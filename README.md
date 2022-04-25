@@ -1,11 +1,11 @@
 # Talks
 
-**About Philip Riecks (rieckpil)**:  Philip is an independent software consultant with over seven years of professional experience. Apart from his freelance work, he's running a blog and a YouTube channel to educate Java developers about #SpringBoot, #AWS, #Testing under the slogan _Testing Java Applications Made Simple_. Philip is convinced that testing can be joyful once you know the _how_. Besides that, he's one of the authors of _Stratospheric - From Zero to Production with Spring Boot and AWS_.
+**Speaker Description (Philip Riecks - rieckpil)**: Philip is an independent software consultant with over seven years of professional experience. Apart from his freelance work, he's running a blog and a YouTube channel to educate Java developers about #SpringBoot, #AWS, #Testing under the slogan _Testing Java Applications Made Simple_. Philip is convinced that testing can be joyful once you know the _how_. Besides that, he's one of the authors of _Stratospheric - From Zero to Production with Spring Boot and AWS_.
 
 Links:
 - [Blog](https://rieckpil.de)
 - [Twitter](https://twitter.com/rieckpil)
-- Image Reference: [400x400](/resources/rieckpil-400x400.jpg) or [200x257](/resources/rieckpil-200x257.jpg)
+- Speaker Image Reference: [400x400](/resources/rieckpil-400x400.jpg) or [200x257](/resources/rieckpil-200x257.jpg)
 
 ## How Fixing a Broken Window Cut Down Our Build Time by 50%
 
