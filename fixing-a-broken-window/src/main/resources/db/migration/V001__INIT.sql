@@ -1,0 +1,5 @@
+CREATE TABLE broken_windows
+(
+    ID    BIGSERIAL PRIMARY KEY,
+    ISSUE VARCHAR(255) NOT NULL
+);
