@@ -1,0 +1,25 @@
+name: Build
+
+on:
+  push:
+
+
+jobs:
+  build-application:
+    runs-on: ubuntu-20.04
+    name: Build the Maven projects
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          java-package: jdk
+          distribution: temurin
+          cache: maven
+
+      - name: Build the Backend
+        working-directory: fixing-a-broken-window
+        run: ./mvnw -B verify
