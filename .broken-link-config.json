@@ -1,7 +1,10 @@
 {
     "ignorePatterns": [
         {
-            "pattern": "localhost:"
+            "pattern": "/resources/*"
+        },
+        {
+            "pattern": "/fixing-a-broken-window/*"
         }
     ]
 }
