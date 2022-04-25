@@ -7,7 +7,7 @@ Links:
 - [Twitter](https://twitter.com/rieckpil)
 - Image Reference: [400x400](/resources/rieckpil-400x400.jpg) or [200x257](/resources/rieckpil-200x257.jpg)
 
-## How fixing a broken window cut down our build time by 50%
+## How Fixing a Broken Window Cut Down Our Build Time by 50%
 
 <p align="center">
   <a href="https://rieckpil.de">
