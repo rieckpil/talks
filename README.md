@@ -5,9 +5,15 @@
 Links:
 - [Blog](https://rieckpil.de)
 - [Twitter](https://twitter.com/rieckpil)
-- Image reference: [400x400](/resources/rieckpil-400x400.jpg) or [200x257](/resources/rieckpil-200x257.jpg)
+- Image Reference: [400x400](/resources/rieckpil-400x400.jpg) or [200x257](/resources/rieckpil-200x257.jpg)
 
 ## How fixing a broken window cut down our build time by 50%
+
+<p align="center">
+  <a href="https://rieckpil.de">
+    <img src="/resources/broken-window.png" alt="Broken Window"/>
+  </a>
+</p>
 
 **Talk description**: The broken windows (not the operating system - 😁) theory not only applies to criminological cases but also codebases. It only takes one lazy developer to break the first window. Chances are high that others will follow a similar path and take workarounds or re-apply a not so optimal pattern thinking, "It passed the code review, I must not be that bad".
 
