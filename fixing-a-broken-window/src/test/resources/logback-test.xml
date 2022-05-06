@@ -2,6 +2,8 @@
 <configuration>
   <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
 
+  <logger name="org.springframework.test.context" level="TRACE" />
+
   <appender name="PLAIN" class="ch.qos.logback.core.ConsoleAppender">
     <encoder>
       <pattern>${CONSOLE_LOG_PATTERN}</pattern>
