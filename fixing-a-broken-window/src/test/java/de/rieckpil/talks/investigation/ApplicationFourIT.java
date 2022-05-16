@@ -34,5 +34,7 @@ class ApplicationFourIT extends GeneralTestSetup{
             .uri("/actuator/health")
             .exchange()
             .expectStatus().is2xxSuccessful();
+
+    Thread.sleep(20_000);
   }
 }
