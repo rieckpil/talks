@@ -16,3 +16,5 @@ public class InvoiceQueueListener {
     LOG.info("Incoming payload: '{}'", payload);
   }
 }
+
+
