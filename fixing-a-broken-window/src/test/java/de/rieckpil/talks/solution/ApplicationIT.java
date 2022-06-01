@@ -19,18 +19,23 @@ import static org.testcontainers.containers.localstack.LocalStackContainer.Servi
 
 @Testcontainers
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@ContextConfiguration(initializers = {MessagingQueueInitializer.class, WireMockInitializer.class})
+@ContextConfiguration(
+  initializers = { MessagingQueueInitializer.class, WireMockInitializer.class }
+)
 class ApplicationIT {
 
   @Container
-  public static LocalStackContainer localStack =
-          new LocalStackContainer(DockerImageName.parse("localstack/localstack:0.14.2"))
-                  .withServices(SQS);
+  public static LocalStackContainer localStack = new LocalStackContainer(
+    DockerImageName.parse("localstack/localstack:0.14.2")
+  )
+    .withServices(SQS);
 
   @Container
-  static PostgreSQLContainer<?> database = new PostgreSQLContainer<>(DockerImageName.parse("postgres:14.2"))
-          .withDatabaseName("brokenwindow")
-          .withUsername("brokenwindow");
+  static PostgreSQLContainer<?> database = new PostgreSQLContainer<>(
+    DockerImageName.parse("postgres:14.2")
+  )
+    .withDatabaseName("brokenwindow")
+    .withUsername("brokenwindow");
 
   @Autowired
   private WebTestClient webTestClient;
@@ -56,10 +61,10 @@ class ApplicationIT {
 
   @Test
   void contextLoads() {
-    this.webTestClient
-            .get()
-            .uri("/actuator/health")
-            .exchange()
-            .expectStatus().is2xxSuccessful();
+    this.webTestClient.get()
+      .uri("/actuator/health")
+      .exchange()
+      .expectStatus()
+      .is2xxSuccessful();
   }
 }

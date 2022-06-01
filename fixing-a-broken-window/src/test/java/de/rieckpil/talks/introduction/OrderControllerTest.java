@@ -22,11 +22,9 @@ class OrderControllerTest {
 
   @Test
   void shouldAllowAccessForAnonymousUsers() throws Exception {
-    this.mockMvc
-            .perform(get("/api/orders")
-                    .header(ACCEPT, APPLICATION_JSON))
-            .andExpect(status().is(200))
-            .andExpect(content().contentType(APPLICATION_JSON))
-            .andExpect(jsonPath("$.size()", is(1)));
+    this.mockMvc.perform(get("/api/orders").header(ACCEPT, APPLICATION_JSON))
+      .andExpect(status().is(200))
+      .andExpect(content().contentType(APPLICATION_JSON))
+      .andExpect(jsonPath("$.size()", is(1)));
   }
 }

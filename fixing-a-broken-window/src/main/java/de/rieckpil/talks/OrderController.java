@@ -20,7 +20,13 @@ public class OrderController {
 
   @GetMapping
   public JsonNode getOrders() {
-    return objectMapper.createArrayNode().add(objectMapper.createObjectNode().put("id", UUID.randomUUID().toString())
-            .put("customerId", 42));
+    return objectMapper
+      .createArrayNode()
+      .add(
+        objectMapper
+          .createObjectNode()
+          .put("id", UUID.randomUUID().toString())
+          .put("customerId", 42)
+      );
   }
 }

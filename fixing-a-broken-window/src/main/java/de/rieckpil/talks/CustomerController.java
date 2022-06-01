@@ -1,6 +1,5 @@
 package de.rieckpil.talks;
 
-
 import java.util.UUID;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -21,7 +20,13 @@ public class CustomerController {
 
   @GetMapping
   public JsonNode getOrders() {
-    return objectMapper.createArrayNode().add(objectMapper.createObjectNode().put("id", UUID.randomUUID().toString())
-            .put("name", "duke"));
+    return objectMapper
+      .createArrayNode()
+      .add(
+        objectMapper
+          .createObjectNode()
+          .put("id", UUID.randomUUID().toString())
+          .put("name", "duke")
+      );
   }
 }

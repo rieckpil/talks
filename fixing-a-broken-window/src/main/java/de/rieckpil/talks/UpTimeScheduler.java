@@ -21,6 +21,10 @@ public class UpTimeScheduler {
 
   @Scheduled(cron = "*/5 * * * * *")
   public void print() {
-    LOG.info("Context '{} - {}' is still up", applicationContext.getId(), applicationContext);
+    LOG.info(
+      "Context '{} - {}' is still up",
+      applicationContext.getId(),
+      applicationContext
+    );
   }
 }

@@ -10,12 +10,13 @@ import org.springframework.core.annotation.Order;
 
 @Order(Ordered.LOWEST_PRECEDENCE - 1000)
 public class WireMockInitializer
-        implements ApplicationContextInitializer<ConfigurableApplicationContext> {
+  implements ApplicationContextInitializer<ConfigurableApplicationContext> {
 
   @Override
   public void initialize(ConfigurableApplicationContext applicationContext) {
-
-    WireMockServer wireMockServer = new WireMockServer(new WireMockConfiguration().dynamicPort());
+    WireMockServer wireMockServer = new WireMockServer(
+      new WireMockConfiguration().dynamicPort()
+    );
     wireMockServer.start();
 
     RSAKeyGenerator rsaKeyGenerator = new RSAKeyGenerator();
@@ -26,13 +27,15 @@ public class WireMockInitializer
     oAuth2Stubs.stubForJWKS();
 
     applicationContext.getBeanFactory().registerSingleton("oAuth2Stubs", oAuth2Stubs);
-    applicationContext.getBeanFactory().registerSingleton("rsaKeyGenerator", rsaKeyGenerator);
+    applicationContext
+      .getBeanFactory()
+      .registerSingleton("rsaKeyGenerator", rsaKeyGenerator);
 
     TestPropertyValues
-            .of(
-                    "spring.security.oauth2.resourceserver.jwt.issuer-uri",
-                    "http://localhost:" + wireMockServer.port() + "/auth/realms/spring")
-            .applyTo(applicationContext);
+      .of(
+        "spring.security.oauth2.resourceserver.jwt.issuer-uri",
+        "http://localhost:" + wireMockServer.port() + "/auth/realms/spring"
+      )
+      .applyTo(applicationContext);
   }
 }
-

@@ -19,7 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ActiveProfiles("integration-test")
 @Import(SomeTestConfiguration.class)
 @ContextConfiguration(initializers = CustomInitializer.class)
-@SpringBootTest(properties = {"features.login-enabled=true", "custom.message=duke42"})
+@SpringBootTest(properties = { "features.login-enabled=true", "custom.message=duke42" })
 class ShowcaseIT {
 
   @MockBean
@@ -30,9 +30,6 @@ class ShowcaseIT {
 
   @Test
   void shouldInitializeContext(@Autowired ApplicationContext applicationContext) {
-    assertThat(applicationContext)
-            .isNotNull();
+    assertThat(applicationContext).isNotNull();
   }
 }
-
-

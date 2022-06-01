@@ -7,6 +7,7 @@ import org.springframework.http.MediaType;
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 
 public class OAuth2Stubs {
+
   private final WireMockServer wireMockServer;
   private final RSAKeyGenerator rsaKeyGenerator;
 
@@ -17,25 +18,35 @@ public class OAuth2Stubs {
 
   public void stubForJWKS() {
     wireMockServer.stubFor(
-            WireMock.get("/jwks")
-                    .willReturn(aResponse()
-                            .withHeader("Content-Type", MediaType.APPLICATION_JSON_VALUE)
-                            .withBody(rsaKeyGenerator.getJWKSetJsonString())
-                    )
+      WireMock
+        .get("/jwks")
+        .willReturn(
+          aResponse()
+            .withHeader("Content-Type", MediaType.APPLICATION_JSON_VALUE)
+            .withBody(rsaKeyGenerator.getJWKSetJsonString())
+        )
     );
   }
 
   public void stubForConfiguration() {
     wireMockServer.stubFor(
-            WireMock.get("/auth/realms/spring/.well-known/openid-configuration")
-                    .willReturn(aResponse()
-                            .withHeader("Content-Type", MediaType.APPLICATION_JSON_VALUE)
-                            .withBody("""
+      WireMock
+        .get("/auth/realms/spring/.well-known/openid-configuration")
+        .willReturn(
+          aResponse()
+            .withHeader("Content-Type", MediaType.APPLICATION_JSON_VALUE)
+            .withBody(
+              """
                                     {
                                      "issuer":"%s",
                                      "jwks_uri":"%s"
                                     }
-                                    """.formatted(getIssuerUri(), getJWKSUri())))
+                                    """.formatted(
+                  getIssuerUri(),
+                  getJWKSUri()
+                )
+            )
+        )
     );
   }
 

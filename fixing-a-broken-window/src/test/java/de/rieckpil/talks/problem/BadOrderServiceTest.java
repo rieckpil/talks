@@ -24,7 +24,6 @@ class BadOrderServiceTest {
 
   @Test
   void shouldNotifyCustomerIfPriceReachesAlertThreshold() {
-
     orderService.processOrder("MacBook Pro M1", BigDecimal.valueOf(1499));
 
     verify(customerService).informCustomer();

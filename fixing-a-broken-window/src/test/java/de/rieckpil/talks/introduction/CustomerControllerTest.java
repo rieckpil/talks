@@ -1,7 +1,6 @@
 package de.rieckpil.talks.introduction;
 
 import de.rieckpil.talks.CustomerController;
-import de.rieckpil.talks.OrderController;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -23,11 +22,9 @@ class CustomerControllerTest {
 
   @Test
   void shouldAllowAccessForAnonymousUsers() throws Exception {
-    this.mockMvc
-            .perform(get("/api/customers")
-                    .header(ACCEPT, APPLICATION_JSON))
-            .andExpect(status().is(200))
-            .andExpect(content().contentType(APPLICATION_JSON))
-            .andExpect(jsonPath("$.size()", is(1)));
+    this.mockMvc.perform(get("/api/customers").header(ACCEPT, APPLICATION_JSON))
+      .andExpect(status().is(200))
+      .andExpect(content().contentType(APPLICATION_JSON))
+      .andExpect(jsonPath("$.size()", is(1)));
   }
 }

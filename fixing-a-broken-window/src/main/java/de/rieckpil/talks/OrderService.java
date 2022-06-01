@@ -18,13 +18,11 @@ public class OrderService {
   }
 
   public void processOrder(String orderItem, BigDecimal price) {
-
     LOG.info("Processing order for orderItem: '{}'", orderItem);
 
     if (price.compareTo(BigDecimal.TEN) > 0) {
       customerService.informCustomer();
     }
-
     // process order
   }
 }

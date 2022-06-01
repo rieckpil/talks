@@ -7,9 +7,9 @@ class PurchaseIT extends AbstractIntegrationTest {
   @Test
   void shouldPurchaseInStockItem() {
     this.webTestClient.get()
-            .uri("/actuator/health")
-            .exchange()
-            .expectStatus()
-            .is2xxSuccessful();
+      .uri("/actuator/health")
+      .exchange()
+      .expectStatus()
+      .is2xxSuccessful();
   }
 }

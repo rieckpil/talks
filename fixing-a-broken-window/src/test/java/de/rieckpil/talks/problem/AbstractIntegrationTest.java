@@ -26,21 +26,29 @@ abstract class AbstractIntegrationTest {
   protected WebTestClient webTestClient;
 
   @Container
-  static PostgreSQLContainer database = new PostgreSQLContainer<>(DockerImageName.parse("postgres:14.2"))
-          .withDatabaseName("brokenwindow")
-          .withUsername("brokenwindow");
+  static PostgreSQLContainer database = new PostgreSQLContainer<>(
+    DockerImageName.parse("postgres:14.2")
+  )
+    .withDatabaseName("brokenwindow")
+    .withUsername("brokenwindow");
 
   @Container
-  public static LocalStackContainer localStack =
-          new LocalStackContainer(DockerImageName.parse("localstack/localstack:0.14.2"))
-                  .withServices(SQS);
+  public static LocalStackContainer localStack = new LocalStackContainer(
+    DockerImageName.parse("localstack/localstack:0.14.2")
+  )
+    .withServices(SQS);
 
   private static final String QUEUE_NAME = "duke42";
 
   @BeforeAll
   static void createQueue() throws Exception {
-    localStack
-            .execInContainer("awslocal", "sqs", "create-queue", "--queue-name", QUEUE_NAME);
+    localStack.execInContainer(
+      "awslocal",
+      "sqs",
+      "create-queue",
+      "--queue-name",
+      QUEUE_NAME
+    );
   }
 
   @DynamicPropertySource
