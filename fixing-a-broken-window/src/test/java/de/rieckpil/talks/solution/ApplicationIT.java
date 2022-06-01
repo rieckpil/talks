@@ -52,6 +52,7 @@ class ApplicationIT {
     registry.add("cloud.aws.sns.enabled", () -> "false");
     registry.add("cloud.aws.credentials.access-key", localStack::getAccessKey);
     registry.add("cloud.aws.credentials.secret-key", localStack::getSecretKey);
+    registry.add("cloud.aws.region.static", () -> localStack.getRegion());
   }
 
   @AfterEach

@@ -1,1 +1,5 @@
 message: Hello Spring I/O 2022!
+cloud:
+  aws:
+    region:
+      static:

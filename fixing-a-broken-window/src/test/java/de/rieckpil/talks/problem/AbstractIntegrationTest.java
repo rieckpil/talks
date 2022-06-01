@@ -3,6 +3,7 @@ package de.rieckpil.talks.problem;
 import static org.testcontainers.containers.localstack.LocalStackContainer.Service.SQS;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
@@ -20,6 +21,7 @@ import org.testcontainers.utility.DockerImageName;
 @Testcontainers
 @ActiveProfiles("integration-test")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@Disabled("Showcasing purposes only - don't do this at home")
 abstract class AbstractIntegrationTest {
 
   @Autowired

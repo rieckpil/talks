@@ -1,7 +1,9 @@
 package de.rieckpil.talks.problem;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+@Disabled("Showcasing purposes only - don't do this at home")
 class PurchaseIT extends AbstractIntegrationTest {
 
   @Test
