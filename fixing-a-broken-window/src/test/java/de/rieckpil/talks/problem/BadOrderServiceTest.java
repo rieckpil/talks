@@ -1,16 +1,15 @@
 package de.rieckpil.talks.problem;
 
-import java.math.BigDecimal;
+import static org.mockito.Mockito.verify;
 
 import de.rieckpil.talks.CustomerService;
 import de.rieckpil.talks.OrderService;
+import java.math.BigDecimal;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-
-import static org.mockito.Mockito.verify;
 
 @SpringBootTest
 @Disabled("Showcasing purposes only - don't do this at home")

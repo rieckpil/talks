@@ -1,5 +1,7 @@
 package de.rieckpil.talks.problem;
 
+import static org.testcontainers.containers.localstack.LocalStackContainer.Service.SQS;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,8 +15,6 @@ import org.testcontainers.containers.localstack.LocalStackContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
-
-import static org.testcontainers.containers.localstack.LocalStackContainer.Service.SQS;
 
 @DirtiesContext
 @Testcontainers

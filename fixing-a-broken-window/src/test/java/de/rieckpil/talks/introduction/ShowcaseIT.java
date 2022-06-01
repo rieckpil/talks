@@ -1,5 +1,7 @@
 package de.rieckpil.talks.introduction;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import de.rieckpil.talks.CustomerService;
 import de.rieckpil.talks.OrderService;
 import org.junit.jupiter.api.Disabled;
@@ -12,8 +14,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 @Disabled("Showcasing only")
 @ActiveProfiles("integration-test")
