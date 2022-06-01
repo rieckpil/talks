@@ -3,7 +3,6 @@ name: Build
 on:
   push:
 
-
 jobs:
   build-application:
     runs-on: ubuntu-20.04

@@ -31,11 +31,11 @@ public class OAuth2Stubs {
                     .willReturn(aResponse()
                             .withHeader("Content-Type", MediaType.APPLICATION_JSON_VALUE)
                             .withBody("""
-            {
-             "issuer":"%s",
-             "jwks_uri":"%s"
-            }
-            """.formatted(getIssuerUri(), getJWKSUri())))
+                                    {
+                                     "issuer":"%s",
+                                     "jwks_uri":"%s"
+                                    }
+                                    """.formatted(getIssuerUri(), getJWKSUri())))
     );
   }
 

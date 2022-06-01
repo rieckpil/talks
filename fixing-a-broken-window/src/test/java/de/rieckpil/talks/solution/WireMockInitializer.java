@@ -2,12 +2,9 @@ package de.rieckpil.talks.solution;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.util.TestPropertyValues;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.event.ContextClosedEvent;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 
@@ -32,10 +29,10 @@ public class WireMockInitializer
     applicationContext.getBeanFactory().registerSingleton("rsaKeyGenerator", rsaKeyGenerator);
 
     TestPropertyValues
-      .of(
-  "spring.security.oauth2.resourceserver.jwt.issuer-uri",
-          "http://localhost:" + wireMockServer.port() + "/auth/realms/spring")
-      .applyTo(applicationContext);
+            .of(
+                    "spring.security.oauth2.resourceserver.jwt.issuer-uri",
+                    "http://localhost:" + wireMockServer.port() + "/auth/realms/spring")
+            .applyTo(applicationContext);
   }
 }
 
