@@ -49,6 +49,7 @@ class ApplicationIT {
     registry.add("spring.datasource.password", database::getPassword);
     registry.add("spring.datasource.username", database::getUsername);
     registry.add("cloud.aws.sqs.endpoint", () -> localStack.getEndpointOverride(SQS));
+    registry.add("cloud.aws.sns.enabled", () -> "false");
     registry.add("cloud.aws.credentials.access-key", localStack::getAccessKey);
     registry.add("cloud.aws.credentials.secret-key", localStack::getSecretKey);
   }
