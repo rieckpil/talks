@@ -26,4 +26,5 @@ This talk describes our journey of getting rid of `@DirtiesContext` on top of an
 After fixing this "broken window", our overall build time went down by 50% from 25 to 12 minutes.
 
 - [Source Code](/fixing-a-broken-window/)
-- Slides
+- [Slides](https://speakerdeck.com/rieckpil/how-fixing-a-broken-window-cut-down-our-build-time-by-50-percent)
+- Recordings: Spring I/O 2022 (upcoming)
