@@ -2,6 +2,7 @@ package de.rieckpil.talks.solution;
 
 import static de.rieckpil.talks.solution.ApplicationIT.localStack;
 
+import java.util.Map;
 import java.util.UUID;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.boot.test.util.TestPropertyValues;
@@ -27,6 +28,8 @@ public class MessagingQueueInitializer
       throw new RuntimeException("Unable to initialize context", e);
     }
 
-    TestPropertyValues.of("invoice-queue-name", queueName).applyTo(applicationContext);
+    TestPropertyValues
+      .of(Map.of("invoice-queue-name", queueName))
+      .applyTo(applicationContext);
   }
 }

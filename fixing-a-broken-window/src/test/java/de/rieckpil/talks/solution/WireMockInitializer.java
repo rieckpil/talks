@@ -2,6 +2,7 @@ package de.rieckpil.talks.solution;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
+import java.util.Map;
 import org.springframework.boot.test.util.TestPropertyValues;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -33,8 +34,10 @@ public class WireMockInitializer
 
     TestPropertyValues
       .of(
-        "spring.security.oauth2.resourceserver.jwt.issuer-uri",
-        "http://localhost:" + wireMockServer.port() + "/auth/realms/spring"
+        Map.of(
+          "spring.security.oauth2.resourceserver.jwt.issuer-uri",
+          "http://localhost:" + wireMockServer.port() + "/auth/realms/spring"
+        )
       )
       .applyTo(applicationContext);
   }
