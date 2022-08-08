@@ -27,4 +27,4 @@ After fixing this "broken window", our overall build time went down by 50% from 
 
 - [Source Code](/fixing-a-broken-window/)
 - [Slides](https://speakerdeck.com/rieckpil/how-fixing-a-broken-window-cut-down-our-build-time-by-50-percent)
-- Recordings: Spring I/O 2022 (upcoming)
+- Recordings: [Spring I/O 2022](https://www.youtube.com/watch?v=c-GV2PxymoY)
