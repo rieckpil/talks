@@ -5,6 +5,9 @@
         },
         {
             "pattern": "/fixing-a-broken-window/*"
+        },
+        {
+            "pattern": "/things-i-wish-i-knew-spring-boot-testing/*"
         }
     ]
 }
