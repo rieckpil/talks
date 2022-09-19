@@ -1,12 +1,14 @@
 name: Build
 
-on:
-  push:
+on: [push]
 
 jobs:
-  build-application:
+  build-sample-applications:
+    strategy:
+      matrix:
+        talks: ['fixing-a-broken-window', 'things-i-wish-i-knew-spring-boot-testing']
     runs-on: ubuntu-20.04
-    name: Build the Maven projects
+    name: Build the Maven project ${{ matrix.talks }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -19,6 +21,6 @@ jobs:
           distribution: temurin
           cache: maven
 
-      - name: Build the Backend
-        working-directory: fixing-a-broken-window
+      - name: Build the Application
+        working-directory: ${{ matrix.talks }}
         run: ./mvnw -B verify
