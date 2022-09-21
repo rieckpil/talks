@@ -79,7 +79,9 @@ class SampleTest {
         }
       """;
 
-    assertEquals(2, JsonPath.parse(result).read("$.tags.length()", Long.class));
+    assertEquals(2,
+      JsonPath.parse(result)
+        .read("$.tags.length()", Long.class));
 
     assertEquals("duke", JsonPath.parse(result).read("$.name", String.class));
   }
