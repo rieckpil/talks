@@ -43,7 +43,9 @@ class CustomerControllerTest {
           """)
       )
       .andExpect(status().isCreated())
-      .andExpect(header().string("Location", Matchers.containsString("/api/customers/42")));
+
+      .andExpect(header().string("Location",
+        Matchers.containsString("/api/customers/42")));
   }
 }
 
