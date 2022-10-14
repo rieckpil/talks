@@ -1,6 +1,6 @@
 # Conference Talks 🎤
 
-**Speaker description (Philip Riecks - rieckpil)**: Philip is an independent software consultant with over seven years of professional experience. Apart from his freelance work, he's running a blog and a YouTube channel to educate Java developers about #SpringBoot, #AWS, #Testing under the slogan _Testing Java Applications Made Simple_. Philip is convinced that testing can be joyful once you know the _how_. Besides that, he's one of the authors of _Stratospheric - From Zero to Production with Spring Boot and AWS_.
+**Speaker description (Philip Riecks - rieckpil)**: Philip is an independent IT consultant with a focus on developing and operating cloud-native applications. Apart from his freelance work, he's running a blog and a YouTube channel to educate Java developers about #SpringBoot, #AWS, #Testing under the slogan _Testing Java Applications Made Simple_. Philip is convinced that testing can be joyful once you know the _how_. Besides that, he's one of the authors of _Stratospheric - From Zero to Production with Spring Boot and AWS_.
 
 Links:
 - [Blog](https://rieckpil.de)
@@ -49,5 +49,5 @@ This talk will give you an overview of best practices, pitfalls, and recipes for
 
 
 - [Source Code](/things-i-wish-i-knew-spring-boot-testing/)
-- Slides (upcoming)
-- Recordings: Devoxx Belgium 2022 (upcoming)
+- [Slides](https://speakerdeck.com/rieckpil/things-i-wish-i-knew-when-i-started-testing-spring-boot-applications)
+- Recordings: [Devoxx Belgium 2022](https://www.youtube.com/watch?v=5Td7vAS9qJI)
