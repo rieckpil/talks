@@ -1,6 +1,6 @@
 # Conference Talks 🎤
 
-**Speaker description (Philip Riecks - rieckpil)**: Philip is an independent software consultant with over seven years of professional experience. Apart from his freelance work, he's running a blog and a YouTube channel to educate Java developers about #SpringBoot, #AWS, #Testing under the slogan _Testing Java Applications Made Simple_. Philip is convinced that testing can be joyful once you know the _how_. Besides that, he's one of the authors of _Stratospheric - From Zero to Production with Spring Boot and AWS_.
+**Speaker description (Philip Riecks - rieckpil)**: Philip is an independent IT consultant with a focus on developing and operating cloud-native applications. Apart from his freelance work, he's running a blog and a YouTube channel to educate Java developers about #SpringBoot, #AWS, #Testing under the slogan _Testing Java Applications Made Simple_. Philip is convinced that testing can be joyful once you know the _how_. Besides that, he's one of the authors of _Stratospheric - From Zero to Production with Spring Boot and AWS_.
 
 Links:
 - [Blog](https://rieckpil.de)
@@ -28,3 +28,26 @@ After fixing this "broken window", our overall build time went down by 50% from 
 - [Source Code](/fixing-a-broken-window/)
 - [Slides](https://speakerdeck.com/rieckpil/how-fixing-a-broken-window-cut-down-our-build-time-by-50-percent)
 - Recordings: [Spring I/O 2022](https://www.youtube.com/watch?v=c-GV2PxymoY)
+
+## Things I Wish I Knew When I Started Testing Spring Boot Applications
+
+<p align="center">
+  <a href="https://rieckpil.de">
+    <img src="/resources/getting-started.jpg" alt="Getting Started"/>
+  </a>
+</p>
+
+**Talk description**: Getting started with Spring Boot and its auto-configuration mechanism can be a hurdle for new developers.
+
+Once you get your first Spring Boot application up- and running, writing tests for it is the last thing you care about. You’re happy that your code does its job.
+
+However, as soon as you try to integrate your changes, you face a pull request rejection because your lead developer reminds you that tests are missing.
+
+Testing is an integral part of software development, and unfortunately, some teams treat this topic neglectfully. That’s bad for the future maintenance and overall health of their project. Fortunately, both Spring Test and Spring Boot offer excellent support for testing your application.
+
+This talk will give you an overview of best practices, pitfalls, and recipes for testing Spring Boot applications. Simply put, with this talk, I’ll share the things that I wish I had known when I started testing Spring Boot applications.
+
+
+- [Source Code](/things-i-wish-i-knew-spring-boot-testing/)
+- [Slides](https://speakerdeck.com/rieckpil/things-i-wish-i-knew-when-i-started-testing-spring-boot-applications)
+- Recordings: [Devoxx Belgium 2022](https://www.youtube.com/watch?v=5Td7vAS9qJI)
