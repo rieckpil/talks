@@ -50,4 +50,4 @@ This talk will give you an overview of best practices, pitfalls, and recipes for
 
 - [Source Code](/things-i-wish-i-knew-spring-boot-testing/)
 - [Slides](https://speakerdeck.com/rieckpil/things-i-wish-i-knew-when-i-started-testing-spring-boot-applications)
-- Recordings: [Devoxx Belgium 2022](https://www.youtube.com/watch?v=5Td7vAS9qJI)
+- Recordings: [Spring I/0 2023](https://www.youtube.com/watch?v=hR0bbk2tsF0) & [Devoxx Belgium 2022](https://www.youtube.com/watch?v=5Td7vAS9qJI)
