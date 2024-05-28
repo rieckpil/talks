@@ -1,0 +1,3 @@
+spring:
+  application:
+    name: testing-spring-boot-applications-demystified
