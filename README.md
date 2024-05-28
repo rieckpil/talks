@@ -11,6 +11,12 @@ Links:
 
 ## Testing Spring Boot Applications Demystified
 
+<p align="center">
+  <a href="https://rieckpil.de">
+    <img src="/resources/demystify.jpg" alt="Demystify"/>
+  </a>
+</p>
+
 **Talk description**: Testing plays a crucial role in software development, allowing you to catch bugs, ensure your code functions as intended, and provide confidence in the reliability and stability of your applications.
 
 However, testing Spring Boot applications can sometimes feel like navigating a labyrinth of challenges – from managing dependencies and external systems to crafting effective tests that reflect the behavior of your code.
