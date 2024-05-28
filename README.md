@@ -9,6 +9,20 @@ Links:
 - [Twitter](https://twitter.com/rieckpil)
 - Speaker Image Reference: [400x400](/resources/rieckpil-400x400.jpg) or [200x257](/resources/rieckpil-200x257.jpg)
 
+## Testing Spring Boot Applications Demystified
+
+**Talk description**: Testing plays a crucial role in software development, allowing you to catch bugs, ensure your code functions as intended, and provide confidence in the reliability and stability of your applications.
+
+However, testing Spring Boot applications can sometimes feel like navigating a labyrinth of challenges – from managing dependencies and external systems to crafting effective tests that reflect the behavior of your code.
+
+Whether you’re a seasoned developer or just starting your journey with Spring Boot, this workshop is designed to unravel the complexities and pitfalls of testing Spring Boot applications and empower you to become more productive and confident in your testing efforts.
+
+In this workshop, we will demystify testing Spring Boot applications by providing you with clear explanations, practical insights, and actionable best practices. Philip will guide you through the common pitfalls faced by developers, share time-tested recipes for success, and equip you with the tools and knowledge you need to write comprehensive and effective tests.
+
+- [Source Code](/testing-spring-boot-applications-demystified/)
+- Slides
+- Recordings: Spring I/0 2024
+
 ## How Fixing a Broken Window Cut Down Our Build Time by 50%
 
 <p align="center">
