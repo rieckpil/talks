@@ -15,7 +15,7 @@ Links:
 
 Create a new development environment via [GitHub Codespaces](https://codespaces.new/rieckpil/talksg). Choose a _Region_ close to where you live and select at least a 4-core machine (8-core would be better). GitHub will automatically open the development environment in a Visual Studio Code instance in your web browser.
 
-Don't forget to [shut down the codespace](https://github.com/codespaces) afterward to avoid costs.
+Don't forget to [shut down the codespace](https://github.com/codespaces) afterward to avoid costs (check your usage [here](https://github.com/settings/billing/summary)).
 
 ## Testing Spring Boot Applications Demystified
 
