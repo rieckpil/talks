@@ -9,6 +9,12 @@ Links:
 - [Twitter](https://twitter.com/rieckpil)
 - Speaker Image Reference: [400x400](/resources/rieckpil-400x400.jpg) or [200x257](/resources/rieckpil-200x257.jpg)
 
+## Hands-On
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/rieckpil/talks)
+
+Create a new development environment via [GitHub Codespaces](https://codespaces.new/rieckpil/talksg). Choose a _Region_ close to where you live and select at least a 4-core machine (8-core would be better). GitHub will automatically open the development environment in a Visual Studio Code instance in your web browser.
+
 ## Testing Spring Boot Applications Demystified
 
 <p align="center">
