@@ -1,4 +1,4 @@
-package de.rieckpil.workshop;
+package de.rieckpil.workshop.advanced;
 
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
