@@ -34,8 +34,8 @@ Whether you’re a seasoned developer or just starting your journey with Spring 
 In this workshop, we will demystify testing Spring Boot applications by providing you with clear explanations, practical insights, and actionable best practices. Philip will guide you through the common pitfalls faced by developers, share time-tested recipes for success, and equip you with the tools and knowledge you need to write comprehensive and effective tests.
 
 - [Source Code](/testing-spring-boot-applications-demystified/)
-- Slides
-- Recordings: Spring I/0 2024
+- Slides: [Spring I/0 2024](https://pitch.com/v/spring-io-2024-testing-spring-boot-applications-demystified-vy8zf9)
+- Recordings: none
 
 ## How Fixing a Broken Window Cut Down Our Build Time by 50%
 
