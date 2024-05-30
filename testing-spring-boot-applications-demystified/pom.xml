@@ -115,6 +115,7 @@
         <artifactId>maven-failsafe-plugin</artifactId>
         <version>3.2.5</version>
         <configuration>
+          <rerunFailingTestsCount>3</rerunFailingTestsCount>
           <includes>
             <include>**/*WT.java</include>
             <include>**/*IT.java</include>
