@@ -82,5 +82,7 @@ Reason for splitting: parallelize, better grouping
 
 ## Outlook
 
+- Still new features coming: Still many new features (@ServiceConnection, Testcontainers Support, more AssertJ integrations, etc.
+
 - In house 1 or 2 day workshop for this topic
 - On-demand online course
