@@ -40,6 +40,13 @@
       .bean-config { fill: #e9ecef; } /* Light Grey */
       .bean-component { fill: #f5c6cb; } /* Light Red */
       .bean-webconfig { fill: #d1e7dd; } /* Muted Teal/Green */
+      .bean-mocked { fill: #f8d7da; stroke: #d9534f; } /* Red fill/stroke for mocked/provided */
+
+      .mock-annotation-text {
+      font-size: 9px;
+      fill: #d9534f; /* Red color for emphasis */
+      font-style: italic;
+      }
 
     </style>
     <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
@@ -77,7 +84,7 @@
       <circle cx="45" cy="55" r="18" class="bean-circle bean-config"/>
       <text x="45" y="55" class="bean-text">Config</text>
     </g>
-    <text x="150" y="310" text-anchor="middle" class="annotation-text">Entire Application COntext</text>
+    <text x="150" y="310" text-anchor="middle" class="annotation-text">Entire Application Context</text>
   </g>
 
   <!-- Arrow -->
@@ -94,8 +101,14 @@
     <!-- Beans in Sliced Context - Symmetrical Layout -->
     <g transform="translate(500, 190)"> <!-- Center beans relative to context circle -->
       <!-- Top -->
-      <circle cx="0" cy="-50" r="18" class="bean-circle bean-controller"/>
-      <text x="0" y="-50" class="bean-text">Service</text>
+
+      <circle cx="0" cy="-35" r="18" class="bean-circle bean-mocked"/>
+      <text x="0" y="-35" class="bean-text">Service</text>
+      <!-- Annotation for the mocked bean -->
+      <text x="0" y="-70" class="mock-annotation-text" text-anchor="middle">Needs @MockitoBean or</text>
+      <text x="0" y="-60" class="mock-annotation-text" text-anchor="middle">@TestConfiguration</text>
+
+
 
       <!-- Relevant Web Auto-Configuration Beans -->
       <circle cx="-35" cy="15" r="18" class="bean-circle bean-webconfig"/>
