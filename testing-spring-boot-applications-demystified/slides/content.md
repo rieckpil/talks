@@ -33,7 +33,6 @@ First two Surefire, last Failsafe
 
 Reason for splitting: parallelize, better grouping
 
-
 ## Spring Boot Starter Test
 
 - aka. Testing Swiss Army Knife
@@ -63,9 +62,25 @@ Reason for splitting: parallelize, better grouping
 
 ## Sliced Testing with Spring Boot
 
-- For some application parts it will become not benefical
+- For some application parts it will become not beneficial
 - best use cases web layer: show how we don't get far with a plain unit test -> validation, security, status code, mapping
 - Same is true for DataJapTest
 - THere are more slices available
 - You can write your own slice
-- `WebMvcTypeExcludeFilter`
+- See `WebMvcTypeExcludeFilter`
+
+
+## Integration Testing with Spring Boot
+
+- Start everything up
+- Difference with PORT to start tomcat or not
+- Differnece between MockMvc and WebTestClient
+- Context Caching! Best pracitces, pitfalls
+
+## AI
+
+
+## Outlook
+
+- In house 1 or 2 day workshop for this topic
+- On-demand online course
