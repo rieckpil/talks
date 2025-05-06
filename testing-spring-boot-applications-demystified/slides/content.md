@@ -68,3 +68,4 @@ Reason for splitting: parallelize, better grouping
 - Same is true for DataJapTest
 - THere are more slices available
 - You can write your own slice
+- `WebMvcTypeExcludeFilter`
