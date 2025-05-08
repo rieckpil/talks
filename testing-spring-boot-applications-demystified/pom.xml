@@ -19,7 +19,7 @@
   <properties>
     <java.version>21</java.version>
     <awaitility.version>4.3.0</awaitility.version>
-    <mockito.version>5.11.0</mockito.version>
+    <mockito.version>5.17.0</mockito.version>
     <selenide.version>7.9.0</selenide.version>
     <selenium.version>4.31.0</selenium.version>
     <wiremock.version>3.13.0</wiremock.version>
@@ -104,11 +104,11 @@
           <reportsDirectory>${project.build.directory}/test-reports</reportsDirectory>
           <argLine>-XX:+EnableDynamicAgentLoading -Xshare:off</argLine>
           <properties>
-            <!--            <configurationParameters>-->
-            <!--              junit.jupiter.execution.parallel.enabled = true-->
-            <!--              junit.jupiter.execution.parallel.mode.default = same_thread-->
-            <!--              junit.jupiter.execution.parallel.mode.classes.default = concurrent-->
-            <!--            </configurationParameters>-->
+            <configurationParameters>
+              junit.jupiter.execution.parallel.enabled = true
+              junit.jupiter.execution.parallel.mode.default = same_thread
+              junit.jupiter.execution.parallel.mode.classes.default = concurrent
+            </configurationParameters>
           </properties>
         </configuration>
       </plugin>
