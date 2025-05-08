@@ -1,6 +1,5 @@
 # Welcome
 
-
 ## Intro
 
 - Shifting left
@@ -9,6 +8,11 @@
 - Fast feedback loops
 - QUicker devleopment, errors pop up more early, wouldn't say bugs but sometimes we are over confident only to relaize aftr the deployment we missed a parameter or misspelled it. Avoid friction
 
+## About Me & Agenda
+
+- Interrupt me any time during the talk
+- self employed consultant
+- enjoys writing tests
 
 ## Spring Boot Testing 101
 
@@ -23,8 +27,6 @@ Test types with Spring Boot:
 - Springyfied Unit Test -> Sliced Tests with `@WebMvcTest`
 Usually have `*Test` postfix
 
-
-
 - Integration Test -> @SpringBootTest
 - Web Tests/E2E -> usually involve tests with UI
 usually have `*IT/*WT` postix
@@ -33,7 +35,7 @@ First two Surefire, last Failsafe
 
 Reason for splitting: parallelize, better grouping
 
-## Spring Boot Starter Test
+### Spring Boot Starter Test
 
 - aka. Testing Swiss Army Knife
 - Batteries Included for testing
@@ -69,14 +71,12 @@ Reason for splitting: parallelize, better grouping
 - You can write your own slice
 - See `WebMvcTypeExcludeFilter`
 
-
 ## Integration Testing with Spring Boot
 
 - Start everything up
 - Difference with PORT to start tomcat or not
 - Differnece between MockMvc and WebTestClient
 - Context Caching! Best practices, pitfalls
-
 
 ## Best Practices and Pitfalls
 
@@ -111,6 +111,8 @@ oller`
 
 - PIT
 - Mutation Testing
+- Show example where it makes sense
+- Considerations for bigger projects: only run on the new diffs, not on the whole codebase
 
 ### Testing Pitfall 1: Using @SpringBootTest for Everything
 
@@ -119,8 +121,19 @@ oller`
 - Useful for integration tests that verify the whole application but not for testing a time manipulation service class works as expected
 - Start with unit tests, see if sliced tests are applicable and only then use @SpringBootTest
 
+### Testing Pitfall 2: @MockitoBean vs. @MockBean vs. @Mock
 
-### Testing Pitfall 2: JUnit 4 vs. JUnit 5 Pitfall
+- Might be complex
+- @MockBean is a Spring Boot specific annotation that replaces a bean in the application context with a Mockito mock
+- New @MockitoBean annotation is a Spring Boot specific annotation that replaces a bean in the application context with a Mockito mock
+- @Mock is Mockito only for unit tests
+- Golden Mockito Rules:
+  - Do not mock types you don't own -> e.g. Framework Boundary
+  - Don't mock value objects -> e.g. DTOs
+  - Don't mock everything
+  - Show some love with your tests
+
+### Testing Pitfall 3: JUnit 4 vs. JUnit 5 Pitfall
 
 - Usually transition period, old projects have not time to fix tech debt, let alone test tech debt
 - Browsing through the internet for solutions, you might find test setups that are for JUnit 5
@@ -130,7 +143,9 @@ oller`
 
 ## Outlook
 
-- Still new features coming: Still many new features (@ServiceConnection, Testcontainers Support, more AssertJ integrations, etc.
-
-- In house 1 or 2 day workshop for this topic
-- On-demand online course
+- Still new features coming: Still many new features (@ServiceConnection, Testcontainers Support, more AssertJ integrations, etc.) are coming in the ecosystem, Testcontainers being one of the most important one in recent years. The company AtomicJar got acquired by Docker
+- Offer: in house 1 or 2 day workshop for this topic to cover more in depth
+- On-demand online course Masterclass
+- Open for consulting
+- Thank you!
+- Now it's time for questions
