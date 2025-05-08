@@ -101,8 +101,10 @@ Two ways to achieve this:
 - Show Diffblue, a niche AI tool that generates unit tests for Java code
 - TDD with an LLM?
 - LLM very usueful for boilerplate setup, test data, test migration (e.g. Kotlin -> Java)
+- ChatBots might not produce compilable/working test code, agents are better
 - Take a look at OpenRewrite for migrations (not AI but super useful)
 - Clearly define your test requirements in your copiolot instructions, claude.md or cursor rule
+- Showcase Claude Code
 
 Example:
 
