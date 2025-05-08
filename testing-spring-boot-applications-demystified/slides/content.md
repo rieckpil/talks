@@ -98,31 +98,19 @@ Two ways to achieve this:
 
 ### Best Practice 2: Use the help of AI
 
-- Show Diffblue, a niche AI tool that generates unit tests for Java code
+- Show Diffblue, a niche AI tool that generates unit tests for Java code: `dcover create de.rieckpil.workshop.CustomerContr
+oller`
 - TDD with an LLM?
 - LLM very usueful for boilerplate setup, test data, test migration (e.g. Kotlin -> Java)
 - ChatBots might not produce compilable/working test code, agents are better
 - Take a look at OpenRewrite for migrations (not AI but super useful)
 - Clearly define your test requirements in your copiolot instructions, claude.md or cursor rule
-- Showcase Claude Code
+- Showcase Claude Code and my `CLAUDE.md` file
 
-Example:
+### Best Practice 3: Use Mutation Testing If You Are Keen on Code Coverage
 
-Test Structure Guidelines
-
-- Use JUnit 5 for all test classes
-- Name test methods using the pattern: `should<ExpectedBehavior>When<Condition>`
-- Structure each test with the Arrange-Act-Assert pattern
-- Use AssertJ for all assertions
-- Avoid for loops and if statements in tests
-- Avoid comments in the test code
-- Name the class under test variable as cut
-- Create a separate test class for each production class
-- Follow a consistent setup pattern for all tests
-- Use @DisplayName for more descriptive test names in reports
-- Group related tests with @Nested classes
-- Use parameterized tests for testing multiple scenarios
-- Mock external dependencies with Mockito
+- PIT
+- Mutation Testing
 
 ### Testing Pitfall 1: Using @SpringBootTest for Everything
 
