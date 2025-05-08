@@ -2,9 +2,12 @@
 
 ## Intro
 
+- Raise hands if you enjoy writing tests
+- My story towards testing
+- What I mean with testing: automated tests written by a developer
 - Shifting left
 - How much confidence do I have to deploy on a friday afternoon to prod on a dependabot update?
-- Don't work towarsd 100% code coverage
+- Don't work towards 100% code coverage
 - Fast feedback loops
 - QUicker devleopment, errors pop up more early, wouldn't say bugs but sometimes we are over confident only to relaize aftr the deployment we missed a parameter or misspelled it. Avoid friction
 
