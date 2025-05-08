@@ -20,9 +20,7 @@
 ## Spring Boot Testing 101
 
 - Maven  Surfire Plugin for unit tests
-
 -> what is a unit test?
-
 
 Test types with Spring Boot:
 
