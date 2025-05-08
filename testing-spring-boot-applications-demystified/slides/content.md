@@ -36,6 +36,18 @@ First two Surefire, last Failsafe
 
 Reason for splitting: parallelize, better grouping
 
+### Naming Test Wirr Warr
+
+White box test, integrated test, black box test, fast test
+
+Word cloud and mention that it's complicated
+
+### My Pragmatich Approach
+
+1. Unit
+2. Integration
+3. E2E
+
 ### Spring Boot Starter Test
 
 - aka. Testing Swiss Army Knife
