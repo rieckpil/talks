@@ -12,7 +12,7 @@ public class DiscountCalculator {
   private static final BigDecimal STANDARD_DISCOUNT = new BigDecimal("0.05");  // 5%
   private static final BigDecimal PREMIUM_DISCOUNT = new BigDecimal("0.10");   // 10%
 
-  public BigDecimal calculateDiscount(Customer customer, BigDecimal totalAmount) {
+  public BigDecimal calculateDiscount(BigDecimal totalAmount) {
     BigDecimal discountRate = STANDARD_DISCOUNT;  // Standard discount for all customers (5%)
 
     // Premium discount for orders over $1000 (additional 10%)

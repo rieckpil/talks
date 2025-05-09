@@ -20,7 +20,7 @@ class DiscountCalculatorPoorTest {
         BigDecimal amount = new BigDecimal("100.00");
 
         // Act
-        BigDecimal discount = cut.calculateDiscount(customer, amount);
+        BigDecimal discount = cut.calculateDiscount(amount);
 
         // Assert
         // This assertion is too general - doesn't validate the actual value
@@ -36,7 +36,7 @@ class DiscountCalculatorPoorTest {
         BigDecimal amount = new BigDecimal("2000.00");
 
         // Act
-        BigDecimal discount = cut.calculateDiscount(customer, amount);
+        BigDecimal discount = cut.calculateDiscount(amount);
 
         // Assert
         // This covers the code path but doesn't verify the correct calculation

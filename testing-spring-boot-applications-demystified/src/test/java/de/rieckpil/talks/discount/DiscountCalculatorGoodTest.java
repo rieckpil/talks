@@ -27,7 +27,7 @@ class DiscountCalculatorGoodTest {
             BigDecimal amount = new BigDecimal("100.00");
 
             // Act
-            BigDecimal discount = cut.calculateDiscount(customer, amount);
+            BigDecimal discount = cut.calculateDiscount(amount);
 
             // Assert
             assertThat(discount).isEqualByComparingTo(new BigDecimal("5.00"));
@@ -46,12 +46,12 @@ class DiscountCalculatorGoodTest {
             BigDecimal amount = new BigDecimal("2000.00");
 
             // Act
-            BigDecimal discount = cut.calculateDiscount(customer, amount);
+            BigDecimal discount = cut.calculateDiscount(amount);
 
             // Assert
             assertThat(discount).isEqualByComparingTo(new BigDecimal("300.00"));
         }
-        
+
         @Test
         @DisplayName("should apply 15% discount for order at premium threshold")
         void shouldApplyPremiumDiscountAtThreshold() {
@@ -60,7 +60,7 @@ class DiscountCalculatorGoodTest {
             BigDecimal amount = new BigDecimal("1000.00");
 
             // Act
-            BigDecimal discount = cut.calculateDiscount(customer, amount);
+            BigDecimal discount = cut.calculateDiscount(amount);
 
             // Assert
             assertThat(discount).isEqualByComparingTo(new BigDecimal("150.00"));
@@ -78,10 +78,10 @@ class DiscountCalculatorGoodTest {
         // Arrange
         Customer customer = new Customer("1", "John Doe", false);
         BigDecimal orderAmount = new BigDecimal(amount);
-        
+
         // Act
-        BigDecimal discount = cut.calculateDiscount(customer, orderAmount);
-        
+        BigDecimal discount = cut.calculateDiscount(orderAmount);
+
         // Assert
         assertThat(discount).isEqualByComparingTo(new BigDecimal(expectedDiscount));
     }
