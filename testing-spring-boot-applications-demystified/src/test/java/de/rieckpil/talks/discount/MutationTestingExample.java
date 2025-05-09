@@ -27,14 +27,13 @@ public class MutationTestingExample {
     /**
      * Example 2: Poor Test with Weak Assertions
      *
-     * Consider the poor test: shouldCalculateDiscountWithSeasonalPromotion()
+     * Consider the poor test: shouldCalculateDiscountForRegularCustomer()
      *
-     * POTENTIAL MUTATION 2: Change "discountRate.add(SEASONAL_DISCOUNT)" to "discountRate"
-     * (Remove the addition of seasonal discount)
+     * POTENTIAL MUTATION 2: Change "STANDARD_DISCOUNT" to "BigDecimal.ZERO"
      *
      * The poor test would still pass if this mutation were introduced because:
-     * - It only asserts that the result is greater than zero
-     * - It doesn't verify the actual calculation or that the seasonal discount was applied
+     * - It only asserts that the result is positive
+     * - It doesn't verify the actual calculation or the correct discount amount
      *
      * MUTATION SURVIVING = Business logic bug introduced!
      */
@@ -42,14 +41,13 @@ public class MutationTestingExample {
     /**
      * Example 3: Good Test that Would Kill Mutations
      *
-     * Consider the good test: shouldApplyStandardAndSeasonalDiscountForRegularCustomer()
+     * Consider the good test: shouldApplyStandardDiscountForRegularCustomer()
      *
-     * POTENTIAL MUTATION 3: Change "discountRate.add(SEASONAL_DISCOUNT)" to "discountRate"
-     * (Remove the addition of seasonal discount)
+     * POTENTIAL MUTATION 3: Change "STANDARD_DISCOUNT" to "BigDecimal.ZERO"
      *
      * The good test would FAIL if this mutation were introduced because:
-     * - It verifies the exact calculated amount (8.00) that includes the seasonal discount
-     * - Without the seasonal discount, the result would be 5.00, failing the assertion
+     * - It verifies the exact calculated amount (5.00)
+     * - With zero discount, the result would be 0.00, failing the assertion
      *
      * MUTATION KILLED = Bug detected!
      */
@@ -60,12 +58,12 @@ public class MutationTestingExample {
      * The good tests include:
      * - Tests for exactly 1000.00 (the boundary)
      * - Tests for values just below and above boundaries
-     * - Tests for all combinations of conditions
+     * - Tests with exact expected discount values
      *
      * POTENTIAL MUTATION 4: Change ">=" to ">"
      *
      * The good test with parameterized cases would catch this immediately by failing
-     * when testing the boundary condition.
+     * when testing the boundary condition of exactly 1000.00.
      *
      * MUTATION KILLED = Bug detected!
      */
