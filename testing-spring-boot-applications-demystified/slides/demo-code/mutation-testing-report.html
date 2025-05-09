@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>PIT Mutation Report</title>
+    <style>
+        html, body, table {
+            font-family: sans-serif;
+            font-size: 10pt;
+        }
+        h1, h2, h3 {
+            font-weight: bold;
+        }
+        h1 {
+            font-size: 18pt;
+        }
+        h2 {
+            font-size: 14pt;
+        }
+        h3 {
+            font-size: 12pt;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        td, th {
+            padding: 3px;
+            border: 1px solid #ccc;
+        }
+        th {
+            background-color: #eee;
+        }
+        .green {
+            background-color: #9ACD32;
+        }
+        .red {
+            background-color: #FF6347;
+        }
+        .yellow {
+            background-color: #FFFF00;
+        }
+        .code {
+            font-family: monospace;
+            font-size: 10pt;
+            white-space: pre;
+            overflow: auto;
+        }
+        .line-number {
+            color: #888;
+            width: 30px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        .mutated {
+            background-color: yellow;
+        }
+        .killed {
+            text-decoration: line-through;
+            color: red;
+        }
+        .survived {
+            font-weight: bold;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>PIT Mutation Report - Discount Calculator Example</h1>
+    <h2>Summary</h2>
+    <table>
+        <tr>
+            <th>Package</th>
+            <th>Classes</th>
+            <th>Lines of Code</th>
+            <th>Line Coverage</th>
+            <th>Mutation Coverage</th>
+            <th>Test Strength</th>
+        </tr>
+        <tr>
+            <td>de.rieckpil.talks.discount</td>
+            <td>2</td>
+            <td>43</td>
+            <td>100%</td>
+            <td>45%</td>
+            <td class="red">FAIL</td>
+        </tr>
+        <tr>
+            <td>de.rieckpil.talks.discount with good tests</td>
+            <td>2</td>
+            <td>43</td>
+            <td>100%</td>
+            <td>97%</td>
+            <td class="green">PASS</td>
+        </tr>
+    </table>
+
+    <h2>Mutation Report for DiscountCalculator with Poor Tests</h2>
+    <div>
+        <h3>Surviving Mutations</h3>
+        <div class="code">
+            <div>
+                <span class="line-number">24</span><span>public BigDecimal calculateDiscount(Customer customer, BigDecimal totalAmount, boolean seasonalPromoActive) {</span>
+            </div>
+            <div>
+                <span class="line-number">25</span><span>    BigDecimal discountRate = BigDecimal.ZERO;</span>
+            </div>
+            <div>
+                <span class="line-number">26</span><span>    </span>
+            </div>
+            <div>
+                <span class="line-number">27</span><span>    // Standard discount for all customers (5%)</span>
+            </div>
+            <div>
+                <span class="line-number">28</span><span>    discountRate = discountRate.add(STANDARD_DISCOUNT);</span>
+            </div>
+            <div>
+                <span class="line-number">29</span><span>    </span>
+            </div>
+            <div>
+                <span class="line-number">30</span><span>    // Premium discount for orders over $1000 (additional 10%)</span>
+            </div>
+            <div>
+                <span class="line-number">31</span><span class="survived">    if (totalAmount.compareTo(PREMIUM_THRESHOLD) >= 0) {</span>
+                <span class="mutated">Mutation: Changed >= to ></span>
+            </div>
+            <div>
+                <span class="line-number">32</span><span>        discountRate = discountRate.add(PREMIUM_DISCOUNT);</span>
+            </div>
+            <div>
+                <span class="line-number">33</span><span>    }</span>
+            </div>
+            <div>
+                <span class="line-number">34</span><span>    </span>
+            </div>
+            <div>
+                <span class="line-number">35</span><span>    // First-time customer bonus (additional 2%)</span>
+            </div>
+            <div>
+                <span class="line-number">36</span><span>    if (customer.isFirstTimeCustomer()) {</span>
+            </div>
+            <div>
+                <span class="line-number">37</span><span class="survived">        discountRate = discountRate.add(FIRST_TIME_BONUS);</span>
+                <span class="mutated">Mutation: Removed call to add</span>
+            </div>
+            <div>
+                <span class="line-number">38</span><span>    }</span>
+            </div>
+            <div>
+                <span class="line-number">39</span><span>    </span>
+            </div>
+            <div>
+                <span class="line-number">40</span><span>    // Seasonal promotion discount if active (additional 3%)</span>
+            </div>
+            <div>
+                <span class="line-number">41</span><span>    if (seasonalPromoActive) {</span>
+            </div>
+            <div>
+                <span class="line-number">42</span><span class="survived">        discountRate = discountRate.add(SEASONAL_DISCOUNT);</span>
+                <span class="mutated">Mutation: Removed call to add</span>
+            </div>
+            <div>
+                <span class="line-number">43</span><span>    }</span>
+            </div>
+        </div>
+
+        <h3>Summary for Poor Tests</h3>
+        <p>Despite having 100% line coverage, the poor tests allow several critical mutations to survive:</p>
+        <ul>
+            <li>Changed condition from <code>>=</code> to <code>></code> on premium discount threshold</li>
+            <li>Removed first-time customer bonus discount</li>
+            <li>Removed seasonal promotion discount</li>
+        </ul>
+        <p>This means the tests are not actually verifying the business logic correctly, despite executing all code paths.</p>
+    </div>
+
+    <h2>Mutation Report for DiscountCalculator with Good Tests</h2>
+    <div>
+        <h3>Killed Mutations</h3>
+        <div class="code">
+            <div>
+                <span class="line-number">24</span><span>public BigDecimal calculateDiscount(Customer customer, BigDecimal totalAmount, boolean seasonalPromoActive) {</span>
+            </div>
+            <div>
+                <span class="line-number">25</span><span>    BigDecimal discountRate = BigDecimal.ZERO;</span>
+            </div>
+            <div>
+                <span class="line-number">26</span><span>    </span>
+            </div>
+            <div>
+                <span class="line-number">27</span><span>    // Standard discount for all customers (5%)</span>
+            </div>
+            <div>
+                <span class="line-number">28</span><span>    discountRate = discountRate.add(STANDARD_DISCOUNT);</span>
+            </div>
+            <div>
+                <span class="line-number">29</span><span>    </span>
+            </div>
+            <div>
+                <span class="line-number">30</span><span>    // Premium discount for orders over $1000 (additional 10%)</span>
+            </div>
+            <div>
+                <span class="line-number">31</span><span class="killed">    if (totalAmount.compareTo(PREMIUM_THRESHOLD) >= 0) {</span>
+                <span class="mutated">Mutation: Changed >= to ></span>
+            </div>
+            <div>
+                <span class="line-number">32</span><span>        discountRate = discountRate.add(PREMIUM_DISCOUNT);</span>
+            </div>
+            <div>
+                <span class="line-number">33</span><span>    }</span>
+            </div>
+            <div>
+                <span class="line-number">34</span><span>    </span>
+            </div>
+            <div>
+                <span class="line-number">35</span><span>    // First-time customer bonus (additional 2%)</span>
+            </div>
+            <div>
+                <span class="line-number">36</span><span>    if (customer.isFirstTimeCustomer()) {</span>
+            </div>
+            <div>
+                <span class="line-number">37</span><span class="killed">        discountRate = discountRate.add(FIRST_TIME_BONUS);</span>
+                <span class="mutated">Mutation: Removed call to add</span>
+            </div>
+            <div>
+                <span class="line-number">38</span><span>    }</span>
+            </div>
+            <div>
+                <span class="line-number">39</span><span>    </span>
+            </div>
+            <div>
+                <span class="line-number">40</span><span>    // Seasonal promotion discount if active (additional 3%)</span>
+            </div>
+            <div>
+                <span class="line-number">41</span><span>    if (seasonalPromoActive) {</span>
+            </div>
+            <div>
+                <span class="line-number">42</span><span class="killed">        discountRate = discountRate.add(SEASONAL_DISCOUNT);</span>
+                <span class="mutated">Mutation: Removed call to add</span>
+            </div>
+            <div>
+                <span class="line-number">43</span><span>    }</span>
+            </div>
+        </div>
+
+        <h3>Summary for Good Tests</h3>
+        <p>The well-designed tests kill nearly all mutations by:</p>
+        <ul>
+            <li>Testing exact discount values, not just "positive" or "greater than X"</li>
+            <li>Testing boundary conditions (e.g., exactly $1000.00)</li>
+            <li>Testing all combinations of conditions systematically</li>
+            <li>Using parameterized tests to cover many scenarios efficiently</li>
+        </ul>
+        <p>This gives much higher confidence that the business logic is correct and will work as expected in production.</p>
+    </div>
+
+    <h2>Conclusion</h2>
+    <p>This report demonstrates how mutation testing reveals weaknesses in test suites that have good line coverage but poor verification of business logic. JaCoCo would show the same code coverage percentage for both test suites, but PIT clearly identifies which one is actually testing the code properly.</p>
+</body>
+</html>

@@ -23,6 +23,9 @@
     <selenide.version>7.9.0</selenide.version>
     <selenium.version>4.31.0</selenium.version>
     <wiremock.version>3.13.0</wiremock.version>
+    <jacoco.version>0.8.11</jacoco.version>
+    <pitest.version>1.15.6</pitest.version>
+    <pitest-junit5.version>1.2.1</pitest-junit5.version>
   </properties>
 
   <dependencies>
@@ -134,6 +137,85 @@
           </execution>
         </executions>
       </plugin>
+
+      <!-- JaCoCo Plugin for Code Coverage -->
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>${jacoco.version}</version>
+        <executions>
+          <execution>
+            <id>prepare-agent</id>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>report</id>
+            <phase>test</phase>
+            <goals>
+              <goal>report</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- PIT Mutation Testing Plugin -->
+      <plugin>
+        <groupId>org.pitest</groupId>
+        <artifactId>pitest-maven</artifactId>
+        <version>${pitest.version}</version>
+        <dependencies>
+          <dependency>
+            <groupId>org.pitest</groupId>
+            <artifactId>pitest-junit5-plugin</artifactId>
+            <version>${pitest-junit5.version}</version>
+          </dependency>
+        </dependencies>
+        <configuration>
+          <targetClasses>
+            <param>de.rieckpil.talks.discount.*</param>
+          </targetClasses>
+          <targetTests>
+            <param>de.rieckpil.talks.discount.*Test</param>
+          </targetTests>
+          <mutators>
+            <mutator>DEFAULTS</mutator>
+          </mutators>
+          <outputFormats>
+            <outputFormat>HTML</outputFormat>
+            <outputFormat>XML</outputFormat>
+          </outputFormats>
+          <timestampedReports>false</timestampedReports>
+          <threads>4</threads>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
+
+  <profiles>
+    <!-- Profile for running PIT on changed code only -->
+    <profile>
+      <id>pit-incremental</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.pitest</groupId>
+            <artifactId>pitest-maven</artifactId>
+            <configuration>
+              <mutationThreshold>80</mutationThreshold>
+              <timeoutFactor>1.5</timeoutFactor>
+              <timeoutConstant>5000</timeoutConstant>
+              <maxSurviving>0</maxSurviving>
+              <withHistory>true</withHistory>
+              <threads>4</threads>
+              <historyInputFile>target/pit-history/history.bin</historyInputFile>
+              <historyOutputFile>target/pit-history/history.bin</historyOutputFile>
+              <fullMutationMatrix>true</fullMutationMatrix>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>

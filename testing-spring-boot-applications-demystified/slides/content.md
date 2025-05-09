@@ -95,6 +95,7 @@ Word cloud and mention that it's complicated
 ### Best Practice 1: Test Parallelization
 
 - Goal: reduce build time and get faster feedback
+
 - Requirements:
   - No shared state
   - No dependency between tests and their execution order
@@ -110,7 +111,7 @@ Two ways to achieve this:
 
 ### Best Practice 2: Use the help of AI
 
-- Show Diffblue, a niche AI tool that generates unit tests for Java code: `dcover create de.rieckpil.workshop.CustomerContr
+- Show Diffblue, a niche AI tool that generates unit tests for Java code: `dcover create de.rieckpil.talks.CustomerContr
 oller`
 - TDD with an LLM?
 - LLM very usueful for boilerplate setup, test data, test migration (e.g. Kotlin -> Java)
@@ -118,7 +119,7 @@ oller`
 - Take a look at OpenRewrite for migrations (not AI but super useful)
 - Clearly define your test requirements in your copiolot instructions, claude.md or cursor rule
 - Showcase Claude Code and my `CLAUDE.md` file
-- GitHub Copilot in IDEA lalal in VSCode it should be better
+- GitHub Copilot in IDEA not sooo good (much filtering, UX could be improved) but in VSCode it should be better
 
 ### Best Practice 3: Use Mutation Testing If You Are Keen on Code Coverage
 
@@ -147,6 +148,8 @@ oller`
 - @MockBean is a Spring Boot specific annotation that replaces a bean in the application context with a Mockito mock
 - New @MockitoBean annotation is a Spring Boot specific annotation that replaces a bean in the application context with a Mockito mock
 - @Mock is Mockito only for unit tests
+
+
 - Golden Mockito Rules:
   - Do not mock types you don't own -> e.g. Framework Boundary
   - Don't mock value objects -> e.g. DTOs
@@ -158,7 +161,7 @@ oller`
 - Usually transition period, old projects have not time to fix tech debt, let alone test tech debt
 - Browsing through the internet for solutions, you might find test setups that are for JUnit 5
 - you can mix both versions in the same project but not in the same test class
-- Easily import the wrong @Test and you end up wasting one hour because the Sppring context does not work as expected
+- Easily import the wrong @Test and you end up wasting one hour because the Spring context does not work as expected
 - If you keep that in mind, good - small hint and tip
 
 ## Outlook & Summary
@@ -167,5 +170,5 @@ oller`
 - Offer: in house 1 or 2 day workshop for this topic to cover more in depth
 - On-demand online course Masterclass
 - Open for consulting
-- Thank you!
+- Thank you! Joyful testing!
 - Now it's time for questions
