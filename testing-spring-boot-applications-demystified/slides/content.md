@@ -9,7 +9,7 @@
 - How much confidence do I have to deploy on a friday afternoon to prod on a dependabot update?
 - Don't work towards 100% code coverage
 - Fast feedback loops
-- Quicker devleopment, errors pop up more early, wouldn't say bugs but sometimes we are over confident only to relaize aftr the deployment we missed a parameter or misspelled it. Avoid friction
+- Quicker development, errors pop up more early, wouldn't say bugs, but sometimes we are overconfident only to realize after the deployment we missed a parameter or misspelled it. Avoid friction
 
 ## About Me & Agenda
 
