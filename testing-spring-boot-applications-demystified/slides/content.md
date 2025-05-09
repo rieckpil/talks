@@ -38,15 +38,15 @@ Reason for splitting: parallelize, better grouping
 
 ### Naming Test Wirr Warr
 
-White box test, integrated test, black box test, fast test
+White box test, integrated test, black box test, fast test, functional test, regression test, system tests, user acceptance tests, unit tests, E2E tests, smoke tests, performance tests, load tests, stress tests, exploratory tests, mutation tests, contract tests, property-based tests, integration tests, boundary value testing
 
 Word cloud and mention that it's complicated
 
-### My Pragmatich Approach
+### My Pragmatic Test Name Approach
 
-1. Unit
-2. Integration
-3. E2E
+1. Unit: Tests that verify the functionality of a single, isolated component (like a method or class) by mocking or stubbing all external dependencies.
+2. Integration: Tests that verify interactions between two or more components work correctly together, with real implementations replacing some mocks.
+3. E2E: Tests that validate the entire application workflow from start to finish, simulating real user scenarios across all components and external dependencies.
 
 ### Spring Boot Starter Test
 
@@ -119,6 +119,7 @@ oller`
 - Take a look at OpenRewrite for migrations (not AI but super useful)
 - Clearly define your test requirements in your copiolot instructions, claude.md or cursor rule
 - Showcase Claude Code and my `CLAUDE.md` file
+- GitHub Copilo in IDEA lalal in VSCode it should be better
 
 ### Best Practice 3: Use Mutation Testing If You Are Keen on Code Coverage
 
@@ -154,7 +155,7 @@ oller`
 - Easily import the wrong @Test and you end up wasting one hour because the Sppring context does not work as expected
 - If you keep that in mind, good - small hint and tip
 
-## Outlook
+## Outlook & Summary
 
 - Still new features coming: Still many new features (@ServiceConnection, Testcontainers Support, more AssertJ integrations, etc.) are coming in the ecosystem, Testcontainers being one of the most important one in recent years. The company AtomicJar got acquired by Docker
 - Offer: in house 1 or 2 day workshop for this topic to cover more in depth
