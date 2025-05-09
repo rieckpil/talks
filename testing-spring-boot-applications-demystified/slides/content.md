@@ -9,7 +9,7 @@
 - How much confidence do I have to deploy on a friday afternoon to prod on a dependabot update?
 - Don't work towards 100% code coverage
 - Fast feedback loops
-- QUicker devleopment, errors pop up more early, wouldn't say bugs but sometimes we are over confident only to relaize aftr the deployment we missed a parameter or misspelled it. Avoid friction
+- Quicker devleopment, errors pop up more early, wouldn't say bugs but sometimes we are over confident only to relaize aftr the deployment we missed a parameter or misspelled it. Avoid friction
 
 ## About Me & Agenda
 
@@ -67,7 +67,6 @@ Word cloud and mention that it's complicated
 
 - Pick one assertion library or at least not mix it within the same test class
 
-
 ## Unit Testing with Spring Boot
 
 - Unit tests are the fastest tests
@@ -99,7 +98,7 @@ Word cloud and mention that it's complicated
 - Requirements:
   - No shared state
   - No dependency between tests and their execution order
-  - No mutatation of global state
+  - No mutation of global state
   - No `@DirtiesContext`
 
 Two ways to achieve this:
@@ -119,14 +118,21 @@ oller`
 - Take a look at OpenRewrite for migrations (not AI but super useful)
 - Clearly define your test requirements in your copiolot instructions, claude.md or cursor rule
 - Showcase Claude Code and my `CLAUDE.md` file
-- GitHub Copilo in IDEA lalal in VSCode it should be better
+- GitHub Copilot in IDEA lalal in VSCode it should be better
 
 ### Best Practice 3: Use Mutation Testing If You Are Keen on Code Coverage
 
-- PIT
-- Mutation Testing
+- aka. your tests may give you a false sense of security
+- Having code coverage but not testing the right things
+- introduction:  Mutation Testing with e.g. PIT
 - Show example where it makes sense
 - Considerations for bigger projects: only run on the new diffs, not on the whole codebase
+- Beyond Line Coverage: Traditional tools like JaCoCo show which code runs during tests, but PIT verifies if your tests actually detect when code behaves incorrectly by introducing "mutations" to your source code.
+- Quality Guarantee: PIT automatically modifies your code (changing conditionals, return values, etc.) to ensure your tests fail when they should, revealing blind spots in seemingly comprehensive test suites.
+- Business Logic Protection: For Spring Boot services with complex business workflows, PIT helps identify untested edge cases that could lead to critical production bugs in your application.
+- Easy Integration: PIT seamlessly integrates with Maven/Gradle build processes, with minimal configuration required to start testing your Spring Boot application.
+- Prioritize Improvements: PIT's HTML reports clearly identify which parts of your codebase have mutations that survived testing, helping teams focus their testing efforts where they'll have the most impact.
+- Production Confidence: While requiring more computational resources than basic unit tests, the enhanced detection of subtle logic errors provides significantly greater confidence in mission-critical Spring Boot components.
 
 ### Testing Pitfall 1: Using @SpringBootTest for Everything
 
