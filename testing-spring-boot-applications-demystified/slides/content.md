@@ -1,6 +1,5 @@
 ---
 marp: true
-#theme: pragmatech-theme
 theme: pragmatech
 paginate: false
 header: 'Testing Spring Boot Applications Demystified @ JUG Hamburg 14.05.2025'
@@ -15,6 +14,7 @@ header: 'Testing Spring Boot Applications Demystified @ JUG Hamburg 14.05.2025'
 ---
 
 <!-- _class: title -->
+![bg left](https://picsum.photos/720?image=29)
 
 # Testing Spring Boot Applications Demystified
 
@@ -27,8 +27,7 @@ Java User Group Hamburg 14.05.2025
 <!-- header: 'Testing Spring Boot Applications Demystified @ JUG Hamburg 14.05.2025' -->
 <!-- footer: '![w:32 h:32](/assets/logo.webp)' -->
 
-[//]: # (<!-- backgroundColor: aqua -->)
-<!-- backgroundImage: "linear-gradient(to bottom, #67b8e3, #0288d1)" -->
+[//]: # (<!-- transition: pull -->)
 
 ## Intro
 
@@ -49,6 +48,8 @@ Java User Group Hamburg 14.05.2025
 
 
 ---
+
+![bg left:33%](https://picsum.photos/720?image=27)
 
 ## Spring Boot Testing 101
 
@@ -76,11 +77,16 @@ White box test, integrated test, black box test, fast test, functional test, reg
 
 Word cloud and mention that it's complicated
 
+---
+
 ### My Pragmatic Test Name Approach
 
 1. Unit: Tests that verify the functionality of a single, isolated component (like a method or class) by mocking or stubbing all external dependencies.
 2. Integration: Tests that verify interactions between two or more components work correctly together, with real implementations replacing some mocks.
 3. E2E: Tests that validate the entire application workflow from start to finish, simulating real user scenarios across all components and external dependencies.
+
+
+---
 
 ### Spring Boot Starter Test
 
@@ -101,12 +107,16 @@ Word cloud and mention that it's complicated
 
 - Pick one assertion library or at least not mix it within the same test class
 
+---
+
 ## Unit Testing with Spring Boot
 
 - Unit tests are the fastest tests
 - Provide collaborators from outside -> no new
 - avoid static (possible to Mock)
 - rely only on JUnit and Mockito
+
+---
 
 ## Sliced Testing with Spring Boot
 
@@ -117,6 +127,8 @@ Word cloud and mention that it's complicated
 - You can write your own slice
 - See `WebMvcTypeExcludeFilter`
 
+---
+
 ## Integration Testing with Spring Boot
 
 - Start everything up
@@ -124,7 +136,11 @@ Word cloud and mention that it's complicated
 - Differnece between MockMvc and WebTestClient
 - Context Caching! Best practices, pitfalls
 
+---
+
 ## Best Practices and Pitfalls
+
+---
 
 ### Best Practice 1: Test Parallelization
 
@@ -143,6 +159,8 @@ Two ways to achieve this:
 - Might not work out of the box, but worth investing
 - Combine both approaches, multiple JVM and witin the JVM run in parallel
 
+---
+
 ### Best Practice 2: Use the help of AI
 
 - Show Diffblue, a niche AI tool that generates unit tests for Java code: `dcover create de.rieckpil.talks.CustomerContr
@@ -154,6 +172,8 @@ oller`
 - Clearly define your test requirements in your copiolot instructions, claude.md or cursor rule
 - Showcase Claude Code and my `CLAUDE.md` file
 - GitHub Copilot in IDEA not sooo good (much filtering, UX could be improved) but in VSCode it should be better
+
+---
 
 ### Best Practice 3: Use Mutation Testing If You Are Keen on Code Coverage
 
@@ -190,6 +210,8 @@ oller`
   - Don't mock everything
   - Show some love with your tests
 
+---
+
 ### Testing Pitfall 3: JUnit 4 vs. JUnit 5 Pitfall
 
 - Usually transition period, old projects have not time to fix tech debt, let alone test tech debt
@@ -197,6 +219,8 @@ oller`
 - you can mix both versions in the same project but not in the same test class
 - Easily import the wrong @Test and you end up wasting one hour because the Spring context does not work as expected
 - If you keep that in mind, good - small hint and tip
+
+---
 
 ## Outlook & Summary
 

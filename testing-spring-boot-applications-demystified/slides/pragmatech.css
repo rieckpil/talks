@@ -1,0 +1,206 @@
+@import 'https://fonts.bunny.net/css?family=Lato:400,900|Roboto+Mono:400,700&display=swap';
+
+/*!
+ * Marp / PragmaTech  theme.
+ *
+ * @theme pragmatech
+ * @author Philip Riecks
+ *
+ * @auto-scaling true
+ * @size 16:9 1280px 720px
+ * @size 4:3 960px 720px
+ */
+
+:root {
+  --primary-blue: #2563eb; /* blue-600 */
+  --secondary-blue: #3b82f6; /* blue-500 */
+  --dark-blue: #1e40af; /* blue-800 */
+  --light-blue: #dbeafe; /* blue-100 */
+  --gray-700: #374151;
+  --gray-500: #6b7280;
+  --gray-200: #e5e7eb;
+  --white: #ffffff;
+  --black: #000000;
+}
+
+
+header {
+  background-color: #800000;
+  color: #fff;
+  font-size: 1em;
+  font-weight: 700;
+}
+
+
+section {
+  padding: 50px;
+}
+
+header,
+footer {
+  position: absolute;
+  left: 50px;
+  right: 50px;
+  height: 20px;
+}
+
+header {
+  top: 30px;
+}
+
+footer {
+  bottom: 30px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0.5em 0 0;
+  color: red;
+
+  strong {
+    font-weight: inherit;
+  }
+}
+
+h1 {
+  font-size: 1.8em;
+}
+
+h2 {
+  font-size: 1.5em;
+}
+
+h3 {
+  font-size: 1.3em;
+}
+
+h4 {
+  font-size: 1.1em;
+}
+
+h5 {
+  font-size: 1em;
+}
+
+h6 {
+  font-size: 0.9em;
+}
+
+p,
+blockquote {
+  margin: 1em 0 0;
+}
+
+ul,
+ol {
+  > li {
+    margin: 0.3em 0 0;
+
+    > p {
+      margin: 0.6em 0 0;
+    }
+  }
+}
+
+code {
+  display: inline-block;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.8em;
+  letter-spacing: 0;
+  margin: -0.1em 0.15em;
+  padding: 0.1em 0.2em;
+  vertical-align: baseline;
+}
+
+pre {
+  display: block;
+  margin: 1em 0 0;
+  overflow: visible;
+
+  code {
+    box-sizing: border-box;
+    margin: 0;
+    min-width: 100%;
+    padding: 0.5em;
+    font-size: 0.7em;
+  }
+
+  &::part(auto-scaling) {
+    max-height: calc(580px - 1em);
+  }
+}
+
+blockquote {
+  margin: 1em 0 0;
+  padding: 0 1em;
+  position: relative;
+
+  &::after,
+  &::before {
+    content: '“';
+    display: block;
+    font-family: 'Times New Roman', serif;
+    font-weight: bold;
+    position: absolute;
+  }
+
+  &::before {
+    top: 0;
+    left: 0;
+  }
+
+  &::after {
+    right: 0;
+    bottom: 0;
+    transform: rotate(180deg);
+  }
+
+  > *:first-child {
+    margin-top: 0;
+  }
+}
+
+mark {
+  background: transparent;
+}
+
+table {
+  border-spacing: 0;
+  border-collapse: collapse;
+  margin: 1em 0 0;
+
+  th,
+  td {
+    padding: 0.2em 0.4em;
+    border-width: 1px;
+    border-style: solid;
+  }
+}
+
+header,
+footer,
+section::after {
+  box-sizing: border-box;
+  font-size: 66%;
+  height: 70px;
+  line-height: 50px;
+  overflow: hidden;
+  padding: 10px 25px;
+  position: absolute;
+}
+
+header {
+  left: 0;
+  right: 0;
+  top: 0;
+}
+
+footer {
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
