@@ -1,4 +1,34 @@
-# Welcome
+---
+marp: true
+#theme: pragmatech-theme
+theme: pragmatech
+paginate: false
+header: 'Testing Spring Boot Applications Demystified @ JUG Hamburg 14.05.2025'
+---
+
+![bg](./assets/hamburg-jug-hh.jpg)
+<!-- header: "" -->
+<!-- footer: ""-->
+
+
+
+---
+
+<!-- _class: title -->
+
+# Testing Spring Boot Applications Demystified
+
+## Best Practices, Common Pitfalls, and Real-World Strategies
+
+Java User Group Hamburg 14.05.2025
+
+---
+<!-- paginate: true -->
+<!-- header: 'Testing Spring Boot Applications Demystified @ JUG Hamburg 14.05.2025' -->
+<!-- footer: '![w:32 h:32](/assets/logo.webp)' -->
+
+[//]: # (<!-- backgroundColor: aqua -->)
+<!-- backgroundImage: "linear-gradient(to bottom, #67b8e3, #0288d1)" -->
 
 ## Intro
 
@@ -16,6 +46,9 @@
 - Interrupt me any time during the talk
 - self employed consultant
 - enjoys writing tests
+
+
+---
 
 ## Spring Boot Testing 101
 
@@ -35,6 +68,7 @@ usually have `*IT/*WT` postix
 First two Surefire, last Failsafe
 
 Reason for splitting: parallelize, better grouping
+---
 
 ### Naming Test Wirr Warr
 

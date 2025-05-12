@@ -1,10 +1,13 @@
 ---
 marp: true
-theme: pragmatech-theme
+#theme: pragmatech-theme
+theme: gaia
+class:
+  - lead
+  - invert
 paginate: true
-class: 
-header: ''
-footer: '<img src="./assets/logo.webp" class="footer-logo" /><div class="footer-company">PragmaTech Digital</div><div class="footer-line"></div>'
+header: 'JUG Hamburg 2025'
+footer: '<img src="./assets/logo-small.webp" class="footer-logo" /><div class="footer-company"></div><div class="footer-line"></div>'
 ---
 
 <!-- _class: title -->
@@ -24,7 +27,7 @@ Philip Riecks | PragmaTech Digital | JUG Munich 2025
 
 - Philip Riecks, Self-employed Consultant & Founder of PragmaTech Digital
 - Specialized in Build Pipeline Acceleration & Test Automation
-- Spring Boot Enthusiast 
+- Spring Boot Enthusiast
 - Author of Technical Books & Courses
 - Java Champion
 - [philip@pragmatech.digital](mailto:philip@pragmatech.digital)
@@ -125,10 +128,10 @@ class CustomerServiceTest {
     // Arrange
     when(customerRepository.findAllCustomerIds())
       .thenReturn(List.of("42"));
-    
+
     // Act
     cut.notifyAllCustomers();
-    
+
     // Assert
     verify(customerRepository).findAllCustomerIds();
   }
@@ -159,13 +162,13 @@ class CustomerControllerTest {
         .contentType(APPLICATION_JSON)
         .content("""
            {
-             "first_name": "John", 
+             "first_name": "John",
              "last_name": "Doe",
              "email": "john.doe@example.com"
            }
           """))
       .andExpect(status().isCreated())
-      .andExpect(header().string("Location", 
+      .andExpect(header().string("Location",
         containsString("/api/customers/42")));
   }
 }
@@ -181,10 +184,10 @@ class ApplicationIT {
 
   @LocalServerPort
   private int port;
-  
+
   @Autowired
   private TestRestTemplate restTemplate;
-  
+
   @Autowired
   private WebTestClient webTestClient;
 
@@ -268,7 +271,7 @@ class ContextReuseTwoIT {
 
 <div>
 
-- Generate test boilerplate 
+- Generate test boilerplate
 - Create test data fixtures
 - Migrate tests between frameworks
 
