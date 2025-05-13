@@ -1,8 +1,5 @@
 package de.rieckpil.talks.advanced;
 
-import org.junit.jupiter.api.Test;
-import org.testcontainers.containers.PostgreSQLContainer;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -10,9 +7,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import org.junit.jupiter.api.Test;
+import org.testcontainers.containers.PostgreSQLContainer;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
-class TestcontainersTest {
+class TestcontainersIT {
 
   private static PostgreSQLContainer<?> postgresContainer = new PostgreSQLContainer<>("postgres:latest")
     .withDatabaseName("testdb")
@@ -20,7 +20,7 @@ class TestcontainersTest {
     .withPassword("testpass");
 
   @Test
-  public void testQuery() throws SQLException {
+  void testQuery() throws SQLException {
 
     postgresContainer.start();
 

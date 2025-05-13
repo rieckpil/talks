@@ -7,7 +7,7 @@ import org.springframework.test.context.cache.ContextCacheUtils;
 
 @SpringBootTest
 @ActiveProfiles("test")
-public class ContextReuseTwoIT {
+class ContextReuseTwoIT {
 
   @Test
   void doStuff() {
