@@ -17,7 +17,6 @@ You are to follow a strict test-driven development (TDD) workflow for all code c
 
 3. Commit the Tests:
 
-
 Once the tests are complete and you are satisfied with their coverage, commit only the test code.
 
 4. Write Implementation Code:

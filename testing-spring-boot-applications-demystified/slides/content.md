@@ -311,14 +311,21 @@ Two ways to achieve this:
 
 - Show Diffblue, a niche AI tool that generates unit tests for Java code: `dcover create de.rieckpil.talks.CustomerContr
 oller`
-- TDD with an LLM?
+- TDD with an LLM? Example: following my TDD instructions, implement a Spring Boot
+  Web REST API to fetch the stock price from a given
+  company using their ticker symbol (e.g. MSTR), use the
+  Spring WebClient and implement meaningful unit and
+  integration tests in a test-driven manner
+
 - LLM very usueful for boilerplate setup, test data, test migration (e.g. Kotlin -> Java)
 - ChatBots might not produce compilable/working test code, agents are better
 - Take a look at OpenRewrite for migrations (not AI but super useful)
 - Clearly define your test requirements in your copiolot instructions, claude.md or cursor rule
 - Showcase Claude Code and my `CLAUDE.md` file
 - GitHub Copilot in IDEA not sooo good (much filtering, UX could be improved) but in VSCode it should be better
-
+- OpenRewrite byy Moderne recipes:
+  - https://docs.openrewrite.org/recipes/java/spring/boot3/replacemockbeanandspybean
+  - https://docs.openrewrite.org/recipes/java/testing/junit5
 ---
 
 ### Best Practice 3: Use Mutation Testing If You Are Keen on Code Coverage

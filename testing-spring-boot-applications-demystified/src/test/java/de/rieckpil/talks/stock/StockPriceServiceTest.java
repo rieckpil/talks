@@ -7,14 +7,15 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.web.reactive.function.client.WebClient;
-import org.springframework.web.reactive.function.client.WebClient.RequestHeadersSpec;
-import org.springframework.web.reactive.function.client.WebClient.RequestHeadersUriSpec;
-import org.springframework.web.reactive.function.client.WebClient.ResponseSpec;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -22,19 +23,7 @@ import static org.mockito.Mockito.when;
 class StockPriceServiceTest {
 
     @Mock
-    private WebClient webClient;
-    
-    @Mock
     private WebClient.Builder webClientBuilder;
-    
-    @Mock
-    private RequestHeadersUriSpec<?> requestHeadersUriSpec;
-    
-    @Mock
-    private RequestHeadersSpec<?> requestHeadersSpec;
-    
-    @Mock
-    private ResponseSpec responseSpec;
     
     @InjectMocks
     private StockPriceService cut;
@@ -48,14 +37,24 @@ class StockPriceServiceTest {
         void shouldReturnStockPriceWhenTickerSymbolIsValid() {
             // Arrange
             String ticker = "AAPL";
+            String baseUrl = "https://api.example.com";
             StockPriceResponse expectedResponse = new StockPriceResponse(ticker, 150.25);
             
-            when(webClientBuilder.baseUrl(anyString())).thenReturn(webClientBuilder);
-            when(webClientBuilder.build()).thenReturn(webClient);
-            when(webClient.get()).thenReturn(requestHeadersUriSpec);
-            when(requestHeadersUriSpec.uri(anyString())).thenReturn(requestHeadersSpec);
-            when(requestHeadersSpec.retrieve()).thenReturn(responseSpec);
-            when(responseSpec.bodyToMono(StockPriceResponse.class)).thenReturn(Mono.just(expectedResponse));
+            // Manually set the baseUrl field using reflection
+            ReflectionTestUtils.setField(cut, "baseUrl", baseUrl);
+            
+            // Setup WebClient mock chain
+            WebClient mockWebClient = mock(WebClient.class);
+            WebClient.RequestHeadersUriSpec mockUriSpec = mock(WebClient.RequestHeadersUriSpec.class);
+            WebClient.RequestHeadersSpec mockHeadersSpec = mock(WebClient.RequestHeadersSpec.class);
+            WebClient.ResponseSpec mockResponseSpec = mock(WebClient.ResponseSpec.class);
+            
+            when(webClientBuilder.baseUrl(eq(baseUrl))).thenReturn(webClientBuilder);
+            when(webClientBuilder.build()).thenReturn(mockWebClient);
+            when(mockWebClient.get()).thenReturn(mockUriSpec);
+            when(mockUriSpec.uri(anyString(), eq(ticker))).thenReturn(mockHeadersSpec);
+            when(mockHeadersSpec.retrieve()).thenReturn(mockResponseSpec);
+            when(mockResponseSpec.bodyToMono(StockPriceResponse.class)).thenReturn(Mono.just(expectedResponse));
             
             // Act
             Mono<StockPrice> result = cut.getStockPrice(ticker);
@@ -71,13 +70,23 @@ class StockPriceServiceTest {
         void shouldReturnEmptyWhenTickerSymbolIsNotFound() {
             // Arrange
             String ticker = "INVALID";
+            String baseUrl = "https://api.example.com";
             
-            when(webClientBuilder.baseUrl(anyString())).thenReturn(webClientBuilder);
-            when(webClientBuilder.build()).thenReturn(webClient);
-            when(webClient.get()).thenReturn(requestHeadersUriSpec);
-            when(requestHeadersUriSpec.uri(anyString())).thenReturn(requestHeadersSpec);
-            when(requestHeadersSpec.retrieve()).thenReturn(responseSpec);
-            when(responseSpec.bodyToMono(StockPriceResponse.class)).thenReturn(Mono.empty());
+            // Manually set the baseUrl field using reflection
+            ReflectionTestUtils.setField(cut, "baseUrl", baseUrl);
+            
+            // Setup WebClient mock chain
+            WebClient mockWebClient = mock(WebClient.class);
+            WebClient.RequestHeadersUriSpec mockUriSpec = mock(WebClient.RequestHeadersUriSpec.class);
+            WebClient.RequestHeadersSpec mockHeadersSpec = mock(WebClient.RequestHeadersSpec.class);
+            WebClient.ResponseSpec mockResponseSpec = mock(WebClient.ResponseSpec.class);
+            
+            when(webClientBuilder.baseUrl(eq(baseUrl))).thenReturn(webClientBuilder);
+            when(webClientBuilder.build()).thenReturn(mockWebClient);
+            when(mockWebClient.get()).thenReturn(mockUriSpec);
+            when(mockUriSpec.uri(anyString(), eq(ticker))).thenReturn(mockHeadersSpec);
+            when(mockHeadersSpec.retrieve()).thenReturn(mockResponseSpec);
+            when(mockResponseSpec.bodyToMono(StockPriceResponse.class)).thenReturn(Mono.empty());
             
             // Act
             Mono<StockPrice> result = cut.getStockPrice(ticker);
@@ -92,13 +101,23 @@ class StockPriceServiceTest {
         void shouldHandleErrorWhenApiRequestFails() {
             // Arrange
             String ticker = "AAPL";
+            String baseUrl = "https://api.example.com";
             
-            when(webClientBuilder.baseUrl(anyString())).thenReturn(webClientBuilder);
-            when(webClientBuilder.build()).thenReturn(webClient);
-            when(webClient.get()).thenReturn(requestHeadersUriSpec);
-            when(requestHeadersUriSpec.uri(anyString())).thenReturn(requestHeadersSpec);
-            when(requestHeadersSpec.retrieve()).thenReturn(responseSpec);
-            when(responseSpec.bodyToMono(StockPriceResponse.class)).thenReturn(Mono.error(new RuntimeException("API Error")));
+            // Manually set the baseUrl field using reflection
+            ReflectionTestUtils.setField(cut, "baseUrl", baseUrl);
+            
+            // Setup WebClient mock chain
+            WebClient mockWebClient = mock(WebClient.class);
+            WebClient.RequestHeadersUriSpec mockUriSpec = mock(WebClient.RequestHeadersUriSpec.class);
+            WebClient.RequestHeadersSpec mockHeadersSpec = mock(WebClient.RequestHeadersSpec.class);
+            WebClient.ResponseSpec mockResponseSpec = mock(WebClient.ResponseSpec.class);
+            
+            when(webClientBuilder.baseUrl(eq(baseUrl))).thenReturn(webClientBuilder);
+            when(webClientBuilder.build()).thenReturn(mockWebClient);
+            when(mockWebClient.get()).thenReturn(mockUriSpec);
+            when(mockUriSpec.uri(anyString(), eq(ticker))).thenReturn(mockHeadersSpec);
+            when(mockHeadersSpec.retrieve()).thenReturn(mockResponseSpec);
+            when(mockResponseSpec.bodyToMono(StockPriceResponse.class)).thenReturn(Mono.error(new RuntimeException("API Error")));
             
             // Act
             Mono<StockPrice> result = cut.getStockPrice(ticker);
