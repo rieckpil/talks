@@ -58,7 +58,7 @@ Notes:
 
 ---
 
-![bg right:33%](assets/pragmatech-logo.png)
+![bg right:33%](assets/hza.jpg)
 
 ## About
 
