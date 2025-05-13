@@ -31,7 +31,16 @@ Java User Group Hamburg 14.05.2025
 
 ## Intro
 
-- Raise hands if you enjoy writing tests
+<!--
+
+
+Notes:
+
+- Raise hands if you enjoy writing tests -> I do and hope I can change that for some of you today
+
+
+-->
+
 - My story towards testing
 - What I mean with testing: automated tests written by a developer
 - Shifting left
@@ -90,8 +99,19 @@ Word cloud and mention that it's complicated
 
 ### Spring Boot Starter Test
 
+<!--
+
+Notes:
+
+- Show the `spring-boot-starter-test` dependency and Maven dependency tree
+- Show manual overriden
+
+
+-->
+
 - aka. Testing Swiss Army Knife
 - Batteries Included for testing
+
 - What's inside
   - JsonPath
   - AssertJ
@@ -105,6 +125,8 @@ Word cloud and mention that it's complicated
 
 - Short description of each library with a minimal code example
 
+Tips:
+- Favor JUnit 5 over JUnit 4
 - Pick one assertion library or at least not mix it within the same test class
 
 ---
@@ -112,18 +134,105 @@ Word cloud and mention that it's complicated
 ## Unit Testing with Spring Boot
 
 - Unit tests are the fastest tests
-- Provide collaborators from outside -> no new
-- avoid static (possible to Mock)
-- rely only on JUnit and Mockito
+- Provide collaborators from outside -> no `new`
+- Avoid static method access
+- avoid static (possible to Mock) -> show example of injecting clock
+
+```java
+@Service
+public class BirthdayService {
+
+  public boolean isTodayBirthday(LocalDate birthday) {
+    LocalDate today = LocalDate.now();
+
+    return today.getMonth() == birthday.getMonth()
+      && today.getDayOfMonth() == birthday.getDayOfMonth();
+  }
+}
+```
+
+```java
+@Service
+public class BirthdayServiceWithClock {
+
+  private final Clock clock;
+
+  public BirthdayServiceWithClock(Clock clock) {
+    this.clock = clock;
+  }
+
+  public boolean isTodayBirthday(LocalDate birthday) {
+    LocalDate today = LocalDate.now(clock);
+
+    return today.getMonth() == birthday.getMonth()
+      && today.getDayOfMonth() == birthday.getDayOfMonth();
+  }
+}
+```
+
+```java
+@Test
+void shouldReturnTrueWhenTodayIsBirthday() {
+  // Arrange
+  LocalDate fixedDate = LocalDate.of(2025, 5, 15);
+  Clock fixedClock = Clock.fixed(
+    fixedDate.atStartOfDay(ZONE_ID).toInstant(),
+    ZONE_ID
+  );
+
+  BirthdayServiceWithClock cut = new BirthdayServiceWithClock(fixedClock);
+  LocalDate birthday = LocalDate.of(1990, 5, 15); // Same month and day
+
+  // Act
+  boolean result = cut.isTodayBirthday(birthday);
+
+  // Assert
+  assertThat(result).isTrue();
+}
+```
+
+- rely only on JUnit and Mockito -> show import
+
+```java
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import static org.assertj.core.api.Assertions.assertThat;
+```
+
+- Nothing Spring related here, master JUnit, Mockito and AssertJ
+- Arrange Act Assert Pattern
+
+- Unit test comes to break when e.g. controller
+
+- Request Mapping: Does /api/users/{id} actually resolve to your method?
+- Status Codes: Will a bad request return a 400 or an accidental 200?
+- Headers: Are you setting Content-Type or custom headers correctly?
+- Security: Is your @PreAuthorize rule enforced?
 
 ---
 
 ## Sliced Testing with Spring Boot
 
+<!--
+
+Notes:
+
+- Show the exclude filter in @WebMvcTest
+
+-->
+
+
 - For some application parts it will become not beneficial
 - best use cases web layer: show how we don't get far with a plain unit test -> validation, security, status code, mapping
 - Same is true for DataJapTest
-- THere are more slices available
+- There are more slices available
 - You can write your own slice
 - See `WebMvcTypeExcludeFilter`
 
@@ -131,10 +240,19 @@ Word cloud and mention that it's complicated
 
 ## Integration Testing with Spring Boot
 
+<!--
+
+Notes:
+
+- Ask who is using Testcontainers?
+
+-->
+
 - Start everything up
+- BUto how? Testcontainers to the resuce
 - Difference with PORT to start tomcat or not
-- Differnece between MockMvc and WebTestClient
-- Context Caching! Best practices, pitfalls
+- Difference between MockMvc and WebTestClient!
+- Context Caching!
 
 ---
 
