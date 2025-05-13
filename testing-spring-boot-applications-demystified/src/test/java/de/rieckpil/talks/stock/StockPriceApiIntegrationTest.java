@@ -1,6 +1,5 @@
 package de.rieckpil.talks.stock;
 
-import com.github.tomakehurst.wiremock.client.WireMock;
 import com.github.tomakehurst.wiremock.junit5.WireMockExtension;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -84,7 +83,9 @@ class StockPriceApiIntegrationTest {
         wireMock.stubFor(
                 get(urlPathMatching("/api/v1/stocks/" + ticker))
                         .willReturn(aResponse()
-                                .withStatus(404))
+                                .withStatus(404)
+                                .withHeader("Content-Type", MediaType.APPLICATION_JSON_VALUE)
+                                .withBody("{}"))
         );
 
         // Act & Assert

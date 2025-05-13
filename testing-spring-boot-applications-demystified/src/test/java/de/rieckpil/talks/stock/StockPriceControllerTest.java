@@ -58,7 +58,7 @@ class StockPriceControllerTest {
     @DisplayName("should return 400 when ticker symbol is invalid format")
     void shouldReturn400WhenTickerSymbolIsInvalidFormat() {
         // Arrange
-        String ticker = "";
+        String ticker = " ";
 
         // Act & Assert
         webTestClient.get()
