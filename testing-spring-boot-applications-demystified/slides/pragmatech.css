@@ -23,17 +23,9 @@
   --black: #000000;
 }
 
-
-header {
-  background-color: #800000;
-  color: #fff;
-  font-size: 1em;
-  font-weight: 700;
-}
-
-
 section {
   padding: 50px;
+  background-color: var(--white);
 }
 
 header,
@@ -59,7 +51,6 @@ h4,
 h5,
 h6 {
   margin: 0.5em 0 0;
-  color: red;
 
   strong {
     font-weight: inherit;

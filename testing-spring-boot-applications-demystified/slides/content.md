@@ -151,6 +151,8 @@ public class BirthdayService {
 }
 ```
 
+---
+
 ```java
 @Service
 public class BirthdayServiceWithClock {
@@ -169,6 +171,8 @@ public class BirthdayServiceWithClock {
   }
 }
 ```
+
+---
 
 ```java
 @Test
@@ -191,7 +195,9 @@ void shouldReturnTrueWhenTodayIsBirthday() {
 }
 ```
 
-- rely only on JUnit and Mockito -> show import
+## Check Your Imports
+
+- Nothing Spring related here, master JUnit, Mockito and AssertJ
 
 ```java
 import org.junit.jupiter.api.DisplayName;
@@ -206,8 +212,30 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import static org.assertj.core.api.Assertions.assertThat;
 ```
 
-- Nothing Spring related here, master JUnit, Mockito and AssertJ
-- Arrange Act Assert Pattern
+---
+
+## Test Patterns
+
+- Unify test method naming
+- Structure test for the Arrange Act Assert test setup
+- Cut naming -> Class Under Test
+
+```java
+@Test
+void should_When_() {
+
+  // Arrange
+  // ... setting up objects, data, collaborators, etc.
+
+  // Act
+  // ... performing the action to be tested on the class under test
+
+  // Assert
+  // ... verifying the expected outcome
+}
+```
+
+---
 
 - Unit test comes to break when e.g. controller
 
