@@ -349,7 +349,6 @@ oller`
 - New @MockitoBean annotation is a Spring Boot specific annotation that replaces a bean in the application context with a Mockito mock
 - @Mock is Mockito only for unit tests
 
-
 - Golden Mockito Rules:
   - Do not mock types you don't own -> e.g. Framework Boundary
   - Don't mock value objects -> e.g. DTOs

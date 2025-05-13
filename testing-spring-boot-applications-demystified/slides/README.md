@@ -34,7 +34,7 @@ This will create `marp-slides.html` in the current directory.
 To generate a PDF version of the slides:
 
 ```bash
-marp --pdf marp-slides.md
+marp --theme slides/pragmatech.css --pdf marp-slides.md
 ```
 
 This will create `marp-slides.pdf` in the current directory.
@@ -63,7 +63,7 @@ This will start a local server and open the presentation in your default browser
 
 ## Customization
 
-The slides use a custom PragmaTech theme defined in `pragmatech-theme.css`. The theme includes:
+The slides use a custom PragmaTech theme defined in `pragmatech.css`. The theme includes:
 
 - Custom colors matching PragmaTech's branding
 - A footer with the PragmaTech logo on the left, company name in the center, and page numbers on the right
