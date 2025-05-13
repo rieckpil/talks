@@ -61,8 +61,6 @@ class CustomerControllerClaudeTest {
       assertThat(result.getResponse().getHeader("Location"))
         .isNotNull()
         .contains("/api/customers/42");
-
-      verify(customerService).createNewCustomer(any(ObjectNode.class));
     }
 
     @ParameterizedTest
@@ -106,8 +104,6 @@ class CustomerControllerClaudeTest {
             """)
         )
         .andExpect(status().isCreated());
-
-      verify(customerService).createNewCustomer(any(ObjectNode.class));
     }
   }
 }

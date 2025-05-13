@@ -1,15 +1,17 @@
 package de.rieckpil.talks.basics;
 
+import java.time.LocalDate;
+import java.util.List;
+
 import com.jayway.jsonpath.JsonPath;
 import org.assertj.core.api.Assertions;
 import org.hamcrest.MatcherAssert;
 import org.json.JSONException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.skyscreamer.jsonassert.JSONAssert;
-
-import java.time.LocalDate;
-import java.util.List;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.await;
@@ -17,7 +19,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-// @ExtendWith(SpringExtension.class)
+@ExtendWith(SpringExtension.class)
 class SampleTest {
 
   @BeforeEach

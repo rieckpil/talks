@@ -14,32 +14,37 @@ header: 'Testing Spring Boot Applications Demystified @ JUG Hamburg 14.05.2025'
 ---
 
 <!-- _class: title -->
-![bg left](https://picsum.photos/720?image=29)
+![bg left:33%](assets/demystify.png)
 
 # Testing Spring Boot Applications Demystified
 
 ## Best Practices, Common Pitfalls, and Real-World Strategies
 
-Java User Group Hamburg 14.05.2025
+_Java User Group Hamburg 14.05.2025_
+
+Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](https://x.com/rieckpil)
 
 ---
 <!-- paginate: true -->
-<!-- header: 'Testing Spring Boot Applications Demystified @ JUG Hamburg 14.05.2025' -->
-<!-- footer: '![w:32 h:32](/assets/logo.webp)' -->
 
-[//]: # (<!-- transition: pull -->)
-
-## Intro
-
+<!-- header: '' -->
+<!-- footer: '' -->
 <!--
 
 
 Notes:
 
 - Raise hands if you enjoy writing tests -> I do and hope I can change that for some of you today
-
-
 -->
+
+![bg left](assets/starting.jpg)
+
+# Getting Started with Testing
+
+---
+
+<!-- header: 'Testing Spring Boot Applications Demystified @ JUG Hamburg 14.05.2025' -->
+<!-- footer: '![w:32 h:32](/assets/logo.webp)' -->
 
 - My story towards testing
 - What I mean with testing: automated tests written by a developer
@@ -49,13 +54,30 @@ Notes:
 - Fast feedback loops
 - Quicker development, errors pop up more early, wouldn't say bugs, but sometimes we are overconfident only to realize after the deployment we missed a parameter or misspelled it. Avoid friction
 
-## About Me & Agenda
+---
 
-- Interrupt me any time during the talk
-- self employed consultant
-- enjoys writing tests
+## About
+
+- Self-employed IT consultant from Erlangen, Germany (Bavaria) 🍻
+- Blogging & content creation for more than five years. Since three years with a focus on testing Java and specifically Spring Boot applications 🍃
+- Founder of PragmaTech GmbH - Enabling Developers to Frequently Deliver Software with More Confidence 🚤
+- Enjoys writing tests 🧪
+- @rieckpil on various platforms
+
+---
 
 
+## Agenda
+
+- Introduction
+- Testing with Spring Boot
+  - Spring Boot Testing 101
+  - Unit Testing with Spring Boot
+  - Sliced Tests with @WebMvcTest & Friends
+  - Integration Tests with @SpringBootTest
+- Best Practices
+- Common Pitfalls to Avoid
+- Q&A
 ---
 
 ![bg left:33%](https://picsum.photos/720?image=27)
@@ -124,6 +146,41 @@ Notes:
 - Manually override the versions possible
 
 - Short description of each library with a minimal code example
+
+---
+
+```shell
+[INFO] +- org.springframework.boot:spring-boot-starter-test:jar:3.4.5:test
+[INFO] |  +- org.springframework.boot:spring-boot-test:jar:3.4.5:test
+[INFO] |  +- org.springframework.boot:spring-boot-test-autoconfigure:jar:3.4.5:test
+[INFO] |  +- com.jayway.jsonpath:json-path:jar:2.9.0:test
+[INFO] |  +- jakarta.xml.bind:jakarta.xml.bind-api:jar:4.0.2:test
+[INFO] |  |  \- jakarta.activation:jakarta.activation-api:jar:2.1.3:test
+[INFO] |  +- net.minidev:json-smart:jar:2.5.2:test
+[INFO] |  |  \- net.minidev:accessors-smart:jar:2.5.2:test
+[INFO] |  |     \- org.ow2.asm:asm:jar:9.7.1:test
+[INFO] |  +- org.assertj:assertj-core:jar:3.26.3:test
+[INFO] |  |  \- net.bytebuddy:byte-buddy:jar:1.15.11:test
+[INFO] |  +- org.awaitility:awaitility:jar:4.3.0:test
+[INFO] |  +- org.hamcrest:hamcrest:jar:2.2:test
+[INFO] |  +- org.junit.jupiter:junit-jupiter:jar:5.11.4:test
+[INFO] |  |  +- org.junit.jupiter:junit-jupiter-api:jar:5.11.4:test
+[INFO] |  |  |  +- org.junit.platform:junit-platform-commons:jar:1.11.4:test
+[INFO] |  |  |  \- org.apiguardian:apiguardian-api:jar:1.1.2:test
+[INFO] |  |  +- org.junit.jupiter:junit-jupiter-params:jar:5.11.4:test
+[INFO] |  |  \- org.junit.jupiter:junit-jupiter-engine:jar:5.11.4:test
+[INFO] |  |     \- org.junit.platform:junit-platform-engine:jar:1.11.4:test
+[INFO] |  +- org.mockito:mockito-core:jar:5.17.0:test
+[INFO] |  |  +- net.bytebuddy:byte-buddy-agent:jar:1.15.11:test
+[INFO] |  |  \- org.objenesis:objenesis:jar:3.3:test
+[INFO] |  +- org.mockito:mockito-junit-jupiter:jar:5.17.0:test
+[INFO] |  +- org.skyscreamer:jsonassert:jar:1.5.3:test
+[INFO] |  |  \- com.vaadin.external.google:android-json:jar:0.0.20131108.vaadin1:test
+[INFO] |  +- org.springframework:spring-core:jar:6.2.6:compile
+[INFO] |  |  \- org.springframework:spring-jcl:jar:6.2.6:compile
+[INFO] |  +- org.springframework:spring-test:jar:6.2.6:test
+[INFO] |  \- org.xmlunit:xmlunit-core:jar:2.10.0:test
+```
 
 Tips:
 - Favor JUnit 5 over JUnit 4
