@@ -41,6 +41,8 @@ Notes:
 
 # Getting Started with Testing
 
+## My Journey
+
 ---
 
 <!-- header: 'Testing Spring Boot Applications Demystified @ JUG Hamburg 14.05.2025' -->
@@ -56,9 +58,11 @@ Notes:
 
 ---
 
+![bg right:33%](assets/pragmatech-logo.png)
+
 ## About
 
-- Self-employed IT consultant from Erlangen, Germany (Bavaria) 🍻
+- Self-employed IT consultant from Her, Germany (Bavaria) 🍻
 - Blogging & content creation for more than five years. Since three years with a focus on testing Java and specifically Spring Boot applications 🍃
 - Founder of PragmaTech GmbH - Enabling Developers to Frequently Deliver Software with More Confidence 🚤
 - Enjoys writing tests 🧪
@@ -68,6 +72,8 @@ Notes:
 
 
 ## Agenda
+
+![bg left:33%](assets/steps.jpg)
 
 - Introduction
 - Testing with Spring Boot
