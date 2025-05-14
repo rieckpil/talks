@@ -519,12 +519,11 @@ Notes:
 
 ### Best Practice 3: Try Mutation Testing
 
-- Having high code coverage but not testing the right things
-- aka. your code coverage might give you a false sense of security
+- Having high code coverage might give you a false sense of security
 - Mutation Testing with [PIT](https://pitest.org/quickstart/)
 - Beyond Line Coverage: Traditional tools like JaCoCo show which code runs during tests, but PIT verifies if your tests actually detect when code behaves incorrectly by introducing "mutations" to your source code.
 - Quality Guarantee: PIT automatically modifies your code (changing conditionals, return values, etc.) to ensure your tests fail when they should, revealing blind spots in seemingly comprehensive test suites.
-- Considerations for bigger projects: only run on the new diffs, not on the whole codebase
+- Considerations for bigger projects: only run on the new code diffs, not on the whole codebase
 
 ---
 
@@ -534,7 +533,7 @@ Notes:
 
 ---
 
-## Testing Pitfall 1: @SpringBootTest Obsession
+## Testing Pitfall 1: `@SpringBootTest` Obsession
 
 - The name could apply it's a one size fits all solution, but it isn't
 - It comes with costs: starting the (entire) application context
