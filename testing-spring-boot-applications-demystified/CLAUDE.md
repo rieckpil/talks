@@ -2,7 +2,6 @@
 
 You are to follow a strict test-driven development (TDD) workflow for all code changes. The process is as follows:
 
-
 1. Write Tests First:
 
 - Begin by writing comprehensive tests (unit, integration, or end-to-end) that define the expected behavior of the code.
@@ -53,8 +52,8 @@ When writing test code, please follow these guidelines:
 - Name the class under test variable as cut
 - Create a separate test class for each production class
 - Follow a consistent setup pattern for all tests
-- Use @DisplayName for more descriptive test names in reports
-- Group related tests with @Nested classes
+- Use `@DisplayName` for more descriptive test names in reports
+- Group related tests with `@Nested` classes
 - Use parameterized tests for testing multiple scenarios
 - Mock external dependencies with Mockito
 - Use Java records for test data classes
