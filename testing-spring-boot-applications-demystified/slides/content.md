@@ -489,7 +489,6 @@ oller`
 
 ---
 
-
 ### @SpringBootTest Obsession
 
 ![](assets/spring-boot-test-obsession.png)
@@ -536,11 +535,35 @@ oller`
 
 ---
 
-## Outlook & Summary
+## Summary & Outlook
 
-- Still new features coming: Still many new features (@ServiceConnection, Testcontainers Support, more AssertJ integrations, etc.) are coming in the ecosystem, Testcontainers being one of the most important one in recent years. The company AtomicJar got acquired by Docker
+- Spring Boot applications come with batteries-included for testing
+- Spring and Spring Boot provides many excellent testing features
+- the Java testing ecosystem is huge
+- Consider the context caching feature for fast builds
+- Get help from AI
+- Still many new features are coming: `@ServiceConnection`, Testcontainers support, Docker Compose support, more AssertJ integrations, etc.
+
+---
+
+## What's Next?
+
 - Offer: in house 1 or 2 day workshop for this topic to cover more in depth
 - On-demand online course Masterclass
 - Open for consulting
-- Thank you! Joyful testing!
-- Now it's time for questions
+- eBook: 30 Testing Tools and Libraries Every Java Developer Must Know
+- eBook & online course: Stratospheric - From Zero to Production with AWS
+- 1 or 2 day in-house/remote/hybrid Spring Boot testing workshops
+- Consulting offerings, e.g. the Test Maturity Assessment
+
+---
+
+## Joyful Testing!
+
+![bg right:33%](assets/end.jpg)
+
+
+Reach out any time via;
+- LinkedIn (Philip Riecks)
+- X (@rieckpil)
+- Mail (philip@pragmatech.digital)
