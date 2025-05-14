@@ -383,7 +383,6 @@ Notes:
 
 ---
 
-
 <!--
 
 Notes:
@@ -392,16 +391,16 @@ Notes:
 
 -->
 
-- Start everything up
-- BUto how? Testcontainers to the resuce
-- Difference with PORT to start tomcat or not
-- Difference between MockMvc and WebTestClient!
-- Context Caching!
+![](assets/spring-boot-test-setup.png)
 
-- Tips to make the most of context caching
-  - avoid many different context setups
-  - avoid @DirtiesContext
-  - Measure the time it takes to start the context
+---
+
+## Starting the Entire Context
+
+- Provide external infrastructure with [Testcontainers](https://testcontainers.com/)
+- Start Tomcat with: `@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)`
+- Test controller endpoints via: `MockMvc`, `WebTestClient`, `TestRestTemplate`!
+- Context Caching!
 
 ---
 
