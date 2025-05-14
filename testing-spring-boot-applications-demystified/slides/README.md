@@ -24,7 +24,7 @@ npm install -g @marp-team/marp-cli
 To generate HTML slides that you can view in a browser:
 
 ```bash
-marp --html marp-slides.md
+marp --html content.md --theme pragmatech.css
 ```
 
 This will create `marp-slides.html` in the current directory.
@@ -34,7 +34,7 @@ This will create `marp-slides.html` in the current directory.
 To generate a PDF version of the slides:
 
 ```bash
-marp --theme slides/pragmatech.css --pdf marp-slides.md
+ marp --pdf content.md --theme pragmatech.css --allow-local-files
 ```
 
 This will create `marp-slides.pdf` in the current directory.
