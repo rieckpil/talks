@@ -414,7 +414,7 @@ Notes:
 - Start Tomcat with: `@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)`
 - Consider WireMock/MockServer for stubbing external HTTP services
 - Test controller endpoints via: `MockMvc`, `WebTestClient`, `TestRestTemplate`
-- Speed up builds with SpringTest context caching
+- Speed up builds with Spring Test `TestContext` caching
 
 ---
 
@@ -424,15 +424,22 @@ Notes:
 
 -->
 
-## Context Caching
+## Spring Test `TestContext` Caching
 
 - Part of Spring Test (automatically part of every Spring Boot project via `spring-boot-starter-test`)
-- Spring TestContext Framework: caches an already started Spring context for later reuse
+- Spring Test caches an already started Spring `ApplicationContext` for later reuse
+- Cache retrieval is usually faster than a cold context start
 - Configurable cache size (default is 32) with LRU (least recently used) strategy
 
 Speed up your build:
 
 ![](assets/context-cache-improvements.png)
+
+---
+
+## Caching is King
+
+![center](assets/cache.svg)
 
 ---
 
@@ -445,12 +452,6 @@ This goes into the cache key (`MergedContextConfiguration`):
 - propertySourceLocations (`@TestPropertySource`)
 - propertySourceProperties (`@TestPropertySource`)
 - contextCustomizer (`@MockitoBean`, `@MockBean`, `@DynamicPropertySource`, ...)
-
----
-
-## Caching Is King
-
-![center](assets/cache.svg)
 
 ---
 ## Identify Context Restarts
@@ -466,13 +467,13 @@ This goes into the cache key (`MergedContextConfiguration`):
 
 ---
 
-## Spot the issues for Context Caching
+## Spot the Issues for Context Caching
 
 ![](assets/context-caching-bad.png)
 
 ---
 
-### Make the Most of the Caching Feature
+## Make the Most of the Caching Feature
 
 
 - Avoid `@DirtiesContext` when possible, especially at `AbstractIntegrationTest` classes

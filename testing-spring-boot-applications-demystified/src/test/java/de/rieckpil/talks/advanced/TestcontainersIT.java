@@ -8,13 +8,31 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import org.junit.jupiter.api.Test;
+import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.containers.PostgreSQLContainer;
+import org.testcontainers.containers.wait.strategy.Wait;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
+import org.testcontainers.utility.DockerImageName;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Testcontainers
 class TestcontainersIT {
 
-  private static PostgreSQLContainer<?> postgresContainer = new PostgreSQLContainer<>("postgres:latest")
+  private static final int POSTGRES_PORT = 5432;
+
+  @Container
+  private static final GenericContainer<?> postgresManual = new GenericContainer<>(
+    DockerImageName.parse("postgres:latest"))
+    .withEnv("POSTGRES_USER", "testuser")
+    .withEnv("POSTGRES_PASSWORD", "testpassword")
+    .withEnv("POSTGRES_DB", "testdb")
+    .withExposedPorts(POSTGRES_PORT)
+    .waitingFor(Wait.forLogMessage(".*database system is ready to accept connections.*\\s", 1));
+
+  @Container
+  private static PostgreSQLContainer<?> postgresModule = new PostgreSQLContainer<>("postgres:latest")
     .withDatabaseName("testdb")
     .withUsername("testuser")
     .withPassword("testpass");
@@ -22,11 +40,11 @@ class TestcontainersIT {
   @Test
   void testQuery() throws SQLException {
 
-    postgresContainer.start();
+    // postgresContainer.start();
 
-    String jdbcUrl = postgresContainer.getJdbcUrl();
-    String username = postgresContainer.getUsername();
-    String password = postgresContainer.getPassword();
+    String jdbcUrl = postgresModule.getJdbcUrl();
+    String username = postgresModule.getUsername();
+    String password = postgresModule.getPassword();
     Connection connection = DriverManager.getConnection(jdbcUrl, username, password);
 
     System.out.println("We just started: " + connection.getMetaData().getDatabaseProductName());
@@ -45,6 +63,6 @@ class TestcontainersIT {
       }
     }
 
-    postgresContainer.stop();
+    postgresModule.stop();
   }
 }
