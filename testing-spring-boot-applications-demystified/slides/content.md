@@ -108,26 +108,9 @@ Notes:
 
 ---
 
-![bg left:33%](https://picsum.photos/720?image=27)
+![bg left:33%](assets/101.jpg)
 
-## Spring Boot Testing 101
-
-- Maven  Surfire Plugin for unit tests
--> what is a unit test?
-
-Test types with Spring Boot:
-
-- (Plain) Unit Test -> Plain JUnit & Mockito
-- Springyfied Unit Test -> Sliced Tests with `@WebMvcTest`
-Usually have `*Test` postfix
-
-- Integration Test -> @SpringBootTest
-- Web Tests/E2E -> usually involve tests with UI
-usually have `*IT/*WT` postix
-
-First two Surefire, last Failsafe
-
-Reason for splitting: parallelize, better grouping
+# Spring Boot Testing 101
 
 ---
 
@@ -150,6 +133,15 @@ img[alt~="center"] {
 2. **Integration Tests**: Tests that verify interactions between two or more components work correctly together, with real implementations replacing some mocks.
 3. **E2E**: Tests that validate the entire application workflow from start to finish, simulating real user scenarios across all components and external dependencies.
 
+---
+
+## Maven Build Lifecycle
+
+![bg h:500 right](assets/lifecycle.svg)
+
+- Maven Surfire Plugin for unit tests: default postfix  `*Test` (e.g. `CustomerTest`)
+- Maven Failsafe Plugin for integration tests: default postfix `*IT` (e.g. `CheckoutIT`)
+- Reason for splitting: parallelize, better grouping
 
 ---
 
@@ -165,23 +157,30 @@ Notes:
 
 -->
 
-- aka. Testing Swiss Army Knife
-- Batteries Included for testing
+![bg right:33%](assets/swiss.jpg)
 
-- What's inside
-  - JsonPath
-  - AssertJ
-  - Awaitility
-  - Hamcrest
+- aka. "Testing Swiss Army Knife"
+- Batteries-included for testing
+- Dependency management for:
   - JUnit Jupiter
   - Mockito
-  - JSONAssert
-  - XmlUnit
-- Manually override the versions possible
-
-- Short description of each library with a minimal code example
+  - AssertJ
+  - Awaitility
+  - etc.
+- We can manually override the dependency versions
 
 ---
+
+<!--
+Notes:
+- Go to IDE to show the start
+- Navigate to the parent pom to see the management
+- Show the sample test to have seen the libraries at least once
+
+Tips:
+- Favor JUnit 5 over JUnit 4
+- Pick one assertion library or at least not mix it within the same test class
+-->
 
 ```shell
 [INFO] +- org.springframework.boot:spring-boot-starter-test:jar:3.4.5:test
@@ -216,18 +215,17 @@ Notes:
 [INFO] |  \- org.xmlunit:xmlunit-core:jar:2.10.0:test
 ```
 
-Tips:
-- Favor JUnit 5 over JUnit 4
-- Pick one assertion library or at least not mix it within the same test class
-
 ---
 
 ## Unit Testing with Spring Boot
 
-- Unit tests are the fastest tests
-- Provide collaborators from outside -> no `new`
-- Avoid static method access
-- avoid static (possible to Mock) -> show example of injecting clock
+- Provide collaborators from outside (dependency injection) -> no `new` inside your code
+- Develop small, single responsibility classes
+- Test only the public API of your class
+- Verify behavior not implementation details
+
+---
+### Avoid Static Method Access
 
 ```java
 @Service
@@ -243,6 +241,8 @@ public class BirthdayService {
 ```
 
 ---
+
+### Better Alternative
 
 ```java
 @Service
@@ -286,9 +286,12 @@ void shouldReturnTrueWhenTodayIsBirthday() {
 }
 ```
 
-## Check Your Imports
+---
 
-- Nothing Spring related here, master JUnit, Mockito and AssertJ
+### Check Your Imports
+
+- Nothing Spring-related here
+- Rely only on JUnit, Mockito and an assertion library
 
 ```java
 import org.junit.jupiter.api.DisplayName;
@@ -305,11 +308,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 ---
 
-## Test Patterns
+## Unify Test Structure
 
-- Unify test method naming
-- Structure test for the Arrange Act Assert test setup
-- Cut naming -> Class Under Test
+- Use a consistent test method naming: givenWhenThen, shouldWhen, etc.
+- Structure test for the Arrange/Act/Assert test setup
 
 ```java
 @Test
@@ -328,8 +330,9 @@ void should_When_() {
 
 ---
 
-- Unit test comes to break when e.g. controller
+## Unit Testing Has Limits
 
+- Unit test comes to break when e.g. controller
 - Request Mapping: Does /api/users/{id} actually resolve to your method?
 - Status Codes: Will a bad request return a 400 or an accidental 200?
 - Headers: Are you setting Content-Type or custom headers correctly?
