@@ -399,8 +399,9 @@ Notes:
 
 - Provide external infrastructure with [Testcontainers](https://testcontainers.com/)
 - Start Tomcat with: `@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)`
+- Consider WireMock/MockServer for stubbing external HTTP services
 - Test controller endpoints via: `MockMvc`, `WebTestClient`, `TestRestTemplate`!
-- Context Caching!
+- Speed up builds with SpringTest context caching
 
 ---
 
