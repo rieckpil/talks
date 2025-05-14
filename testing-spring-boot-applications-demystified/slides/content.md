@@ -138,9 +138,9 @@ img[alt~="center"] {
 
 ![bg h:500 right](assets/lifecycle.svg)
 
-- Maven Surfire Plugin for unit tests: default postfix  `*Test` (e.g. `CustomerTest`)
-- Maven Failsafe Plugin for integration tests: default postfix `*IT` (e.g. `CheckoutIT`)
-- Reason for splitting: parallelize, better grouping
+- **Maven Surfire Plugin** for unit tests: default postfix  `*Test` (e.g. `CustomerTest`)
+- **Maven Failsafe Plugin** for integration tests: default postfix `*IT` (e.g. `CheckoutIT`)
+- Reason for splitting: different parallelization options, better organisation
 
 ---
 
@@ -222,6 +222,7 @@ Tips:
 - Develop small, single responsibility classes
 - Test only the public API of your class
 - Verify behavior not implementation details
+- TDD can help design (better) classes
 
 ---
 ### Avoid Static Method Access
@@ -412,7 +413,7 @@ Notes:
 - Provide external infrastructure with [Testcontainers](https://testcontainers.com/)
 - Start Tomcat with: `@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)`
 - Consider WireMock/MockServer for stubbing external HTTP services
-- Test controller endpoints via: `MockMvc`, `WebTestClient`, `TestRestTemplate`!
+- Test controller endpoints via: `MockMvc`, `WebTestClient`, `TestRestTemplate`
 - Speed up builds with SpringTest context caching
 
 ---
@@ -530,10 +531,10 @@ Notes:
 
 ### Best Practice 3: Try Mutation Testing
 
-- Having high code coverage might give you a false sense of security
+- Having high code coverage might give you a **false sense of security**
 - Mutation Testing with [PIT](https://pitest.org/quickstart/)
-- Beyond Line Coverage: Traditional tools like JaCoCo show which code runs during tests, but PIT verifies if your tests actually detect when code behaves incorrectly by introducing "mutations" to your source code.
-- Quality Guarantee: PIT automatically modifies your code (changing conditionals, return values, etc.) to ensure your tests fail when they should, revealing blind spots in seemingly comprehensive test suites.
+- Beyond Line Coverage: Traditional tools like JaCoCo show which code runs during tests, but PIT verifies if your tests actually detect when code behaves incorrectly by introducing "**mutations**" to your source code.
+- Quality Guarantee: PIT automatically modifies your code (changing conditionals, return values, etc.) to ensure your tests fail when they should, **revealing blind spots** in seemingly comprehensive test suites.
 - Considerations for bigger projects: only run on the new code diffs, not on the whole codebase
 
 ---
