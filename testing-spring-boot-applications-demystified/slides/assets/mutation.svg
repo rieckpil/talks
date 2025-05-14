@@ -80,8 +80,8 @@
   </text>
 
   <!-- Action Box -->
-  <rect x="50" y="580" width="800" height="70" fill="#fff" stroke="#9c27b0" stroke-width="2" rx="5" ry="5"/>
-  <text x="450" y="620" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#9c27b0">Action Required: Add tests for boundary cases (1000, loyal) and different combinations of inputs</text>
+  <rect x="50" y="580" width="800" height="70" fill="#fff"  stroke-width="2" rx="5" ry="5"/>
+  <text x="450" y="620" font-family="Arial, sans-serif" font-size="16" text-anchor="middle">Action Required: Add tests for boundary cases (1000, loyal) and different combinations of inputs</text>
 
   <!-- Connecting Arrows -->
   <path d="M225 280 L225 340" stroke="#666" stroke-width="2" fill="none"/>
