@@ -365,7 +365,7 @@ Notes:
 
 ## Slicing Example: @WebMvcTest
 
-- Testing your web layer in isolation
+- Testing your web layer in isolation and only load the beans you need
 - `MockMvc`: Mocked servlet environment with HTTP semantics
 
 ```java
@@ -389,10 +389,9 @@ class CustomerControllerTest {
 
 ---
 
-# Integration Testing
+# Integration Testing with Spring Boot
 
 ![bg right:33%](assets/full.jpg)
-
 
 ---
 
@@ -536,6 +535,10 @@ Notes:
 - Beyond Line Coverage: Traditional tools like JaCoCo show which code runs during tests, but PIT verifies if your tests actually detect when code behaves incorrectly by introducing "mutations" to your source code.
 - Quality Guarantee: PIT automatically modifies your code (changing conditionals, return values, etc.) to ensure your tests fail when they should, revealing blind spots in seemingly comprehensive test suites.
 - Considerations for bigger projects: only run on the new code diffs, not on the whole codebase
+
+---
+
+![center w:800 h:600](assets/mutation.svg)
 
 ---
 
