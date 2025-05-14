@@ -436,7 +436,7 @@ This goes into the cache key (`MergedContextConfiguration`):
 
 ---
 
-## Spot Context Restarts
+## Identify Context Restarts
 
 ![](assets/context-caching-hints.png)
 
@@ -533,7 +533,7 @@ oller`
 
 ---
 
-## Testing Pitfall 1: Using @SpringBootTest for Everything
+## Testing Pitfall 1: @SpringBootTest Obsession
 
 
 - The name could apply it's a one size fits all solution, but it isn't
@@ -543,7 +543,7 @@ oller`
 
 ---
 
-## @SpringBootTest Obsession
+## @SpringBootTest Obsession Visualized
 
 ![](assets/spring-boot-test-obsession.png)
 
@@ -564,7 +564,7 @@ oller`
 
 ---
 
-## Testing Pitfall 3: JUnit 4 vs. JUnit 5 Pitfall
+## Testing Pitfall 3: JUnit 4 vs. JUnit 5
 
 ![bg right:33%](assets/car-comparison.jpg)
 
@@ -593,7 +593,7 @@ oller`
 
 - Spring Boot applications come with batteries-included for testing
 - Spring and Spring Boot provides many excellent testing features
-- the Java testing ecosystem is huge
+- Mature & rich Java testing ecosystem
 - Consider the context caching feature for fast builds
 - Get help from AI
 - Still many new features are coming: `@ServiceConnection`, Testcontainers support, Docker Compose support, more AssertJ integrations, etc.
