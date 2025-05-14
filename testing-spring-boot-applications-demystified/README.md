@@ -6,12 +6,10 @@
 dcover create de.rieckpil.talks.CustomerController
 ```
 
+Example TDD:
+
 ```
-Example: following my TDD instructions, implement a Spring Boot
-  Web REST API to fetch the stock price from a given
-  company using their ticker symbol (e.g. MSTR), use the
-  Spring WebClient and implement meaningful unit and
-  integration tests in a test-driven manner
+Following my TDD instructions, implement a Spring Boot Web REST API to fetch the stock price from a given company using their ticker symbol (e.g. MSTR), use the Spring WebClient and implement meaningful unit and integration tests in a test-driven manner
 ```
 
 OpenRewrite:

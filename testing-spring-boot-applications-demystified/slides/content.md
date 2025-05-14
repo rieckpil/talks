@@ -46,7 +46,7 @@ Notes:
 ---
 
 <!-- header: 'Testing Spring Boot Applications Demystified @ JUG Hamburg 14.05.2025' -->
-<!-- footer: '![w:32 h:32](/assets/logo.webp)' -->
+<!-- footer: '![w:32 h:32](assets/logo.webp)' -->
 
 <!--
 - My story towards testing
