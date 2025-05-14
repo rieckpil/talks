@@ -535,11 +535,10 @@ oller`
 
 ## Testing Pitfall 1: @SpringBootTest Obsession
 
-
 - The name could apply it's a one size fits all solution, but it isn't
-- It comes with costs: the application context
-- Useful for integration tests that verify the whole application but not for testing a time manipulation service class works as expected
-- Start with unit tests, see if sliced tests are applicable and only then use @SpringBootTest
+- It comes with costs: starting the (entire) application context
+- Useful for integration tests that verify the whole application but not for testing a single service in isolation
+- Start with unit tests, see if sliced tests are applicable and only then use `@SpringBootTest`
 
 ---
 
@@ -548,7 +547,6 @@ oller`
 ![](assets/spring-boot-test-obsession.png)
 
 ---
-
 
 ## Testing Pitfall 2: @MockitoBean vs. @MockBean vs. @Mock
 
@@ -588,6 +586,14 @@ oller`
 </center>
 
 ---
+
+<!--
+
+Notes:
+
+- Rich ecosystem: LocalStack, Contract testing (Pact), GreenMail, Selenide, Performance Testing
+
+-->
 
 ## Summary & Outlook
 
