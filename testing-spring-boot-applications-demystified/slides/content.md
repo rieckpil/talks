@@ -331,11 +331,13 @@ void should_When_() {
 
 ## Unit Testing Has Limits
 
-- Unit test comes to break when e.g. controller
-- Request Mapping: Does /api/users/{id} actually resolve to your method?
-- Status Codes: Will a bad request return a 400 or an accidental 200?
-- Headers: Are you setting Content-Type or custom headers correctly?
-- Security: Is your @PreAuthorize rule enforced?
+- **Request Mapping**: Does `/api/users/{id}` actually resolve to your desired method?
+- **Validation**: Will incomplete request bodys result in a 400 bad request or return an accidental 200?
+- **Serialization**: Are your JSON objects serialized and deserialized correctly?
+- **Headers**: Are you setting Content-Type or custom headers correctly?
+- **Security**: Are your Spring Security configuration and other authorization checks enforced?
+- **Database**: Can we effectively map our complex JPA entity to a database table?
+- etc.
 
 ---
 
@@ -363,12 +365,23 @@ Notes:
 
 ## Slicing Example: @WebMvcTest
 
-- For some application parts it will become not beneficial
-- best use cases web layer: show how we don't get far with a plain unit test -> validation, security, status code, mapping
-- Same is true for DataJapTest
-- There are more slices available
-- You can write your own slice
-- See `WebMvcTypeExcludeFilter`
+- Testing your web layer in isolation
+- `MockMvc`: Mocked servlet environment with HTTP semantics
+
+```java
+@WebMvcTest(CustomerController.class)
+class CustomerControllerTest {
+
+  @Autowired
+  private MockMvc mockMvc;
+
+  @MockitoBean
+  private CustomerService customerService;
+
+}
+```
+
+- See `WebMvcTypeExcludeFilter` for included Spring beans
 
 ---
 
