@@ -1,7 +1,6 @@
 ---
 marp: true
 theme: pragmatech
-paginate: false
 header: 'Testing Spring Boot Applications Demystified @ JUG Hamburg 14.05.2025'
 ---
 
@@ -618,6 +617,9 @@ Notes:
 - Consulting offerings, e.g. the Test Maturity Assessment
 
 ---
+
+<!-- paginate: false -->
+
 
 ## Joyful Testing!
 
