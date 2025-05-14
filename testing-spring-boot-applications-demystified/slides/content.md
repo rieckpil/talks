@@ -14,7 +14,7 @@ header: 'Testing Spring Boot Applications Demystified @ JUG Hamburg 14.05.2025'
 ---
 
 <!-- _class: title -->
-![bg left:33%](assets/demystify.png)
+![bg h:500 left:33%](assets/demystify.png)
 
 # Testing Spring Boot Applications Demystified
 
@@ -41,13 +41,14 @@ Notes:
 
 # Getting Started with Testing
 
-## My Journey
+## How It Started
 
 ---
 
 <!-- header: 'Testing Spring Boot Applications Demystified @ JUG Hamburg 14.05.2025' -->
 <!-- footer: '![w:32 h:32](/assets/logo.webp)' -->
 
+<!--
 - My story towards testing
 - What I mean with testing: automated tests written by a developer
 - Shifting left
@@ -55,6 +56,26 @@ Notes:
 - Don't work towards 100% code coverage
 - Fast feedback loops
 - Quicker development, errors pop up more early, wouldn't say bugs, but sometimes we are overconfident only to realize after the deployment we missed a parameter or misspelled it. Avoid friction
+
+
+-->
+
+### Getting Used To Testing At Work
+
+![](assets/pr-reject.png)
+
+---
+
+# Goals For This Talk
+
+![bg h:500 right:33%](assets/demystify.png)
+
+
+- Lay the foundation for your Spring Boot testing success
+- Introduction to Spring Boot’s excellent test support
+- Showcase a mix of best practices and early pitfalls
+- Convince you that testing is not an afterthought
+
 
 ---
 
@@ -73,17 +94,18 @@ Notes:
 
 ## Agenda
 
-![bg left:33%](assets/steps.jpg)
+![bg right:33%](assets/steps.jpg)
 
 - Introduction
 - Testing with Spring Boot
   - Spring Boot Testing 101
-  - Unit Testing with Spring Boot
-  - Sliced Tests with @WebMvcTest & Friends
-  - Integration Tests with @SpringBootTest
-- Best Practices
-- Common Pitfalls to Avoid
-- Q&A
+  - Unit Testing
+  - Sliced Testing
+  - Integration Testing
+- Spring Boot Testing Best Practices
+- Common Spring Boot Testing Pitfalls to Avoid
+- Summary & Outlook
+
 ---
 
 ![bg left:33%](https://picsum.photos/720?image=27)
@@ -106,21 +128,27 @@ usually have `*IT/*WT` postix
 First two Surefire, last Failsafe
 
 Reason for splitting: parallelize, better grouping
+
 ---
 
-### Naming Test Wirr Warr
+<style>
+img[alt~="center"] {
+  display: block;
+  margin: 0 auto;
+}
+</style>
 
-White box test, integrated test, black box test, fast test, functional test, regression test, system tests, user acceptance tests, unit tests, E2E tests, smoke tests, performance tests, load tests, stress tests, exploratory tests, mutation tests, contract tests, property-based tests, integration tests, boundary value testing
+### Naming Things Is Hard
 
-Word cloud and mention that it's complicated
+![h:700 center](assets/cloud.svg)
 
 ---
 
 ### My Pragmatic Test Name Approach
 
-1. Unit: Tests that verify the functionality of a single, isolated component (like a method or class) by mocking or stubbing all external dependencies.
-2. Integration: Tests that verify interactions between two or more components work correctly together, with real implementations replacing some mocks.
-3. E2E: Tests that validate the entire application workflow from start to finish, simulating real user scenarios across all components and external dependencies.
+1. **Unit Tests**: Tests that verify the functionality of a single, isolated component (like a method or class) by mocking or stubbing all external dependencies.
+2. **Integration Tests**: Tests that verify interactions between two or more components work correctly together, with real implementations replacing some mocks.
+3. **E2E**: Tests that validate the entire application workflow from start to finish, simulating real user scenarios across all components and external dependencies.
 
 
 ---
@@ -412,9 +440,9 @@ This goes into the cache key (`MergedContextConfiguration`):
 
 ---
 
-## Best Practices
+# Spring Boot Testing Best Practices
 
-![bg left:33%](assets/best-practices.jpg)
+![bg right:33%](assets/best-practices.jpg)
 
 ---
 
@@ -473,13 +501,13 @@ oller`
 
 ---
 
-## Common Testing Pitfalls to Avoid
+# Common Spring Boot Testing Pitfalls to Avoid
 
 ![bg right:33%](assets/pitfalls.jpg)
 
 ---
 
-### Testing Pitfall 1: Using @SpringBootTest for Everything
+## Testing Pitfall 1: Using @SpringBootTest for Everything
 
 
 - The name could apply it's a one size fits all solution, but it isn't
@@ -489,14 +517,14 @@ oller`
 
 ---
 
-### @SpringBootTest Obsession
+## @SpringBootTest Obsession
 
 ![](assets/spring-boot-test-obsession.png)
 
 ---
 
 
-### Testing Pitfall 2: @MockitoBean vs. @MockBean vs. @Mock
+## Testing Pitfall 2: @MockitoBean vs. @MockBean vs. @Mock
 
 - `@MockBean` is a Spring Boot specific annotation that replaces a bean in the application context with a Mockito mock
 - `@MockBean` is deprecated in favor of the new `@MockitoBean` annotation
@@ -510,7 +538,7 @@ oller`
 
 ---
 
-### Testing Pitfall 3: JUnit 4 vs. JUnit 5 Pitfall
+## Testing Pitfall 3: JUnit 4 vs. JUnit 5 Pitfall
 
 ![bg right:33%](assets/car-comparison.jpg)
 
@@ -548,12 +576,13 @@ oller`
 
 ## What's Next?
 
-- Offer: in house 1 or 2 day workshop for this topic to cover more in depth
-- On-demand online course Masterclass
-- Open for consulting
-- eBook: 30 Testing Tools and Libraries Every Java Developer Must Know
-- eBook & online course: Stratospheric - From Zero to Production with AWS
-- 1 or 2 day in-house/remote/hybrid Spring Boot testing workshops
+![bg h:1200 right:33%](assets/offers-w.png)
+
+
+- Online Course: **Testing Spring Boot Applications Masterclass** (on-demand, 12 hours, 130+ modules)
+- eBook: **30 Testing Tools and Libraries Every Java Developer Must Know**
+- eBook: **Stratospheric - From Zero to Production with AWS**
+- Spring Boot testing workshops (in-house/remote/hybrid)
 - Consulting offerings, e.g. the Test Maturity Assessment
 
 ---
@@ -562,8 +591,7 @@ oller`
 
 ![bg right:33%](assets/end.jpg)
 
-
-Reach out any time via;
+Reach out any time via:
 - LinkedIn (Philip Riecks)
 - X (@rieckpil)
 - Mail (philip@pragmatech.digital)
