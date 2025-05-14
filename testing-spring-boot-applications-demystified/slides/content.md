@@ -436,6 +436,11 @@ This goes into the cache key (`MergedContextConfiguration`):
 
 ---
 
+## Caching Is King
+
+![center](assets/cache.svg)
+
+---
 ## Identify Context Restarts
 
 ![](assets/context-caching-hints.png)
@@ -474,56 +479,52 @@ This goes into the cache key (`MergedContextConfiguration`):
 
 ### Best Practice 1: Test Parallelization
 
-- Goal: reduce build time and get faster feedback
+**Goal**: Reduce build time and get faster feedback
 
-- Requirements:
-  - No shared state
-  - No dependency between tests and their execution order
-  - No mutation of global state
+Requirements:
+- No shared state
+- No dependency between tests and their execution order
+- No mutation of global state
 
 Two ways to achieve this:
-- Fork new JVM with Surefire/Failsafe and let it run in parallel -> more resources but isolated execution
-- Use JUnit Jupiter's parallelization mode and let it run in the same JVM with multiple threads, more fine-grained parallelization possible, define how to parallelize test classes and method, e.g. parallelize test class exection but within the same class run the test in sequence
-- Parallel access to shared resources like database? Cleanup after each test to not pollute the next test
-- Might not work out of the box, but worth investing
-- Combine both approaches, multiple JVM and witin the JVM run in parallel
+- Fork a new JVM with Surefire/Failsafe and let it run in parallel -> more resources but isolated execution
+- Use JUnit Jupiter's parallelization mode and let it run in the same JVM with multiple threads
 
 ---
 
-### Best Practice 2: Use the help of AI
+![bg w:800 h:900 center](assets/parallel-testing.svg)
 
-- Show Diffblue, a niche AI tool that generates unit tests for Java code: `dcover create de.rieckpil.talks.CustomerContr
-oller`
-- TDD with an LLM? Example: following my TDD instructions, implement a Spring Boot
-  Web REST API to fetch the stock price from a given
-  company using their ticker symbol (e.g. MSTR), use the
-  Spring WebClient and implement meaningful unit and
-  integration tests in a test-driven manner
+---
 
+<!--
+
+Notes:
+- Useful to get started
+- Boilerplate and skeleton help
 - LLM very usueful for boilerplate setup, test data, test migration (e.g. Kotlin -> Java)
 - ChatBots might not produce compilable/working test code, agents are better
-- Take a look at OpenRewrite for migrations (not AI but super useful)
-- Clearly define your test requirements in your copiolot instructions, claude.md or cursor rule
-- Showcase Claude Code and my `CLAUDE.md` file
-- GitHub Copilot in IDEA not sooo good (much filtering, UX could be improved) but in VSCode it should be better
-- OpenRewrite byy Moderne recipes:
-  - https://docs.openrewrite.org/recipes/java/spring/boot3/replacemockbeanandspybean
-  - https://docs.openrewrite.org/recipes/java/testing/junit5
+-->
+
+### Best Practice 2: Get Help from AI
+
+- [Diffblue Cover](https://www.diffblue.com/): #1 AI Agent for unit testing complex Java code at scale
+- Agent vs. Assistant
+- LLMs: ChatGPT, Claude, Gemini, etc.
+- Claude Code
+- TDD with an LLM?
+- (Not AI but still useful) OpenRewrite for migrations
+- Clearly define your requirements in e.g. `claude.md` or cursor rule files
+
 ---
 
-### Best Practice 3: Use Mutation Testing If You Are Keen on Code Coverage
+### Best Practice 3: Try Mutation Testing
 
-- aka. your tests may give you a false sense of security
-- Having code coverage but not testing the right things
-- introduction:  Mutation Testing with e.g. PIT
-- Show example where it makes sense
-- Considerations for bigger projects: only run on the new diffs, not on the whole codebase
+- Having high code coverage but not testing the right things
+- aka. your code coverage might give you a false sense of security
+- Mutation Testing with [PIT](https://pitest.org/quickstart/)
 - Beyond Line Coverage: Traditional tools like JaCoCo show which code runs during tests, but PIT verifies if your tests actually detect when code behaves incorrectly by introducing "mutations" to your source code.
 - Quality Guarantee: PIT automatically modifies your code (changing conditionals, return values, etc.) to ensure your tests fail when they should, revealing blind spots in seemingly comprehensive test suites.
-- Business Logic Protection: For Spring Boot services with complex business workflows, PIT helps identify untested edge cases that could lead to critical production bugs in your application.
-- Easy Integration: PIT seamlessly integrates with Maven/Gradle build processes, with minimal configuration required to start testing your Spring Boot application.
-- Prioritize Improvements: PIT's HTML reports clearly identify which parts of your codebase have mutations that survived testing, helping teams focus their testing efforts where they'll have the most impact.
-- Production Confidence: While requiring more computational resources than basic unit tests, the enhanced detection of subtle logic errors provides significantly greater confidence in mission-critical Spring Boot components.
+- Considerations for bigger projects: only run on the new diffs, not on the whole codebase
 
 ---
 
