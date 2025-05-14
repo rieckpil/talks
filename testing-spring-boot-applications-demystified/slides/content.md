@@ -340,7 +340,7 @@ void should_When_() {
 
 ---
 
-## Sliced Testing with Spring Boot
+# Sliced Testing with Spring Boot
 
 <!--
 
@@ -350,6 +350,19 @@ Notes:
 
 -->
 
+![bg right:33%](assets/slice.jpg)
+
+---
+
+![w:600 center](assets/spring-context.png)
+
+---
+
+![w:700 center](assets/spring-sliced-context.png)
+
+---
+
+## Slicing Example: @WebMvcTest
 
 - For some application parts it will become not beneficial
 - best use cases web layer: show how we don't get far with a plain unit test -> validation, security, status code, mapping
@@ -360,7 +373,17 @@ Notes:
 
 ---
 
-## Integration Testing with Spring Boot
+![center](assets/slicing-annotations.png)
+
+---
+
+# Integration Testing
+
+![bg right:33%](assets/full.jpg)
+
+
+---
+
 
 <!--
 
