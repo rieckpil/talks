@@ -76,6 +76,38 @@ The slides use a custom PragmaTech theme defined in `pragmatech.css`. The theme 
 - The PragmaTech logo is included in the footer of each slide
 - SVG diagrams for context caching and other concepts
 
+## Image Optimization
+
+To reduce the size of the generated PDF, you can use the included image optimization scripts:
+
+1. Resize and optimize all images:
+
+```bash
+./resize_images.sh
+```
+
+This script creates resized versions of all images in an `assets/generated` directory.
+
+2. Update image references in the markdown file:
+
+```bash
+./update_image_links.sh
+```
+
+This script updates all image references in `content.md` to point to the optimized versions.
+
+3. Generate the PDF as usual:
+
+```bash
+marp --pdf content.md --theme pragmatech.css --allow-local-files
+```
+
+You can restore the original markdown file if needed:
+
+```bash
+mv content.md.bak content.md
+```
+
 ## Troubleshooting
 
 If you encounter any issues with slide rendering:
