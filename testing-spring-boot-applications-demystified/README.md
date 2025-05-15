@@ -16,6 +16,3 @@ OpenRewrite:
 
 - https://docs.openrewrite.org/recipes/java/spring/boot3/replacemockbeanandspybean
 - https://docs.openrewrite.org/recipes/java/testing/junit5
-
-## Held At
-- Spring I/O 2024 Workshop
