@@ -6,23 +6,26 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.3.0</version>
+    <version>3.4.5</version>
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
 
   <groupId>de.rieckpil</groupId>
-  <artifactId>workshop</artifactId>
+  <artifactId>testing-spring-boot-applications-demystified</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>testing-spring-boot-applications-demystified</name>
   <description>Testing Spring Boot Applications Demystified</description>
 
   <properties>
     <java.version>21</java.version>
-    <awaitility.version>4.2.0</awaitility.version>
-    <mockito.version>5.11.0</mockito.version>
-    <selenide.version>7.3.1</selenide.version>
-    <selenium.version>4.16.1</selenium.version>
-    <wiremock.version>3.5.4</wiremock.version>
+    <awaitility.version>4.3.0</awaitility.version>
+    <mockito.version>5.16.0</mockito.version>
+    <selenide.version>7.9.0</selenide.version>
+    <selenium.version>4.31.0</selenium.version>
+    <wiremock.version>3.13.0</wiremock.version>
+    <jacoco.version>0.8.11</jacoco.version>
+    <pitest.version>1.15.6</pitest.version>
+    <pitest-junit5.version>1.2.1</pitest-junit5.version>
   </properties>
 
   <dependencies>
@@ -47,6 +50,11 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-test</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -87,6 +95,12 @@
       <version>${wiremock.version}</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>com.diffblue.cover</groupId>
+      <artifactId>cover-annotations</artifactId>
+      <version>1.3.0</version>
+      <scope>provided</scope>
+    </dependency>
   </dependencies>
 
   <build>
@@ -98,23 +112,27 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.2.5</version>
+        <version>3.5.3</version>
         <configuration>
+          <redirectTestOutputToFile>true</redirectTestOutputToFile>
+          <reportsDirectory>${project.build.directory}/test-reports</reportsDirectory>
           <argLine>-XX:+EnableDynamicAgentLoading -Xshare:off</argLine>
           <properties>
-            <!--            <configurationParameters>-->
-            <!--              junit.jupiter.execution.parallel.enabled = true-->
-            <!--              junit.jupiter.execution.parallel.mode.default = same_thread-->
-            <!--              junit.jupiter.execution.parallel.mode.classes.default = concurrent-->
-            <!--            </configurationParameters>-->
+            <configurationParameters>
+              junit.jupiter.execution.parallel.enabled = true
+              junit.jupiter.execution.parallel.mode.default = same_thread
+              junit.jupiter.execution.parallel.mode.classes.default = concurrent
+            </configurationParameters>
           </properties>
         </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-failsafe-plugin</artifactId>
-        <version>3.2.5</version>
+        <version>3.5.3</version>
         <configuration>
+          <redirectTestOutputToFile>true</redirectTestOutputToFile>
+          <reportsDirectory>${project.build.directory}/test-reports</reportsDirectory>
           <rerunFailingTestsCount>3</rerunFailingTestsCount>
           <includes>
             <include>**/*WT.java</include>
@@ -130,6 +148,85 @@
           </execution>
         </executions>
       </plugin>
+
+      <!-- JaCoCo Plugin for Code Coverage -->
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>${jacoco.version}</version>
+        <executions>
+          <execution>
+            <id>prepare-agent</id>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>report</id>
+            <phase>test</phase>
+            <goals>
+              <goal>report</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- PIT Mutation Testing Plugin -->
+      <plugin>
+        <groupId>org.pitest</groupId>
+        <artifactId>pitest-maven</artifactId>
+        <version>${pitest.version}</version>
+        <dependencies>
+          <dependency>
+            <groupId>org.pitest</groupId>
+            <artifactId>pitest-junit5-plugin</artifactId>
+            <version>${pitest-junit5.version}</version>
+          </dependency>
+        </dependencies>
+        <configuration>
+          <targetClasses>
+            <param>de.rieckpil.talks.discount.*</param>
+          </targetClasses>
+          <targetTests>
+            <param>de.rieckpil.talks.discount.*Test</param>
+          </targetTests>
+          <mutators>
+            <mutator>DEFAULTS</mutator>
+          </mutators>
+          <outputFormats>
+            <outputFormat>HTML</outputFormat>
+            <outputFormat>XML</outputFormat>
+          </outputFormats>
+          <timestampedReports>false</timestampedReports>
+          <threads>4</threads>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
+
+  <profiles>
+    <!-- Profile for running PIT on changed code only -->
+    <profile>
+      <id>pit-incremental</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.pitest</groupId>
+            <artifactId>pitest-maven</artifactId>
+            <configuration>
+              <mutationThreshold>80</mutationThreshold>
+              <timeoutFactor>1.5</timeoutFactor>
+              <timeoutConstant>5000</timeoutConstant>
+              <maxSurviving>0</maxSurviving>
+              <withHistory>true</withHistory>
+              <threads>4</threads>
+              <historyInputFile>target/pit-history/history.bin</historyInputFile>
+              <historyOutputFile>target/pit-history/history.bin</historyOutputFile>
+              <fullMutationMatrix>true</fullMutationMatrix>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>

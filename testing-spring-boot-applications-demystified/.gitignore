@@ -33,3 +33,9 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Marp ###
+public/
+
+slides/content.pdf
+slides/assets/generated/

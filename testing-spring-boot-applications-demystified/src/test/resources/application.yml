@@ -1,6 +1,6 @@
-#logging:
-#  level:
-#    org:
-#      springframework:
-#        test:
-#          context: TRACE
+logging:
+  level:
+    org:
+      springframework:
+        test:
+          context: TRACE

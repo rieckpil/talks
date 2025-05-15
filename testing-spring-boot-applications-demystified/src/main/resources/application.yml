@@ -1,3 +1,7 @@
 spring:
   application:
     name: testing-spring-boot-applications-demystified
+
+stock:
+  api:
+    base-url: https://api.example.com

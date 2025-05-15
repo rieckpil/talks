@@ -7,14 +7,14 @@ jobs:
     strategy:
       matrix:
         talks: ['fixing-a-broken-window', 'things-i-wish-i-knew-spring-boot-testing', 'testing-spring-boot-applications-demystified']
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     name: Build the Maven project ${{ matrix.talks }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Set up JDK
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           java-version: 21
           java-package: jdk
