@@ -1,10 +1,10 @@
 ---
 marp: true
 theme: pragmatech
-header: 'Testing Spring Boot Applications Demystified @ JUG Hamburg 14.05.2025'
+header: 'Testing Spring Boot Applications Demystified @ JUG Barcelona 20.05.2025'
 ---
 
-![bg](./assets/generated/hamburg-jug-hh.jpg)
+![bg](./assets/generated/barcelona-2025-jug-bcn.jpg)
 <!-- header: "" -->
 <!-- footer: ""-->
 
@@ -19,7 +19,7 @@ header: 'Testing Spring Boot Applications Demystified @ JUG Hamburg 14.05.2025'
 
 ## Best Practices, Common Pitfalls, and Real-World Strategies
 
-_Java User Group Hamburg 14.05.2025_
+_Java User Group Barcelona 20.05.2025_
 
 Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](https://x.com/rieckpil)
 
@@ -44,7 +44,7 @@ Notes:
 
 ---
 
-<!-- header: 'Testing Spring Boot Applications Demystified @ JUG Hamburg 14.05.2025' -->
+<!-- header: 'Testing Spring Boot Applications Demystified @ JUG Barcelona 20.05.2025' -->
 <!-- footer: '![w:32 h:32](assets/generated/logo.webp)' -->
 
 <!--
@@ -628,9 +628,9 @@ Notes:
 ![bg h:1200 right:33%](assets/generated/offers-w.png)
 
 
-- Online Course: [**Testing Spring Boot Applications Masterclass**](https://rieckpil.de/testing-spring-boot-applications-masterclass/) (on-demand, 12 hours, 130+ modules)
-- eBook: [**30 Testing Tools and Libraries Every Java Developer Must Know**](https://leanpub.com/java-testing-toolbox)
-- eBook: [**Stratospheric - From Zero to Production with AWS**](https://leanpub.com/stratospheric)
+- Online Course: [Testing Spring Boot Applications Masterclass](https://rieckpil.de/testing-spring-boot-applications-masterclass/) (on-demand, 12 hours, 130+ modules)
+- eBook: [30 Testing Tools and Libraries Every Java Developer Must Know](https://leanpub.com/java-testing-toolbox)
+- eBook: [Stratospheric - From Zero to Production with AWS](https://leanpub.com/stratospheric)
 - Spring Boot [testing workshops](https://pragmatech.digital/workshops/) (in-house/remote/hybrid)
 - [Consulting offerings](https://pragmatech.digital/consulting/), e.g. the Test Maturity Assessment
 
