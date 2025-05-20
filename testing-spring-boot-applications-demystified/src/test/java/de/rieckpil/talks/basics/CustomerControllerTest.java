@@ -4,10 +4,14 @@ package de.rieckpil.talks.basics;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import de.rieckpil.talks.CustomerController;
 import de.rieckpil.talks.CustomerService;
+import de.rieckpil.talks.config.SecurityConfig;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.context.annotation.Import;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -19,6 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(CustomerController.class)
+@Import(SecurityConfig.class)
 class CustomerControllerTest {
 
   @Autowired
@@ -28,6 +33,7 @@ class CustomerControllerTest {
   private CustomerService customerService;
 
   @Test
+  @WithMockUser
   void shouldReturnLocationOfNewlyCreatedCustomer() throws Exception {
 
     when(customerService.createNewCustomer(any(ObjectNode.class)))
@@ -35,6 +41,7 @@ class CustomerControllerTest {
 
     this.mockMvc
       .perform(post("/api/customers")
+//        .with(SecurityMockMvcRequestPostProcessors.jwt())
         .contentType(APPLICATION_JSON)
         .content("""
            {

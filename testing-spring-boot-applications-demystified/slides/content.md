@@ -356,6 +356,8 @@ Notes:
 
 ---
 
+## A Typical Spring Application Context
+
 ![w:600 center](assets/generated/spring-context.png)
 
 ---
@@ -371,6 +373,7 @@ Notes:
 
 ```java
 @WebMvcTest(CustomerController.class)
+@Import(SecurityConfig.class)
 class CustomerControllerTest {
 
   @Autowired
