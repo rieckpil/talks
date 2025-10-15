@@ -65,7 +65,7 @@ Notes:
 
 ---
 
-# Goals For This Talk
+## Goals For This Talk
 
 ![bg h:500 right:33%](assets/generated/demystify.png)
 
@@ -681,7 +681,19 @@ Notes:
 - eBook: [30 Testing Tools and Libraries Every Java Developer Must Know](https://leanpub.com/java-testing-toolbox)
 - eBook: [Stratospheric - From Zero to Production with AWS](https://leanpub.com/stratospheric)
 - Spring Boot [testing workshops](https://pragmatech.digital/workshops/) (in-house/remote/hybrid)
-- [Consulting offerings](https://pragmatech.digital/consulting/), e.g. the Test Maturity Assessment
+- [Consulting offerings](https://pragmatech.digital/consulting/), e.g. the Test Maturity Assessment for your team
+
+---
+
+## Don't Leave Empty-Handed
+
+![bg right:33%](assets/generated/spring-boot-testing-book-cover.png)
+
+- Get the **Testing Spring Boot Applications Demystified eBook** for free
+- 120+ Pages with hands-on advice to ship code with confidence
+- Scan the QR code below to get the free eBook by [joining our newsletter](https://rieckpil.de/free-spring-boot-testing-book/)
+
+![center h:200 w:200](assets/generated/newsletter-signup-qr.png)
 
 ---
 
@@ -692,7 +704,7 @@ Notes:
 
 ![bg right:33%](assets/generated/end.jpg)
 
-Reach out any time via:
-- LinkedIn (Philip Riecks)
-- X (@rieckpil)
-- Mail (philip@pragmatech.digital)
+Reach out any time via
+- [LinkedIn](https://www.linkedin.com/in/rieckpil) (Philip Riecks)
+- [X](https://x.com/rieckpil) (@rieckpil)
+- [Mail](mailto:philip@pragmatech.digital) (philip@pragmatech.digital)
