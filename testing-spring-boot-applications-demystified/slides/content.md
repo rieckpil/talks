@@ -1,10 +1,10 @@
 ---
 marp: true
 theme: pragmatech
-header: 'Testing Spring Boot Applications Demystified @ JUG Barcelona 20.05.2025'
+header: 'Testing Spring Boot Applications Demystified @ JUG Zürich 21.10.2025'
 ---
 
-![bg](./assets/generated/barcelona-2025-jug-bcn.jpg)
+![bg](./assets/generated/zuerich-jug-ch.jpg)
 <!-- header: "" -->
 <!-- footer: ""-->
 
@@ -19,7 +19,7 @@ header: 'Testing Spring Boot Applications Demystified @ JUG Barcelona 20.05.2025
 
 ## Best Practices, Common Pitfalls, and Real-World Strategies
 
-_Java User Group Barcelona 20.05.2025_
+_Java User Group Zürich 21.10.2025_
 
 Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](https://x.com/rieckpil)
 
@@ -44,7 +44,7 @@ Notes:
 
 ---
 
-<!-- header: 'Testing Spring Boot Applications Demystified @ JUG Barcelona 20.05.2025' -->
+<!-- header: 'Testing Spring Boot Applications Demystified @ JUG Zürich 21.10.2025' -->
 <!-- footer: '![w:32 h:32](assets/generated/logo.webp)' -->
 
 <!--
@@ -96,6 +96,7 @@ Notes:
 ![bg right:33%](assets/generated/steps.jpg)
 
 - Introduction
+- Why Test Software?
 - Testing with Spring Boot
   - Spring Boot Testing 101
   - Unit Testing
@@ -105,6 +106,38 @@ Notes:
 - Common Spring Boot Testing Pitfalls to Avoid
 - Summary & Outlook
 
+---
+
+![bg right:33%](assets/generated/why-test-software.jpg)
+
+# Why Test Software?
+
+---
+
+
+![bg left:33%](assets/generated/northstar.jpg)
+
+## My Overall Northstar
+
+Imagine seeing this pull request on a Friday afternoon:
+
+![](assets/generated/northstar-pr.png)
+
+How confident are you to merge this major Spring Boot upgrade and deploy it to production once the pipeline turns green?
+
+Good tests don't just catch bugs - they give you the confidence to say "yes" without hesitation.
+
+---
+
+## Why Test Software? (continued)
+
+- Shift Left
+- Confidence in Code Changes
+- Catch Bugs Early
+- Documentation
+- Regression Prevention
+- Become more Productive
+- Use Tests as a Playground to Explore New Technologies
 ---
 
 ![bg left:33%](assets/generated/101.jpg)
@@ -120,17 +153,20 @@ img[alt~="center"] {
 }
 </style>
 
-### Naming Things Is Hard
+## Naming Things Is Hard
 
 ![h:700 center](assets/cloud.svg)
 
 ---
 
-### My Pragmatic Test Name Approach
+## My Pragmatic Test Name Approach
 
 1. **Unit Tests**: Tests that verify the functionality of a single, isolated component (like a method or class) by mocking or stubbing all external dependencies.
+
 2. **Integration Tests**: Tests that verify interactions between two or more components work correctly together, with real implementations replacing some mocks.
-3. **E2E**: Tests that validate the entire application workflow from start to finish, simulating real user scenarios across all components and external dependencies.
+<br/>
+
+3. **E2E** (End-to-End): Tests that validate the entire application workflow from start to finish, simulating real user scenarios across all components and external dependencies.
 
 ---
 
@@ -140,11 +176,11 @@ img[alt~="center"] {
 
 - **Maven Surfire Plugin** for unit tests: default postfix  `*Test` (e.g. `CustomerTest`)
 - **Maven Failsafe Plugin** for integration tests: default postfix `*IT` (e.g. `CheckoutIT`)
-- Reason for splitting: different parallelization options, better organisation
+- Reason for splitting: different **parallelization** options, better **organisation**
 
 ---
 
-### Spring Boot Starter Test
+## Spring Boot Starter Test
 
 <!--
 
@@ -182,36 +218,36 @@ Tips:
 -->
 
 ```shell
-[INFO] +- org.springframework.boot:spring-boot-starter-test:jar:3.4.5:test
-[INFO] |  +- org.springframework.boot:spring-boot-test:jar:3.4.5:test
-[INFO] |  +- org.springframework.boot:spring-boot-test-autoconfigure:jar:3.4.5:test
+[INFO] +- org.springframework.boot:spring-boot-starter-test:jar:3.5.6:test
+[INFO] |  +- org.springframework.boot:spring-boot-test:jar:3.5.6:test
+[INFO] |  +- org.springframework.boot:spring-boot-test-autoconfigure:jar:3.5.6:test
 [INFO] |  +- com.jayway.jsonpath:json-path:jar:2.9.0:test
 [INFO] |  +- jakarta.xml.bind:jakarta.xml.bind-api:jar:4.0.2:test
-[INFO] |  |  \- jakarta.activation:jakarta.activation-api:jar:2.1.3:test
+[INFO] |  |  \- jakarta.activation:jakarta.activation-api:jar:2.1.4:test
 [INFO] |  +- net.minidev:json-smart:jar:2.5.2:test
 [INFO] |  |  \- net.minidev:accessors-smart:jar:2.5.2:test
 [INFO] |  |     \- org.ow2.asm:asm:jar:9.7.1:test
-[INFO] |  +- org.assertj:assertj-core:jar:3.26.3:test
-[INFO] |  |  \- net.bytebuddy:byte-buddy:jar:1.15.11:test
+[INFO] |  +- org.assertj:assertj-core:jar:3.27.4:test
+[INFO] |  |  \- net.bytebuddy:byte-buddy:jar:1.17.7:test
 [INFO] |  +- org.awaitility:awaitility:jar:4.3.0:test
-[INFO] |  +- org.hamcrest:hamcrest:jar:2.2:test
-[INFO] |  +- org.junit.jupiter:junit-jupiter:jar:5.11.4:test
-[INFO] |  |  +- org.junit.jupiter:junit-jupiter-api:jar:5.11.4:test
-[INFO] |  |  |  +- org.junit.platform:junit-platform-commons:jar:1.11.4:test
+[INFO] |  +- org.hamcrest:hamcrest:jar:3.0:test
+[INFO] |  +- org.junit.jupiter:junit-jupiter:jar:5.12.2:test
+[INFO] |  |  +- org.junit.jupiter:junit-jupiter-api:jar:5.12.2:test
+[INFO] |  |  |  +- org.junit.platform:junit-platform-commons:jar:1.12.2:test
 [INFO] |  |  |  \- org.apiguardian:apiguardian-api:jar:1.1.2:test
-[INFO] |  |  +- org.junit.jupiter:junit-jupiter-params:jar:5.11.4:test
-[INFO] |  |  \- org.junit.jupiter:junit-jupiter-engine:jar:5.11.4:test
-[INFO] |  |     \- org.junit.platform:junit-platform-engine:jar:1.11.4:test
-[INFO] |  +- org.mockito:mockito-core:jar:5.17.0:test
-[INFO] |  |  +- net.bytebuddy:byte-buddy-agent:jar:1.15.11:test
+[INFO] |  |  +- org.junit.jupiter:junit-jupiter-params:jar:5.12.2:test
+[INFO] |  |  \- org.junit.jupiter:junit-jupiter-engine:jar:5.12.2:test
+[INFO] |  |     \- org.junit.platform:junit-platform-engine:jar:1.12.2:test
+[INFO] |  +- org.mockito:mockito-core:jar:5.16.0:test
+[INFO] |  |  +- net.bytebuddy:byte-buddy-agent:jar:1.17.7:test
 [INFO] |  |  \- org.objenesis:objenesis:jar:3.3:test
-[INFO] |  +- org.mockito:mockito-junit-jupiter:jar:5.17.0:test
+[INFO] |  +- org.mockito:mockito-junit-jupiter:jar:5.16.0:test
 [INFO] |  +- org.skyscreamer:jsonassert:jar:1.5.3:test
 [INFO] |  |  \- com.vaadin.external.google:android-json:jar:0.0.20131108.vaadin1:test
-[INFO] |  +- org.springframework:spring-core:jar:6.2.6:compile
-[INFO] |  |  \- org.springframework:spring-jcl:jar:6.2.6:compile
-[INFO] |  +- org.springframework:spring-test:jar:6.2.6:test
-[INFO] |  \- org.xmlunit:xmlunit-core:jar:2.10.0:test
+[INFO] |  +- org.springframework:spring-core:jar:6.2.11:compile
+[INFO] |  |  \- org.springframework:spring-jcl:jar:6.2.11:compile
+[INFO] |  +- org.springframework:spring-test:jar:6.2.11:test
+[INFO] |  \- org.xmlunit:xmlunit-core:jar:2.10.4:test
 ```
 
 ---
@@ -467,6 +503,16 @@ This goes into the cache key (`MergedContextConfiguration`):
 ## Investigate the Logs
 
 ![](assets/generated/context-caching-logs.png)
+
+---
+
+## Spring Test Profiler
+
+![center](assets/spring-test-profiler-logo.png)
+
+A Spring Test utility that provides visualization and insights for Spring Test execution, with a focus on Spring context caching statistics.
+
+**Overall goal**: Identify optimization opportunities in your Spring Test suite to speed up your builds and ship to production faster and with more confidence.
 
 ---
 
