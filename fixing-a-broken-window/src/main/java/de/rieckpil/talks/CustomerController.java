@@ -18,7 +18,7 @@ public class CustomerController {
   }
 
   @GetMapping
-  public JsonNode getOrders() {
+  public JsonNode getCustomers() {
     return objectMapper
       .createArrayNode()
       .add(

@@ -1,7 +1,12 @@
-package de.rieckpil.talks;
+package de.rieckpil.talks.customner;
 
+import java.util.UUID;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +35,11 @@ public class CustomerController {
       .buildAndExpand(customerId);
 
     return ResponseEntity.created(uriComponents.toUri()).build();
+  }
+
+  @GetMapping
+  public JsonNode getAll() {
+    return customerService.getAll();
   }
 }
 

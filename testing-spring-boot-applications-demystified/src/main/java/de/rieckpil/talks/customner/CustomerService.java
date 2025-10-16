@@ -1,9 +1,10 @@
-package de.rieckpil.talks;
-
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import org.springframework.stereotype.Service;
+package de.rieckpil.talks.customner;
 
 import java.util.List;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.springframework.stereotype.Service;
 
 @Service
 public class CustomerService {
@@ -23,5 +24,9 @@ public class CustomerService {
     List<String> allCustomers = customerRepository.findAllCustomerIds();
 
     // send email, etc.
+  }
+
+  public JsonNode getAll() {
+    return this.customerRepository.findAll();
   }
 }

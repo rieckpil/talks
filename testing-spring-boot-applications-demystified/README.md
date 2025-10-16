@@ -3,7 +3,7 @@
 ## Notes
 
 ```
-dcover create de.rieckpil.talks.CustomerController
+dcover create de.rieckpil.talks.customner.CustomerController
 ```
 
 Example TDD:

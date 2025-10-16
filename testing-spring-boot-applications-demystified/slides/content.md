@@ -402,6 +402,12 @@ Notes:
 
 ---
 
+## Slicing in Action
+
+![](assets/generated/slicing-in-action.png)
+
+---
+
 ## Slicing Example: @WebMvcTest
 
 - Testing your web layer in isolation and only load the beans you need
@@ -422,6 +428,16 @@ class CustomerControllerTest {
 ```
 
 - See `WebMvcTypeExcludeFilter` for included Spring beans
+
+---
+
+## Common Test Slices
+
+- `@WebMvcTest`/`@WebFluxTest` - Controller layer
+- `@DataJpaTest`/`@JdbcTest` - Persistence layer
+- `@JsonTest` - JSON serialization/deserialization
+- `@RestClientTest` - RestTemplate testing
+- etc.
 
 ---
 
@@ -457,6 +473,59 @@ Notes:
 
 ---
 
+## Version 1:
+
+```java
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+class ApplicationServletContainerIT {
+
+  @LocalServerPort
+  private int port; // <-- we're running on a real port
+
+  @Test
+  void contextLoads(@Autowired WebTestClient webTestClient) {
+    webTestClient
+      .get()
+      .uri("/api/customers")
+      .header("Authorization", "Basic " + Base64.getEncoder().encodeToString("user:dummy".getBytes()))
+      .exchange()
+      .expectStatus()
+      .isOk();
+  }
+}
+```
+
+- Access over HTTP like a user, separate threads, requires authentication
+
+---
+
+## Version 2:
+
+```java
+@SpringBootTest
+// which is @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
+@AutoConfigureMockMvc
+class ApplicationMockWebIT {
+
+  // @LocalServerPort
+  // private int port; <-- this would fail the test, there is no local port occupied
+
+  @Test
+  @WithMockUser
+  void givenCustomersThenReturnListForAuthenticatedUser(@Autowired MockMvc mockMvc) throws Exception {
+    mockMvc
+      .perform(get("/api/customers")
+        .header(ACCEPT, APPLICATION_JSON))
+      .andExpect(status().is(200))
+      .andExpect(content().contentType(APPLICATION_JSON))
+      .andExpect(jsonPath("$.size()", is(1)));
+  }
+}
+```
+
+- Same thread, we can rollback with `@Transactional`, simply overide the security context with `@WithMockUser`
+
+---
 <!--
 
 - Go to `DefaultContextCache` to show the cache

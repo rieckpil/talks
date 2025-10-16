@@ -1,7 +1,7 @@
 package de.rieckpil.talks.basics;
 
-import de.rieckpil.talks.CustomerRepository;
-import de.rieckpil.talks.CustomerService;
+import de.rieckpil.talks.customner.CustomerRepository;
+import de.rieckpil.talks.customner.CustomerService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

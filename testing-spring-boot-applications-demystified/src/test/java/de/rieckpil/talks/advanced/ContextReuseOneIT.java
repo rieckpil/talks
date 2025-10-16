@@ -9,7 +9,7 @@ import org.springframework.test.context.cache.ContextCacheUtils;
 @SpringBootTest
 class ContextReuseOneIT {
 
-  private static final Logger LOG = LoggerFactory.getLogger(ApplicationIT.class);
+  private static final Logger LOG = LoggerFactory.getLogger(ApplicationServletContainerIT.class);
 
   @Test
   void doStuff() {
