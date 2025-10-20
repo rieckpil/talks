@@ -4,7 +4,7 @@ theme: pragmatech
 header: 'Testing Spring Boot Applications Demystified @ JUG Zürich 21.10.2025'
 ---
 
-![bg](./assets/generated/zuerich-jug-ch.jpg)
+![bg](./assets/zuerich-jug-ch.jpg)
 <!-- header: "" -->
 <!-- footer: ""-->
 
@@ -13,7 +13,7 @@ header: 'Testing Spring Boot Applications Demystified @ JUG Zürich 21.10.2025'
 ---
 
 <!-- _class: title -->
-![bg h:500 left:33%](assets/generated/demystify.png)
+![bg h:500 left:33%](assets/demystify.png)
 
 # Testing Spring Boot Applications Demystified
 
@@ -36,7 +36,7 @@ Notes:
 - Raise hands if you enjoy writing tests -> I do and hope I can change that for some of you today
 -->
 
-![bg left](assets/generated/starting.jpg)
+![bg left](assets/starting.jpg)
 
 # Getting Started with Testing
 
@@ -45,7 +45,7 @@ Notes:
 ---
 
 <!-- header: 'Testing Spring Boot Applications Demystified @ JUG Zürich 21.10.2025' -->
-<!-- footer: '![w:32 h:32](assets/generated/logo.webp)' -->
+<!-- footer: '![w:32 h:32](assets/logo.webp)' -->
 
 <!--
 - My story towards testing
@@ -61,13 +61,13 @@ Notes:
 
 ### Getting Used To Testing At Work
 
-![](assets/generated/pr-reject.png)
+![](assets/pr-reject.png)
 
 ---
 
 ## Goals For This Talk
 
-![bg h:500 right:33%](assets/generated/demystify.png)
+![bg h:500 right:33%](assets/demystify.png)
 
 
 - Lay the foundation for your Spring Boot testing success
@@ -78,7 +78,7 @@ Notes:
 
 ---
 
-![bg right:33%](assets/generated/hza.jpg)
+![bg right:33%](assets/hza.jpg)
 
 ## About
 
@@ -93,7 +93,7 @@ Notes:
 
 ## Agenda
 
-![bg right:33%](assets/generated/steps.jpg)
+![bg right:33%](assets/steps.jpg)
 
 - Introduction
 - Why Test Software?
@@ -108,20 +108,20 @@ Notes:
 
 ---
 
-![bg right:33%](assets/generated/why-test-software.jpg)
+![bg right:33%](assets/why-test-software.jpg)
 
 # Why Test Software?
 
 ---
 
 
-![bg left:33%](assets/generated/northstar.jpg)
+![bg left:33%](assets/northstar.jpg)
 
 ## My Overall Northstar
 
 Imagine seeing this pull request on a Friday afternoon:
 
-![](assets/generated/northstar-pr.png)
+![](assets/northstar-pr.png)
 
 How confident are you to merge this major Spring Boot upgrade and deploy it to production once the pipeline turns green?
 
@@ -140,7 +140,7 @@ Good tests don't just catch bugs - they give you the confidence to say "yes" wit
 - Use Tests as a Playground to Explore New Technologies
 ---
 
-![bg left:33%](assets/generated/101.jpg)
+![bg left:33%](assets/101.jpg)
 
 # Spring Boot Testing 101
 
@@ -192,20 +192,24 @@ Notes:
 
 -->
 
-![bg right:33%](assets/generated/swiss.jpg)
+![bg right:33%](assets/swiss.jpg)
 
 - aka. "Testing Swiss Army Knife"
-- Batteries-included for testing
-- Dependency management for:
-  - JUnit Jupiter
+
+
+```xml
+<dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter-test</artifactId>
+  <scope>test</scope>
+</dependency>
+```
+
+- Batteries-included for testing by transitively including popular testing libraries
+  - JUnit
   - Mockito
-  - AssertJ
-  - Awaitility
-  - etc.
-- We can manually override the dependency versions
-
+  - Assertion libraries: AssertJ, Hamcrest, XMLUnit, JSONAssert, Awaitility
 ---
-
 <!--
 Notes:
 - Go to IDE to show the start
@@ -217,7 +221,9 @@ Tips:
 - Pick one assertion library or at least not mix it within the same test class
 -->
 
-```shell
+```shell {4-6,12,14,15-16,23,27,32}
+./mvnw dependency:tree
+[INFO] ...
 [INFO] +- org.springframework.boot:spring-boot-starter-test:jar:3.5.6:test
 [INFO] |  +- org.springframework.boot:spring-boot-test:jar:3.5.6:test
 [INFO] |  +- org.springframework.boot:spring-boot-test-autoconfigure:jar:3.5.6:test
@@ -249,6 +255,20 @@ Tips:
 [INFO] |  +- org.springframework:spring-test:jar:6.2.11:test
 [INFO] |  \- org.xmlunit:xmlunit-core:jar:2.10.4:test
 ```
+
+---
+
+
+## What's Inside the Testing Swiss Army Knife?
+
+- **JUnit** (currently 5, later 6): Java's de-facto standard testing framework and foundation.
+- **Mockito**: Creating mock objects to simulate dependencies and verify interactions.
+- **AssertJ**: Provides fluent, chainable, and readable assertions.
+- **Hamcrest**: Offers flexible matchers for creating custom assertions.
+- **JSONAssert**: Compares JSON strings with flexible matching options.
+- **JsonPath**: Extracts and queries data from JSON similar to XPath.
+- **XMLUnit**: Compares and validates XML documents.
+- **Awaitility**: Handles asynchronous testing with fluent conditions.
 
 ---
 
@@ -388,23 +408,23 @@ Notes:
 
 -->
 
-![bg right:33%](assets/generated/slice.jpg)
+![bg right:33%](assets/slice.jpg)
 
 ---
 
 ## A Typical Spring Application Context
 
-![w:600 center](assets/generated/spring-context.png)
+![w:600 center](assets/spring-context.png)
 
 ---
 
-![w:700 center](assets/generated/spring-sliced-context.png)
+![w:700 center](assets/spring-sliced-context.png)
 
 ---
 
 ## Slicing in Action
 
-![](assets/generated/slicing-in-action.png)
+![](assets/slicing-in-action.png)
 
 ---
 
@@ -441,13 +461,13 @@ class CustomerControllerTest {
 
 ---
 
-![center](assets/generated/slicing-annotations.png)
+![center](assets/slicing-annotations.png)
 
 ---
 
 # Integration Testing with Spring Boot
 
-![bg right:33%](assets/generated/full.jpg)
+![bg right:33%](assets/full.jpg)
 
 ---
 
@@ -459,7 +479,7 @@ Notes:
 
 -->
 
-![](assets/generated/spring-boot-test-setup.png)
+![](assets/spring-boot-test-setup.png)
 
 ---
 
@@ -532,7 +552,7 @@ class ApplicationMockWebIT {
 
 -->
 
-## Spring Test `TestContext` Caching
+## The Need for Speed: Spring Test `TestContext` Caching
 
 - Part of Spring Test (automatically part of every Spring Boot project via `spring-boot-starter-test`)
 - Spring Test caches an already started Spring `ApplicationContext` for later reuse
@@ -541,7 +561,7 @@ class ApplicationMockWebIT {
 
 Speed up your build:
 
-![](assets/generated/context-cache-improvements.png)
+![](assets/context-cache-improvements.png)
 
 ---
 
@@ -564,14 +584,14 @@ This goes into the cache key (`MergedContextConfiguration`):
 ---
 ## Identify Context Restarts
 
-![](assets/generated/context-caching-hints.png)
+![](assets/context-caching-hints.png)
 
 
 ---
 
 ## Investigate the Logs
 
-![](assets/generated/context-caching-logs.png)
+![](assets/context-caching-logs.png)
 
 ---
 
@@ -587,7 +607,30 @@ A Spring Test utility that provides visualization and insights for Spring Test e
 
 ## Spot the Issues for Context Caching
 
-![](assets/generated/context-caching-bad.png)
+![](assets/context-caching-bad.png)
+
+---
+
+## Outlook to Spring Framework 7
+
+> Pausing of Test Application Contexts
+
+The Spring TestContext framework is caching application context instances within test suites for faster runs. As of Spring Framework 7.0, we now pause test application contexts when they're not used. This means an application context stored in the context cache will be stopped when it is no longer actively in use and automatically restarted the next time the context is retrieved from the cache. Specifically, the latter will restart all auto-startup beans in the application context, effectively restoring the lifecycle state.
+
+See the release notes of [Spring Framework 7.0.0 M7](https://spring.io/blog/2025/07/17/spring-framework-7-0-0-M7-available-now).
+
+---
+
+## The Final Boss
+
+```java
+@DirtiesContext // this instructs Spring to remove the context from the cache and rebuild
+abstract class AbstractIntegrationTest {
+
+}
+```
+
+- Developers tend to consult AI/StackOverflow for integration test issues and often copy this over without knowing the implications
 
 ---
 
@@ -604,7 +647,7 @@ A Spring Test utility that provides visualization and insights for Spring Test e
 
 # Spring Boot Testing Best Practices
 
-![bg right:33%](assets/generated/best-practices.jpg)
+![bg right:33%](assets/best-practices.jpg)
 
 ---
 
@@ -664,7 +707,7 @@ Notes:
 
 # Common Spring Boot Testing Pitfalls to Avoid
 
-![bg right:33%](assets/generated/pitfalls.jpg)
+![bg right:33%](assets/pitfalls.jpg)
 
 ---
 
@@ -679,7 +722,7 @@ Notes:
 
 ## @SpringBootTest Obsession Visualized
 
-![](assets/generated/spring-boot-test-obsession.png)
+![](assets/spring-boot-test-obsession.png)
 
 ---
 
@@ -699,7 +742,7 @@ Notes:
 
 ## Testing Pitfall 3: JUnit 4 vs. JUnit 5
 
-![bg right:33%](assets/generated/car-comparison.jpg)
+![bg right:33%](assets/car-comparison.jpg)
 
 - You can mix both versions in the same project but not in the same test class
 - Browsing through the internet (aka. StackOverflow/blogs/LLMs) for solutions, you might find test setups that are still for JUnit 4
@@ -743,7 +786,7 @@ Notes:
 
 ## What's Next?
 
-![bg h:1200 right:33%](assets/generated/offers-w.png)
+![bg h:1200 right:33%](assets/offers-w.png)
 
 
 - Online Course: [Testing Spring Boot Applications Masterclass](https://rieckpil.de/testing-spring-boot-applications-masterclass/) (on-demand, 12 hours, 130+ modules)
@@ -756,13 +799,13 @@ Notes:
 
 ## Don't Leave Empty-Handed
 
-![bg right:33%](assets/generated/spring-boot-testing-book-cover.png)
+![bg right:33%](assets/spring-boot-testing-book-cover.png)
 
 - Get the **Testing Spring Boot Applications Demystified eBook** for free
 - 120+ Pages with hands-on advice to ship code with confidence
 - Scan the QR code below to get the free eBook by [joining our newsletter](https://rieckpil.de/free-spring-boot-testing-book/)
 
-![center h:200 w:200](assets/generated/newsletter-signup-qr.png)
+![center h:200 w:200](assets/newsletter-signup-qr.png)
 
 ---
 
@@ -771,7 +814,7 @@ Notes:
 
 ## Joyful Testing!
 
-![bg right:33%](assets/generated/end.jpg)
+![bg right:33%](assets/end.jpg)
 
 Reach out any time via
 - [LinkedIn](https://www.linkedin.com/in/rieckpil) (Philip Riecks)
