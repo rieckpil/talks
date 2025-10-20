@@ -11,7 +11,14 @@ header: 'Testing Spring Boot Applications Demystified @ JUG Zürich 21.10.2025'
 
 
 ---
+<!--
 
+Notes:
+
+- Despite having AI, who still wirtes test by hand
+- and who enjoys it? -> I do and hope I can change that for some of you today
+
+-->
 <!-- _class: title -->
 ![bg h:500 left:33%](assets/demystify.png)
 
@@ -31,9 +38,6 @@ Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](htt
 <!--
 
 
-Notes:
-
-- Raise hands if you enjoy writing tests -> I do and hope I can change that for some of you today
 -->
 
 ![bg left](assets/starting.jpg)
@@ -926,7 +930,7 @@ Notes:
 
 ## Don't Leave Empty-Handed
 
-![bg right:33%](assets/spring-boot-testing-book-cover.png)
+![bg h:720 w:450 right:33%](assets/spring-boot-testing-book-cover.png)
 
 - Get the **Testing Spring Boot Applications Demystified eBook** for free
 - 120+ Pages with hands-on advice to ship code with confidence
