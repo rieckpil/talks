@@ -6,7 +6,6 @@ header {
   text-align: center;
 }
 
-
 pre ol {
   all: unset;
   display: grid;
@@ -18,12 +17,18 @@ pre ol li {
   display: contents;
 }
 
-/*pre ol li span[data-marp-line-number]::before {*/
-/*  display: block;*/
-/*  content: counter(line-number) ': ';*/
-/*  counter-increment: line-number;*/
-/*  text-align: right;*/
-/*}*/
+
+img[alt~="center"] {
+  display: block;
+  margin: 0 auto;
+}
+
+pre ol li span[data-marp-line-number]::before {
+  display: block;
+  content: counter(line-number) ' ';
+  counter-increment: line-number;
+  text-align: right;
+}
 
 pre .highlighted-line > * {
   background-color: #ff6;

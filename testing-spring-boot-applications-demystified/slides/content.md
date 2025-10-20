@@ -80,10 +80,10 @@ Notes:
 
 ![bg right:33%](assets/hza.jpg)
 
-## About
+## About Philip
 
-- Self-employed IT consultant from Herzogenaurach, Germany (Bavaria) 🍻
-- Blogging & content creation for more than five years. Since three years with a focus on testing Java and specifically Spring Boot applications 🍃
+- Self-employed developer from Herzogenaurach, Germany (Bavaria) 🍻
+- Blogging & content creation with a focus on testing Java and specifically Spring Boot applications 🍃
 - Founder of PragmaTech GmbH - Enabling Developers to Frequently Deliver Software with More Confidence 🚤
 - Enjoys writing tests 🧪
 - @rieckpil on various platforms
@@ -108,6 +108,15 @@ Notes:
 
 ---
 
+<!--
+
+Notes:
+- Not because a definition of done says "all tests must pass"
+- Not to reach a coverage goal
+
+
+-->
+
 ![bg right:33%](assets/why-test-software.jpg)
 
 # Why Test Software?
@@ -131,42 +140,44 @@ Good tests don't just catch bugs - they give you the confidence to say "yes" wit
 
 ## Why Test Software? (continued)
 
-- Shift Left
-- Confidence in Code Changes
-- Catch Bugs Early
-- Documentation
-- Regression Prevention
-- Become more Productive
-- Use Tests as a Playground to Explore New Technologies
+- **Shift Left** - Catch issues earlier than the customers
+- **Confidence in Code Changes** - Help new team members to onboard faster
+- **Catch Bugs Early** - Reduce the ($) cost of bugs in production
+- **Documentation** - Single point of truth for implemented business logic
+- **Regression Prevention** - Prevent existing functionality from breaking
+- **Become more Productive** - Enable faster development cycles
+- **Use it as a  Playground** - Explore new technologies via tests
 ---
 
 ![bg left:33%](assets/101.jpg)
 
 # Spring Boot Testing 101
 
----
+[//]: # (---)
 
-<style>
-img[alt~="center"] {
-  display: block;
-  margin: 0 auto;
-}
-</style>
+[//]: # ()
+[//]: # ()
+[//]: # (## Naming Things Is Hard)
 
-## Naming Things Is Hard
+[//]: # ()
+[//]: # (![h:700 center]&#40;assets/cloud.svg&#41;)
 
-![h:700 center](assets/cloud.svg)
+[//]: # ()
+[//]: # (---)
 
----
+[//]: # ()
+[//]: # (## My Pragmatic Test Name Approach)
 
-## My Pragmatic Test Name Approach
+[//]: # ()
+[//]: # (1. **Unit Tests**: Tests that verify the functionality of a single, isolated component &#40;like a method or class&#41; by mocking or stubbing all external dependencies.)
 
-1. **Unit Tests**: Tests that verify the functionality of a single, isolated component (like a method or class) by mocking or stubbing all external dependencies.
+[//]: # ()
+[//]: # (2. **Integration Tests**: Tests that verify interactions between two or more components work correctly together, with real implementations replacing some mocks.)
 
-2. **Integration Tests**: Tests that verify interactions between two or more components work correctly together, with real implementations replacing some mocks.
-<br/>
+[//]: # (<br/>)
 
-3. **E2E** (End-to-End): Tests that validate the entire application workflow from start to finish, simulating real user scenarios across all components and external dependencies.
+[//]: # ()
+[//]: # (3. **E2E** &#40;End-to-End&#41;: Tests that validate the entire application workflow from start to finish, simulating real user scenarios across all components and external dependencies.)
 
 ---
 
@@ -174,9 +185,32 @@ img[alt~="center"] {
 
 ![bg h:500 right](assets/lifecycle.svg)
 
-- **Maven Surfire Plugin** for unit tests: default postfix  `*Test` (e.g. `CustomerTest`)
+- **Maven Surefire Plugin** for unit tests: default postfix  `*Test` (e.g. `CustomerTest`)
 - **Maven Failsafe Plugin** for integration tests: default postfix `*IT` (e.g. `CheckoutIT`)
 - Reason for splitting: different **parallelization** options, better **organisation**
+
+---
+
+
+### Gradle Build Lifecycle
+
+- Unit tests are run during the `test` task
+- To separate integration tests, we need a custom Gradle task, as this structure is **not part** of default Gradle lifecycle
+- We [need to configure](https://docs.gradle.org/current/userguide/java_testing.html#sec:configuring_java_integration_tests) the `integrationTest` task manually in our `build.gradle`:
+
+```groovy
+// Sample configuration from the Gradle docs
+tasks.register('integrationTest', Test) {
+  description = 'Runs integration tests.'
+  group = 'verification'
+
+  // ...
+  shouldRunAfter test
+
+  useJUnitPlatform()
+}
+```
+
 
 ---
 
@@ -283,41 +317,6 @@ Tips:
 ---
 ### Avoid Static Method Access
 
-```java
-@Service
-public class BirthdayService {
-
-  public boolean isTodayBirthday(LocalDate birthday) {
-    LocalDate today = LocalDate.now();
-
-    return today.getMonth() == birthday.getMonth()
-      && today.getDayOfMonth() == birthday.getDayOfMonth();
-  }
-}
-```
-
----
-
-### Better Alternative
-
-```java
-@Service
-public class BirthdayServiceWithClock {
-
-  private final Clock clock;
-
-  public BirthdayServiceWithClock(Clock clock) {
-    this.clock = clock;
-  }
-
-  public boolean isTodayBirthday(LocalDate birthday) {
-    LocalDate today = LocalDate.now(clock);
-
-    return today.getMonth() == birthday.getMonth()
-      && today.getDayOfMonth() == birthday.getDayOfMonth();
-  }
-}
-```
 
 ---
 
@@ -388,13 +387,13 @@ void should_When_() {
 
 ## Unit Testing Has Limits
 
-- **Request Mapping**: Does `/api/users/{id}` actually resolve to your desired method?
+Writing a unit test for our web layer (`UserController`) might not cover all aspects:
+
+- **Request Mapping**: Does `/api/users/{id}` actually resolve to our desired method?
 - **Validation**: Will incomplete request bodys result in a 400 bad request or return an accidental 200?
-- **Serialization**: Are your JSON objects serialized and deserialized correctly?
-- **Headers**: Are you setting Content-Type or custom headers correctly?
-- **Security**: Are your Spring Security configuration and other authorization checks enforced?
-- **Database**: Can we effectively map our complex JPA entity to a database table?
-- etc.
+- **Serialization**: Are we JSON objects serialized and deserialized correctly?
+- **Headers**: Are we setting `Content-Type` or custom headers correctly?
+- **Security**: Are we Spring Security configuration and other authorization checks enforced?
 
 ---
 
