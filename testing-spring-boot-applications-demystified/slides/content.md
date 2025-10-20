@@ -308,9 +308,9 @@ Tips:
 
 ## Unit Testing with Spring Boot
 
-- Provide collaborators from outside (dependency injection) -> no `new` inside your code
+- Provide collaborators from outside (dependency injection) -> no `new` inside our code
 - Develop small, single responsibility classes
-- Test only the public API of your class
+- Test only the public API of our class
 - Verify behavior not implementation details
 - TDD can help design (better) classes
 
@@ -343,7 +343,7 @@ void shouldReturnTrueWhenTodayIsBirthday() {
 
 ---
 
-### Check Your Imports
+### Check the Imports
 
 - Nothing Spring-related here
 - Rely only on JUnit, Mockito and an assertion library
@@ -429,7 +429,7 @@ Notes:
 
 ## Slicing Example: @WebMvcTest
 
-- Testing your web layer in isolation and only load the beans you need
+- Testing the web layer in isolation and only load the beans we need
 - `MockMvc`: Mocked servlet environment with HTTP semantics
 
 ```java
@@ -492,9 +492,57 @@ Notes:
 
 ---
 
-## Version 1:
+## Provide External Infrastructure with Testcontainers
+
+Running infrastructure components (databases, message brokers, etc.) in Docker containers for our tests becomes a breeze with Testcontainers:
 
 ```java
+@Container
+@ServiceConnection
+static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:16-alpine")
+  .withDatabaseName("testdb")
+  .withUsername("test")
+  .withPassword("test")
+  .withInitScript("init-postgres.sql");
+```
+
+This gives us an ephemeral PostgreSQL database for our tests:
+
+```shell {3}
+$ docker ps
+CONTAINER ID   IMAGE                        COMMAND                  CREATED          STATUS         PORTS                                           NAMES
+a958ee2887c6   postgres:16-alpine           "docker-entrypoint.s…"   10 seconds ago   Up 9 seconds   0.0.0.0:32776->5432/tcp, [::]:32776->5432/tcp   affectionate_cannon
+ad0f804068dc   testcontainers/ryuk:0.12.0   "/bin/ryuk"              10 seconds ago   Up 9 seconds   0.0.0.0:32775->8080/tcp, [::]:32775->8080/tcp   testcontainers-ryuk-1f9f76a6-46d4-4e19-85c1-e8364da12804
+```
+
+---
+
+## Stub External HTTP Services with WireMock
+
+Consider [WireMock](http://wiremock.org/) to stub external HTTP services during tests.
+
+- Run as in-memory service or Docker container to simulate connected HTTP services
+- Simulate failures, slow responses, etc.
+- Stateful setups possible (scenarios): first request fails, then succeeds
+- Override HTTP clients to connect to the WireMock server during tests
+
+```java
+wireMockServer.stubFor(
+  get(urlPathEqualTo("/api/books/" + isbn))
+    .willReturn(aResponse()
+      .withHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+      .withBodyFile("book-response-success.json"))
+);
+```
+
+---
+
+## Starting the Entire Spring Context - Version 1
+
+
+- We access the application over HTTP like a user, the test and context run in separate threads (no `@Transactional` rollback), requires HTTP authentication
+
+```java {1}
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class ApplicationServletContainerIT {
 
@@ -514,13 +562,14 @@ class ApplicationServletContainerIT {
 }
 ```
 
-- Access over HTTP like a user, separate threads, requires authentication
-
 ---
 
-## Version 2:
+## Starting the Entire Spring Context - Version 1
 
-```java
+- The test and the context run in the same thread, hence we can rollback with `@Transactional` and simply override the security context with `@WithMockUser`
+
+
+```java {1,3}
 @SpringBootTest
 // which is @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 @AutoConfigureMockMvc
@@ -542,7 +591,6 @@ class ApplicationMockWebIT {
 }
 ```
 
-- Same thread, we can rollback with `@Transactional`, simply overide the security context with `@WithMockUser`
 
 ---
 <!--
@@ -551,14 +599,14 @@ class ApplicationMockWebIT {
 
 -->
 
-## The Need for Speed: Spring Test `TestContext` Caching
+## The Need for Speed: Speed up Build Times with Context Caching
 
-- Part of Spring Test (automatically part of every Spring Boot project via `spring-boot-starter-test`)
+- **The** **problem**: Integration tests require a started & initialized Spring `ApplicationContext`, which can be slow
+- **The** **solution**: Spring Test `TestContext` caching
+- This feature is part of Spring Test (part of every Spring Boot project via `spring-boot-starter-test`)
 - Spring Test caches an already started Spring `ApplicationContext` for later reuse
-- Cache retrieval is usually faster than a cold context start
-- Configurable cache size (default is 32) with LRU (least recently used) strategy
 
-Speed up your build:
+Speed improvement example:
 
 ![](assets/context-cache-improvements.png)
 
@@ -572,6 +620,12 @@ Speed up your build:
 
 ## How the Cache Key is Built
 
+```java
+// DefaultContextCache.java
+private final Map<MergedContextConfiguration, ApplicationContext> contextMap =
+  Collections.synchronizedMap(new LruCache(32, 0.75f));
+```
+
 This goes into the cache key (`MergedContextConfiguration`):
 
 - activeProfiles (`@ActiveProfiles`)
@@ -581,24 +635,24 @@ This goes into the cache key (`MergedContextConfiguration`):
 - contextCustomizer (`@MockitoBean`, `@MockBean`, `@DynamicPropertySource`, ...)
 
 ---
-## Identify Context Restarts
+## Identify Context Restarts - Visually
 
 ![](assets/context-caching-hints.png)
 
 
 ---
 
-## Investigate the Logs
+## Identify Context Restarts - with Logs
 
 ![](assets/context-caching-logs.png)
 
 ---
 
-## Spring Test Profiler
+## Identify Context Restarts - with Tools
 
 ![center](assets/spring-test-profiler-logo.png)
 
-A Spring Test utility that provides visualization and insights for Spring Test execution, with a focus on Spring context caching statistics.
+An [open-source Spring Test utility](https://github.com/PragmaTech-GmbH/spring-test-profiler) that provides visualization and insights for Spring Test execution, with a focus on Spring context caching statistics.
 
 **Overall goal**: Identify optimization opportunities in your Spring Test suite to speed up your builds and ship to production faster and with more confidence.
 
@@ -610,37 +664,62 @@ A Spring Test utility that provides visualization and insights for Spring Test e
 
 ---
 
-## Outlook to Spring Framework 7
-
-> Pausing of Test Application Contexts
-
-The Spring TestContext framework is caching application context instances within test suites for faster runs. As of Spring Framework 7.0, we now pause test application contexts when they're not used. This means an application context stored in the context cache will be stopped when it is no longer actively in use and automatically restarted the next time the context is retrieved from the cache. Specifically, the latter will restart all auto-startup beans in the application context, effectively restoring the lifecycle state.
-
-See the release notes of [Spring Framework 7.0.0 M7](https://spring.io/blog/2025/07/17/spring-framework-7-0-0-M7-available-now).
-
----
 
 ## The Final Boss
 
+Developers tend to consult AI/StackOverflow for integration test issues and often copy advice from the internet without knowing the implications:
+
 ```java
-@DirtiesContext // this instructs Spring to remove the context from the cache and rebuild
-abstract class AbstractIntegrationTest {
+@SpringBootTest
+@DirtiesContext
+// this instructs Spring to remove the context from the cache
+// and rebuild a new context on every request
+public abstract class AbstractIntegrationTest {
 
 }
 ```
 
-- Developers tend to consult AI/StackOverflow for integration test issues and often copy this over without knowing the implications
+The setup above will **disable** the context caching feature and slow down the builds significantly!
+
+---
+
+
+## Outlook to Spring Framework 7: Pausing of Test Contexts
+
+See the release notes of [Spring Framework 7.0.0 M7](https://spring.io/blog/2025/07/17/spring-framework-7-0-0-M7-available-now).
+
+> Pausing of Test Application Contexts
+>
+> The Spring TestContext framework is caching application context instances within test suites for faster runs. As of Spring Framework 7.0, we now pause test application contexts when
+> they're not used.
+>
+> This means an application context stored in the context cache will be stopped when it is no longer actively in use and automatically restarted the next time the
+> context is retrieved from the cache.
+>
+> Specifically, the latter will restart all auto-startup beans in the application context, effectively restoring the lifecycle state.
+
 
 ---
 
 ## Make the Most of the Caching Feature
 
 
-- Avoid `@DirtiesContext` when possible, especially at `AbstractIntegrationTest` classes
+- Avoid `@DirtiesContext` when possible, especially central places
 - Understand how the cache key is built
 - Monitor and investigate the context restarts
 - Align the number of unique context configurations for your test suite
 
+---
+
+## E2E Testing - the Holy Grail of Confidence
+
+![bg right:33%](assets/prod-example.jpg)
+
+- For applications involving a UI consider tools like Selenium, Selenide, Cypress, Playwright, etc.
+- Detect issues that only appear in production-like environments, also for downstream systems
+- Start with a QA/DEV environment
+- Consider Canary Testing and run your E2E tests regularly with a cron-like setup
+- Challenges: authentication, test data management, environment stability, flakiness
 
 ---
 
@@ -680,12 +759,12 @@ Notes:
 
 ### Best Practice 2: Get Help from AI
 
-- [Diffblue Cover](https://www.diffblue.com/): #1 AI Agent for unit testing complex Java code at scale
+- [Diffblue Cover](https://www.diffblue.com/): AI Agent for unit testing complex (Spring Boot) Java code at scale
 - Agent vs. Assistant
 - LLMs: ChatGPT, Claude, Gemini, etc.
 - Claude Code
 - TDD with an LLM?
-- (Not AI but still useful) OpenRewrite for migrations
+- (Not AI but still useful) OpenRewrite for [automatic code migrations](https://docs.openrewrite.org/recipes/java/testing) (e.g. JUnit 4 -> JUnit 5)
 - Clearly define your requirements in e.g. `claude.md` or cursor rule files
 
 ---
@@ -694,9 +773,8 @@ Notes:
 
 - Having high code coverage might give you a **false sense of security**
 - Mutation Testing with [PIT](https://pitest.org/quickstart/)
-- Beyond Line Coverage: Traditional tools like JaCoCo show which code runs during tests, but PIT verifies if your tests actually detect when code behaves incorrectly by introducing "**mutations**" to your source code.
-- Quality Guarantee: PIT automatically modifies your code (changing conditionals, return values, etc.) to ensure your tests fail when they should, **revealing blind spots** in seemingly comprehensive test suites.
-- Considerations for bigger projects: only run on the new code diffs, not on the whole codebase
+- Beyond Line Coverage: Traditional tools like JaCoCo show which code runs during tests, but PIT verifies if our tests actually detect when code behaves incorrectly by introducing "**mutations**" to our source code.
+- Quality Guarantee: PIT automatically **modifies our code** (changing conditionals, return values, etc.) to ensure our tests fail when they should, **revealing blind spots** in seemingly comprehensive test suites.
 
 ---
 
@@ -776,10 +854,10 @@ Notes:
 
 - Spring Boot applications come with batteries-included for testing
 - Spring and Spring Boot provides many excellent testing features
-- Mature & rich Java testing ecosystem
+- Java provides a mature & rich testing ecosystem
 - Consider the context caching feature for fast builds
 - Get help from AI
-- Still many new features are coming: `@ServiceConnection`, Testcontainers support, Docker Compose support, more AssertJ integrations, etc.
+- Still many new testing-related features are part of new releases: pausing a `TestContext`, `@ServiceConnection`, Testcontainers support, Docker Compose support, more AssertJ integrations, etc.
 
 ---
 
@@ -792,7 +870,7 @@ Notes:
 - eBook: [30 Testing Tools and Libraries Every Java Developer Must Know](https://leanpub.com/java-testing-toolbox)
 - eBook: [Stratospheric - From Zero to Production with AWS](https://leanpub.com/stratospheric)
 - Spring Boot [testing workshops](https://pragmatech.digital/workshops/) (in-house/remote/hybrid)
-- [Consulting offerings](https://pragmatech.digital/consulting/), e.g. the Test Maturity Assessment for your team
+- [Consulting offerings](https://pragmatech.digital/consulting/), e.g. the Test Maturity Assessment for teams
 
 ---
 
@@ -814,6 +892,10 @@ Notes:
 ## Joyful Testing!
 
 ![bg right:33%](assets/end.jpg)
+
+Get the Spring Boot Testing eBook here:
+
+![center h:200 w:200](assets/newsletter-signup-qr.png)
 
 Reach out any time via
 - [LinkedIn](https://www.linkedin.com/in/rieckpil) (Philip Riecks)
