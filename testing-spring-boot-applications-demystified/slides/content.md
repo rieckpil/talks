@@ -306,6 +306,20 @@ Tips:
 
 ---
 
+## Unit Testing Spring Boot Applications 101
+
+- **Core Concept**: Test individual components (classes, methods) in complete isolation from their dependencies.
+
+- **Confidence Gained**: Provides logarithmic verifications, ensuring that the smallest parts of your code work as expected under various conditions.
+
+- **Best Practices**: Focus on a single unit of work.
+
+- **Pitfalls**: Requires a well-thought-out class design. Poor design can lead to testing overly complex "god classes," making tests difficult to write and maintain.
+
+- **Tools**: JUnit (or Spock, TestNG, etc.), Mockito and assertion libraries like AssertJ or Hamcrest.
+
+---
+
 ## Unit Testing with Spring Boot
 
 - Provide collaborators from outside (dependency injection) -> no `new` inside our code
@@ -315,35 +329,8 @@ Tips:
 - TDD can help design (better) classes
 
 ---
-### Avoid Static Method Access
 
-
----
-
-```java
-@Test
-void shouldReturnTrueWhenTodayIsBirthday() {
-  // Arrange
-  LocalDate fixedDate = LocalDate.of(2025, 5, 15);
-  Clock fixedClock = Clock.fixed(
-    fixedDate.atStartOfDay(ZONE_ID).toInstant(),
-    ZONE_ID
-  );
-
-  BirthdayServiceWithClock cut = new BirthdayServiceWithClock(fixedClock);
-  LocalDate birthday = LocalDate.of(1990, 5, 15); // Same month and day
-
-  // Act
-  boolean result = cut.isTodayBirthday(birthday);
-
-  // Assert
-  assertThat(result).isTrue();
-}
-```
-
----
-
-### Check the Imports
+## Check the Imports
 
 - Nothing Spring-related here
 - Rely only on JUnit, Mockito and an assertion library
@@ -385,6 +372,38 @@ void should_When_() {
 
 ---
 
+```java
+@ExtendWith(MockitoExtension.class)
+class CustomerServiceTest {
+
+  @Mock
+  private CustomerRepository customerRepository;
+
+  @InjectMocks
+  private CustomerService customerService;
+
+  @Test
+  void shouldCreateNewCustomerWhenNameDoesNotExist() {
+
+    when(customerRepository.findByCustomerName("duke"))
+      .thenReturn(Optional.empty());
+
+    when(customerRepository.save(any(CustomerEntity.class)))
+      .thenAnswer(invocation -> {
+        CustomerEntity storedCustomer = invocation.getArgument(0);
+        storedCustomer.setId("42");
+        return storedCustomer;
+      });
+
+    String customerId = customerService.createNewCustomer("duke");
+
+    assertThat(customerId).isEqualTo("42");
+  }
+}
+```
+
+---
+
 ## Unit Testing Has Limits
 
 Writing a unit test for our web layer (`UserController`) might not cover all aspects:
@@ -413,11 +432,31 @@ Notes:
 
 ## A Typical Spring Application Context
 
-![w:600 center](assets/spring-context.png)
+Our application context consists of many components (aka. Spring beans) from different types:
+
+
+![w:400 h:400 center](assets/spring-context.png)
 
 ---
 
-![w:700 center](assets/spring-sliced-context.png)
+## We Can Slice It!
+
+
+![w:600 h:500 center](assets/spring-sliced-context.png)
+
+---
+
+## Sliced Testing Spring Boot Applications 101
+
+- **Core Concept**: Test a specific "slice" or layer of your application by loading a minimal, relevant part of the Spring `ApplicationContext`.
+
+- **Confidence Gained**: Helps validate parts of your application where pure unit testing is insufficient, like the web, messaging, or data layer.
+
+- **Prominent Examples:** Web layer (`@WebMvcTest`) and database layer (`@DataJpaTest`)
+
+- **Pitfalls**: Requires careful configuration to ensure only the necessary slice of the context is loaded.
+
+- **Tools**: JUnit, Mockito, Spring Test, Spring Boot, Testcontainers
 
 ---
 
@@ -427,14 +466,14 @@ Notes:
 
 ---
 
-## Slicing Example: @WebMvcTest
+## Slicing Example: `@WebMvcTest`
 
 - Testing the web layer in isolation and only load the beans we need
 - `MockMvc`: Mocked servlet environment with HTTP semantics
+- See `WebMvcTypeExcludeFilter` for included Spring beans
 
 ```java
 @WebMvcTest(CustomerController.class)
-@Import(SecurityConfig.class)
 class CustomerControllerTest {
 
   @Autowired
@@ -445,8 +484,6 @@ class CustomerControllerTest {
 
 }
 ```
-
-- See `WebMvcTypeExcludeFilter` for included Spring beans
 
 ---
 
@@ -479,6 +516,20 @@ Notes:
 -->
 
 ![](assets/spring-boot-test-setup.png)
+
+---
+
+## Integration Testing Spring Boot Applications 101
+
+- **Core Concept**: Start the entire Spring application context, often on a random local port, and test the application through its external interfaces (e.g., REST API).
+
+- **Confidence Gained**: Validates the integration of all internal components working together as a complete application.
+
+- **Best Practices**: Use `@SpringBootTest` to run the app on a local port.
+
+- **Pitfalls**: Slower to run than unit or sliced tests. Managing the lifecycle of dependent services can be complex.
+
+- **Tools**: JUnit, Mockito, Spring Test, Spring Boot, Testcontainers, WireMock (for mocking external HTTP services), Selenium (for browser-based UI testing)
 
 ---
 
@@ -564,7 +615,7 @@ class ApplicationServletContainerIT {
 
 ---
 
-## Starting the Entire Spring Context - Version 1
+## Starting the Entire Spring Context - Version 2
 
 - The test and the context run in the same thread, hence we can rollback with `@Transactional` and simply override the security context with `@WithMockUser`
 
@@ -601,10 +652,9 @@ class ApplicationMockWebIT {
 
 ## The Need for Speed: Speed up Build Times with Context Caching
 
-- **The** **problem**: Integration tests require a started & initialized Spring `ApplicationContext`, which can be slow
-- **The** **solution**: Spring Test `TestContext` caching
+- **The** **problem**: Integration tests require a started & initialized Spring `ApplicationContext`, which takes time to start
+- **The** **solution**: Spring Test `TestContext` caching, caches an already started Spring `ApplicationContext` for later reuse
 - This feature is part of Spring Test (part of every Spring Boot project via `spring-boot-starter-test`)
-- Spring Test caches an already started Spring `ApplicationContext` for later reuse
 
 Speed improvement example:
 
@@ -870,7 +920,7 @@ Notes:
 - eBook: [30 Testing Tools and Libraries Every Java Developer Must Know](https://leanpub.com/java-testing-toolbox)
 - eBook: [Stratospheric - From Zero to Production with AWS](https://leanpub.com/stratospheric)
 - Spring Boot [testing workshops](https://pragmatech.digital/workshops/) (in-house/remote/hybrid)
-- [Consulting offerings](https://pragmatech.digital/consulting/), e.g. the Test Maturity Assessment for teams
+- [Consulting offerings](https://pragmatech.digital/consulting/), e.g. the Test Maturity Assessment for projects/teams
 
 ---
 

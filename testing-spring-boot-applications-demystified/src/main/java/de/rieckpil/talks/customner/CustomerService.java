@@ -1,9 +1,11 @@
 package de.rieckpil.talks.customner;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
+import de.rieckpil.talks.discount.Customer;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,8 +17,17 @@ public class CustomerService {
     this.customerRepository = customerRepository;
   }
 
-  public Long createNewCustomer(ObjectNode payload) {
-    return 42L;
+  public String createNewCustomer(String customerName) {
+
+    Optional<CustomerEntity> existingCustomer = customerRepository.findByCustomerName(customerName);
+
+    if (existingCustomer.isPresent()) {
+      throw new IllegalArgumentException("Customer already exists");
+    }
+
+    CustomerEntity createdCustomer = this.customerRepository.save(new CustomerEntity(customerName));
+
+    return createdCustomer.getId();
   }
 
   public void notifyAllCustomers() {

@@ -29,7 +29,7 @@ public class CustomerController {
     @RequestBody ObjectNode payload,
     UriComponentsBuilder uriComponentsBuilder) {
 
-    Long customerId = customerService.createNewCustomer(payload);
+    String customerId = customerService.createNewCustomer(payload.get("first_name").asText());
 
     UriComponents uriComponents = uriComponentsBuilder.path("/api/customers/{id}")
       .buildAndExpand(customerId);

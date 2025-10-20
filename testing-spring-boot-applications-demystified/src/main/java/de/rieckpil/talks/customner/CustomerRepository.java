@@ -1,10 +1,12 @@
 package de.rieckpil.talks.customner;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import de.rieckpil.talks.discount.Customer;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -29,6 +31,15 @@ public class CustomerRepository {
           .put("id", UUID.randomUUID().toString())
           .put("name", "duke")
       );
+  }
+
+  public Optional<CustomerEntity> findByCustomerName(String customerName) {
+    return Optional.empty();
+  }
+
+  public CustomerEntity save(CustomerEntity customer) {
+    customer.setId(UUID.randomUUID().toString());
+    return customer;
   }
 }
 
