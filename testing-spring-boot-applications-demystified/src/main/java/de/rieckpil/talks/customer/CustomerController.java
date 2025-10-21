@@ -1,11 +1,9 @@
-package de.rieckpil.talks.customner;
-
-import java.util.UUID;
+package de.rieckpil.talks.customer;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,10 +24,10 @@ public class CustomerController {
 
   @PostMapping
   public ResponseEntity<Void> createNewCustomer(
-    @RequestBody ObjectNode payload,
+    @Validated @RequestBody CustomerCreationRequest payload,
     UriComponentsBuilder uriComponentsBuilder) {
 
-    String customerId = customerService.createNewCustomer(payload.get("first_name").asText());
+    String customerId = customerService.createNewCustomer(payload.firstName());
 
     UriComponents uriComponents = uriComponentsBuilder.path("/api/customers/{id}")
       .buildAndExpand(customerId);

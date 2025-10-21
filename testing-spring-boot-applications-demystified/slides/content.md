@@ -102,12 +102,11 @@ Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](htt
 - Introduction
 - Why Test Software?
 - Testing with Spring Boot
-  - Spring Boot Testing 101
-  - Unit Testing
+  - Spring Boot Testing 101 & Unit Testing
   - Sliced Testing
-  - Integration Testing
+  - Integration & E2E Testing
 - Spring Boot Testing Best Practices
-- Common Spring Boot Testing Pitfalls to Avoid
+- Common Spring Boot Testing Pitfalls
 - Summary & Outlook
 
 ---
@@ -153,9 +152,9 @@ Good tests don't just catch bugs - they give you the confidence to say "yes" wit
 - **Use it as a  Playground** - Explore new technologies via tests
 ---
 
-![bg left:33%](assets/101.jpg)
+![bg right:33%](assets/101.jpg)
 
-# Spring Boot Testing 101
+# Spring Boot Testing 101 & Unit Testing
 
 [//]: # (---)
 
@@ -420,7 +419,7 @@ Writing a unit test for our web layer (`UserController`) might not cover all asp
 
 ---
 
-# Sliced Testing with Spring Boot
+# Sliced Testing
 
 <!--
 
@@ -434,9 +433,9 @@ Notes:
 
 ---
 
-## A Typical Spring Application Context
+## A Typical Spring `ApplicationContext`
 
-Our application context consists of many components (aka. Spring beans) from different types:
+Our application context consists of many different components (Spring beans):
 
 
 ![w:400 h:400 center](assets/spring-context.png)
@@ -445,6 +444,7 @@ Our application context consists of many components (aka. Spring beans) from dif
 
 ## We Can Slice It!
 
+Spring Boot allows to load only specific parts (slices) of the application context:
 
 ![w:600 h:500 center](assets/spring-sliced-context.png)
 
@@ -466,7 +466,9 @@ Our application context consists of many components (aka. Spring beans) from dif
 
 ## Slicing in Action
 
-![](assets/slicing-in-action.png)
+We need to provide beans that are not part of the slice:
+
+![h:450 w:1200](assets/slicing-in-action.png)
 
 ---
 
@@ -505,7 +507,7 @@ class CustomerControllerTest {
 
 ---
 
-# Integration Testing with Spring Boot
+# Integration Testing
 
 ![bg right:33%](assets/full.jpg)
 
@@ -549,7 +551,7 @@ Notes:
 
 ## Provide External Infrastructure with Testcontainers
 
-Running infrastructure components (databases, message brokers, etc.) in Docker containers for our tests becomes a breeze with Testcontainers:
+Running infrastructure components (databases, message brokers, etc.) in Docker containers for our tests becomes a breeze with [Testcontainers](https://testcontainers.com/):
 
 ```java
 @Container
@@ -654,7 +656,7 @@ class ApplicationMockWebIT {
 
 -->
 
-## The Need for Speed: Speed up Build Times with Context Caching
+## The Need for Speed - Reduce Build Times with Context Caching
 
 - **The** **problem**: Integration tests require a started & initialized Spring `ApplicationContext`, which takes time to start
 - **The** **solution**: Spring Test `TestContext` caching, caches an already started Spring `ApplicationContext` for later reuse
@@ -667,6 +669,8 @@ Speed improvement example:
 ---
 
 ## Caching is King
+
+How the caching mechanism works:
 
 ![center](assets/cache.svg)
 
@@ -712,12 +716,6 @@ An [open-source Spring Test utility](https://github.com/PragmaTech-GmbH/spring-t
 
 ---
 
-## Spot the Issues for Context Caching
-
-![](assets/context-caching-bad.png)
-
----
-
 
 ## The Final Boss
 
@@ -734,6 +732,14 @@ public abstract class AbstractIntegrationTest {
 ```
 
 The setup above will **disable** the context caching feature and slow down the builds significantly!
+
+
+---
+
+## Spot the Issues for Context Caching
+
+![](assets/context-caching-bad.png)
+
 
 ---
 
@@ -814,12 +820,10 @@ Notes:
 ### Best Practice 2: Get Help from AI
 
 - [Diffblue Cover](https://www.diffblue.com/): AI Agent for unit testing complex (Spring Boot) Java code at scale
-- Agent vs. Assistant
-- LLMs: ChatGPT, Claude, Gemini, etc.
-- Claude Code
+- My go-to CLI code agent: Claude Code
 - TDD with an LLM?
 - (Not AI but still useful) OpenRewrite for [automatic code migrations](https://docs.openrewrite.org/recipes/java/testing) (e.g. JUnit 4 -> JUnit 5)
-- Clearly define your requirements in e.g. `claude.md` or cursor rule files
+- Clearly define your requirements in e.g. `claude.md` or Cursor rule files to adopt a common test structure
 
 ---
 
@@ -932,11 +936,9 @@ Notes:
 
 ![bg h:720 w:450 right:33%](assets/spring-boot-testing-book-cover.png)
 
-- Get the **Testing Spring Boot Applications Demystified eBook** for free
+- Get the complementary **Testing Spring Boot Applications Demystified eBook** for free
 - 120+ Pages with hands-on advice to ship code with confidence
-- Scan the QR code below to get the free eBook by [joining our newsletter](https://rieckpil.de/free-spring-boot-testing-book/)
-
-![center h:200 w:200](assets/newsletter-signup-qr.png)
+- Scan the **QR code on the next slide** to get the free eBook by joining our newsletter
 
 ---
 
@@ -947,11 +949,11 @@ Notes:
 
 ![bg right:33%](assets/end.jpg)
 
-Get the Spring Boot Testing eBook here:
+Get the Spring Boot Testing eBook [here](https://rieckpil.de/book):
 
 ![center h:200 w:200](assets/newsletter-signup-qr.png)
 
-Reach out any time via
+Reach out any time via:
 - [LinkedIn](https://www.linkedin.com/in/rieckpil) (Philip Riecks)
 - [X](https://x.com/rieckpil) (@rieckpil)
 - [Mail](mailto:philip@pragmatech.digital) (philip@pragmatech.digital)

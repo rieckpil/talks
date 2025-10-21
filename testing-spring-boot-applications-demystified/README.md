@@ -3,7 +3,7 @@
 ## Notes
 
 ```
-dcover create de.rieckpil.talks.customner.CustomerController
+dcover create de.rieckpil.talks.customer.CustomerController
 ```
 
 Example prompt to develop a feature TDD:
@@ -20,3 +20,6 @@ OpenRewrite:
 - https://docs.openrewrite.org/recipes/java/spring/boot3/replacemockbeanandspybean
 - https://docs.openrewrite.org/recipes/java/testing/junit5
 
+## Spring Test Profiler
+
+Report at `file:///Users/rieckpil/Development/git/spring-test-profiler/demo/spring-boot-3.5-maven/target/spring-test-profiler/latest.html`

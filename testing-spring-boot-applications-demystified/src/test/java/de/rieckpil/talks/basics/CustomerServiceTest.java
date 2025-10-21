@@ -2,9 +2,9 @@ package de.rieckpil.talks.basics;
 
 import java.util.List;
 
-import de.rieckpil.talks.customner.CustomerEntity;
-import de.rieckpil.talks.customner.CustomerRepository;
-import de.rieckpil.talks.customner.CustomerService;
+import de.rieckpil.talks.customer.CustomerEntity;
+import de.rieckpil.talks.customer.CustomerRepository;
+import de.rieckpil.talks.customer.CustomerService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

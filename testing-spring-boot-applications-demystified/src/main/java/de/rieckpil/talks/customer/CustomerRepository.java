@@ -1,4 +1,4 @@
-package de.rieckpil.talks.customner;
+package de.rieckpil.talks.customer;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,7 +6,6 @@ import java.util.UUID;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import de.rieckpil.talks.discount.Customer;
 import org.springframework.stereotype.Repository;
 
 @Repository

@@ -2,8 +2,8 @@ package de.rieckpil.talks.basics;
 
 
 import de.rieckpil.talks.config.SecurityConfig;
-import de.rieckpil.talks.customner.CustomerController;
-import de.rieckpil.talks.customner.CustomerService;
+import de.rieckpil.talks.customer.CustomerController;
+import de.rieckpil.talks.customer.CustomerService;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,13 +14,9 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -43,15 +39,15 @@ class CustomerControllerTest {
 
     this.mockMvc
       .perform(post("/api/customers")
-//        .with(SecurityMockMvcRequestPostProcessors.jwt())
-          .contentType(APPLICATION_JSON)
-          .content("""
-             {
-               "first_name": "Mike",
-               "last_name": "Doe",
-               "email": "john.doe@jug.ch"
-             }
-            """)
+        // .with(SecurityMockMvcRequestPostProcessors.user("user").roles("ADMIN", "USER"))
+        .contentType(APPLICATION_JSON)
+        .content("""
+           {
+             "firstName": "Mike",
+             "lastName": "Doe",
+             "email": "mike.doe@jug.ch"
+           }
+          """)
       )
       .andExpect(status().isCreated())
       .andExpect(header().string("Location",

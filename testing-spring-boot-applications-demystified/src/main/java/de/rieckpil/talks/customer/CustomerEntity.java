@@ -1,4 +1,4 @@
-package de.rieckpil.talks.customner;
+package de.rieckpil.talks.customer;
 
 public class CustomerEntity {
 
