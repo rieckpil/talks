@@ -24,7 +24,7 @@ npm install -g @marp-team/marp-cli
 To generate HTML slides that you can view in a browser:
 
 ```bash
-marp --html content.md --theme pragmatech.css
+marp --html content.md --theme pragmatech.css --engine engine.js
 ```
 
 This will create `marp-slides.html` in the current directory.
@@ -80,6 +80,35 @@ The slides use a custom PragmaTech theme defined in `pragmatech.css`. The theme 
 
 To reduce the size of the generated PDF, you can use the included image optimization scripts:
 
+### Quick Method: Generate Shareable PDF (Recommended)
+
+The easiest way to generate a shareable PDF with optimized images:
+
+```bash
+./generate_sharable_pdf.sh talk-abc-2025.pdf
+```
+
+This script will:
+1. Check if resized images exist in `assets/generated` (if not, prompts to run `resize_images.sh` first)
+2. Temporarily update image references in `content.md` to use resized images
+3. Generate the PDF with Marp using the specified filename
+4. Automatically restore the original `content.md` file
+
+**Usage:**
+```bash
+./generate_sharable_pdf.sh <output-pdf-name>
+
+# Examples:
+./generate_sharable_pdf.sh talk-jug-zurich-2025.pdf
+./generate_sharable_pdf.sh presentation.pdf
+```
+
+The script handles all the temporary modifications and cleanup automatically, so you don't have to worry about manually restoring your markdown file.
+
+### Manual Method: Step-by-Step
+
+If you prefer to do it manually or need more control:
+
 1. Resize and optimize all images:
 
 ```bash
@@ -102,7 +131,7 @@ This script updates all image references in `content.md` to point to the optimiz
 marp --pdf content.md --theme pragmatech.css --allow-local-files
 ```
 
-You can restore the original markdown file if needed:
+4. Restore the original markdown file:
 
 ```bash
 mv content.md.bak content.md

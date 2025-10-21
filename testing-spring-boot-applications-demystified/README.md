@@ -3,16 +3,23 @@
 ## Notes
 
 ```
-dcover create de.rieckpil.talks.CustomerController
+dcover create de.rieckpil.talks.customer.CustomerController
 ```
 
-Example TDD:
+Example prompt to develop a feature TDD:
 
 ```
-Following my TDD instructions, implement a Spring Boot Web REST API to fetch the stock price from a given company using their ticker symbol (e.g. MSTR), use the Spring WebClient and implement meaningful unit and integration tests in a test-driven manner
+For my CustomerController, please implement a HTTP PUT API to update existing
+customer entities.
+
+Make sure this can only be done by authenticated users with the "ADMIN" role.
 ```
 
 OpenRewrite:
 
 - https://docs.openrewrite.org/recipes/java/spring/boot3/replacemockbeanandspybean
 - https://docs.openrewrite.org/recipes/java/testing/junit5
+
+## Spring Test Profiler
+
+Report at `file:///Users/rieckpil/Development/git/spring-test-profiler/demo/spring-boot-3.5-maven/target/spring-test-profiler/latest.html`

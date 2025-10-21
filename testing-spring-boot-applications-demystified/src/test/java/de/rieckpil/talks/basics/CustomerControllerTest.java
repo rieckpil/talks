@@ -1,17 +1,15 @@
 package de.rieckpil.talks.basics;
 
 
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import de.rieckpil.talks.CustomerController;
-import de.rieckpil.talks.CustomerService;
 import de.rieckpil.talks.config.SecurityConfig;
+import de.rieckpil.talks.customer.CustomerController;
+import de.rieckpil.talks.customer.CustomerService;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -36,18 +34,18 @@ class CustomerControllerTest {
   @WithMockUser
   void shouldReturnLocationOfNewlyCreatedCustomer() throws Exception {
 
-    when(customerService.createNewCustomer(any(ObjectNode.class)))
-      .thenReturn(42L);
+    when(customerService.createNewCustomer(any(String.class)))
+      .thenReturn("42");
 
     this.mockMvc
       .perform(post("/api/customers")
-//        .with(SecurityMockMvcRequestPostProcessors.jwt())
+        // .with(SecurityMockMvcRequestPostProcessors.user("user").roles("ADMIN", "USER"))
         .contentType(APPLICATION_JSON)
         .content("""
            {
-             "first_name": "John",
-             "last_name": "Doe",
-             "email": "john.doe@devoxx.be"
+             "firstName": "Mike",
+             "lastName": "Doe",
+             "email": "mike.doe@jug.ch"
            }
           """)
       )
