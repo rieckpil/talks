@@ -31,6 +31,18 @@ _Java User Group St. Gallen 22.10.2025_
 Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](https://x.com/rieckpil)
 
 ---
+
+
+## Participate During the Talk & Win Prizes
+
+
+![bg h:1200 right:33%](assets/offers-w.png)
+
+Go to menti.com on your phone or laptop and use the code **2298 6846** to submit answers for the quizzes and add your questions during the talk.
+
+If you want to take part in the raffle, please add your first name and the first letter of your last name to each **text-filed submission** like "What's your preferred % for code coverage (Philip R.)" - not for the single choice questions.
+
+---
 <!-- paginate: false -->
 
 <!-- header: '' -->
@@ -48,7 +60,7 @@ Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](htt
 
 ---
 
-<!-- header: 'Testing Spring Boot Applications Demystified @ JUG St. Gallen 22.10.2025' -->
+<!-- header: 'JUG St. Gallen 22.10.2025 - Audience Questions, Raffle and Q&A @ menti.com Code: 2298 6846' -->
 <!-- footer: '![w:32 h:32](assets/logo.webp)' -->
 
 <!--
