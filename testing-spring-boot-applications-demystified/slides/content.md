@@ -505,7 +505,7 @@ Spring Boot allows to load only specific parts (slices) of the application conte
 
 ## Slicing in Action
 
-We need to provide beans that are not part of the slice:
+Spring Boot's test slice component scanning will only include relevant beans in the sliced context. We need to provide or mock beans that are not part of the slice:
 
 ![h:450 w:1200](assets/slicing-in-action.png)
 
