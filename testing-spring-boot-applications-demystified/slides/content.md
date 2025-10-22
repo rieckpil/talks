@@ -1,10 +1,10 @@
 ---
 marp: true
 theme: pragmatech
-header: 'Testing Spring Boot Applications Demystified @ JUG Zürich 21.10.2025'
+header: 'Testing Spring Boot Applications Demystified @ JUG St. Gallen 22.10.2025'
 ---
 
-![bg](./assets/zuerich-jug-ch.jpg)
+![bg](./assets/st-gallen-jug-ch.jpg)
 <!-- header: "" -->
 <!-- footer: ""-->
 
@@ -26,12 +26,12 @@ Notes:
 
 ## Best Practices, Common Pitfalls, and Real-World Strategies
 
-_Java User Group Zürich 21.10.2025_
+_Java User Group St. Gallen 22.10.2025_
 
 Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](https://x.com/rieckpil)
 
 ---
-<!-- paginate: true -->
+<!-- paginate: false -->
 
 <!-- header: '' -->
 <!-- footer: '' -->
@@ -48,7 +48,7 @@ Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](htt
 
 ---
 
-<!-- header: 'Testing Spring Boot Applications Demystified @ JUG Zürich 21.10.2025' -->
+<!-- header: 'Testing Spring Boot Applications Demystified @ JUG St. Gallen 22.10.2025' -->
 <!-- footer: '![w:32 h:32](assets/logo.webp)' -->
 
 <!--
@@ -333,26 +333,6 @@ Tips:
 
 ---
 
-## Check the Imports
-
-- Nothing Spring-related here
-- Rely only on JUnit, Mockito and an assertion library
-
-```java
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
-
-import static org.assertj.core.api.Assertions.assertThat;
-```
-
----
-
 ## Unify Test Structure
 
 - Use a consistent test method naming: givenWhenThen, shouldWhen, etc.
@@ -409,9 +389,68 @@ class CustomerServiceTest {
 
 ## Unit Testing Has Limits
 
-Writing a unit test for our web layer (`UserController`) might not cover all aspects:
+Consider this sample REST controller, what could we verify with a unit test?
 
-- **Request Mapping**: Does `/api/users/{id}` actually resolve to our desired method?
+```java
+@RestController
+@RequestMapping("/api/customers")
+public class CustomerController {
+
+  private final CustomerService customerService;
+
+  public CustomerController(CustomerService customerService) {
+    this.customerService = customerService;
+  }
+
+  @PostMapping
+  public ResponseEntity<Void> createNewCustomer(@Validated CustomerCreationRequest payload, UriComponentsBuilder uriBuilder) {
+
+    String customerId = customerService.createNewCustomer(payload.firstName());
+
+    UriComponents uriComponents = uriBuilder
+      .path("/api/customers/{id}")
+      .buildAndExpand(customerId);
+
+    return ResponseEntity.created(uriComponents.toUri()).build();
+  }
+}
+```
+
+---
+
+```java {15-18}
+@ExtendWith(MockitoExtension.class)
+class CustomerControllerUnitTests {
+
+  @Mock
+  private CustomerService customerService;
+
+  @InjectMocks
+  private CustomerController customerController;
+
+  @Test
+  void shouldCreateCustomerWhenPayloadRequestIsValid() {
+    when(customerService.createNewCustomer(anyString()))
+      .thenReturn("42");
+
+    ResponseEntity<Void> result = customerController.createNewCustomer(
+      new CustomerCreationRequest("Java", "Duke", "duke@jug.ch"),
+      UriComponentsBuilder.newInstance()
+    );
+
+    assertThat(result.getStatusCode().value())
+      .isEqualTo(201);
+    assertThat(result.getHeaders().getLocation().toString())
+      .isEqualTo("/api/customers/42");
+  }
+}
+```
+
+---
+
+## Things We Can't Cover with a Unit Test
+
+- **Request Mapping**: Does HTTP GET `/api/customers/{id}` actually resolve to our desired method?
 - **Validation**: Will incomplete request bodys result in a 400 bad request or return an accidental 200?
 - **Serialization**: Are we JSON objects serialized and deserialized correctly?
 - **Headers**: Are we setting `Content-Type` or custom headers correctly?
