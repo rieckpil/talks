@@ -1,9 +1,7 @@
 package de.rieckpil.talks.customer;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,7 +22,7 @@ public class CustomerController {
 
   @PostMapping
   public ResponseEntity<Void> createNewCustomer(
-    @Validated @RequestBody CustomerCreationRequest payload,
+    @RequestBody CustomerCreationRequest payload,
     UriComponentsBuilder uriComponentsBuilder) {
 
     String customerId = customerService.createNewCustomer(payload.firstName());
