@@ -1,10 +1,10 @@
 ---
 marp: true
 theme: pragmatech
-header: 'Testing Spring Boot Applications Demystified @ JUG St. Gallen 22.10.2025'
+header: 'Testing Spring Boot Applications Demystified @ JUG Bern 23.10.2025'
 ---
 
-![bg](./assets/st-gallen-jug-ch.jpg)
+![bg](./assets/bern-jug-ch.jpg)
 <!-- header: "" -->
 <!-- footer: ""-->
 
@@ -26,7 +26,7 @@ Notes:
 
 ## Best Practices, Common Pitfalls, and Real-World Strategies
 
-_Java User Group St. Gallen 22.10.2025_
+_Java User Group Bern 23.10.2025_
 
 Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](https://x.com/rieckpil)
 
@@ -36,11 +36,15 @@ Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](htt
 ## Participate During the Talk & Win Prizes
 
 
-![bg h:1200 right:33%](assets/offers-w.png)
+![bg  right:23%](assets/offers-w.png)
 
-Go to menti.com on your phone or laptop and use the code **2298 6846** to submit answers for the quizzes and add your questions during the talk.
+Go to [menti.com](https://www.menti.com/) and use the code **2505 9310** to **anonymously** submit answers for the quizzes and add your questions during the talk.
 
-If you want to take part in the raffle, please add your first name and the first letter of your last name to each **text-filed submission** like "What's your preferred % for code coverage (Philip R.)" - not for the single choice questions.
+1. **Stratospheric - From Zero to Production with Spring Boot and AWS** eBook
+2. **30 Testing Tools and Libraries every Java Developer Must Know** eBook
+3. **Testing Spring Boot Applications Masterclass Online Course** (70% off Coupon)
+
+If you want to take part in the raffle, please add your first name and last name to each **text-field submission**.
 
 ---
 <!-- paginate: false -->
@@ -60,7 +64,7 @@ If you want to take part in the raffle, please add your first name and the first
 
 ---
 
-<!-- header: 'JUG St. Gallen 22.10.2025 - Audience Questions, Raffle and Q&A @ menti.com Code: 2298 6846' -->
+<!-- header: 'JUG Bern 23.10.2025 - Audience Questions, Raffle and Q&A @ menti.com Code: <strong>2505 9310</strong>' -->
 <!-- footer: '![w:32 h:32](assets/logo.webp)' -->
 
 <!--
@@ -114,8 +118,8 @@ If you want to take part in the raffle, please add your first name and the first
 - Introduction
 - Why Test Software?
 - Testing with Spring Boot
-  - Spring Boot Testing 101 & Unit Testing
-  - Sliced Testing
+  - Spring Boot Testing 101
+  - Unit Testing & Sliced Testing
   - Integration & E2E Testing
 - Spring Boot Testing Best Practices
 - Common Spring Boot Testing Pitfalls
@@ -166,33 +170,7 @@ Good tests don't just catch bugs - they give you the confidence to say "yes" wit
 
 ![bg right:33%](assets/101.jpg)
 
-# Spring Boot Testing 101 & Unit Testing
-
-[//]: # (---)
-
-[//]: # ()
-[//]: # ()
-[//]: # (## Naming Things Is Hard)
-
-[//]: # ()
-[//]: # (![h:700 center]&#40;assets/cloud.svg&#41;)
-
-[//]: # ()
-[//]: # (---)
-
-[//]: # ()
-[//]: # (## My Pragmatic Test Name Approach)
-
-[//]: # ()
-[//]: # (1. **Unit Tests**: Tests that verify the functionality of a single, isolated component &#40;like a method or class&#41; by mocking or stubbing all external dependencies.)
-
-[//]: # ()
-[//]: # (2. **Integration Tests**: Tests that verify interactions between two or more components work correctly together, with real implementations replacing some mocks.)
-
-[//]: # (<br/>)
-
-[//]: # ()
-[//]: # (3. **E2E** &#40;End-to-End&#41;: Tests that validate the entire application workflow from start to finish, simulating real user scenarios across all components and external dependencies.)
+# Spring Boot Testing 101
 
 ---
 
@@ -202,7 +180,7 @@ Good tests don't just catch bugs - they give you the confidence to say "yes" wit
 
 - **Maven Surefire Plugin** for unit tests: default postfix  `*Test` (e.g. `CustomerTest`)
 - **Maven Failsafe Plugin** for integration tests: default postfix `*IT` (e.g. `CheckoutIT`)
-- Reason for splitting: different **parallelization** options, better **organisation**
+- Reason for splitting: fail fast, configure different **parallelization** options, better **organisation**
 
 ---
 
@@ -367,38 +345,6 @@ void should_When_() {
 
 ---
 
-```java
-@ExtendWith(MockitoExtension.class)
-class CustomerServiceTest {
-
-  @Mock
-  private CustomerRepository customerRepository;
-
-  @InjectMocks
-  private CustomerService customerService;
-
-  @Test
-  void shouldCreateNewCustomerWhenNameDoesNotExist() {
-
-    when(customerRepository.findByCustomerName("duke"))
-      .thenReturn(Optional.empty());
-
-    when(customerRepository.save(any(CustomerEntity.class)))
-      .thenAnswer(invocation -> {
-        CustomerEntity storedCustomer = invocation.getArgument(0);
-        storedCustomer.setId("42");
-        return storedCustomer;
-      });
-
-    String customerId = customerService.createNewCustomer("duke");
-
-    assertThat(customerId).isEqualTo("42");
-  }
-}
-```
-
----
-
 ## Unit Testing Has Limits
 
 Consider this sample REST controller, what could we verify with a unit test?
@@ -500,6 +446,13 @@ Spring Boot allows to load only specific parts (slices) of the application conte
 ![w:600 h:500 center](assets/spring-sliced-context.png)
 
 ---
+## Slicing in Action
+
+Spring Boot's test slice component scanning will only include relevant beans in the sliced context. We need to provide or mock beans that are not part of the slice:
+
+![h:450 w:1200](assets/slicing-in-action.png)
+
+---
 
 ## Sliced Testing Spring Boot Applications 101
 
@@ -512,14 +465,6 @@ Spring Boot allows to load only specific parts (slices) of the application conte
 - **Pitfalls**: Requires careful configuration to ensure only the necessary slice of the context is loaded.
 
 - **Tools**: JUnit, Mockito, Spring Test, Spring Boot, Testcontainers
-
----
-
-## Slicing in Action
-
-Spring Boot's test slice component scanning will only include relevant beans in the sliced context. We need to provide or mock beans that are not part of the slice:
-
-![h:450 w:1200](assets/slicing-in-action.png)
 
 ---
 
@@ -596,7 +541,6 @@ Notes:
 - Start Tomcat with: `@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)`
 - Consider WireMock/MockServer for stubbing external HTTP services
 - Test controller endpoints via: `MockMvc`, `WebTestClient`, `TestRestTemplate`
-- Speed up builds with Spring Test `TestContext` caching
 
 ---
 
@@ -987,9 +931,12 @@ Notes:
 
 ![bg h:720 w:450 right:33%](assets/spring-boot-testing-book-cover.png)
 
-- Get the complementary **Testing Spring Boot Applications Demystified eBook** for free
-- 120+ Pages with hands-on advice to ship code with confidence
-- Scan the **QR code on the next slide** to get the free eBook by joining our newsletter
+- Get the complementary **Spring Boot Testing eBook** for free (instead of $9)
+- 120+ Pages with practical hands-on advice to ship code with confidence
+- Get the eBook by joining our [newsletter](https://rieckpil.de/book):
+
+![center h:200 w:200](assets/newsletter-signup-qr.png)
+
 
 ---
 
@@ -998,11 +945,11 @@ Notes:
 
 ## Joyful Testing!
 
+Please provide feedback for this talk using this QR code:
+
 ![bg right:33%](assets/end.jpg)
 
-Get the Spring Boot Testing eBook [here](https://rieckpil.de/book):
-
-![center h:200 w:200](assets/newsletter-signup-qr.png)
+![center h:200 w:200](assets/feedback-qr-bern.png)
 
 Reach out any time via:
 - [LinkedIn](https://www.linkedin.com/in/rieckpil) (Philip Riecks)
