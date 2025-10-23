@@ -1,6 +1,12 @@
 # Testing Spring Boot Applications Demystified
 
+## Slides
+
+You can find the rendered PDF slides for each talk in the [slides](slides) folder to preview in the browser or download.
+
 ## Notes
+
+Diffblue Cover CLI usage:
 
 ```
 dcover create de.rieckpil.talks.customer.CustomerController
@@ -21,5 +27,7 @@ OpenRewrite:
 - https://docs.openrewrite.org/recipes/java/testing/junit5
 
 ## Spring Test Profiler
+
+Instructions to use the open-source Spring Test Profiler [are on GitHub](https://github.com/PragmaTech-GmbH/spring-test-profiler).
 
 Report at `file:///Users/rieckpil/Development/git/spring-test-profiler/demo/spring-boot-3.5-maven/target/spring-test-profiler/latest.html`
