@@ -36,15 +36,29 @@ Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](htt
 ## Participate During the Talk & Win Prizes
 
 
-![bg  right:23%](assets/offers-w.png)
+![h:200 w:200 center](assets/mentimeter-jug-bern.png)
 
 Go to [menti.com](https://www.menti.com/) and use the code **2505 9310** to **anonymously** submit answers for the quizzes and add your questions during the talk.
+
+Start with the first two questions:
+- Despite having LLMs and Code Agents, do you still write your tests by hand?
+- Do You Enjoy Writing Automated Tests?
+
+---
+
+## What You Can Win
+
+![bg right:20%](assets/offers-w.png)
+
+Three lucky winners get one of the following:
 
 1. **Stratospheric - From Zero to Production with Spring Boot and AWS** eBook
 2. **30 Testing Tools and Libraries every Java Developer Must Know** eBook
 3. **Testing Spring Boot Applications Masterclass Online Course** (70% off Coupon)
 
-If you want to take part in the raffle, please add your first name and last name to each **text-field submission**.
+If you want to take part in the raffle, please add your first name and last name to each **text field submission**.
+
+The winners will be picked randomly after the talk.
 
 ---
 <!-- paginate: false -->
