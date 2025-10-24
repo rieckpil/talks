@@ -23,7 +23,7 @@ public class CustomerController {
 
   @PostMapping
   public ResponseEntity<Void> createNewCustomer(
-    @Validated CustomerCreationRequest payload,
+    @Validated @RequestBody CustomerCreationRequest payload,
     UriComponentsBuilder uriComponentsBuilder) {
 
     String customerId = customerService.createNewCustomer(payload.firstName());
