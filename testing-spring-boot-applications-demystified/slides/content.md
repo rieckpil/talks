@@ -1,14 +1,12 @@
 ---
 marp: true
 theme: pragmatech
-header: 'Testing Spring Boot Applications Demystified @ JUG Bern 23.10.2025'
+header: 'Testing Spring Boot Applications Demystified @ JUG CERN 24.10.2025'
 ---
 
-![bg](./assets/bern-jug-ch.jpg)
+![bg](./assets/cern-jug-ch.jpg)
 <!-- header: "" -->
 <!-- footer: ""-->
-
-
 
 ---
 <!--
@@ -26,7 +24,7 @@ Notes:
 
 ## Best Practices, Common Pitfalls, and Real-World Strategies
 
-_Java User Group Bern 23.10.2025_
+_Java User Group CERN 24.10.2025_
 
 Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](https://x.com/rieckpil)
 
@@ -36,9 +34,9 @@ Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](htt
 ## Participate During the Talk & Win Prizes
 
 
-![h:200 w:200 center](assets/mentimeter-jug-bern.png)
+![h:200 w:200 center](assets/mentimeter-jug-cern.png)
 
-Go to [menti.com](https://www.menti.com/) and use the code **2505 9310** to **anonymously** submit answers for the quizzes and add your questions during the talk.
+Go to [menti.com](https://www.menti.com/) and use the code **2712 4278** to **anonymously** submit answers for the quizzes and add your questions during the talk.
 
 Start with the first two questions:
 - Despite having LLMs and Code Agents, do you still write your tests by hand?
@@ -78,7 +76,7 @@ The winners will be picked randomly after the talk.
 
 ---
 
-<!-- header: 'JUG Bern 23.10.2025 - Audience Questions, Raffle and Q&A @ menti.com Code: <strong>2505 9310</strong>' -->
+<!-- header: 'JUG CERN 24.10.2025 - Audience Questions, Raffle and Q&A @ menti.com Code: <strong>2712 4278</strong>' -->
 <!-- footer: '![w:32 h:32](assets/logo.webp)' -->
 
 <!--
@@ -947,9 +945,8 @@ Notes:
 
 - Get the complementary **Spring Boot Testing eBook** for free (instead of $9)
 - 120+ Pages with practical hands-on advice to ship code with confidence
-- Get the eBook by joining our [newsletter](https://rieckpil.de/book):
+- Get the eBook by joining our [newsletter](https://rieckpil.de/book) via the **QR code** on the next & final slide
 
-![center h:200 w:200](assets/newsletter-signup-qr.png)
 
 
 ---
@@ -959,11 +956,11 @@ Notes:
 
 ## Joyful Testing!
 
-Please provide feedback for this talk using this QR code:
+Get your free Spring Boot Testing eBook copy:
 
 ![bg right:33%](assets/end.jpg)
 
-![center h:200 w:200](assets/feedback-qr-bern.png)
+![center h:200 w:200](assets/newsletter-signup-qr.png)
 
 Reach out any time via:
 - [LinkedIn](https://www.linkedin.com/in/rieckpil) (Philip Riecks)
