@@ -169,16 +169,6 @@ Good tests don't just catch bugs - they give you the confidence to say "yes" wit
 
 ---
 
-## Why Test Software? (continued)
-
-- **Shift Left** - Catch issues earlier than the customers
-- **Confidence in Code Changes** - Help new team members to onboard faster
-- **Catch Bugs Early** - Reduce the ($) cost of bugs in production
-- **Documentation** - Single point of truth for implemented business logic
-- **Regression Prevention** - Prevent existing functionality from breaking
-- **Become more Productive** - Enable faster development cycles
-- **Use it as a  Playground** - Explore new technologies via tests
----
 
 ![bg right:33%](assets/101.jpg)
 
@@ -325,38 +315,6 @@ Tips:
 
 ---
 
-## Unit Testing with Spring Boot
-
-- Provide collaborators from outside (dependency injection) -> no `new` inside our code
-- Develop small, single responsibility classes
-- Test only the public API of our class
-- Verify behavior not implementation details
-- TDD can help design (better) classes
-
----
-
-## Unify Test Structure
-
-- Use a consistent test method naming: givenWhenThen, shouldWhen, etc.
-- Structure test for the Arrange/Act/Assert test setup
-
-```java
-@Test
-void should_When_() {
-
-  // Arrange
-  // ... setting up objects, data, collaborators, etc.
-
-  // Act
-  // ... performing the action to be tested on the class under test
-
-  // Assert
-  // ... verifying the expected outcome
-}
-```
-
----
-
 ## Unit Testing Has Limits
 
 Consider this sample REST controller, what could we verify with a unit test?
@@ -421,7 +379,7 @@ class CustomerControllerUnitTests {
 ## Things We Can't Cover with a Unit Test
 
 - **Request Mapping**: Does HTTP GET `/api/customers/{id}` actually resolve to our desired method?
-- **Validation**: Will incomplete request bodys result in a 400 bad request or return an accidental 200?
+- **Validation**: Will incomplete request bodys result in a 400 bad request or return an accidental 201?
 - **Serialization**: Are we JSON objects serialized and deserialized correctly?
 - **Headers**: Are we setting `Content-Type` or custom headers correctly?
 - **Security**: Are we Spring Security configuration and other authorization checks enforced?
@@ -429,6 +387,8 @@ class CustomerControllerUnitTests {
 ---
 
 # Sliced Testing
+
+A better alternative from some parts of our application compared to unit testing.
 
 <!--
 
@@ -517,6 +477,8 @@ class CustomerControllerTest {
 
 # Integration Testing
 
+Writing tests against the whole `ApplicationContext`.
+
 ![bg right:33%](assets/full.jpg)
 
 ---
@@ -547,16 +509,15 @@ Notes:
 
 ---
 
-## Starting the Entire Context
+## Starting the Entire `ApplicationContext`
 
-- Provide external infrastructure with [Testcontainers](https://testcontainers.com/)
-- Start Tomcat with: `@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)`
-- Consider WireMock/MockServer for stubbing external HTTP services
-- Test controller endpoints via: `MockMvc`, `WebTestClient`, `TestRestTemplate`
+- **Problem #1**: How to ensure surrounding infrastructure (e.g. database, queues, etc.) is present?
+- **Problem #2**: How to handle HTTP communication from our application to remote services?
+- **Problem #3**: How to keep our build time at a reasonable duration?
 
 ---
 
-## Provide External Infrastructure with Testcontainers
+## Provide External Infrastructure with Testcontainers (Problem #1)
 
 Running infrastructure components (databases, message brokers, etc.) in Docker containers for our tests becomes a breeze with [Testcontainers](https://testcontainers.com/):
 
@@ -581,14 +542,24 @@ ad0f804068dc   testcontainers/ryuk:0.12.0   "/bin/ryuk"              10 seconds 
 
 ---
 
-## Stub External HTTP Services with WireMock
+## Stub External HTTP Services with WireMock (Problem #2)
 
 Consider [WireMock](http://wiremock.org/) to stub external HTTP services during tests.
 
+![h:400 center](assets/wiremock-usage.svg)
+
+---
+
+## Using WireMock for Integration Tests
+
 - Run as in-memory service or Docker container to simulate connected HTTP services
-- Simulate failures, slow responses, etc.
-- Stateful setups possible (scenarios): first request fails, then succeeds
 - Override HTTP clients to connect to the WireMock server during tests
+
+```java
+TestPropertyValues.of(
+  "clients.open-library.base-url=http://localhost:"+ wireMockServer.port())
+  .applyTo(applicationContext);
+```
 
 ```java
 wireMockServer.stubFor(
@@ -663,7 +634,7 @@ class ApplicationMockWebIT {
 
 -->
 
-## The Need for Speed - Reduce Build Times with Context Caching
+## The Need for Speed - Reducing Build Times (Problem #3)
 
 - **The** **problem**: Integration tests require a started & initialized Spring `ApplicationContext`, which takes time to start
 - **The** **solution**: Spring Test `TestContext` caching, caches an already started Spring `ApplicationContext` for later reuse
@@ -698,6 +669,7 @@ This goes into the cache key (`MergedContextConfiguration`):
 - propertySourceLocations (`@TestPropertySource`)
 - propertySourceProperties (`@TestPropertySource`)
 - contextCustomizer (`@MockitoBean`, `@MockBean`, `@DynamicPropertySource`, ...)
+- etc.
 
 ---
 ## Identify Context Restarts - Visually
@@ -921,14 +893,14 @@ Notes:
 - Spring and Spring Boot provides many excellent testing features
 - Java provides a mature & rich testing ecosystem
 - Consider the context caching feature for fast builds
-- Get help from AI
+- Sliced testing can help write isolated tests with a minimal context
 - Still many new testing-related features are part of new releases: pausing a `TestContext`, `@ServiceConnection`, Testcontainers support, Docker Compose support, more AssertJ integrations, etc.
 
 ---
 
-## What's Next?
+## What's Next? Additional Testing Resources
 
-![bg h:1200 right:33%](assets/offers-w.png)
+![bg h:900 right:20%](assets/offers-w.png)
 
 
 - Online Course: [Testing Spring Boot Applications Masterclass](https://rieckpil.de/testing-spring-boot-applications-masterclass/) (on-demand, 12 hours, 130+ modules)
