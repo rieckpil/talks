@@ -1,10 +1,10 @@
 ---
 marp: true
 theme: pragmatech
-header: 'Testing Spring Boot Applications Demystified @ JUG CERN 24.10.2025'
+header: 'Testing Spring Boot Applications Demystified @ JUG Munich 27.10.2025'
 ---
 
-![bg](./assets/cern-jug-ch.jpg)
+![bg](./assets/munich-jug-de.jpg)
 <!-- header: "" -->
 <!-- footer: ""-->
 
@@ -24,7 +24,7 @@ Notes:
 
 ## Best Practices, Common Pitfalls, and Real-World Strategies
 
-_Java User Group CERN 24.10.2025_
+_Java User Group Munich 27.10.2025_
 
 Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](https://x.com/rieckpil)
 
@@ -34,9 +34,9 @@ Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](htt
 ## Participate During the Talk & Win Prizes
 
 
-![h:200 w:200 center](assets/mentimeter-jug-cern.png)
+![h:200 w:200 center](assets/mentimeter-jug-munich.png)
 
-Go to [menti.com](https://www.menti.com/) and use the code **2712 4278** to **anonymously** submit answers for the quizzes and add your questions during the talk.
+Go to [menti.com](https://www.menti.com/) and use the code **2154 4772** to **anonymously** submit answers for the quizzes and add your questions during the talk.
 
 Start with the first two questions:
 - Despite having LLMs and Code Agents, do you still write your tests by hand?
@@ -76,7 +76,7 @@ The winners will be picked randomly after the talk.
 
 ---
 
-<!-- header: 'JUG CERN 24.10.2025 - Audience Questions, Raffle and Q&A @ menti.com Code: <strong>2712 4278</strong>' -->
+<!-- header: 'JUG Munich 27.10.2025 - Audience Questions, Raffle and Q&A @ menti.com Code: <strong>2154 4772</strong>' -->
 <!-- footer: '![w:32 h:32](assets/logo.webp)' -->
 
 <!--
