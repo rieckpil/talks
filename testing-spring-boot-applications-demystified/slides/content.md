@@ -52,7 +52,7 @@ Three lucky winners get one of the following:
 
 1. **Stratospheric - From Zero to Production with Spring Boot and AWS** eBook
 2. **30 Testing Tools and Libraries every Java Developer Must Know** eBook
-3. **Testing Spring Boot Applications Masterclass Online Course** (70% off Coupon)
+3. **Testing Spring Boot Applications Masterclass Online Course** (50% off Coupon)
 
 If you want to take part in the raffle, please add your first name and last name to each **text field submission**.
 
@@ -118,7 +118,6 @@ The winners will be picked randomly after the talk.
 - Blogging & content creation with a focus on testing Java and specifically Spring Boot applications 🍃
 - Founder of PragmaTech GmbH - Enabling Developers to Frequently Deliver Software with More Confidence 🚤
 - Enjoys writing tests 🧪
-- @rieckpil on various platforms
 
 ---
 
