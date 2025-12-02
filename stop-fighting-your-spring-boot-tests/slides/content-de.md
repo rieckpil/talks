@@ -165,28 +165,149 @@ Notes:
 ![center h:500 w:1000](assets/spring-boot-test-decision-tree-de.png)
 
 ---
+![bg right:33%](assets/unit-testing.jpg)
 
 ## Unit Testing mit Spring Boot
 
+---
+
+### Unit Testing 101
+
 - Spring Boot Starter Test ("Testing Schweizertaschenmesser"): Bringt notwendige Test-Bibliotheken mit (JUnit, Mockito, AssertJ, etc.)
-- B
-- C
+- Abhängigkeiten von außen bereitstellen (Dependency Injection)
+- Kleine Klassen/Methode mit Single Responsibility entwickeln
+- Nur die öffentliche API der Klasse/Methode testen
+- Verhalten prüfen, nicht Implementierungsdetails
+- TDD kann helfen, (bessere) Klassen zu entwerfen
 
 ---
+
+### Unit Testing Beispiel
+
+```java
+
+```
+
+---
+
+![bg right:33%](assets/slice.jpg)
 
 ## Sliced Testing mit Spring Boot
 
-- A
-- B
-- C
 
 ---
 
+![center h:600 w:700](assets/typical-context.png)
+
+---
+
+![center h:600 w:700](assets/typical-context-colored.png)
+
+---
+
+
+![center h:500 w:600](assets/typical-context-sliced.png)
+
+---
+
+
+![](assets/typical-context-webmvctest-example.png)
+
+---
+
+### Spring Boot Test Slice Beispiel: `@WebMvcTest`
+
+
+```java
+@WebMvcTest(CustomerController.class)
+@Import(SecurityConfig.class)
+class CustomerControllerTest {
+
+  @Autowired
+  private MockMvc mockMvc;
+
+  @MockitoBean
+  private CustomerService customerService;
+
+  @Test
+  @WithMockUser
+  void shouldReturnLocationOfNewlyCreatedCustomer() throws Exception {
+    // ...
+  }
+}
+```
+
+---
+
+![bg right:33%](assets/full.jpg)
+
 ## Integration Testing mit Spring Boot
 
-- A
-- B
-- C
+---
+
+
+### Integration Testing Herausforderungen
+
+- Externe Infrastruktur mit Testcontainers bereitstellen
+- Servlet Container (z.B. Tomcat) starten mit: `@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)`
+- WireMock/MockServer für das Stubben externer HTTP-Services in Betracht ziehen
+- Controller-Endpunkte testen via: `MockMvc`, `WebTestClient`, `TestRestTemplate`
+
+---
+
+### Testcontainers 101
+
+Infrastrukturkomponenten (Datenbanken, Message Broker, etc.) in Docker-Containern für unsere Tests zu betreiben wird mit [Testcontainers](https://testcontainers.com/) kinderleicht:
+
+```java
+@Container
+@ServiceConnection
+static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:16-alpine")
+  .withDatabaseName("testdb")
+  .withUsername("test")
+  .withPassword("test")
+  .withInitScript("init-postgres.sql");
+```
+
+Das gibt uns eine kurzlebige PostgreSQL-Datenbank für unsere Tests:
+
+```shell {3}
+$ docker ps
+CONTAINER ID   IMAGE                        COMMAND                  CREATED          STATUS         PORTS                                           NAMES
+a958ee2887c6   postgres:16-alpine           "docker-entrypoint.s…"   10 seconds ago   Up 9 seconds   0.0.0.0:32776->5432/tcp, [::]:32776->5432/tcp   affectionate_cannon
+ad0f804068dc   testcontainers/ryuk:0.12.0   "/bin/ryuk"              10 seconds ago   Up 9 seconds   0.0.0.0:32775->8080/tcp, [::]:32775->8080/tcp   testcontainers-ryuk-1f9f76a6-46d4-4e19-85c1-e8364da12804
+```
+
+---
+
+### Integration Test Beispiel
+
+```java {1,12}
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+class ApplicationServletContainerIT {
+
+  @LocalServerPort
+  private int port; // <-- we're running on a real port
+
+  @Test
+  void contextLoads(@Autowired WebTestClient webTestClient) {
+    webTestClient
+      .get()
+      .uri("/api/customers")
+      .header("Authorization", "Basic " + Base64.getEncoder().encodeToString("user:dummy".getBytes()))
+      .exchange()
+      .expectStatus()
+      .isOk();
+  }
+}
+```
+
+
+---
+
+### Zusammenfassung
+
+![center h:400 w:800](assets/slice-test-recommendation.png)
 
 ---
 

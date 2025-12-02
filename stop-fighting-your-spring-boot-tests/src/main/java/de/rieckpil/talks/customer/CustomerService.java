@@ -3,8 +3,8 @@ package de.rieckpil.talks.customer;
 import java.util.List;
 import java.util.Optional;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.stereotype.Service;
+import tools.jackson.databind.JsonNode;
 
 @Service
 public class CustomerService {
