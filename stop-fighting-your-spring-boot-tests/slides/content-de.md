@@ -36,7 +36,7 @@ Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](htt
 
 ![h:200 w:200 center](assets/mentimeter-nuernberger.png)
 
-Gehe auf [menti.com](https://www.menti.com/) und verwende den Code **2578 7937**, um **anonym** Antworten zu den Quizfragen einzureichen und während des Vortrags Fragen zu stellen.
+Gehe auf [menti.com](https://www.menti.com/) und verwende den Code **5490 0636**, um **anonym** Antworten zu den Quizfragen einzureichen und während des Vortrags Fragen zu stellen.
 
 Starte mit den ersten beiden Fragen:
 - Schreibst du deine Tests trotz LLMs und Code Agents noch von Hand?
@@ -53,7 +53,7 @@ Starte mit den ersten beiden Fragen:
 
 -->
 
-<!-- header: 'Nürnberger Versicherung 03.12.2025 - Fragen & FAQ @ menti.com Code: <strong>2578 7937</strong>' -->
+<!-- header: 'Nürnberger Versicherung 03.12.2025 - Fragen & FAQ @ menti.com Code: <strong>5490 0636</strong>' -->
 <!-- footer: '![w:32 h:32](assets/logo.webp)' -->
 ## Spring Boot Testing - The Bad & Ugly
 
@@ -128,7 +128,7 @@ Gute Tests finden nicht nur Bugs – sie geben dir das Vertrauen, ohne Zögern z
 - Testen mit Spring Boot
   - Part 1: Die Spring Boot Test Pyramide
   - Part 2: Geschwindigkeit & Stabilität für deine Spring Boot Test Suite
-  - Part 3: Warum Spring Boot Tests Probleme machen
+  - Part 3: Warum & wann Spring Boot Tests Probleme machen
 - Zusammenfassung & Ausblick
 - FAQ
 
@@ -165,7 +165,7 @@ Notes:
 ![center h:500 w:1000](assets/spring-boot-test-decision-tree-de.png)
 
 ---
-![bg right:33%](assets/unit-testing.jpg)
+![bg right:33%](assets/101.jpg)
 
 ## Unit Testing mit Spring Boot
 
@@ -436,7 +436,7 @@ Das Setup oben deaktiviert das Context-Caching-Feature und verlangsamt die Build
 
 ### Ausblick Spring Framework 7: Pausing von Contexts
 
-Siehe Release notes von [Spring Framework 7.0.0 M7](https://spring.io/blog/2025/07/17/spring-framework-7-0-0-M7-available-now).
+Siehe Release Notes von [Spring Framework 7.0.0 M7](https://spring.io/blog/2025/07/17/spring-framework-7-0-0-M7-available-now).
 
 > Pausing of Test Application Contexts
 >
