@@ -1,29 +1,40 @@
 #!/bin/bash
 
 # Script to generate a shareable PDF using resized images
-# Usage: ./generate_sharable_pdf.sh <output-pdf-name>
+# Usage: ./generate_sharable_pdf.sh <output-pdf-name> [de]
 # Example: ./generate_sharable_pdf.sh talk-abc-2025.pdf
+# Example (German): ./generate_sharable_pdf.sh talk-abc-2025.pdf de
 
 set -e  # Exit on error
 
 # Check if output filename is provided
 if [ $# -eq 0 ]; then
     echo "Error: No output PDF filename provided"
-    echo "Usage: $0 <output-pdf-name>"
+    echo "Usage: $0 <output-pdf-name> [de]"
     echo "Example: $0 talk-abc-2025.pdf"
+    echo "Example (German): $0 talk-abc-2025.pdf de"
     exit 1
 fi
 
 OUTPUT_PDF="$1"
+LANGUAGE="${2:-en}"
 
 # Ensure the output filename ends with .pdf
 if [[ ! "$OUTPUT_PDF" == *.pdf ]]; then
     OUTPUT_PDF="${OUTPUT_PDF}.pdf"
 fi
 
-# Configuration
-MARKDOWN_FILE="./content.md"
-BACKUP_FILE="./content.md.tmp"
+# Configuration - select content file based on language parameter
+if [[ "$LANGUAGE" == "de" ]]; then
+    MARKDOWN_FILE="./content-de.md"
+    BACKUP_FILE="./content-de.md.tmp"
+    echo "Using German content: $MARKDOWN_FILE"
+else
+    MARKDOWN_FILE="./content.md"
+    BACKUP_FILE="./content.md.tmp"
+    echo "Using English content: $MARKDOWN_FILE"
+fi
+
 GENERATED_DIR="./assets/generated"
 THEME_FILE="./pragmatech.css"
 ENGINE_FILE="./engine.js"
@@ -47,7 +58,25 @@ if [ ! -d "$GENERATED_DIR" ]; then
     fi
     # Generate PDF with original images
     echo "Generating PDF with original images..."
-    marp --pdf "$MARKDOWN_FILE" --theme "$THEME_FILE" --engine "$ENGINE_FILE" --allow-local-files -o "$OUTPUT_PDF"
+    TEMP_PDF="${OUTPUT_PDF%.pdf}-temp.pdf"
+    marp --pdf "$MARKDOWN_FILE" --theme "$THEME_FILE" --engine "$ENGINE_FILE" --allow-local-files -o "$TEMP_PDF"
+
+    # Check if Ghostscript is available for reduction
+    if command -v gs &> /dev/null && [ -f "$TEMP_PDF" ]; then
+        echo "Reducing PDF size..."
+        gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook -dNOPAUSE -dQUIET -dBATCH -sOutputFile="$OUTPUT_PDF" "$TEMP_PDF"
+        if [ $? -eq 0 ]; then
+            original_size=$(du -h "$TEMP_PDF" | cut -f1)
+            reduced_size=$(du -h "$OUTPUT_PDF" | cut -f1)
+            echo "Original: $original_size → Reduced: $reduced_size"
+            rm "$TEMP_PDF"
+        else
+            mv "$TEMP_PDF" "$OUTPUT_PDF"
+        fi
+    else
+        [ -f "$TEMP_PDF" ] && mv "$TEMP_PDF" "$OUTPUT_PDF"
+    fi
+
     echo "PDF generated successfully: $OUTPUT_PDF"
     exit 0
 fi
@@ -92,17 +121,52 @@ fi
 
 # Generate the PDF using Marp
 echo "Generating PDF: $OUTPUT_PDF"
-marp --pdf "$MARKDOWN_FILE" --theme "$THEME_FILE" --engine "$ENGINE_FILE" --allow-local-files -o "$OUTPUT_PDF"
+TEMP_PDF="${OUTPUT_PDF%.pdf}-temp.pdf"
+marp --pdf "$MARKDOWN_FILE" --theme "$THEME_FILE" --engine "$ENGINE_FILE" --allow-local-files -o "$TEMP_PDF"
 
-# Get file size for confirmation
-if [ -f "$OUTPUT_PDF" ]; then
-    file_size=$(du -h "$OUTPUT_PDF" | cut -f1)
+# Check if PDF generation was successful
+if [ ! -f "$TEMP_PDF" ]; then
+    echo "Error: PDF generation failed"
+    exit 1
+fi
+
+# Get file size before reduction
+original_file_size=$(du -h "$TEMP_PDF" | cut -f1)
+echo ""
+echo "✓ PDF generated successfully: $TEMP_PDF"
+echo "  Original file size: $original_file_size"
+
+# Check if Ghostscript is installed for PDF reduction
+if ! command -v gs &> /dev/null; then
     echo ""
-    echo "✓ PDF generated successfully: $OUTPUT_PDF"
-    echo "  File size: $file_size"
+    echo "Warning: Ghostscript not found. Skipping PDF reduction."
+    echo "Install Ghostscript to enable PDF size reduction:"
+    echo "  brew install ghostscript"
+    mv "$TEMP_PDF" "$OUTPUT_PDF"
     echo ""
+    echo "Final PDF: $OUTPUT_PDF"
+    echo "The original $MARKDOWN_FILE has been restored."
+    exit 0
+fi
+
+# Reduce PDF size using Ghostscript
+echo ""
+echo "Reducing PDF size..."
+gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook -dNOPAUSE -dQUIET -dBATCH -sOutputFile="$OUTPUT_PDF" "$TEMP_PDF"
+
+if [ $? -eq 0 ] && [ -f "$OUTPUT_PDF" ]; then
+    reduced_file_size=$(du -h "$OUTPUT_PDF" | cut -f1)
+    echo "✓ PDF reduced successfully"
+    echo "  Original: $original_file_size → Reduced: $reduced_file_size"
+
+    # Remove temporary PDF
+    rm "$TEMP_PDF"
+
+    echo ""
+    echo "✓ Final PDF: $OUTPUT_PDF"
     echo "The original $MARKDOWN_FILE has been restored."
 else
-    echo "Error: PDF generation failed"
+    echo "Error: PDF reduction failed, keeping original"
+    mv "$TEMP_PDF" "$OUTPUT_PDF"
     exit 1
 fi
