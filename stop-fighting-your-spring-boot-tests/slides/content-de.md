@@ -92,7 +92,7 @@ Stell dir vor, du siehst diesen Pull Request an einem Freitagnachmittag:
 
 Wie zuversichtlich bist du, dieses Spring Boot Upgrade zu mergen und in Produktion zu deployen, sobald die Pipeline grün ist?
 
-Gute Tests finden nicht nur Bugs – sie geben dir das Vertrauen, ohne Zögern zu deployen.
+Gute Testsfinden nicht nur Bugs – sie (und Automatisierung) geben dir das Vertrauen, ohne Zögern zu deployen.
 
 ---
 
