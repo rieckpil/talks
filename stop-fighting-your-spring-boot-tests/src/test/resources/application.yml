@@ -1,0 +1,12 @@
+logging:
+  level:
+    org:
+      springframework:
+        test:
+          context: INFO # use TRACE for insights
+spring:
+  security:
+    user:
+      password: dummy
+      name: user
+      roles: USER

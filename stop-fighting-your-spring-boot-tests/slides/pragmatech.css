@@ -1,0 +1,36 @@
+/* @theme pragmatech */
+
+@import 'default';
+
+header {
+  text-align: center;
+  color: black;
+}
+
+pre ol {
+  all: unset;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  counter-reset: line-number 0;
+}
+
+pre ol li {
+  display: contents;
+}
+
+
+img[alt~="center"] {
+  display: block;
+  margin: 0 auto;
+}
+
+pre ol li span[data-marp-line-number]::before {
+  display: block;
+  content: counter(line-number) ' ';
+  counter-increment: line-number;
+  text-align: right;
+}
+
+pre .highlighted-line > * {
+  background-color: #ff6;
+}

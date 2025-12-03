@@ -34,7 +34,29 @@ Whether you’re a seasoned developer or just starting your journey with Spring 
 In this workshop, we will demystify testing Spring Boot applications by providing you with clear explanations, practical insights, and actionable best practices. Philip will guide you through the common pitfalls faced by developers, share time-tested recipes for success, and equip you with the tools and knowledge you need to write comprehensive and effective tests.
 
 - [Source Code](testing-spring-boot-applications-demystified/)
-- Slides: [Java User Group Hamburg 2025](testing-spring-boot-applications-demystified/slides/slides-jug-hamburg-2025.pdf), [Java User Group Barcelona 2025](testing-spring-boot-applications-demystified/slides/slides-jug-barcelona-2025.pdf), [Spring I/O 2024](https://pitch.com/v/spring-io-2024-testing-spring-boot-applications-demystified-vy8zf9)
+- Slides: JUG Munich 205, JUG Zürich 2025, JUG St. Gallen 2025, JUG Bern 2025, [Java User Group Hamburg 2025](testing-spring-boot-applications-demystified/slides/slides-jug-hamburg-2025.pdf), [Java User Group Barcelona 2025](testing-spring-boot-applications-demystified/slides/slides-jug-barcelona-2025.pdf), [Spring I/O 2024](https://pitch.com/v/spring-io-2024-testing-spring-boot-applications-demystified-vy8zf9), 
+- Recordings: [JUG Munich 2025](https://youtu.be/WW3tAcaiSd0?si=ou8olvUuhP-MLneL)
+
+## Stop Fighting Your Spring Boot Tests
+
+
+<p align="center">
+  <a href="https://rieckpil.de">
+    <img src="/resources/stop-fighting-your-spring-boot-tests.jpg" alt="Stop Fighting Your Spring Boot Tests"/>
+  </a>
+</p>
+
+
+**Talk Description**: Is Your Spring Boot Team Waiting 20+ Minutes for Tests to Run? Discover how your Spring Boot team can cut build
+times, eliminate flaky tests, and ship with confidence.
+
+Stop wasting hours waiting for slow tests. Stop skipping tests because they take too long. Stop fearing refactoring because your test suite might explode.
+
+This 45-60 minute session reveals exactly why your Spring Boot tests fight back and gives you practical strategies to fix it - no fluff, just actionable insights you can implement this week.
+
+
+- Source Code
+- Slides:
 - Recordings: none
 
 ## How Fixing a Broken Window Cut Down Our Build Time by 50%
