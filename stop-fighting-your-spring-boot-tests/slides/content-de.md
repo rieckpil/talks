@@ -1,7 +1,7 @@
 ---
 marp: true
 theme: pragmatech
-header: 'Stop Fighting Your Spring Boot Tests @ Nürnberger Versicherung 03.12.2025'
+header: 'Stop Fighting Your Spring Boot Tests @ Firma & Datum'
 ---
 
 ![bg](./assets/nuremberg-view.jpg)
@@ -24,7 +24,7 @@ Notes:
 
 ## Patterns für zuverlässige & schnelle Builds
 
-_Nürnberger Versicherung 03.12.2025_
+_Firma & Datum_
 
 Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](https://x.com/rieckpil)
 
@@ -53,7 +53,7 @@ Starte mit den ersten beiden Fragen:
 
 -->
 
-<!-- header: 'Nürnberger Versicherung 03.12.2025 - Fragen & FAQ @ menti.com Code: <strong>5490 0636</strong>' -->
+<!-- header: 'Firma & Datum - Fragen & FAQ @ menti.com Code: <strong>5490 0636</strong>' -->
 <!-- footer: '![w:32 h:32](assets/logo.webp)' -->
 ## Spring Boot Testing - The Bad & Ugly
 
