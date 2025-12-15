@@ -1,10 +1,10 @@
 ---
 marp: true
 theme: pragmatech
-header: 'Testing Spring Boot Applications Demystified @ JUG Munich 27.10.2025'
+header: 'Testing Spring Boot Applications Demystified @ Webinar 17.12.2025'
 ---
 
-![bg](./assets/munich-jug-de.jpg)
+![bg](./assets/tsbad-beginning.png)
 <!-- header: "" -->
 <!-- footer: ""-->
 
@@ -18,20 +18,20 @@ Notes:
 
 -->
 <!-- _class: title -->
-![bg h:500 left:33%](assets/demystify.png)
+![bg left:33%](assets/tsbad-beginning-split-middle.png)
 
 # Testing Spring Boot Applications Demystified
 
-## Best Practices, Common Pitfalls, and Real-World Strategies
+## A Hero's Journey Through the Spring Boot Testing Labyrinth
 
-_Java User Group Munich 27.10.2025_
+_Online Webinar 17.12.2025_
 
 Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](https://x.com/rieckpil)
 
 ---
 
 
-## Participate During the Talk & Win Prizes
+## Participate During the Talk
 
 
 ![h:200 w:200 center](assets/mentimeter-jug-munich.png)
@@ -44,56 +44,61 @@ Start with the first two questions:
 
 ---
 
-## What You Can Win
+![bg left:33%](assets/tsbad-act-one.png)
 
-![bg right:20%](assets/offers-w.png)
+## Act 1: The Grand Entrance
 
-Three lucky winners get one of the following:
+"Raise your hand if you've ever stared at a failing test with no idea why"
+"Keep it raised if you've copied test configuration from Stack Overflow hoping it works"
+Testing Spring Boot feels like entering a labyrinth blindfolded
 
-1. **Stratospheric - From Zero to Production with Spring Boot and AWS** eBook
-2. **30 Testing Tools and Libraries every Java Developer Must Know** eBook
-3. **Testing Spring Boot Applications Masterclass Online Course** (50% off Coupon)
+The paradox of choice: @SpringBootTest, @WebMvcTest, @DataJpaTest, @MockBean, @Mock, Testcontainers, WireMock...
+Conflicting advice online: "Always use integration tests" vs "Unit tests only"
+The slow feedback death spiral: tests take 10 minutes, developers stop running them
 
-If you want to take part in the raffle, please add your first name and last name to each **text field submission**.
+Why Developers Get Lost
 
-The winners will be picked randomly after the talk.
+
+The Cost of Being Lost
+
+
+- Neglected afterthought
+-
+---
+
+![bg right:33%](assets/northstar.jpg)
+
+## My Overall Northstar for Automated Testing
+
+Imagine seeing this pull request on a Friday afternoon:
+
+![](assets/northstar-pr.png)
+
+How confident are you to merge this major Spring Boot upgrade and deploy it to production once the pipeline turns green?
+
+Good tests don't just catch bugs - they give you **fast feedback** and **confident deployments**.
 
 ---
-<!-- paginate: false -->
 
-<!-- header: '' -->
-<!-- footer: '' -->
+## Act 2: The Hero's Journey
+
 <!--
-
-
+- Act 1: The Entrance
+- Act 2: The Map
+- Act 3: The Three Bosses
+  - Boss 1: The Unit Testing Guardian
+  - Boss 2: The Slice Testing Hydra
+  - Boss 3: The Integration Testing Dragon
+- Act 4: The Three Quest Items
+  - Quest Item 1: The Caching Amulet
+  - Quest Item 2: The Lightning Shield
+  - Quest Item 3: The Scroll of Truth
+- Act 5: The Exit
 -->
 
-![bg left](assets/starting.jpg)
-
-# Getting Started with Testing
-
-## How It Started
-
----
-
-<!-- header: 'JUG Munich 27.10.2025 - Audience Questions, Raffle and Q&A @ menti.com Code: <strong>2154 4772</strong>' -->
 <!-- footer: '![w:32 h:32](assets/logo.webp)' -->
 
-<!--
-- My story towards testing
-- What I mean with testing: automated tests written by a developer
-- Shifting left
-- How much confidence do I have to deploy on a friday afternoon to prod on a dependabot update?
-- Don't work towards 100% code coverage
-- Fast feedback loops
-- Quicker development, errors pop up more early, wouldn't say bugs, but sometimes we are overconfident only to realize after the deployment we missed a parameter or misspelled it. Avoid friction
-
-
--->
-
-### Getting Used To Testing At Work
-
-![](assets/pr-reject.png)
+![h:500 w:900 center](assets/tsbad-map-parts.png)
 
 ---
 
@@ -122,19 +127,6 @@ The winners will be picked randomly after the talk.
 ---
 
 
-## Agenda
-
-![bg right:33%](assets/steps.jpg)
-
-- Introduction
-- Why Test Software?
-- Testing with Spring Boot
-  - Spring Boot Testing 101
-  - Unit Testing & Sliced Testing
-  - Integration & E2E Testing
-- Spring Boot Testing Best Practices
-- Common Spring Boot Testing Pitfalls
-- Summary & Outlook
 
 ---
 
@@ -154,19 +146,7 @@ Notes:
 ---
 
 
-![bg left:33%](assets/northstar.jpg)
 
-## My Overall Northstar
-
-Imagine seeing this pull request on a Friday afternoon:
-
-![](assets/northstar-pr.png)
-
-How confident are you to merge this major Spring Boot upgrade and deploy it to production once the pipeline turns green?
-
-Good tests don't just catch bugs - they give you the confidence to say "yes" without hesitation.
-
----
 
 
 ![bg right:33%](assets/101.jpg)
@@ -886,7 +866,9 @@ Notes:
 
 -->
 
-## Summary & Outlook
+## Act 5: The Triumphant Exit
+
+![bg right:33%](assets/tsbad-end.png)
 
 - Spring Boot applications come with batteries-included for testing
 - Spring and Spring Boot provides many excellent testing features
