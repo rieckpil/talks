@@ -937,28 +937,55 @@ Notes:
 
 ---
 
-## What's Next? Additional Testing Resources
+## My Entire Spring Boot Testing Knowledge Combined
 
-![bg h:900 right:20%](assets/offers-w.png)
+... in one on-demand online course.
 
+Learn how to test and verify a real-world self-contained system with the [Testing Spring Boot Applications Masterclass](https://rieckpil.de/testing-spring-boot-applications-masterclass/)
 
-- Online Course: [Testing Spring Boot Applications Masterclass](https://rieckpil.de/testing-spring-boot-applications-masterclass/) (on-demand, 12 hours, 130+ modules)
-- eBook: [30 Testing Tools and Libraries Every Java Developer Must Know](https://leanpub.com/java-testing-toolbox)
-- eBook: [Stratospheric - From Zero to Production with AWS](https://leanpub.com/stratospheric)
-- Spring Boot [testing workshops](https://pragmatech.digital/workshops/) (in-house/remote/hybrid)
-- [Consulting offerings](https://pragmatech.digital/consulting/), e.g. the Test Maturity Assessment for projects/teams
+![center w:400 h:400](assets/masterclass-architecture.png)
+
 
 ---
 
-## Don't Leave Empty-Handed
+## Covering Unit, Sliced, Integration and E2E Tests
 
-![bg h:720 w:450 right:33%](assets/spring-boot-testing-book-cover.png)
+... with 130 course lessons and 12h+ of content
 
-- Get the complementary **Spring Boot Testing eBook** for free (instead of $9)
-- 120+ Pages with practical hands-on advice to ship code with confidence
-- Get the eBook by joining our [newsletter](https://rieckpil.de/book) via the **QR code** on the next & final slide
+![center](assets/tsbam-recording.gif)
+
+---
+
+![bg h:900 right:20%](assets/offers-w.png)
+
+## Limited Webinar Offer for the Next 24 Hours
+
+All webinar attendees get a **50% discount** on the course price.
 
 
+Enrolling for the Bundle Edition gives you three additional resources for free:
+
+- TDD with Spring Boot Done Right Online Course
+- Hands-On Mocking with Mockito Online Course
+- 30 Testing Tools and Libraries Every Java Developer Must Know eBook
+
+The offer expires on the 19th of December 2025 6 PM CET.
+
+---
+
+![bg right:23%](assets/philip-jug-zurich-2025-audience.jpg)
+
+
+## What's Next? Additional Testing Resources
+
+
+
+- Free Brown-Bag/meetup sessions for companies/teams:
+  - Stop Fighting Your Spring Boot Tests
+  - Testing Spring Boot Applications Demystified
+  - Getting Started with Testcontainers for Spring Boot
+- Spring Boot [testing workshops](https://pragmatech.digital/workshops/) (in-house/remote/hybrid)
+- [Consulting offerings](https://pragmatech.digital/consulting/), e.g. the Test Maturity Assessment for projects/teams
 
 ---
 
