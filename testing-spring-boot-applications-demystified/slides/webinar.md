@@ -968,7 +968,7 @@ Enrolling for the Bundle Edition gives you three additional resources for free:
 - Hands-On Mocking with Mockito Online Course
 - 30 Testing Tools and Libraries Every Java Developer Must Know eBook
 
-The offer expires on the 19th of December 2025 6 PM CET.
+The offer expires on the 18th of December 2025 6 PM CET.
 
 ---
 
