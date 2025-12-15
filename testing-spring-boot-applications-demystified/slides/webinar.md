@@ -960,8 +960,7 @@ Learn how to test and verify a real-world self-contained system with the [Testin
 
 ## Limited Webinar Offer for the Next 24 Hours
 
-All webinar attendees get a **50% discount** on the course price.
-
+All webinar attendees get a **50% discount** on the course price with this link: https://rieckpil.de/testing-spring-boot-applications-masterclass/?promo=WEBINAR-2025-12-17
 
 Enrolling for the Bundle Edition gives you three additional resources for free:
 
