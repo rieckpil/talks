@@ -33,14 +33,13 @@ Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](htt
 
 ## Participate During the Talk
 
-
-![h:200 w:200 center](assets/mentimeter-jug-munich.png)
-
-Go to [menti.com](https://www.menti.com/) and use the code **2154 4772** to **anonymously** submit answers for the quizzes and add your questions during the talk.
+Go to [menti.com](https://www.menti.com/) and use the code **7747 1181** to **anonymously** submit answers for the quizzes and add your questions during the talk.
 
 Start with the first two questions:
 - Despite having LLMs and Code Agents, do you still write your tests by hand?
 - Do You Enjoy Writing Automated Tests?
+
+At the end of the Menti, you can add your questions for the Q&A session.
 
 ---
 
@@ -737,12 +736,31 @@ static {
 
 ![bg right:33%](assets/tsbad-end.png)
 
-- Spring Boot applications come with batteries-included for testing
-- Spring and Spring Boot provides many excellent testing features
-- Java provides a mature & rich testing ecosystem
-- Consider the context caching feature for fast builds
-- Sliced testing can help write isolated tests with a minimal context
-- Still many new testing-related features are part of new releases: pausing a `TestContext`, `@ServiceConnection`, Testcontainers support, Docker Compose support, more AssertJ integrations, etc.
+- Spring Boot applications come with batteries-included and excellent testing support
+- We've completed three main quests:
+  - Unit testing
+  - Sliced testing
+  - Integration testing
+- Three core quest items help us to speed up and validate our tests:
+  - Context Caching
+  - Test Parallelization
+  - Mutation Testing
+
+---
+
+![bg right:23%](assets/philip-jug-zurich-2025-audience.jpg)
+
+
+## What's Next?
+
+Testing is a team sport, make sure your whole team levels up together!
+
+- Free meetup sessions for companies/teams:
+  - Stop Fighting Your Spring Boot Tests
+  - Testing Spring Boot Applications Demystified
+  - Getting Started with Testcontainers for Spring Boot
+- Spring Boot [testing workshops](https://pragmatech.digital/workshops/) (in-house/remote/hybrid)
+- [Consulting offerings](https://pragmatech.digital/consulting/), e.g. the Test Maturity Assessment for projects/teams
 
 ---
 
@@ -781,32 +799,16 @@ The offer expires on the 18th of December 2025 6 PM CET.
 
 ---
 
-![bg right:23%](assets/philip-jug-zurich-2025-audience.jpg)
 
-
-## What's Next? Additional Testing Resources
-
-
-
-- Free Brown-Bag/meetup sessions for companies/teams:
-  - Stop Fighting Your Spring Boot Tests
-  - Testing Spring Boot Applications Demystified
-  - Getting Started with Testcontainers for Spring Boot
-- Spring Boot [testing workshops](https://pragmatech.digital/workshops/) (in-house/remote/hybrid)
-- [Consulting offerings](https://pragmatech.digital/consulting/), e.g. the Test Maturity Assessment for projects/teams
-
----
 
 <!-- paginate: false -->
 
 
 ## Joyful Testing!
 
-Get your free Spring Boot Testing eBook copy:
+Slides & recording will be shared after the webinar via email.
 
 ![bg right:33%](assets/end.jpg)
-
-![center h:200 w:200](assets/newsletter-signup-qr.png)
 
 Reach out any time via:
 - [LinkedIn](https://www.linkedin.com/in/rieckpil) (Philip Riecks)
