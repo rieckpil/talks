@@ -13,9 +13,6 @@ header: 'Testing Spring Boot Applications Demystified @ Webinar 17.12.2025'
 
 Notes:
 
-- Despite having AI, who still wirtes test by hand
-- and who enjoys it? -> I do and hope I can change that for some of you today
-
 -->
 <!-- _class: title -->
 ![bg left:33%](assets/tsbad-beginning-split-middle.png)
@@ -24,7 +21,7 @@ Notes:
 
 ## A Hero's Journey Through the Spring Boot Testing Labyrinth
 
-_Online Webinar 17.12.2025_
+_Online Webinar 17th of December 2025_
 
 Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](https://x.com/rieckpil)
 
@@ -47,23 +44,17 @@ At the end of the Menti, you can add your questions for the Q&A session.
 
 ## Act 1: The Grand Entrance
 
-"Raise your hand if you've ever stared at a failing test with no idea why"
-"Keep it raised if you've copied test configuration from Stack Overflow hoping it works"
-Testing Spring Boot feels like entering a labyrinth blindfolded
 
-The paradox of choice: @SpringBootTest, @WebMvcTest, @DataJpaTest, @MockBean, @Mock, Testcontainers, WireMock...
-Conflicting advice online: "Always use integration tests" vs "Unit tests only"
-The slow feedback death spiral: tests take 10 minutes, developers stop running them
+Testing Spring Boot applications can feel like entering a labyrinth blindfolded:
 
-Why Developers Get Lost
-
-
-The Cost of Being Lost
-
-
-- Neglected afterthought
--
+- Copying test configuration from AI/StackOverflow hoping it works
+- The paradox of choice: `@SpringBootTest`, `@WebMvcTest`, `@DataJpaTest`, `@MockBean`, etc.
+- Fear of refactoring because tests break for the wrong reasons
+- Tests written to satisfy coverage metrics, not increase productivity, confidence or catch bugs
 ---
+
+<!-- footer: '![w:32 h:32](assets/logo.webp)' -->
+
 
 ![bg right:33%](assets/northstar.jpg)
 
@@ -79,7 +70,7 @@ Good tests don't just catch bugs - they give you **fast feedback** and **confide
 
 ---
 
-## The Hero's Journey
+## The Hero's Journey aka. Our Agenda
 
 <!--
 - Act 1: The Entrance
@@ -95,7 +86,6 @@ Good tests don't just catch bugs - they give you **fast feedback** and **confide
 - Act 5: The Exit
 -->
 
-<!-- footer: '![w:32 h:32](assets/logo.webp)' -->
 
 ![h:500 w:900 center](assets/tsbad-map-parts.png)
 
