@@ -378,8 +378,6 @@ class CustomerControllerTest {
 
 ---
 
----
-
 # Quest 3
 
 ## The Integration Testing Dragon
@@ -718,7 +716,7 @@ static {
 
 ---
 
-![center h:400 w:1300](assets/mutation-testing-explained.png)
+![center h:500 w:1300](assets/mutation-testing-explained.png)
 
 ---
 
