@@ -110,7 +110,7 @@ Good tests don't just catch bugs - they give you **fast feedback** and **confide
 - Self-employed developer from Herzogenaurach, Germany (Bavaria) 🍻
 - Blogging & content creation with a focus on testing Java and specifically Spring Boot applications 🍃
 - Founder of PragmaTech GmbH - Enabling Developers to Frequently Deliver Software with More Confidence 🚤
-- Enjoys writing tests 🧪
+- Enjoys writing tests (sometimes even more than production code) 🧪
 
 ---
 
@@ -300,7 +300,7 @@ class CustomerControllerUnitTests {
 
 ---
 
-## Things We Can't Cover with a Unit Test
+## Things We Can't Cover With a Unit Test
 
 - **Request Mapping**: Does HTTP GET `/api/customers/{id}` actually resolve to our desired method?
 - **Validation**: Will incomplete request bodys result in a 400 bad request or return an accidental 201?
@@ -378,6 +378,21 @@ class CustomerControllerTest {
 
 ---
 
+## Sliced Testing Spring Boot Applications 101
+
+- **Core Concept**: Test a specific "slice" or layer of your application by loading a minimal, relevant part of the Spring `ApplicationContext`.
+
+- **Confidence Gained**: Helps validate parts of your application where pure unit testing is insufficient, like the web, messaging, or data layer.
+
+- **Prominent Examples:** Web layer (`@WebMvcTest`) and database layer (`@DataJpaTest`)
+
+- **Pitfalls**: Requires careful configuration to ensure only the necessary slice of the context is loaded.
+
+- **Tools**: JUnit, Mockito, Spring Test, Spring Boot, Testcontainers
+
+---
+
+
 # Quest 3
 
 ## The Integration Testing Dragon
@@ -398,20 +413,6 @@ Notes:
 -->
 
 ![](assets/spring-boot-test-setup.png)
-
----
-
-## Integration Testing Spring Boot Applications 101
-
-- **Core Concept**: Start the entire Spring application context, often on a random local port, and test the application through its external interfaces (e.g., REST API).
-
-- **Confidence Gained**: Validates the integration of all internal components working together as a complete application.
-
-- **Best Practices**: Use `@SpringBootTest` to run the app on a local port.
-
-- **Pitfalls**: Slower to run than unit or sliced tests. Managing the lifecycle of dependent services can be complex.
-
-- **Tools**: JUnit, Mockito, Spring Test, Spring Boot, Testcontainers, WireMock (for mocking external HTTP services), Selenium (for browser-based UI testing)
 
 ---
 
@@ -532,6 +533,19 @@ class ApplicationMockWebIT {
 }
 ```
 
+---
+
+## Integration Testing Spring Boot Applications 101
+
+- **Core Concept**: Start the entire Spring application context, often on a random local port, and test the application through its external interfaces (e.g., REST API).
+
+- **Confidence Gained**: Validates the integration of all internal components working together as a complete application.
+
+- **Best Practices**: Use `@SpringBootTest` to run the app on a local port.
+
+- **Pitfalls**: Slower to run than unit or sliced tests. Managing the lifecycle of dependent services can be complex.
+
+- **Tools**: JUnit, Mockito, Spring Test, Spring Boot, Testcontainers, WireMock (for mocking external HTTP services), Selenium (for browser-based UI testing)
 
 ---
 
@@ -725,10 +739,7 @@ static {
 ![bg right:33%](assets/tsbad-end.png)
 
 - Spring Boot applications come with batteries-included and excellent testing support
-- We've completed three main quests:
-  - Unit testing
-  - Sliced testing
-  - Integration testing
+- We've completed three main quests: Unit testing, Sliced testing, and Integration testing
 - Three core quest items help us to speed up and validate our tests:
   - Context Caching
   - Test Parallelization
