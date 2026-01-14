@@ -1,7 +1,7 @@
 ---
 marp: true
 theme: pragmatech
-header: 'Testing Spring Boot Applications Demystified @ Webinar 17.12.2025'
+header: 'Testing Spring Boot Applications Demystified @ Infinium 14.01.2026'
 ---
 
 ![bg](./assets/tsbad-beginning.png)
@@ -24,7 +24,7 @@ Notes:
 
 ## A Hero's Journey Through the Spring Boot Testing Labyrinth
 
-_Online Webinar 17.12.2025_
+_Webinar@Infinium 14.01.2026_
 
 Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](https://x.com/rieckpil)
 
