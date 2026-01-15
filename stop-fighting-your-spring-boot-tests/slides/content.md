@@ -14,7 +14,7 @@ header: 'Stop Fighting Your Spring Boot Tests @ Nürnberger Versicherung 03.12.2
 
 # Stop Fighting Your Spring Boot Tests
 
-## Discover how your Spring Boot team can cut build times, eliminate flaky tests, and ship with confidence
+## Optimizing your test suite for speed, stability, and developer happiness
 
 _Infinum Webinar 15.01.2026_
 
@@ -196,8 +196,9 @@ class CustomerServiceTest {
 
 ![bg right:33%](assets/slice.jpg)
 
-## Sliced Testing mit Spring Boot
+## Sliced Testing with Spring Boot
 
+Verify specific layers of your Spring Boot application with a minimal `ApplicationContext`.
 
 ---
 
@@ -271,7 +272,7 @@ class CustomerControllerTest {
 
 ---
 
-# Integration Testing
+## Integration Testing
 
 Writing tests against the whole `ApplicationContext`.
 
@@ -369,7 +370,6 @@ class ApplicationServletContainerIT {
 
 # Part 2: Speed & Stability for your Spring Boot Test Suite
 
----
 
 ---
 <!--
@@ -390,11 +390,21 @@ Speed improvement example:
 
 ---
 
-## Caching is King
+### How Caching Works: Step 0
 
-How the caching mechanism works:
+![center h:500 w:700](assets/caching-step-0.png)
 
-![center](assets/cache.svg)
+---
+
+### How Caching Works: Step 1
+
+![center h:500 w:700](assets/caching-step-1.png)
+
+---
+
+### How Caching Works: Step 2
+
+![center h:500 w:700](assets/caching-step-2.png)
 
 ---
 
@@ -459,15 +469,8 @@ The setup above will **disable** the context caching feature and slow down the b
 
 ---
 
-## Spot the Issues for Context Caching
 
-![](assets/context-caching-bad.png)
-
-
----
-
-
-## Outlook to Spring Framework 7: Pausing of Test Contexts
+## New in Spring Framework 7: Pausing of Test Contexts
 
 See the release notes of [Spring Framework 7.0.0 M7](https://spring.io/blog/2025/07/17/spring-framework-7-0-0-M7-available-now).
 
@@ -504,7 +507,7 @@ Requirements:
 - No mutation of global state
 
 Two ways to achieve this:
-- Fork a new JVM with Surefire/Failsafe and let it run in parallel -> more resources but isolated execution
+- Fork a new JVM with Maven/Gradle and let it run in parallel -> more resources but isolated execution
 - Use JUnit Jupiter's parallelization mode and let it run in the same JVM with multiple threads
 
 ---
@@ -527,7 +530,7 @@ Notes:
 - [Diffblue Cover](https://www.diffblue.com/): AI Agent for unit testing complex (Spring Boot) Java code at scale
 - My go-to CLI code agent: Claude Code
 - TDD with an LLM?
-- (Not AI but still useful) OpenRewrite for [automatic code migrations](https://docs.openrewrite.org/recipes/java/testing) (e.g. JUnit 4 -> JUnit 5)
+- (Not AI but still useful) OpenRewrite for [automatic code migrations](https://docs.openrewrite.org/recipes/java/testing) (e.g. JUnit 4 -> JUnit 5 -> JUnit 6)
 - Clearly define your requirements in e.g. `claude.md` or Cursor rule files to adopt a common test structure
 
 ---
@@ -549,10 +552,6 @@ static {
   postgresModule.start();
 }
 ```
-
----
-
-![center w:800 h:600](assets/mutation.svg)
 
 ---
 
@@ -608,7 +607,7 @@ static {
 
 ![bg right:33%](assets/car-comparison.jpg)
 
-- You can mix both versions in the same project but not in the same test class
+- You can mix all three versions in the same project but not in the same test class
 - Browsing through the internet (aka. StackOverflow/blogs/LLMs) for solutions, you might find test setups that are still for JUnit 4
 - Easily import the wrong `@Test` and you end up wasting one hour because the Spring context does not work as expected
 
@@ -637,7 +636,7 @@ Notes:
 
 -->
 
-## Summary & Outlook
+## Wrap-Up: Key Takeaways
 
 - Spring Boot applications come with batteries-included for testing
 - Spring and Spring Boot provides many excellent testing features
@@ -648,8 +647,6 @@ Notes:
 
 ---
 
----
-
 ![bg right:23%](assets/philip-jug-zurich-2025-audience.jpg)
 
 
@@ -657,8 +654,8 @@ Notes:
 
 Testing is a team sport, make sure your whole team levels up together!
 
+- Further Spring Boot testing resources (courses, eBooks, articles) at [rieckpil.de](https://rieckpil.de/)
 - Spring Boot [testing workshops](https://pragmatech.digital/workshops/) (in-house/remote/hybrid)
-- Furher Spring Boot testing resources (courses, eBooks, articles) at [rieckpil.de](https://rieckpil.de/)
 - [Consulting offerings](https://pragmatech.digital/consulting/), e.g. the Test Maturity Assessment for projects/teams
 
 ---
@@ -696,11 +693,11 @@ Learn how to test and verify a real-world self-contained system with the [Testin
 
 ## Joyful Testing!
 
-The slides will be shared after the webinar via email.
+The slides & code  will be shared after the webinar.
 
 ![bg right:33%](assets/end.jpg)
 
 Reach out any time via:
 - [LinkedIn](https://www.linkedin.com/in/rieckpil) (Philip Riecks)
-  - [X](https://x.com/rieckpil) (@rieckpil)
+- [X](https://x.com/rieckpil) (@rieckpil)
 - [Mail](mailto:philip@pragmatech.digital) (philip@pragmatech.digital)
