@@ -35,6 +35,14 @@ Start with the first two questions:
 
 <!-- header: 'Infinum Webinar 15.01.2026 - Questions @ menti.com Code: <strong>2322 7818</strong>' -->
 
+
+![bg right:33%](assets/why-test-software.jpg)
+
+# Why Test Software?
+
+---
+
+
 [//]: # (<!-- footer: '![w:32 h:32]&#40;assets/logo.webp&#41;' -->)
 ## Spring Boot Testing - The Bad & Ugly
 
@@ -48,12 +56,6 @@ Start with the first two questions:
 
 ![center h:500 w:900](assets/tests-benefit-en.png)
 
-
----
-
-![bg right:33%](assets/why-test-software.jpg)
-
-# Why Test Software?
 
 ---
 
