@@ -4,39 +4,28 @@ theme: pragmatech
 header: 'Stop Fighting Your Spring Boot Tests @ Nürnberger Versicherung 03.12.2025'
 ---
 
-![bg](./assets/nuremberg-view.jpg)
+![bg](./assets/stop-fighting-your-spring-boot-tests.jpg)
 <!-- header: "" -->
 <!-- footer: ""-->
 
 ---
-<!--
 
-Notes:
-
-- Despite having AI, who still wirtes test by hand
-- and who enjoys it? -> I do and hope I can change that for some of you today
-
--->
-<!-- _class: title -->
 ![bg left:33%](assets/stop-fighting-your-spring-boot-tests.jpg)
 
 # Stop Fighting Your Spring Boot Tests
 
 ## Discover how your Spring Boot team can cut build times, eliminate flaky tests, and ship with confidence
 
-_Nürnberger Versicherung 03.12.2025_
+_Infinum Webinar 15.01.2026_
 
 Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](https://x.com/rieckpil)
 
 ---
 
 
-## Participate During the Talk & Win Prizes
+## Participate During the Talk
 
-
-![h:200 w:200 center](assets/mentimeter-nuernberger.png)
-
-Go to [menti.com](https://www.menti.com/) and use the code **2578 7937** to **anonymously** submit answers for the quizzes and add your questions during the talk.
+Go to [menti.com](https://www.menti.com/) and use the code **2322 7818** to **anonymously** submit answers for the quizzes and add your questions during the talk.
 
 Start with the first two questions:
 - Despite having LLMs and Code Agents, do you still write your tests by hand?
@@ -44,104 +33,23 @@ Start with the first two questions:
 
 ---
 
-<!-- paginate: false -->
+<!-- header: 'Infinum Webinar 15.01.2026 - Questions @ menti.com Code: <strong>2322 7818</strong>' -->
 
-<!-- header: '' -->
-<!-- footer: '' -->
-<!--
-
-
--->
-
-![bg left](assets/starting.jpg)
-
-# Getting Started with Testing
-
-## How It Started
-
----
-
-<!-- header: 'Nürnberger Versicherung 03.12.2025 - Audience Questions, Raffle and Q&A @ menti.com Code: <strong>2578 7937</strong>' -->
-<!-- footer: '![w:32 h:32](assets/logo.webp)' -->
-
-<!--
-- My story towards testing
-- What I mean with testing: automated tests written by a developer
-- Shifting left
-- How much confidence do I have to deploy on a friday afternoon to prod on a dependabot update?
-- Don't work towards 100% code coverage
-- Fast feedback loops
-- Quicker development, errors pop up more early, wouldn't say bugs, but sometimes we are overconfident only to realize after the deployment we missed a parameter or misspelled it. Avoid friction
+[//]: # (<!-- footer: '![w:32 h:32]&#40;assets/logo.webp&#41;' -->)
+## Spring Boot Testing - The Bad & Ugly
 
 
--->
-
-### Testing Intro
-
-Langsame builds, Spring Boot komplexität, AI-tested code
-
-
-Part 1: The Spring Boot Test Pyramid
-
-- Unit Testing
-- Sliced Testing
-- Integration Testing
-
-Part 2: Speed & Stability for your Spring Boot Test Suite
-Part 3: Why Spring Boot Tests Fight Back
-
-
----
-
-## Goals For This Talk
-
-![bg h:500 right:33%](assets/demystify.png)
-
-
-- Lay the foundation for your Spring Boot testing success
-- Introduction to Spring Boot’s excellent test support
-- Showcase a mix of best practices and early pitfalls
-- Convince you that testing is not an afterthought
-
-
----
-
-![bg right:33%](assets/hza.jpg)
-
-## About Philip
-
-- Self-employed developer from Herzogenaurach, Germany (Bavaria) 🍻
-- Blogging & content creation with a focus on testing Java and specifically Spring Boot applications 🍃
-- Founder of PragmaTech GmbH - Enabling Developers to Frequently Deliver Software with More Confidence 🚤
-- Enjoys writing tests 🧪
+![center h:500 w:900](assets/spring-boot-testing-the-bad.png)
 
 ---
 
 
-## Agenda
+## Spring Boot Testing - The Good
 
-![bg right:33%](assets/steps.jpg)
+![center h:500 w:900](assets/tests-benefit-en.png)
 
-- Introduction
-- Why Test Software?
-- Testing with Spring Boot
-  - Spring Boot Testing 101
-  - Unit Testing & Sliced Testing
-  - Integration & E2E Testing
-- Spring Boot Testing Best Practices
-- Common Spring Boot Testing Pitfalls
-- Summary & Outlook
 
 ---
-
-<!--
-
-Notes:
-- Not because a definition of done says "all tests must pass"
-- Not to reach a coverage goal
-
-
--->
 
 ![bg right:33%](assets/why-test-software.jpg)
 
@@ -164,207 +72,111 @@ Good tests don't just catch bugs - they give you the confidence to say "yes" wit
 
 ---
 
+## Goals for The Next 45 Minutes
 
+![bg right:33%](assets/best-practices.jpg)
+
+- Laying the foundation for successfully testing Spring Boot applications
+- Introduction to Spring Boot's excellent testing support
+- Spring Boot testing best practices and common pitfalls
+- Hands-on tips for optimizing build times
+
+---
+
+![bg right:33%](assets/hza.jpg)
+
+## About Philip
+
+- Self-employed developer from Germany (close to Nuremberg) 🍻
+- Blogging & content creation with a focus on testing Java and specifically Spring Boot applications 🍃
+- Founder of PragmaTech GmbH - Enabling Developers to Frequently Deliver Software with More Confidence 🚤
+
+---
+
+
+## Agenda
+
+![bg right:33%](assets/steps.jpg)
+
+- Introduction
+- Testing with Spring Boot
+  - Part 1: The Spring Boot Test "Pyramid"
+  - Part 2: Speed & Stability for your Spring Boot Test Suite
+  - Part 3: Why & When Spring Boot Tests Fight Back
+- Wrap-up & Next Steps
+- FAQ
+
+---
+
+
+![bg right:33%](assets/testing-pyramid.jpg)
+
+# Part 1: The Spring Boot Test "Pyramid"
+
+---
+
+
+## Testing - Pyramid, Honeycomb, Diamond, Trophy?
+
+- The classic test pyramid is a good starting point, but not a dogma
+- It cannot be applied 1-to-1 to every project
+- Many alternative models: Testing Trophy, Testing Honeycomb, Testing Diamond, etc.
+- The right testing strategy depends heavily on the project context
+- Hard to measure, but crucial: subjective confidence during development & deployment
+
+---
+
+## Spring Boot Test Types
+
+![center h:500 w:1000](assets/decision-tree-testing-en.png)
+
+---
 ![bg right:33%](assets/101.jpg)
 
-# Spring Boot Testing 101
+## Unit Testing with Spring Boot
 
 ---
 
-## Maven Build Lifecycle
+### Unit Testing with Spring Boot 101
 
-![bg h:500 right](assets/lifecycle.svg)
-
-- **Maven Surefire Plugin** for unit tests: default postfix  `*Test` (e.g. `CustomerTest`)
-- **Maven Failsafe Plugin** for integration tests: default postfix `*IT` (e.g. `CheckoutIT`)
-- Reason for splitting: fail fast, configure different **parallelization** options, better **organisation**
-
----
-
-
-### Gradle Build Lifecycle
-
-- Unit tests are run during the `test` task
-- To separate integration tests, we need a custom Gradle task, as this structure is **not part** of default Gradle lifecycle
-- We [need to configure](https://docs.gradle.org/current/userguide/java_testing.html#sec:configuring_java_integration_tests) the `integrationTest` task manually in our `build.gradle`:
-
-```groovy
-// Sample configuration from the Gradle docs
-tasks.register('integrationTest', Test) {
-  description = 'Runs integration tests.'
-  group = 'verification'
-
-  // ...
-  shouldRunAfter test
-
-  useJUnitPlatform()
-}
-```
-
+- The Spring Boot Starter Test ("The Testing Swiss Army Knife") includes necessary test libraries (JUnit, Mockito, AssertJ, etc.)
+- When designing classes:
+  - Provide dependencies from the outside (Dependency Injection)
+  - Develop small classes/methods with a single responsibility
+  - Test only the public API of the class/method
+  - Verify behavior, not implementation details
+- TDD can help design (better testable) classes
 
 ---
 
-## Spring Boot Starter Test
-
-<!--
-
-Notes:
-
-- Show the `spring-boot-starter-test` dependency and Maven dependency tree
-- Show manual overriden
-
-
--->
-
-![bg right:33%](assets/swiss.jpg)
-
-- aka. "Testing Swiss Army Knife"
-
-
-```xml
-<dependency>
-  <groupId>org.springframework.boot</groupId>
-  <artifactId>spring-boot-starter-test</artifactId>
-  <scope>test</scope>
-</dependency>
-```
-
-- Batteries-included for testing by transitively including popular testing libraries
-  - JUnit
-  - Mockito
-  - Assertion libraries: AssertJ, Hamcrest, XMLUnit, JSONAssert, Awaitility
----
-<!--
-Notes:
-- Go to IDE to show the start
-- Navigate to the parent pom to see the management
-- Show the sample test to have seen the libraries at least once
-
-Tips:
-- Favor JUnit 5 over JUnit 4
-- Pick one assertion library or at least not mix it within the same test class
--->
-
-```shell {4-6,12,14,15-16,23,27,32}
-./mvnw dependency:tree
-[INFO] ...
-[INFO] +- org.springframework.boot:spring-boot-starter-test:jar:3.5.6:test
-[INFO] |  +- org.springframework.boot:spring-boot-test:jar:3.5.6:test
-[INFO] |  +- org.springframework.boot:spring-boot-test-autoconfigure:jar:3.5.6:test
-[INFO] |  +- com.jayway.jsonpath:json-path:jar:2.9.0:test
-[INFO] |  +- jakarta.xml.bind:jakarta.xml.bind-api:jar:4.0.2:test
-[INFO] |  |  \- jakarta.activation:jakarta.activation-api:jar:2.1.4:test
-[INFO] |  +- net.minidev:json-smart:jar:2.5.2:test
-[INFO] |  |  \- net.minidev:accessors-smart:jar:2.5.2:test
-[INFO] |  |     \- org.ow2.asm:asm:jar:9.7.1:test
-[INFO] |  +- org.assertj:assertj-core:jar:3.27.4:test
-[INFO] |  |  \- net.bytebuddy:byte-buddy:jar:1.17.7:test
-[INFO] |  +- org.awaitility:awaitility:jar:4.3.0:test
-[INFO] |  +- org.hamcrest:hamcrest:jar:3.0:test
-[INFO] |  +- org.junit.jupiter:junit-jupiter:jar:5.12.2:test
-[INFO] |  |  +- org.junit.jupiter:junit-jupiter-api:jar:5.12.2:test
-[INFO] |  |  |  +- org.junit.platform:junit-platform-commons:jar:1.12.2:test
-[INFO] |  |  |  \- org.apiguardian:apiguardian-api:jar:1.1.2:test
-[INFO] |  |  +- org.junit.jupiter:junit-jupiter-params:jar:5.12.2:test
-[INFO] |  |  \- org.junit.jupiter:junit-jupiter-engine:jar:5.12.2:test
-[INFO] |  |     \- org.junit.platform:junit-platform-engine:jar:1.12.2:test
-[INFO] |  +- org.mockito:mockito-core:jar:5.16.0:test
-[INFO] |  |  +- net.bytebuddy:byte-buddy-agent:jar:1.17.7:test
-[INFO] |  |  \- org.objenesis:objenesis:jar:3.3:test
-[INFO] |  +- org.mockito:mockito-junit-jupiter:jar:5.16.0:test
-[INFO] |  +- org.skyscreamer:jsonassert:jar:1.5.3:test
-[INFO] |  |  \- com.vaadin.external.google:android-json:jar:0.0.20131108.vaadin1:test
-[INFO] |  +- org.springframework:spring-core:jar:6.2.11:compile
-[INFO] |  |  \- org.springframework:spring-jcl:jar:6.2.11:compile
-[INFO] |  +- org.springframework:spring-test:jar:6.2.11:test
-[INFO] |  \- org.xmlunit:xmlunit-core:jar:2.10.4:test
-```
-
----
-
-
-## What's Inside the Testing Swiss Army Knife?
-
-- **JUnit** (currently 5, later 6): Java's de-facto standard testing framework and foundation.
-- **Mockito**: Creating mock objects to simulate dependencies and verify interactions.
-- **AssertJ**: Provides fluent, chainable, and readable assertions.
-- **Hamcrest**: Offers flexible matchers for creating custom assertions.
-- **JSONAssert**: Compares JSON strings with flexible matching options.
-- **JsonPath**: Extracts and queries data from JSON similar to XPath.
-- **XMLUnit**: Compares and validates XML documents.
-- **Awaitility**: Handles asynchronous testing with fluent conditions.
-
----
-
-## Unit Testing Spring Boot Applications 101
-
-- **Core Concept**: Test individual components (classes, methods) in complete isolation from their dependencies.
-
-- **Confidence Gained**: Provides logarithmic verifications, ensuring that the smallest parts of your code work as expected under various conditions.
-
-- **Best Practices**: Focus on a single unit of work.
-
-- **Pitfalls**: Requires a well-thought-out class design. Poor design can lead to testing overly complex "god classes," making tests difficult to write and maintain.
-
-- **Tools**: JUnit (or Spock, TestNG, etc.), Mockito and assertion libraries like AssertJ or Hamcrest.
-
----
-
-## Unit Testing Has Limits
-
-Consider this sample REST controller, what could we verify with a unit test?
+### Basic Spring Boot Unit Test Example
 
 ```java
-@RestController
-@RequestMapping("/api/customers")
-public class CustomerController {
-
-  private final CustomerService customerService;
-
-  public CustomerController(CustomerService customerService) {
-    this.customerService = customerService;
-  }
-
-  @PostMapping
-  public ResponseEntity<Void> createNewCustomer(@Validated CustomerCreationRequest payload, UriComponentsBuilder uriBuilder) {
-
-    String customerId = customerService.createNewCustomer(payload.firstName());
-
-    UriComponents uriComponents = uriBuilder
-      .path("/api/customers/{id}")
-      .buildAndExpand(customerId);
-
-    return ResponseEntity.created(uriComponents.toUri()).build();
-  }
-}
-```
-
----
-
-```java {15-18}
 @ExtendWith(MockitoExtension.class)
-class CustomerControllerUnitTests {
+class CustomerServiceTest {
 
   @Mock
-  private CustomerService customerService;
+  private CustomerRepository customerRepository;
 
   @InjectMocks
-  private CustomerController customerController;
+  private CustomerService customerService;
 
   @Test
-  void shouldCreateCustomerWhenPayloadRequestIsValid() {
-    when(customerService.createNewCustomer(anyString()))
-      .thenReturn("42");
+  void shouldCreateNewCustomerWhenNameDoesNotExist() {
 
-    ResponseEntity<Void> result = customerController.createNewCustomer(
-      new CustomerCreationRequest("Java", "Duke", "duke@jug.ch"),
-      UriComponentsBuilder.newInstance()
-    );
+    when(customerRepository.findByCustomerName("duke"))
+      .thenReturn(empty());
 
-    assertThat(result.getStatusCode().value())
-      .isEqualTo(201);
-    assertThat(result.getHeaders().getLocation().toString())
-      .isEqualTo("/api/customers/42");
+    when(customerRepository.save(any(CustomerEntity.class)))
+      .thenAnswer(invocation -> {
+        CustomerEntity storedCustomer = invocation.getArgument(0);
+        storedCustomer.setId("42");
+        return storedCustomer;
+      });
+
+    String customerId = customerService.createNewCustomer("duke");
+
+    assertThat(customerId).isEqualTo("42");
   }
 }
 ```
@@ -379,45 +191,55 @@ class CustomerControllerUnitTests {
 - **Headers**: Are we setting `Content-Type` or custom headers correctly?
 - **Security**: Are we Spring Security configuration and other authorization checks enforced?
 
+
 ---
-
-# Sliced Testing
-
-A better alternative from some parts of our application compared to unit testing.
-
-<!--
-
-Notes:
-
-- Show the exclude filter in @WebMvcTest
-
--->
 
 ![bg right:33%](assets/slice.jpg)
 
----
+## Sliced Testing mit Spring Boot
 
-## A Typical Spring `ApplicationContext`
-
-Our application context consists of many different components (Spring beans):
-
-
-![w:400 h:400 center](assets/spring-context.png)
 
 ---
 
-## We Can Slice It!
-
-Spring Boot allows to load only specific parts (slices) of the application context:
-
-![w:600 h:500 center](assets/spring-sliced-context.png)
+![center h:600 w:700](assets/typical-context.png)
 
 ---
-## Slicing in Action
 
-Spring Boot's test slice component scanning will only include relevant beans in the sliced context. We need to provide or mock beans that are not part of the slice:
+![center h:600 w:700](assets/typical-context-colored.png)
 
-![h:450 w:1200](assets/slicing-in-action.png)
+---
+
+
+![center h:500 w:600](assets/typical-context-sliced.png)
+
+---
+
+
+![](assets/typical-context-webmvctest-example.png)
+
+---
+
+### Spring Boot Test Slice Beispiel: `@WebMvcTest`
+
+
+```java
+@WebMvcTest(CustomerController.class)
+@Import(SecurityConfig.class)
+class CustomerControllerTest {
+
+  @Autowired
+  private MockMvc mockMvc;
+
+  @MockitoBean
+  private CustomerService customerService;
+
+  @Test
+  @WithMockUser
+  void shouldReturnLocationOfNewlyCreatedCustomer() throws Exception {
+    // ...
+  }
+}
+```
 
 ---
 
@@ -432,27 +254,6 @@ Spring Boot's test slice component scanning will only include relevant beans in 
 - **Pitfalls**: Requires careful configuration to ensure only the necessary slice of the context is loaded.
 
 - **Tools**: JUnit, Mockito, Spring Test, Spring Boot, Testcontainers
-
----
-
-## Slicing Example: `@WebMvcTest`
-
-- Testing the web layer in isolation and only load the beans we need
-- `MockMvc`: Mocked servlet environment with HTTP semantics
-- See `WebMvcTypeExcludeFilter` for included Spring beans
-
-```java
-@WebMvcTest(CustomerController.class)
-class CustomerControllerTest {
-
-  @Autowired
-  private MockMvc mockMvc;
-
-  @MockitoBean
-  private CustomerService customerService;
-
-}
-```
 
 ---
 
@@ -490,7 +291,15 @@ Notes:
 
 ---
 
-## Integration Testing Spring Boot Applications 101
+## Challenges when Starting the Entire `ApplicationContext`
+
+- **Problem #1**: How to ensure surrounding infrastructure (e.g. database, queues, etc.) is present?
+- **Problem #2**: How to handle HTTP communication from our application to remote services?
+- **Problem #3**: How to keep our build time at a reasonable duration?
+
+---
+
+## Integration Testing with Spring Boot  101
 
 - **Core Concept**: Start the entire Spring application context, often on a random local port, and test the application through its external interfaces (e.g., REST API).
 
@@ -504,21 +313,14 @@ Notes:
 
 ---
 
-## Starting the Entire `ApplicationContext`
-
-- **Problem #1**: How to ensure surrounding infrastructure (e.g. database, queues, etc.) is present?
-- **Problem #2**: How to handle HTTP communication from our application to remote services?
-- **Problem #3**: How to keep our build time at a reasonable duration?
-
----
 
 ## Provide External Infrastructure with Testcontainers (Problem #1)
 
 Running infrastructure components (databases, message brokers, etc.) in Docker containers for our tests becomes a breeze with [Testcontainers](https://testcontainers.com/):
 
 ```java
-@Container
-@ServiceConnection
+@Container // <-- Testcontainers manages the lifecycle of the container
+@ServiceConnection // <-- automatically configures Spring Boot datasource properties
 static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:16-alpine")
   .withDatabaseName("testdb")
   .withUsername("test")
@@ -537,42 +339,10 @@ ad0f804068dc   testcontainers/ryuk:0.12.0   "/bin/ryuk"              10 seconds 
 
 ---
 
-## Stub External HTTP Services with WireMock (Problem #2)
+### Full Integration Test Example
 
-Consider [WireMock](http://wiremock.org/) to stub external HTTP services during tests.
-
-![h:400 center](assets/wiremock-usage.svg)
-
----
-
-## Using WireMock for Integration Tests
-
-- Run as in-memory service or Docker container to simulate connected HTTP services
-- Override HTTP clients to connect to the WireMock server during tests
-
-```java
-TestPropertyValues.of(
-  "clients.open-library.base-url=http://localhost:"+ wireMockServer.port())
-  .applyTo(applicationContext);
-```
-
-```java
-wireMockServer.stubFor(
-  get(urlPathEqualTo("/api/books/" + isbn))
-    .willReturn(aResponse()
-      .withHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-      .withBodyFile("book-response-success.json"))
-);
-```
-
----
-
-## Starting the Entire Spring Context - Version 1
-
-
-- We access the application over HTTP like a user, the test and context run in separate threads (no `@Transactional` rollback), requires HTTP authentication
-
-```java {1}
+```java {1-2,13}
+@AutoConfigureWebTestClient // Spring Boot 4.0
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class ApplicationServletContainerIT {
 
@@ -594,33 +364,12 @@ class ApplicationServletContainerIT {
 
 ---
 
-## Starting the Entire Spring Context - Version 2
 
-- The test and the context run in the same thread, hence we can rollback with `@Transactional` and simply override the security context with `@WithMockUser`
+![bg right:33%](assets/speed.jpg)
 
+# Part 2: Speed & Stability for your Spring Boot Test Suite
 
-```java {1,3}
-@SpringBootTest
-// which is @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
-@AutoConfigureMockMvc
-class ApplicationMockWebIT {
-
-  // @LocalServerPort
-  // private int port; <-- this would fail the test, there is no local port occupied
-
-  @Test
-  @WithMockUser
-  void givenCustomersThenReturnListForAuthenticatedUser(@Autowired MockMvc mockMvc) throws Exception {
-    mockMvc
-      .perform(get("/api/customers")
-        .header(ACCEPT, APPLICATION_JSON))
-      .andExpect(status().is(200))
-      .andExpect(content().contentType(APPLICATION_JSON))
-      .andExpect(jsonPath("$.size()", is(1)));
-  }
-}
-```
-
+---
 
 ---
 <!--
@@ -629,7 +378,7 @@ class ApplicationMockWebIT {
 
 -->
 
-## The Need for Speed - Reducing Build Times (Problem #3)
+## Speed Hack #1 - Spring Context Caching
 
 - **The** **problem**: Integration tests require a started & initialized Spring `ApplicationContext`, which takes time to start
 - **The** **solution**: Spring Test `TestContext` caching, caches an already started Spring `ApplicationContext` for later reuse
@@ -745,25 +494,7 @@ See the release notes of [Spring Framework 7.0.0 M7](https://spring.io/blog/2025
 
 ---
 
-## E2E Testing - the Holy Grail of Confidence
-
-![bg right:33%](assets/prod-example.jpg)
-
-- For applications involving a UI consider tools like Selenium, Selenide, Cypress, Playwright, etc.
-- Detect issues that only appear in production-like environments, also for downstream systems
-- Start with a QA/DEV environment
-- Consider Canary Testing and run your E2E tests regularly with a cron-like setup
-- Challenges: authentication, test data management, environment stability, flakiness
-
----
-
-# Spring Boot Testing Best Practices
-
-![bg right:33%](assets/best-practices.jpg)
-
----
-
-### Best Practice 1: Test Parallelization
+### Speed Hack #2: Test Parallelization
 
 **Goal**: Reduce build time and get faster feedback
 
@@ -791,7 +522,7 @@ Notes:
 - ChatBots might not produce compilable/working test code, agents are better
 -->
 
-### Best Practice 2: Get Help from AI
+### Speed Hack #3 - Get Help from AI
 
 - [Diffblue Cover](https://www.diffblue.com/): AI Agent for unit testing complex (Spring Boot) Java code at scale
 - My go-to CLI code agent: Claude Code
@@ -801,12 +532,23 @@ Notes:
 
 ---
 
-### Best Practice 3: Try Mutation Testing
 
-- Having high code coverage might give you a **false sense of security**
-- Mutation Testing with [PIT](https://pitest.org/quickstart/)
-- Beyond Line Coverage: Traditional tools like JaCoCo show which code runs during tests, but PIT verifies if our tests actually detect when code behaves incorrectly by introducing "**mutations**" to our source code.
-- Quality Guarantee: PIT automatically **modifies our code** (changing conditionals, return values, etc.) to ensure our tests fail when they should, **revealing blind spots** in seemingly comprehensive test suites.
+## Speed Hack #4 - Reuse Testcontainers Container
+
+- Enable container reuse in Testcontainers if possible: `.withReuse(true)`
+- Singleton containers per test run are better suited than `@Testcontainers` (container per test class)
+- Speed up container startup, e.g., by using predefined database snapshots
+
+```java
+private static PostgreSQLContainer<?> postgresModule = new PostgreSQLContainer<>("myteampostgres:42")
+  .withDatabaseName("testdb")
+  .withUsername("testuser")
+  .withPassword("testpass");
+
+static {
+  postgresModule.start();
+}
+```
 
 ---
 
@@ -814,13 +556,13 @@ Notes:
 
 ---
 
-# Common Spring Boot Testing Pitfalls to Avoid
+# Part 3: Why & When Spring Boot Tests Fight Back
 
-![bg right:33%](assets/pitfalls.jpg)
+![bg right:33%](assets/fight-back.jpg)
 
 ---
 
-## Testing Pitfall 1: `@SpringBootTest` Obsession
+## Pitfall 1: `@SpringBootTest` Obsession
 
 - The name could apply it's a one size fits all solution, but it isn't
 - It comes with costs: starting the (entire) application context
@@ -835,7 +577,7 @@ Notes:
 
 ---
 
-## Testing Pitfall 2: @MockitoBean vs. @MockBean vs. @Mock
+## Pitfall 2: @MockitoBean vs. @MockBean vs. @Mock
 
 - `@MockBean` is a Spring Boot specific annotation that replaces a bean in the application context with a Mockito mock
 - `@MockBean` is deprecated in favor of the new `@MockitoBean` annotation
@@ -849,7 +591,20 @@ Notes:
 
 ---
 
-## Testing Pitfall 3: JUnit 4 vs. JUnit 5
+## Pitfall 3: Code Coverage Illusion
+
+- Having high code coverage might give you a **false sense of security**
+- Mutation Testing with [PIT](https://pitest.org/quickstart/)
+- Beyond Line Coverage: Traditional tools like JaCoCo show which code runs during tests, but PIT verifies if our tests actually detect when code behaves incorrectly by introducing "**mutations**" to our source code.
+- Quality Guarantee: PIT automatically **modifies our code** (changing conditionals, return values, etc.) to ensure our tests fail when they should, **revealing blind spots** in seemingly comprehensive test suites.
+
+---
+
+![center h:400 w:1300](assets/mutation-testing-explained.png)
+
+---
+
+## Pitfall 4: JUnit 4 vs. JUnit 5 vs. JUnit 6
 
 ![bg right:33%](assets/car-comparison.jpg)
 
@@ -893,43 +648,59 @@ Notes:
 
 ---
 
-## What's Next? Additional Testing Resources
+---
 
-![bg h:900 right:20%](assets/offers-w.png)
+![bg right:23%](assets/philip-jug-zurich-2025-audience.jpg)
 
 
-- Online Course: [Testing Spring Boot Applications Masterclass](https://rieckpil.de/testing-spring-boot-applications-masterclass/) (on-demand, 12 hours, 130+ modules)
-- eBook: [30 Testing Tools and Libraries Every Java Developer Must Know](https://leanpub.com/java-testing-toolbox)
-- eBook: [Stratospheric - From Zero to Production with AWS](https://leanpub.com/stratospheric)
+## What's Next?
+
+Testing is a team sport, make sure your whole team levels up together!
+
 - Spring Boot [testing workshops](https://pragmatech.digital/workshops/) (in-house/remote/hybrid)
+- Furher Spring Boot testing resources (courses, eBooks, articles) at [rieckpil.de](https://rieckpil.de/)
 - [Consulting offerings](https://pragmatech.digital/consulting/), e.g. the Test Maturity Assessment for projects/teams
 
 ---
 
+## My Entire Spring Boot Testing Knowledge Combined
+
+... in one on-demand online course.
+
+Learn how to test and verify a real-world self-contained system with the [Testing Spring Boot Applications Masterclass](https://rieckpil.de/testing-spring-boot-applications-masterclass/)
+
+![center w:400 h:400](assets/masterclass-architecture.png)
+
+
+---
+
+## Covering Unit, Sliced, Integration and E2E Tests
+
+... with 130 course lessons and 12h+ of content
+
+![center](assets/tsbam-recording.gif)
+
+---
 ## Don't Leave Empty-Handed
 
-![bg h:720 w:450 right:33%](assets/spring-boot-testing-book-cover.png)
+![bg h:720 w:450 right:33%](assets/tsbad-cover.png)
 
-- Get the complementary **Spring Boot Testing eBook** for free (instead of $9)
+- Get the complementary **Testing Spring Boot Applications Demystified** for free (instead of $9)
 - 120+ Pages with practical hands-on advice to ship code with confidence
-- Get the eBook by joining our [newsletter](https://rieckpil.de/book) via the **QR code** on the next & final slide
-
+- Get the eBook by joining our [newsletter](https://rieckpil.de/free-spring-boot-testing-book/)
 
 
 ---
 
 <!-- paginate: false -->
 
-
 ## Joyful Testing!
 
-Get your free Spring Boot Testing eBook copy:
+The slides will be shared after the webinar via email.
 
 ![bg right:33%](assets/end.jpg)
 
-![center h:200 w:200](assets/newsletter-signup-qr.png)
-
 Reach out any time via:
 - [LinkedIn](https://www.linkedin.com/in/rieckpil) (Philip Riecks)
-- [X](https://x.com/rieckpil) (@rieckpil)
+  - [X](https://x.com/rieckpil) (@rieckpil)
 - [Mail](mailto:philip@pragmatech.digital) (philip@pragmatech.digital)
