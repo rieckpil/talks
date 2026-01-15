@@ -1,7 +1,7 @@
 ---
 marp: true
 theme: pragmatech
-header: 'Testing Spring Boot Applications Demystified @ Webinar 17.12.2025'
+header: 'Testing Spring Boot Applications Demystified @ Infinum 15.01.2026'
 ---
 
 ![bg](./assets/tsbad-beginning.png)
@@ -21,7 +21,7 @@ Notes:
 
 ## A Hero's Journey Through the Spring Boot Testing Labyrinth
 
-_Online Webinar 17th of December 2025_
+_Webinar for Infinum 15th of January 2026_
 
 Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](https://x.com/rieckpil)
 
@@ -30,7 +30,7 @@ Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](htt
 
 ## Participate During the Talk
 
-Go to [menti.com](https://www.menti.com/) and use the code **7747 1181** to **anonymously** submit answers for the quizzes and add your questions during the talk.
+Go to [menti.com](https://www.menti.com/) and use the code **2322 7818** to **anonymously** submit answers for the quizzes and add your questions during the talk.
 
 Start with the first two questions:
 - Despite having LLMs and Code Agents, do you still write your tests by hand?
@@ -754,11 +754,8 @@ static {
 
 Testing is a team sport, make sure your whole team levels up together!
 
-- Free meetup sessions for companies/teams:
-  - Stop Fighting Your Spring Boot Tests
-  - Testing Spring Boot Applications Demystified
-  - Getting Started with Testcontainers for Spring Boot
 - Spring Boot [testing workshops](https://pragmatech.digital/workshops/) (in-house/remote/hybrid)
+- Furher Spring Boot testing resources (courses, eBooks, articles) at [rieckpil.de](https://rieckpil.de/)
 - [Consulting offerings](https://pragmatech.digital/consulting/), e.g. the Test Maturity Assessment for projects/teams
 
 ---
@@ -782,19 +779,34 @@ Learn how to test and verify a real-world self-contained system with the [Testin
 
 ---
 
-![bg h:900 right:20%](assets/offers-w.png)
+[//]: # (![bg h:900 right:20%]&#40;assets/offers-w.png&#41;)
 
-## Limited Webinar Offer for the Next 24 Hours
+[//]: # ()
+[//]: # (## Limited Webinar Offer for the Next 24 Hours)
 
-All webinar attendees get a **50% discount** on the course price with this link: https://rieckpil.de/testing-spring-boot-applications-masterclass/?promo=WEBINAR-2025-12-17
+[//]: # ()
+[//]: # (All webinar attendees get a **50% discount** on the course price with this link: https://rieckpil.de/testing-spring-boot-applications-masterclass/?promo=WEBINAR-2025-12-17)
 
-Enrolling for the Bundle Edition gives you three additional resources for free:
+[//]: # ()
+[//]: # (Enrolling for the Bundle Edition gives you three additional resources for free:)
 
-- TDD with Spring Boot Done Right Online Course
-- Hands-On Mocking with Mockito Online Course
-- 30 Testing Tools and Libraries Every Java Developer Must Know eBook
+[//]: # ()
+[//]: # (- TDD with Spring Boot Done Right Online Course)
 
-The offer expires on the 18th of December 2025 6 PM CET.
+[//]: # (- Hands-On Mocking with Mockito Online Course)
+
+[//]: # (- 30 Testing Tools and Libraries Every Java Developer Must Know eBook)
+
+[//]: # ()
+[//]: # (The offer expires on the 18th of December 2025 6 PM CET.)
+
+## Don't Leave Empty-Handed
+
+![bg h:720 w:450 right:33%](assets/tsbad-cover.png)
+
+- Get the complementary **Testing Spring Boot Applications Demystified** for free (instead of $9)
+- 120+ Pages with practical hands-on advice to ship code with confidence
+- Get the eBook by joining our [newsletter](https://rieckpil.de/free-spring-boot-testing-book/)
 
 ---
 
@@ -805,7 +817,7 @@ The offer expires on the 18th of December 2025 6 PM CET.
 
 ## Joyful Testing!
 
-Slides & recording will be shared after the webinar via email.
+The slides will be shared after the webinar via email.
 
 ![bg right:33%](assets/end.jpg)
 
