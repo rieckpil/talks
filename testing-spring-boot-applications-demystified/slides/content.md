@@ -1,7 +1,7 @@
 ---
 marp: true
 theme: pragmatech
-header: 'Testing Spring Boot Applications Demystified @ Infinium 14.01.2026'
+header: 'Testing Spring Boot Applications Demystified @ 20.01.2026'
 ---
 
 ![bg](./assets/tsbad-beginning.png)
@@ -24,7 +24,7 @@ Notes:
 
 ## A Hero's Journey Through the Spring Boot Testing Labyrinth
 
-_Webinar@Infinium 14.01.2026_
+_Webinar 20.01.2026_
 
 Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](https://x.com/rieckpil)
 
@@ -34,9 +34,7 @@ Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](htt
 ## Participate During the Talk
 
 
-![h:200 w:200 center](assets/mentimeter-jug-munich.png)
-
-Go to [menti.com](https://www.menti.com/) and use the code **2154 4772** to **anonymously** submit answers for the quizzes and add your questions during the talk.
+Go to [menti.com](https://www.menti.com/) and use the code **7720 7354** to **anonymously** submit answers for the quizzes and add your questions during the talk.
 
 Start with the first two questions:
 - Despite having LLMs and Code Agents, do you still write your tests by hand?
