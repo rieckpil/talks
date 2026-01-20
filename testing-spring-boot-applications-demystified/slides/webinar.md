@@ -53,6 +53,35 @@ Testing Spring Boot applications can feel like entering a labyrinth blindfolded:
 - Tests written to satisfy coverage metrics, not increase productivity, confidence or catch bugs
 ---
 
+
+
+<!-- header: 'Webinar 20.01.2026 - Questions @ menti.com Code: <strong>7720 7354</strong>' -->
+
+
+![bg right:33%](assets/why-test-software.jpg)
+
+# Why Test Software?
+
+---
+
+
+[//]: # (<!-- footer: '![w:32 h:32]&#40;assets/logo.webp&#41;' -->)
+## Spring Boot Testing - The Bad & Ugly
+
+
+![center h:500 w:900](assets/spring-boot-testing-the-bad.png)
+
+---
+
+
+## Spring Boot Testing - The Good
+
+![center h:500 w:900](assets/tests-benefit-en.png)
+
+
+---
+
+
 <!-- footer: '![w:32 h:32](assets/logo.webp)' -->
 
 
@@ -784,10 +813,6 @@ Learn how to test and verify a real-world self-contained system with the [Testin
 
 ## Limited Webinar Offer for the Next 24 Hours
 
-
-All webinar attendees get a **50% discount** on the course price with [this link](https://rieckpil.de/testing-spring-boot-applications-masterclass/?promo=WEBINAR-2026-01-20) (slides will be shared).
-
-
 Enrolling for the Bundle Edition gives you three additional resources for free:
 
 
@@ -797,6 +822,7 @@ Enrolling for the Bundle Edition gives you three additional resources for free:
 
 - 30 Testing Tools and Libraries Every Java Developer Must Know **eBook**
 
+All webinar attendees get a **50% discount** on the course price with [this link](https://rieckpil.de/testing-spring-boot-applications-masterclass/?promo=WEBINAR-2026-01-20) (link will be shared in the chat).
 
 The offer expires on the 21st of December 2026 6 PM CET.
 
