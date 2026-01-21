@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/bin/zsh
+source ~/.zshrc
 
 # Script to generate a shareable PDF using resized images
 # Usage: ./generate_sharable_pdf.sh <output-pdf-name>
@@ -22,8 +23,8 @@ if [[ ! "$OUTPUT_PDF" == *.pdf ]]; then
 fi
 
 # Configuration
-MARKDOWN_FILE="./content.md"
-BACKUP_FILE="./content.md.tmp"
+MARKDOWN_FILE="./webinar.md"
+BACKUP_FILE="./webinar.md.tmp"
 GENERATED_DIR="./assets/generated"
 THEME_FILE="./pragmatech.css"
 ENGINE_FILE="./engine.js"
@@ -94,15 +95,38 @@ fi
 echo "Generating PDF: $OUTPUT_PDF"
 marp --pdf "$MARKDOWN_FILE" --theme "$THEME_FILE" --engine "$ENGINE_FILE" --allow-local-files -o "$OUTPUT_PDF"
 
-# Get file size for confirmation
-if [ -f "$OUTPUT_PDF" ]; then
-    file_size=$(du -h "$OUTPUT_PDF" | cut -f1)
+# Check if PDF was generated
+if [ ! -f "$OUTPUT_PDF" ]; then
+    echo "Error: PDF generation failed"
+    exit 1
+fi
+
+raw_size=$(du -h "$OUTPUT_PDF" | cut -f1)
+echo "Raw PDF generated: $OUTPUT_PDF ($raw_size)"
+
+# Reduce PDF size using Ghostscript
+REDUCED_PDF="${OUTPUT_PDF%.pdf}-reduced.pdf"
+echo "Reducing PDF size..."
+reduce_pdf "$OUTPUT_PDF" "$REDUCED_PDF"
+
+if [ -f "$REDUCED_PDF" ]; then
+    reduced_size=$(du -h "$REDUCED_PDF" | cut -f1)
     echo ""
-    echo "✓ PDF generated successfully: $OUTPUT_PDF"
-    echo "  File size: $file_size"
+    echo "✓ Reduced PDF generated successfully: $REDUCED_PDF"
+    echo "  File size: $reduced_size (was $raw_size before reduction)"
+    echo ""
+
+    # Remove the raw PDF
+    rm "$OUTPUT_PDF"
+    echo "Removed raw PDF: $OUTPUT_PDF"
+
+    # Rename reduced PDF to original name
+    mv "$REDUCED_PDF" "$OUTPUT_PDF"
+    echo "Renamed $REDUCED_PDF to $OUTPUT_PDF"
     echo ""
     echo "The original $MARKDOWN_FILE has been restored."
 else
-    echo "Error: PDF generation failed"
-    exit 1
+    echo "Warning: PDF reduction failed, keeping original PDF"
+    file_size=$(du -h "$OUTPUT_PDF" | cut -f1)
+    echo "  File size: $file_size"
 fi

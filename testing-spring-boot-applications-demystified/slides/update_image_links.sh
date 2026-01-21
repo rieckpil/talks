@@ -4,8 +4,8 @@
 # Run this after resize_images.sh
 
 # Configuration
-MARKDOWN_FILE="./content.md"
-BACKUP_FILE="./content.md.bak"
+MARKDOWN_FILE="./webinar.md"
+BACKUP_FILE="./webinar.md.bak"
 GENERATED_DIR="./assets/generated"
 
 # Check if the generated directory exists
