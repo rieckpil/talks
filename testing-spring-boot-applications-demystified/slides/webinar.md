@@ -1,7 +1,7 @@
 ---
 marp: true
 theme: pragmatech
-header: 'Testing Spring Boot Applications Demystified @ 20.01.2026'
+header: 'Testing Spring Boot Applications Demystified @ 19.02.2026'
 ---
 
 ![bg](./assets/tsbad-beginning.png)
@@ -21,7 +21,7 @@ Notes:
 
 ## A Hero's Journey Through the Spring Boot Testing Labyrinth
 
-_Webinar 20th of January 2026_
+_Webinar 19th of February 2026
 
 Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](https://x.com/rieckpil)
 
@@ -54,9 +54,7 @@ Testing Spring Boot applications can feel like entering a labyrinth blindfolded:
 ---
 
 
-
 <!-- header: 'Webinar 20.01.2026 - Questions @ menti.com Code: <strong>7720 7354</strong>' -->
-
 
 ![bg right:33%](assets/why-test-software.jpg)
 
@@ -824,7 +822,7 @@ Enrolling for the Bundle Edition gives you three additional resources for free:
 
 All webinar attendees get a **50% discount** on the course price with [this link](https://rieckpil.de/testing-spring-boot-applications-masterclass/?promo=WEBINAR-2026-01-20) (link will be shared in the chat).
 
-The offer expires on the 21st of December 2026 6 PM CET.
+The offer expires on the 20th of February 2026 6 PM CET.
 
 [//]: # ()
 [//]: # (## Don't Leave Empty-Handed)
