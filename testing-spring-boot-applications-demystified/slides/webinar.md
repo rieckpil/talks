@@ -21,7 +21,7 @@ Notes:
 
 ## A Hero's Journey Through the Spring Boot Testing Labyrinth
 
-_Webinar 19th of February 2026
+Webinar 19th of February 2026
 
 Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](https://x.com/rieckpil)
 
@@ -30,7 +30,7 @@ Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](htt
 
 ## Participate During the Talk
 
-Go to [menti.com](https://www.menti.com/) and use the code **7720 7354** to **anonymously** submit answers for the quizzes and add your questions during the talk.
+Go to [menti.com](https://www.menti.com/) and use the code **1975 5264** to **anonymously** submit answers for the quizzes and add your questions during the talk.
 
 Start with the first two questions:
 - Despite having LLMs and Code Agents, do you still write your tests by hand?
@@ -54,7 +54,7 @@ Testing Spring Boot applications can feel like entering a labyrinth blindfolded:
 ---
 
 
-<!-- header: 'Webinar 20.01.2026 - Questions @ menti.com Code: <strong>7720 7354</strong>' -->
+<!-- header: 'Webinar 20.01.2026 - Questions @ menti.com Code: <strong>1975 5264</strong>' -->
 
 ![bg right:33%](assets/why-test-software.jpg)
 
@@ -201,38 +201,41 @@ Tips:
 - Pick one assertion library or at least not mix it within the same test class
 -->
 
-```shell {4-6,12,14,15-16,23,27,32}
+```shell {4-6,13,15-16,23,25,29}
 ./mvnw dependency:tree
 [INFO] ...
-[INFO] +- org.springframework.boot:spring-boot-starter-test:jar:3.5.6:test
-[INFO] |  +- org.springframework.boot:spring-boot-test:jar:3.5.6:test
-[INFO] |  +- org.springframework.boot:spring-boot-test-autoconfigure:jar:3.5.6:test
-[INFO] |  +- com.jayway.jsonpath:json-path:jar:2.9.0:test
-[INFO] |  +- jakarta.xml.bind:jakarta.xml.bind-api:jar:4.0.2:test
+[INFO] +- org.springframework.boot:spring-boot-starter-test:jar:4.0.2:test
+[INFO] |  +- org.springframework.boot:spring-boot-test:jar:4.0.2:test
+[INFO] |  +- org.springframework.boot:spring-boot-test-autoconfigure:jar:4.0.2:test
+[INFO] |  +- com.jayway.jsonpath:json-path:jar:2.10.0:test
+[INFO] |  |  \- org.slf4j:slf4j-api:jar:2.0.17:compile
+[INFO] |  +- jakarta.xml.bind:jakarta.xml.bind-api:jar:4.0.4:test
 [INFO] |  |  \- jakarta.activation:jakarta.activation-api:jar:2.1.4:test
-[INFO] |  +- net.minidev:json-smart:jar:2.5.2:test
-[INFO] |  |  \- net.minidev:accessors-smart:jar:2.5.2:test
+[INFO] |  +- net.minidev:json-smart:jar:2.6.0:test
+[INFO] |  |  \- net.minidev:accessors-smart:jar:2.6.0:test
 [INFO] |  |     \- org.ow2.asm:asm:jar:9.7.1:test
-[INFO] |  +- org.assertj:assertj-core:jar:3.27.4:test
-[INFO] |  |  \- net.bytebuddy:byte-buddy:jar:1.17.7:test
+[INFO] |  +- org.assertj:assertj-core:jar:3.27.6:test
+[INFO] |  |  \- net.bytebuddy:byte-buddy:jar:1.17.8:test
 [INFO] |  +- org.awaitility:awaitility:jar:4.3.0:test
 [INFO] |  +- org.hamcrest:hamcrest:jar:3.0:test
-[INFO] |  +- org.junit.jupiter:junit-jupiter:jar:5.12.2:test
-[INFO] |  |  +- org.junit.jupiter:junit-jupiter-api:jar:5.12.2:test
-[INFO] |  |  |  +- org.junit.platform:junit-platform-commons:jar:1.12.2:test
+[INFO] |  +- org.junit.jupiter:junit-jupiter:jar:6.0.2:test
+[INFO] |  |  +- org.junit.jupiter:junit-jupiter-api:jar:6.0.2:test
+[INFO] |  |  |  +- org.opentest4j:opentest4j:jar:1.3.0:test
+[INFO] |  |  |  +- org.junit.platform:junit-platform-commons:jar:6.0.2:test
 [INFO] |  |  |  \- org.apiguardian:apiguardian-api:jar:1.1.2:test
-[INFO] |  |  +- org.junit.jupiter:junit-jupiter-params:jar:5.12.2:test
-[INFO] |  |  \- org.junit.jupiter:junit-jupiter-engine:jar:5.12.2:test
-[INFO] |  |     \- org.junit.platform:junit-platform-engine:jar:1.12.2:test
-[INFO] |  +- org.mockito:mockito-core:jar:5.16.0:test
-[INFO] |  |  +- net.bytebuddy:byte-buddy-agent:jar:1.17.7:test
+[INFO] |  |  +- org.junit.jupiter:junit-jupiter-params:jar:6.0.2:test
+[INFO] |  |  \- org.junit.jupiter:junit-jupiter-engine:jar:6.0.2:test
+[INFO] |  |     \- org.junit.platform:junit-platform-engine:jar:6.0.2:test
+[INFO] |  +- org.mockito:mockito-core:jar:5.5.0:test
+[INFO] |  |  +- net.bytebuddy:byte-buddy-agent:jar:1.17.8:test
 [INFO] |  |  \- org.objenesis:objenesis:jar:3.3:test
-[INFO] |  +- org.mockito:mockito-junit-jupiter:jar:5.16.0:test
+[INFO] |  +- org.mockito:mockito-junit-jupiter:jar:5.5.0:test
 [INFO] |  +- org.skyscreamer:jsonassert:jar:1.5.3:test
 [INFO] |  |  \- com.vaadin.external.google:android-json:jar:0.0.20131108.vaadin1:test
-[INFO] |  +- org.springframework:spring-core:jar:6.2.11:compile
-[INFO] |  |  \- org.springframework:spring-jcl:jar:6.2.11:compile
-[INFO] |  +- org.springframework:spring-test:jar:6.2.11:test
+[INFO] |  +- org.springframework:spring-core:jar:7.0.3:compile
+[INFO] |  |  +- commons-logging:commons-logging:jar:1.3.5:compile
+[INFO] |  |  \- org.jspecify:jspecify:jar:1.0.0:compile
+[INFO] |  +- org.springframework:spring-test:jar:7.0.3:test
 [INFO] |  \- org.xmlunit:xmlunit-core:jar:2.10.4:test
 ```
 
@@ -820,7 +823,7 @@ Enrolling for the Bundle Edition gives you three additional resources for free:
 
 - 30 Testing Tools and Libraries Every Java Developer Must Know **eBook**
 
-All webinar attendees get a **50% discount** on the course price with [this link](https://rieckpil.de/testing-spring-boot-applications-masterclass/?promo=WEBINAR-2026-01-20) (link will be shared in the chat).
+All webinar attendees get a **50% discount** on the course price with [this link](https://rieckpil.de/testing-spring-boot-applications-masterclass/?promo=WEBINAR-2026-02-19) (link will be shared in the chat).
 
 The offer expires on the 20th of February 2026 6 PM CET.
 
