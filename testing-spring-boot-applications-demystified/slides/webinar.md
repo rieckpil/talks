@@ -54,7 +54,7 @@ Testing Spring Boot applications can feel like entering a labyrinth blindfolded:
 ---
 
 
-<!-- header: 'Webinar 20.01.2026 - Questions @ menti.com Code: <strong>1975 5264</strong>' -->
+<!-- header: 'Webinar 19.02.2026 - Questions @ menti.com Code: <strong>1975 5264</strong>' -->
 
 ![bg right:33%](assets/why-test-software.jpg)
 
@@ -777,16 +777,30 @@ static {
 
 ---
 
-![bg right:23%](assets/philip-jug-zurich-2025-audience.jpg)
+![bg right:30%](assets/why-test.jpg)
 
 
 ## What's Next?
 
-Testing is a team sport, make sure your whole team levels up together!
+Testing is a team sport, make sure your whole team levels up together
 
 - Spring Boot [testing workshops](https://pragmatech.digital/workshops/) (in-house/remote/hybrid)
-- Furher Spring Boot testing resources (courses, eBooks, articles) at [rieckpil.de](https://rieckpil.de/)
+- Further Spring Boot testing resources (courses, eBooks, articles) at [rieckpil.de](https://rieckpil.de/)
 - [Consulting offerings](https://pragmatech.digital/consulting/), e.g. the Test Maturity Assessment for projects/teams
+
+---
+
+## Bring This Webinar to Your Company!
+
+![bg right:23%](assets/philip-jug-zurich-2025-audience.jpg)
+
+I offer this and similar Spring Boot testing webinars **for free** for companies as:
+
+- **Lunch & Learn** sessions
+- **Internal conferences** and developer days
+- **Team training** events
+
+Reach out via LinkedIn or email (philip@pragmatech.digital) to discuss the details and schedule a session for your team.
 
 ---
 
@@ -806,6 +820,10 @@ Learn how to test and verify a real-world self-contained system with the [Testin
 ... with 130 course lessons and 12h+ of content
 
 ![center](assets/tsbam-recording.gif)
+
+---
+
+![bg h:600 center](assets/tsbam-testimonials.png)
 
 ---
 
@@ -843,13 +861,12 @@ The offer expires on the 20th of February 2026 6 PM CET.
 ---
 
 
-
 <!-- paginate: false -->
 
 
 ## Joyful Testing!
 
-The slides will be shared after the webinar via email.
+The slides & recording will be shared after the webinar via email.
 
 ![bg right:33%](assets/end.jpg)
 
