@@ -201,7 +201,7 @@ Tips:
 - Pick one assertion library or at least not mix it within the same test class
 -->
 
-```shell {4-6,13,15-16,23,25,29}
+```shell {4-6,13,15-16,17,25,29}
 ./mvnw dependency:tree
 [INFO] ...
 [INFO] +- org.springframework.boot:spring-boot-starter-test:jar:4.0.2:test
