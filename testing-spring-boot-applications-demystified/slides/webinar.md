@@ -1,10 +1,10 @@
 ---
 marp: true
 theme: pragmatech
-header: 'Testing Spring Boot Applications Demystified @ 19.02.2026'
+header: 'Testing Spring Boot Applications Demystified @ javaBin Bergen 26.02.2026'
 ---
 
-![bg](./assets/tsbad-beginning.png)
+![bg](./assets/bergen-jug-norway.jpg)
 <!-- header: "" -->
 <!-- footer: ""-->
 
@@ -21,7 +21,7 @@ Notes:
 
 ## A Hero's Journey Through the Spring Boot Testing Labyrinth
 
-Webinar 19th of February 2026
+javaBin Bergen 26.02.2026
 
 Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](https://x.com/rieckpil)
 
@@ -30,7 +30,9 @@ Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](htt
 
 ## Participate During the Talk
 
-Go to [menti.com](https://www.menti.com/) and use the code **1975 5264** to **anonymously** submit answers for the quizzes and add your questions during the talk.
+Go to [menti.com](https://www.menti.com/) and use the code **1661 6205** to **anonymously** submit answers for the quizzes and add your questions during the talk.
+
+![h:200 center](../assets/mentimeter-jug-bergen-2026.png)
 
 Start with the first two questions:
 - Despite having LLMs and Code Agents, do you still write your tests by hand?
@@ -54,7 +56,7 @@ Testing Spring Boot applications can feel like entering a labyrinth blindfolded:
 ---
 
 
-<!-- header: 'Webinar 19.02.2026 - Questions @ menti.com Code: <strong>1975 5264</strong>' -->
+<!-- header: 'javaBin Bergen 26.02.2026 - Questions @ menti.com Code: <strong>1661 6205</strong>' -->
 
 ![bg right:33%](assets/why-test-software.jpg)
 
@@ -62,6 +64,18 @@ Testing Spring Boot applications can feel like entering a labyrinth blindfolded:
 
 ---
 
+![bg right:33%](assets/ai-image.jpg)
+
+
+## Automated Testing in the AI Era
+
+- AI generates the code; you own the consequences.
+- Co-pilots don’t carry pagers. You do.
+- The faster the code is generated, the faster you need to prove it’s correct.
+- AI is the accelerator; your test suite is the brakes. You can't drive fast without both.
+- Mass-produced code without (the correct) mass-produced tests is just technical debt at scale.
+
+---
 
 [//]: # (<!-- footer: '![w:32 h:32]&#40;assets/logo.webp&#41;' -->)
 ## Spring Boot Testing - The Bad & Ugly
@@ -790,11 +804,11 @@ Testing is a team sport, make sure your whole team levels up together
 
 ---
 
-## Bring This Webinar to Your Company!
+## Bring This Talk to Your Company!
 
 ![bg right:23%](assets/philip-jug-zurich-2025-audience.jpg)
 
-I offer this and similar Spring Boot testing webinars **for free** for companies as:
+I offer this and similar Spring Boot testing talks **for free** for companies as:
 
 - **Lunch & Learn** sessions
 - **Internal conferences** and developer days
@@ -827,36 +841,41 @@ Learn how to test and verify a real-world self-contained system with the [Testin
 
 ---
 
-![bg h:900 right:20%](assets/offers-w.png)
+[//]: # (![bg h:900 right:20%]&#40;assets/offers-w.png&#41;)
 
-
-## Limited Webinar Offer for the Next 24 Hours
-
-Enrolling for the Bundle Edition gives you three additional resources for free:
-
-
-- TDD with Spring Boot Done Right **Online Course**
-
-- Hands-On Mocking with Mockito **Online Course**
-
-- 30 Testing Tools and Libraries Every Java Developer Must Know **eBook**
-
-All webinar attendees get a **50% discount** on the course price with [this link](https://rieckpil.de/testing-spring-boot-applications-masterclass/?promo=WEBINAR-2026-02-19) (link will be shared in the chat).
-
-The offer expires on the 20th of February 2026 6 PM CET.
+[//]: # (## Limited Webinar Offer for the Next 24 Hours)
 
 [//]: # ()
-[//]: # (## Don't Leave Empty-Handed)
+[//]: # (Enrolling for the Bundle Edition gives you three additional resources for free:)
 
 [//]: # ()
-[//]: # (![bg h:720 w:450 right:33%]&#40;assets/tsbad-cover.png&#41;)
+[//]: # ()
+[//]: # (- TDD with Spring Boot Done Right **Online Course**)
 
 [//]: # ()
-[//]: # (- Get the complementary **Testing Spring Boot Applications Demystified** for free &#40;instead of $9&#41;)
+[//]: # (- Hands-On Mocking with Mockito **Online Course**)
 
-[//]: # (- 120+ Pages with practical hands-on advice to ship code with confidence)
+[//]: # ()
+[//]: # (- 30 Testing Tools and Libraries Every Java Developer Must Know **eBook**)
 
-[//]: # (- Get the eBook by joining our [newsletter]&#40;https://rieckpil.de/free-spring-boot-testing-book/&#41;)
+[//]: # ()
+[//]: # (All webinar attendees get a **50% discount** on the course price with [this link]&#40;https://rieckpil.de/testing-spring-boot-applications-masterclass/?promo=WEBINAR-2026-02-19&#41; &#40;link will be shared in the chat&#41;.)
+
+[//]: # ()
+[//]: # (The offer expires on the 20th of February 2026 6 PM CET.)
+
+
+## Don't Leave Empty-Handed
+
+
+![bg h:720 w:450 right:33%](assets/tsbad-cover.png)
+
+
+- Get the complementary **Testing Spring Boot Applications Demystified** for free (instead of $9)
+
+- 120+ Pages with practical hands-on advice to ship code with confidence
+
+- Get the eBook by joining our [newsletter](https://rieckpil.de/free-spring-boot-testing-book/)
 
 ---
 
@@ -866,7 +885,9 @@ The offer expires on the 20th of February 2026 6 PM CET.
 
 ## Joyful Testing!
 
-The slides & recording will be shared after the webinar via email.
+Get your Spring Boot testing eBook:
+
+![center h:200 w:200](assets/newsletter-signup-qr.png)
 
 ![bg right:33%](assets/end.jpg)
 
