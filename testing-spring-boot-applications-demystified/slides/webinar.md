@@ -1,10 +1,10 @@
 ---
 marp: true
 theme: pragmatech
-header: 'Testing Spring Boot Applications Demystified @ javaBin Bergen 26.02.2026'
+header: 'Testing Spring Boot Applications Demystified @ javaBin Oslo 05.03.2026'
 ---
 
-![bg](./assets/bergen-jug-norway.jpg)
+![bg](./assets/oslo-2026-jug.jpg)
 <!-- header: "" -->
 <!-- footer: ""-->
 
@@ -21,7 +21,7 @@ Notes:
 
 ## A Hero's Journey Through the Spring Boot Testing Labyrinth
 
-javaBin Bergen 26.02.2026
+javaBin Oslo 05.03.2026
 
 Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](https://x.com/rieckpil)
 
@@ -30,9 +30,9 @@ Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](htt
 
 ## Participate During the Talk
 
-Go to [menti.com](https://www.menti.com/) and use the code **1661 6205** to **anonymously** submit answers for the quizzes and add your questions during the talk.
+Go to [menti.com](https://www.menti.com/) and use the code **5726 9235** to **anonymously** submit answers for the quizzes and add your questions during the talk.
 
-![h:200 center](../assets/mentimeter-jug-bergen-2026.png)
+![h:200 center](../assets/mentimeter-jug-oslo-2026.png)
 
 Start with the first two questions:
 - Despite having LLMs and Code Agents, do you still write your tests by hand?
@@ -883,13 +883,15 @@ Learn how to test and verify a real-world self-contained system with the [Testin
 <!-- paginate: false -->
 
 
-## Joyful Testing!
+## Tusen takk!
 
 Get your Spring Boot testing eBook:
 
 ![center h:200 w:200](assets/newsletter-signup-qr.png)
 
 ![bg right:33%](assets/end.jpg)
+
+Joyful testing!
 
 Reach out any time via:
 - [LinkedIn](https://www.linkedin.com/in/rieckpil) (Philip Riecks)
