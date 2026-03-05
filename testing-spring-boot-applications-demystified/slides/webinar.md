@@ -56,7 +56,7 @@ Testing Spring Boot applications can feel like entering a labyrinth blindfolded:
 ---
 
 
-<!-- header: 'javaBin Bergen 26.02.2026 - Questions @ menti.com Code: <strong>1661 6205</strong>' -->
+<!-- header: 'javaBin Oslo 05.03.2026 - Questions @ menti.com Code: <strong>5726 9235</strong>' -->
 
 ![bg right:33%](assets/why-test-software.jpg)
 
@@ -144,7 +144,7 @@ Good tests don't just catch bugs - they give you **fast feedback** and **confide
 
 ---
 
-![bg right:33%](assets/hza.jpg)
+![bg right:33% h:750](assets/location.png)
 
 ### About Philip
 
@@ -890,8 +890,6 @@ Get your Spring Boot testing eBook:
 ![center h:200 w:200](assets/newsletter-signup-qr.png)
 
 ![bg right:33%](assets/end.jpg)
-
-Joyful testing!
 
 Reach out any time via:
 - [LinkedIn](https://www.linkedin.com/in/rieckpil) (Philip Riecks)
