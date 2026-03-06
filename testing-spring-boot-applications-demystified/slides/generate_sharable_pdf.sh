@@ -1,6 +1,4 @@
 #!/bin/zsh
-source ~/.zshrc
-
 # Script to generate a shareable PDF using resized images
 # Usage: ./generate_sharable_pdf.sh <output-pdf-name>
 # Example: ./generate_sharable_pdf.sh talk-abc-2025.pdf
@@ -103,6 +101,8 @@ fi
 
 raw_size=$(du -h "$OUTPUT_PDF" | cut -f1)
 echo "Raw PDF generated: $OUTPUT_PDF ($raw_size)"
+
+source ~/.zshrc
 
 # Reduce PDF size using Ghostscript
 REDUCED_PDF="${OUTPUT_PDF%.pdf}-reduced.pdf"
