@@ -1,7 +1,7 @@
 ---
 marp: true
 theme: pragmatech
-header: 'Testing Spring Boot Applications Demystified @ javaBin Oslo 05.03.2026'
+header: 'Testing Spring Boot Applications Demystified @ Webinar 19.03.2026'
 ---
 
 ![bg](./assets/oslo-2026-jug.jpg)
@@ -21,7 +21,7 @@ Notes:
 
 ## A Hero's Journey Through the Spring Boot Testing Labyrinth
 
-javaBin Oslo 05.03.2026
+Webinar 19.03.2026
 
 Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](https://x.com/rieckpil)
 
@@ -56,7 +56,7 @@ Testing Spring Boot applications can feel like entering a labyrinth blindfolded:
 ---
 
 
-<!-- header: 'javaBin Oslo 05.03.2026 - Questions @ menti.com Code: <strong>5726 9235</strong>' -->
+<!-- header: 'Webinar 19.03.2026 - Questions @ menti.com Code: <strong>5726 9235</strong>' -->
 
 ![bg right:33%](assets/why-test-software.jpg)
 
