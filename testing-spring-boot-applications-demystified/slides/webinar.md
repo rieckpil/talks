@@ -4,7 +4,7 @@ theme: pragmatech
 header: 'Testing Spring Boot Applications Demystified @ Webinar 19.03.2026'
 ---
 
-![bg](./assets/oslo-2026-jug.jpg)
+![bg](./assets/tsbad-beginning.png)
 <!-- header: "" -->
 <!-- footer: ""-->
 
@@ -30,9 +30,9 @@ Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](htt
 
 ## Participate During the Talk
 
-Go to [menti.com](https://www.menti.com/) and use the code **5726 9235** to **anonymously** submit answers for the quizzes and add your questions during the talk.
+Go to [menti.com](https://www.menti.com/) and use the code **4893 2523** to **anonymously** submit answers for the quizzes and add your questions during the talk.
 
-![h:200 center](../assets/mentimeter-jug-oslo-2026.png)
+[//]: # (![h:200 center]&#40;../assets/mentimeter-jug-oslo-2026.png&#41;)
 
 Start with the first two questions:
 - Despite having LLMs and Code Agents, do you still write your tests by hand?
@@ -56,7 +56,7 @@ Testing Spring Boot applications can feel like entering a labyrinth blindfolded:
 ---
 
 
-<!-- header: 'Webinar 19.03.2026 - Questions @ menti.com Code: <strong>5726 9235</strong>' -->
+<!-- header: 'Webinar 19.03.2026 - Questions @ menti.com Code: <strong>4893 2523</strong>' -->
 
 ![bg right:33%](assets/why-test-software.jpg)
 
@@ -691,7 +691,7 @@ The setup above will **disable** the context caching feature and slow down the b
 
 ### New in Spring Framework 7: Pausing Contexts
 
-See Release Notes von [Spring Framework 7.0.0 M7](https://spring.io/blog/2025/07/17/spring-framework-7-0-0-M7-available-now).
+See Release Notes von [Spring Framework 7](https://spring.io/blog/2025/07/17/spring-framework-7-0-0-M7-available-now).
 
 > Pausing of Test Application Contexts
 >
@@ -841,41 +841,40 @@ Learn how to test and verify a real-world self-contained system with the [Testin
 
 ---
 
-[//]: # (![bg h:900 right:20%]&#40;assets/offers-w.png&#41;)
+![bg h:900 right:20%](assets/offers-w.png)
 
-[//]: # (## Limited Webinar Offer for the Next 24 Hours)
+## Limited Webinar Offer for the Next 24 Hours
+
+
+Enrolling for the Bundle Edition gives you three additional resources for free:
+
+
+- TDD with Spring Boot Done Right **Online Course**
+- Hands-On Mocking with Mockito **Online Course**
+- 30 Testing Tools and Libraries Every Java Developer Must Know **eBook**
+
+
+All webinar attendees get a **50% discount** on the course price with [this link](https://rieckpil.de/testing-spring-boot-applications-masterclass/?promo=WEBINAR-2026-03-19) (link will be shared in the chat).
+
+
+The offer expires on the 20th of March 2026 6 PM CET.
+
+
+[//]: # (## Don't Leave Empty-Handed)
 
 [//]: # ()
-[//]: # (Enrolling for the Bundle Edition gives you three additional resources for free:)
+[//]: # ()
+[//]: # (![bg h:720 w:450 right:33%]&#40;assets/tsbad-cover.png&#41;)
 
 [//]: # ()
 [//]: # ()
-[//]: # (- TDD with Spring Boot Done Right **Online Course**)
+[//]: # (- Get the complementary **Testing Spring Boot Applications Demystified** for free &#40;instead of $9&#41;)
 
 [//]: # ()
-[//]: # (- Hands-On Mocking with Mockito **Online Course**)
+[//]: # (- 120+ Pages with practical hands-on advice to ship code with confidence)
 
 [//]: # ()
-[//]: # (- 30 Testing Tools and Libraries Every Java Developer Must Know **eBook**)
-
-[//]: # ()
-[//]: # (All webinar attendees get a **50% discount** on the course price with [this link]&#40;https://rieckpil.de/testing-spring-boot-applications-masterclass/?promo=WEBINAR-2026-02-19&#41; &#40;link will be shared in the chat&#41;.)
-
-[//]: # ()
-[//]: # (The offer expires on the 20th of February 2026 6 PM CET.)
-
-
-## Don't Leave Empty-Handed
-
-
-![bg h:720 w:450 right:33%](assets/tsbad-cover.png)
-
-
-- Get the complementary **Testing Spring Boot Applications Demystified** for free (instead of $9)
-
-- 120+ Pages with practical hands-on advice to ship code with confidence
-
-- Get the eBook by joining our [newsletter](https://rieckpil.de/free-spring-boot-testing-book/)
+[//]: # (- Get the eBook by joining our [newsletter]&#40;https://rieckpil.de/free-spring-boot-testing-book/&#41;)
 
 ---
 
@@ -883,11 +882,14 @@ Learn how to test and verify a real-world self-contained system with the [Testin
 <!-- paginate: false -->
 
 
-## Tusen takk!
+## Joyful Testing!
 
-Get your Spring Boot testing eBook:
+[//]: # (Get your Spring Boot testing eBook:)
 
-![center h:200 w:200](assets/newsletter-signup-qr.png)
+[//]: # ()
+[//]: # (![center h:200 w:200]&#40;assets/newsletter-signup-qr.png&#41;)
+
+Now it's time for Q&A! If you have any questions feel free to ask via Zoom chat or within Menti (last question).
 
 ![bg right:33%](assets/end.jpg)
 
