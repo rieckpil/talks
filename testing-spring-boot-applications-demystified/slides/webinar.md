@@ -42,18 +42,6 @@ At the end of the Menti, you can add your questions for the Q&A session.
 
 ---
 
-![bg left:33%](assets/tsbad-act-one.png)
-
-## Act 1: The Grand Entrance
-
-
-Testing Spring Boot applications can feel like entering a labyrinth blindfolded:
-
-- Copying test configuration from AI/StackOverflow hoping it works
-- The paradox of choice: `@SpringBootTest`, `@WebMvcTest`, `@DataJpaTest`, `@MockBean`, etc.
-- Fear of refactoring because tests break for the wrong reasons
-- Tests written to satisfy coverage metrics, not increase productivity, confidence or catch bugs
----
 
 
 <!-- header: 'Webinar 19.03.2026 - Questions @ menti.com Code: <strong>4893 2523</strong>' -->
@@ -154,6 +142,20 @@ Good tests don't just catch bugs - they give you **fast feedback** and **confide
 - Enjoys writing tests (sometimes even more than production code) 🧪
 
 ---
+
+![bg left:33%](assets/tsbad-act-one.png)
+
+## Act 1: The Grand Entrance
+
+
+Testing Spring Boot applications can feel like entering a labyrinth blindfolded:
+
+- Copying test configuration from AI/StackOverflow hoping it works
+- The paradox of choice: `@SpringBootTest`, `@WebMvcTest`, `@DataJpaTest`, `@MockBean`, etc.
+- Fear of refactoring because tests break for the wrong reasons
+- Tests written to satisfy coverage metrics, not increase productivity, confidence or catch bugs
+---
+
 
 <!--
 
