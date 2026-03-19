@@ -9,10 +9,10 @@ import java.sql.Statement;
 
 import org.junit.jupiter.api.Test;
 import org.testcontainers.containers.GenericContainer;
-import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.containers.wait.strategy.Wait;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
+import org.testcontainers.postgresql.PostgreSQLContainer;
 import org.testcontainers.utility.DockerImageName;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -32,7 +32,7 @@ class TestcontainersIT {
     .waitingFor(Wait.forLogMessage(".*database system is ready to accept connections.*\\s", 1));
 
   @Container
-  private static PostgreSQLContainer<?> postgresModule = new PostgreSQLContainer<>("postgres:latest")
+  private static PostgreSQLContainer postgresModule = new PostgreSQLContainer("postgres:latest")
     .withDatabaseName("testdb")
     .withUsername("testuser")
     .withPassword("testpass");
