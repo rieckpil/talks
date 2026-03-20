@@ -30,7 +30,7 @@ Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](htt
 
 ## Participate During the Talk
 
-Go to [menti.com](https://www.menti.com/) and use the code **4893 2523** to **anonymously** submit answers for the quizzes and add your questions during the talk.
+Go to [menti.com](https://www.menti.com/) and use the code **4893 2535** to **anonymously** submit answers for the quizzes and add your questions during the talk.
 
 [//]: # (![h:200 center]&#40;../assets/mentimeter-jug-oslo-2026.png&#41;)
 
@@ -44,7 +44,7 @@ At the end of the Menti, you can add your questions for the Q&A session.
 
 
 
-<!-- header: 'Webinar 19.03.2026 - Questions @ menti.com Code: <strong>4893 2523</strong>' -->
+<!-- header: 'Webinar 19.03.2026 - Questions @ menti.com Code: <strong>4893 2535</strong>' -->
 
 ![bg right:33%](assets/why-test-software.jpg)
 
