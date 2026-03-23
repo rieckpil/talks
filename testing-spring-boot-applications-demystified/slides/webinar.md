@@ -21,7 +21,7 @@ Notes:
 
 ## A Hero's Journey Through the Spring Boot Testing Labyrinth
 
-Webinar 19.03.2026
+REWE 25.03.2026
 
 Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](https://x.com/rieckpil)
 
@@ -806,77 +806,100 @@ Testing is a team sport, make sure your whole team levels up together
 
 ---
 
-## Bring This Talk to Your Company!
+[//]: # (## Bring This Talk to Your Company!)
 
-![bg right:23%](assets/philip-jug-zurich-2025-audience.jpg)
+[//]: # ()
+[//]: # (![bg right:23%]&#40;assets/philip-jug-zurich-2025-audience.jpg&#41;)
 
-I offer this and similar Spring Boot testing talks **for free** for companies as:
+[//]: # ()
+[//]: # (I offer this and similar Spring Boot testing talks **for free** for companies as:)
 
-- **Lunch & Learn** sessions
-- **Internal conferences** and developer days
-- **Team training** events
+[//]: # ()
+[//]: # (- **Lunch & Learn** sessions)
 
-Reach out via LinkedIn or email (philip@pragmatech.digital) to discuss the details and schedule a session for your team.
+[//]: # (- **Internal conferences** and developer days)
 
----
+[//]: # (- **Team training** events)
 
-## My Entire Spring Boot Testing Knowledge Combined
+[//]: # ()
+[//]: # (Reach out via LinkedIn or email &#40;philip@pragmatech.digital&#41; to discuss the details and schedule a session for your team.)
 
-... in one on-demand online course.
+[//]: # ()
+[//]: # (---)
 
-Learn how to test and verify a real-world self-contained system with the [Testing Spring Boot Applications Masterclass](https://rieckpil.de/testing-spring-boot-applications-masterclass/)
+[//]: # ()
+[//]: # (## My Entire Spring Boot Testing Knowledge Combined)
 
-![center w:400 h:400](assets/masterclass-architecture.png)
+[//]: # ()
+[//]: # (... in one on-demand online course.)
 
+[//]: # ()
+[//]: # (Learn how to test and verify a real-world self-contained system with the [Testing Spring Boot Applications Masterclass]&#40;https://rieckpil.de/testing-spring-boot-applications-masterclass/&#41;)
 
----
+[//]: # ()
+[//]: # (![center w:400 h:400]&#40;assets/masterclass-architecture.png&#41;)
 
-## Covering Unit, Sliced, Integration and E2E Tests
+[//]: # ()
+[//]: # ()
+[//]: # (---)
 
-... with 130 course lessons and 12h+ of content
+[//]: # ()
+[//]: # (## Covering Unit, Sliced, Integration and E2E Tests)
 
-![center](assets/tsbam-recording.gif)
+[//]: # ()
+[//]: # (... with 130 course lessons and 12h+ of content)
 
----
+[//]: # ()
+[//]: # (![center]&#40;assets/tsbam-recording.gif&#41;)
 
-![bg h:600 center](assets/tsbam-testimonials.png)
+[//]: # ()
+[//]: # (---)
+
+[//]: # ()
+[//]: # (![bg h:600 center]&#40;assets/tsbam-testimonials.png&#41;)
 
 ---
 
 ![bg h:900 right:20%](assets/offers-w.png)
 
-## Limited Webinar Offer for the Next 24 Hours
-
-
-Enrolling for the Bundle Edition gives you three additional resources for free:
-
-
-- TDD with Spring Boot Done Right **Online Course**
-- Hands-On Mocking with Mockito **Online Course**
-- 30 Testing Tools and Libraries Every Java Developer Must Know **eBook**
-
-
-All webinar attendees get a **50% discount** on the course price with [this link](https://rieckpil.de/testing-spring-boot-applications-masterclass/?promo=WEBINAR-2026-03-19) (link will be shared in the chat).
-
-
-The offer expires on the 20th of March 2026 6 PM CET.
-
-
-[//]: # (## Don't Leave Empty-Handed)
+[//]: # (## Limited Webinar Offer for the Next 24 Hours)
 
 [//]: # ()
 [//]: # ()
-[//]: # (![bg h:720 w:450 right:33%]&#40;assets/tsbad-cover.png&#41;)
+[//]: # (Enrolling for the Bundle Edition gives you three additional resources for free:)
 
 [//]: # ()
 [//]: # ()
-[//]: # (- Get the complementary **Testing Spring Boot Applications Demystified** for free &#40;instead of $9&#41;)
+[//]: # (- TDD with Spring Boot Done Right **Online Course**)
+
+[//]: # (- Hands-On Mocking with Mockito **Online Course**)
+
+[//]: # (- 30 Testing Tools and Libraries Every Java Developer Must Know **eBook**)
 
 [//]: # ()
-[//]: # (- 120+ Pages with practical hands-on advice to ship code with confidence)
+[//]: # ()
+[//]: # (All webinar attendees get a **50% discount** on the course price with [this link]&#40;https://rieckpil.de/testing-spring-boot-applications-masterclass/?promo=WEBINAR-2026-03-19&#41; &#40;link will be shared in the chat&#41;.)
 
 [//]: # ()
-[//]: # (- Get the eBook by joining our [newsletter]&#40;https://rieckpil.de/free-spring-boot-testing-book/&#41;)
+[//]: # ()
+[//]: # (The offer expires on the 20th of March 2026 6 PM CET.)
+
+
+## Don't Leave Empty-Handed
+
+
+
+![bg h:720 w:450 right:33%](assets/tsbad-cover.png)
+
+
+
+- Get the complementary **Testing Spring Boot Applications Demystified** for free (instead of $9)
+
+
+- 120+ Pages with practical hands-on advice to ship code with confidence
+
+
+- Get the eBook by joining our [newsletter](https://rieckpil.de/free-spring-boot-testing-book/)
 
 ---
 
@@ -886,10 +909,10 @@ The offer expires on the 20th of March 2026 6 PM CET.
 
 ## Joyful Testing!
 
-[//]: # (Get your Spring Boot testing eBook:)
+Get your Spring Boot testing eBook:
 
-[//]: # ()
-[//]: # (![center h:200 w:200]&#40;assets/newsletter-signup-qr.png&#41;)
+
+![center h:200 w:200](assets/newsletter-signup-qr.png)
 
 Now it's time for Q&A! If you have any questions feel free to ask via Zoom chat or within Menti (last question).
 
