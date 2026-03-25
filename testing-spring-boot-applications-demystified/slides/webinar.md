@@ -21,7 +21,7 @@ Notes:
 
 ## A Hero's Journey Through the Spring Boot Testing Labyrinth
 
-REWE 25.03.2026
+CoP Spring Boot @ REWE Group 25.03.2026
 
 Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](https://x.com/rieckpil)
 
@@ -30,11 +30,12 @@ Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](htt
 
 ## Participate During the Talk
 
-Go to [menti.com](https://www.menti.com/) and use the code **4893 2535** to **anonymously** submit answers for the quizzes and add your questions during the talk.
+Go to [menti.com](https://www.menti.com/) and use the code **4469 9652** to **anonymously** submit answers for the quizzes and add your questions during the talk.
 
 [//]: # (![h:200 center]&#40;../assets/mentimeter-jug-oslo-2026.png&#41;)
 
-Start with the first two questions:
+Start with the **first three questions**:
+- Which talk language do you prefer?
 - Despite having LLMs and Code Agents, do you still write your tests by hand?
 - Do You Enjoy Writing Automated Tests?
 
@@ -44,7 +45,7 @@ At the end of the Menti, you can add your questions for the Q&A session.
 
 
 
-<!-- header: 'Webinar 19.03.2026 - Questions @ menti.com Code: <strong>4893 2535</strong>' -->
+<!-- header: 'CoP Spring Boot @ REWE Group 26.03.2026 - Questions @ menti.com Code: <strong>4469 9652</strong>' -->
 
 ![bg right:33%](assets/why-test-software.jpg)
 
@@ -57,29 +58,34 @@ At the end of the Menti, you can add your questions for the Q&A session.
 
 ## Automated Testing in the AI Era
 
-- AI generates the code; you own the consequences.
-- Co-pilots don’t carry pagers. You do.
-- The faster the code is generated, the faster you need to prove it’s correct.
-- AI is the accelerator; your test suite is the brakes. You can't drive fast without both.
-- Mass-produced code without (the correct) mass-produced tests is just technical debt at scale.
-
+- AI generates code; you own the consequences.
+- Co-pilots don't carry pagers. You do.
+- AI is the accelerator. Your test suite is the brakes. You need both to go fast.
+- AI can write your tests, but it can't understand your intent. A test without intent is just a green checkmark.
+- If you don't understand why a test passes, you won't understand why it fails at 3 AM.
 ---
 
-[//]: # (<!-- footer: '![w:32 h:32]&#40;assets/logo.webp&#41;' -->)
-## Spring Boot Testing - The Bad & Ugly
+[//]: # ()
+[//]: # ([//]: # &#40;<!-- footer: '![w:32 h:32]&#40;assets/logo.webp&#41;' -->&#41;)
+[//]: # (## Spring Boot Testing - The Bad & Ugly)
 
+[//]: # ()
+[//]: # ()
+[//]: # (![center h:500 w:900]&#40;assets/spring-boot-testing-the-bad.png&#41;)
 
-![center h:500 w:900](assets/spring-boot-testing-the-bad.png)
+[//]: # ()
+[//]: # (---)
 
----
+[//]: # ()
+[//]: # ()
+[//]: # (## Spring Boot Testing - The Good)
 
+[//]: # ()
+[//]: # (![center h:500 w:900]&#40;assets/tests-benefit-en.png&#41;)
 
-## Spring Boot Testing - The Good
-
-![center h:500 w:900](assets/tests-benefit-en.png)
-
-
----
+[//]: # ()
+[//]: # ()
+[//]: # (---)
 
 
 <!-- footer: '![w:32 h:32](assets/logo.webp)' -->
@@ -271,18 +277,15 @@ Tips:
 
 ---
 
-## Unit Testing Spring Boot Applications 101
+## Unit Testing Java/Spring Boot Applications 101
 
-- **Core Concept**: Test individual components (classes, methods) in complete isolation from their dependencies.
+- **Core Concept**: Test individual components in isolation from dependencies — one unit of work at a time.
 
-- **Confidence Gained**: Provides logarithmic verifications, ensuring that the smallest parts of your code work as expected under various conditions.
+- **Confidence Gained**: Fast, high-volume verification that the smallest building blocks behave correctly under various conditions.
 
-- **Best Practices**: Focus on a single unit of work.
+- **Pitfall**: Poor class design leads to untestable god classes. Good tests start with good design.
 
-- **Pitfalls**: Requires a well-thought-out class design. Poor design can lead to testing overly complex "god classes," making tests difficult to write and maintain.
-
-- **Tools**: JUnit (or Spock, TestNG, etc.), Mockito and assertion libraries like AssertJ or Hamcrest.
-
+- **Tools**: JUnit, Mockito, AssertJ (or Spock, TestNG, Hamcrest).
 ---
 
 ## Unit Testing has Limits
@@ -316,7 +319,7 @@ public class CustomerController {
 
 ---
 
-```java {15-18}
+```java {1,7,12,13,15-18}
 @ExtendWith(MockitoExtension.class)
 class CustomerControllerUnitTests {
 
@@ -346,16 +349,85 @@ class CustomerControllerUnitTests {
 
 ---
 
-## Things We Can't Cover With a Unit Test
+## Things We Can't Cover With a Unit Test #0
 
-- **Request Mapping**: Does HTTP GET `/api/customers/{id}` actually resolve to our desired method?
-- **Validation**: Will incomplete request bodys result in a 400 bad request or return an accidental 201?
-- **Serialization**: Are we JSON objects serialized and deserialized correctly?
-- **Headers**: Are we setting `Content-Type` or custom headers correctly?
-- **Security**: Are we Spring Security configuration and other authorization checks enforced?
+**Request Mapping**: Does HTTP GET `/api/customers/{id}` actually resolve to our desired method?
+
+
+```java
+@Test
+void shouldCreateCustomerWhenPayloadRequestIsValid() {
+
+  // ...
+
+  ResponseEntity<Void> result = customerController.createNewCustomer(
+    new CustomerCreationRequest("Java", "Duke", "duke@spring.io"),
+    UriComponentsBuilder.newInstance()
+  );
+}
+```
 
 ---
 
+## Things We Can't Cover With a Unit Test #1
+
+**Validation**: Will an incomplete request body result in a 400 bad request or return an accidental 201?
+
+```java {7}
+@Test
+void shouldCreateCustomerWhenPayloadRequestIsValid() {
+
+  // ...
+
+  ResponseEntity<Void> result = customerController.createNewCustomer(
+    new CustomerCreationRequest("Java", "Duke", "NOT_AN_EMAIL"),
+    UriComponentsBuilder.newInstance()
+  );
+}
+```
+
+---
+
+## Things We Can't Cover With a Unit Test #2
+
+**Serialization**: Are we JSON objects serialized and deserialized correctly?
+
+```java {2}
+ResponseEntity<Void> result = customerController.createNewCustomer(
+  new CustomerCreationRequest("Java", "Duke", "NOT_AN_EMAIL"),
+  UriComponentsBuilder.newInstance());
+```
+
+```json
+{
+  "first-name": "Java",
+  "last_Name": "Duke",
+  "email": "duke@spring.io"
+}
+```
+
+
+---
+
+
+## Things We Can't Cover With a Unit Test #3
+
+**Security**: Are we Spring Security configuration and other authorization checks enforced?
+
+```java {7}
+@Test
+void shouldCreateCustomerWhenPayloadRequestIsValid() {
+
+  // ...
+
+  ResponseEntity<Void> result = customerController.createNewCustomer(
+    new CustomerCreationRequest("Java", "Duke", "NOT_AN_EMAIL"),
+    UriComponentsBuilder.newInstance()
+  );
+}
+```
+
+---
 
 # Quest 2
 
@@ -528,32 +600,6 @@ wireMockServer.stubFor(
 ## Starting the Entire Spring Context - Version 1
 
 
-- We access the application over HTTP like a user, the test and context run in separate threads (no `@Transactional` rollback), requires HTTP authentication
-
-```java {1}
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class ApplicationServletContainerIT {
-
-  @LocalServerPort
-  private int port; // <-- we're running on a real port
-
-  @Test
-  void contextLoads(@Autowired WebTestClient webTestClient) {
-    webTestClient
-      .get()
-      .uri("/api/customers")
-      .header("Authorization", "Basic " + Base64.getEncoder().encodeToString("user:dummy".getBytes()))
-      .exchange()
-      .expectStatus()
-      .isOk();
-  }
-}
-```
-
----
-
-## Starting the Entire Spring Context - Version 2
-
 - The test and the context run in the same thread, hence we can rollback with `@Transactional` and simply override the security context with `@WithMockUser`
 
 
@@ -579,6 +625,35 @@ class ApplicationMockWebIT {
 }
 ```
 
+
+---
+
+## Starting the Entire Spring Context - Version 2
+
+
+- We access the application over HTTP like a user, the test and context run in separate threads (no `@Transactional` rollback), requires HTTP authentication
+
+```java {1}
+@AutoConfigureWebTestClient // required since Spring Boot 4
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+class ApplicationServletContainerIT {
+
+  @LocalServerPort
+  private int port; // <-- we're running on a real port
+
+  @Test
+  void contextLoads(@Autowired WebTestClient webTestClient) {
+    webTestClient
+      .get()
+      .uri("/api/customers")
+      .header("Authorization", "Basic " + Base64.getEncoder().encodeToString("user:dummy".getBytes()))
+      .exchange()
+      .expectStatus()
+      .isOk();
+  }
+}
+```
+
 ---
 
 ## Integration Testing Spring Boot Applications 101
@@ -595,6 +670,9 @@ class ApplicationMockWebIT {
 
 ---
 
+... but what about **Problem #3**: How to keep our build time at a reasonable duration?
+
+---
 
 # Quest Item 1
 
@@ -793,6 +871,20 @@ static {
 
 ---
 
+## Spring Boot 4 - Testing Support Keeps Improving
+
+- **RestTestClient**: Modern, fluent alternative for the `TestRestTemplate`/`WebTestClient`/`RestAssured`.
+
+- **Context pausing**: Cached test contexts are now automatically paused, eliminating resource conflicts from background processes.
+
+- **JUnit 6**: Drop-in upgrade from JUnit 5 - far smoother than the JUnit 4 → 5 migration.
+
+- **Testcontainers 2.0**: New `testcontainers-` prefix for modules, JUnit 4 support removed.
+
+- **Bean overrides for non-singletons**: `@MockitoBean` and `@TestBean` now work with prototype and custom-scoped beans.
+
+---
+
 ![bg right:30%](assets/why-test.jpg)
 
 
@@ -858,9 +950,9 @@ Testing is a team sport, make sure your whole team levels up together
 [//]: # ()
 [//]: # (![bg h:600 center]&#40;assets/tsbam-testimonials.png&#41;)
 
----
+[//]: # (---)
 
-![bg h:900 right:20%](assets/offers-w.png)
+[//]: # (![bg h:900 right:20%]&#40;assets/offers-w.png&#41;)
 
 [//]: # (## Limited Webinar Offer for the Next 24 Hours)
 
@@ -918,7 +1010,4 @@ Now it's time for Q&A! If you have any questions feel free to ask via Zoom chat 
 
 ![bg right:33%](assets/end.jpg)
 
-Reach out any time via:
-- [LinkedIn](https://www.linkedin.com/in/rieckpil) (Philip Riecks)
-- [X](https://x.com/rieckpil) (@rieckpil)
-- [Mail](mailto:philip@pragmatech.digital) (philip@pragmatech.digital)
+Reach out any time via: [LinkedIn](https://www.linkedin.com/in/rieckpil) (Philip Riecks) or [Mail](mailto:philip@pragmatech.digital) (philip@pragmatech.digital)
