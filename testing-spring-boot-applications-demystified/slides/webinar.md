@@ -45,7 +45,7 @@ At the end of the Menti, you can add your questions for the Q&A session.
 
 
 
-<!-- header: 'CoP Spring Boot @ REWE Group 26.03.2026 - Questions @ menti.com Code: <strong>4469 9652</strong>' -->
+<!-- header: 'CoP Spring Boot @ REWE Group 25.03.2026 - Questions @ menti.com Code: <strong>4469 9652</strong>' -->
 
 ![bg right:33%](assets/why-test-software.jpg)
 
