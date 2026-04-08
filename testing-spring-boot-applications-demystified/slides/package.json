@@ -1,0 +1,17 @@
+{
+  "name": "testing-spring-boot-demystified-slides",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Reveal.js slides for Testing Spring Boot Applications Demystified",
+  "scripts": {
+    "serve": "npx reveal.js-cli serve index.html --port 8000 2>/dev/null || npx serve -l 8000",
+    "pdf": "./generate_revealjs_pdf.sh slides-output.pdf"
+  },
+  "dependencies": {
+    "reveal.js": "^5.2.1"
+  },
+  "devDependencies": {
+    "decktape": "^3.14.0",
+    "serve": "^14.2.4"
+  }
+}

@@ -1,0 +1,1242 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Testing Spring Boot Applications Demystified</title>
+
+  <link rel="stylesheet" href="node_modules/reveal.js/dist/reset.css">
+  <link rel="stylesheet" href="node_modules/reveal.js/dist/reveal.css">
+  <link rel="stylesheet" href="node_modules/reveal.js/dist/theme/white.css" id="theme">
+  <!-- IntelliJ Light colours are defined in pragmatech-reveal.css -->
+  <link rel="stylesheet" href="css/pragmatech-reveal.css">
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- ========== COVER ========== -->
+      <section data-background-image="./assets/tsbad-beginning.png" data-background-size="cover">
+      </section>
+
+      <!-- ========== TITLE ========== -->
+      <section class="title-slide">
+        <div class="split equal">
+          <div class="col-visual">
+            <img src="assets/tsbad-beginning-split-middle.png" alt="Cover art" class="rounded">
+          </div>
+          <div class="col-text" style="display:flex; flex-direction:column; justify-content:center; text-align:center;">
+            <h1>Testing Spring Boot Applications Demystified</h1>
+            <h2>A Hero's Journey Through the Spring Boot Testing Labyrinth</h2>
+            <div class="meta">
+              CoP Spring Boot @ REWE Group 25.03.2026<br>
+              Philip Riecks &ndash;
+              <a href="https://pragmatech.digital/">PragmaTech GmbH</a> &ndash;
+              <a href="https://x.com/rieckpil">@rieckpil</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== PARTICIPATE ========== -->
+      <section>
+        <h2>Participate During the Talk</h2>
+        <div class="card card-accent">
+          <p>Go to <a href="https://www.menti.com/">menti.com</a> and use the code
+            <strong style="font-size:1.1em;">4469 9652</strong> to <strong>anonymously</strong>
+            submit answers for the quizzes and add your questions.</p>
+        </div>
+        <p style="margin-top:1em;">Start with the <strong>first three questions</strong>:</p>
+        <ul>
+          <li>Which talk language do you prefer?</li>
+          <li>Despite having LLMs and Code Agents, do you still write your tests by hand?</li>
+          <li>Do You Enjoy Writing Automated Tests?</li>
+        </ul>
+        <p class="text-muted text-small">At the end of the Menti, you can add your questions for the Q&amp;A session.</p>
+      </section>
+
+      <!-- ========== WHY TEST SOFTWARE? ========== -->
+      <section>
+        <div class="split">
+          <div class="col-text" style="display:flex; align-items:center;">
+            <h1>Why Test Software?</h1>
+          </div>
+          <div class="col-visual">
+            <img src="assets/why-test-software.jpg" alt="Why test software?" class="rounded">
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== AI ERA ========== -->
+      <section>
+        <div class="split">
+          <div class="col-text">
+            <h2>Automated Testing in the AI Era</h2>
+            <ul class="feature-list">
+              <li>
+                <span class="icon">1</span>
+                <span class="desc">
+                  <strong>AI generates code; you own the consequences.</strong>
+                </span>
+              </li>
+              <li>
+                <span class="icon">2</span>
+                <span class="desc">
+                  <strong>Co-pilots don't carry pagers. You do.</strong>
+                </span>
+              </li>
+              <li>
+                <span class="icon">3</span>
+                <span class="desc">
+                  <strong>AI is the accelerator. Your test suite is the brakes.</strong>
+                  <span>You need both to go fast.</span>
+                </span>
+              </li>
+              <li>
+                <span class="icon">4</span>
+                <span class="desc">
+                  <strong>AI can write your tests, but it can't understand your intent.</strong>
+                  <span>A test without intent is just a green checkmark.</span>
+                </span>
+              </li>
+              <li>
+                <span class="icon">5</span>
+                <span class="desc">
+                  <strong>If you don't understand why a test passes,</strong>
+                  <span>you won't understand why it fails at 3 AM.</span>
+                </span>
+              </li>
+            </ul>
+          </div>
+          <div class="col-visual">
+            <img src="assets/ai-image.jpg" alt="AI era" class="rounded">
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== NORTHSTAR ========== -->
+      <section>
+        <div class="split">
+          <div class="col-text">
+            <h3>My Overall Northstar for Automated Testing</h3>
+            <p>Imagine seeing this pull request on a Friday afternoon:</p>
+            <figure>
+              <img src="assets/northstar-pr.png" alt="Northstar PR" class="rounded" style="max-height:220px;">
+            </figure>
+            <p style="margin-top:0.8em;">How confident are you to merge this major Spring Boot upgrade
+              and deploy it to production once the pipeline turns green?</p>
+            <div class="callout callout-info">
+              Good tests don't just catch bugs &mdash; they give you
+              <strong>fast feedback</strong> and <strong>confident deployments</strong>.
+            </div>
+          </div>
+          <div class="col-visual">
+            <img src="assets/northstar.jpg" alt="Northstar" class="rounded">
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== AGENDA ========== -->
+      <section>
+        <h2>The Hero's Journey &mdash; Our Agenda</h2>
+        <figure>
+          <img src="assets/tsbad-map-parts.png" alt="Agenda map" class="centered rounded" style="max-height:480px;">
+        </figure>
+        <aside class="notes">
+          Act 1: The Entrance. Act 2: The Map. Act 3: The Three Bosses (Unit, Slice, Integration).
+          Act 4: The Three Quest Items (Caching, Speed, Mutation). Act 5: The Exit.
+        </aside>
+      </section>
+
+      <!-- ========== GOALS ========== -->
+      <section>
+        <div class="split">
+          <div class="col-text">
+            <h3>Goals For This Talk</h3>
+            <ul class="feature-list">
+              <li>
+                <span class="icon" style="background:rgba(16,185,129,0.1); color:var(--pt-success);">&#x2713;</span>
+                <span class="desc">
+                  <strong>Provide a clear mental map</strong>
+                  <span>for choosing between unit, slice, and integration tests so developers stop guessing which tool to use</span>
+                </span>
+              </li>
+              <li>
+                <span class="icon" style="background:rgba(16,185,129,0.1); color:var(--pt-success);">&#x2713;</span>
+                <span class="desc">
+                  <strong>Equip attendees with practical techniques</strong>
+                  <span>to speed up test suites and validate test quality</span>
+                </span>
+              </li>
+              <li>
+                <span class="icon" style="background:rgba(16,185,129,0.1); color:var(--pt-success);">&#x2713;</span>
+                <span class="desc">
+                  <strong>Build confidence to refactor fearlessly</strong>
+                  <span>by creating tests that catch real bugs, not just achieve coverage metrics</span>
+                </span>
+              </li>
+            </ul>
+          </div>
+          <div class="col-visual">
+            <img src="assets/demystify.png" alt="Demystify" style="max-height:480px;">
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== ABOUT PHILIP ========== -->
+      <section>
+        <div class="split reverse">
+          <div class="col-text">
+            <h3>About Philip</h3>
+            <ul>
+              <li>Self-employed developer from Herzogenaurach, Germany (Bavaria)</li>
+              <li>Blogging &amp; content creation with a focus on testing Java and Spring Boot applications</li>
+              <li>Founder of PragmaTech GmbH &mdash; Enabling Developers to Frequently Deliver Software with More Confidence</li>
+              <li>Enjoys writing tests (sometimes even more than production code)</li>
+            </ul>
+          </div>
+          <div class="col-visual">
+            <img src="assets/location.png" alt="Location" style="max-height:600px;">
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== ACT 1: GRAND ENTRANCE ========== -->
+      <section>
+        <div class="split">
+          <div class="col-text">
+            <h2>Act 1: The Grand Entrance</h2>
+            <p>Testing Spring Boot applications can feel like entering a labyrinth blindfolded:</p>
+            <ul>
+              <li>Copying test configuration from AI/StackOverflow hoping it works</li>
+              <li>The paradox of choice: <code>@SpringBootTest</code>, <code>@WebMvcTest</code>,
+                <code>@DataJpaTest</code>, <code>@MockBean</code>, etc.</li>
+              <li>Fear of refactoring because tests break for the wrong reasons</li>
+              <li>Tests written to satisfy coverage metrics, not increase productivity, confidence or catch bugs</li>
+            </ul>
+          </div>
+          <div class="col-visual">
+            <img src="assets/tsbad-act-one.png" alt="Act 1">
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== QUEST 1: UNIT TESTING GUARDIAN ========== -->
+      <section class="quest-slide">
+        <div class="split">
+          <div class="col-text">
+            <div class="quest-header">
+              <span class="quest-label">Quest 1</span>
+              <h2>The Unit Testing Guardian</h2>
+              <h3>The Swift Gatekeeper &mdash; Blocks Those Who Overcomplicate</h3>
+            </div>
+          </div>
+          <div class="col-visual">
+            <img src="assets/unit-gatekeeper-act.png" alt="Unit Testing Guardian">
+          </div>
+        </div>
+        <aside class="notes">
+          Not because a definition of done says "all tests must pass". Not to reach a coverage goal.
+        </aside>
+      </section>
+
+      <!-- ========== STARTER TEST ========== -->
+      <section>
+        <div class="split">
+          <div class="col-text">
+            <h2>Our Foundation: Spring Boot Starter Test</h2>
+            <p><span class="badge badge-accent">Swiss Army Knife</span></p>
+            <pre><code class="language-xml">&lt;dependency&gt;
+  &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+  &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
+  &lt;scope&gt;test&lt;/scope&gt;
+&lt;/dependency&gt;</code></pre>
+            <ul>
+              <li>Batteries-included for testing by transitively including popular testing libraries</li>
+              <li>Out-of-the-box dependency management to ensure compatibility</li>
+            </ul>
+          </div>
+          <div class="col-visual">
+            <img src="assets/swiss.jpg" alt="Swiss Army Knife" class="rounded">
+          </div>
+        </div>
+        <aside class="notes">
+          Go to IDE to show the start. Navigate to the parent pom to see the management.
+          Tips: Favor JUnit 5 over JUnit 4. Pick one assertion library.
+        </aside>
+      </section>
+
+      <!-- ========== DEPENDENCY TREE (step-by-step highlight) ========== -->
+      <section>
+        <h3 class="mb-sm">Dependency Tree <span class="badge badge-accent">step through &rarr;</span></h3>
+        <pre><code class="language-shell" data-line-numbers="|3-5|13|15-17|25,28|29,33-34">./mvnw dependency:tree
+[INFO] ...
+[INFO] +- org.springframework.boot:spring-boot-starter-test:jar:4.0.2:test
+[INFO] |  +- org.springframework.boot:spring-boot-test:jar:4.0.2:test
+[INFO] |  +- org.springframework.boot:spring-boot-test-autoconfigure:jar:4.0.2:test
+[INFO] |  +- com.jayway.jsonpath:json-path:jar:2.10.0:test
+[INFO] |  |  \- org.slf4j:slf4j-api:jar:2.0.17:compile
+[INFO] |  +- jakarta.xml.bind:jakarta.xml.bind-api:jar:4.0.4:test
+[INFO] |  |  \- jakarta.activation:jakarta.activation-api:jar:2.1.4:test
+[INFO] |  +- net.minidev:json-smart:jar:2.6.0:test
+[INFO] |  |  \- net.minidev:accessors-smart:jar:2.6.0:test
+[INFO] |  |     \- org.ow2.asm:asm:jar:9.7.1:test
+[INFO] |  +- org.assertj:assertj-core:jar:3.27.6:test
+[INFO] |  |  \- net.bytebuddy:byte-buddy:jar:1.17.8:test
+[INFO] |  +- org.awaitility:awaitility:jar:4.3.0:test
+[INFO] |  +- org.hamcrest:hamcrest:jar:3.0:test
+[INFO] |  +- org.junit.jupiter:junit-jupiter:jar:6.0.2:test
+[INFO] |  |  +- org.junit.jupiter:junit-jupiter-api:jar:6.0.2:test
+[INFO] |  |  |  +- org.opentest4j:opentest4j:jar:1.3.0:test
+[INFO] |  |  |  +- org.junit.platform:junit-platform-commons:jar:6.0.2:test
+[INFO] |  |  |  \- org.apiguardian:apiguardian-api:jar:1.1.2:test
+[INFO] |  |  +- org.junit.jupiter:junit-jupiter-params:jar:6.0.2:test
+[INFO] |  |  \- org.junit.jupiter:junit-jupiter-engine:jar:6.0.2:test
+[INFO] |  |     \- org.junit.platform:junit-platform-engine:jar:6.0.2:test
+[INFO] |  +- org.mockito:mockito-core:jar:5.5.0:test
+[INFO] |  |  +- net.bytebuddy:byte-buddy-agent:jar:1.17.8:test
+[INFO] |  |  \- org.objenesis:objenesis:jar:3.3:test
+[INFO] |  +- org.mockito:mockito-junit-jupiter:jar:5.5.0:test
+[INFO] |  +- org.skyscreamer:jsonassert:jar:1.5.3:test
+[INFO] |  |  \- com.vaadin.external.google:android-json:jar:0.0.20131108.vaadin1:test
+[INFO] |  +- org.springframework:spring-core:jar:7.0.3:compile
+[INFO] |  |  +- commons-logging:commons-logging:jar:1.3.5:compile
+[INFO] |  |  \- org.jspecify:jspecify:jar:1.0.0:compile
+[INFO] |  +- org.springframework:spring-test:jar:7.0.3:test
+[INFO] |  \- org.xmlunit:xmlunit-core:jar:2.10.4:test</code></pre>
+      </section>
+
+      <!-- ========== WHAT'S INSIDE ========== -->
+      <section>
+        <h2>What's Inside the Testing Swiss Army Knife?</h2>
+        <div class="card-grid">
+          <div class="card">
+            <h4>JUnit <span class="badge badge-accent">5 / 6</span></h4>
+            <p>Java's de-facto standard testing framework and foundation.</p>
+          </div>
+          <div class="card">
+            <h4>Mockito</h4>
+            <p>Creating mock objects to simulate dependencies and verify interactions.</p>
+          </div>
+          <div class="card">
+            <h4>AssertJ</h4>
+            <p>Provides fluent, chainable, and readable assertions.</p>
+          </div>
+          <div class="card">
+            <h4>Hamcrest</h4>
+            <p>Offers flexible matchers for creating custom assertions.</p>
+          </div>
+          <div class="card">
+            <h4>JSONAssert</h4>
+            <p>Compares JSON strings with flexible matching options.</p>
+          </div>
+          <div class="card">
+            <h4>JsonPath</h4>
+            <p>Extracts and queries data from JSON similar to XPath.</p>
+          </div>
+          <div class="card">
+            <h4>XMLUnit</h4>
+            <p>Compares and validates XML documents.</p>
+          </div>
+          <div class="card">
+            <h4>Awaitility</h4>
+            <p>Handles asynchronous testing with fluent conditions.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== UNIT TESTING 101 ========== -->
+      <section>
+        <h2>Unit Testing Java/Spring Boot Applications 101</h2>
+        <ul class="feature-list">
+          <li>
+            <span class="icon">C</span>
+            <span class="desc">
+              <strong>Core Concept</strong>
+              <span>Test individual components in isolation from dependencies &mdash; one unit of work at a time.</span>
+            </span>
+          </li>
+          <li>
+            <span class="icon" style="background:rgba(16,185,129,0.1); color:var(--pt-success);">&#x2713;</span>
+            <span class="desc">
+              <strong>Confidence Gained</strong>
+              <span>Fast, high-volume verification that the smallest building blocks behave correctly.</span>
+            </span>
+          </li>
+          <li>
+            <span class="icon" style="background:rgba(239,68,68,0.08); color:var(--pt-danger);">!</span>
+            <span class="desc">
+              <strong>Pitfall</strong>
+              <span>Poor class design leads to untestable god classes. Good tests start with good design.</span>
+            </span>
+          </li>
+          <li>
+            <span class="icon">T</span>
+            <span class="desc">
+              <strong>Tools</strong>
+              <span>JUnit, Mockito, AssertJ (or Spock, TestNG, Hamcrest).</span>
+            </span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- ========== UNIT TESTING HAS LIMITS ========== -->
+      <section>
+        <h2>Unit Testing has Limits</h2>
+        <p>Consider this sample REST controller &mdash; what could we verify with a unit test?</p>
+        <pre><code class="language-java">@RestController
+@RequestMapping("/api/customers")
+public class CustomerController {
+
+  private final CustomerService customerService;
+
+  public CustomerController(CustomerService customerService) {
+    this.customerService = customerService;
+  }
+
+  @PostMapping
+  public ResponseEntity&lt;Void&gt; createNewCustomer(
+      @Validated CustomerCreationRequest payload,
+      UriComponentsBuilder uriBuilder) {
+
+    String customerId = customerService.createNewCustomer(payload.firstName());
+
+    UriComponents uriComponents = uriBuilder
+      .path("/api/customers/{id}")
+      .buildAndExpand(customerId);
+
+    return ResponseEntity.created(uriComponents.toUri()).build();
+  }
+}</code></pre>
+      </section>
+
+      <!-- ========== UNIT TEST EXAMPLE ========== -->
+      <section>
+        <h3 class="mb-sm">Unit Test Example</h3>
+        <pre><code class="language-java" data-line-numbers="1,7,12-13,15-18">@ExtendWith(MockitoExtension.class)
+class CustomerControllerUnitTests {
+
+  @Mock
+  private CustomerService customerService;
+
+  @InjectMocks
+  private CustomerController customerController;
+
+  @Test
+  void shouldCreateCustomerWhenPayloadRequestIsValid() {
+    when(customerService.createNewCustomer(anyString()))
+      .thenReturn("42");
+
+    ResponseEntity&lt;Void&gt; result = customerController.createNewCustomer(
+      new CustomerCreationRequest("Java", "Duke", "duke@spring.io"),
+      UriComponentsBuilder.newInstance()
+    );
+
+    assertThat(result.getStatusCode().value())
+      .isEqualTo(201);
+    assertThat(result.getHeaders().getLocation().toString())
+      .isEqualTo("/api/customers/42");
+  }
+}</code></pre>
+      </section>
+
+      <!-- ========== CAN'T COVER #0 ========== -->
+      <section>
+        <h2>Things We Can't Cover With a Unit Test <span class="badge badge-warning">#0</span></h2>
+        <div class="card card-accent">
+          <h4 class="mt-0">Request Mapping</h4>
+          <p class="mb-0">Does HTTP GET <code>/api/customers/{id}</code> actually resolve to our desired method?</p>
+        </div>
+        <pre><code class="language-java">@Test
+void shouldCreateCustomerWhenPayloadRequestIsValid() {
+
+  // ...
+
+  ResponseEntity&lt;Void&gt; result = customerController.createNewCustomer(
+    new CustomerCreationRequest("Java", "Duke", "duke@spring.io"),
+    UriComponentsBuilder.newInstance()
+  );
+}</code></pre>
+      </section>
+
+      <!-- ========== CAN'T COVER #1 ========== -->
+      <section>
+        <h2>Things We Can't Cover With a Unit Test <span class="badge badge-warning">#1</span></h2>
+        <div class="card card-accent">
+          <h4 class="mt-0">Validation</h4>
+          <p class="mb-0">Will an incomplete request body result in a 400 bad request or return an accidental 201?</p>
+        </div>
+        <pre><code class="language-java" data-line-numbers="7">@Test
+void shouldCreateCustomerWhenPayloadRequestIsValid() {
+
+  // ...
+
+  ResponseEntity&lt;Void&gt; result = customerController.createNewCustomer(
+    new CustomerCreationRequest("Java", "Duke", "NOT_AN_EMAIL"),
+    UriComponentsBuilder.newInstance()
+  );
+}</code></pre>
+      </section>
+
+      <!-- ========== CAN'T COVER #2 ========== -->
+      <section>
+        <h2>Things We Can't Cover With a Unit Test <span class="badge badge-warning">#2</span></h2>
+        <div class="card card-accent">
+          <h4 class="mt-0">Serialization</h4>
+          <p class="mb-0">Are JSON objects serialized and deserialized correctly?</p>
+        </div>
+        <pre><code class="language-java" data-line-numbers="2">ResponseEntity&lt;Void&gt; result = customerController.createNewCustomer(
+  new CustomerCreationRequest("Java", "Duke", "NOT_AN_EMAIL"),
+  UriComponentsBuilder.newInstance());</code></pre>
+        <pre><code class="language-json">{
+  "first-name": "Java",
+  "last_Name": "Duke",
+  "email": "duke@spring.io"
+}</code></pre>
+      </section>
+
+      <!-- ========== CAN'T COVER #3 ========== -->
+      <section>
+        <h2>Things We Can't Cover With a Unit Test <span class="badge badge-warning">#3</span></h2>
+        <div class="card card-accent">
+          <h4 class="mt-0">Security</h4>
+          <p class="mb-0">Are Spring Security configuration and other authorization checks enforced?</p>
+        </div>
+        <pre><code class="language-java" data-line-numbers="7">@Test
+void shouldCreateCustomerWhenPayloadRequestIsValid() {
+
+  // ...
+
+  ResponseEntity&lt;Void&gt; result = customerController.createNewCustomer(
+    new CustomerCreationRequest("Java", "Duke", "NOT_AN_EMAIL"),
+    UriComponentsBuilder.newInstance()
+  );
+}</code></pre>
+      </section>
+
+      <!-- ========== QUEST 2: SLICE TESTING HYDRA ========== -->
+      <section class="quest-slide">
+        <div class="split">
+          <div class="col-text">
+            <div class="quest-header">
+              <span class="quest-label">Quest 2</span>
+              <h2>The Slice Testing Hydra</h2>
+              <h3>Multiple Heads, Each Guarding a Layer</h3>
+            </div>
+          </div>
+          <div class="col-visual">
+            <img src="assets/hydra-act.png" alt="Hydra">
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== CONTEXT DIAGRAMS ========== -->
+      <section>
+        <figure>
+          <img src="assets/typical-context.png" alt="Typical Context" class="centered" style="max-height:580px;">
+        </figure>
+      </section>
+
+      <section>
+        <figure>
+          <img src="assets/typical-context-colored.png" alt="Typical Context Colored" class="centered" style="max-height:580px;">
+        </figure>
+      </section>
+
+      <section>
+        <figure>
+          <img src="assets/typical-context-sliced.png" alt="Typical Context Sliced" class="centered" style="max-height:500px;">
+        </figure>
+      </section>
+
+      <section>
+        <figure>
+          <img src="assets/typical-context-webmvctest-example.png" alt="WebMvcTest Example" class="centered" style="max-height:580px;">
+        </figure>
+      </section>
+
+      <!-- ========== @WEBMVCTEST CODE ========== -->
+      <section>
+        <h3>Spring Boot Test Slice Example: <code>@WebMvcTest</code></h3>
+        <pre><code class="language-java" data-line-numbers="1,6,12">@WebMvcTest(CustomerController.class)
+@Import(SecurityConfig.class)
+class CustomerControllerTest {
+
+  @Autowired
+  private MockMvc mockMvc;
+
+  @MockitoBean
+  private CustomerService customerService;
+
+  @Test
+  @WithMockUser
+  void shouldReturnLocationOfNewlyCreatedCustomer() throws Exception {
+    // ...
+  }
+}</code></pre>
+      </section>
+
+      <!-- ========== COMMON TEST SLICES ========== -->
+      <section>
+        <h2>Common Test Slices</h2>
+        <ul class="feature-list">
+          <li>
+            <span class="icon">W</span>
+            <span class="desc">
+              <strong><code>@WebMvcTest</code> / <code>@WebFluxTest</code></strong>
+              <span>Controller layer</span>
+            </span>
+          </li>
+          <li>
+            <span class="icon">D</span>
+            <span class="desc">
+              <strong><code>@DataJpaTest</code> / <code>@JdbcTest</code></strong>
+              <span>Persistence layer</span>
+            </span>
+          </li>
+          <li>
+            <span class="icon">J</span>
+            <span class="desc">
+              <strong><code>@JsonTest</code></strong>
+              <span>JSON serialization / deserialization</span>
+            </span>
+          </li>
+          <li>
+            <span class="icon">R</span>
+            <span class="desc">
+              <strong><code>@RestClientTest</code></strong>
+              <span>RestTemplate testing</span>
+            </span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- ========== SLICING ANNOTATIONS IMAGE ========== -->
+      <section>
+        <figure>
+          <img src="assets/slicing-annotations.png" alt="Slicing Annotations" class="centered" style="max-height:580px;">
+        </figure>
+      </section>
+
+      <!-- ========== SLICED TESTING 101 ========== -->
+      <section>
+        <h2>Sliced Testing Spring Boot Applications 101</h2>
+        <ul class="feature-list">
+          <li>
+            <span class="icon">C</span>
+            <span class="desc">
+              <strong>Core Concept</strong>
+              <span>Test a specific "slice" or layer by loading a minimal, relevant part of the Spring <code>ApplicationContext</code>.</span>
+            </span>
+          </li>
+          <li>
+            <span class="icon" style="background:rgba(16,185,129,0.1); color:var(--pt-success);">&#x2713;</span>
+            <span class="desc">
+              <strong>Confidence Gained</strong>
+              <span>Validates parts where pure unit testing is insufficient &mdash; web, messaging, or data layer.</span>
+            </span>
+          </li>
+          <li>
+            <span class="icon" style="background:rgba(239,68,68,0.08); color:var(--pt-danger);">!</span>
+            <span class="desc">
+              <strong>Pitfalls</strong>
+              <span>Requires careful configuration to ensure only the necessary slice of the context is loaded.</span>
+            </span>
+          </li>
+          <li>
+            <span class="icon">T</span>
+            <span class="desc">
+              <strong>Tools</strong>
+              <span>JUnit, Mockito, Spring Test, Spring Boot, Testcontainers</span>
+            </span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- ========== QUEST 3: INTEGRATION TESTING DRAGON ========== -->
+      <section class="quest-slide">
+        <div class="split">
+          <div class="col-text">
+            <div class="quest-header">
+              <span class="quest-label">Quest 3</span>
+              <h2>The Integration Testing Dragon</h2>
+              <h3>Guards the Full Treasure &mdash; but Demands Patience</h3>
+            </div>
+          </div>
+          <div class="col-visual">
+            <img src="assets/dragon-act.png" alt="Dragon">
+          </div>
+        </div>
+        <aside class="notes">Ask who is using Testcontainers?</aside>
+      </section>
+
+      <!-- ========== SPRINGBOOTTEST SETUP IMAGE ========== -->
+      <section>
+        <figure>
+          <img src="assets/spring-boot-test-setup.png" alt="SpringBootTest Setup" class="centered" style="max-height:580px;">
+        </figure>
+      </section>
+
+      <!-- ========== STARTING THE ENTIRE CONTEXT ========== -->
+      <section>
+        <h2>Starting the Entire <code>ApplicationContext</code></h2>
+        <div style="display:flex; flex-direction:column; gap:12px; margin-top:1em;">
+          <div class="card card-accent">
+            <strong>Problem #1</strong> &mdash; How to ensure surrounding infrastructure (database, queues, etc.) is present?
+          </div>
+          <div class="card card-accent">
+            <strong>Problem #2</strong> &mdash; How to handle HTTP communication from our application to remote services?
+          </div>
+          <div class="card card-accent">
+            <strong>Problem #3</strong> &mdash; How to keep our build time at a reasonable duration?
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== TESTCONTAINERS ========== -->
+      <section>
+        <h2>Provide External Infrastructure with Testcontainers
+          <span class="badge badge-success">Problem #1</span>
+        </h2>
+        <p>Running infrastructure in Docker containers for tests becomes a breeze with
+          <a href="https://testcontainers.com/">Testcontainers</a>:</p>
+        <pre><code class="language-java">@Container
+@ServiceConnection
+static PostgreSQLContainer&lt;?&gt; postgres =
+    new PostgreSQLContainer&lt;&gt;("postgres:16-alpine")
+  .withDatabaseName("testdb")
+  .withUsername("test")
+  .withPassword("test")
+  .withInitScript("init-postgres.sql");</code></pre>
+        <p class="text-small text-muted">This gives us an ephemeral PostgreSQL database for our tests:</p>
+        <pre><code class="language-shell" data-line-numbers="3">$ docker ps
+CONTAINER ID   IMAGE               COMMAND                  PORTS
+a958ee2887c6   postgres:16-alpine  "docker-entrypoint.s…"   0.0.0.0:32776-&gt;5432/tcp</code></pre>
+      </section>
+
+      <!-- ========== WIREMOCK ========== -->
+      <section>
+        <h2>Stub External HTTP Services with WireMock
+          <span class="badge badge-success">Problem #2</span>
+        </h2>
+        <p>Consider <a href="http://wiremock.org/">WireMock</a> to stub external HTTP services during tests.</p>
+        <figure>
+          <img src="assets/wiremock-usage.svg" alt="WireMock usage" class="centered" style="max-height:380px;">
+        </figure>
+      </section>
+
+      <!-- ========== USING WIREMOCK ========== -->
+      <section>
+        <h2>Using WireMock for Integration Tests</h2>
+        <p>Run as in-memory service or Docker container. Override HTTP clients to connect to WireMock during tests:</p>
+        <pre><code class="language-java">TestPropertyValues.of(
+  "clients.open-library.base-url=http://localhost:"
+    + wireMockServer.port())
+  .applyTo(applicationContext);</code></pre>
+        <pre><code class="language-java">wireMockServer.stubFor(
+  get(urlPathEqualTo("/api/books/" + isbn))
+    .willReturn(aResponse()
+      .withHeader(HttpHeaders.CONTENT_TYPE,
+        MediaType.APPLICATION_JSON_VALUE)
+      .withBodyFile("book-response-success.json"))
+);</code></pre>
+      </section>
+
+      <!-- ========== CONTEXT VERSION 1: MOCK ========== -->
+      <section>
+        <h2>Starting the Entire Spring Context &mdash; Version 1</h2>
+        <div class="callout callout-info text-small">
+          Test and context run in the <strong>same thread</strong> &mdash; rollback with
+          <code>@Transactional</code>, override security with <code>@WithMockUser</code>.
+        </div>
+        <pre><code class="language-java" data-line-numbers="1,3">@SpringBootTest
+// which is @SpringBootTest(webEnvironment = WebEnvironment.MOCK)
+@AutoConfigureMockMvc
+class ApplicationMockWebIT {
+
+  @Test
+  @WithMockUser
+  void givenCustomersThenReturnListForAuthenticatedUser(
+      @Autowired MockMvc mockMvc) throws Exception {
+    mockMvc
+      .perform(get("/api/customers")
+        .header(ACCEPT, APPLICATION_JSON))
+      .andExpect(status().is(200))
+      .andExpect(content().contentType(APPLICATION_JSON))
+      .andExpect(jsonPath("$.size()", is(1)));
+  }
+}</code></pre>
+      </section>
+
+      <!-- ========== CONTEXT VERSION 2: RANDOM_PORT ========== -->
+      <section>
+        <h2>Starting the Entire Spring Context &mdash; Version 2</h2>
+        <div class="callout callout-info text-small">
+          Access over HTTP like a real user &mdash; <strong>separate threads</strong>,
+          no <code>@Transactional</code> rollback, requires HTTP authentication.
+        </div>
+        <pre><code class="language-java" data-line-numbers="1">@AutoConfigureWebTestClient // required since Spring Boot 4
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+class ApplicationServletContainerIT {
+
+  @LocalServerPort
+  private int port;
+
+  @Test
+  void contextLoads(@Autowired WebTestClient webTestClient) {
+    webTestClient
+      .get()
+      .uri("/api/customers")
+      .header("Authorization", "Basic " + Base64.getEncoder()
+        .encodeToString("user:dummy".getBytes()))
+      .exchange()
+      .expectStatus()
+      .isOk();
+  }
+}</code></pre>
+      </section>
+
+      <!-- ========== INTEGRATION TESTING 101 ========== -->
+      <section>
+        <h2>Integration Testing Spring Boot Applications 101</h2>
+        <ul class="feature-list">
+          <li>
+            <span class="icon">C</span>
+            <span class="desc">
+              <strong>Core Concept</strong>
+              <span>Start the entire Spring application context and test through external interfaces (REST API).</span>
+            </span>
+          </li>
+          <li>
+            <span class="icon" style="background:rgba(16,185,129,0.1); color:var(--pt-success);">&#x2713;</span>
+            <span class="desc">
+              <strong>Confidence Gained</strong>
+              <span>Validates all internal components working together as a complete application.</span>
+            </span>
+          </li>
+          <li>
+            <span class="icon" style="background:rgba(239,68,68,0.08); color:var(--pt-danger);">!</span>
+            <span class="desc">
+              <strong>Pitfalls</strong>
+              <span>Slower to run. Managing lifecycle of dependent services can be complex.</span>
+            </span>
+          </li>
+          <li>
+            <span class="icon">T</span>
+            <span class="desc">
+              <strong>Tools</strong>
+              <span>JUnit, Mockito, Spring Test, Spring Boot, Testcontainers, WireMock, Selenium</span>
+            </span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- ========== PROBLEM #3 TRANSITION ========== -->
+      <section class="text-center" style="display:flex; align-items:center; justify-content:center;">
+        <div>
+          <h2>... but what about</h2>
+          <h2 style="color:var(--pt-accent);"><strong>Problem #3</strong>: How to keep our build time at a reasonable duration?</h2>
+        </div>
+      </section>
+
+      <!-- ========== QUEST ITEM 1: CACHING AMULET ========== -->
+      <section class="quest-slide">
+        <div class="split">
+          <div class="col-text">
+            <div class="quest-header">
+              <span class="quest-label">Quest Item 1</span>
+              <h2>The Caching Amulet</h2>
+              <h3>Helps You Reuse What You Already Built</h3>
+            </div>
+          </div>
+          <div class="col-visual">
+            <img src="assets/caching-amulet.png" alt="Caching Amulet">
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== NEED FOR SPEED ========== -->
+      <section>
+        <h2>Integration Testing &mdash; The Need for Speed</h2>
+        <ul>
+          <li><strong>The Problem:</strong> Integration tests require a started &amp; initialized Spring
+            <code>ApplicationContext</code>, which slows down the build</li>
+          <li><strong>The Solution:</strong> Spring Test <code>TestContext</code> Caching &mdash; stores an
+            already started <code>ApplicationContext</code> for reuse</li>
+          <li>This feature is part of Spring Test (included via <code>spring-boot-starter-test</code>)</li>
+        </ul>
+        <figure style="margin-top:0.8em;">
+          <img src="assets/context-cache-improvements.png" alt="Context cache improvements" class="centered">
+          <figcaption>Speed improvement with context caching</figcaption>
+        </figure>
+      </section>
+
+      <!-- ========== CACHING EXPLAINED 00-02 ========== -->
+      <section>
+        <figure>
+          <img src="assets/caching-explained-00.png" alt="Caching Explained Step 0" class="centered" style="max-height:580px;">
+        </figure>
+      </section>
+
+      <section>
+        <figure>
+          <img src="assets/caching-explained-01.png" alt="Caching Explained Step 1" class="centered" style="max-height:580px;">
+        </figure>
+      </section>
+
+      <section>
+        <figure>
+          <img src="assets/caching-explained-02.png" alt="Caching Explained Step 2" class="centered" style="max-height:580px;">
+        </figure>
+      </section>
+
+      <!-- ========== CACHE KEY ========== -->
+      <section>
+        <h3>How the Cache Key is Built</h3>
+        <pre><code class="language-java">// DefaultContextCache.java
+private final Map&lt;MergedContextConfiguration, ApplicationContext&gt; contextMap =
+  Collections.synchronizedMap(new LruCache(32, 0.75f));</code></pre>
+        <p>The following information is part of the Cache Key (<code>MergedContextConfiguration</code>):</p>
+        <ul class="text-small">
+          <li><code>activeProfiles</code> (<code>@ActiveProfiles</code>)</li>
+          <li><code>contextInitializersClasses</code> (<code>@ContextConfiguration</code>)</li>
+          <li><code>propertySourceLocations</code> (<code>@TestPropertySource</code>)</li>
+          <li><code>propertySourceProperties</code> (<code>@TestPropertySource</code>)</li>
+          <li><code>contextCustomizer</code> (<code>@MockitoBean</code>, <code>@MockBean</code>,
+            <code>@DynamicPropertySource</code>, ...)</li>
+        </ul>
+      </section>
+
+      <!-- ========== DETECT RESTARTS ========== -->
+      <section>
+        <h3>Detect Context Restarts &mdash; Visually</h3>
+        <figure>
+          <img src="assets/context-caching-hints.png" alt="Context caching hints" class="centered" style="max-height:520px;">
+        </figure>
+      </section>
+
+      <section>
+        <h3>Detect Context Restarts &mdash; with Logs</h3>
+        <figure>
+          <img src="assets/context-caching-logs.png" alt="Context caching logs" class="centered" style="max-height:520px;">
+        </figure>
+      </section>
+
+      <!-- ========== SPRING TEST PROFILER ========== -->
+      <section>
+        <h3>Detect Context Restarts &mdash; with Tooling</h3>
+        <figure>
+          <img src="assets/spring-test-profiler-logo.png" alt="Spring Test Profiler" class="centered">
+        </figure>
+        <p>An <a href="https://github.com/PragmaTech-GmbH/spring-test-profiler">open-source Spring Test utility</a>
+          that provides visualization and insights for Spring Test execution, focusing on context caching statistics.</p>
+        <div class="callout callout-info">
+          <strong>Overall goal:</strong> Identify optimization opportunities in your Spring Test suite to
+          speed up your builds and ship to production faster with more confidence.
+        </div>
+      </section>
+
+      <!-- ========== FINAL BOSS: @DIRTIESCONTEXT ========== -->
+      <section>
+        <h3>The Final Boss</h3>
+        <p>Developers tend to consult AI/StackOverflow and copy advice without knowing the implications:</p>
+        <pre><code class="language-java">@SpringBootTest
+@DirtiesContext
+// this instructs Spring to remove the context from the cache
+// and rebuild a new context on every request
+public abstract class AbstractIntegrationTest {
+
+}</code></pre>
+        <div class="callout callout-danger">
+          The setup above will <strong>disable</strong> the context caching feature and slow down builds significantly!
+        </div>
+      </section>
+
+      <!-- ========== SPRING FRAMEWORK 7: PAUSING ========== -->
+      <section>
+        <h3>New in Spring Framework 7: Pausing Contexts</h3>
+        <p>See Release Notes from <a href="https://spring.io/blog/2025/07/17/spring-framework-7-0-0-M7-available-now">Spring Framework 7</a>:</p>
+        <blockquote>
+          <p><strong>Pausing of Test Application Contexts</strong></p>
+          <p>The Spring TestContext framework is caching application context instances within test suites
+            for faster runs. As of Spring Framework 7.0, we now pause test application contexts when
+            they're not used.</p>
+          <p>This means an application context stored in the context cache will be stopped when it is
+            no longer actively in use and automatically restarted the next time the context is retrieved
+            from the cache.</p>
+        </blockquote>
+      </section>
+
+      <!-- ========== QUEST ITEM 2: LIGHTNING SHIELD ========== -->
+      <section class="quest-slide">
+        <div class="split">
+          <div class="col-text">
+            <div class="quest-header">
+              <span class="quest-label">Quest Item 2</span>
+              <h2>The Lightning Shield</h2>
+              <h3>Many Cores, One Goal</h3>
+            </div>
+          </div>
+          <div class="col-visual">
+            <img src="assets/lightning-shield.png" alt="Lightning Shield">
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== TEST PARALLELIZATION ========== -->
+      <section>
+        <h2>Test Parallelization</h2>
+        <p><strong>Goal:</strong> Reduce build time and get faster feedback</p>
+        <h4>Requirements</h4>
+        <ul>
+          <li>No shared state</li>
+          <li>No dependency between tests and their execution order</li>
+          <li>No mutation of global state</li>
+        </ul>
+        <h4>Two ways to achieve this</h4>
+        <ul>
+          <li>Fork a new JVM with Surefire/Failsafe and run in parallel</li>
+          <li>Use JUnit Jupiter's parallelization mode &mdash; same JVM, multiple threads</li>
+        </ul>
+      </section>
+
+      <!-- ========== PARALLEL TESTING DIAGRAM ========== -->
+      <section>
+        <figure>
+          <img src="assets/parallel-testing.svg" alt="Parallel Testing" class="centered" style="max-height:580px;">
+        </figure>
+      </section>
+
+      <!-- ========== REUSE CONTAINERS ========== -->
+      <section>
+        <h2>Reuse Containers with Testcontainers</h2>
+        <ul>
+          <li>Bootstrapping new containers can take significant time</li>
+          <li>Enable container reuse when possible: <code>.withReuse(true)</code></li>
+          <li>Singleton containers per test run are preferable to <code>@Testcontainers</code> (container per class)</li>
+          <li>Speed up startup with predefined database snapshots</li>
+        </ul>
+        <pre><code class="language-java">private static PostgreSQLContainer&lt;?&gt; postgresModule =
+    new PostgreSQLContainer&lt;&gt;("myteampostgres:42")
+  .withDatabaseName("testdb")
+  .withUsername("testuser")
+  .withPassword("testpass");
+
+static {
+  postgresModule.start();
+}</code></pre>
+      </section>
+
+      <!-- ========== QUEST ITEM 3: SCROLL OF TRUTH ========== -->
+      <section class="quest-slide">
+        <div class="split">
+          <div class="col-text">
+            <div class="quest-header">
+              <span class="quest-label">Quest Item 3</span>
+              <h2>The Scroll of Truth</h2>
+              <h3>Coverage Lies, Mutants Don't</h3>
+            </div>
+          </div>
+          <div class="col-visual">
+            <img src="assets/scroll-of-truth.png" alt="Scroll of Truth">
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== MUTATION TESTING ========== -->
+      <section>
+        <h2>Introducing: Mutation Testing</h2>
+        <ul>
+          <li>Having high code coverage might give you a <strong>false sense of security</strong></li>
+          <li>Mutation Testing with <a href="https://pitest.org/quickstart/">PIT</a></li>
+          <li><strong>Beyond Line Coverage:</strong> Traditional tools like JaCoCo show which code runs,
+            but PIT verifies if tests actually detect when code behaves incorrectly by
+            introducing &ldquo;<strong>mutations</strong>&rdquo; to source code.</li>
+          <li><strong>Quality Guarantee:</strong> PIT automatically <strong>modifies your code</strong>
+            (changing conditionals, return values, etc.) to ensure tests fail when they should,
+            <strong>revealing blind spots</strong> in seemingly comprehensive suites.</li>
+        </ul>
+      </section>
+
+      <!-- ========== MUTATION TESTING EXPLAINED IMAGE ========== -->
+      <section>
+        <figure>
+          <img src="assets/mutation-testing-explained.png" alt="Mutation Testing Explained" class="centered" style="max-height:500px;">
+        </figure>
+      </section>
+
+      <!-- ========== ACT 5: TRIUMPHANT EXIT ========== -->
+      <section>
+        <div class="split">
+          <div class="col-text">
+            <h2>Act 5: The Triumphant Exit</h2>
+            <ul>
+              <li>Spring Boot applications come with batteries-included and excellent testing support</li>
+              <li>We've completed three main quests: Unit testing, Sliced testing, and Integration testing</li>
+              <li>Three core quest items help us speed up and validate:
+                <ul>
+                  <li>Context Caching</li>
+                  <li>Test Parallelization</li>
+                  <li>Mutation Testing</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <div class="col-visual">
+            <img src="assets/tsbad-end.png" alt="The End">
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== SPRING BOOT 4 ========== -->
+      <section>
+        <h2>Spring Boot 4 &mdash; Testing Support Keeps Improving</h2>
+        <ul class="feature-list">
+          <li>
+            <span class="icon" style="background:rgba(16,185,129,0.1); color:var(--pt-success);">&#x2605;</span>
+            <span class="desc">
+              <strong>RestTestClient</strong>
+              <span>Modern, fluent alternative for <code>TestRestTemplate</code> / <code>WebTestClient</code> / <code>RestAssured</code>.</span>
+            </span>
+          </li>
+          <li>
+            <span class="icon" style="background:rgba(16,185,129,0.1); color:var(--pt-success);">&#x2605;</span>
+            <span class="desc">
+              <strong>Context pausing</strong>
+              <span>Cached test contexts are now automatically paused, eliminating resource conflicts.</span>
+            </span>
+          </li>
+          <li>
+            <span class="icon" style="background:rgba(16,185,129,0.1); color:var(--pt-success);">&#x2605;</span>
+            <span class="desc">
+              <strong>JUnit 6</strong>
+              <span>Drop-in upgrade from JUnit 5 &mdash; far smoother than the JUnit 4 &rarr; 5 migration.</span>
+            </span>
+          </li>
+          <li>
+            <span class="icon" style="background:rgba(16,185,129,0.1); color:var(--pt-success);">&#x2605;</span>
+            <span class="desc">
+              <strong>Testcontainers 2.0</strong>
+              <span>New <code>testcontainers-</code> prefix for modules, JUnit 4 support removed.</span>
+            </span>
+          </li>
+          <li>
+            <span class="icon" style="background:rgba(16,185,129,0.1); color:var(--pt-success);">&#x2605;</span>
+            <span class="desc">
+              <strong>Bean overrides for non-singletons</strong>
+              <span><code>@MockitoBean</code> and <code>@TestBean</code> now work with prototype and custom-scoped beans.</span>
+            </span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- ========== WHAT'S NEXT ========== -->
+      <section>
+        <div class="split">
+          <div class="col-text">
+            <h2>What's Next?</h2>
+            <p>Testing is a team sport &mdash; make sure your whole team levels up together</p>
+            <ul>
+              <li>Spring Boot <a href="https://pragmatech.digital/workshops/">testing workshops</a>
+                (in-house / remote / hybrid)</li>
+              <li>Further Spring Boot testing resources (courses, eBooks, articles) at
+                <a href="https://rieckpil.de/">rieckpil.de</a></li>
+              <li><a href="https://pragmatech.digital/consulting/">Consulting offerings</a>,
+                e.g. the Test Maturity Assessment for projects/teams</li>
+            </ul>
+          </div>
+          <div class="col-visual">
+            <img src="assets/why-test.jpg" alt="What's next" class="rounded">
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== DON'T LEAVE EMPTY-HANDED ========== -->
+      <section>
+        <div class="split">
+          <div class="col-text">
+            <h2>Don't Leave Empty-Handed</h2>
+            <div class="card card-accent" style="margin-top:1em;">
+              <ul style="margin:0;">
+                <li>Get the complementary <strong>Testing Spring Boot Applications Demystified</strong>
+                  for free (instead of $9)</li>
+                <li>120+ Pages with practical hands-on advice to ship code with confidence</li>
+                <li>Get the eBook by joining our
+                  <a href="https://rieckpil.de/free-spring-boot-testing-book/">newsletter</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-visual">
+            <img src="assets/tsbad-cover.png" alt="eBook cover" style="max-height:560px;">
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== JOYFUL TESTING / Q&A ========== -->
+      <section>
+        <div class="split">
+          <div class="col-text text-center" style="display:flex; flex-direction:column; justify-content:center;">
+            <h2>Joyful Testing!</h2>
+            <p>Get your Spring Boot testing eBook:</p>
+            <figure>
+              <img src="assets/newsletter-signup-qr.png" alt="QR Code" class="centered" style="max-height:180px;">
+            </figure>
+            <p style="margin-top:1em;">Now it's time for Q&amp;A!</p>
+            <p class="text-small text-muted">
+              Reach out any time via:
+              <a href="https://www.linkedin.com/in/rieckpil">LinkedIn</a> (Philip Riecks) or
+              <a href="mailto:philip@pragmatech.digital">philip@pragmatech.digital</a>
+            </p>
+          </div>
+          <div class="col-visual">
+            <img src="assets/end.jpg" alt="End" class="rounded">
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="node_modules/reveal.js/dist/reveal.js"></script>
+  <script src="node_modules/reveal.js/plugin/highlight/highlight.js"></script>
+  <script src="node_modules/reveal.js/plugin/notes/notes.js"></script>
+  <script>
+    /*
+     * Inject header + footer chrome into every <section> so they
+     * live INSIDE the slide coordinate space and never overlap
+     * reveal.js controls, progress bar, or slide-number.
+     */
+    (function injectSlideChrome() {
+      var headerHtml =
+        '<div class="slide-chrome-header">' +
+          'Testing Spring Boot Applications Demystified &mdash; Webinar 19.03.2026' +
+        '</div>';
+
+      var footerHtml =
+        '<div class="slide-chrome-footer">' +
+          '<span class="footer-brand">' +
+            '<img src="assets/logo.webp" alt="PragmaTech">' +
+            'PragmaTech GmbH' +
+          '</span>' +
+          '<span>Philip Riecks &bull; pragmatech.digital</span>' +
+        '</div>';
+
+      document.querySelectorAll('.reveal .slides > section').forEach(function(section) {
+        section.insertAdjacentHTML('afterbegin', headerHtml);
+        section.insertAdjacentHTML('beforeend', footerHtml);
+      });
+    })();
+
+    Reveal.initialize({
+      hash: true,
+      slideNumber: 'c/t',
+      width: 1280,
+      height: 720,
+      margin: 0.04,
+      transition: 'slide',
+      controlsLayout: 'edges',
+      plugins: [RevealHighlight, RevealNotes]
+    });
+  </script>
+</body>
+</html>

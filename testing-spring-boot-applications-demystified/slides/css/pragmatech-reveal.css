@@ -1,0 +1,656 @@
+/*
+ * PragmaTech Reveal.js Theme
+ * Common theme for PragmaTech GmbH presentations
+ * Extends reveal.js white base theme
+ *
+ * Header & footer live INSIDE each slide via the reveal.js
+ * built-in `display` callback — no fixed overlays, so they
+ * never collide with controls or slide-number.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ---- Design tokens ---- */
+:root {
+  --pt-primary: #1a1a2e;
+  --pt-primary-light: #2d2d4a;
+  --pt-accent: #2563eb;
+  --pt-accent-hover: #1d4ed8;
+  --pt-accent-soft: rgba(37, 99, 235, 0.08);
+  --pt-highlight: #fef08a;
+  --pt-text: #1e293b;
+  --pt-text-muted: #64748b;
+  --pt-text-light: #94a3b8;
+  --pt-surface: #ffffff;
+  --pt-surface-alt: #f8fafc;
+  --pt-border: #e2e8f0;
+  --pt-border-light: #f1f5f9;
+  --pt-success: #10b981;
+  --pt-warning: #f59e0b;
+  --pt-danger: #ef4444;
+  --pt-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --pt-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --pt-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+  --pt-radius: 8px;
+  --pt-radius-lg: 12px;
+}
+
+/* ---- Base ---- */
+.reveal {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--pt-text);
+  line-height: 1.6;
+}
+
+.reveal .slides {
+  text-align: left;
+}
+
+.reveal .slides section {
+  padding: 20px 48px 16px;
+  box-sizing: border-box;
+  height: 100%;
+}
+
+/* ---- Typography ---- */
+.reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+  font-family: 'Inter', sans-serif;
+  color: var(--pt-primary);
+  font-weight: 700;
+  text-transform: none;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 0.6em;
+}
+
+.reveal h1 { font-size: 2em; font-weight: 800; }
+.reveal h2 { font-size: 1.5em; }
+.reveal h3 { font-size: 1.2em; }
+.reveal h4 { font-size: 1em; color: var(--pt-text-muted); font-weight: 600; }
+
+.reveal p {
+  margin-bottom: 0.8em;
+  line-height: 1.7;
+}
+
+.reveal strong {
+  font-weight: 600;
+  color: var(--pt-primary);
+}
+
+.reveal a {
+  color: var(--pt-accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+
+.reveal a:hover {
+  border-bottom-color: var(--pt-accent);
+}
+
+/* ---- Lists ---- */
+.reveal ul, .reveal ol {
+  margin-left: 0;
+  padding-left: 1.2em;
+}
+
+.reveal li {
+  margin-bottom: 0.5em;
+  line-height: 1.6;
+  padding-left: 0.3em;
+}
+
+.reveal li::marker {
+  color: var(--pt-accent);
+  font-weight: 600;
+}
+
+.reveal ul ul {
+  margin-top: 0.3em;
+  font-size: 0.92em;
+}
+
+/* ---- Inline code ---- */
+.reveal code:not([class*="language-"]):not([class*="hljs"]) {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.85em;
+  background: var(--pt-accent-soft);
+  color: var(--pt-accent);
+  padding: 0.15em 0.45em;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+/* ===========================================================
+   HEADER & FOOTER — inside the slide flow
+   These are placed as the first/last child of each <section>
+   via JS (see Reveal.on('ready') in index.html). They live
+   within the slide coordinate system so they never overlap
+   reveal.js controls, slide-number, or progress bar.
+   =========================================================== */
+.slide-chrome-header {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 40px;
+  background: linear-gradient(135deg, var(--pt-primary) 0%, var(--pt-primary-light) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
+  letter-spacing: 0.02em;
+  padding: 0 24px;
+  z-index: 1;
+}
+
+.slide-chrome-footer {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 36px;
+  background: var(--pt-surface-alt);
+  border-top: 1px solid var(--pt-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--pt-text-muted);
+  padding: 0 24px;
+  z-index: 1;
+}
+
+.slide-chrome-footer .footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.slide-chrome-footer .footer-brand img {
+  height: 18px;
+  width: 18px;
+  border-radius: 3px;
+}
+
+/* Slide padding to make room for header + footer chrome */
+.reveal .slides section {
+  padding-top: 56px;
+  padding-bottom: 48px;
+}
+
+/* ---- Reveal.js controls: reposition to avoid footer ---- */
+.reveal .controls {
+  bottom: 44px !important;
+}
+
+/* ---- Slide number: put in footer area, left-center ---- */
+.reveal .slide-number {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--pt-text-muted);
+  background: transparent;
+  bottom: 8px;
+  right: auto;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* ---- Title slide ---- */
+.reveal .slides section.title-slide {
+  text-align: center;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.reveal .slides section.title-slide h1 {
+  font-size: 2.2em;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.3em;
+  background: linear-gradient(135deg, var(--pt-primary) 0%, var(--pt-accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.reveal .slides section.title-slide h2 {
+  font-size: 1em;
+  color: var(--pt-text-muted);
+  font-weight: 400;
+  margin-bottom: 1.5em;
+}
+
+.reveal .slides section.title-slide .meta {
+  font-size: 0.75em;
+  color: var(--pt-text-muted);
+  line-height: 1.8;
+}
+
+/* ---- Full-background slides ---- */
+.reveal .slides section.bg-dark {
+  color: #fff;
+}
+
+.reveal .slides section.bg-dark h1,
+.reveal .slides section.bg-dark h2,
+.reveal .slides section.bg-dark h3 {
+  color: #fff;
+  -webkit-text-fill-color: #fff;
+}
+
+.reveal .slides section.bg-dark .overlay {
+  background: rgba(0, 0, 0, 0.45);
+  padding: 32px 40px;
+  border-radius: var(--pt-radius-lg);
+  backdrop-filter: blur(4px);
+}
+
+/* Hide chrome on full-background cover slides */
+.reveal .slides section[data-background-image] .slide-chrome-header,
+.reveal .slides section[data-background-image] .slide-chrome-footer {
+  display: none;
+}
+
+/* ---- Two-column split layout ---- */
+.split {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  height: 100%;
+}
+
+.split .col-text {
+  flex: 2;
+  min-width: 0;
+}
+
+.split .col-visual {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+
+.split .col-visual img {
+  max-width: 100%;
+  max-height: 520px;
+  object-fit: contain;
+  border-radius: var(--pt-radius);
+}
+
+.split.reverse {
+  flex-direction: row-reverse;
+}
+
+.split.equal .col-text,
+.split.equal .col-visual {
+  flex: 1;
+}
+
+/* ---- Cards ---- */
+.card {
+  background: var(--pt-surface);
+  border: 1px solid var(--pt-border);
+  border-radius: var(--pt-radius-lg);
+  padding: 24px 28px;
+  box-shadow: var(--pt-shadow-sm);
+}
+
+.card-accent {
+  border-left: 4px solid var(--pt-accent);
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.card-grid .card {
+  padding: 16px 20px;
+}
+
+.card-grid .card h4 {
+  margin: 0 0 0.3em;
+  font-size: 0.85em;
+}
+
+.card-grid .card p {
+  margin: 0;
+  font-size: 0.78em;
+  color: var(--pt-text-muted);
+  line-height: 1.5;
+}
+
+/* ---- Feature list (icon + label + desc) ---- */
+.feature-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.feature-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--pt-border-light);
+}
+
+.feature-list li:last-child {
+  border-bottom: none;
+}
+
+.feature-list .icon {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--pt-accent-soft);
+  color: var(--pt-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7em;
+  font-weight: 700;
+}
+
+.feature-list .desc {
+  flex: 1;
+}
+
+.feature-list .desc strong {
+  display: block;
+  font-size: 0.9em;
+  margin-bottom: 2px;
+}
+
+.feature-list .desc span {
+  font-size: 0.78em;
+  color: var(--pt-text-muted);
+  line-height: 1.5;
+}
+
+/* ---- Badge / pill ---- */
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  font-size: 0.65em;
+  font-weight: 600;
+  border-radius: 20px;
+  letter-spacing: 0.02em;
+  vertical-align: middle;
+}
+
+.badge-accent {
+  background: var(--pt-accent-soft);
+  color: var(--pt-accent);
+}
+
+.badge-success {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--pt-success);
+}
+
+.badge-warning {
+  background: rgba(245, 158, 11, 0.1);
+  color: var(--pt-warning);
+}
+
+.badge-danger {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--pt-danger);
+}
+
+/* ---- Blockquote ---- */
+.reveal blockquote {
+  background: var(--pt-surface-alt);
+  border-left: 4px solid var(--pt-accent);
+  border-radius: 0 var(--pt-radius) var(--pt-radius) 0;
+  padding: 20px 24px;
+  margin: 1em 0;
+  font-size: 0.88em;
+  color: var(--pt-text);
+  box-shadow: none;
+  font-style: normal;
+  line-height: 1.65;
+}
+
+.reveal blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+/* ---- Images ---- */
+.reveal img {
+  border: none;
+  box-shadow: none;
+}
+
+.reveal img.centered {
+  display: block;
+  margin: 0 auto;
+}
+
+.reveal img.rounded {
+  border-radius: var(--pt-radius-lg);
+  box-shadow: var(--pt-shadow-md);
+}
+
+.reveal figure {
+  margin: 0;
+  text-align: center;
+}
+
+.reveal figcaption {
+  font-size: 0.65em;
+  color: var(--pt-text-light);
+  margin-top: 8px;
+}
+
+/* ===========================================================
+   CODE BLOCKS — IntelliJ Light theme
+   Light background, dark text, colored syntax tokens matching
+   IntelliJ IDEA's default light color scheme.
+   =========================================================== */
+.reveal pre {
+  width: 100%;
+  font-size: 0.52em;
+  box-shadow: var(--pt-shadow-sm);
+  border-radius: var(--pt-radius);
+  border: 1px solid var(--pt-border);
+  margin: 0.8em 0;
+  background: #fbfbfb;
+}
+
+.reveal pre code {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  max-height: 520px;
+  padding: 18px 20px;
+  line-height: 1.5;
+  border-radius: var(--pt-radius);
+  background: #fbfbfb;
+  color: #080808;
+}
+
+/* --- IntelliJ Light syntax colours --- */
+.reveal pre code .hljs-keyword,
+.reveal pre code .hljs-selector-tag,
+.reveal pre code .hljs-built_in {
+  color: #0033b3;
+  font-weight: 600;
+}
+
+.reveal pre code .hljs-type,
+.reveal pre code .hljs-title.class_,
+.reveal pre code .hljs-title {
+  color: #000000;
+  font-weight: 600;
+}
+
+.reveal pre code .hljs-string,
+.reveal pre code .hljs-attr {
+  color: #067d17;
+}
+
+.reveal pre code .hljs-number,
+.reveal pre code .hljs-literal {
+  color: #1750eb;
+}
+
+.reveal pre code .hljs-comment,
+.reveal pre code .hljs-doctag {
+  color: #8c8c8c;
+  font-style: italic;
+}
+
+.reveal pre code .hljs-meta,
+.reveal pre code .hljs-meta .hljs-keyword {
+  color: #9e880d;
+}
+
+.reveal pre code .hljs-function,
+.reveal pre code .hljs-title.function_ {
+  color: #00627a;
+}
+
+.reveal pre code .hljs-variable,
+.reveal pre code .hljs-template-variable {
+  color: #871094;
+}
+
+.reveal pre code .hljs-params {
+  color: #080808;
+}
+
+.reveal pre code .hljs-tag {
+  color: #0033b3;
+}
+
+.reveal pre code .hljs-name {
+  color: #0033b3;
+  font-weight: 600;
+}
+
+.reveal pre code .hljs-attribute {
+  color: #174ad4;
+}
+
+.reveal pre code .hljs-symbol,
+.reveal pre code .hljs-bullet {
+  color: #871094;
+}
+
+.reveal pre code .hljs-selector-id,
+.reveal pre code .hljs-selector-class {
+  color: #9e880d;
+}
+
+/* Step-through highlight: reveal.js adds these */
+.reveal .highlight-line {
+  display: inline-block;
+  width: 100%;
+}
+
+/* The "current" highlighted lines in step-by-step mode */
+.reveal pre code table .highlight-line {
+  background: rgba(255, 243, 128, 0.5) !important;
+}
+
+/* Gutter (line numbers) in reveal highlight */
+.reveal pre code table .hljs-ln-numbers {
+  color: #b0b0b0;
+  border-right: 1px solid var(--pt-border);
+  padding-right: 12px;
+  margin-right: 12px;
+  user-select: none;
+}
+
+/* ---- Quest / Act section slides ---- */
+.reveal .slides section.quest-slide {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.quest-header {
+  text-align: center;
+}
+
+.quest-header .quest-label {
+  display: inline-block;
+  font-size: 0.65em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--pt-accent);
+  margin-bottom: 0.6em;
+  padding: 4px 16px;
+  background: var(--pt-accent-soft);
+  border-radius: 20px;
+}
+
+.quest-header h2 {
+  font-size: 1.6em;
+  margin-bottom: 0.2em;
+}
+
+.quest-header h3 {
+  font-size: 0.85em;
+  color: var(--pt-text-muted);
+  font-weight: 400;
+}
+
+/* ---- Callout boxes ---- */
+.callout {
+  border-radius: var(--pt-radius);
+  padding: 16px 20px;
+  margin: 0.8em 0;
+  font-size: 0.88em;
+  line-height: 1.6;
+}
+
+.callout-info {
+  background: var(--pt-accent-soft);
+  border: 1px solid rgba(37, 99, 235, 0.15);
+  color: var(--pt-text);
+}
+
+.callout-warning {
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+}
+
+.callout-danger {
+  background: rgba(239, 68, 68, 0.06);
+  border: 1px solid rgba(239, 68, 68, 0.15);
+}
+
+/* ---- Utilities ---- */
+.text-center { text-align: center; }
+.text-small  { font-size: 0.82em; }
+.text-xs     { font-size: 0.7em; }
+.text-muted  { color: var(--pt-text-muted); }
+.mt-0 { margin-top: 0; }
+.mb-0 { margin-bottom: 0; }
+.mb-sm { margin-bottom: 0.4em; }
+.gap-sm { gap: 16px; }
+
+/* ---- Print / PDF ---- */
+@media print {
+  .slide-chrome-header,
+  .slide-chrome-footer {
+    position: absolute;
+  }
+
+  .reveal pre {
+    box-shadow: none;
+    border: 1px solid #ddd;
+  }
+
+  .reveal .controls {
+    display: none !important;
+  }
+}
