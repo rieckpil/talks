@@ -30,12 +30,11 @@ Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](htt
 
 ## Participate During the Talk
 
-Go to [menti.com](https://www.menti.com/) and use the code **2311 8721 ** to **anonymously** submit answers for the quizzes and add your questions during the talk.
+Go to [menti.com](https://www.menti.com/) and use the code **2311 8721** to **anonymously** submit answers for the quizzes and add your questions during the talk.
 
 [//]: # (![h:200 center]&#40;../assets/mentimeter-jug-oslo-2026.png&#41;)
 
-Start with the **first three questions**:
-- Which talk language do you prefer?
+Start with the **first two questions**:
 - Despite having LLMs and Code Agents, do you still write your tests by hand?
 - Do You Enjoy Writing Automated Tests?
 
