@@ -1,7 +1,7 @@
 ---
 marp: true
 theme: pragmatech
-header: 'Testing Spring Boot Applications Demystified @ Webinar 19.03.2026'
+header: 'Testing Spring Boot Applications Demystified @ Entur 09.04.2026'
 ---
 
 ![bg](./assets/tsbad-beginning.png)
@@ -21,7 +21,7 @@ Notes:
 
 ## A Hero's Journey Through the Spring Boot Testing Labyrinth
 
-CoP Spring Boot @ REWE Group 25.03.2026
+Webinar @ Entur 09.04.2026
 
 Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](https://x.com/rieckpil)
 
@@ -30,7 +30,7 @@ Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](htt
 
 ## Participate During the Talk
 
-Go to [menti.com](https://www.menti.com/) and use the code **4469 9652** to **anonymously** submit answers for the quizzes and add your questions during the talk.
+Go to [menti.com](https://www.menti.com/) and use the code **2311 8721 ** to **anonymously** submit answers for the quizzes and add your questions during the talk.
 
 [//]: # (![h:200 center]&#40;../assets/mentimeter-jug-oslo-2026.png&#41;)
 
@@ -45,7 +45,7 @@ At the end of the Menti, you can add your questions for the Q&A session.
 
 
 
-<!-- header: 'CoP Spring Boot @ REWE Group 25.03.2026 - Questions @ menti.com Code: <strong>4469 9652</strong>' -->
+<!-- header: 'Webinar @ Entur 09.04.2026 - Questions @ menti.com Code: <strong>2311 8721 </strong>' -->
 
 ![bg right:33%](assets/why-test-software.jpg)
 
@@ -919,38 +919,38 @@ Testing is a team sport, make sure your whole team levels up together
 [//]: # ()
 [//]: # (---)
 
-[//]: # ()
-[//]: # (## My Entire Spring Boot Testing Knowledge Combined)
 
-[//]: # ()
-[//]: # (... in one on-demand online course.)
+## My Entire Spring Boot Testing Knowledge Combined
 
-[//]: # ()
-[//]: # (Learn how to test and verify a real-world self-contained system with the [Testing Spring Boot Applications Masterclass]&#40;https://rieckpil.de/testing-spring-boot-applications-masterclass/&#41;)
 
-[//]: # ()
-[//]: # (![center w:400 h:400]&#40;assets/masterclass-architecture.png&#41;)
+... in one on-demand online course.
 
-[//]: # ()
-[//]: # ()
-[//]: # (---)
 
-[//]: # ()
-[//]: # (## Covering Unit, Sliced, Integration and E2E Tests)
+Learn how to test and verify a real-world self-contained system with the [Testing Spring Boot Applications Masterclass](https://rieckpil.de/testing-spring-boot-applications-masterclass/)
 
-[//]: # ()
-[//]: # (... with 130 course lessons and 12h+ of content)
 
-[//]: # ()
-[//]: # (![center]&#40;assets/tsbam-recording.gif&#41;)
+![center w:400 h:400](assets/masterclass-architecture.png)
 
-[//]: # ()
-[//]: # (---)
 
-[//]: # ()
-[//]: # (![bg h:600 center]&#40;assets/tsbam-testimonials.png&#41;)
 
-[//]: # (---)
+---
+
+
+## Covering Unit, Sliced, Integration and E2E Tests
+
+
+... with 130 course lessons and 12h+ of content
+
+
+![center](assets/tsbam-recording.gif)
+
+
+---
+
+
+![bg h:600 center](assets/tsbam-testimonials.png)
+
+---
 
 [//]: # (![bg h:900 right:20%]&#40;assets/offers-w.png&#41;)
 
@@ -999,7 +999,7 @@ Testing is a team sport, make sure your whole team levels up together
 <!-- paginate: false -->
 
 
-## Joyful Testing!
+## Tusen Takk!
 
 Get your Spring Boot testing eBook:
 
