@@ -55,13 +55,14 @@ At the end of the Menti, you can add your questions for the Q&A session.
 ![bg right:33%](assets/ai-image.jpg)
 
 
-## Automated Testing in the AI Era
+## The AI Trap: Testing is Your Safety Net
 
-- AI generates code; you own the consequences.
-- Co-pilots don't carry pagers. You do.
+- AI generates the logic, but you inherit the liability. It can write the function; it won't join the post-mortem.
+- If the AI wrote the code and the AI wrote the test, you are the only person left to solve the hallucination when the system crashes.
 - AI is the accelerator. Your test suite is the brakes. You need both to go fast.
-- AI can write your tests, but it can't understand your intent. A test without intent is just a green checkmark.
-- If you don't understand why a test passes, you won't understand why it fails at 3 AM.
+
+The New Standard: AI provides the horsepower, but your test suite provides the steering. Together, they turn **coding fast** into **shipping reliably**.
+
 ---
 
 [//]: # ()
