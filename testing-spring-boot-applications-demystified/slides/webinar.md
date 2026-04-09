@@ -32,7 +32,7 @@ Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](htt
 
 Go to [menti.com](https://www.menti.com/) and use the code **2311 8721** to **anonymously** submit answers for the quizzes and add your questions during the talk.
 
-[//]: # (![h:200 center]&#40;../assets/mentimeter-jug-oslo-2026.png&#41;)
+![h:200 center](/assets/menti-entur.png)
 
 Start with the **first two questions**:
 - Despite having LLMs and Code Agents, do you still write your tests by hand?
@@ -59,9 +59,9 @@ At the end of the Menti, you can add your questions for the Q&A session.
 
 - AI generates the logic, but you inherit the liability. It can write the function; it won't join the post-mortem.
 - If the AI wrote the code and the AI wrote the test, you are the only person left to solve the hallucination when the system crashes.
-- AI is the accelerator. Your test suite is the brakes. You need both to go fast.
+- AI is the accelerator. Your tests are the brakes. You need both to go fast.
 
-The New Standard: AI provides the horsepower, but your test suite provides the steering. Together, they turn **coding fast** into **shipping reliably**.
+AI provides the horsepower, but your test suite provides the steering. Together, they turn **coding fast** into **shipping reliably with confidence**.
 
 ---
 
