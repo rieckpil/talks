@@ -1,10 +1,10 @@
 ---
 marp: true
 theme: pragmatech
-header: 'Testing Spring Boot Applications Demystified @ Entur 09.04.2026'
+header: 'Testing Spring Boot Applications Demystified @ Spring I/O 14.04.2026'
 ---
 
-![bg](./assets/tsbad-beginning.png)
+![bg](./assets/barcelona-2026.jpg)
 <!-- header: "" -->
 <!-- footer: ""-->
 
@@ -21,7 +21,7 @@ Notes:
 
 ## A Hero's Journey Through the Spring Boot Testing Labyrinth
 
-Webinar @ Entur 09.04.2026
+Talk @ Spring I/O 14.04.2026
 
 Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](https://x.com/rieckpil)
 
@@ -30,21 +30,20 @@ Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](htt
 
 ## Participate During the Talk
 
-Go to [menti.com](https://www.menti.com/) and use the code **2311 8721** to **anonymously** submit answers for the quizzes and add your questions during the talk.
+Go to [menti.com](https://www.menti.com/) and use the code **7894 9383** to **anonymously** submit answers for the quizzes and add your questions during the talk.
 
-![h:200 center](/assets/menti-entur.png)
+![h:200 center](/assets/menti-springio.png)
 
 Start with the **first two questions**:
 - Despite having LLMs and Code Agents, do you still write your tests by hand?
 - Do You Enjoy Writing Automated Tests?
 
-At the end of the Menti, you can add your questions for the Q&A session.
-
 ---
 
 
 
-<!-- header: 'Webinar @ Entur 09.04.2026 - Questions @ menti.com Code: <strong>2311 8721 </strong>' -->
+<!-- header: 'Webinar @ Spring I/O 14.04.2026 - Questions @ menti.com Code: <strong>7894 9383 </strong>' -->
+
 
 ![bg right:33%](assets/why-test-software.jpg)
 
@@ -158,8 +157,9 @@ Testing Spring Boot applications can feel like entering a labyrinth blindfolded:
 
 - Copying test configuration from AI/StackOverflow hoping it works
 - The paradox of choice: `@SpringBootTest`, `@WebMvcTest`, `@DataJpaTest`, `@MockBean`, etc.
-- Fear of refactoring because tests break for the wrong reasons
-- Tests written to satisfy coverage metrics, not increase productivity, confidence or catch bugs
+- Struggling with Spring `ApplicationContext` creation during tests
+- Uncertainty about what to test and how to test it effectively
+
 ---
 
 
@@ -567,37 +567,55 @@ ad0f804068dc   testcontainers/ryuk:0.12.0   "/bin/ryuk"              10 seconds 
 
 ---
 
-## Stub External HTTP Services with WireMock (Problem #2)
+[//]: # (## Stub External HTTP Services with WireMock &#40;Problem #2&#41;)
 
-Consider [WireMock](http://wiremock.org/) to stub external HTTP services during tests.
+[//]: # ()
+[//]: # (Consider [WireMock]&#40;http://wiremock.org/&#41; to stub external HTTP services during tests.)
 
-![h:400 center](assets/wiremock-usage.svg)
+[//]: # ()
+[//]: # (![h:400 center]&#40;assets/wiremock-usage.svg&#41;)
+
+[//]: # ()
+[//]: # (---)
+[//]: # ()
+[//]: # (## Using WireMock for Integration Tests)
+
+[//]: # ()
+[//]: # (- Run as in-memory service or Docker container to simulate connected HTTP services)
+
+[//]: # (- Override HTTP clients to connect to the WireMock server during tests)
+
+[//]: # ()
+[//]: # (```java)
+
+[//]: # (TestPropertyValues.of&#40;)
+
+[//]: # (  "clients.open-library.base-url=http://localhost:"+ wireMockServer.port&#40;&#41;&#41;)
+
+[//]: # (  .applyTo&#40;applicationContext&#41;;)
+
+[//]: # (```)
+
+[//]: # ()
+[//]: # (```java)
+
+[//]: # (wireMockServer.stubFor&#40;)
+
+[//]: # (  get&#40;urlPathEqualTo&#40;"/api/books/" + isbn&#41;&#41;)
+
+[//]: # (    .willReturn&#40;aResponse&#40;&#41;)
+
+[//]: # (      .withHeader&#40;HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE&#41;)
+
+[//]: # (      .withBodyFile&#40;"book-response-success.json"&#41;&#41;)
+
+[//]: # (&#41;;)
+
+[//]: # (```)
 
 ---
 
-## Using WireMock for Integration Tests
-
-- Run as in-memory service or Docker container to simulate connected HTTP services
-- Override HTTP clients to connect to the WireMock server during tests
-
-```java
-TestPropertyValues.of(
-  "clients.open-library.base-url=http://localhost:"+ wireMockServer.port())
-  .applyTo(applicationContext);
-```
-
-```java
-wireMockServer.stubFor(
-  get(urlPathEqualTo("/api/books/" + isbn))
-    .willReturn(aResponse()
-      .withHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-      .withBodyFile("book-response-success.json"))
-);
-```
-
----
-
-## Starting the Entire Spring Context - Version 1
+## Testing Against the Entire Spring Context - Version 1
 
 
 - The test and the context run in the same thread, hence we can rollback with `@Transactional` and simply override the security context with `@WithMockUser`
@@ -628,21 +646,21 @@ class ApplicationMockWebIT {
 
 ---
 
-## Starting the Entire Spring Context - Version 2
+## Testing Against the Entire Spring Context - Version 2
 
 
 - We access the application over HTTP like a user, the test and context run in separate threads (no `@Transactional` rollback), requires HTTP authentication
 
-```java {1}
+```java {1,2}
 @AutoConfigureWebTestClient // required since Spring Boot 4
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class ApplicationServletContainerIT {
 
-  @LocalServerPort
-  private int port; // <-- we're running on a real port
+  @Autowired
+  WebTestClient webTestClient;
 
   @Test
-  void contextLoads(@Autowired WebTestClient webTestClient) {
+  void contextLoads() {
     webTestClient
       .get()
       .uri("/api/customers")
@@ -715,7 +733,7 @@ Example of speed improvement:
 ```java
 // DefaultContextCache.java
 private final Map<MergedContextConfiguration, ApplicationContext> contextMap =
-  Collections.synchronizedMap(new LruCache(32, 0.75f));
+  Collections.synchronizedMap(new LinkedHashMap<>(32, 0.75f, true));
 ```
 
 The following information is part of the Cache Key (`MergedContextConfiguration`):
@@ -728,6 +746,26 @@ The following information is part of the Cache Key (`MergedContextConfiguration`
 - etc.
 
 ---
+
+```text
+Test class
+    │
+    ▼
+MergedContextConfiguration(
+  testClass, locations, classes,
+  activeProfiles, propertyValues,
+  contextInitializers, contextCustomizers   ← every @MockitoBean lands here
+  ... etc.
+)
+    │
+    ▼  hashCode() / equals()
+
+Cache hit? → reuse context ✅
+Cache miss? → start new context and store it 🆕
+```
+
+---
+
 ###  Detect Context Restarts - Visually
 
 ![](assets/context-caching-hints.png)
@@ -814,23 +852,60 @@ Two ways to achieve this:
 
 ---
 
-## Reuse Containers with Testcontainers
+## Test Parallelization 101
 
-- Bootstrapping new containers can take a significant amount of time
-- Enable container reuse in Testcontainers when possible: `.withReuse(true)`
-- Singleton containers per test run are preferable to `@Testcontainers` (container per test class)
-- Speed up container startup with e.g. predefined database snapshots
+Using Surefire/Failsafe:
 
-```java
-private static PostgreSQLContainer<?> postgresModule = new PostgreSQLContainer<>("myteampostgres:42")
-  .withDatabaseName("testdb")
-  .withUsername("testuser")
-  .withPassword("testpass");
-
-static {
-  postgresModule.start();
-}
+```xml
+<plugin>
+  <artifactId>maven-surefire-plugin</artifactId>
+  <configuration>
+    <forkCount>1C</forkCount> <!-- 1 JVM per CPU core -->
+  </configuration>
+</plugin>
 ```
+
+With JUnit Jupiter:
+
+```properties
+# src/test/resources/junit-platform.properties
+junit.jupiter.execution.parallel.enabled = true
+junit.jupiter.execution.parallel.mode.default = same_thread
+junit.jupiter.execution.parallel.mode.classes.default = concurrent
+```
+
+[//]: # (---)
+
+[//]: # (## Reuse Containers with Testcontainers)
+
+[//]: # ()
+[//]: # (- Bootstrapping new containers can take a significant amount of time)
+
+[//]: # (- Enable container reuse in Testcontainers when possible: `.withReuse&#40;true&#41;`)
+
+[//]: # (- Singleton containers per test run are preferable to `@Testcontainers` &#40;container per test class&#41;)
+
+[//]: # (- Speed up container startup with e.g. predefined database snapshots)
+
+[//]: # ()
+[//]: # (```java)
+
+[//]: # (private static PostgreSQLContainer<?> postgresModule = new PostgreSQLContainer<>&#40;"myteampostgres:42"&#41;)
+
+[//]: # (  .withDatabaseName&#40;"testdb"&#41;)
+
+[//]: # (  .withUsername&#40;"testuser"&#41;)
+
+[//]: # (  .withPassword&#40;"testpass"&#41;;)
+
+[//]: # ()
+[//]: # (static {)
+
+[//]: # (  postgresModule.start&#40;&#41;;)
+
+[//]: # (})
+
+[//]: # (```)
 
 ---
 
@@ -854,7 +929,7 @@ static {
 
 ---
 
-![center h:500 w:1300](assets/mutation-testing-explained.png)
+![center](assets/pit-new.png)
 
 ---
 
@@ -885,18 +960,24 @@ static {
 
 ---
 
-![bg right:30%](assets/why-test.jpg)
+[//]: # ()
+[//]: # (![bg right:30%]&#40;assets/why-test.jpg&#41;)
 
+[//]: # ()
+[//]: # ()
+[//]: # (## What's Next?)
 
-## What's Next?
+[//]: # ()
+[//]: # (Testing is a team sport, make sure your whole team levels up together)
 
-Testing is a team sport, make sure your whole team levels up together
+[//]: # ()
+[//]: # (- Spring Boot [testing workshops]&#40;https://pragmatech.digital/workshops/&#41; &#40;in-house/remote/hybrid&#41;)
 
-- Spring Boot [testing workshops](https://pragmatech.digital/workshops/) (in-house/remote/hybrid)
-- Further Spring Boot testing resources (courses, eBooks, articles) at [rieckpil.de](https://rieckpil.de/)
-- [Consulting offerings](https://pragmatech.digital/consulting/), e.g. the Test Maturity Assessment for projects/teams
+[//]: # (- Further Spring Boot testing resources &#40;courses, eBooks, articles&#41; at [rieckpil.de]&#40;https://rieckpil.de/&#41;)
 
----
+[//]: # (- [Consulting offerings]&#40;https://pragmatech.digital/consulting/&#41;, e.g. the Test Maturity Assessment for projects/teams)
+
+[//]: # (---)
 
 [//]: # (## Bring This Talk to Your Company!)
 
@@ -920,37 +1001,47 @@ Testing is a team sport, make sure your whole team levels up together
 [//]: # (---)
 
 
-## My Entire Spring Boot Testing Knowledge Combined
+[//]: # (## My Entire Spring Boot Testing Knowledge Combined)
 
+[//]: # ()
+[//]: # ()
+[//]: # (... in one on-demand online course.)
 
-... in one on-demand online course.
+[//]: # ()
+[//]: # ()
+[//]: # (Learn how to test and verify a real-world self-contained system with the [Testing Spring Boot Applications Masterclass]&#40;https://rieckpil.de/testing-spring-boot-applications-masterclass/&#41;)
 
+[//]: # ()
+[//]: # ()
+[//]: # (![center w:400 h:400]&#40;assets/masterclass-architecture.png&#41;)
 
-Learn how to test and verify a real-world self-contained system with the [Testing Spring Boot Applications Masterclass](https://rieckpil.de/testing-spring-boot-applications-masterclass/)
+[//]: # ()
+[//]: # ()
+[//]: # ()
+[//]: # (---)
 
+[//]: # ()
+[//]: # ()
+[//]: # (## Covering Unit, Sliced, Integration and E2E Tests)
 
-![center w:400 h:400](assets/masterclass-architecture.png)
+[//]: # ()
+[//]: # ()
+[//]: # (... with 130 course lessons and 12h+ of content)
 
+[//]: # ()
+[//]: # ()
+[//]: # (![center]&#40;assets/tsbam-recording.gif&#41;)
 
+[//]: # ()
+[//]: # ()
+[//]: # (---)
 
----
+[//]: # ()
+[//]: # ()
+[//]: # (![bg h:600 center]&#40;assets/tsbam-testimonials.png&#41;)
 
-
-## Covering Unit, Sliced, Integration and E2E Tests
-
-
-... with 130 course lessons and 12h+ of content
-
-
-![center](assets/tsbam-recording.gif)
-
-
----
-
-
-![bg h:600 center](assets/tsbam-testimonials.png)
-
----
+[//]: # ()
+[//]: # (---)
 
 [//]: # (![bg h:900 right:20%]&#40;assets/offers-w.png&#41;)
 
@@ -977,6 +1068,38 @@ Learn how to test and verify a real-world self-contained system with the [Testin
 [//]: # (The offer expires on the 20th of March 2026 6 PM CET.)
 
 
+## Bring this Talk to your Company!
+
+![bg right:23%](assets/philip-jug-zurich-2025-audience.jpg)
+
+Testing is a team sport, make sure your whole team levels up together.
+
+I offer the 90 minutes talk **Testing Spring Boot Applications Demystified** for free during:
+
+- **Lunch & Learn** sessions
+- **Internal conferences** and developer days
+- **Team training** events
+
+Reach out via LinkedIn or email (philip@pragmatech.digital) to discuss the details and schedule a session for your team.
+
+---
+
+## Upcoming Open Online Workshops
+
+Join developers from all around the world in a public, hands-on cohort:
+
+**Confidence In Every Commit: Essentials (1 Day)** - Achieve confidence in every commit. Stop fighting your test suite and start mastering it. Covering fast & reliable unit, sliced and integration testing with Spring Boot
+
+Next dates:
+
+- 🗓️ 02.07.2026
+- 🗓️ 08.09.2026
+
+Dates, agendas and tickets: https://rieckpil.de/workshops
+
+---
+
+
 ## Don't Leave Empty-Handed
 
 
@@ -999,14 +1122,14 @@ Learn how to test and verify a real-world self-contained system with the [Testin
 <!-- paginate: false -->
 
 
-## Tusen Takk!
+## Joyful Testing!
 
 Get your Spring Boot testing eBook:
 
 
 ![center h:200 w:200](assets/newsletter-signup-qr.png)
 
-Now it's time for Q&A! If you have any questions feel free to ask via Zoom chat or within Menti (last question).
+Now it's time for Q&A! If you have any questions feel free to ask them live or via Menti (last question in the poll).
 
 ![bg right:33%](assets/end.jpg)
 
