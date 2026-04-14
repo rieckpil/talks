@@ -42,7 +42,7 @@ Start with the **first two questions**:
 
 
 
-<!-- header: 'Webinar @ Spring I/O 14.04.2026 - Questions @ menti.com Code: <strong>7894 9383 </strong>' -->
+<!-- header: 'Talk @ Spring I/O 14.04.2026 - Questions @ menti.com Code: <strong>7894 9383 </strong>' -->
 
 
 ![bg right:33%](assets/why-test-software.jpg)
@@ -59,8 +59,6 @@ Start with the **first two questions**:
 - AI generates the logic, but you inherit the liability. It can write the function; it won't join the post-mortem.
 - If the AI wrote the code and the AI wrote the test, you are the only person left to solve the hallucination when the system crashes.
 - AI is the accelerator. Your tests are the brakes. You need both to go fast.
-
-AI provides the horsepower, but your test suite provides the steering. Together, they turn **coding fast** into **shipping reliably with confidence**.
 
 ---
 
@@ -100,7 +98,11 @@ Imagine seeing this pull request on a Friday afternoon:
 
 How confident are you to merge this major Spring Boot upgrade and deploy it to production once the pipeline turns green?
 
-Good tests don't just catch bugs - they give you **fast feedback** and **confident deployments**.
+---
+
+# Good tests don't just catch bugs - they give you **fast feedback** and **confident deployments**.
+
+
 
 ---
 
@@ -132,7 +134,7 @@ Good tests don't just catch bugs - they give you **fast feedback** and **confide
 
 - **Provide a clear mental map** for choosing between unit, slice, and integration tests so developers stop guessing which tool to use
 - **Equip attendees with practical techniques** to speed up test suites and validate test quality
-- **Build confidence to refactor fearlessly** by creating tests that catch real bugs, not just achieve coverage metrics
+- **Build confidence to ship fearlessly** by creating tests that catch real bugs, not just achieve coverage metrics
 
 
 ---
@@ -279,7 +281,7 @@ Tips:
 
 ## Unit Testing Java/Spring Boot Applications 101
 
-- **Core Concept**: Test individual components in isolation from dependencies — one unit of work at a time.
+- **Core Concept**: Test individual components in isolation from dependencies - one unit of work at a time.
 
 - **Confidence Gained**: Fast, high-volume verification that the smallest building blocks behave correctly under various conditions.
 
@@ -534,11 +536,20 @@ Notes:
 
 ---
 
-## Starting the Entire `ApplicationContext`
+## Challenges when Starting the Entire `ApplicationContext`
 
-- **Problem #1**: How to ensure surrounding infrastructure (e.g. database, queues, etc.) is present?
-- **Problem #2**: How to handle HTTP communication from our application to remote services?
-- **Problem #3**: How to keep our build time at a reasonable duration?
+- **Problem #1**: How to Ensure Surrounding Infrastructure (e.g. database, queues, etc.) is Present?
+- **Problem #2**: How to Interact with our Application for Integration Tests?
+- **Problem #3**: How to Keep our Build Time at a reasonable Duration?
+
+---
+
+## There's Even More...
+
+- **Problem #4**: How to handle HTTP communication from our application
+  to remote services?
+- **Problem #5**: How to provide test data and maintain a clean state between tests?
+- **Problem #6**: How to handle authentication and security contexts during tests?
 
 ---
 
@@ -613,13 +624,9 @@ ad0f804068dc   testcontainers/ryuk:0.12.0   "/bin/ryuk"              10 seconds 
 
 [//]: # (```)
 
----
+## How to Interact with our Application for Integration Tests?
 
-## Testing Against the Entire Spring Context - Version 1
-
-
-- The test and the context run in the same thread, hence we can rollback with `@Transactional` and simply override the security context with `@WithMockUser`
-
+Option #1:
 
 ```java {1,3}
 @SpringBootTest
@@ -646,10 +653,9 @@ class ApplicationMockWebIT {
 
 ---
 
-## Testing Against the Entire Spring Context - Version 2
+## How to Interact with our Application for Integration Tests?
 
-
-- We access the application over HTTP like a user, the test and context run in separate threads (no `@Transactional` rollback), requires HTTP authentication
+Option #2:
 
 ```java {1,2}
 @AutoConfigureWebTestClient // required since Spring Boot 4
@@ -688,7 +694,7 @@ class ApplicationServletContainerIT {
 
 ---
 
-... but what about **Problem #3**: How to keep our build time at a reasonable duration?
+... but what about **Problem #3**: How to Keep our Build Time at a reasonable Duration?
 
 ---
 
@@ -920,16 +926,22 @@ junit.jupiter.execution.parallel.mode.classes.default = concurrent
 
 ---
 
+## Another Approach to Validate Test Quality
+
+![center](assets/pit-example-step-1.png)
+
+---
+
+![center](assets/pit-example-step-2.png)
+
+---
+
 ## Introducing: Mutation Testing
 
 - Having high code coverage might give you a **false sense of security**
 - Mutation Testing with [PIT](https://pitest.org/quickstart/)
 - Beyond Line Coverage: Traditional tools like JaCoCo show which code runs during tests, but PIT verifies if our tests actually detect when code behaves incorrectly by introducing "**mutations**" to our source code.
 - Quality Guarantee: PIT automatically **modifies our code** (changing conditionals, return values, etc.) to ensure our tests fail when they should, **revealing blind spots** in seemingly comprehensive test suites.
-
----
-
-![center](assets/pit-new.png)
 
 ---
 
@@ -1074,7 +1086,7 @@ junit.jupiter.execution.parallel.mode.classes.default = concurrent
 
 Testing is a team sport, make sure your whole team levels up together.
 
-I offer the 90 minutes talk **Testing Spring Boot Applications Demystified** for free during:
+I offer this talk **Testing Spring Boot Applications Demystified** for free during:
 
 - **Lunch & Learn** sessions
 - **Internal conferences** and developer days
@@ -1127,9 +1139,7 @@ Dates, agendas and tickets: https://rieckpil.de/workshops
 Get your Spring Boot testing eBook:
 
 
-![center h:200 w:200](assets/newsletter-signup-qr.png)
-
-Now it's time for Q&A! If you have any questions feel free to ask them live or via Menti (last question in the poll).
+![center h:300 w:300](assets/newsletter-signup-qr.png)
 
 ![bg right:33%](assets/end.jpg)
 
