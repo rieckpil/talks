@@ -1,10 +1,10 @@
 ---
 marp: true
 theme: pragmatech
-header: 'Testing Spring Boot Applications Demystified @ Spring I/O 14.04.2026'
+header: 'Testing Spring Boot Applications Demystified @ Softwerkskammer Köln 22.04.2026'
 ---
 
-![bg](./assets/barcelona-2026.jpg)
+![bg](assets/cologne.jpg)
 <!-- header: "" -->
 <!-- footer: ""-->
 
@@ -21,7 +21,7 @@ Notes:
 
 ## A Hero's Journey Through the Spring Boot Testing Labyrinth
 
-Talk @ Spring I/O 14.04.2026
+Talk @ Softwerkskammer Köln 22.04.2026
 
 Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](https://x.com/rieckpil)
 
@@ -30,9 +30,10 @@ Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](htt
 
 ## Participate During the Talk
 
-Go to [menti.com](https://www.menti.com/) and use the code **7894 9383** to **anonymously** submit answers for the quizzes and add your questions during the talk.
+Go to [menti.com](https://www.menti.com/) and use the code **8907 0511** to **anonymously** submit answers for the quizzes and add your questions during the talk.
 
-![h:200 center](/assets/menti-springio.png)
+![h:200 center](assets/mentimeter-cologne-2026.png)
+
 
 Start with the **first two questions**:
 - Despite having LLMs and Code Agents, do you still write your tests by hand?
@@ -42,7 +43,7 @@ Start with the **first two questions**:
 
 
 
-<!-- header: 'Talk @ Spring I/O 14.04.2026 - Questions @ menti.com Code: <strong>7894 9383 </strong>' -->
+<!-- header: 'Talk @ Softwerkskammer Köln 22.04.2026 - Questions @ menti.com Code: <strong>8907 0511</strong>' -->
 
 
 ![bg right:33%](assets/why-test-software.jpg)
@@ -1137,7 +1138,6 @@ Dates, agendas and tickets: https://rieckpil.de/workshops
 ## Joyful Testing!
 
 Get your Spring Boot testing eBook:
-
 
 ![center h:300 w:300](assets/newsletter-signup-qr.png)
 
