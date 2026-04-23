@@ -1137,8 +1137,8 @@ Dates, agendas and tickets: https://rieckpil.de/workshops
 
 Use Slido (or Menti) to ask questions:
 
-![center h:300 w:300](assets/jcon-slido-2026-qr.png)
-![center h:300 w:300](assets/jcon-rate.png)
+![center h:250 w:250](assets/jcon-slido-2026-qr.png)
+![center w:250](assets/jcon-rate.png)
 
 Feedback for this session is highly appreciated, please use the JCON schedule.
 
