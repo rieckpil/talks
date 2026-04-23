@@ -1,7 +1,7 @@
 ---
 marp: true
 theme: pragmatech
-header: 'Testing Spring Boot Applications Demystified @ Softwerkskammer Köln 22.04.2026'
+header: 'Testing Spring Boot Applications Demystified @ JCON Europe 23.04.2026'
 ---
 
 ![bg](assets/cologne.jpg)
@@ -21,7 +21,7 @@ Notes:
 
 ## A Hero's Journey Through the Spring Boot Testing Labyrinth
 
-Talk @ Softwerkskammer Köln 22.04.2026
+Talk @ JCON Europe 23.04.2026
 
 Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](https://x.com/rieckpil)
 
@@ -43,7 +43,7 @@ Start with the **first two questions**:
 
 
 
-<!-- header: 'Talk @ Softwerkskammer Köln 22.04.2026 - Questions @ menti.com Code: <strong>8907 0511</strong>' -->
+<!-- header: 'Talk @ JCON Europe 23.04.2026 - Questions @ menti.com Code: <strong>8907 0511</strong>' -->
 
 
 ![bg right:33%](assets/why-test-software.jpg)
@@ -933,7 +933,7 @@ junit.jupiter.execution.parallel.mode.classes.default = concurrent
 
 ---
 
-![center](assets/pit-example-step-2.png)
+![center](assets/mutation-testing-explained-corrected.png)
 
 ---
 
