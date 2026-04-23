@@ -30,9 +30,9 @@ Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](htt
 
 ## Participate During the Talk
 
-Go to [menti.com](https://www.menti.com/) and use the code **8907 0511** to **anonymously** submit answers for the quizzes and add your questions during the talk.
+Go to [menti.com](https://www.menti.com/) and use the code **5949 0191** to **anonymously** submit answers for the quizzes and add your questions during the talk.
 
-![h:200 center](assets/mentimeter-cologne-2026.png)
+![h:200 center](assets/mentimeter-jcon-2026.png)
 
 
 Start with the **first two questions**:
@@ -43,7 +43,7 @@ Start with the **first two questions**:
 
 
 
-<!-- header: 'Talk @ JCON Europe 23.04.2026 - Questions @ menti.com Code: <strong>8907 0511</strong>' -->
+<!-- header: 'Talk @ JCON Europe 23.04.2026 - Questions @ menti.com Code: <strong>5949 0191</strong>' -->
 
 
 ![bg right:33%](assets/why-test-software.jpg)
@@ -927,11 +927,13 @@ junit.jupiter.execution.parallel.mode.classes.default = concurrent
 
 ---
 
-## Another Approach to Validate Test Quality
+## Let's Challenge Code Coverage
 
 ![center](assets/pit-example-step-1.png)
 
 ---
+## Idea: Introduce Regressions and See If they are Caught
+
 
 ![center](assets/mutation-testing-explained-corrected.png)
 
@@ -1131,13 +1133,22 @@ Dates, agendas and tickets: https://rieckpil.de/workshops
 
 ---
 
+## JCON Slido for Q&A and Feedback
+
+Use Slido (or Menti) to ask questions:
+
+![center h:300 w:300](assets/jcon-slido-2026-qr.png)
+
+Feedback for this session is highly appreciated, please use the JCON schedule.
+
+---
 
 <!-- paginate: false -->
 
 
 ## Joyful Testing!
 
-Get your Spring Boot testing eBook:
+Get your Spring Boot Testing eBook (120+ pages):
 
 ![center h:300 w:300](assets/newsletter-signup-qr.png)
 
