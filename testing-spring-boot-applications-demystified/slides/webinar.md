@@ -1,7 +1,7 @@
 ---
 marp: true
 theme: pragmatech
-header: 'Testing Spring Boot Applications Demystified @ JCON Europe 23.04.2026'
+header: 'Testing Spring Boot Applications Demystified @ platform X 07.05.2026'
 ---
 
 ![bg](assets/cologne.jpg)
@@ -21,7 +21,7 @@ Notes:
 
 ## A Hero's Journey Through the Spring Boot Testing Labyrinth
 
-Talk @ JCON Europe 23.04.2026
+Webinar @ platform X 07.05.2026
 
 Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](https://x.com/rieckpil)
 
@@ -30,7 +30,7 @@ Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](htt
 
 ## Participate During the Talk
 
-Go to [menti.com](https://www.menti.com/) and use the code **5949 0191** to **anonymously** submit answers for the quizzes and add your questions during the talk.
+Go to [menti.com](https://www.menti.com/) and use the code **1830 7517** to **anonymously** submit answers for the quizzes and add your questions during the talk.
 
 ![h:200 center](assets/mentimeter-jcon-2026.png)
 
@@ -43,7 +43,7 @@ Start with the **first two questions**:
 
 
 
-<!-- header: 'Talk @ JCON Europe 23.04.2026 - Questions @ menti.com Code: <strong>5949 0191</strong>' -->
+<!-- header: 'Webinar @ platform X 07.05.2026 - Questions @ menti.com Code: <strong>1830 7517</strong>' -->
 
 
 ![bg right:33%](assets/why-test-software.jpg)
@@ -973,7 +973,7 @@ junit.jupiter.execution.parallel.mode.classes.default = concurrent
 
 - **Bean overrides for non-singletons**: `@MockitoBean` and `@TestBean` now work with prototype and custom-scoped beans.
 
----
+[//]: # (---)
 
 [//]: # ()
 [//]: # (![bg right:30%]&#40;assets/why-test.jpg&#41;)
@@ -1083,19 +1083,26 @@ junit.jupiter.execution.parallel.mode.classes.default = concurrent
 [//]: # (The offer expires on the 20th of March 2026 6 PM CET.)
 
 
-## Bring this Talk to your Company!
+[//]: # (## Bring this Talk to your Company!)
 
-![bg right:23%](assets/philip-jug-zurich-2025-audience.jpg)
+[//]: # ()
+[//]: # (![bg right:23%]&#40;assets/philip-jug-zurich-2025-audience.jpg&#41;)
 
-Testing is a team sport, make sure your whole team levels up together.
+[//]: # ()
+[//]: # (Testing is a team sport, make sure your whole team levels up together.)
 
-I offer this talk **Testing Spring Boot Applications Demystified** for free during:
+[//]: # ()
+[//]: # (I offer this talk **Testing Spring Boot Applications Demystified** for free during:)
 
-- **Lunch & Learn** sessions
-- **Internal conferences** and developer days
-- **Team training** events
+[//]: # ()
+[//]: # (- **Lunch & Learn** sessions)
 
-Reach out via LinkedIn or email (philip@pragmatech.digital) to discuss the details and schedule a session for your team.
+[//]: # (- **Internal conferences** and developer days)
+
+[//]: # (- **Team training** events)
+
+[//]: # ()
+[//]: # (Reach out via LinkedIn or email &#40;philip@pragmatech.digital&#41; to discuss the details and schedule a session for your team.)
 
 ---
 
@@ -1118,7 +1125,6 @@ Dates, agendas and tickets: https://rieckpil.de/workshops
 ## Don't Leave Empty-Handed
 
 
-
 ![bg h:720 w:450 right:33%](assets/tsbad-cover.png)
 
 
@@ -1131,16 +1137,21 @@ Dates, agendas and tickets: https://rieckpil.de/workshops
 
 - Get the eBook by joining our [newsletter](https://rieckpil.de/free-spring-boot-testing-book/)
 
----
+[//]: # (---)
 
-## JCON Slido for Q&A and Feedback
+[//]: # ()
+[//]: # (## JCON Slido for Q&A and Feedback)
 
-Use Slido (or Menti) to ask questions:
+[//]: # ()
+[//]: # (Use Slido &#40;or Menti&#41; to ask questions:)
 
-![center h:250 w:250](assets/jcon-slido-2026-qr.png)
-![center w:250](assets/jcon-rate.png)
+[//]: # ()
+[//]: # (![center h:250 w:250]&#40;assets/jcon-slido-2026-qr.png&#41;)
 
-Feedback for this session is highly appreciated, please use the JCON schedule.
+[//]: # (![center w:250]&#40;assets/jcon-rate.png&#41;)
+
+[//]: # ()
+[//]: # (Feedback for this session is highly appreciated, please use the JCON schedule.)
 
 ---
 
