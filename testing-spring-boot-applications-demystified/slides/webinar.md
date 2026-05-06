@@ -4,7 +4,7 @@ theme: pragmatech
 header: 'Testing Spring Boot Applications Demystified @ platform X 07.05.2026'
 ---
 
-![bg](assets/cologne.jpg)
+![bg](assets/tsbad-beginning.png)
 <!-- header: "" -->
 <!-- footer: ""-->
 
@@ -32,7 +32,7 @@ Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](htt
 
 Go to [menti.com](https://www.menti.com/) and use the code **1830 7517** to **anonymously** submit answers for the quizzes and add your questions during the talk.
 
-![h:200 center](assets/mentimeter-jcon-2026.png)
+![h:200 center](assets/mentimeter-platform-x.png)
 
 
 Start with the **first two questions**:
