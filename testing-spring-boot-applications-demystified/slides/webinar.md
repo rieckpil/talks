@@ -1,10 +1,10 @@
 ---
 marp: true
 theme: pragmatech
-header: 'Testing Spring Boot Applications Demystified @ platform X 07.05.2026'
+header: 'Testing Spring Boot Applications Demystified @ JUG Paderborn 13.05.2026'
 ---
 
-![bg](assets/tsbad-beginning.png)
+![bg](assets/paderborn.jpg)
 <!-- header: "" -->
 <!-- footer: ""-->
 
@@ -21,7 +21,7 @@ Notes:
 
 ## A Hero's Journey Through the Spring Boot Testing Labyrinth
 
-Webinar @ platform X 07.05.2026
+Talk @ JUG Paderborn 13.05.2026
 
 Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](https://x.com/rieckpil)
 
@@ -43,7 +43,7 @@ Start with the **first two questions**:
 
 
 
-<!-- header: 'Webinar @ platform X 07.05.2026 - Questions @ menti.com Code: <strong>1830 7517</strong>' -->
+<!-- header: 'Talk @ JUG Paderborn 13.05.2026 - Questions @ menti.com Code: <strong>1830 7517</strong>' -->
 
 
 ![bg right:33%](assets/why-test-software.jpg)
