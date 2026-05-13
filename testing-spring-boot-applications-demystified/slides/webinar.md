@@ -30,9 +30,9 @@ Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](htt
 
 ## Participate During the Talk
 
-Go to [menti.com](https://www.menti.com/) and use the code **1830 7517** to **anonymously** submit answers for the quizzes and add your questions during the talk.
+Go to [menti.com](https://www.menti.com/) and use the code **3668 6743** to **anonymously** submit answers for the quizzes and add your questions during the talk.
 
-![h:200 center](assets/mentimeter-platform-x.png)
+![h:200 center](assets/mentimeter-jug-paderborn.png)
 
 
 Start with the **first two questions**:
@@ -43,7 +43,7 @@ Start with the **first two questions**:
 
 
 
-<!-- header: 'Talk @ JUG Paderborn 13.05.2026 - Questions @ menti.com Code: <strong>1830 7517</strong>' -->
+<!-- header: 'Talk @ JUG Paderborn 13.05.2026 - Questions @ menti.com Code: <strong>3668 6743</strong>' -->
 
 
 ![bg right:33%](assets/why-test-software.jpg)
@@ -52,6 +52,9 @@ Start with the **first two questions**:
 
 ---
 
+![center h:500](assets/ai-speed-illusion.png)
+
+---
 ![bg right:33%](assets/ai-image.jpg)
 
 
@@ -1082,40 +1085,40 @@ junit.jupiter.execution.parallel.mode.classes.default = concurrent
 [//]: # ()
 [//]: # (The offer expires on the 20th of March 2026 6 PM CET.)
 
+---
 
-[//]: # (## Bring this Talk to your Company!)
+## Bring this Talk to your Company!
 
-[//]: # ()
-[//]: # (![bg right:23%]&#40;assets/philip-jug-zurich-2025-audience.jpg&#41;)
 
-[//]: # ()
-[//]: # (Testing is a team sport, make sure your whole team levels up together.)
+![bg right:23%](assets/philip-jug-zurich-2025-audience.jpg)
 
-[//]: # ()
-[//]: # (I offer this talk **Testing Spring Boot Applications Demystified** for free during:)
 
-[//]: # ()
-[//]: # (- **Lunch & Learn** sessions)
+Testing is a team sport, make sure your whole team levels up together.
 
-[//]: # (- **Internal conferences** and developer days)
 
-[//]: # (- **Team training** events)
+I offer this talk **Testing Spring Boot Applications Demystified** for free during:
 
-[//]: # ()
-[//]: # (Reach out via LinkedIn or email &#40;philip@pragmatech.digital&#41; to discuss the details and schedule a session for your team.)
+
+- **Lunch & Learn** sessions
+
+- **Internal conferences** and developer days
+
+- **Team training** events
+
+
+Reach out via LinkedIn or email (philip@pragmatech.digital) to discuss the details and schedule a session for your team.
+
 
 ---
 
 ## Upcoming Open Online Workshops
 
-Join developers from all around the world in a public, hands-on cohort:
-
 **Confidence In Every Commit: Essentials (1 Day)** - Achieve confidence in every commit. Stop fighting your test suite and start mastering it. Covering fast & reliable unit, sliced and integration testing with Spring Boot
 
 Next dates:
 
-- 🗓️ 02.07.2026
-- 🗓️ 08.09.2026
+- 🗓️ Thursday 02.07.2026: 9 AM - 4 PM CEST
+- 🗓️ Tuesday 08.09.2026: 9 AM - 4 PM CEST
 
 Dates, agendas and tickets: https://rieckpil.de/workshops
 
