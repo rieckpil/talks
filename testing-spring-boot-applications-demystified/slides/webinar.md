@@ -50,9 +50,6 @@ Start with the **first two questions**:
 
 # Why Test Software?
 
----
-
-![center h:500](assets/ai-speed-illusion.png)
 
 ---
 ![bg right:33%](assets/ai-image.jpg)
@@ -60,9 +57,19 @@ Start with the **first two questions**:
 
 ## The AI Trap: Testing is Your Safety Net
 
-- AI generates the logic, but you inherit the liability. It can write the function; it won't join the post-mortem.
+- AI generates the logic, but you inherit the **liability**. It can write the function; it won't join the post-mortem.
 - If the AI wrote the code and the AI wrote the test, you are the only person left to solve the hallucination when the system crashes.
 - AI is the accelerator. Your tests are the brakes. You need both to go fast.
+
+---
+
+## METR Study: Early-2025 AI on Experienced Open-Source Developer Productivity
+
+Surprisingly, we [find](https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/) that when developers use AI tools, they take 19% longer than without.
+
+---
+
+![center h:500](assets/ai-speed-illusion.png)
 
 ---
 
