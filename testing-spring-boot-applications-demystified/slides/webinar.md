@@ -269,17 +269,136 @@ Tips:
 
 ---
 
+[//]: # (## What's Inside the Testing Swiss Army Knife?)
 
-## What's Inside the Testing Swiss Army Knife?
+[//]: # ()
+[//]: # (- **JUnit** &#40;currently 5, later 6&#41;: Java's de-facto standard testing framework and foundation.)
 
-- **JUnit** (currently 5, later 6): Java's de-facto standard testing framework and foundation.
-- **Mockito**: Creating mock objects to simulate dependencies and verify interactions.
-- **AssertJ**: Provides fluent, chainable, and readable assertions.
-- **Hamcrest**: Offers flexible matchers for creating custom assertions.
-- **JSONAssert**: Compares JSON strings with flexible matching options.
-- **JsonPath**: Extracts and queries data from JSON similar to XPath.
-- **XMLUnit**: Compares and validates XML documents.
-- **Awaitility**: Handles asynchronous testing with fluent conditions.
+[//]: # (- **Mockito**: Creating mock objects to simulate dependencies and verify interactions.)
+
+[//]: # (- **AssertJ**: Provides fluent, chainable, and readable assertions.)
+
+[//]: # (- **Hamcrest**: Offers flexible matchers for creating custom assertions.)
+
+[//]: # (- **JSONAssert**: Compares JSON strings with flexible matching options.)
+
+[//]: # (- **JsonPath**: Extracts and queries data from JSON similar to XPath.)
+
+[//]: # (- **XMLUnit**: Compares and validates XML documents.)
+
+[//]: # (- **Awaitility**: Handles asynchronous testing with fluent conditions.)
+
+---
+
+## JUnit: The Testing Foundation
+
+- Java's de-facto standard testing framework — version **6** with Spring Boot 4 (drop-in upgrade, unlike 4 → 5)
+- More than just `@Test`: **Extension API** (replaces `@RunWith`), lifecycle hooks, `@ParameterizedTest`, `@Nested`, `@DisplayName`, **Parallel execution**
+
+```java
+@ExtendWith(MockitoExtension.class)
+class DiscountCalculatorTest {
+
+  @ParameterizedTest
+  @CsvSource({ "0, 0.0", "100, 10.0", "1000, 150.0" })
+  void shouldApplyDiscountWhenAmountIsValid(int amount, double expected) {
+    // ...
+  }
+}
+```
+
+---
+
+## Mockito: Stub, Verify, and Beyond
+
+- **Stubbing** with `when(...).thenReturn(...)` and **verifying** interactions with `verify(...)`
+- **Argument matchers** (`any()`, `eq()`, `argThat(...)`) for flexible expectations
+- **Advanced**: deep stubs (`RETURNS_DEEP_STUBS`) and static mocking (`MockedStatic`) for legacy/utility code
+
+```java
+when(customerRepository.findById(42L))
+  .thenReturn(Optional.of(customer));
+
+verify(eventPublisher).publish(any(CustomerCreated.class));
+```
+
+---
+
+## AssertJ & Hamcrest: Readable Assertions
+
+- **AssertJ**: fluent, chainable, IDE-friendly auto-completion
+- **Hamcrest**: composable matchers, useful with matcher-driven APIs like Mockito `argThat(...)`
+- Pick one for general assertions and stick with it within a test class
+
+```java
+// AssertJ - chainable & expressive
+assertThat(customers)
+  .hasSize(3)
+  .extracting(Customer::firstName)
+  .containsExactly("Alice", "Bob", "Charlie");
+
+// Hamcrest - composable matchers
+assertThat("duke".toUpperCase(), equalTo("DUKE"));
+assertThat(List.of("Alice", "Bob", "Charlie"),
+  allOf(hasSize(3), hasItem("Alice")));
+```
+
+---
+
+## JsonPath & JSONAssert: Working With JSON
+
+- **JsonPath**: query JSON like XPath - drill into responses without deserializing
+- **JSONAssert**: compare JSON strings with **lenient** or **strict** mode - order-insensitive, ignores extra fields
+
+```java
+String json = "{ ... }";
+
+// JsonPath — query a JSON document directly
+String firstName = JsonPath.parse(json).read("$.firstName", String.class);
+Long tagCount = JsonPath.parse(json).read("$.tags.length()", Long.class);
+
+// JSONAssert — lenient: extra fields in actual are OK
+String expected = "{ \"name\": \"duke\" }";
+String actual = "{ \"name\": \"duke\", \"age\": 42 }";
+
+JSONAssert.assertEquals(expected, actual, JSONCompareMode.LENIENT);
+```
+
+---
+
+## XMLUnit: Comparing XML Documents
+
+- Compare and validate XML with **whitespace-aware**, **namespace-aware**, **order-tolerant** diffs
+- Still relevant for SOAP, configuration files, and legacy enterprise integrations
+
+```java
+String control = "<customer>...</customer>";
+String test = "<customer>...</customer>";
+
+Diff diff = DiffBuilder.compare(control)
+  .withTest(test)
+  .ignoreWhitespace()
+  .checkForSimilar()
+  .build();
+
+assertThat(diff.hasDifferences()).isFalse();
+```
+
+---
+
+## Awaitility: Taming Asynchronous Tests
+
+- Fluent **polling** for eventually-consistent assertions - message queues, async event handlers, scheduled jobs
+- Replaces brittle `Thread.sleep(...)` with explicit conditions and timeouts
+
+```java
+await()
+  .atMost(5, SECONDS)
+  .pollInterval(100, MILLISECONDS)
+  .untilAsserted(() ->
+    assertThat(orderRepository.findAll()).hasSize(1)
+  );
+```
 
 ---
 
