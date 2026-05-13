@@ -58,8 +58,8 @@ Start with the **first two questions**:
 ## The AI Trap: Testing is Your Safety Net
 
 - AI generates the logic, but you inherit the **liability**. It can write the function; it won't join the post-mortem.
-- If the AI wrote the code and the AI wrote the test, you are the only person left to solve the hallucination when the system crashes.
-- AI is the accelerator. Your tests are the brakes. You need both to go fast.
+- If the AI wrote the code and the AI wrote the test, you are the only person left to solve the **hallucination** when the **system** **crashes**.
+- AI is the **accelerator**. Your tests are the **brakes**. You need both to go fast.
 
 ---
 
