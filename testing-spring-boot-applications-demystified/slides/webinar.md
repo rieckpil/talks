@@ -288,11 +288,10 @@ Tips:
 
 [//]: # (- **Awaitility**: Handles asynchronous testing with fluent conditions.)
 
----
 
 ## JUnit: The Testing Foundation
 
-- Java's de-facto standard testing framework — version **6** with Spring Boot 4 (drop-in upgrade, unlike 4 → 5)
+- Java's de-facto standard testing framework - version **6** with Spring Boot 4 (drop-in upgrade, unlike 4 → 5)
 - More than just `@Test`: **Extension API** (replaces `@RunWith`), lifecycle hooks, `@ParameterizedTest`, `@Nested`, `@DisplayName`, **Parallel execution**
 
 ```java
@@ -339,8 +338,6 @@ assertThat(customers)
 
 // Hamcrest - composable matchers
 assertThat("duke".toUpperCase(), equalTo("DUKE"));
-assertThat(List.of("Alice", "Bob", "Charlie"),
-  allOf(hasSize(3), hasItem("Alice")));
 ```
 
 ---
@@ -353,11 +350,11 @@ assertThat(List.of("Alice", "Bob", "Charlie"),
 ```java
 String json = "{ ... }";
 
-// JsonPath — query a JSON document directly
+// JsonPath - query a JSON document directly
 String firstName = JsonPath.parse(json).read("$.firstName", String.class);
 Long tagCount = JsonPath.parse(json).read("$.tags.length()", Long.class);
 
-// JSONAssert — lenient: extra fields in actual are OK
+// JSONAssert - lenient: extra fields in actual are OK
 String expected = "{ \"name\": \"duke\" }";
 String actual = "{ \"name\": \"duke\", \"age\": 42 }";
 
