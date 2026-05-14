@@ -1,10 +1,10 @@
 ---
 marp: true
 theme: pragmatech
-header: 'Testing Spring Boot Applications Demystified @ platform X 07.05.2026'
+header: 'Testing Spring Boot Applications Demystified @ JUG Paderborn 13.05.2026'
 ---
 
-![bg](assets/tsbad-beginning.png)
+![bg](assets/paderborn.jpg)
 <!-- header: "" -->
 <!-- footer: ""-->
 
@@ -21,7 +21,7 @@ Notes:
 
 ## A Hero's Journey Through the Spring Boot Testing Labyrinth
 
-Webinar @ platform X 07.05.2026
+Talk @ JUG Paderborn 13.05.2026
 
 Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](https://x.com/rieckpil)
 
@@ -30,9 +30,9 @@ Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](htt
 
 ## Participate During the Talk
 
-Go to [menti.com](https://www.menti.com/) and use the code **1830 7517** to **anonymously** submit answers for the quizzes and add your questions during the talk.
+Go to [menti.com](https://www.menti.com/) and use the code **3668 6743** to **anonymously** submit answers for the quizzes and add your questions during the talk.
 
-![h:200 center](assets/mentimeter-platform-x.png)
+![h:200 center](assets/mentimeter-jug-paderborn.png)
 
 
 Start with the **first two questions**:
@@ -43,23 +43,33 @@ Start with the **first two questions**:
 
 
 
-<!-- header: 'Webinar @ platform X 07.05.2026 - Questions @ menti.com Code: <strong>1830 7517</strong>' -->
+<!-- header: 'Talk @ JUG Paderborn 13.05.2026 - Questions @ menti.com Code: <strong>3668 6743</strong>' -->
 
 
 ![bg right:33%](assets/why-test-software.jpg)
 
 # Why Test Software?
 
----
 
+---
 ![bg right:33%](assets/ai-image.jpg)
 
 
 ## The AI Trap: Testing is Your Safety Net
 
-- AI generates the logic, but you inherit the liability. It can write the function; it won't join the post-mortem.
-- If the AI wrote the code and the AI wrote the test, you are the only person left to solve the hallucination when the system crashes.
-- AI is the accelerator. Your tests are the brakes. You need both to go fast.
+- AI generates the logic, but you inherit the **liability**. It can write the function; it won't join the post-mortem.
+- If the AI wrote the code and the AI wrote the test, you are the only person left to solve the **hallucination** when the **system** **crashes**.
+- AI is the **accelerator**. Your tests are the **brakes**. You need both to go fast.
+
+---
+
+## METR Study: Early-2025 AI on Experienced Open-Source Developer Productivity
+
+Surprisingly, we [find](https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/) that when developers use AI tools, they take 19% longer than without.
+
+---
+
+![center h:500](assets/ai-speed-illusion.png)
 
 ---
 
@@ -266,17 +276,133 @@ Tips:
 
 ---
 
+[//]: # (## What's Inside the Testing Swiss Army Knife?)
 
-## What's Inside the Testing Swiss Army Knife?
+[//]: # ()
+[//]: # (- **JUnit** &#40;currently 5, later 6&#41;: Java's de-facto standard testing framework and foundation.)
 
-- **JUnit** (currently 5, later 6): Java's de-facto standard testing framework and foundation.
-- **Mockito**: Creating mock objects to simulate dependencies and verify interactions.
-- **AssertJ**: Provides fluent, chainable, and readable assertions.
-- **Hamcrest**: Offers flexible matchers for creating custom assertions.
-- **JSONAssert**: Compares JSON strings with flexible matching options.
-- **JsonPath**: Extracts and queries data from JSON similar to XPath.
-- **XMLUnit**: Compares and validates XML documents.
-- **Awaitility**: Handles asynchronous testing with fluent conditions.
+[//]: # (- **Mockito**: Creating mock objects to simulate dependencies and verify interactions.)
+
+[//]: # (- **AssertJ**: Provides fluent, chainable, and readable assertions.)
+
+[//]: # (- **Hamcrest**: Offers flexible matchers for creating custom assertions.)
+
+[//]: # (- **JSONAssert**: Compares JSON strings with flexible matching options.)
+
+[//]: # (- **JsonPath**: Extracts and queries data from JSON similar to XPath.)
+
+[//]: # (- **XMLUnit**: Compares and validates XML documents.)
+
+[//]: # (- **Awaitility**: Handles asynchronous testing with fluent conditions.)
+
+
+## JUnit: The Testing Foundation
+
+- Java's de-facto standard testing framework - version **6** with Spring Boot 4 (drop-in upgrade, unlike 4 → 5)
+- More than just `@Test`: **Extension API** (replaces `@RunWith`), lifecycle hooks, `@ParameterizedTest`, `@Nested`, `@DisplayName`, **Parallel execution**
+
+```java
+@ExtendWith(MockitoExtension.class)
+class DiscountCalculatorTest {
+
+  @ParameterizedTest
+  @CsvSource({ "0, 0.0", "100, 10.0", "1000, 150.0" })
+  void shouldApplyDiscountWhenAmountIsValid(int amount, double expected) {
+    // ...
+  }
+}
+```
+
+---
+
+## Mockito: Stub, Verify, and Beyond
+
+- **Stubbing** with `when(...).thenReturn(...)` and **verifying** interactions with `verify(...)`
+- **Argument matchers** (`any()`, `eq()`, `argThat(...)`) for flexible expectations
+- **Advanced**: deep stubs (`RETURNS_DEEP_STUBS`) and static mocking (`MockedStatic`) for legacy/utility code
+
+```java
+when(customerRepository.findById(42L))
+  .thenReturn(Optional.of(customer));
+
+verify(eventPublisher).publish(any(CustomerCreated.class));
+```
+
+---
+
+## AssertJ & Hamcrest: Readable Assertions
+
+- **AssertJ**: fluent, chainable, IDE-friendly auto-completion
+- **Hamcrest**: composable matchers, useful with matcher-driven APIs like Mockito `argThat(...)`
+- Pick one for general assertions and stick with it within a test class
+
+```java
+// AssertJ - chainable & expressive
+assertThat(customers)
+  .hasSize(3)
+  .extracting(Customer::firstName)
+  .containsExactly("Alice", "Bob", "Charlie");
+
+// Hamcrest - composable matchers
+assertThat("duke".toUpperCase(), equalTo("DUKE"));
+```
+
+---
+
+## JsonPath & JSONAssert: Working With JSON
+
+- **JsonPath**: query JSON like XPath - drill into responses without deserializing
+- **JSONAssert**: compare JSON strings with **lenient** or **strict** mode - order-insensitive, ignores extra fields
+
+```java
+String json = "{ ... }";
+
+// JsonPath - query a JSON document directly
+String firstName = JsonPath.parse(json).read("$.firstName", String.class);
+Long tagCount = JsonPath.parse(json).read("$.tags.length()", Long.class);
+
+// JSONAssert - lenient: extra fields in actual are OK
+String expected = "{ \"name\": \"duke\" }";
+String actual = "{ \"name\": \"duke\", \"age\": 42 }";
+
+JSONAssert.assertEquals(expected, actual, JSONCompareMode.LENIENT);
+```
+
+---
+
+## XMLUnit: Comparing XML Documents
+
+- Compare and validate XML with **whitespace-aware**, **namespace-aware**, **order-tolerant** diffs
+- Still relevant for SOAP, configuration files, and legacy enterprise integrations
+
+```java
+String control = "<customer>...</customer>";
+String test = "<customer>...</customer>";
+
+Diff diff = DiffBuilder.compare(control)
+  .withTest(test)
+  .ignoreWhitespace()
+  .checkForSimilar()
+  .build();
+
+assertThat(diff.hasDifferences()).isFalse();
+```
+
+---
+
+## Awaitility: Taming Asynchronous Tests
+
+- Fluent **polling** for eventually-consistent assertions - message queues, async event handlers, scheduled jobs
+- Replaces brittle `Thread.sleep(...)` with explicit conditions and timeouts
+
+```java
+await()
+  .atMost(5, SECONDS)
+  .pollInterval(100, MILLISECONDS)
+  .untilAsserted(() ->
+    assertThat(orderRepository.findAll()).hasSize(1)
+  );
+```
 
 ---
 
@@ -1082,40 +1208,40 @@ junit.jupiter.execution.parallel.mode.classes.default = concurrent
 [//]: # ()
 [//]: # (The offer expires on the 20th of March 2026 6 PM CET.)
 
+---
 
-[//]: # (## Bring this Talk to your Company!)
+## Bring this Talk to your Company!
 
-[//]: # ()
-[//]: # (![bg right:23%]&#40;assets/philip-jug-zurich-2025-audience.jpg&#41;)
 
-[//]: # ()
-[//]: # (Testing is a team sport, make sure your whole team levels up together.)
+![bg right:23%](assets/philip-jug-zurich-2025-audience.jpg)
 
-[//]: # ()
-[//]: # (I offer this talk **Testing Spring Boot Applications Demystified** for free during:)
 
-[//]: # ()
-[//]: # (- **Lunch & Learn** sessions)
+Testing is a team sport, make sure your whole team levels up together.
 
-[//]: # (- **Internal conferences** and developer days)
 
-[//]: # (- **Team training** events)
+I offer this talk **Testing Spring Boot Applications Demystified** for free during:
 
-[//]: # ()
-[//]: # (Reach out via LinkedIn or email &#40;philip@pragmatech.digital&#41; to discuss the details and schedule a session for your team.)
+
+- **Lunch & Learn** sessions
+
+- **Internal conferences** and developer days
+
+- **Team training** events
+
+
+Reach out via LinkedIn or email (philip@pragmatech.digital) to discuss the details and schedule a session for your team.
+
 
 ---
 
 ## Upcoming Open Online Workshops
 
-Join developers from all around the world in a public, hands-on cohort:
-
 **Confidence In Every Commit: Essentials (1 Day)** - Achieve confidence in every commit. Stop fighting your test suite and start mastering it. Covering fast & reliable unit, sliced and integration testing with Spring Boot
 
 Next dates:
 
-- 🗓️ 02.07.2026
-- 🗓️ 08.09.2026
+- 🗓️ Thursday 02.07.2026: 9 AM - 4 PM CEST
+- 🗓️ Tuesday 08.09.2026: 9 AM - 4 PM CEST
 
 Dates, agendas and tickets: https://rieckpil.de/workshops
 

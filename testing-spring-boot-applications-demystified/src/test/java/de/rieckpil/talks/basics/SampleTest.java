@@ -12,11 +12,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.xmlunit.builder.DiffBuilder;
+import org.xmlunit.diff.Diff;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.awaitility.Awaitility.await;
 import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.hasSize;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(SpringExtension.class)
@@ -25,6 +27,21 @@ class SampleTest {
   @BeforeEach
   void setUp() {
     // setup, preparation and initialization
+  }
+
+  @Test
+  void xmlUnit() {
+
+    String control = "<customer>...</customer>";
+    String test = "<customer>...</customer>";
+    Diff diff = DiffBuilder.compare(control)
+      .withTest(test)
+      .ignoreWhitespace()
+      .checkForSimilar()
+      .build();
+
+    assertThat(diff.hasDifferences()).isFalse();
+
   }
 
   @Test
@@ -45,7 +62,6 @@ class SampleTest {
   void hamcrestExample() {
     MatcherAssert.assertThat("duke".toUpperCase(), equalTo("DUKE"));
 
-    MatcherAssert.assertThat(List.of("Duke"), hasSize(1));
   }
 
   @Test
