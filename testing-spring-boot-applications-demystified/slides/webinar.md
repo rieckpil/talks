@@ -1,10 +1,11 @@
 ---
 marp: true
 theme: pragmatech
-header: 'Testing Spring Boot Applications Demystified @ JUG Paderborn 13.05.2026'
+header: 'Testing Spring Boot Applications Demystified @ Allianz Technology 29.05.2026'
 ---
 
-![bg](assets/paderborn.jpg)
+[//]: # (![bg]&#40;assets/paderborn.jpg&#41;)
+![bg](assets/tsbad-beginning.png)
 <!-- header: "" -->
 <!-- footer: ""-->
 
@@ -21,7 +22,7 @@ Notes:
 
 ## A Hero's Journey Through the Spring Boot Testing Labyrinth
 
-Talk @ JUG Paderborn 13.05.2026
+Talk @ Allianz Technology 29.05.2026
 
 Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](https://x.com/rieckpil)
 
@@ -30,9 +31,9 @@ Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](htt
 
 ## Participate During the Talk
 
-Go to [menti.com](https://www.menti.com/) and use the code **3668 6743** to **anonymously** submit answers for the quizzes and add your questions during the talk.
+Go to [menti.com](https://www.menti.com/) and use the code **8721 6863** to **anonymously** submit answers for the quizzes and add your questions during the talk.
 
-![h:200 center](assets/mentimeter-jug-paderborn.png)
+![h:200 center](assets/mentimeter-allianz-technology.png)
 
 
 Start with the **first two questions**:
@@ -43,7 +44,7 @@ Start with the **first two questions**:
 
 
 
-<!-- header: 'Talk @ JUG Paderborn 13.05.2026 - Questions @ menti.com Code: <strong>3668 6743</strong>' -->
+<!-- header: 'Talk @ Allianz Technology 29.05.2026 - Questions @ menti.com Code: <strong>8721 6863</strong>' -->
 
 
 ![bg right:33%](assets/why-test-software.jpg)
@@ -63,15 +64,28 @@ Start with the **first two questions**:
 
 ---
 
+# Recent Studies
+
 ## METR Study: Early-2025 AI on Experienced Open-Source Developer Productivity
 
 Surprisingly, we [find](https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/) that when developers use AI tools, they take 19% longer than without.
 
+## Google's 2025 DORA Report
+The [report](https://dora.dev/research/2025/) concludes that AI's primary role in software development is that of an amplifier: AI doesn’t fix a team; it **amplifies** whatever is already there. This works in both directions.
+
 ---
 
-![center h:500](assets/ai-speed-illusion.png)
+## From Developer to AI-Code Auditor
+
+![center h:500](assets/ai-speed-illusion-green.jpeg)
 
 ---
+
+
+# Good tests don't just catch bugs - they give you **fast feedback** and **confident deployments**.
+
+---
+
 
 [//]: # ()
 [//]: # ([//]: # &#40;<!-- footer: '![w:32 h:32]&#40;assets/logo.webp&#41;' -->&#41;)
@@ -109,9 +123,6 @@ Imagine seeing this pull request on a Friday afternoon:
 
 How confident are you to merge this major Spring Boot upgrade and deploy it to production once the pipeline turns green?
 
----
-
-# Good tests don't just catch bugs - they give you **fast feedback** and **confident deployments**.
 
 
 
@@ -1208,28 +1219,36 @@ junit.jupiter.execution.parallel.mode.classes.default = concurrent
 [//]: # ()
 [//]: # (The offer expires on the 20th of March 2026 6 PM CET.)
 
----
+[//]: # (---)
 
-## Bring this Talk to your Company!
+[//]: # ()
+[//]: # (## Bring this Talk to your Company!)
 
+[//]: # ()
+[//]: # ()
+[//]: # (![bg right:23%]&#40;assets/philip-jug-zurich-2025-audience.jpg&#41;)
 
-![bg right:23%](assets/philip-jug-zurich-2025-audience.jpg)
+[//]: # ()
+[//]: # ()
+[//]: # (Testing is a team sport, make sure your whole team levels up together.)
 
+[//]: # ()
+[//]: # ()
+[//]: # (I offer this talk **Testing Spring Boot Applications Demystified** for free during:)
 
-Testing is a team sport, make sure your whole team levels up together.
+[//]: # ()
+[//]: # ()
+[//]: # (- **Lunch & Learn** sessions)
 
+[//]: # ()
+[//]: # (- **Internal conferences** and developer days)
 
-I offer this talk **Testing Spring Boot Applications Demystified** for free during:
+[//]: # ()
+[//]: # (- **Team training** events)
 
-
-- **Lunch & Learn** sessions
-
-- **Internal conferences** and developer days
-
-- **Team training** events
-
-
-Reach out via LinkedIn or email (philip@pragmatech.digital) to discuss the details and schedule a session for your team.
+[//]: # ()
+[//]: # ()
+[//]: # (Reach out via LinkedIn or email &#40;philip@pragmatech.digital&#41; to discuss the details and schedule a session for your team.)
 
 
 ---
@@ -1238,15 +1257,32 @@ Reach out via LinkedIn or email (philip@pragmatech.digital) to discuss the detai
 
 **Confidence In Every Commit: Essentials (1 Day)** - Achieve confidence in every commit. Stop fighting your test suite and start mastering it. Covering fast & reliable unit, sliced and integration testing with Spring Boot
 
+
+
 Next dates:
 
-- 🗓️ Thursday 02.07.2026: 9 AM - 4 PM CEST
-- 🗓️ Tuesday 08.09.2026: 9 AM - 4 PM CEST
+- 🗓️ **Thursday 02.07.2026**: 9 AM - 4 PM CEST
+- 🗓️ **Tuesday 08.09.2026**: 9 AM - 4 PM CEST
 
-Dates, agendas and tickets: https://rieckpil.de/workshops
+See the [detailed agenda and save your spot.](https://rieckpil.de/workshops)
 
 ---
 
+## What we Cover in the Workshop
+
+
+- Block 1: Foundations & The Testing Pyramid 2.0 – Moving
+  beyond "coverage" to "confidence."
+- Block 2: Sliced Contexts & Unit Testing – Mastery of , and avoiding the "ApplicationContext Bloat."
+- Block 3: Real-World Integration Testing – Advanced Testcontainers patterns, handling external APIs, and state management.
+- Block 4: Performance & Strategy – Context caching, parallel execution, and patterns for sub-5-minute builds.
+-  Block 5: Live Q&A & Implementation – Direct feedback on your specific architectural hurdles
+
+---
+
+![](assets/pragmatech-main-offering.png)
+
+---
 
 ## Don't Leave Empty-Handed
 
