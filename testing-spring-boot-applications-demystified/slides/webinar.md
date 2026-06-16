@@ -1,11 +1,11 @@
 ---
 marp: true
 theme: pragmatech
-header: 'Testing Spring Boot Applications Demystified @ Allianz Technology 29.05.2026'
+header: 'Testing Spring Boot Applications Demystified @ Silesia JUG 16.06.2026'
 ---
 
 [//]: # (![bg]&#40;assets/paderborn.jpg&#41;)
-![bg](assets/tsbad-beginning.png)
+![bg](assets/katowice-jug-2026.jpg)
 <!-- header: "" -->
 <!-- footer: ""-->
 
@@ -22,7 +22,7 @@ Notes:
 
 ## A Hero's Journey Through the Spring Boot Testing Labyrinth
 
-Talk @ Allianz Technology 29.05.2026
+Talk @ Silesia JUG 16.06.2026
 
 Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](https://x.com/rieckpil)
 
@@ -44,7 +44,7 @@ Start with the **first two questions**:
 
 
 
-<!-- header: 'Talk @ Allianz Technology 29.05.2026 - Questions @ menti.com Code: <strong>8721 6863</strong>' -->
+<!-- header: 'Talk @ Silesia JUG 16.06.2026 - Questions @ menti.com Code: <strong>8721 6863</strong>' -->
 
 
 ![bg right:33%](assets/why-test-software.jpg)
