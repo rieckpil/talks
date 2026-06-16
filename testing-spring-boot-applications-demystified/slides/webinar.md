@@ -1,11 +1,11 @@
 ---
 marp: true
 theme: pragmatech
-header: 'Testing Spring Boot Applications Demystified @ Allianz Technology 29.05.2026'
+header: 'Testing Spring Boot Applications Demystified @ Silesia JUG 16.06.2026'
 ---
 
 [//]: # (![bg]&#40;assets/paderborn.jpg&#41;)
-![bg](assets/tsbad-beginning.png)
+![bg](assets/katowice-jug-2026.jpg)
 <!-- header: "" -->
 <!-- footer: ""-->
 
@@ -22,7 +22,7 @@ Notes:
 
 ## A Hero's Journey Through the Spring Boot Testing Labyrinth
 
-Talk @ Allianz Technology 29.05.2026
+Talk @ Silesia JUG 16.06.2026
 
 Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](https://x.com/rieckpil)
 
@@ -31,9 +31,9 @@ Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](htt
 
 ## Participate During the Talk
 
-Go to [menti.com](https://www.menti.com/) and use the code **8721 6863** to **anonymously** submit answers for the quizzes and add your questions during the talk.
+Go to [menti.com](https://www.menti.com/) and use the code **1938 2589** to **anonymously** submit answers for the quizzes and add your questions during the talk.
 
-![h:200 center](assets/mentimeter-allianz-technology.png)
+![h:200 center](assets/mentimeter-silesia-jug.png)
 
 
 Start with the **first two questions**:
@@ -42,15 +42,12 @@ Start with the **first two questions**:
 
 ---
 
-
-
-<!-- header: 'Talk @ Allianz Technology 29.05.2026 - Questions @ menti.com Code: <strong>8721 6863</strong>' -->
+<!-- header: 'Talk @ Silesia JUG 16.06.2026 - Questions @ menti.com Code: <strong>1938 2589</strong>' -->
 
 
 ![bg right:33%](assets/why-test-software.jpg)
 
 # Why Test Software?
-
 
 ---
 ![bg right:33%](assets/ai-image.jpg)
@@ -1066,10 +1063,24 @@ junit.jupiter.execution.parallel.mode.classes.default = concurrent
 
 ## Let's Challenge Code Coverage
 
-![center](assets/pit-example-step-1.png)
+```java
+public Long registerUser(int age, String username) {
+
+  if (age <= 18) {
+    throw new IllegalArgumentException("User must be at least 18 years old");
+  }
+
+  if ("ADMIN".equalsIgnoreCase(username)) {
+    throw new IllegalArgumentException("Username 'ADMIN' is not allowed");
+  }
+
+  // ...
+
+}
+```
 
 ---
-## Idea: Introduce Regressions and See If they are Caught
+## Idea: Introduce Regressions to Verify Test Quality
 
 
 ![center](assets/mutation-testing-explained-corrected.png)
@@ -1271,12 +1282,12 @@ See the [detailed agenda and save your spot.](https://rieckpil.de/workshops)
 ## What we Cover in the Workshop
 
 
-- Block 1: Foundations & The Testing Pyramid 2.0 – Moving
+- Section 1: Foundations & The Testing Pyramid 2.0:  Moving
   beyond "coverage" to "confidence."
-- Block 2: Sliced Contexts & Unit Testing – Mastery of , and avoiding the "ApplicationContext Bloat."
-- Block 3: Real-World Integration Testing – Advanced Testcontainers patterns, handling external APIs, and state management.
-- Block 4: Performance & Strategy – Context caching, parallel execution, and patterns for sub-5-minute builds.
--  Block 5: Live Q&A & Implementation – Direct feedback on your specific architectural hurdles
+- Section 2: Sliced Contexts & Unit Testing
+- Section 3: Real-World Integration Testing
+- Section 4: Performance & Strategy
+- Section 5: Live Q&A & Implementation
 
 ---
 
@@ -1320,7 +1331,7 @@ See the [detailed agenda and save your spot.](https://rieckpil.de/workshops)
 <!-- paginate: false -->
 
 
-## Joyful Testing!
+## Dziękuję & Joyful Testing!
 
 Get your Spring Boot Testing eBook (120+ pages):
 
