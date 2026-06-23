@@ -4,8 +4,8 @@ theme: pragmatech
 header: 'Testing Spring Boot Applications Demystified @ Silesia JUG 16.06.2026'
 ---
 
-[//]: # (![bg]&#40;assets/paderborn.jpg&#41;)
-![bg](assets/katowice-jug-2026.jpg)
+![bg](assets/tsbad-beginning.png)
+<!--![bg](assets/katowice-jug-2026.jpg) -->
 <!-- header: "" -->
 <!-- footer: ""-->
 
@@ -22,7 +22,7 @@ Notes:
 
 ## A Hero's Journey Through the Spring Boot Testing Labyrinth
 
-Talk @ Silesia JUG 16.06.2026
+Talk @ Digiteal 23.06.2026
 
 Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](https://x.com/rieckpil)
 
@@ -31,9 +31,9 @@ Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](htt
 
 ## Participate During the Talk
 
-Go to [menti.com](https://www.menti.com/) and use the code **1938 2589** to **anonymously** submit answers for the quizzes and add your questions during the talk.
+Go to [menti.com](https://www.menti.com/) and use the code **5463 9225** to **anonymously** submit answers for the quizzes and add your questions during the talk.
 
-![h:200 center](assets/mentimeter-silesia-jug.png)
+![h:200 center](assets/mentimeter-digiteal.png)
 
 
 Start with the **first two questions**:
@@ -42,7 +42,7 @@ Start with the **first two questions**:
 
 ---
 
-<!-- header: 'Talk @ Silesia JUG 16.06.2026 - Questions @ menti.com Code: <strong>1938 2589</strong>' -->
+<!-- header: 'Talk @ Digiteal 23.06.2026 - Questions @ menti.com Code: <strong>5463 9225</strong>' -->
 
 
 ![bg right:33%](assets/why-test-software.jpg)
@@ -61,23 +61,25 @@ Start with the **first two questions**:
 
 ---
 
-# Recent Studies
+## More Than a One-Line Prompt
 
-## METR Study: Early-2025 AI on Experienced Open-Source Developer Productivity
+![bg right:40% fit](assets/ai-judgement-layer.svg)
 
-Surprisingly, we [find](https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/) that when developers use AI tools, they take 19% longer than without.
-
-## Google's 2025 DORA Report
-The [report](https://dora.dev/research/2025/) concludes that AI's primary role in software development is that of an amplifier: AI doesn’t fix a team; it **amplifies** whatever is already there. This works in both directions.
+- You can't just run `claude -p "Write meaningful tests, make no mistakes"` and walk away
+- Effective AI testing needs **judgement** and understanding of the **HOW**: which test, at which level, and proof it actually fails
+- The craft shifts from *writing* tests to *directing and reviewing* them - the goal stays **confidence in every commit**
 
 ---
 
 ## From Developer to AI-Code Auditor
 
-![center h:500](assets/ai-speed-illusion-green.jpeg)
+![bg right:40% fit](assets/ai-auditor-loop.svg)
+
+- AI writes more code, faster - your job becomes **auditing** it with confidence
+- An auditor lives or dies by **fast feedback**: a slow suite breaks the loop
+- Fast, reliable tests are the auditor's instrument - the foundation for **confidence in every commit**
 
 ---
-
 
 # Good tests don't just catch bugs - they give you **fast feedback** and **confident deployments**.
 
@@ -119,9 +121,6 @@ Imagine seeing this pull request on a Friday afternoon:
 ![](assets/northstar-pr.png)
 
 How confident are you to merge this major Spring Boot upgrade and deploy it to production once the pipeline turns green?
-
-
-
 
 ---
 
@@ -1291,6 +1290,16 @@ See the [detailed agenda and save your spot.](https://rieckpil.de/workshops)
 
 ---
 
+## Let's Tailor Your Team's Agentic Workflow
+
+A **hands-on workshop** to develop and establish your **unified agentic guardrails** for **optimized testing and confidence in every commit**.
+
+![center h:400 w:1050](assets/skills.jpg)
+
+
+
+---
+
 ![](assets/pragmatech-main-offering.png)
 
 ---
@@ -1331,7 +1340,7 @@ See the [detailed agenda and save your spot.](https://rieckpil.de/workshops)
 <!-- paginate: false -->
 
 
-## Dziękuję & Joyful Testing!
+## Joyful Testing!
 
 Get your Spring Boot Testing eBook (120+ pages):
 

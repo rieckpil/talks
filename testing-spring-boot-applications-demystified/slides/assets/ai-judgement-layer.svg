@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="620" height="560" viewBox="0 0 620 560" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif">
+  <defs>
+    <linearGradient id="gBlue" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e9f4ff"/><stop offset="1" stop-color="#bbdefb"/>
+    </linearGradient>
+    <linearGradient id="gAmber" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff8e1"/><stop offset="1" stop-color="#ffe0b2"/>
+    </linearGradient>
+    <linearGradient id="gGreen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#edf8ee"/><stop offset="1" stop-color="#c8e6c9"/>
+    </linearGradient>
+    <linearGradient id="gGreenStrong" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c8e6c9"/><stop offset="1" stop-color="#9ccc9f"/>
+    </linearGradient>
+    <linearGradient id="gRed" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff0f1"/><stop offset="1" stop-color="#ffcdd2"/>
+    </linearGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#1a2b3a" flood-opacity="0.18"/>
+    </filter>
+    <marker id="aGrey" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#607d8b"/></marker>
+    <marker id="aRed" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#e53935"/></marker>
+    <marker id="aGreen" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#43a047"/></marker>
+  </defs>
+
+  <rect width="620" height="560" fill="#0000"/>
+
+  <text x="310" y="30" font-size="22" text-anchor="middle" font-weight="bold" fill="#22303c">A Prompt Is Not Enough</text>
+
+  <!-- Prompt -->
+  <g filter="url(#soft)">
+    <rect x="110" y="46" width="400" height="86" rx="16" fill="url(#gBlue)" stroke="#2196f3" stroke-width="2"/>
+  </g>
+  <text x="310" y="76" font-family="monospace" font-size="15" text-anchor="middle" font-weight="bold" fill="#0d47a1">$ claude -p</text>
+  <text x="310" y="100" font-family="monospace" font-size="13" text-anchor="middle" fill="#1565c0">"Write meaningful tests,</text>
+  <text x="310" y="119" font-family="monospace" font-size="13" text-anchor="middle" fill="#1565c0">make no mistakes"</text>
+
+  <!-- Diverging paths -->
+  <path d="M250,132 C185,160 150,176 150,206" fill="none" stroke="#e53935" stroke-width="2" stroke-dasharray="6,5" marker-end="url(#aRed)"/>
+  <path d="M370,132 C435,160 470,176 470,206" fill="none" stroke="#607d8b" stroke-width="2" marker-end="url(#aGrey)"/>
+  <text x="118" y="172" font-size="12" text-anchor="middle" font-style="italic" fill="#e53935">skip judgement</text>
+
+  <!-- Left: naive dead end -->
+  <g filter="url(#soft)">
+    <rect x="35" y="212" width="230" height="150" rx="16" fill="url(#gRed)" stroke="#e53935" stroke-width="2"/>
+  </g>
+  <circle cx="62" cy="239" r="13" fill="#e53935"/>
+  <text x="62" y="244" font-size="15" text-anchor="middle" font-weight="bold" fill="#fff">&#10007;</text>
+  <text x="158" y="244" font-size="14" text-anchor="middle" font-weight="bold" fill="#b71c1c">Plausible-looking</text>
+  <text x="158" y="262" font-size="14" text-anchor="middle" font-weight="bold" fill="#b71c1c">tests</text>
+  <text x="150" y="296" font-size="13" text-anchor="middle" fill="#2e7d32">&#10003; all green</text>
+  <text x="150" y="320" font-size="13" text-anchor="middle" fill="#c62828">&#10007; prove nothing</text>
+  <text x="150" y="344" font-size="13" text-anchor="middle" fill="#c62828">&#10007; miss real bugs</text>
+
+  <!-- Right: judgement layer -->
+  <g filter="url(#soft)">
+    <rect x="355" y="206" width="230" height="146" rx="16" fill="url(#gAmber)" stroke="#fb8c00" stroke-width="3"/>
+  </g>
+  <text x="470" y="232" font-size="16" text-anchor="middle" font-weight="bold" fill="#e65100">JUDGEMENT</text>
+  <text x="470" y="256" font-size="13" text-anchor="middle" fill="#5d4037">Which test? Which level?</text>
+  <text x="470" y="278" font-size="13" text-anchor="middle" fill="#5d4037">Does it actually fail</text>
+  <text x="470" y="296" font-size="13" text-anchor="middle" fill="#5d4037">for the correct reason?</text>
+  <text x="470" y="322" font-size="12" text-anchor="middle" font-style="italic" fill="#ef6c00">know the HOW</text>
+
+  <path d="M470,352 L470,372" fill="none" stroke="#43a047" stroke-width="2" marker-end="url(#aGreen)"/>
+  <g filter="url(#soft)">
+    <rect x="355" y="376" width="230" height="54" rx="16" fill="url(#gGreen)" stroke="#4caf50" stroke-width="2"/>
+  </g>
+  <text x="470" y="409" font-size="15" text-anchor="middle" font-weight="bold" fill="#1b5e20">Tests you can trust</text>
+
+  <path d="M470,430 C470,452 405,460 388,470" fill="none" stroke="#43a047" stroke-width="2" marker-end="url(#aGreen)"/>
+
+  <!-- Outcome -->
+  <g filter="url(#soft)">
+    <rect x="95" y="474" width="430" height="80" rx="18" fill="url(#gGreenStrong)" stroke="#2e7d32" stroke-width="2"/>
+  </g>
+  <circle cx="150" cy="514" r="19" fill="#2e7d32"/>
+  <text x="150" y="521" font-size="20" text-anchor="middle" font-weight="bold" fill="#fff">&#10003;</text>
+  <text x="330" y="508" font-size="24" text-anchor="middle" font-weight="bold" fill="#1b5e20">Confidence</text>
+  <text x="330" y="536" font-size="18" text-anchor="middle" fill="#1b5e20">in every commit</text>
+</svg>
