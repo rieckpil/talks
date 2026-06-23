@@ -1292,7 +1292,7 @@ See the [detailed agenda and save your spot.](https://rieckpil.de/workshops)
 
 ## Let's Tailor Your Team's Agentic Workflow
 
-A **hands-on workshop** to develop and establish **unified agentic guardrails** - my private Spring Boot testing knowledge dropped into *your* team's AI workflow for **optimized testing and confidence in every commit**.
+A **hands-on workshop** to develop and establish your **unified agentic guardrails** for **optimized testing and confidence in every commit**.
 
 ![center h:400 w:1050](assets/skills.jpg)
 
