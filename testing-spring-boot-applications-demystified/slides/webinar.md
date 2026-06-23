@@ -5,7 +5,7 @@ header: 'Testing Spring Boot Applications Demystified @ Silesia JUG 16.06.2026'
 ---
 
 ![bg](assets/tsbad-beginning.png)
-[//]: # (![bg]&#40;assets/katowice-jug-2026.jpg&#41;)
+<!--![bg](assets/katowice-jug-2026.jpg) -->
 <!-- header: "" -->
 <!-- footer: ""-->
 
@@ -61,20 +61,23 @@ Start with the **first two questions**:
 
 ---
 
-# Recent Studies
+## More Than a One-Line Prompt
 
-## METR Study: Early-2025 AI on Experienced Open-Source Developer Productivity
+![bg right:40% fit](assets/ai-judgement-layer.svg)
 
-Surprisingly, we [find](https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/) that when developers use AI tools, they take 19% longer than without.
-
-## Google's 2025 DORA Report
-The [report](https://dora.dev/research/2025/) concludes that AI's primary role in software development is that of an amplifier: AI doesn’t fix a team; it **amplifies** whatever is already there. This works in both directions.
+- You can't just run `claude -p "Write meaningful tests, make no mistakes"` and walk away
+- Effective AI testing needs **judgement** and understanding of the **HOW**: which test, at which level, and proof it actually fails
+- The craft shifts from *writing* tests to *directing and reviewing* them - the goal stays **confidence in every commit**
 
 ---
 
 ## From Developer to AI-Code Auditor
 
-![center h:500](assets/ai-speed-illusion-green.jpeg)
+![bg right:40% fit](assets/ai-auditor-loop.svg)
+
+- AI writes more code, faster - your job becomes **auditing** it with confidence
+- An auditor lives or dies by **fast feedback**: a slow suite breaks the loop
+- Fast, reliable tests are the auditor's instrument - the foundation for **confidence in every commit**
 
 ---
 
@@ -1284,6 +1287,16 @@ See the [detailed agenda and save your spot.](https://rieckpil.de/workshops)
 - Section 3: Real-World Integration Testing
 - Section 4: Performance & Strategy
 - Section 5: Live Q&A & Implementation
+
+---
+
+## Let's Tailor Your Team's Agentic Workflow
+
+A **hands-on workshop** to develop and establish **unified agentic guardrails** - my private Spring Boot testing knowledge dropped into *your* team's AI workflow for **optimized testing and confidence in every commit**.
+
+![center h:400 w:1050](assets/skills.jpg)
+
+
 
 ---
 
