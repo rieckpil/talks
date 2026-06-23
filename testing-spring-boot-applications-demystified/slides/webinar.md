@@ -4,8 +4,8 @@ theme: pragmatech
 header: 'Testing Spring Boot Applications Demystified @ Silesia JUG 16.06.2026'
 ---
 
-[//]: # (![bg]&#40;assets/paderborn.jpg&#41;)
-![bg](assets/katowice-jug-2026.jpg)
+![bg](assets/tsbad-beginning.png)
+[//]: # (![bg]&#40;assets/katowice-jug-2026.jpg&#41;)
 <!-- header: "" -->
 <!-- footer: ""-->
 
@@ -22,7 +22,7 @@ Notes:
 
 ## A Hero's Journey Through the Spring Boot Testing Labyrinth
 
-Talk @ Silesia JUG 16.06.2026
+Talk @ Digiteal 23.06.2026
 
 Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](https://x.com/rieckpil)
 
@@ -31,9 +31,9 @@ Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](htt
 
 ## Participate During the Talk
 
-Go to [menti.com](https://www.menti.com/) and use the code **1938 2589** to **anonymously** submit answers for the quizzes and add your questions during the talk.
+Go to [menti.com](https://www.menti.com/) and use the code **5463 9225** to **anonymously** submit answers for the quizzes and add your questions during the talk.
 
-![h:200 center](assets/mentimeter-silesia-jug.png)
+![h:200 center](assets/mentimeter-digiteal.png)
 
 
 Start with the **first two questions**:
@@ -42,7 +42,7 @@ Start with the **first two questions**:
 
 ---
 
-<!-- header: 'Talk @ Silesia JUG 16.06.2026 - Questions @ menti.com Code: <strong>1938 2589</strong>' -->
+<!-- header: 'Talk @ Digiteal 23.06.2026 - Questions @ menti.com Code: <strong>5463 9225</strong>' -->
 
 
 ![bg right:33%](assets/why-test-software.jpg)
@@ -77,7 +77,6 @@ The [report](https://dora.dev/research/2025/) concludes that AI's primary role i
 ![center h:500](assets/ai-speed-illusion-green.jpeg)
 
 ---
-
 
 # Good tests don't just catch bugs - they give you **fast feedback** and **confident deployments**.
 
@@ -119,9 +118,6 @@ Imagine seeing this pull request on a Friday afternoon:
 ![](assets/northstar-pr.png)
 
 How confident are you to merge this major Spring Boot upgrade and deploy it to production once the pipeline turns green?
-
-
-
 
 ---
 
