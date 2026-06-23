@@ -1340,7 +1340,7 @@ A **hands-on workshop** to develop and establish your **unified agentic guardrai
 <!-- paginate: false -->
 
 
-## Dziękuję & Joyful Testing!
+## Joyful Testing!
 
 Get your Spring Boot Testing eBook (120+ pages):
 
