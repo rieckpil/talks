@@ -22,27 +22,37 @@ Notes:
 
 ## A Hero's Journey Through the Spring Boot Testing Labyrinth
 
-Talk @ Digiteal 23.06.2026
+Talk @ Deichmann SE 04.08.2026
 
 Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](https://x.com/rieckpil)
 
 ---
 
+![bg right:33% h:750](assets/location.png)
 
-## Participate During the Talk
+### About Philip
 
-Go to [menti.com](https://www.menti.com/) and use the code **5463 9225** to **anonymously** submit answers for the quizzes and add your questions during the talk.
-
-![h:200 center](assets/mentimeter-digiteal.png)
-
-
-Start with the **first two questions**:
-- Despite having LLMs and Code Agents, do you still write your tests by hand?
-- Do You Enjoy Writing Automated Tests?
+- Self-employed developer from Herzogenaurach (HQ of adidas & Puma), Germany (Bavaria) 🍻
+- Blogging & content creation with a focus on testing Java and specifically Spring Boot applications 🍃
+- Founder of PragmaTech GmbH - Enabling Developers to Frequently Deliver Software with More Confidence 🚤
 
 ---
 
-<!-- header: 'Talk @ Digiteal 23.06.2026 - Questions @ menti.com Code: <strong>5463 9225</strong>' -->
+## Participate During the Talk
+
+Go to [menti.com](https://www.menti.com/) and use the code **7495 6357** to **anonymously** submit answers for the quizzes and add your questions during the talk.
+
+![h:200 center](assets/mentimeter-deichmann.png)
+
+
+Please answer the **first three questions**:
+- Who wrote your tests today?
+- How would you rate your Spring Boot testing knowledge?
+- How confident are you deploying on a Friday afternoon?
+
+---
+
+<!-- header: 'Talk @ Deichmann SE 04.08.2026 - Questions @ menti.com Code: <strong>7495 6357</strong>' -->
 
 
 ![bg right:33%](assets/why-test-software.jpg)
@@ -50,26 +60,81 @@ Start with the **first two questions**:
 # Why Test Software?
 
 ---
+
+## Being a Developer in 2026 (?)
+
+![center](assets/uncle-bob-tweet.jpeg)
+
+---
+
+## How not to: Agentic Development
+
+![center](assets/ai-tests-meme.jpg)
+
+---
+
+## Offload Everything to the AI
+
+![center h:500](assets/ai-frog-meme.jpg)
+
+
+---
+
+
 ![bg right:33%](assets/ai-image.jpg)
 
 
-## The AI Trap: Testing is Your Safety Net
+## Agentic Development Today
 
+- AI makes software faster to create and harder to trust.
+- AI made writing code cheap. Verifying it is the new bottleneck.
+- AI adoption correlates with increased throughput and decreased stability.
 - AI generates the logic, but you inherit the **liability**. It can write the function; it won't join the post-mortem.
-- If the AI wrote the code and the AI wrote the test, you are the only person left to solve the **hallucination** when the **system** **crashes**.
-- AI is the **accelerator**. Your tests are the **brakes**. You need both to go fast.
 
 ---
 
-## More Than a One-Line Prompt
+<!-- footer: '![w:32 h:32](assets/logo.webp)' -->
 
-![bg right:40% fit](assets/ai-judgement-layer.svg)
 
-- You can't just run `claude -p "Write meaningful tests, make no mistakes"` and walk away
-- Effective AI testing needs **judgement** and understanding of the **HOW**: which test, at which level, and proof it actually fails
-- The craft shifts from *writing* tests to *directing and reviewing* them - the goal stays **confidence in every commit**
+![bg right:33%](assets/northstar.jpg)
+
+### My Overall Northstar for Engineering Excellence
+
+Imagine seeing this pull request on a Friday afternoon:
+
+![](assets/northstar-pr.png)
+
+How confident are you to merge this major Spring Boot upgrade and deploy it to production once the pipeline turns green?
 
 ---
+
+
+# Good tests don't just catch bugs - they give you **fast feedback** and **confident deployments**.
+
+---
+
+## DORA (DevOps Research Assessment)
+
+![center](assets/dora-core-v2.1.0-summary-raw.png)
+
+
+---
+
+[//]: # (## More Than a One-Line Prompt)
+
+[//]: # ()
+[//]: # (![bg right:40% fit]&#40;assets/ai-judgement-layer.svg&#41;)
+
+[//]: # ()
+[//]: # (- You can't just run `claude -p "Write meaningful tests, make no mistakes"` and walk away)
+
+[//]: # (- Effective AI testing needs **judgement** and understanding of the **HOW**: which test, at which level, and proof it actually fails)
+
+[//]: # (- The craft shifts from *writing* tests to *directing and reviewing* them - the goal stays **confidence in every commit**)
+
+[//]: # ()
+[//]: # (---)
+
 
 ## From Developer to AI-Code Auditor
 
@@ -81,10 +146,10 @@ Start with the **first two questions**:
 
 ---
 
-# Good tests don't just catch bugs - they give you **fast feedback** and **confident deployments**.
+# How do we get there for your **Spring Boot** projects?
+
 
 ---
-
 
 [//]: # ()
 [//]: # ([//]: # &#40;<!-- footer: '![w:32 h:32]&#40;assets/logo.webp&#41;' -->&#41;)
@@ -109,20 +174,7 @@ Start with the **first two questions**:
 [//]: # (---)
 
 
-<!-- footer: '![w:32 h:32](assets/logo.webp)' -->
 
-
-![bg right:33%](assets/northstar.jpg)
-
-### My Overall Northstar for Automated Testing
-
-Imagine seeing this pull request on a Friday afternoon:
-
-![](assets/northstar-pr.png)
-
-How confident are you to merge this major Spring Boot upgrade and deploy it to production once the pipeline turns green?
-
----
 
 ## The Hero's Journey aka. Our Agenda
 
@@ -150,23 +202,14 @@ How confident are you to merge this major Spring Boot upgrade and deploy it to p
 ![bg h:500 right:33%](assets/demystify.png)
 
 
-- **Provide a clear mental map** for choosing between unit, slice, and integration tests so developers stop guessing which tool to use
-- **Equip attendees with practical techniques** to speed up test suites and validate test quality
-- **Build confidence to ship fearlessly** by creating tests that catch real bugs, not just achieve coverage metrics
+- **Provide a clear mental map** for choosing between unit, slice, and integration tests
+- Get **better judgment** for AI-written tests
+- Collect **practical techniques and best practices** to speed up test suites and validate test quality
+- **Build confidence** into your development work to **ship fearlessly**
 
 
 ---
 
-![bg right:33% h:750](assets/location.png)
-
-### About Philip
-
-- Self-employed developer from Herzogenaurach, Germany (Bavaria) 🍻
-- Blogging & content creation with a focus on testing Java and specifically Spring Boot applications 🍃
-- Founder of PragmaTech GmbH - Enabling Developers to Frequently Deliver Software with More Confidence 🚤
-- Enjoys writing tests (sometimes even more than production code) 🧪
-
----
 
 ![bg left:33%](assets/tsbad-act-one.png)
 
@@ -694,7 +737,7 @@ Running infrastructure components (databases, message brokers, etc.) in Docker c
 ```java
 @Container
 @ServiceConnection
-static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:16-alpine")
+static PostgreSQLContainer postgres = new PostgreSQLContainer("postgres:16-alpine")
   .withDatabaseName("testdb")
   .withUsername("test")
   .withPassword("test")
@@ -1263,46 +1306,74 @@ public Long registerUser(int age, String username) {
 
 ---
 
-## Upcoming Open Online Workshops
+[//]: # (## Upcoming Open Online Workshops)
 
-**Confidence In Every Commit: Essentials (1 Day)** - Achieve confidence in every commit. Stop fighting your test suite and start mastering it. Covering fast & reliable unit, sliced and integration testing with Spring Boot
+[//]: # ()
+[//]: # (**Confidence In Every Commit: Essentials &#40;1 Day&#41;** - Achieve confidence in every commit. Stop fighting your test suite and start mastering it. Covering fast & reliable unit, sliced and integration testing with Spring Boot)
+
+[//]: # ()
+[//]: # ()
+[//]: # ()
+[//]: # (Next dates:)
+
+[//]: # ()
+[//]: # (- 🗓️ **Thursday 02.07.2026**: 9 AM - 4 PM CEST)
+
+[//]: # (- 🗓️ **Tuesday 08.09.2026**: 9 AM - 4 PM CEST)
+
+[//]: # ()
+[//]: # (See the [detailed agenda and save your spot.]&#40;https://rieckpil.de/workshops&#41;)
+
+[//]: # ()
+[//]: # (---)
+[//]: # ()
+[//]: # (## What we Cover in the Workshop)
+
+[//]: # ()
+[//]: # ()
+[//]: # (- Section 1: Foundations & The Testing Pyramid 2.0:  Moving)
+
+[//]: # (  beyond "coverage" to "confidence.")
+
+[//]: # (- Section 2: Sliced Contexts & Unit Testing)
+
+[//]: # (- Section 3: Real-World Integration Testing)
+
+[//]: # (- Section 4: Performance & Strategy)
+
+[//]: # (- Section 5: Live Q&A & Implementation)
 
 
+## Making the Most of Agentic Development
 
-Next dates:
-
-- 🗓️ **Thursday 02.07.2026**: 9 AM - 4 PM CEST
-- 🗓️ **Tuesday 08.09.2026**: 9 AM - 4 PM CEST
-
-See the [detailed agenda and save your spot.](https://rieckpil.de/workshops)
+- Invest in a **comprehensive** and **fast test suite**
+- Reduce context switches for developers to stay in the loop
+- Achieve **operational excellence**: monitoring, alerting, runbooks, A/B testing, feature flags, canary testing etc.
+- Use e.g. Playwright MCP to let the AI self-verify features locally
+- Provide custom skills to standardize code and tests across the company
 
 ---
 
-## What we Cover in the Workshop
+## Optimizing AI-written Tests with Skills
 
 
-- Section 1: Foundations & The Testing Pyramid 2.0:  Moving
-  beyond "coverage" to "confidence."
-- Section 2: Sliced Contexts & Unit Testing
-- Section 3: Real-World Integration Testing
-- Section 4: Performance & Strategy
-- Section 5: Live Q&A & Implementation
+![center h:500 w:1050](assets/skills.jpg)
 
 ---
 
-## Let's Tailor Your Team's Agentic Workflow
+## Let's Finalize the Menti Questions
 
-A **hands-on workshop** to develop and establish your **unified agentic guardrails** for **optimized testing and confidence in every commit**.
+Go to [menti.com](https://www.menti.com/) and use the code **7495 6357** to **anonymously** submit answers for the quizzes and add your questions during the talk.
 
-![center h:400 w:1050](assets/skills.jpg)
-
+![h:200 center](assets/mentimeter-deichmann.png)
 
 
 ---
 
-![](assets/pragmatech-main-offering.png)
+[//]: # (![]&#40;assets/pragmatech-main-offering.png&#41;)
 
----
+[//]: # ()
+[//]: # (---)
 
 ## Don't Leave Empty-Handed
 
