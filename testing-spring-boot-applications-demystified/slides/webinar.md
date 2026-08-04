@@ -22,7 +22,7 @@ Notes:
 
 ## A Hero's Journey Through the Spring Boot Testing Labyrinth
 
-Talk @ Digiteal 23.06.2026
+Talk @ Deichmann SE 04.08.2026
 
 Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](https://x.com/rieckpil)
 
@@ -31,18 +31,19 @@ Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](htt
 
 ## Participate During the Talk
 
-Go to [menti.com](https://www.menti.com/) and use the code **5463 9225** to **anonymously** submit answers for the quizzes and add your questions during the talk.
+Go to [menti.com](https://www.menti.com/) and use the code **7495 6357** to **anonymously** submit answers for the quizzes and add your questions during the talk.
 
-![h:200 center](assets/mentimeter-digiteal.png)
+![h:200 center](assets/mentimeter-deichmann.png)
 
 
-Start with the **first two questions**:
-- Despite having LLMs and Code Agents, do you still write your tests by hand?
-- Do You Enjoy Writing Automated Tests?
+Start with the **first three questions**:
+- Who wrote your tests today?
+- How would you rate your Spring Boot testing knowledge?
+- How confident are you deploying on a Friday afternoon?
 
 ---
 
-<!-- header: 'Talk @ Digiteal 23.06.2026 - Questions @ menti.com Code: <strong>5463 9225</strong>' -->
+<!-- header: 'Talk @ Deichmann SE 04.06.2026 - Questions @ menti.com Code: <strong>7495 6357</strong>' -->
 
 
 ![bg right:33%](assets/why-test-software.jpg)
