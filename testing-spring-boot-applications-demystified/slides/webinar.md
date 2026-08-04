@@ -52,7 +52,7 @@ Please answer the **first three questions**:
 
 ---
 
-<!-- header: 'Talk @ Deichmann SE 04.06.2026 - Questions @ menti.com Code: <strong>7495 6357</strong>' -->
+<!-- header: 'Talk @ Deichmann SE 04.08.2026 - Questions @ menti.com Code: <strong>7495 6357</strong>' -->
 
 
 ![bg right:33%](assets/why-test-software.jpg)
