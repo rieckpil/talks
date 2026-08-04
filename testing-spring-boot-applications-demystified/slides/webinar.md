@@ -32,10 +32,9 @@ Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](htt
 
 ### About Philip
 
-- Self-employed developer from Herzogenaurach, Germany (Bavaria) 🍻
+- Self-employed developer from Herzogenaurach (HQ of adidas & Puma), Germany (Bavaria) 🍻
 - Blogging & content creation with a focus on testing Java and specifically Spring Boot applications 🍃
 - Founder of PragmaTech GmbH - Enabling Developers to Frequently Deliver Software with More Confidence 🚤
-- Enjoys writing tests (sometimes even more than production code) 🧪
 
 ---
 
