@@ -46,7 +46,7 @@ Go to [menti.com](https://www.menti.com/) and use the code **8677 1883** to **an
 
 
 Please answer the **first three questions**:
-- Who wrote your tests today?
+- Who wrote your tests this week?
 - How would you rate your Spring Boot testing knowledge?
 - How confident are you deploying on a Friday afternoon?
 
