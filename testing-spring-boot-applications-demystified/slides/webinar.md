@@ -1,7 +1,7 @@
 ---
 marp: true
 theme: pragmatech
-header: 'Testing Spring Boot Applications Demystified @ Silesia JUG 16.06.2026'
+header: 'Testing Spring Boot Applications Demystified @ Vestas 19.08.2026'
 ---
 
 ![bg](assets/tsbad-beginning.png)
@@ -22,7 +22,7 @@ Notes:
 
 ## A Hero's Journey Through the Spring Boot Testing Labyrinth
 
-Talk @ Deichmann SE 04.08.2026
+Talk @ Vestas 20.08.2026
 
 Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](https://x.com/rieckpil)
 
@@ -40,19 +40,19 @@ Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](htt
 
 ## Participate During the Talk
 
-Go to [menti.com](https://www.menti.com/) and use the code **7495 6357** to **anonymously** submit answers for the quizzes and add your questions during the talk.
+Go to [menti.com](https://www.menti.com/) and use the code **8677 1883** to **anonymously** submit answers for the quizzes and add your questions during the talk.
 
-![h:200 center](assets/mentimeter-deichmann.png)
+![h:200 center](assets/mentimeter-vestas.png)
 
 
 Please answer the **first three questions**:
-- Who wrote your tests today?
+- Who wrote your tests this week?
 - How would you rate your Spring Boot testing knowledge?
 - How confident are you deploying on a Friday afternoon?
 
 ---
 
-<!-- header: 'Talk @ Deichmann SE 04.08.2026 - Questions @ menti.com Code: <strong>7495 6357</strong>' -->
+<!-- header: 'Talk @ Vestas 20.08.2026 - Questions @ menti.com Code: <strong>8677 1883</strong>' -->
 
 
 ![bg right:33%](assets/why-test-software.jpg)
@@ -61,19 +61,12 @@ Please answer the **first three questions**:
 
 ---
 
-## Being a Developer in 2026 (?)
+## Software Development is Changing
 
-![center](assets/uncle-bob-tweet.jpeg)
-
----
-
-## How not to: Agentic Development
-
-![center](assets/ai-tests-meme.jpg)
+![center w:400](assets/uncle-bob-tweet.jpeg)
 
 ---
 
-## Offload Everything to the AI
 
 ![center h:500](assets/ai-frog-meme.jpg)
 
@@ -113,12 +106,14 @@ How confident are you to merge this major Spring Boot upgrade and deploy it to p
 
 ---
 
-## DORA (DevOps Research Assessment)
+[//]: # (## DORA &#40;DevOps Research Assessment&#41;)
 
-![center](assets/dora-core-v2.1.0-summary-raw.png)
+[//]: # ()
+[//]: # (![center]&#40;assets/dora-core-v2.1.0-summary-raw.png&#41;)
 
-
----
+[//]: # ()
+[//]: # ()
+[//]: # (---)
 
 [//]: # (## More Than a One-Line Prompt)
 
@@ -135,18 +130,23 @@ How confident are you to merge this major Spring Boot upgrade and deploy it to p
 [//]: # ()
 [//]: # (---)
 
+[//]: # ()
+[//]: # (## From Developer to AI-Code Auditor)
 
-## From Developer to AI-Code Auditor
+[//]: # ()
+[//]: # (![bg right:40% fit]&#40;assets/ai-auditor-loop.svg&#41;)
 
-![bg right:40% fit](assets/ai-auditor-loop.svg)
+[//]: # ()
+[//]: # (- AI writes more code, faster - your job becomes **auditing** it with confidence)
 
-- AI writes more code, faster - your job becomes **auditing** it with confidence
-- An auditor lives or dies by **fast feedback**: a slow suite breaks the loop
-- Fast, reliable tests are the auditor's instrument - the foundation for **confidence in every commit**
+[//]: # (- An auditor lives or dies by **fast feedback**: a slow suite breaks the loop)
 
----
+[//]: # (- Fast, reliable tests are the auditor's instrument - the foundation for **confidence in every commit**)
 
-# How do we get there for your **Spring Boot** projects?
+[//]: # ()
+[//]: # (---)
+
+# How do we get there for our **Spring Boot** projects?
 
 
 ---
@@ -1105,6 +1105,8 @@ junit.jupiter.execution.parallel.mode.classes.default = concurrent
 
 ## Let's Challenge Code Coverage
 
+Imagine a set of unit tests for this isolated buisness logic:
+
 ```java
 public Long registerUser(int age, String username) {
 
@@ -1354,6 +1356,12 @@ public Long registerUser(int age, String username) {
 
 ---
 
+## Upcoming Online Course
+
+![center h:500 ](assets/agentic-testing-course.png)
+
+---
+
 ## Optimizing AI-written Tests with Skills
 
 
@@ -1361,11 +1369,12 @@ public Long registerUser(int age, String username) {
 
 ---
 
-## Let's Finalize the Menti Questions
 
-Go to [menti.com](https://www.menti.com/) and use the code **7495 6357** to **anonymously** submit answers for the quizzes and add your questions during the talk.
+## Let's Finalize the Menti Survey
 
-![h:200 center](assets/mentimeter-deichmann.png)
+Go to [menti.com](https://www.menti.com/) and use the code **8677 1883** to finalize the poll and add your questions for the Q&A.
+
+![h:200 center](assets/mentimeter-vestas.png)
 
 
 ---
