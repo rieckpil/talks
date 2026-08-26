@@ -1,0 +1,565 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Trap Map - Top 5 Spring Boot Testing Mistakes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; background: transparent; }
+  body.grid {
+    background-color: #ffffff;
+    background-image: radial-gradient(rgba(15, 23, 42, 0.08) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+  canvas { display: block; background: transparent; }
+</style>
+</head>
+<body>
+<canvas id="scene"></canvas>
+<script>
+/*
+ * Hand-drawn "trap map" for the talk. No libraries: a seeded PRNG plus small
+ * rough-stroke helpers give the Excalidraw look. Views (query parameters):
+ *   ?view=map&disarmed=N   wide map, traps 1..N disarmed (N = 0..5)
+ *   ?view=zoom&trap=N      close-up of trap N (N = 1..5)
+ *   ?view=cover            the Green Lie cover image (square)
+ *   &grid=1                paint the slide dot grid behind the canvas (preview only)
+ */
+const params = new URLSearchParams(location.search);
+const view = params.get('view') || 'map';
+const disarmedCount = clamp(parseInt(params.get('disarmed') ?? '0', 10) || 0, 0, 5);
+const zoomTrap = clamp(parseInt(params.get('trap') ?? '1', 10) || 1, 1, 5);
+if (params.get('grid') === '1') document.body.classList.add('grid');
+
+const WIDTH = view === 'cover' ? 1080 : 1920;
+const HEIGHT = 1080;
+
+const C = {
+  ink: '#0f172a',
+  muted: '#64748b',
+  accent: '#0284c7',
+  cyan: '#22d0eb',
+  red: '#fb2c36',
+  green: '#00c758',
+  amber: '#edb200',
+  amberDark: '#b98600',
+  surface: '#f1f5f9',
+  border: '#cbd5e1',
+  pit: '#1e293b',
+  pitDeep: '#0a0e16',
+  wood: '#d9a066',
+  woodDark: '#8b5a2b',
+  ground: '#f0f7f1',
+  cardboard: '#e7d3b1',
+  steel: '#cbd5e1',
+  white: '#ffffff'
+};
+
+const TRAP_NAMES = ['Golden Hammer', 'Context Tax', 'Production Parity', 'Phantom Commit', 'Green Lie'];
+const pathY = x => 745 + 22 * Math.sin((x - 150) / 260);
+const PITS = [380, 640, 900, 1160, 1420].map((x, i) => ({ x, y: pathY(x), n: i + 1, name: TRAP_NAMES[i] }));
+const DOOR = { x: 1650, y: 560, w: 84, h: 200 };
+
+const canvas = document.getElementById('scene');
+const ctx = canvas.getContext('2d');
+const dpr = window.devicePixelRatio || 1;
+canvas.style.width = WIDTH + 'px';
+canvas.style.height = HEIGHT + 'px';
+canvas.width = Math.round(WIDTH * dpr);
+canvas.height = Math.round(HEIGHT * dpr);
+ctx.scale(dpr, dpr);
+
+/* ---------- seeded randomness (deterministic exports) ---------- */
+function mulberry32(seed) {
+  return function () {
+    seed |= 0; seed = seed + 0x6D2B79F5 | 0;
+    let t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
+}
+let rnd = mulberry32(1337);
+const jit = amount => (rnd() - 0.5) * 2 * amount;
+function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+
+/* ---------- rough drawing helpers ---------- */
+function setStroke(o) {
+  ctx.strokeStyle = o.color || C.ink;
+  ctx.lineWidth = o.width || 3;
+  ctx.globalAlpha = o.alpha ?? 1;
+  ctx.lineCap = 'round';
+  ctx.lineJoin = 'round';
+  if (o.dash) ctx.setLineDash(o.dash);
+}
+
+function roughLine(x1, y1, x2, y2, o = {}) {
+  const passes = o.passes ?? 2;
+  const len = Math.hypot(x2 - x1, y2 - y1);
+  const j = Math.min(4, 1 + len * 0.012) * (o.rough ?? 1);
+  ctx.save();
+  setStroke(o);
+  for (let p = 0; p < passes; p++) {
+    ctx.beginPath();
+    ctx.moveTo(x1 + jit(j * 0.6), y1 + jit(j * 0.6));
+    const cx1 = x1 + (x2 - x1) * 0.3 + jit(j * 1.5), cy1 = y1 + (y2 - y1) * 0.3 + jit(j * 1.5);
+    const cx2 = x1 + (x2 - x1) * 0.7 + jit(j * 1.5), cy2 = y1 + (y2 - y1) * 0.7 + jit(j * 1.5);
+    ctx.bezierCurveTo(cx1, cy1, cx2, cy2, x2 + jit(j * 0.6), y2 + jit(j * 0.6));
+    ctx.stroke();
+  }
+  ctx.restore();
+}
+
+function hachure(pts, color, gap, angle, lineWidth) {
+  const xs = pts.map(p => p[0]), ys = pts.map(p => p[1]);
+  const minX = Math.min(...xs), maxX = Math.max(...xs), minY = Math.min(...ys), maxY = Math.max(...ys);
+  const cx = (minX + maxX) / 2, cy = (minY + maxY) / 2;
+  const r = Math.hypot(maxX - minX, maxY - minY) / 2 + gap;
+  ctx.save();
+  ctx.translate(cx, cy);
+  ctx.rotate(angle * Math.PI / 180);
+  ctx.strokeStyle = color;
+  ctx.lineWidth = lineWidth;
+  ctx.lineCap = 'round';
+  for (let y = -r; y <= r; y += gap) {
+    ctx.beginPath();
+    ctx.moveTo(-r + jit(2), y + jit(1.5));
+    ctx.lineTo(r + jit(2), y + jit(1.5));
+    ctx.stroke();
+  }
+  ctx.restore();
+}
+
+function fillPoly(pts, o) {
+  ctx.save();
+  ctx.beginPath();
+  pts.forEach((p, i) => i ? ctx.lineTo(p[0] + jit(1.2), p[1] + jit(1.2)) : ctx.moveTo(p[0], p[1]));
+  ctx.closePath();
+  ctx.globalAlpha = o.fillAlpha ?? 1;
+  if ((o.fillStyle || 'solid') === 'solid') {
+    ctx.fillStyle = o.fill;
+    ctx.fill();
+  } else {
+    ctx.clip();
+    hachure(pts, o.fill, o.hachureGap || 9, o.hachureAngle ?? -45, o.hachureWidth || 1.6);
+  }
+  ctx.restore();
+}
+
+function roughPoly(pts, o = {}) {
+  const close = o.close ?? true;
+  if (o.fill) fillPoly(pts, o);
+  if (o.stroke === false) return;
+  const count = close ? pts.length : pts.length - 1;
+  for (let i = 0; i < count; i++) {
+    const a = pts[i], b = pts[(i + 1) % pts.length];
+    roughLine(a[0], a[1], b[0], b[1], o);
+  }
+}
+
+function roughRect(x, y, w, h, o = {}) {
+  roughPoly([[x, y], [x + w, y], [x + w, y + h], [x, y + h]], o);
+}
+
+function ellipsePts(cx, cy, rx, ry, n, j) {
+  const pts = [];
+  for (let i = 0; i < n; i++) {
+    const t = i / n * Math.PI * 2;
+    pts.push([cx + Math.cos(t) * (rx + jit(j)), cy + Math.sin(t) * (ry + jit(j))]);
+  }
+  return pts;
+}
+
+function smoothClosed(pts) {
+  const n = pts.length;
+  ctx.moveTo((pts[0][0] + pts[n - 1][0]) / 2, (pts[0][1] + pts[n - 1][1]) / 2);
+  for (let i = 0; i < n; i++) {
+    const p = pts[i], q = pts[(i + 1) % n];
+    ctx.quadraticCurveTo(p[0], p[1], (p[0] + q[0]) / 2, (p[1] + q[1]) / 2);
+  }
+  ctx.closePath();
+}
+
+function roughEllipse(cx, cy, rx, ry, o = {}) {
+  if (o.fill) fillPoly(ellipsePts(cx, cy, rx, ry, 48, 0.4), o);
+  if (o.stroke === false) return;
+  const passes = o.passes ?? 2;
+  for (let p = 0; p < passes; p++) {
+    ctx.save();
+    setStroke(o);
+    ctx.beginPath();
+    smoothClosed(ellipsePts(cx, cy, rx, ry, 30, (o.rough ?? 1) * 1.4));
+    ctx.stroke();
+    ctx.restore();
+  }
+}
+
+function text(str, x, y, o = {}) {
+  ctx.save();
+  ctx.translate(x, y);
+  if (o.rotate) ctx.rotate(o.rotate);
+  ctx.globalAlpha = o.alpha ?? 1;
+  ctx.fillStyle = o.color || C.ink;
+  ctx.font = `${o.weight || ''} ${o.size || 28}px "Architects Daughter", "Comic Sans MS", cursive`;
+  ctx.textAlign = o.align || 'center';
+  ctx.textBaseline = o.baseline || 'middle';
+  ctx.fillText(str, 0, 0);
+  ctx.restore();
+}
+
+function dot(x, y, r, color) {
+  ctx.save();
+  ctx.fillStyle = color || C.ink;
+  ctx.beginPath();
+  ctx.arc(x, y, r, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.restore();
+}
+
+/* ---------- icons (each drawn in a 220x220 box centered at 0,0) ---------- */
+function cylinder(cx, cy, rx, ry, h, o = {}) {
+  // body
+  const body = [[cx - rx, cy - h / 2], [cx + rx, cy - h / 2], [cx + rx, cy + h / 2], [cx - rx, cy + h / 2]];
+  if (o.fill) fillPoly(body, o);
+  if (o.fill) fillPoly(ellipsePts(cx, cy + h / 2, rx, ry, 40, 0.3), o);
+  roughLine(cx - rx, cy - h / 2, cx - rx, cy + h / 2, o);
+  roughLine(cx + rx, cy - h / 2, cx + rx, cy + h / 2, o);
+  // bottom arc (front half)
+  ctx.save(); setStroke(o);
+  for (let p = 0; p < 2; p++) {
+    ctx.beginPath();
+    for (let i = 0; i <= 20; i++) {
+      const t = i / 20 * Math.PI;
+      const x = cx + Math.cos(t) * (rx + jit(1)), y = cy + h / 2 + Math.sin(t) * (ry + jit(1));
+      i ? ctx.lineTo(x, y) : ctx.moveTo(x, y);
+    }
+    ctx.stroke();
+  }
+  ctx.restore();
+  // top ellipse
+  roughEllipse(cx, cy - h / 2, rx, ry, { ...o, fill: o.topFill || o.fill, fillStyle: 'solid', fillAlpha: 1 });
+}
+
+const ICONS = {
+  1: function hammer(o) {
+    // gleaming golden hammer, comically oversized next to a tiny screw
+    ctx.save();
+    ctx.rotate(-0.55);
+    roughRect(-11, -20, 22, 135, { fill: C.wood, fillStyle: 'hachure', hachureGap: 7, hachureAngle: 60, width: 3.5 });
+    roughRect(-11, -20, 22, 135, { fill: C.wood, fillStyle: 'solid', fillAlpha: 0.45, stroke: false });
+    roughPoly([[-78, -72], [78, -72], [82, -20], [-82, -20]], { fill: C.amber, fillStyle: 'solid', width: 3.5 });
+    roughPoly([[-78, -72], [78, -72], [82, -20], [-82, -20]], { fill: C.amberDark, fillStyle: 'hachure', hachureGap: 8, hachureAngle: -40, stroke: false, fillAlpha: 0.6 });
+    roughLine(-60, -62, -20, -62, { color: C.white, width: 4, alpha: 0.9, passes: 1 });
+    ctx.restore();
+    // sparkles
+    sparkle(60, -95, 14, C.amber);
+    sparkle(-92, -40, 9, C.amber);
+    // tiny screw
+    ctx.save();
+    ctx.translate(74, 60);
+    roughEllipse(0, 0, 13, 6, { fill: C.steel, width: 2.5 });
+    roughLine(-9, 0, 9, 0, { width: 2, passes: 1 });
+    roughPoly([[-6, 5], [6, 5], [4, 48], [-4, 48]], { fill: C.steel, width: 2.5 });
+    for (let i = 0; i < 4; i++) roughLine(-5, 12 + i * 9, 5, 16 + i * 9, { width: 1.6, passes: 1, color: C.muted });
+    ctx.restore();
+  },
+  2: function contextTax(o) {
+    // stack of coins + a receipt spooling out + (detail) a contexts meter
+    for (let i = 0; i < 5; i++) {
+      const y = 78 - i * 17;
+      roughRect(-88, y - 8, 90, 16, { fill: C.amber, fillStyle: 'solid', stroke: false });
+      roughLine(-88, y - 8, -88, y + 8, { width: 3 });
+      roughLine(2, y - 8, 2, y + 8, { width: 3 });
+      roughEllipse(-43, y - 8, 45, 9, { fill: C.amber, width: 3 });
+    }
+    text('$', -43, 62, { size: 22, color: C.amberDark, weight: 'bold' });
+    // receipt with zigzag bottom
+    const zig = [];
+    for (let i = 0; i <= 8; i++) zig.push([18 + i * 10, 72 + (i % 2 ? 0 : 10)]);
+    roughPoly([[18, -95], [98, -95], [98, 72], ...zig.reverse()], { fill: C.white, width: 3 });
+    for (let i = 0; i < 6; i++) roughLine(28, -78 + i * 22, 86 - (i % 3) * 14, -78 + i * 22, { color: C.muted, width: 2.4, passes: 1 });
+    roughLine(28, 52, 86, 52, { color: C.red, width: 3, passes: 1 });
+    if (o.detail) {
+      roughRect(-108, -108, 128, 40, { fill: C.white, width: 3 });
+      text(`Contexts: ${o.contexts ?? 12}`, -44, -88, { size: 22, color: o.contexts && o.contexts < 5 ? C.green : C.red });
+    }
+  },
+  3: function parity(o) {
+    // sketchy cardboard db (left) vs steel db inside a shipping container (right)
+    cylinder(-62, 8, 38, 13, 84, { fill: C.cardboard, fillStyle: 'solid', width: 3, dash: [9, 7], rough: 1.8 });
+    roughLine(-84, -10, -70, 6, { color: C.woodDark, width: 2, passes: 1 });
+    roughLine(-70, 6, -80, 22, { color: C.woodDark, width: 2, passes: 1 });
+    text('≠', 0, 0, { size: 46, color: C.red, weight: 'bold' });
+    roughRect(14, -66, 108, 136, { fill: C.accent, fillStyle: 'solid', fillAlpha: 0.12, width: 3 });
+    for (let i = 1; i < 6; i++) roughLine(14 + i * 18, -66, 14 + i * 18, 70, { color: C.accent, width: 1.6, passes: 1, alpha: 0.5 });
+    cylinder(68, 8, 30, 10, 70, { fill: C.steel, fillStyle: 'solid', width: 3, topFill: '#e2e8f0' });
+    roughLine(48, -12, 48, 30, { color: C.white, width: 3, passes: 1, alpha: 0.9 });
+    if (o.detail) {
+      text('in-memory', -62, 78, { size: 18, color: C.muted });
+      text('prod', 68, 88, { size: 18, color: C.muted });
+    }
+  },
+  4: function phantom(o) {
+    // a translucent ghost hovering over a database, holding a see-through COMMITTED sign
+    cylinder(0, 62, 46, 15, 58, { fill: C.steel, fillStyle: 'solid', width: 3, topFill: '#e2e8f0' });
+    ctx.save();
+    ctx.globalAlpha = 0.72;
+    const ghost = [];
+    for (let i = 0; i <= 16; i++) {
+      const t = Math.PI + i / 16 * Math.PI;
+      ghost.push([-6 + Math.cos(t) * 44, -36 + Math.sin(t) * 44]);
+    }
+    ghost.push([38, 10], [38, 30]);
+    for (let i = 0; i < 4; i++) ghost.push([38 - i * 22 - 11, 30 - (i % 2 ? 0 : 12)]);
+    ghost.push([-50, 30], [-50, 10]);
+    roughPoly(ghost, { fill: C.white, width: 3 });
+    ctx.restore();
+    roughEllipse(-22, -40, 5, 7, { fill: C.ink, width: 1.5, passes: 1 });
+    roughEllipse(6, -40, 5, 7, { fill: C.ink, width: 1.5, passes: 1 });
+    roughLine(-14, -18, 0, -18, { width: 2, passes: 1, color: C.muted });
+    // arm to sign
+    roughLine(34, -14, 60, -30, { width: 2.6, alpha: 0.7 });
+    ctx.save();
+    ctx.globalAlpha = 0.5;
+    roughRect(40, -82, 98, 42, { fill: C.white, width: 2.6 });
+    ctx.restore();
+    text('COMMITTED ✓', 89, -61, { size: 15, color: C.green, alpha: 0.55, weight: 'bold' });
+  },
+  5: function greenLie(o) {
+    // green check casting a red X shadow on the ground
+    ctx.save();
+    ctx.translate(38, 78);
+    ctx.transform(1, 0, 0.75, 0.42, 0, 0);
+    roughLine(-46, -46, 46, 46, { color: C.red, width: 24, alpha: 0.45, passes: 1 });
+    roughLine(-46, 46, 46, -46, { color: C.red, width: 24, alpha: 0.45, passes: 1 });
+    ctx.restore();
+    roughLine(-72, 6, -24, 54, { color: C.green, width: 26, passes: 1 });
+    roughLine(-24, 54, 78, -62, { color: C.green, width: 26, passes: 1 });
+    roughLine(-72, 6, -24, 54, { color: C.ink, width: 3, passes: 1, alpha: 0.15 });
+  }
+};
+
+function sparkle(x, y, r, color) {
+  roughLine(x - r, y, x + r, y, { color, width: 3, passes: 1 });
+  roughLine(x, y - r, x, y + r, { color, width: 3, passes: 1 });
+  roughLine(x - r * 0.5, y - r * 0.5, x + r * 0.5, y + r * 0.5, { color, width: 2, passes: 1 });
+  roughLine(x - r * 0.5, y + r * 0.5, x + r * 0.5, y - r * 0.5, { color, width: 2, passes: 1 });
+}
+
+function drawIcon(n, cx, cy, scale, o = {}) {
+  ctx.save();
+  ctx.translate(cx, cy);
+  ctx.scale(scale, scale);
+  ICONS[n](o);
+  ctx.restore();
+}
+
+/* ---------- scene pieces ---------- */
+function drawSky(disarmed, o = {}) {
+  cloud(300, 220, 1);
+  cloud(820, 160, 0.8);
+  cloud(1250, 250, 0.7);
+  if (o.zoom) return; // close-ups: no sun in the crop
+  // sun sinks and warms as the traps get disarmed
+  const sunX = 1500, sunY = 300 + disarmed * 46, sunR = 62;
+  ctx.save();
+  const glow = ctx.createRadialGradient(sunX, sunY, sunR * 0.8, sunX, sunY, sunR * 2.6);
+  glow.addColorStop(0, `rgba(237, 178, 0, ${0.12 + disarmed * 0.04})`);
+  glow.addColorStop(1, 'rgba(237, 178, 0, 0)');
+  ctx.fillStyle = glow;
+  ctx.fillRect(sunX - sunR * 5, sunY - sunR * 5, sunR * 10, sunR * 10);
+  ctx.restore();
+  roughEllipse(sunX, sunY, sunR, sunR, { fill: C.amber, fillStyle: 'solid', fillAlpha: 0.35 + disarmed * 0.11, color: C.amber, width: 3.5 });
+  for (let i = 0; i < 12; i++) {
+    const a = i / 12 * Math.PI * 2 + 0.2;
+    roughLine(sunX + Math.cos(a) * (sunR + 16), sunY + Math.sin(a) * (sunR + 16),
+      sunX + Math.cos(a) * (sunR + 40 + (i % 2) * 14), sunY + Math.sin(a) * (sunR + 40 + (i % 2) * 14),
+      { color: C.amber, width: 3, passes: 1 });
+  }
+}
+
+function cloud(x, y, s) {
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.scale(s, s);
+  const blobs = [[-60, 10, 42, 26], [0, -10, 56, 36], [62, 8, 44, 28]];
+  blobs.forEach(([cx, cy, rx, ry]) => roughEllipse(cx, cy, rx, ry, { fill: C.white, fillStyle: 'solid', stroke: false }));
+  blobs.forEach(([cx, cy, rx, ry]) => roughEllipse(cx, cy, rx, ry, { color: C.muted, width: 2.6, passes: 1 }));
+  roughEllipse(0, -10, 56, 36, { fill: C.white, fillStyle: 'solid', stroke: false });
+  roughLine(-95, 34, 100, 34, { color: C.muted, width: 2.6, passes: 1 });
+  ctx.restore();
+}
+
+function drawGround() {
+  const hill = [[-20, 640], [300, 624], [600, 640], [900, 620], [1200, 636], [1500, 616], [1940, 632]];
+  roughPoly([...hill, [1940, 1100], [-20, 1100]], { fill: C.ground, fillStyle: 'solid', stroke: false });
+  for (let i = 0; i < hill.length - 1; i++) roughLine(hill[i][0], hill[i][1], hill[i + 1][0], hill[i + 1][1], { color: C.muted, width: 2.6, passes: 1 });
+  // grass tufts
+  const tuftRnd = mulberry32(42);
+  for (let i = 0; i < 46; i++) {
+    const x = 20 + tuftRnd() * 1880, y = 660 + tuftRnd() * 380;
+    if (PITS.some(p => Math.abs(p.x - x) < 150 && Math.abs(p.y - y) < 110)) continue;
+    if (x > 1700 && y < 800) continue;
+    roughLine(x, y, x - 6, y - 14, { color: C.green, width: 2, passes: 1, alpha: 0.55 });
+    roughLine(x, y, x + 2, y - 17, { color: C.green, width: 2, passes: 1, alpha: 0.55 });
+    roughLine(x, y, x + 8, y - 12, { color: C.green, width: 2, passes: 1, alpha: 0.55 });
+  }
+}
+
+function drawPath() {
+  const start = 120, end = DOOR.x - 10;
+  for (let x = start; x < end; x += 36) {
+    const x2 = Math.min(end, x + 22);
+    roughLine(x, pathY(x) + 10, x2, pathY(x2) + 10, { color: C.muted, width: 3, passes: 1, alpha: 0.8 });
+  }
+}
+
+function drawSignpost() {
+  // destination marker: a signpost, no door
+  const { x, y, w } = DOOR;
+  roughLine(x + w / 2, y + 200, x + w / 2, y - 92, { width: 5 });
+  roughRect(x - 108, y - 150, w + 216, 60, { fill: C.white, width: 3.5 });
+  text('Prod · Friday 4 PM', x + w / 2, y - 119, { size: 27, weight: 'bold' });
+  roughPoly([[x + w + 108, y - 150], [x + w + 140, y - 120], [x + w + 108, y - 90]], { fill: C.white, width: 3.5 });
+}
+
+function drawPit(p, disarmed, o = {}) {
+  const rx = 100, ry = 40;
+  // cracks around the rim
+  [[-1, -0.3], [1, -0.4], [-0.8, 0.5], [0.9, 0.55]].forEach(([dx, dy]) => {
+    const sx = p.x + dx * rx * 0.98, sy = p.y + dy * ry * 1.1;
+    roughLine(sx, sy, sx + dx * 34, sy + dy * 22, { width: 2.4, passes: 1, color: C.muted });
+    roughLine(sx + dx * 34, sy + dy * 22, sx + dx * 52, sy + dy * 14, { width: 2, passes: 1, color: C.muted });
+  });
+  roughEllipse(p.x, p.y, rx, ry, { fill: C.pit, fillStyle: 'solid', width: 3.5, rough: 2.4 });
+  roughEllipse(p.x, p.y + 4, rx * 0.72, ry * 0.62, { fill: C.pitDeep, fillStyle: 'solid', stroke: false });
+  if (!disarmed) {
+    // the trap sits in the pit: draw it, then cover the lower half with the pit front rim
+    drawIcon(p.n, p.x, p.y - 32, 0.6, { detail: o.detail, contexts: 12 });
+    ctx.save();
+    ctx.beginPath();
+    ctx.ellipse(p.x, p.y, rx + 2, ry + 2, 0, 0, Math.PI);
+    ctx.fillStyle = C.pit;
+    ctx.fill();
+    ctx.restore();
+    // warning stakes
+    if (!o.zoom) {
+      roughLine(p.x - rx - 20, p.y + 6, p.x - rx - 20, p.y - 44, { width: 3 });
+      roughPoly([[p.x - rx - 20, p.y - 44], [p.x - rx - 20, p.y - 22], [p.x - rx + 8, p.y - 33]], { fill: C.red, fillStyle: 'solid', width: 2.4 });
+    }
+  } else {
+    // plank across the pit
+    ctx.save();
+    ctx.translate(p.x, p.y - 6);
+    ctx.rotate(-0.05);
+    roughRect(-128, -11, 256, 22, { fill: C.wood, fillStyle: 'solid', width: 3 });
+    roughRect(-128, -11, 256, 22, { fill: C.woodDark, fillStyle: 'hachure', hachureGap: 7, hachureAngle: 0, stroke: false, fillAlpha: 0.35 });
+    dot(-108, 0, 3, C.woodDark); dot(108, 0, 3, C.woodDark);
+    ctx.restore();
+    // minesweeper flag + icon badge at the far end of the plank (skipped for neighbours in zoom views)
+    if (!o.zoom || o.focus === p.n) {
+      const fx = p.x + 84;
+      roughLine(fx, p.y - 12, fx, p.y - 186, { width: 4 });
+      roughPoly([[fx + 2, p.y - 186], [fx + 2, p.y - 136], [fx + 74, p.y - 161]], { fill: C.red, fillStyle: 'solid', width: 2.6 });
+      roughRect(fx - 36, p.y - 126, 72, 72, { fill: C.white, width: 3 });
+      drawIcon(p.n, fx, p.y - 90, 0.28, { detail: false });
+    }
+  }
+  if (o.zoom && o.focus !== p.n) return; // close-ups: label only the focused trap
+  const label = `#${p.n} ${p.name}`;
+  text(label, p.x + (disarmed ? 14 : 0), p.y + 78, { size: 26, color: disarmed ? C.green : C.ink });
+  if (disarmed) {
+    // small green check left of the label
+    ctx.save();
+    ctx.font = '26px "Architects Daughter", "Comic Sans MS", cursive';
+    const left = p.x + 14 - ctx.measureText(label).width / 2 - 34;
+    ctx.restore();
+    roughLine(left, p.y + 76, left + 10, p.y + 88, { color: C.green, width: 4, passes: 1 });
+    roughLine(left + 10, p.y + 88, left + 28, p.y + 64, { color: C.green, width: 4, passes: 1 });
+  }
+}
+
+function drawDeveloper(x, gy) {
+  // shadow
+  roughEllipse(x + 4, gy + 4, 30, 8, { fill: C.ink, fillStyle: 'solid', fillAlpha: 0.12, stroke: false });
+  // legs
+  roughLine(x - 4, gy - 64, x - 22, gy, { width: 3.5 });
+  roughLine(x + 4, gy - 64, x + 24, gy, { width: 3.5 });
+  roughLine(x - 22, gy, x - 36, gy + 2, { width: 3.5, passes: 1 });
+  roughLine(x + 24, gy, x + 38, gy + 2, { width: 3.5, passes: 1 });
+  // torso (t-shirt)
+  roughPoly([[x - 20, gy - 130], [x + 20, gy - 130], [x + 24, gy - 62], [x - 24, gy - 62]], { fill: C.accent, fillStyle: 'hachure', hachureGap: 8, hachureAngle: -45, width: 3.5 });
+  // arms: left holds laptop, right waves forward
+  roughLine(x - 18, gy - 118, x - 46, gy - 78, { width: 3.5 });
+  roughLine(x + 18, gy - 118, x + 44, gy - 96, { width: 3.5 });
+  roughPoly([[x - 66, gy - 96], [x - 30, gy - 96], [x - 26, gy - 66], [x - 62, gy - 66]], { fill: C.surface, width: 3 });
+  roughRect(x - 60, gy - 92, 30, 20, { fill: C.cyan, fillStyle: 'solid', fillAlpha: 0.5, width: 1.8, color: C.accent });
+  // head
+  roughEllipse(x, gy - 158, 24, 26, { fill: C.white, width: 3.5 });
+  dot(x - 8, gy - 162, 2.6); dot(x + 8, gy - 162, 2.6);
+  roughLine(x - 8, gy - 148, x + 8, gy - 148, { width: 2.4, passes: 1 });
+  // hair
+  roughLine(x - 22, gy - 172, x + 22, gy - 178, { width: 5, passes: 1 });
+  roughLine(x - 18, gy - 180, x + 10, gy - 186, { width: 4, passes: 1 });
+}
+
+/* ---------- views ---------- */
+function drawWorld(disarmed, figures, o = {}) {
+  rnd = mulberry32(1337);
+  drawSky(disarmed, o);
+  drawGround();
+  drawSignpost();
+  drawPath();
+  PITS.forEach(p => drawPit(p, p.n <= disarmed, o));
+  figures.forEach(f => f());
+}
+
+function renderMap(disarmed) {
+  let devX;
+  if (disarmed === 0) {
+    devX = 150;
+  } else if (disarmed < 5) {
+    devX = PITS[disarmed - 1].x + 20;
+  } else {
+    devX = PITS[4].x + 190;
+  }
+  drawWorld(disarmed, [
+    () => drawDeveloper(devX, pathY(devX) + 4)
+  ]);
+}
+
+function renderZoom(trap) {
+  const p = PITS[trap - 1];
+  const scale = 2.5;
+  ctx.save();
+  ctx.translate(WIDTH / 2, HEIGHT / 2);
+  ctx.scale(scale, scale);
+  ctx.translate(-p.x, -(p.y - 60));
+  const devX = p.x - 205;
+  drawWorld(trap - 1, [
+    () => drawDeveloper(devX, pathY(devX) + 4)
+  ], { detail: true, zoom: true, focus: trap });
+  ctx.restore();
+}
+
+function renderCover() {
+  rnd = mulberry32(1337);
+  drawIcon(5, WIDTH / 2 - 20, HEIGHT / 2 - 40, 4.2, { detail: true });
+}
+
+async function main() {
+  try {
+    await document.fonts.load('30px "Architects Daughter"');
+    await document.fonts.ready;
+  } catch (e) { /* offline: fall back to the cursive stack */ }
+  ctx.clearRect(0, 0, WIDTH, HEIGHT);
+  if (view === 'zoom') renderZoom(zoomTrap);
+  else if (view === 'cover') renderCover();
+  else renderMap(disarmedCount);
+  window.__rendered = true;
+}
+main();
+</script>
+</body>
+</html>

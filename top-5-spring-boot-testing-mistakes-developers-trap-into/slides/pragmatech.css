@@ -1,0 +1,685 @@
+/* @theme pragmatech */
+
+/*
+ * PragmaTech Marp theme — dark (default) + light variant in ONE file.
+ * Matches pragmatech.digital: Space Grotesk headings, Inter body,
+ * JetBrains Mono code, cyan -> blue gradient accent bar (always bottom).
+ *
+ * CSS STRATEGY — structure once, palette twice:
+ *   1. Every structural rule below uses var(--pt-*) tokens only.
+ *   2. The DARK palette is the default, declared on :root.
+ *   3. The LIGHT palette re-declares the same tokens on `section.light`.
+ * Switch a deck to light with the global directive `class: light`
+ * (in front-matter). Slides that also set a layout combine the classes,
+ * e.g. `<!-- _class: light title -->`.
+ */
+
+@import 'default';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap');
+
+/* ============================================================
+ * Design tokens
+ * ============================================================ */
+:root {
+  /* --- structural (theme-agnostic) --- */
+  --pt-pad-x: 80px;          /* slide horizontal padding (shared by footer logo) */
+  --pt-accent-bar: 8px;      /* accent bar thickness */
+
+  /* --- brand hues (shared; drive the accent bar) --- */
+  --pt-cyan: #22d0eb;
+  --pt-blue: #0ea5e9;
+  --pt-red: #fb2c36;
+  --pt-green: #00c758;
+  --pt-amber: #edb200;
+  --pt-accent: linear-gradient(90deg, var(--pt-blue), var(--pt-cyan));
+
+  /* --- DARK palette (default) --- */
+  --pt-bg-0: #0a0e16;        /* cover / divider backdrop */
+  --pt-bg-1: #0f172a;        /* slide background */
+  --pt-surface: #1e293b;     /* cards, inline code, quote tint */
+  --pt-text: #e2e8f0;
+  --pt-muted: #94a3b8;
+  --pt-heading: #ffffff;
+  --pt-link: #22d0eb;        /* links, strong, markers, accents on bg */
+  --pt-border: #2b3a52;
+  --pt-dot: rgba(148, 163, 184, 0.10);                       /* hero dot grid */
+  --pt-accent-ink: linear-gradient(90deg, var(--pt-blue), var(--pt-cyan)); /* clipped text */
+  --pt-code-bg: #1e293b;
+  --pt-code-text: #e2e8f0;
+  --pt-code-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+  --pt-card-shadow: none;
+  --pt-hl: rgba(34, 208, 235, 0.14);                         /* highlighted code line */
+}
+
+/* --- LIGHT palette: same token names, white surfaces --- */
+section.light {
+  --pt-bg-0: #ffffff;
+  --pt-bg-1: #ffffff;
+  --pt-surface: #f1f5f9;
+  --pt-text: #0f172a;
+  --pt-muted: #64748b;
+  --pt-heading: #0f172a;
+  --pt-link: #0284c7;        /* accessible accent on white */
+  --pt-border: #e2e8f0;
+  --pt-dot: rgba(15, 23, 42, 0.05);
+  --pt-accent-ink: linear-gradient(90deg, #0284c7, #0891b2); /* darker clip for contrast */
+  --pt-code-bg: #f8fafc;
+  --pt-code-text: #0f172a;
+  --pt-code-shadow: 0 6px 20px rgba(15, 23, 42, 0.08);
+  --pt-card-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
+  --pt-hl: rgba(34, 208, 235, 0.16);
+}
+
+/* ============================================================
+ * Slide canvas
+ * ============================================================ */
+section {
+  position: relative;
+  background-color: var(--pt-bg-1);
+  /* Layer 1: cyan->blue CI accent bar pinned to the bottom.
+     Layer 2: subtle dot grid like the website hero.
+     (Painted as section backgrounds because marp-core suppresses
+      section::before/::after inside its SVG foreignObject.) */
+  background-image:
+    linear-gradient(90deg, var(--pt-blue), var(--pt-cyan)),
+    radial-gradient(var(--pt-dot) 1px, transparent 1px);
+  background-size:
+    100% var(--pt-accent-bar),
+    28px 28px;
+  background-position:
+    bottom left,
+    top left;
+  background-repeat:
+    no-repeat,
+    repeat;
+  color: var(--pt-text);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  padding: 70px var(--pt-pad-x) 78px;
+}
+
+/* ============================================================
+ * Headings
+ * ============================================================ */
+h1,
+h2,
+h3,
+h4 {
+  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: var(--pt-heading);
+  line-height: 1.12;
+}
+
+h1 {
+  font-size: 1.9em;
+  margin: 0 0 0.3em;
+}
+
+h2 {
+  font-size: 1.45em;
+  margin: 0 0 0.55em;
+  padding-bottom: 0.28em;
+  position: relative;
+}
+
+/* short gradient marker under H2 as a section cue */
+h2::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 56px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--pt-accent);
+}
+
+h3 {
+  font-size: 1.15em;
+  color: var(--pt-text);
+}
+
+/* ============================================================
+ * Body, links, emphasis
+ * ============================================================ */
+p {
+  margin: 0 0 0.7em;
+}
+
+a {
+  color: var(--pt-link);
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--pt-link) 35%, transparent);
+}
+
+strong {
+  color: var(--pt-link);
+  font-weight: 600;
+}
+
+em {
+  color: var(--pt-muted);
+  font-style: italic;
+}
+
+/* ---------- Lists ---------- */
+ul,
+ol {
+  margin: 0 0 0.7em;
+  padding-left: 1.3em;
+}
+
+li {
+  margin: 0.32em 0;
+}
+
+ul > li::marker {
+  color: var(--pt-link);
+}
+
+ol > li::marker {
+  color: var(--pt-link);
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+}
+
+/* ============================================================
+ * Inline & block code
+ * ============================================================ */
+code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.82em;
+}
+
+/* inline code chip */
+:not(pre) > code {
+  background: var(--pt-surface);
+  color: var(--pt-link);
+  padding: 0.12em 0.42em;
+  border-radius: 6px;
+  border: 1px solid var(--pt-border);
+}
+
+pre {
+  background: var(--pt-code-bg);
+  border: 1px solid var(--pt-border);
+  border-radius: 10px;
+  padding: 0.9em 1.1em;
+  font-size: 0.92em;
+  box-shadow: var(--pt-code-shadow);
+}
+
+pre code {
+  color: var(--pt-code-text);
+}
+
+/* ============================================================
+ * Blockquote
+ * ============================================================ */
+blockquote {
+  margin: 0.4em 0;
+  padding: 0.3em 0 0.3em 1.1em;
+  border-left: 4px solid var(--pt-link);
+  background: var(--pt-surface);
+  color: var(--pt-muted);
+  font-style: italic;
+}
+
+blockquote strong {
+  color: var(--pt-text);
+}
+
+/* ============================================================
+ * Tables
+ * ============================================================ */
+table {
+  border-collapse: collapse;
+  font-size: 0.9em;
+}
+
+th,
+td {
+  border: 1px solid var(--pt-border);
+  padding: 0.45em 0.8em;
+  text-align: left;
+}
+
+thead th {
+  background: var(--pt-surface);
+  color: var(--pt-heading);
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+/* ============================================================
+ * Header / footer / pagination
+ * ============================================================ */
+header {
+  color: var(--pt-muted);
+  font-size: 0.5em;
+  letter-spacing: 0;
+}
+
+/* Footer zones: logo pinned left, label centered, page number stays right
+   (the number is rendered separately via section::after). */
+footer {
+  color: var(--pt-muted);
+  font-size: 0.46em;
+  letter-spacing: 0.01em;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+/* logo pulled out of the inline flow and pinned near the left edge —
+   plain image, no circular frame/background/border */
+footer img {
+  position: absolute;
+  left: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 1.7em;
+  width: auto;
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+}
+
+/* Pagination via section::after (bottom-right, inset by slide padding). */
+section::after {
+  color: var(--pt-muted);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.5em;
+}
+
+/* ---------- Images ---------- */
+img[alt~='center'] {
+  display: block;
+  margin: 0 auto;
+}
+
+/* ============================================================
+ * Layout helper classes (use via <!-- _class: name -->,
+ * or <!-- _class: light name --> on a light deck)
+ * ============================================================ */
+
+/* Cover / title slide */
+section.title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: var(--pt-bg-0);
+}
+
+section.title h1 {
+  font-size: 2.7em;
+  margin-bottom: 0.15em;
+}
+
+/* gradient-clipped accent word: wrap in **bold** to tint */
+section.title h1 strong {
+  background: var(--pt-accent-ink);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+section.title h2 {
+  color: var(--pt-muted);
+  font-weight: 500;
+  font-size: 1.25em;
+  padding-bottom: 0;
+}
+
+section.title h2::after {
+  display: none;
+}
+
+section.title p {
+  color: var(--pt-muted);
+  font-size: 0.8em;
+  margin-top: 1.2em;
+}
+
+/* Section divider */
+section.section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: var(--pt-bg-0);
+}
+
+section.section h1 {
+  font-size: 3em;
+}
+
+section.section h2 {
+  color: var(--pt-muted);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85em;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding-bottom: 0;
+  margin-bottom: 0.2em;
+}
+
+section.section h2::after {
+  display: none;
+}
+
+/* Agenda */
+section.agenda ol {
+  list-style: none;
+  padding-left: 0;
+  counter-reset: agenda;
+}
+
+section.agenda ol > li {
+  counter-increment: agenda;
+  display: flex;
+  align-items: baseline;
+  gap: 0.7em;
+  background: var(--pt-surface);
+  border: 1px solid var(--pt-border);
+  border-left: 3px solid var(--pt-link);
+  border-radius: 10px;
+  padding: 0.5em 0.9em;
+  margin: 0.4em 0;
+  box-shadow: var(--pt-card-shadow);
+}
+
+section.agenda ol > li::before {
+  content: counter(agenda, decimal-leading-zero);
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 1.05em;
+  background: var(--pt-accent-ink);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Split (two columns) */
+section.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: min-content;
+  align-content: center;
+  gap: 0 48px;
+}
+
+section.split-60 {
+  grid-template-columns: 1.5fr 1fr;
+}
+
+/* let a heading span both columns */
+section.split h1,
+section.split h2,
+section.split-60 h1,
+section.split-60 h2 {
+  grid-column: 1 / -1;
+}
+
+section.split img:not(footer img),
+section.split-60 img:not(footer img) {
+  max-width: 100%;
+  max-height: 360px;
+  width: auto;
+  justify-self: center;
+  align-self: center;
+  border-radius: 12px;
+  border: 1px solid var(--pt-border);
+}
+
+/* Quote */
+section.quote {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+section.quote blockquote {
+  border: none;
+  background: none;
+  padding: 0;
+  font-size: 1.7em;
+  font-style: normal;
+  color: var(--pt-text);
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 500;
+  line-height: 1.3;
+  position: relative;
+  padding-left: 0.7em;
+}
+
+section.quote blockquote::before {
+  content: '\201C';
+  position: absolute;
+  left: -0.1em;
+  top: -0.35em;
+  font-size: 2.4em;
+  line-height: 1;
+  color: var(--pt-link);
+  font-family: Georgia, serif;
+}
+
+section.quote p {
+  color: var(--pt-muted);
+  font-size: 0.85em;
+  margin-top: 1em;
+}
+
+/* Big statement */
+section.statement {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: var(--pt-bg-0);
+}
+
+section.statement h1 {
+  font-size: 2.6em;
+  max-width: 16em;
+}
+
+section.statement strong {
+  background: var(--pt-accent-ink);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* Metrics / stats */
+section.metrics .columns,
+section.metrics ul {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  text-align: center;
+}
+
+section.metrics ul > li {
+  background: var(--pt-surface);
+  border: 1px solid var(--pt-border);
+  border-radius: 14px;
+  padding: 1em 0.6em;
+  box-shadow: var(--pt-card-shadow);
+}
+
+section.metrics ul > li strong {
+  display: block;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 2.6em;
+  font-weight: 700;
+  line-height: 1;
+  background: var(--pt-accent-ink);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.2em;
+}
+
+section.metrics ul > li::marker {
+  content: '';
+}
+
+/* Closing / contact */
+section.closing {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: var(--pt-bg-0);
+}
+
+section.closing h1 {
+  font-size: 2.4em;
+}
+
+section.closing img:not(footer img) {
+  margin-bottom: 0.6em;
+}
+
+section.closing p {
+  color: var(--pt-muted);
+}
+
+/* ============================================================
+ * Code line numbers + highlighting (consumed by engine.js)
+ * ============================================================ */
+pre ol {
+  all: unset;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  counter-reset: line-number 0;
+}
+
+pre ol li {
+  display: contents;
+}
+
+pre ol li span[data-marp-line-number]::before {
+  display: block;
+  content: counter(line-number) ' ';
+  counter-increment: line-number;
+  text-align: right;
+  color: var(--pt-muted);
+  opacity: 0.7;
+  padding-right: 1.1em;
+  user-select: none;
+}
+
+pre .highlighted-line > * {
+  background-color: var(--pt-hl);
+}
+
+/* ============================================================
+ * Slide transition (presentation / bespoke HTML only — not visible
+ * in PDF/PNG export). Single transition: pt-fade, a clean cross
+ * dissolve. Applied via the global `transition: pt-fade` directive.
+ * ============================================================ */
+@keyframes marp-transition-pt-fade {
+  from {
+    --marp-transition-duration: 0.4s;
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* ============================================================
+ * Hand-drawn diagram building blocks (Excalidraw-style)
+ * Boxes, arrows, a database cylinder and a test pyramid drawn
+ * in pure CSS - no images. Colors come from the palette tokens
+ * so they adapt to dark/light automatically. Font: Architects
+ * Daughter (imported at the top of this file).
+ *
+ * Usage in a slide:
+ *   <div class="flow">
+ *     <div class="sketch accent">Infrastructure<small>Testcontainers</small></div>
+ *     <div class="arrow">-></div>
+ *     <div class="db">Postgres<small>READ COMMITTED</small></div>
+ *   </div>
+ * ============================================================ */
+.flow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  font-family: 'Architects Daughter', cursive;
+  margin: 0.4em 0 1.3em;          /* bottom margin keeps boxes off the next block */
+}
+.flow.col { flex-direction: column; align-items: stretch; }
+
+.sketch {
+  font-family: 'Architects Daughter', cursive;
+  font-size: 0.8em;
+  line-height: 1.2;
+  text-align: center;
+  padding: 0.55em 0.9em;
+  border: 2.5px solid var(--pt-heading);
+  background: var(--pt-bg-1);
+  border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;  /* hand-drawn corners */
+  box-shadow: 2px 3px 0 rgba(15, 23, 42, 0.12);
+  transform: rotate(-0.6deg);
+}
+.sketch.accent { border-color: var(--pt-link); color: var(--pt-link); }
+.sketch.alt    { transform: rotate(0.7deg); }
+.sketch small  { display: block; font-size: 0.7em; color: var(--pt-muted); margin-top: 0.15em; }
+
+/* Database cylinder in the same sketch look */
+.db {
+  font-family: 'Architects Daughter', cursive;
+  font-size: 0.8em;
+  text-align: center;
+  padding: 0.9em 1.1em 0.7em;
+  border: 2.5px solid var(--pt-heading);
+  background: var(--pt-bg-1);
+  border-radius: 50% 50% 12px 12px / 22px 22px 12px 12px;  /* rounded top = cylinder */
+  box-shadow: 2px 3px 0 rgba(15, 23, 42, 0.12);
+}
+.db small { display: block; font-size: 0.7em; color: var(--pt-muted); margin-top: 0.15em; }
+
+/* Arrow between boxes */
+.arrow {
+  font-family: 'Architects Daughter', cursive;
+  font-size: 1.6em;
+  font-weight: 700;
+  color: var(--pt-link);
+  transform: rotate(-2deg);
+}
+
+/* Test pyramid (or any 3-tier stack) */
+.pyramid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Architects Daughter', cursive;
+}
+.pyramid .layer {
+  text-align: center;
+  padding: 0.5em 0.7em;
+  border: 2.5px solid var(--pt-heading);
+  background: var(--pt-bg-1);
+  border-radius: 18px 8px 22px 8px / 8px 20px 8px 18px;
+  box-shadow: 2px 3px 0 rgba(15, 23, 42, 0.12);
+}
+.pyramid .e2e  { width: 38%; }
+.pyramid .int  { width: 62%; }
+.pyramid .unit { width: 92%; border-color: var(--pt-link); color: var(--pt-link); }
+.pyramid .layer small { display: block; font-size: 0.7em; color: var(--pt-muted); }
