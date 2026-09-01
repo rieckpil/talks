@@ -5,12 +5,12 @@ class: light
 paginate: true
 transition: pt-fade
 header: 'Top 5 Spring Boot Testing Mistakes Developers Trap Into @ Tech Talks South Tyrol #14 · 8th of September 2026'
-footer: '![](assets/logo.webp) PragmaTech GmbH'
+footer: '![](assets/logo.webp) Philip Riecks · [PragmaTech GmbH](https://pragmatech.digital/) · [@rieckpil](https://x.com/rieckpil)'
 ---
 
 <!--
 Light deck (class: light). Layout classes per slide via the _class directive, e.g. "light section".
-Trap map visuals: assets/trap-map-N.png (N = traps disarmed), assets/trap-zoom-N.png, assets/cover-green-lie.png, assets/cover-mouse-traps.png
+Trap map visuals: assets/trap-map-N.png (N = traps disarmed), assets/trap-card-N.png (intro cards), assets/agenda-mouse-traps.png, assets/cover-mouse-traps.png
 Re-export via: node visuals/export-visuals.mjs
 House style: no em dashes, use "-". Bylines use the middle dot.
 -->
@@ -32,35 +32,29 @@ Notes:
 <!-- _paginate: false -->
 <!-- _header: '' -->
 
-<style scoped>
-  h1 { font-size: 2.2em; }
-</style>
-
 ![bg left:36%](assets/cover-mouse-traps.png)
 
 # Top 5 Spring Boot Testing Mistakes **Developers Trap Into**
 
 ## Your tests are green. But do you feel confident deploying?
 
-Talk @ Tech Talks South Tyrol #14 · 8th of September 2026 · Philip Riecks · [PragmaTech GmbH](https://pragmatech.digital/) · [@rieckpil](https://x.com/rieckpil)
+Tech Talks South Tyrol #14 · 8th of September 2026
 
 ---
 
-<!--
-Notes:
-- Short intro, 30 seconds max
--->
+<!-- footer: '![](assets/logo.webp)' -->
 
-![bg right:33%](assets/philip-in-erlangen.jpeg)
+![bg h:500 right:33%](assets/philip-in-erlangen.jpeg)
 
 ### About Philip
 
-- Self-employed developer from Herzogenaurach (HQ of adidas & Puma), Germany (Bavaria) 🍻
-- Living right next to **Erlangen** - Bozen's partner town since 1979 🤝
+- Self-employed developer from Erlangen (Bolzano's partner town since 2018), Germany (Bavaria) 🍻
 - Blogging & content creation with a focus on testing Java and specifically Spring Boot applications 🍃
-- Founder of PragmaTech GmbH - Enabling Developers to Frequently Deliver Software with More Confidence 🚤
+- Founder of PragmaTech GmbH - Enabling Developers to Frequently Deliver Software with More Confidence
+- Worked together with Martin & Alex from AboutBits last year
 
 ---
+
 
 ## Participate During the Talk
 
@@ -74,64 +68,44 @@ Please answer the **first three questions**:
 
 ---
 
-<!-- _class: light statement -->
 <!-- _paginate: false -->
 
-# In 2026, most of your tests are **not written by you**.
 
----
+![bg right:33%](assets/why-test-software.jpg)
 
-<!--
-Notes:
-- You have seen pitfall talks before. Here is what changed.
-- Agents write the code and the tests. Fast. Confidently. Sometimes wrong.
-- Mistake zero: testing stays an afterthought while the AI writes the code.
--->
-
-## Mistake Zero: Testing as an Afterthought
-
-- Coding agents write **more code per day** than any team ever could
-- The tests are the **guardrail** that keeps the agent on the road
-- If you do not own the guardrail, you do not own the outcome
-- Every trap in this talk gets **worse** when a machine writes tests at scale
-
-> Mistake zero: treating testing as an afterthought while the AI writes the code.
+# Why Test Software?
 
 ---
 
 <!-- _class: light statement -->
+<!-- _paginate: true -->
+
+# In 2026, most of our code is **not written by us**.
+
+---
+
+![center h:500](assets/ai-frog-meme.jpg)
+
+---
+
 <!-- _paginate: false -->
 
-# My goal for every client: a safe deploy on a **Friday afternoon**.
+
+![bg right:33%](assets/northstar.jpg)
+
+### My Overall Northstar for Engineering Excellence
+
+Imagine seeing this pull request on a Friday afternoon:
+
+![](assets/northstar-pr.png)
+
+How confident are you to merge this major Spring Boot upgrade and deploy it to production once the pipeline turns green?
 
 ---
 
-<!--
-Notes:
-- Reference the Menti answers: where is the room on the 0 to 10 scale?
-- Goal for the next 45 minutes: make that number bigger.
--->
 
-## Where Are You Today?
+# Good tests don't just catch bugs - they give you **fast feedback** and **confident deployments**.
 
-On a scale from **0** ("I deploy on Monday morning with three colleagues watching") to **10** ("I merge the Dependabot PR at 4 PM and go home"):
-
-**Make the number bigger.** A trustworthy test suite lets you:
-
-- **Fix fast** · **Ship small** · **Experiment freely**
-- **Stay current** · **Sleep well** · **Trust your agents**
-
----
-
-<!-- _class: light agenda -->
-
-## Five Traps Between You and Friday 4 PM
-
-1. The Golden Hammer
-2. The Context Tax
-3. The Production Parity Trap
-4. The Phantom Commit
-5. The Green Lie
 
 ---
 
@@ -150,16 +124,9 @@ Notes:
 
 ---
 
-<!-- _paginate: false -->
-<!-- _header: '' -->
-<!-- _footer: '' -->
-
-![bg](assets/trap-map-0.png)
-
----
 
 <!-- _class: light section -->
-<!-- _paginate: false -->
+<!-- _paginate: true -->
 
 ![bg right:40%](assets/trap-card-1.png)
 
@@ -167,7 +134,7 @@ Notes:
 
 # The Golden Hammer
 
-`@SpringBootTest` for everything
+_If all you have is a hammer, everything looks like a nail._
 
 ---
 
