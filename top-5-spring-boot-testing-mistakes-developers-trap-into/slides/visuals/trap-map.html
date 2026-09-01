@@ -25,6 +25,10 @@
  *   ?view=map&disarmed=N   wide map, traps 1..N disarmed (N = 0..5)
  *   ?view=zoom&trap=N      close-up of trap N (N = 1..5)
  *   ?view=cover            the Green Lie cover image (square)
+ *   ?view=traps            five numbered mouse traps, title slide cover (square)
+ *   ?view=agenda           agenda: mouse trap row with icons and names (wide)
+ *   ?view=trapcard&trap=N  intro card for trap N: mouse trap + icon (square)
+ *   ?view=lie-ideas        scratch sheet: Green Lie logo alternatives (not exported)
  *   &grid=1                paint the slide dot grid behind the canvas (preview only)
  */
 const params = new URLSearchParams(location.search);
@@ -33,7 +37,7 @@ const disarmedCount = clamp(parseInt(params.get('disarmed') ?? '0', 10) || 0, 0,
 const zoomTrap = clamp(parseInt(params.get('trap') ?? '1', 10) || 1, 1, 5);
 if (params.get('grid') === '1') document.body.classList.add('grid');
 
-const WIDTH = view === 'cover' ? 1080 : 1920;
+const WIDTH = ['cover', 'traps', 'trapcard'].includes(view) ? 1080 : 1920;
 const HEIGHT = 1080;
 
 const C = {
@@ -60,7 +64,7 @@ const C = {
 const TRAP_NAMES = ['Golden Hammer', 'Context Tax', 'Production Parity', 'Phantom Commit', 'Green Lie'];
 const pathY = x => 745 + 22 * Math.sin((x - 150) / 260);
 const PITS = [380, 640, 900, 1160, 1420].map((x, i) => ({ x, y: pathY(x), n: i + 1, name: TRAP_NAMES[i] }));
-const DOOR = { x: 1650, y: 560, w: 84, h: 200 };
+const DOOR = { x: 1600, y: 560, w: 84, h: 200 };
 
 const canvas = document.getElementById('scene');
 const ctx = canvas.getContext('2d');
@@ -265,15 +269,13 @@ const ICONS = {
     ctx.restore();
   },
   2: function contextTax(o) {
-    // stack of coins + a receipt spooling out + (detail) a contexts meter
-    for (let i = 0; i < 5; i++) {
-      const y = 78 - i * 17;
-      roughRect(-88, y - 8, 90, 16, { fill: C.amber, fillStyle: 'solid', stroke: false });
-      roughLine(-88, y - 8, -88, y + 8, { width: 3 });
-      roughLine(2, y - 8, 2, y + 8, { width: 3 });
-      roughEllipse(-43, y - 8, 45, 9, { fill: C.amber, width: 3 });
+    // an application context: a circle crowded with bean dots + a receipt spooling out
+    roughEllipse(-45, 5, 64, 64, { color: C.accent, width: 4, fill: C.white, fillStyle: 'solid', fillAlpha: 0.92 });
+    const beanRnd = mulberry32(7);
+    for (let i = 0; i < 18; i++) {
+      const a = beanRnd() * Math.PI * 2, r = Math.sqrt(beanRnd()) * 48;
+      dot(-45 + Math.cos(a) * r, 5 + Math.sin(a) * r, 5.5, i % 3 ? C.accent : C.cyan);
     }
-    text('$', -43, 62, { size: 22, color: C.amberDark, weight: 'bold' });
     // receipt with zigzag bottom
     const zig = [];
     for (let i = 0; i <= 8; i++) zig.push([18 + i * 10, 72 + (i % 2 ? 0 : 10)]);
@@ -322,9 +324,9 @@ const ICONS = {
     roughLine(34, -14, 60, -30, { width: 2.6, alpha: 0.7 });
     ctx.save();
     ctx.globalAlpha = 0.5;
-    roughRect(40, -82, 98, 42, { fill: C.white, width: 2.6 });
+    roughRect(34, -90, 138, 54, { fill: C.white, width: 2.6 });
     ctx.restore();
-    text('COMMITTED ✓', 89, -61, { size: 15, color: C.green, alpha: 0.55, weight: 'bold' });
+    text('COMMITTED ✓', 103, -63, { size: 19, color: C.green, alpha: 0.6, weight: 'bold' });
   },
   5: function greenLie(o) {
     // green check casting a red X shadow on the ground
@@ -419,9 +421,9 @@ function drawSignpost() {
   // destination marker: a signpost, no door
   const { x, y, w } = DOOR;
   roughLine(x + w / 2, y + 200, x + w / 2, y - 92, { width: 5 });
-  roughRect(x - 108, y - 150, w + 216, 60, { fill: C.white, width: 3.5 });
-  text('Prod · Friday 4 PM', x + w / 2, y - 119, { size: 27, weight: 'bold' });
-  roughPoly([[x + w + 108, y - 150], [x + w + 140, y - 120], [x + w + 108, y - 90]], { fill: C.white, width: 3.5 });
+  roughRect(x - 172, y - 150, w + 344, 60, { fill: C.white, width: 3.5 });
+  text('Confidence In Every Commit', x + w / 2, y - 119, { size: 27, weight: 'bold' });
+  roughPoly([[x + w + 172, y - 150], [x + w + 204, y - 120], [x + w + 172, y - 90]], { fill: C.white, width: 3.5 });
 }
 
 function drawPit(p, disarmed, o = {}) {
@@ -522,7 +524,7 @@ function renderMap(disarmed) {
   } else if (disarmed < 5) {
     devX = PITS[disarmed - 1].x + 20;
   } else {
-    devX = PITS[4].x + 190;
+    devX = PITS[4].x + 165;
   }
   drawWorld(disarmed, [
     () => drawDeveloper(devX, pathY(devX) + 4)
@@ -543,6 +545,162 @@ function renderZoom(trap) {
   ctx.restore();
 }
 
+function drawMousetrap(n, cx, cy, scale, rot) {
+  ctx.save();
+  ctx.translate(cx, cy);
+  ctx.rotate(rot);
+  ctx.scale(scale, scale);
+  // wooden base
+  roughRect(-80, -120, 160, 240, { fill: C.wood, fillStyle: 'solid', fillAlpha: 0.55, width: 3.5 });
+  roughRect(-80, -120, 160, 240, { fill: C.woodDark, fillStyle: 'hachure', hachureGap: 10, hachureAngle: 15, stroke: false, fillAlpha: 0.25 });
+  // spring axle with two coils
+  roughLine(-80, 18, 80, 18, { color: C.muted, width: 5, passes: 1 });
+  roughEllipse(-46, 18, 15, 15, { width: 4 });
+  roughEllipse(-46, 18, 7, 7, { width: 2.6, passes: 1 });
+  roughEllipse(46, 18, 15, 15, { width: 4 });
+  roughEllipse(46, 18, 7, 7, { width: 2.6, passes: 1 });
+  // striker wire, armed over the top half
+  roughLine(-62, 18, -62, -100, { width: 6 });
+  roughLine(-62, -100, 62, -100, { width: 6 });
+  roughLine(62, -100, 62, 18, { width: 6 });
+  // holding rod from the bottom edge to the pedal
+  roughLine(34, 112, 24, -34, { color: C.muted, width: 3, passes: 1 });
+  dot(34, 112, 4, C.ink);
+  // bait pedal with a cheese wedge
+  roughEllipse(0, -52, 26, 20, { fill: C.steel, fillStyle: 'solid', width: 3 });
+  roughPoly([[-24, -44], [26, -60], [14, -28]], { fill: C.amber, fillStyle: 'solid', width: 2.6, color: C.amberDark });
+  dot(-2, -46, 3, C.amberDark);
+  dot(10, -50, 2.2, C.amberDark);
+  // number stamped on the wood
+  text('#' + n, -26, 80, { size: 44, color: C.woodDark, weight: 'bold' });
+  ctx.restore();
+}
+
+function drawMouse(x, y, s, flip) {
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.scale(flip ? -s : s, s);
+  // tail
+  ctx.save();
+  setStroke({ color: C.muted, width: 3.5 });
+  ctx.beginPath();
+  ctx.moveTo(40, 4);
+  ctx.bezierCurveTo(84, -14, 98, 32, 64, 40);
+  ctx.stroke();
+  ctx.restore();
+  // body and head, facing the traps
+  roughEllipse(4, 4, 44, 26, { fill: C.steel, fillStyle: 'solid', width: 3 });
+  roughEllipse(-42, -6, 20, 16, { fill: C.steel, fillStyle: 'solid', width: 3 });
+  // ear, eye, nose, whiskers
+  roughEllipse(-30, -24, 11, 11, { fill: C.white, width: 2.6 });
+  dot(-50, -10, 2.6);
+  dot(-61, -2, 3, C.red);
+  roughLine(-58, 0, -76, -6, { width: 1.6, passes: 1, color: C.muted });
+  roughLine(-58, 2, -76, 4, { width: 1.6, passes: 1, color: C.muted });
+  ctx.restore();
+}
+
+function renderTraps() {
+  rnd = mulberry32(1337);
+  const spots = [
+    { x: 450, y: 130, rot: -0.1 },
+    { x: 640, y: 332, rot: 0.12 },
+    { x: 445, y: 535, rot: -0.08 },
+    { x: 635, y: 740, rot: 0.1 },
+    { x: 450, y: 935, rot: -0.12 }
+  ];
+  spots.forEach((s, i) => drawMousetrap(i + 1, s.x, s.y, 0.82, s.rot));
+  drawMouse(710, 1005, 0.95);
+}
+
+function renderAgenda() {
+  rnd = mulberry32(1337);
+  const xs = [300, 630, 960, 1290, 1620];
+  xs.forEach((x, i) => {
+    drawMousetrap(i + 1, x, 300, 0.95, (i % 2 ? 1 : -1) * 0.06);
+    drawTrapIcon(i + 1, x, 590, 0.62);
+    text(TRAP_NAMES[i], x, 760, { size: 33, weight: 'bold' });
+  });
+  // the mouse sets off along a dotted trail under the trap row
+  drawMouse(160, 900, 1.7, true);
+  ctx.save();
+  setStroke({ color: C.muted, width: 4, dash: [1, 26] });
+  ctx.beginPath();
+  ctx.moveTo(270, 880);
+  for (let x = 270; x <= 1840; x += 40) ctx.lineTo(x, 872 + 18 * Math.sin(x / 150));
+  ctx.stroke();
+  ctx.restore();
+}
+
+function drawLieMask() {
+  // a green-check mask on a stick, the red X it hides peeking out behind
+  ctx.save();
+  ctx.translate(38, -34);
+  roughLine(-32, -32, 32, 32, { color: C.red, width: 16, passes: 1 });
+  roughLine(-32, 32, 32, -32, { color: C.red, width: 16, passes: 1 });
+  ctx.restore();
+  roughEllipse(-22, 16, 60, 72, { fill: C.white, fillStyle: 'solid', width: 3.5 });
+  roughLine(-54, 18, -30, 42, { color: C.green, width: 14, passes: 1 });
+  roughLine(-30, 42, 18, -16, { color: C.green, width: 14, passes: 1 });
+  roughLine(8, 82, 52, 116, { color: C.woodDark, width: 5 });
+}
+
+function drawTrapIcon(n, cx, cy, scale) {
+  if (n === 5) {
+    ctx.save();
+    ctx.translate(cx, cy);
+    ctx.scale(scale, scale);
+    drawLieMask();
+    ctx.restore();
+  } else {
+    drawIcon(n, cx, cy, scale, { detail: false });
+  }
+}
+
+function renderTrapCard(trap) {
+  rnd = mulberry32(1337);
+  drawMousetrap(trap, 540, 350, 1.5, (trap % 2 ? -1 : 1) * 0.05);
+  drawTrapIcon(trap, 540, 770, 1.2);
+}
+
+function renderLieIdeas() {
+  rnd = mulberry32(1337);
+  const ideas = [
+    ['A · red X shadow (current)', () => ICONS[5]({})],
+    ['B · Pinocchio check', () => {
+      roughLine(-72, 6, -24, 54, { color: C.green, width: 26, passes: 1 });
+      roughLine(-24, 54, 78, -62, { color: C.green, width: 26, passes: 1 });
+      dot(26, -14, 5, C.ink);
+      dot(48, -40, 5, C.ink);
+      roughPoly([[52, -34], [148, -6], [58, -8]], { fill: C.wood, fillStyle: 'solid', width: 2.6, color: C.woodDark });
+      roughLine(82, -26, 84, -14, { color: C.woodDark, width: 2, passes: 1 });
+      roughLine(112, -18, 113, -10, { color: C.woodDark, width: 2, passes: 1 });
+    }],
+    ['C · check mask, X behind', drawLieMask],
+    ['D · painted over the X', () => {
+      roughLine(-56, -56, 44, 44, { color: C.red, width: 18, passes: 1 });
+      roughLine(-56, 44, 44, -56, { color: C.red, width: 18, passes: 1 });
+      roughPoly([[-92, -16], [8, -88], [42, -56], [-58, 16]], { fill: C.green, fillStyle: 'solid', fillAlpha: 0.88, stroke: false });
+      ctx.save();
+      ctx.translate(36, -74);
+      ctx.rotate(0.62);
+      roughRect(-10, -28, 46, 26, { fill: C.green, fillStyle: 'solid', width: 3 });
+      roughLine(38, -15, 74, 12, { color: C.muted, width: 4, passes: 1 });
+      roughLine(74, 12, 74, 44, { color: C.woodDark, width: 6 });
+      ctx.restore();
+    }]
+  ];
+  const xs = [280, 760, 1240, 1700];
+  ideas.forEach(([label, draw], i) => {
+    ctx.save();
+    ctx.translate(xs[i], 480);
+    ctx.scale(1.7, 1.7);
+    draw();
+    ctx.restore();
+    text(label, xs[i], 800, { size: 32, color: C.muted });
+  });
+}
+
 function renderCover() {
   rnd = mulberry32(1337);
   drawIcon(5, WIDTH / 2 - 20, HEIGHT / 2 - 40, 4.2, { detail: true });
@@ -556,6 +714,10 @@ async function main() {
   ctx.clearRect(0, 0, WIDTH, HEIGHT);
   if (view === 'zoom') renderZoom(zoomTrap);
   else if (view === 'cover') renderCover();
+  else if (view === 'traps') renderTraps();
+  else if (view === 'agenda') renderAgenda();
+  else if (view === 'trapcard') renderTrapCard(zoomTrap);
+  else if (view === 'lie-ideas') renderLieIdeas();
   else renderMap(disarmedCount);
   window.__rendered = true;
 }

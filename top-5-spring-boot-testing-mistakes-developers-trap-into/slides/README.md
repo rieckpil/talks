@@ -42,8 +42,10 @@ external libraries). Open the file in a browser with query parameters to preview
 - `trap-map.html?view=map&disarmed=3` - the wide map, traps 1-3 disarmed
 - `trap-map.html?view=zoom&trap=4` - close-up of trap 4
 - `trap-map.html?view=cover` - the Green Lie cover image
+- `trap-map.html?view=traps` - five mouse traps, the title slide cover
+- `trap-map.html?view=agenda` - the visual agenda: trap row with bait and price labels
 
-Re-export all 12 PNGs into `assets/`:
+Re-export all 14 PNGs into `assets/`:
 
 ```bash
 node visuals/export-visuals.mjs

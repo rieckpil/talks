@@ -4,16 +4,29 @@ theme: pragmatech
 class: light
 paginate: true
 transition: pt-fade
-header: 'Top 5 Spring Boot Testing Mistakes @ <Venue> <Date>'
-footer: '![](assets/logo.webp) PragmaTech GmbH · Top 5 Spring Boot Testing Mistakes · <Date>'
+header: 'Top 5 Spring Boot Testing Mistakes Developers Trap Into @ Tech Talks South Tyrol #14 · 8th of September 2026'
+footer: '![](assets/logo.webp) PragmaTech GmbH'
 ---
 
 <!--
 Light deck (class: light). Layout classes per slide via the _class directive, e.g. "light section".
-Trap map visuals: assets/trap-map-N.png (N = traps disarmed), assets/trap-zoom-N.png, assets/cover-green-lie.png
+Trap map visuals: assets/trap-map-N.png (N = traps disarmed), assets/trap-zoom-N.png, assets/cover-green-lie.png, assets/cover-mouse-traps.png
 Re-export via: node visuals/export-visuals.mjs
 House style: no em dashes, use "-". Bylines use the middle dot.
 -->
+
+<!-- _paginate: false -->
+<!-- _header: '' -->
+<!-- _footer: '' -->
+
+<!--
+Notes:
+- Opener: Bozen, the town of this talk. Warm welcome before the title slide.
+-->
+
+![bg](assets/bolzano-town.jpg)
+
+---
 
 <!-- _class: light title -->
 <!-- _paginate: false -->
@@ -23,13 +36,13 @@ House style: no em dashes, use "-". Bylines use the middle dot.
   h1 { font-size: 2.2em; }
 </style>
 
-![bg left:36%](assets/cover-green-lie.png)
+![bg left:36%](assets/cover-mouse-traps.png)
 
 # Top 5 Spring Boot Testing Mistakes **Developers Trap Into**
 
-## Your tests are green. Can you trust them?
+## Your tests are green. But do you feel confident deploying?
 
-Talk @ <Venue> <Date> · Philip Riecks · [PragmaTech GmbH](https://pragmatech.digital/) · [@rieckpil](https://x.com/rieckpil)
+Talk @ Tech Talks South Tyrol #14 · 8th of September 2026 · Philip Riecks · [PragmaTech GmbH](https://pragmatech.digital/) · [@rieckpil](https://x.com/rieckpil)
 
 ---
 
@@ -38,11 +51,12 @@ Notes:
 - Short intro, 30 seconds max
 -->
 
-![bg right:33% h:750](assets/location.png)
+![bg right:33%](assets/philip-in-erlangen.jpeg)
 
 ### About Philip
 
 - Self-employed developer from Herzogenaurach (HQ of adidas & Puma), Germany (Bavaria) 🍻
+- Living right next to **Erlangen** - Bozen's partner town since 1979 🤝
 - Blogging & content creation with a focus on testing Java and specifically Spring Boot applications 🍃
 - Founder of PragmaTech GmbH - Enabling Developers to Frequently Deliver Software with More Confidence 🚤
 
@@ -125,6 +139,21 @@ On a scale from **0** ("I deploy on Monday morning with three colleagues watchin
 <!-- _header: '' -->
 <!-- _footer: '' -->
 
+<!--
+Notes:
+- Same five traps, seen from the mouse's point of view.
+- Every trap works the same way: the cheese looks free, the snap comes later.
+- We are the mouse. The cheese is always a shortcut that feels great today.
+-->
+
+![bg](assets/agenda-mouse-traps.png)
+
+---
+
+<!-- _paginate: false -->
+<!-- _header: '' -->
+<!-- _footer: '' -->
+
 ![bg](assets/trap-map-0.png)
 
 ---
@@ -132,7 +161,7 @@ On a scale from **0** ("I deploy on Monday morning with three colleagues watchin
 <!-- _class: light section -->
 <!-- _paginate: false -->
 
-![bg right:40%](assets/trap-zoom-1.png)
+![bg right:40%](assets/trap-card-1.png)
 
 ## Testing Trap #1
 
@@ -229,7 +258,7 @@ Rule of thumb: **`@SpringBootTest` is the last tool you reach for, not the first
 <!-- _class: light section -->
 <!-- _paginate: false -->
 
-![bg right:40%](assets/trap-zoom-2.png)
+![bg right:40%](assets/trap-card-2.png)
 
 ## Testing Trap #2
 
@@ -307,7 +336,7 @@ class IntegrationTestMocks {
 <!-- _class: light section -->
 <!-- _paginate: false -->
 
-![bg right:40%](assets/trap-zoom-3.png)
+![bg right:40%](assets/trap-card-3.png)
 
 ## Testing Trap #3
 
@@ -383,7 +412,7 @@ class CustomerRepositoryTest {
 <!-- _class: light section -->
 <!-- _paginate: false -->
 
-![bg right:40%](assets/trap-zoom-4.png)
+![bg right:40%](assets/trap-card-4.png)
 
 ## Testing Trap #4
 
@@ -461,7 +490,7 @@ class CustomerServiceTest {
 <!-- _class: light section -->
 <!-- _paginate: false -->
 
-![bg right:40%](assets/trap-zoom-5.png)
+![bg right:40%](assets/trap-card-5.png)
 
 ## Testing Trap #5
 
