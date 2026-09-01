@@ -271,11 +271,13 @@ const ICONS = {
   2: function contextTax(o) {
     // an application context: a circle crowded with bean dots + a receipt spooling out
     roughEllipse(-45, 5, 64, 64, { color: C.accent, width: 4, fill: C.white, fillStyle: 'solid', fillAlpha: 0.92 });
-    const beanRnd = mulberry32(7);
-    for (let i = 0; i < 18; i++) {
-      const a = beanRnd() * Math.PI * 2, r = Math.sqrt(beanRnd()) * 48;
-      dot(-45 + Math.cos(a) * r, 5 + Math.sin(a) * r, 5.5, i % 3 ? C.accent : C.cyan);
-    }
+    let bean = 0;
+    [[0, 1], [22, 6], [44, 12]].forEach(([r, count]) => {
+      for (let i = 0; i < count; i++) {
+        const a = i / count * Math.PI * 2 - Math.PI / 2;
+        dot(-45 + Math.cos(a) * r, 5 + Math.sin(a) * r, 5.5, bean++ % 3 ? C.accent : C.cyan);
+      }
+    });
     // receipt with zigzag bottom
     const zig = [];
     for (let i = 0; i <= 8; i++) zig.push([18 + i * 10, 72 + (i % 2 ? 0 : 10)]);
