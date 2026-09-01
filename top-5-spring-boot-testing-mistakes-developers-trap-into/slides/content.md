@@ -111,7 +111,6 @@ How confident are you to merge this major Spring Boot upgrade and deploy it to p
 
 <!-- _paginate: false -->
 <!-- _header: '' -->
-<!-- _footer: '' -->
 
 <!--
 Notes:
@@ -214,14 +213,6 @@ Rule of thumb: **`@SpringBootTest` is the last tool you reach for, not the first
 
 ---
 
-<!-- _paginate: false -->
-<!-- _header: '' -->
-<!-- _footer: '' -->
-
-![bg](assets/trap-map-1.png)
-
----
-
 <!-- _class: light section -->
 <!-- _paginate: true -->
 
@@ -292,14 +283,6 @@ class IntegrationTestMocks {
 
 ---
 
-<!-- _paginate: false -->
-<!-- _header: '' -->
-<!-- _footer: '' -->
-
-![bg](assets/trap-map-2.png)
-
----
-
 <!-- _class: light section -->
 <!-- _paginate: false -->
 
@@ -309,7 +292,7 @@ class IntegrationTestMocks {
 
 # The Production Parity Trap
 
-`It works on my machine.`
+_It works on my machine._
 
 ---
 
@@ -368,14 +351,6 @@ class CustomerRepositoryTest {
 
 ---
 
-<!-- _paginate: false -->
-<!-- _header: '' -->
-<!-- _footer: '' -->
-
-![bg](assets/trap-map-3.png)
-
----
-
 <!-- _class: light section -->
 <!-- _paginate: false -->
 
@@ -385,7 +360,7 @@ class CustomerRepositoryTest {
 
 # The Phantom Commit
 
-Nothing ever happened
+_Works in test (TBD)._
 
 ---
 
@@ -444,13 +419,6 @@ class CustomerServiceTest {
 - No `@Transactional` on tests; clean up explicitly (`@Sql`, `deleteAll()`, per-test data)
 - When you need it: `TestTransaction.flagForCommit()` + `TestTransaction.end()`
 
----
-
-<!-- _paginate: false -->
-<!-- _header: '' -->
-<!-- _footer: '' -->
-
-![bg](assets/trap-map-4.png)
 
 ---
 
@@ -526,26 +494,6 @@ void shouldNotifyCustomer() {
 
 ---
 
-<!-- _paginate: false -->
-<!-- _header: '' -->
-<!-- _footer: '' -->
-
-![bg](assets/trap-map-5.png)
-
----
-
-## Five Traps, Five Bridges
-
-| Trap | Bridge |
-|---|---|
-| #1 **Golden Hammer** | The smallest slice that proves the behavior |
-| #2 **Context Tax** | One shared test configuration, count your contexts |
-| #3 **Production Parity** | Testcontainers + `@ServiceConnection`, real migrations, real HTTP |
-| #4 **Phantom Commit** | No `@Transactional` on tests, test the commit boundary |
-| #5 **Green Lie** | Mutation testing with PIT, review tests like production code |
-
----
-
 <!-- _class: light statement -->
 <!-- _paginate: false -->
 
@@ -571,7 +519,7 @@ Notes:
 
 **Agentic Testing Course** - a hands-on course on testing Spring Boot applications in the age of coding agents: guardrails, test strategy, and the judgment to review what the agent produced.
 
-<!-- TODO: add course link + QR code -->
+![h:260 center](assets/agentic-testing-course.png)
 
 ---
 
@@ -583,8 +531,8 @@ Notes:
 
 # Joyful Testing!
 
-Get your Spring Boot Testing eBook (120+ pages):
+Join the waitlist for _Agentic Testing for Spring Boot_:
 
-![h:260](assets/newsletter-signup-qr.png)
+![h:260 center](assets/agentic-testing-course-qr.png)
 
 Reach out any time via [LinkedIn](https://www.linkedin.com/in/rieckpil) (Philip Riecks) or [Mail](mailto:philip@pragmatech.digital) (philip@pragmatech.digital)

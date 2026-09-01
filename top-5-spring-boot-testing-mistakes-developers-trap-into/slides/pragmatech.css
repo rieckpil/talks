@@ -277,12 +277,13 @@ footer {
 }
 
 /* logo pulled out of the inline flow and pinned near the left edge —
-   plain image, no circular frame/background/border */
+   plain image, no circular frame/background/border. Anchored to the footer's
+   bottom edge so it sits at the same height whether or not the footer has
+   text (an empty footer box collapses; centering would drop the logo). */
 footer img {
   position: absolute;
   left: 24px;
-  top: 50%;
-  transform: translateY(-50%);
+  bottom: 0;
   height: 1.7em;
   width: auto;
   margin: 0;
