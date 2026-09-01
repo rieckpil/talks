@@ -223,7 +223,7 @@ Rule of thumb: **`@SpringBootTest` is the last tool you reach for, not the first
 ---
 
 <!-- _class: light section -->
-<!-- _paginate: false -->
+<!-- _paginate: true -->
 
 ![bg right:40%](assets/trap-card-2.png)
 
@@ -231,7 +231,7 @@ Rule of thumb: **`@SpringBootTest` is the last tool you reach for, not the first
 
 # The Context Tax
 
-...and the Context Leak
+_Every `ApplicationContext` you use for testing, comes with a price._
 
 ---
 
@@ -309,7 +309,7 @@ class IntegrationTestMocks {
 
 # The Production Parity Trap
 
-Green on H2, red in prod
+`It works on my machine.`
 
 ---
 
@@ -463,7 +463,7 @@ class CustomerServiceTest {
 
 # The Green Lie
 
-Tests that pass but cannot fail
+_Never trust a test you haven't seen failing._
 
 ---
 
