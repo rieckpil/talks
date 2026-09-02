@@ -1105,7 +1105,7 @@ junit.jupiter.execution.parallel.mode.classes.default = concurrent
 
 ## Let's Challenge Code Coverage
 
-Imagine a set of unit tests for this isolated buisness logic:
+Imagine a set of unit tests for this isolated business logic:
 
 ```java
 public Long registerUser(int age, String username) {

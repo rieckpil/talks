@@ -293,6 +293,13 @@ footer img {
   box-shadow: none;
 }
 
+/* On the title slide the footer logo moves to the right corner (the split
+   background insets the content area, so a left pin would land mid-slide). */
+section.title footer img {
+  left: auto;
+  right: 24px;
+}
+
 /* Pagination via section::after (bottom-right, inset by slide padding). */
 section::after {
   color: var(--pt-muted);
