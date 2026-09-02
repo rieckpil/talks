@@ -28,6 +28,7 @@
  *   ?view=traps            five numbered mouse traps, title slide cover (square)
  *   ?view=agenda           agenda: mouse trap row with icons and names (wide)
  *   ?view=trapcard&trap=N  intro card for trap N: mouse trap + icon (square)
+ *   ?view=summary          summary: trap row with fix one-liners, mouse at the right (wide)
  *   ?view=lie-ideas        scratch sheet: Green Lie logo alternatives (not exported)
  *   &grid=1                paint the slide dot grid behind the canvas (preview only)
  */
@@ -659,6 +660,27 @@ function drawTrapIcon(n, cx, cy, scale) {
   }
 }
 
+function renderSummary() {
+  rnd = mulberry32(1337);
+  const FIX = ['test the smallest slice', 'reuse one cached context', 'prod-like dependencies', 'test the commit boundary', 'mutation-test your tests'];
+  const xs = [300, 630, 960, 1290, 1620];
+  xs.forEach((x, i) => {
+    drawMousetrap(i + 1, x, 300, 0.95, (i % 2 ? 1 : -1) * 0.06);
+    drawTrapIcon(i + 1, x, 590, 0.62);
+    text(TRAP_NAMES[i], x, 760, { size: 33, weight: 'bold' });
+    text('✓ ' + FIX[i], x, 816, { size: 20, color: C.green, weight: 'bold' });
+  });
+  // the mouse made it past every trap: trail runs left to right, mouse at the end
+  ctx.save();
+  setStroke({ color: C.muted, width: 4, dash: [1, 26] });
+  ctx.beginPath();
+  ctx.moveTo(90, 890);
+  for (let x = 90; x <= 1630; x += 40) ctx.lineTo(x, 896 + 16 * Math.sin(x / 150));
+  ctx.stroke();
+  ctx.restore();
+  drawMouse(1760, 910, 1.7, true);
+}
+
 function renderTrapCard(trap) {
   rnd = mulberry32(1337);
   drawMousetrap(trap, 540, 350, 1.5, (trap % 2 ? -1 : 1) * 0.05);
@@ -719,6 +741,7 @@ async function main() {
   else if (view === 'traps') renderTraps();
   else if (view === 'agenda') renderAgenda();
   else if (view === 'trapcard') renderTrapCard(zoomTrap);
+  else if (view === 'summary') renderSummary();
   else if (view === 'lie-ideas') renderLieIdeas();
   else renderMap(disarmedCount);
   window.__rendered = true;

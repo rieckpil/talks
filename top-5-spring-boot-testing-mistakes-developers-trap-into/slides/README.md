@@ -45,9 +45,10 @@ external libraries). Open the file in a browser with query parameters to preview
 - `trap-map.html?view=traps` - five mouse traps, the title slide cover
 - `trap-map.html?view=agenda` - the visual agenda: mouse trap row with icons and names
 - `trap-map.html?view=trapcard&trap=4` - intro card for trap 4 (mouse trap + icon)
+- `trap-map.html?view=summary` - the summary: trap row with fix one-liners, mouse at the right
 - `trap-map.html?view=lie-ideas` - scratch sheet with Green Lie logo alternatives (not exported)
 
-Re-export all 19 PNGs into `assets/`:
+Re-export all 20 PNGs into `assets/`:
 
 ```bash
 node visuals/export-visuals.mjs

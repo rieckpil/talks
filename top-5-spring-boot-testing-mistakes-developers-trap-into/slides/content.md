@@ -414,22 +414,23 @@ public Long registerUser(int age, String username) {
 
 ---
 
-![bg](assets/agenda-mouse-traps.png)
+![bg](assets/summary-mouse-traps.png)
 
 ---
 
 <!-- _class: light statement -->
 <!-- _paginate: false -->
 
-# The AI writes the code & tests. **You own the judgment and liability.**
+# AI writes tests in seconds. **Trusting them still takes human judgment.**
 
 ---
 
-## Implement Guardrails for the Agent
-- **Analyze the output**: read generated tests like a pull request from a new hire - fast, confident, unproven
-- **Put the bridges in the repo**: test slices, shared test configuration, Testcontainers, no `@Transactional` on tests, PIT in the pipeline
-- **Make the rules executable**: ArchUnit rules, a `CLAUDE.md` / `AGENTS.md` with your testing conventions, mutation score thresholds in CI
-- **Keep the loop tight**: fast, trustworthy tests are what let the agent iterate without you watching every step
+## What I Do to Build Confidence in the Agentic Coding Era
+
+- **Review generated tests** like a pull request from a new hire - fast, confident, unproven
+- **Put the bridges in the repo**: test slices, shared test configuration, Testcontainers, no `@Transactional` on tests
+- **Make the rules executable**: ArchUnit rules, my testing conventions in `CLAUDE.md` / `AGENTS.md`, mutation score thresholds (PIT) in CI
+- **Keep the feedback loop tight**: fast, trustworthy tests let the agent iterate without me watching every step
 
 ---
 

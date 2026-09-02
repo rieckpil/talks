@@ -19,7 +19,8 @@ const scenes = [
   { query: 'view=cover', file: 'cover-green-lie.png', width: 1080, height: 1080 },
   { query: 'view=traps', file: 'cover-mouse-traps.png', width: 1080, height: 1080 },
   { query: 'view=agenda', file: 'agenda-mouse-traps.png', width: 1920, height: 1080 },
-  ...[1, 2, 3, 4, 5].map(n => ({ query: `view=trapcard&trap=${n}`, file: `trap-card-${n}.png`, width: 1080, height: 1080 }))
+  ...[1, 2, 3, 4, 5].map(n => ({ query: `view=trapcard&trap=${n}`, file: `trap-card-${n}.png`, width: 1080, height: 1080 })),
+  { query: 'view=summary', file: 'summary-mouse-traps.png', width: 1920, height: 1080 }
 ];
 
 async function launchBrowser() {
