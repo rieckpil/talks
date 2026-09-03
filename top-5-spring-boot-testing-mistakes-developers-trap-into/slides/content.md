@@ -364,42 +364,16 @@ void greenButMeaningless() {
 
 ---
 
-## Why It Hurts
+## Be Careful on the Transaction Boundary
 
 - The entity is **never materialized from a real row**: the missing no-arg constructor stays invisible until the first production query throws `InstantiationException`
 - Rollback at the end of the test: **no commit**, no commit-time constraint checks, no visible change
 - `@TransactionalEventListener(phase = AFTER_COMMIT)` **never fires** in this test
 - Lazy loading works inside the test transaction and throws `LazyInitializationException` in production
-
----
-
-## Disarm It: Test the Commit Boundary on Purpose
-
-```java {1,4,5,12}
-@SpringBootTest
-class CustomerServiceTest {
-
-  @AfterEach
-  void cleanUp() { customerRepository.deleteAll(); }
-
-  @Test
-  void shouldRegisterCustomerAndPublishEvent() {
-    customerService.register(new RegistrationRequest("duke@pragmatech.digital"));
-
-    assertThat(customerRepository.count()).isEqualTo(1);
-    verify(eventPublisher, timeout(1000)).publishEvent(any(CustomerRegisteredEvent.class));
-  }
-}
-```
-
-- No `@Transactional` on tests; clean up explicitly (`@Sql`, `deleteAll()`, per-test data)
-- When you need it: `TestTransaction.flagForCommit()` + `TestTransaction.end()`
 - The gold standard: `@SpringBootTest(webEnvironment = RANDOM_PORT)` + a real HTTP call - the request runs in its **own transaction**, flushes, commits, and reads real rows
 
-> Phantom tests are too fast and too happy. Honest tests cross the commit boundary.
-
-
 ---
+
 
 <!-- _class: light section -->
 <!-- _paginate: false -->
@@ -419,7 +393,7 @@ Notes:
 - AI-era peak: the agent generated 40 tests, coverage is 97%, nobody read them.
 -->
 
-## Watermelon Tests
+## Be Aware of: Watermelon Tests
 
 
 ... green on the outside, red on the inside.
