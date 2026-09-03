@@ -44,11 +44,11 @@ Tech Talks South Tyrol #14 · 8th of September 2026
 
 <!-- footer: '![](assets/logo.webp)' -->
 
-![bg h:500 right:33%](assets/philip-in-erlangen.jpeg)
+![bg h:500 right:33%](assets/philip-in-erlangen-map.jpg)
 
 ### About Philip
 
-- Self-employed developer from Erlangen (Bolzano's partner town since 2018), Germany (Bavaria) 🍻
+- Software Engineer from Erlangen (Bolzano's partner town since 2018), Germany (Bavaria) 🍻
 - Blogging & content creation with a focus on testing Java and specifically Spring Boot applications 🍃
 - Founder of PragmaTech GmbH - Enabling Developers to Frequently Deliver Software with More Confidence
 - Worked together with Martin & Alex from AboutBits last year
@@ -251,30 +251,43 @@ Notes:
 - Second flavor: webEnvironment MOCK looks like HTTP but never touches the servlet container.
 -->
 
-## Looks Fine, Right?
+## Where Tests Drift Away From Production
 
-- Understand where in the testing process we make "shortcuts" compared to production
--
+Every test environment takes shortcuts. Each one is a small drift - and drifts compound:
+
+- **Database**: in-memory H2 instead of the production engine and version
+- **Servlet container**: `@SpringBootTest` defaults to a **mocked** servlet environment - `webEnvironment = RANDOM_PORT` starts the real one (Tomcat, etc.)
+- **External services**: mocked mail, object storage, message queues, IDPs
+- **Schema**: Hibernate `ddl-auto` in tests, Flyway/Liquibase migrations in production
+- **Environment**: clock, timezone, locale, JVM flags, OS of the CI runner
 
 ---
 
-## Why It Hurts
+## The Classic Drift: The In-Memory Database
 
-- In-memory database vs. real database
-  - Use the same databasep rovider in the same version as on prod
-- Testcontaienrs to the resuce: LocalStack, message queues, IDPs, etc.
-- `@SpringBootTest` comes in to modes:
-  -  `@SpringBootTest` -> entire context but a mocked servlet environment
-  - `@SpringBootTest(webEnvironment=RANDOM_PORT)` -> entire context and servlet container (Tomcat, etc.)
+```java {1,8}
+@DataJpaTest
+class OrderRepositoryTest {
+
+  @Autowired private OrderRepository orderRepository;
+
+  @Test
+  void shouldFindOverdueOrders() {
+    // green in two seconds - on an H2 that pretends to be PostgreSQL
+  }
+}
+```
+
+`@DataJpaTest` silently swaps in an embedded database (`replace = Replace.ANY` is the default). H2 in PostgreSQL mode is a **costume, not the engine**.
+
 ---
 
-## Things to Consider
+## Disarm It: Close the Gap Step by Step
 
-We can't preditct everything, but at least we can ensure we notice errors before our customers
-
-- Data size and load is usually hard to predict and effectively test
-- Running your Spring Boot application inside a Docker container? -> run some tests against the running container (JVM flags, OS access to fonts, etc.)
-- There are things we can't test for, run canary test against QA/Prod to e.g. detect: expired SSL certs, rate limits, connectivity loss for cloud resources, etc.
+- **Understand your shortcuts**: know where your test environment drifts from production - and decide which drifts you can live with
+- **Use Testcontainers**: run the real database, pinned to the production version (`postgres:17.2`) - `@ServiceConnection` wires it up; LocalStack, Kafka, Keycloak, and friends run as containers too
+- **Test the app inside Docker**: start the container image you actually ship and run tests against it (JVM flags, base image, OS-level surprises)
+- **Canary-test production continuously**: catch what no test environment can - expired SSL certs, rate limits, lost connectivity to cloud resources
 
 
 ---

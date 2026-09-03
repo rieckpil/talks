@@ -29,6 +29,7 @@
  *   ?view=agenda           agenda: mouse trap row with icons and names (wide)
  *   ?view=trapcard&trap=N  intro card for trap N: mouse trap + icon (square)
  *   ?view=summary          summary: trap row with fix one-liners, mouse at the right (wide)
+ *   ?view=germany          small Germany map card marking Erlangen (and Bozen)
  *   ?view=lie-ideas        scratch sheet: Green Lie logo alternatives (not exported)
  *   &grid=1                paint the slide dot grid behind the canvas (preview only)
  */
@@ -38,8 +39,8 @@ const disarmedCount = clamp(parseInt(params.get('disarmed') ?? '0', 10) || 0, 0,
 const zoomTrap = clamp(parseInt(params.get('trap') ?? '1', 10) || 1, 1, 5);
 if (params.get('grid') === '1') document.body.classList.add('grid');
 
-const WIDTH = ['cover', 'traps', 'trapcard'].includes(view) ? 1080 : 1920;
-const HEIGHT = 1080;
+const WIDTH = view === 'germany' ? 400 : ['cover', 'traps', 'trapcard'].includes(view) ? 1080 : 1920;
+const HEIGHT = view === 'germany' ? 540 : 1080;
 
 const C = {
   ink: '#0f172a',
@@ -681,6 +682,36 @@ function renderSummary() {
   drawMouse(1760, 910, 1.7, true);
 }
 
+function renderGermany() {
+  rnd = mulberry32(1337);
+  // white card
+  roughRect(6, 6, 388, 528, { fill: C.white, fillStyle: 'solid', width: 3 });
+  // simplified Germany outline, clockwise from the Danish border (lon, lat)
+  const border = [
+    [8.7, 54.9], [9.5, 54.8], [10.0, 54.5], [11.0, 54.4], [12.5, 54.4], [13.7, 54.5],
+    [14.2, 53.9], [14.4, 53.3], [14.1, 52.8], [14.6, 52.6], [14.7, 52.1], [14.6, 51.5],
+    [15.0, 51.3], [14.8, 50.9], [14.3, 51.0], [13.0, 50.5], [12.3, 50.2], [12.5, 49.9],
+    [13.8, 48.7], [13.4, 48.4], [12.9, 47.9], [13.0, 47.5], [12.2, 47.6], [11.6, 47.5],
+    [10.9, 47.4], [10.2, 47.3], [9.6, 47.5], [8.6, 47.6], [7.6, 47.5], [7.5, 48.3],
+    [8.2, 48.9], [6.8, 49.2], [6.4, 49.5], [6.1, 49.6], [6.0, 50.2], [5.9, 50.8],
+    [6.2, 51.5], [6.8, 52.2], [7.0, 52.4], [6.7, 52.6], [7.2, 53.3], [7.0, 53.6],
+    [8.0, 53.7], [8.5, 53.9], [8.9, 53.8], [8.6, 54.3]
+  ];
+  const px = lon => 68 + (lon - 5.9) * 29;
+  const py = lat => 42 + (55.1 - lat) * 46;
+  roughPoly(border.map(([lon, lat]) => [px(lon), py(lat)]), { fill: C.surface, fillStyle: 'solid', width: 3, rough: 1.2 });
+  // Erlangen marker
+  const ex = px(11.0), ey = py(49.6);
+  dot(ex, ey, 9, C.red);
+  roughEllipse(ex, ey, 15, 15, { color: C.red, width: 2.5, passes: 1 });
+  text('Erlangen', ex + 4, ey - 32, { size: 30, color: C.red, weight: 'bold' });
+  // Bozen, the partner town south of the Alps
+  const bx = px(11.35), by = py(46.5);
+  roughLine(ex, ey + 18, bx, by - 12, { color: C.muted, width: 2.5, dash: [8, 8], passes: 1 });
+  dot(bx, by, 7, C.accent);
+  text('Bozen', bx, by + 32, { size: 26, color: C.accent, weight: 'bold' });
+}
+
 function renderTrapCard(trap) {
   rnd = mulberry32(1337);
   drawMousetrap(trap, 540, 350, 1.5, (trap % 2 ? -1 : 1) * 0.05);
@@ -742,6 +773,7 @@ async function main() {
   else if (view === 'agenda') renderAgenda();
   else if (view === 'trapcard') renderTrapCard(zoomTrap);
   else if (view === 'summary') renderSummary();
+  else if (view === 'germany') renderGermany();
   else if (view === 'lie-ideas') renderLieIdeas();
   else renderMap(disarmedCount);
   window.__rendered = true;
