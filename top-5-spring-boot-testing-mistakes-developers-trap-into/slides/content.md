@@ -466,11 +466,9 @@ Notes:
 
 ## My Agentic Testing Setup for Spring Boot
 
-**Agentic Testing Course** - a hands-on course on testing Spring Boot applications in the age of coding agents: guardrails, test strategy, and the judgment to review what the agent produced.
+Hands-on course for Spring Boot testing in agentic development era: a **skillset** for fast & comprehensive tests, **guardrails**, MCP server, **test strategy**, and the **judgment** to review what the agent produced.
 
 ![h:260 center](assets/agentic-testing-course.png)
-
-Including 8+ ready to use skills for fast & comprehensive tests.
 
 ---
 
