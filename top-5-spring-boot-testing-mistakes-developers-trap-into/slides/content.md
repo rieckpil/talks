@@ -329,12 +329,47 @@ class CustomerServiceTest {
 
 ---
 
+## What Hibernate Does Behind Your Back
+
+- **Persistence context (first-level cache)**: every entity you save or load lives here - `findById` returns the cached instance, **no SQL executed**
+- **Write-behind**: `save()` does not `INSERT` immediately - Hibernate delays SQL until a **flush** (before a query that needs it, or at commit)
+- **Flush != commit**: flush sends the SQL, only commit makes it durable, fires the commit-time constraint checks and `AFTER_COMMIT` events
+- In a `@Transactional` test the transaction **rolls back**: possibly nothing was ever flushed, and certainly nothing was committed
+
+---
+
+## The Green Test That Proves Nothing
+
+```java {7,8}
+@Entity
+public class Customer {
+
+  @Id @GeneratedValue
+  private Long id;
+  private String email;
+
+  public Customer(String email) { this.email = email; }
+  // no no-arg constructor - Hibernate needs it to materialize rows
+}
+```
+
+```java {4}
+@Test
+@Transactional
+void greenButMeaningless() {
+  Long id = customerRepository.save(new Customer("duke@pragmatech.digital")).getId();
+  assertThat(customerRepository.findById(id)).isPresent(); // first-level cache, no SELECT
+}
+```
+
+---
+
 ## Why It Hurts
 
-- The test transaction **rolls back** at the end: no commit, no constraint check on commit, no visible change
+- The entity is **never materialized from a real row**: the missing no-arg constructor stays invisible until the first production query throws `InstantiationException`
+- Rollback at the end of the test: **no commit**, no commit-time constraint checks, no visible change
 - `@TransactionalEventListener(phase = AFTER_COMMIT)` **never fires** in this test
 - Lazy loading works inside the test transaction and throws `LazyInitializationException` in production
-- One persistence context for the whole test: Hibernate hands you back the same object you just saved, and the assertion means nothing
 
 ---
 
@@ -359,6 +394,9 @@ class CustomerServiceTest {
 
 - No `@Transactional` on tests; clean up explicitly (`@Sql`, `deleteAll()`, per-test data)
 - When you need it: `TestTransaction.flagForCommit()` + `TestTransaction.end()`
+- The gold standard: `@SpringBootTest(webEnvironment = RANDOM_PORT)` + a real HTTP call - the request runs in its **own transaction**, flushes, commits, and reads real rows
+
+> Phantom tests are too fast and too happy. Honest tests cross the commit boundary.
 
 
 ---
