@@ -304,39 +304,6 @@ _Schrödingers database commit or `LazyInitializationException`._
 
 ---
 
-<!--
-Notes:
-- The commit you saw was not there. Everything rolls back at the end of the test.
--->
-
-## Looks Fine, Right?
-
-```java {2,9}
-@SpringBootTest
-@Transactional
-class CustomerServiceTest {
-
-  @Test
-  void shouldRegisterCustomerAndPublishEvent() {
-    customerService.register(new RegistrationRequest("duke@pragmatech.digital"));
-
-    assertThat(customerRepository.count()).isEqualTo(1);
-    verify(eventPublisher).publishEvent(any(CustomerRegisteredEvent.class));
-  }
-}
-```
-
----
-
-## What Hibernate Does Behind Your Back
-
-- **Persistence context (first-level cache)**: every entity you save or load lives here - `findById` returns the cached instance, **no SQL executed**
-- **Write-behind**: `save()` does not `INSERT` immediately - Hibernate delays SQL until a **flush** (before a query that needs it, or at commit)
-- **Flush != commit**: flush sends the SQL, only commit makes it durable, fires the commit-time constraint checks and `AFTER_COMMIT` events
-- In a `@Transactional` test the transaction **rolls back**: possibly nothing was ever flushed, and certainly nothing was committed
-
----
-
 ## The Green Test That Proves Nothing
 
 ```java {7,8}
@@ -363,9 +330,20 @@ void greenButMeaningless() {
 
 ---
 
-## Be Careful on the Transaction Boundary
+## What Hibernate Does Behind Your Back
 
 - The entity is **never materialized from a real row**: the missing no-arg constructor stays invisible until the first production query throws `InstantiationException`
+- **Persistence context (first-level cache)**: every entity you save or load lives here - `findById` returns the cached instance, **no SQL executed**
+- **Flush != commit**: flush sends the SQL, only commit makes it durable, fires the commit-time constraint checks and `AFTER_COMMIT` events
+- In a `@Transactional` test the transaction **rolls back**: possibly nothing was ever flushed, and certainly nothing was committed
+- Consider the `TestEntityManager.persistFlushFind()`
+
+---
+
+
+## Be Careful on the Transaction Boundary
+
+- **Write-behind**: `save()` does not `INSERT` immediately - Hibernate delays SQL until a **flush** (before a query that needs it, or at commit)
 - Rollback at the end of the test: **no commit**, no commit-time constraint checks, no visible change
 - `@TransactionalEventListener(phase = AFTER_COMMIT)` **never fires** in this test
 - Lazy loading works inside the test transaction and throws `LazyInitializationException` in production
