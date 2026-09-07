@@ -40,7 +40,7 @@ const zoomTrap = clamp(parseInt(params.get('trap') ?? '1', 10) || 1, 1, 5);
 if (params.get('grid') === '1') document.body.classList.add('grid');
 
 const WIDTH = view === 'germany' ? 400 : ['cover', 'traps', 'trapcard'].includes(view) ? 1080 : 1920;
-const HEIGHT = view === 'germany' ? 540 : 1080;
+const HEIGHT = view === 'germany' ? 620 : 1080;
 
 const C = {
   ink: '#0f172a',
@@ -685,7 +685,7 @@ function renderSummary() {
 function renderGermany() {
   rnd = mulberry32(1337);
   // white card
-  roughRect(6, 6, 388, 528, { fill: C.white, fillStyle: 'solid', width: 3 });
+  roughRect(6, 6, 388, 608, { fill: C.white, fillStyle: 'solid', width: 3 });
   // simplified Germany outline, clockwise from the Danish border (lon, lat)
   const border = [
     [8.7, 54.9], [9.5, 54.8], [10.0, 54.5], [11.0, 54.4], [12.5, 54.4], [13.7, 54.5],
@@ -705,9 +705,10 @@ function renderGermany() {
   dot(ex, ey, 9, C.red);
   roughEllipse(ex, ey, 15, 15, { color: C.red, width: 2.5, passes: 1 });
   text('Erlangen', ex + 4, ey - 32, { size: 30, color: C.red, weight: 'bold' });
-  // Bozen, the partner town south of the Alps
-  const bx = px(11.35), by = py(46.5);
+  // Bozen, the partner town far south of the Alps (distance visually stretched)
+  const bx = px(11.35), by = 540;
   roughLine(ex, ey + 18, bx, by - 12, { color: C.muted, width: 2.5, dash: [8, 8], passes: 1 });
+  text('~350 km', (ex + bx) / 2 + 66, (ey + by) / 2 + 10, { size: 28, color: C.muted, weight: 'bold' });
   dot(bx, by, 7, C.accent);
   text('Bozen', bx, by + 32, { size: 26, color: C.accent, weight: 'bold' });
 }

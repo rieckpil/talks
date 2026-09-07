@@ -4,15 +4,12 @@ theme: pragmatech
 class: light
 paginate: true
 transition: pt-fade
-header: 'Top 5 Spring Boot Testing Mistakes Developers Trap Into @ Tech Talks South Tyrol #14 · 8th of September 2026'
+header: 'Top 5 Spring Boot Testing Mistakes Developers Trap Into @ Tech Talks South Tyrol #14 · September 8, 2026'
 footer: '![](assets/logo.webp) Philip Riecks · [PragmaTech GmbH](https://pragmatech.digital/) · [@rieckpil](https://x.com/rieckpil)'
 ---
 
 <!--
-Light deck (class: light). Layout classes per slide via the _class directive, e.g. "light section".
-Trap map visuals: assets/trap-map-N.png (N = traps disarmed), assets/trap-card-N.png (intro cards), assets/agenda-mouse-traps.png, assets/cover-mouse-traps.png
-Re-export via: node visuals/export-visuals.mjs
-House style: no em dashes, use "-". Bylines use the middle dot.
+Menti: https://www.menti.com/albx4ndyi8ni
 -->
 
 <!-- _paginate: false -->
@@ -38,7 +35,7 @@ Notes:
 
 ## Your tests are green. But do you feel confident deploying?
 
-Tech Talks South Tyrol #14 · 8th of September 2026
+Tech Talks South Tyrol #14 · September 8, 2026
 
 ---
 
@@ -50,19 +47,21 @@ Tech Talks South Tyrol #14 · 8th of September 2026
 
 - Software Engineer from Erlangen (Bolzano's partner town since 2018), Germany (Bavaria) 🍻
 - Blogging & content creation with a focus on testing Java and specifically Spring Boot applications 🍃
-- Founder of PragmaTech GmbH - Enabling Developers to Frequently Deliver Software with More Confidence
-- Worked together with Martin & Alex from AboutBits last year
+- Founder of [PragmaTech GmbH](https://pragmatech.digital/) - **Enabling Developers to Frequently Deliver** Software with **More Confidence**
+- Worked together with Alex & Martin from AboutBits last year
 
 ---
 
 
 ## Participate During the Talk
 
-Go to [menti.com](https://www.menti.com/) and use the code **XXXX XXXX** to **anonymously** submit answers for the quizzes and add your questions during the talk.
+Go to [menti.com](https://www.menti.com/) and use the code **2636 4022** to **anonymously** submit answers:
+
+![center h:250](assets/mentimeter-bozen.png)
 
 Please answer the **first three questions**:
 
-- Who wrote your tests this week?
+- Who wrote your tests last week?
 - How would you rate your Spring Boot testing knowledge?
 - How confident are you deploying on a Friday afternoon (0 to 10)?
 
@@ -474,7 +473,7 @@ Define a **skillset** for fast & comprehensive tests, including a **test strateg
 └── test-setup-reviewer     flags test anti-patterns for you
 ```
 
-Each skill includes rules, references, best-practices and anti-patterns described as code and text.
+Each skill includes rules, references, best-practices and antipatterns described as code and text.
 
 ---
 
