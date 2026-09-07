@@ -469,11 +469,12 @@ Define a **skillset** for fast & comprehensive tests, including a **test strateg
 ├── slice-testing           right-sized Spring context slices
 ├── slice-testing-webmvc    web layer with @WebMvcTest
 ├── integration-testing     full-context tests that stay fast
+├── e2e-testing             user journeys against the running app
 ├── testcontainers-setup    real infrastructure, reused containers
 └── test-setup-reviewer     flags test anti-patterns for you
 ```
 
-Each skill ships as `SKILL.md` - readable, editable, yours: [pragmatech.digital/agentic-spring-boot-testing-course](https://pragmatech.digital/agentic-spring-boot-testing-course/)
+Each skill includes rules, references, best-practices and anti-patterns described as code and text.
 
 ---
 
@@ -489,4 +490,4 @@ Get the slides here:
 
 ![h:260 center](assets/agentic-testing-course-qr.png)
 
-Reach out any time via [LinkedIn](https://www.linkedin.com/in/rieckpil) (Philip Riecks) or [Mail](mailto:philip@pragmatech.digital) (philip@pragmatech.digital)
+Reach out any time via [LinkedIn](https://www.linkedin.com/in/rieckpil) (Philip Riecks) or [mail](mailto:philip@pragmatech.digital) (philip@pragmatech.digital)
