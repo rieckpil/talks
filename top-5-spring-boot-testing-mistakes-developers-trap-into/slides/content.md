@@ -453,22 +453,27 @@ public Long registerUser(int age, String username) {
 ## What I Do to Build Confidence in the Agentic Coding Era
 
 - **Review generated tests** like a pull request from a new hire - fast, confident, unproven
-- **Put the bridges in the repo**: test slices, shared test configuration, Testcontainers, no `@Transactional` on tests
+- **Put the bridges in the repo**: test slices, shared test configuration, Testcontainers
 - **Make the rules executable**: ArchUnit rules, my testing conventions in `CLAUDE.md` / `AGENTS.md`, mutation score thresholds (PIT) in CI
 - **Keep the feedback loop tight**: fast, trustworthy tests let the agent iterate without me watching every step
 
 ---
 
-<!--
-Notes:
-- Callback: "Want my bridges?"
--->
-
 ## My Agentic Testing Setup for Spring Boot
 
-Hands-on course for Spring Boot testing in agentic development era: a **skillset** for fast & comprehensive tests, **guardrails**, MCP server, **test strategy**, and the **judgment** to review what the agent produced.
+Define a **skillset** for fast & comprehensive tests, including a **test strategy** for the given project:
 
-![h:260 center](assets/agentic-testing-course.png)
+```text
+.claude/skills/
+├── unit-testing            fast tests without context bloat
+├── slice-testing           right-sized Spring context slices
+├── slice-testing-webmvc    web layer with @WebMvcTest
+├── integration-testing     full-context tests that stay fast
+├── testcontainers-setup    real infrastructure, reused containers
+└── test-setup-reviewer     flags test anti-patterns for you
+```
+
+Each skill ships as `SKILL.md` - readable, editable, yours: [pragmatech.digital/agentic-spring-boot-testing-course](https://pragmatech.digital/agentic-spring-boot-testing-course/)
 
 ---
 
@@ -480,7 +485,7 @@ Hands-on course for Spring Boot testing in agentic development era: a **skillset
 
 # Joyful Testing!
 
-Join the waitlist for _Agentic Testing for Spring Boot_:
+Get the slides here:
 
 ![h:260 center](assets/agentic-testing-course-qr.png)
 
