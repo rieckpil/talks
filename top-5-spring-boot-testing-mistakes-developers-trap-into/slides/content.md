@@ -487,6 +487,6 @@ Each skill includes rules, references, best-practices and antipatterns described
 
 Get the slides here:
 
-![h:260 center](assets/agentic-testing-course-qr.png)
+![h:260 center](assets/slides-pdf-bozen.png)
 
 Reach out any time via [LinkedIn](https://www.linkedin.com/in/rieckpil) (Philip Riecks) or [mail](mailto:philip@pragmatech.digital) (philip@pragmatech.digital)
