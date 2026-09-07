@@ -159,13 +159,13 @@ Notes:
 
 A simplified decision table:
 
-| Question                                        | Tool |
-|-------------------------------------------------|---|
-| Does my business logic work?                    | Plain JUnit 5 + Mockito, no Spring |
-| Does my HTTP layer map, validate, serialize?    | `@WebMvcTest` |
-| Does my query return what I think?              | `@DataJpaTest` |
-| Does my client talk to the remote API?          | `@RestClientTest` + WireMock |
-| Does the whole thing start and work end to end? | `@SpringBootTest` |
+| Question                                        | Tool                                             |
+|-------------------------------------------------|--------------------------------------------------|
+| Does my business logic work?                    | Plain JUnit 5 + Mockito, no Spring               |
+| Does my HTTP layer map, validate, serialize?    | `@WebMvcTest`                                    |
+| Does my query return what I think?              | `@DataJpaTest`                                   |
+| Does my client talk to the remote API?          | `@RestClientTest` (including a mock HTTP server) |
+| Does the whole thing start and work end to end? | `@SpringBootTest`                                |
 
 ---
 
@@ -398,7 +398,7 @@ Notes:
 ... green on the outside, red on the inside.
 
 - **100% coverage** and still broken: coverage measures which lines *ran*, not which behavior was *verified*
-- A test that asserts the mock proves the mock works
+- A test that asserts the mock works as previously instructed
 - Auto-generated tests can give you the **feeling** of safety
 - Agents produce these at scale: plausible names, green checks, zero judgment
 
@@ -445,16 +445,17 @@ public Long registerUser(int age, String username) {
 <!-- _class: light statement -->
 <!-- _paginate: false -->
 
-# AI writes tests in seconds. **Trusting them still takes human judgment.**
+# AI writes tests in seconds. **Trusting** them still **takes human judgment.**
 
 ---
 
 ## What I Do to Build Confidence in the Agentic Coding Era
 
-- **Review generated tests** like a pull request from a new hire - fast, confident, unproven
-- **Put the bridges in the repo**: test slices, shared test configuration, Testcontainers
+- **Review generated tests** like a pull request from a new hire
+- **Put the bridges in the repo**: test slices, shared test configuration, Testcontainers best practices
 - **Make the rules executable**: ArchUnit rules, my testing conventions in `CLAUDE.md` / `AGENTS.md`, mutation score thresholds (PIT) in CI
-- **Keep the feedback loop tight**: fast, trustworthy tests let the agent iterate without me watching every step
+- **Custom skills**: Define once for each project how automated testing is tackled, best practices, antipatterns, etc.
+- **Keep the feedback loop tight**: fast, trustworthy tests let the agent iterate without me watching every step (and reduce context switches)
 
 ---
 
@@ -477,6 +478,23 @@ Each skill includes rules, references, best-practices and antipatterns described
 
 ---
 
+<!-- _class: light statement -->
+<!-- _paginate: false -->
+
+<!--
+Notes:
+- Closing thought. The agent can write the code and the tests, but the pager still rings for you.
+- Bridge to the closing slide: confidence for every commit is the reason for all five fixes.
+-->
+
+# You can delegate the typing.
+# You can't delegate the ownership.
+# **You**  get paged at 3 AM.
+
+# Invest in a test suite that gives you **confidence in every commit**.
+
+---
+
 <!-- _class: light closing -->
 <!-- _paginate: false -->
 <!-- _header: '' -->
@@ -489,4 +507,6 @@ Get the slides here:
 
 ![h:260 center](assets/slides-pdf-bozen.png)
 
-Reach out any time via [LinkedIn](https://www.linkedin.com/in/rieckpil) (Philip Riecks) or [mail](mailto:philip@pragmatech.digital) (philip@pragmatech.digital)
+Reach out any time
+- [LinkedIn](https://www.linkedin.com/in/rieckpil) (Philip Riecks)
+- [Mail](mailto:philip@pragmatech.digital) (philip@pragmatech.digital)
