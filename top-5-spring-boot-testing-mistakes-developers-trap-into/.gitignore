@@ -1,0 +1,14 @@
+### Marp ###
+slides/content.pdf
+slides/content.html
+slides/preview/
+slides/assets/generated/
+slides/node_modules/
+
+### Misc ###
+.DS_Store
+excalidraw.log
+.idea
+*.iml
+.vscode/
+**/.claude/settings.local.json
