@@ -354,7 +354,6 @@ void greenButMeaningless() {
 
 ---
 
-
 ## Be Careful on the Transaction Boundary
 
 - `@Transactional` in a test **rolls back** the transaction : no commit-time constraint checks, no visible change
@@ -469,20 +468,20 @@ Each skill includes rules, references, best-practices and antipatterns described
 
 ---
 
-<!-- _class: light statement -->
+<!-- _class: light statement reveal -->
 <!-- _paginate: false -->
 
 <!--
 Notes:
-- Closing thought. The agent can write the code and the tests, but the pager still rings for you.
+- Closing thought, one line per click (fragmented list, works in the HTML deck only).
+- The agent can write the code and the tests, but the pager still rings for you.
 - Bridge to the closing slide: confidence for every commit is the reason for all five fixes.
 -->
 
 # You can delegate the typing.
-# You can't delegate the ownership.
-# **You**  get paged at 3 AM.
-
-# Invest in a test suite that gives you **confidence in every commit**.
+* You can't delegate the ownership.
+* **You** get paged at 3 AM.
+* Invest in a test suite that gives you **confidence in every commit**.
 
 ---
 
