@@ -159,13 +159,13 @@ Notes:
 
 A simplified decision table:
 
-| Question                                        | Tool                                             |
-|-------------------------------------------------|--------------------------------------------------|
-| Does my business logic work?                    | Plain JUnit 5 + Mockito, no Spring               |
-| Does my HTTP layer map, validate, serialize?    | `@WebMvcTest`                                    |
-| Does my query return what I think?              | `@DataJpaTest`                                   |
+| Question                                        | Tool                                           |
+|-------------------------------------------------|------------------------------------------------|
+| Does my business logic work?                    | Plain JUnit + Mockito, no Spring               |
+| Does my HTTP layer map, validate, serialize?    | `@WebMvcTest`                                  |
+| Does my query return what I think?              | `@DataJpaTest`                                 |
 | Does my client talk to the remote API?          | `@RestClientTest` (including a mock HTTP server) |
-| Does the whole thing start and work end to end? | `@SpringBootTest`                                |
+| Does the whole thing start and work end to end? | `@SpringBootTest`                              |
 
 ---
 
@@ -252,7 +252,9 @@ Notes:
 
 ## Where Tests Drift Away From Production
 
-Every test environment takes shortcuts. Each one is a small drift - and drifts compound:
+Every test environment takes shortcuts.
+
+Each one is a small drift - and drifts compound:
 
 - **Database**: in-memory H2 instead of the production engine and version
 - **Servlet container**: `@SpringBootTest` defaults to a **mocked** servlet environment - `webEnvironment = RANDOM_PORT` starts the real one (Tomcat, etc.)
@@ -306,7 +308,7 @@ _Schrödingers database commit or `LazyInitializationException`._
 
 ## The Green Test That Proves Nothing
 
-```java {7,8}
+```java
 @Entity
 public class Customer {
 
@@ -315,7 +317,8 @@ public class Customer {
   private String email;
 
   public Customer(String email) { this.email = email; }
-  // no no-arg constructor - Hibernate needs it to materialize rows
+
+  // what's the catch here?
 }
 ```
 
@@ -323,7 +326,7 @@ public class Customer {
 @Test
 void greenButMeaningless() {
   Long id = customerRepository.save(new Customer("duke@pragmatech.digital")).getId();
-  assertThat(customerRepository.findById(id)).isPresent(); // first-level cache, no SELECT
+  assertThat(customerRepository.findById(id)).isPresent(); // green test, failing production
 }
 ```
 
@@ -332,18 +335,21 @@ void greenButMeaningless() {
 ## What Hibernate Does Behind Your Back
 
 
-```java {4}
+```java
+// as per JPA spec, entity classes require a default constructor
+protected Customer() {
+
+}
+
 @Test
 void greenButMeaningless() {
   Long id = customerRepository.save(new Customer("duke@pragmatech.digital")).getId();
-  assertThat(customerRepository.findById(id)).isPresent(); // first-level cache, no SELECT
+  assertThat(customerRepository.findById(id)).isPresent(); // only interacts with first-level cache
 }
 ```
 
 - The entity is **never materialized from a real row**: the missing no-arg constructor stays invisible until the first production query throws `InstantiationException`
 - **Persistence context (first-level cache)**: every entity you save or load lives here - `findById` returns the cached instance, **no SQL executed**
-- **Write-behind**: `save()` does not `INSERT` immediately - Hibernate delays SQL until a **flush** (before a query that needs it, or at commit)
-
 - Consider the `TestEntityManager.persistFlushFind()`
 
 ---
@@ -352,7 +358,7 @@ void greenButMeaningless() {
 ## Be Careful on the Transaction Boundary
 
 - `@Transactional` in a test **rolls back** the transaction : no commit-time constraint checks, no visible change
-- `@TransactionalEventListener(phase = AFTER_COMMIT)` **never fires** in this test
+- `@TransactionalEventListener(phase = AFTER_COMMIT)` **may not fire** in the test
 - Lazy loading works inside the test transaction and throws `LazyInitializationException` in production
 - The gold standard: `@SpringBootTest(webEnvironment = RANDOM_PORT)` + a real HTTP call - the request runs in its **own transaction**, flushes, commits, and reads real rows
 
