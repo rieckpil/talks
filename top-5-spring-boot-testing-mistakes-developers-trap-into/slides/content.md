@@ -321,7 +321,6 @@ public class Customer {
 
 ```java {4}
 @Test
-@Transactional
 void greenButMeaningless() {
   Long id = customerRepository.save(new Customer("duke@pragmatech.digital")).getId();
   assertThat(customerRepository.findById(id)).isPresent(); // first-level cache, no SELECT
@@ -332,10 +331,19 @@ void greenButMeaningless() {
 
 ## What Hibernate Does Behind Your Back
 
+
+```java {4}
+@Test
+void greenButMeaningless() {
+  Long id = customerRepository.save(new Customer("duke@pragmatech.digital")).getId();
+  assertThat(customerRepository.findById(id)).isPresent(); // first-level cache, no SELECT
+}
+```
+
 - The entity is **never materialized from a real row**: the missing no-arg constructor stays invisible until the first production query throws `InstantiationException`
 - **Persistence context (first-level cache)**: every entity you save or load lives here - `findById` returns the cached instance, **no SQL executed**
-- **Flush != commit**: flush sends the SQL, only commit makes it durable, fires the commit-time constraint checks and `AFTER_COMMIT` events
-- In a `@Transactional` test the transaction **rolls back**: possibly nothing was ever flushed, and certainly nothing was committed
+- **Write-behind**: `save()` does not `INSERT` immediately - Hibernate delays SQL until a **flush** (before a query that needs it, or at commit)
+
 - Consider the `TestEntityManager.persistFlushFind()`
 
 ---
@@ -343,8 +351,7 @@ void greenButMeaningless() {
 
 ## Be Careful on the Transaction Boundary
 
-- **Write-behind**: `save()` does not `INSERT` immediately - Hibernate delays SQL until a **flush** (before a query that needs it, or at commit)
-- Rollback at the end of the test: **no commit**, no commit-time constraint checks, no visible change
+- `@Transactional` in a test **rolls back** the transaction : no commit-time constraint checks, no visible change
 - `@TransactionalEventListener(phase = AFTER_COMMIT)` **never fires** in this test
 - Lazy loading works inside the test transaction and throws `LazyInitializationException` in production
 - The gold standard: `@SpringBootTest(webEnvironment = RANDOM_PORT)` + a real HTTP call - the request runs in its **own transaction**, flushes, commits, and reads real rows
