@@ -159,13 +159,13 @@ Notes:
 
 A simplified decision table:
 
-| Question                                        | Tool |
-|-------------------------------------------------|---|
-| Does my business logic work?                    | Plain JUnit 5 + Mockito, no Spring |
-| Does my HTTP layer map, validate, serialize?    | `@WebMvcTest` |
-| Does my query return what I think?              | `@DataJpaTest` |
-| Does my client talk to the remote API?          | `@RestClientTest` + WireMock |
-| Does the whole thing start and work end to end? | `@SpringBootTest` |
+| Question                                        | Tool                                           |
+|-------------------------------------------------|------------------------------------------------|
+| Does my business logic work?                    | Plain JUnit + Mockito, no Spring               |
+| Does my HTTP layer map, validate, serialize?    | `@WebMvcTest`                                  |
+| Does my query return what I think?              | `@DataJpaTest`                                 |
+| Does my client talk to the remote API?          | `@RestClientTest` (including a mock HTTP server) |
+| Does the whole thing start and work end to end? | `@SpringBootTest`                              |
 
 ---
 
@@ -252,7 +252,9 @@ Notes:
 
 ## Where Tests Drift Away From Production
 
-Every test environment takes shortcuts. Each one is a small drift - and drifts compound:
+Every test environment takes shortcuts.
+
+Each one is a small drift - and drifts compound:
 
 - **Database**: in-memory H2 instead of the production engine and version
 - **Servlet container**: `@SpringBootTest` defaults to a **mocked** servlet environment - `webEnvironment = RANDOM_PORT` starts the real one (Tomcat, etc.)
@@ -304,42 +306,9 @@ _Schrödingers database commit or `LazyInitializationException`._
 
 ---
 
-<!--
-Notes:
-- The commit you saw was not there. Everything rolls back at the end of the test.
--->
-
-## Looks Fine, Right?
-
-```java {2,9}
-@SpringBootTest
-@Transactional
-class CustomerServiceTest {
-
-  @Test
-  void shouldRegisterCustomerAndPublishEvent() {
-    customerService.register(new RegistrationRequest("duke@pragmatech.digital"));
-
-    assertThat(customerRepository.count()).isEqualTo(1);
-    verify(eventPublisher).publishEvent(any(CustomerRegisteredEvent.class));
-  }
-}
-```
-
----
-
-## What Hibernate Does Behind Your Back
-
-- **Persistence context (first-level cache)**: every entity you save or load lives here - `findById` returns the cached instance, **no SQL executed**
-- **Write-behind**: `save()` does not `INSERT` immediately - Hibernate delays SQL until a **flush** (before a query that needs it, or at commit)
-- **Flush != commit**: flush sends the SQL, only commit makes it durable, fires the commit-time constraint checks and `AFTER_COMMIT` events
-- In a `@Transactional` test the transaction **rolls back**: possibly nothing was ever flushed, and certainly nothing was committed
-
----
-
 ## The Green Test That Proves Nothing
 
-```java {7,8}
+```java
 @Entity
 public class Customer {
 
@@ -348,26 +317,47 @@ public class Customer {
   private String email;
 
   public Customer(String email) { this.email = email; }
-  // no no-arg constructor - Hibernate needs it to materialize rows
+
+  // what's the catch here?
 }
 ```
 
 ```java {4}
 @Test
-@Transactional
 void greenButMeaningless() {
   Long id = customerRepository.save(new Customer("duke@pragmatech.digital")).getId();
-  assertThat(customerRepository.findById(id)).isPresent(); // first-level cache, no SELECT
+  assertThat(customerRepository.findById(id)).isPresent(); // green test, failing production
 }
 ```
 
 ---
 
-## Be Careful on the Transaction Boundary
+## What Hibernate Does Behind Your Back
+
+
+```java
+// as per JPA spec, entity classes require a default constructor
+protected Customer() {
+
+}
+
+@Test
+void greenButMeaningless() {
+  Long id = customerRepository.save(new Customer("duke@pragmatech.digital")).getId();
+  assertThat(customerRepository.findById(id)).isPresent(); // only interacts with first-level cache
+}
+```
 
 - The entity is **never materialized from a real row**: the missing no-arg constructor stays invisible until the first production query throws `InstantiationException`
-- Rollback at the end of the test: **no commit**, no commit-time constraint checks, no visible change
-- `@TransactionalEventListener(phase = AFTER_COMMIT)` **never fires** in this test
+- **Persistence context (first-level cache)**: every entity you save or load lives here - `findById` returns the cached instance, **no SQL executed**
+- Consider the `TestEntityManager.persistFlushFind()`
+
+---
+
+## Be Careful on the Transaction Boundary
+
+- `@Transactional` in a test **rolls back** the transaction : no commit-time constraint checks, no visible change
+- `@TransactionalEventListener(phase = AFTER_COMMIT)` **may not fire** in the test
 - Lazy loading works inside the test transaction and throws `LazyInitializationException` in production
 - The gold standard: `@SpringBootTest(webEnvironment = RANDOM_PORT)` + a real HTTP call - the request runs in its **own transaction**, flushes, commits, and reads real rows
 
@@ -398,7 +388,7 @@ Notes:
 ... green on the outside, red on the inside.
 
 - **100% coverage** and still broken: coverage measures which lines *ran*, not which behavior was *verified*
-- A test that asserts the mock proves the mock works
+- A test that asserts the mock works as previously instructed
 - Auto-generated tests can give you the **feeling** of safety
 - Agents produce these at scale: plausible names, green checks, zero judgment
 
@@ -445,16 +435,17 @@ public Long registerUser(int age, String username) {
 <!-- _class: light statement -->
 <!-- _paginate: false -->
 
-# AI writes tests in seconds. **Trusting them still takes human judgment.**
+# AI writes tests in seconds. **Trusting** them still **takes human judgment.**
 
 ---
 
 ## What I Do to Build Confidence in the Agentic Coding Era
 
-- **Review generated tests** like a pull request from a new hire - fast, confident, unproven
-- **Put the bridges in the repo**: test slices, shared test configuration, Testcontainers
+- **Review generated tests** like a pull request from a new hire
+- **Put the bridges in the repo**: test slices, shared test configuration, Testcontainers best practices
 - **Make the rules executable**: ArchUnit rules, my testing conventions in `CLAUDE.md` / `AGENTS.md`, mutation score thresholds (PIT) in CI
-- **Keep the feedback loop tight**: fast, trustworthy tests let the agent iterate without me watching every step
+- **Custom skills**: Define once for each project how automated testing is tackled, best practices, antipatterns, etc.
+- **Keep the feedback loop tight**: fast, trustworthy tests let the agent iterate without me watching every step (and reduce context switches)
 
 ---
 
@@ -477,6 +468,23 @@ Each skill includes rules, references, best-practices and antipatterns described
 
 ---
 
+<!-- _class: light statement reveal -->
+<!-- _paginate: false -->
+
+<!--
+Notes:
+- Closing thought, one line per click (fragmented list, works in the HTML deck only).
+- The agent can write the code and the tests, but the pager still rings for you.
+- Bridge to the closing slide: confidence for every commit is the reason for all five fixes.
+-->
+
+# You can delegate the typing.
+* You can't delegate the ownership.
+* **You** get paged at 3 AM.
+* Invest in a test suite that gives you **confidence in every commit**.
+
+---
+
 <!-- _class: light closing -->
 <!-- _paginate: false -->
 <!-- _header: '' -->
@@ -487,6 +495,8 @@ Each skill includes rules, references, best-practices and antipatterns described
 
 Get the slides here:
 
-![h:260 center](assets/agentic-testing-course-qr.png)
+![h:260 center](assets/slides-pdf-bozen.png)
 
-Reach out any time via [LinkedIn](https://www.linkedin.com/in/rieckpil) (Philip Riecks) or [mail](mailto:philip@pragmatech.digital) (philip@pragmatech.digital)
+Reach out any time
+- [LinkedIn](https://www.linkedin.com/in/rieckpil) (Philip Riecks)
+- [Mail](mailto:philip@pragmatech.digital) (philip@pragmatech.digital)
