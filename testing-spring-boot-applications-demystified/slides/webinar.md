@@ -4,8 +4,8 @@ theme: pragmatech
 header: 'Testing Spring Boot Applications Demystified @ Vestas 19.08.2026'
 ---
 
-![bg](assets/tsbad-beginning.png)
-<!--![bg](assets/katowice-jug-2026.jpg) -->
+<!--![bg](assets/tsbad-beginning.png)  -->
+![bg](assets/jug-nuremberg.jpg) -->
 <!-- header: "" -->
 <!-- footer: ""-->
 
