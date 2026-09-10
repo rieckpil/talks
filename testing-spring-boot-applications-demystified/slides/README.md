@@ -19,61 +19,48 @@ npm install -g @marp-team/marp-cli
 
 ## Generating Slides
 
-### HTML Slides
-
-To generate HTML slides that you can view in a browser:
-
-```bash
-marp --html content.md --theme pragmatech.css --engine engine.js
-```
-
-This will create `marp-slides.html` in the current directory.
-
-### PDF Slides
-
-To generate a PDF version of the slides:
+The deck is `webinar.md`, the theme is `pragmatech.css` (light palette, `class: light`)
+and `engine.js` adds code line numbers and `{1,3-5}` line highlighting. `.marprc.yml`
+wires the engine and theme, so no flags are needed. Run all commands from this folder.
 
 ```bash
- marp --pdf content.md --theme pragmatech.css --allow-local-files
+# self-contained HTML (transitions and presenter mode work here)
+marp webinar.md -o webinar.html
+
+# live preview while editing
+marp -p -w webinar.md
+
+# one PNG per slide for a quick visual check
+marp webinar.md --images png -o preview/slide.png
+
+# shareable PDF with resized images and Ghostscript compression
+./resize_images.sh
+./generate_sharable_pdf.sh slides-<venue>-<date>.pdf
 ```
 
-This will create `marp-slides.pdf` in the current directory.
+Note: when Marp runs from a script or CI without a terminal, add `< /dev/null` to the
+command. Marp CLI otherwise waits for Markdown on stdin and looks like it hangs.
 
-You can also use the Chrome PDF engine for better rendering:
-
-```bash
-marp --pdf --engine chrome marp-slides.md
-```
-
-If you encounter any layout issues, you can also try adjusting the PDF size:
-
-```bash
-marp --pdf --size 16:9 --engine chrome marp-slides.md
-```
-
-### Presentation Mode
-
-For presenting the slides with speaker notes:
-
-```bash
-marp -s marp-slides.md
-```
-
-This will start a local server and open the presentation in your default browser.
+Exported PDFs follow the naming `slides-<venue>-<date>.pdf` and are committed next to the deck.
 
 ## Customization
 
-The slides use a custom PragmaTech theme defined in `pragmatech.css`. The theme includes:
+The slides use the PragmaTech Marp theme in `pragmatech.css`. It is the same file as in
+the "Top 5 Spring Boot Testing Mistakes" deck and ships two palettes in one file: dark
+(default) and light (`class: light`, used here). Layout classes are applied per slide as
+`<!-- _class: light <layout> -->`: `title`, `section`, `agenda`, `split`, `statement`,
+`metrics`, `closing`.
 
-- Custom colors matching PragmaTech's branding
-- A footer with the PragmaTech logo on the left, company name in the center, and page numbers on the right
-- Proper content padding to prevent overflow
-- Responsive layout for different screen sizes
+House style:
+
+- No em dashes, use `-`. Separators in bylines use `·`.
+- One idea per slide. Quest and quest-item intros use the `section` layout.
+- Speaker notes live in `<!-- Notes: ... -->` comments above the slide content.
 
 ### Images and Assets
 
 - All images are stored in the `assets/` directory
-- The PragmaTech logo is included in the footer of each slide
+- The PragmaTech logo (`assets/logo.webp`) sits in the footer of each slide
 - SVG diagrams for context caching and other concepts
 
 ## Image Optimization

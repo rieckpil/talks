@@ -1,48 +1,62 @@
 ---
 marp: true
 theme: pragmatech
-header: 'Testing Spring Boot Applications Demystified @ Vestas 19.08.2026'
+class: light
+paginate: true
+transition: pt-fade
+header: 'Testing Spring Boot Applications Demystified @ JUG Nürnberg 10.09.2026'
+footer: '![](assets/logo.webp) Philip Riecks · [PragmaTech GmbH](https://pragmatech.digital/) · [@rieckpil](https://x.com/rieckpil)'
 ---
 
-<!--![bg](assets/tsbad-beginning.png)  -->
-![bg](assets/jug-nuremberg.jpg) -->
-<!-- header: "" -->
-<!-- footer: ""-->
-
----
 <!--
+Menti: https://www.menti.com/ - code 3982 6427
+-->
 
+<!-- _paginate: false -->
+<!-- _header: '' -->
+<!-- _footer: '' -->
+
+<!-- ![bg](assets/tsbad-beginning.png) -->
+![bg](assets/jug-nuremberg.jpg)
+
+---
+
+<!-- _class: light title -->
+<!-- _paginate: false -->
+<!-- _header: '' -->
+
+<!--
 Notes:
 
 -->
-<!-- _class: title -->
+
 ![bg left:33%](assets/tsbad-beginning-split-middle.png)
 
-# Testing Spring Boot Applications Demystified
+# Testing Spring Boot Applications **Demystified**
 
-## A Hero's Journey Through the Spring Boot Testing Labyrinth
+## The Hero's Journey Through the Spring Boot Testing Labyrinth
 
-Talk @ Vestas 20.08.2026
-
-Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](https://x.com/rieckpil)
+Java User Group Nürnberg · September 10, 2026
 
 ---
 
-![bg right:33% h:750](assets/location.png)
+<!-- footer: '![](assets/logo.webp)' -->
+
+![bg right:33% h:750](assets/hza.jpg)
 
 ### About Philip
 
-- Self-employed developer from Herzogenaurach (HQ of adidas & Puma), Germany (Bavaria) 🍻
+- Self-employed developer from Herzogenaurach, now living in Erlangen, Germany (Bavaria) 🍻
 - Blogging & content creation with a focus on testing Java and specifically Spring Boot applications 🍃
-- Founder of PragmaTech GmbH - Enabling Developers to Frequently Deliver Software with More Confidence 🚤
+- Founder of [PragmaTech GmbH](https://pragmatech.digital/) - **Enabling Developers to Frequently Deliver** Software with **More Confidence** 🚤
 
 ---
 
 ## Participate During the Talk
 
-Go to [menti.com](https://www.menti.com/) and use the code **8677 1883** to **anonymously** submit answers for the quizzes and add your questions during the talk.
+Go to [menti.com](https://www.menti.com/) and use the code **3982 6427** to **anonymously** submit answers for the quizzes and add your questions during the talk.
 
-![h:200 center](assets/mentimeter-vestas.png)
+![h:200 center](assets/mentimeter-jug-nuremberg.png)
 
 
 Please answer the **first three questions**:
@@ -52,8 +66,8 @@ Please answer the **first three questions**:
 
 ---
 
-<!-- header: 'Talk @ Vestas 20.08.2026 - Questions @ menti.com Code: <strong>8677 1883</strong>' -->
-
+<!-- header: 'Testing Spring Boot Applications Demystified  @ JUG Nürnberg 10.09.2026 - Questions @ menti.com Code: <strong>3982 6427</strong>' -->
+<!-- _paginate: false -->
 
 ![bg right:33%](assets/why-test-software.jpg)
 
@@ -61,32 +75,18 @@ Please answer the **first three questions**:
 
 ---
 
-## Software Development is Changing
+<!-- _class: light statement -->
+<!-- _paginate: true -->
 
-![center w:400](assets/uncle-bob-tweet.jpeg)
+# In 2026, most of our code is **not written by us**.
 
 ---
-
 
 ![center h:500](assets/ai-frog-meme.jpg)
 
-
 ---
 
-
-![bg right:33%](assets/ai-image.jpg)
-
-
-## Agentic Development Today
-
-- AI makes software faster to create and harder to trust.
-- AI made writing code cheap. Verifying it is the new bottleneck.
-- AI adoption correlates with increased throughput and decreased stability.
-- AI generates the logic, but you inherit the **liability**. It can write the function; it won't join the post-mortem.
-
----
-
-<!-- footer: '![w:32 h:32](assets/logo.webp)' -->
+<!-- _paginate: false -->
 
 
 ![bg right:33%](assets/northstar.jpg)
@@ -97,10 +97,12 @@ Imagine seeing this pull request on a Friday afternoon:
 
 ![](assets/northstar-pr.png)
 
-How confident are you to merge this major Spring Boot upgrade and deploy it to production once the pipeline turns green?
+How **confident** are you to merge this major Spring Boot upgrade and **deploy** it to production once the pipeline turns green?
 
 ---
 
+<!-- _class: light statement -->
+<!-- _paginate: false -->
 
 # Good tests don't just catch bugs - they give you **fast feedback** and **confident deployments**.
 
@@ -145,6 +147,9 @@ How confident are you to merge this major Spring Boot upgrade and deploy it to p
 
 [//]: # ()
 [//]: # (---)
+
+<!-- _class: light statement -->
+<!-- _paginate: false -->
 
 # How do we get there for our **Spring Boot** projects?
 
@@ -204,7 +209,7 @@ How confident are you to merge this major Spring Boot upgrade and deploy it to p
 
 - **Provide a clear mental map** for choosing between unit, slice, and integration tests
 - Get **better judgment** for AI-written tests
-- Collect **practical techniques and best practices** to speed up test suites and validate test quality
+- Understand the **testing concepts** to better reason about a test strategy or test failures
 - **Build confidence** into your development work to **ship fearlessly**
 
 
@@ -225,6 +230,8 @@ Testing Spring Boot applications can feel like entering a labyrinth blindfolded:
 
 ---
 
+<!-- _class: light section -->
+<!-- _paginate: false -->
 
 <!--
 
@@ -235,13 +242,13 @@ Notes:
 
 -->
 
-# Quest 1
-
-## The Unit Testing Guardian
-
-### The Swift Gatekeeper - Blocks Those Who Overcomplicate
-
 ![bg right:33%](assets/unit-gatekeeper-act.png)
+
+## Quest 1
+
+# The Unit Testing Guardian
+
+_The Swift Gatekeeper - Blocks Those Who Overcomplicate_
 
 ---
 
@@ -326,133 +333,209 @@ Tips:
 
 ---
 
-[//]: # (## What's Inside the Testing Swiss Army Knife?)
+## What's Inside the Testing Swiss Army Knife?
+
+
+- **JUnit**: Java's de-facto standard testing framework and foundation.
+
+- **Mockito**: Creating mock objects to simulate dependencies and verify interactions.
+
+- **AssertJ**: Provides fluent, chainable, and readable assertions.
+
+- **Hamcrest**: Offers flexible matchers for creating custom assertions.
+
+- **JSONAssert**: Compares JSON strings with flexible matching options.
+
+- **JsonPath**: Extracts and queries data from JSON similar to XPath.
+
+- **XMLUnit**: Compares and validates XML documents.
+
+- **Awaitility**: Handles asynchronous testing with fluent conditions.
 
 [//]: # ()
-[//]: # (- **JUnit** &#40;currently 5, later 6&#41;: Java's de-facto standard testing framework and foundation.)
+[//]: # (## JUnit: The Testing Foundation)
 
-[//]: # (- **Mockito**: Creating mock objects to simulate dependencies and verify interactions.)
+[//]: # ()
+[//]: # (- Java's de-facto standard testing framework - version **6** with Spring Boot 4 &#40;drop-in upgrade, unlike 4 → 5&#41;)
 
-[//]: # (- **AssertJ**: Provides fluent, chainable, and readable assertions.)
+[//]: # (- More than just `@Test`: **Extension API** &#40;replaces `@RunWith`&#41;, lifecycle hooks, `@ParameterizedTest`, `@Nested`, `@DisplayName`, **Parallel execution**)
 
-[//]: # (- **Hamcrest**: Offers flexible matchers for creating custom assertions.)
+[//]: # ()
+[//]: # (```java)
 
-[//]: # (- **JSONAssert**: Compares JSON strings with flexible matching options.)
+[//]: # (@ExtendWith&#40;MockitoExtension.class&#41;)
 
-[//]: # (- **JsonPath**: Extracts and queries data from JSON similar to XPath.)
+[//]: # (class DiscountCalculatorTest {)
 
-[//]: # (- **XMLUnit**: Compares and validates XML documents.)
+[//]: # ()
+[//]: # (  @ParameterizedTest)
 
-[//]: # (- **Awaitility**: Handles asynchronous testing with fluent conditions.)
+[//]: # (  @CsvSource&#40;{ "0, 0.0", "100, 10.0", "1000, 150.0" }&#41;)
 
+[//]: # (  void shouldApplyDiscountWhenAmountIsValid&#40;int amount, double expected&#41; {)
 
-## JUnit: The Testing Foundation
+[//]: # (    // ...)
 
-- Java's de-facto standard testing framework - version **6** with Spring Boot 4 (drop-in upgrade, unlike 4 → 5)
-- More than just `@Test`: **Extension API** (replaces `@RunWith`), lifecycle hooks, `@ParameterizedTest`, `@Nested`, `@DisplayName`, **Parallel execution**
+[//]: # (  })
 
-```java
-@ExtendWith(MockitoExtension.class)
-class DiscountCalculatorTest {
+[//]: # (})
 
-  @ParameterizedTest
-  @CsvSource({ "0, 0.0", "100, 10.0", "1000, 150.0" })
-  void shouldApplyDiscountWhenAmountIsValid(int amount, double expected) {
-    // ...
-  }
-}
-```
+[//]: # (```)
 
----
+[//]: # ()
+[//]: # (---)
 
-## Mockito: Stub, Verify, and Beyond
+[//]: # ()
+[//]: # (## Mockito: Stub, Verify, and Beyond)
 
-- **Stubbing** with `when(...).thenReturn(...)` and **verifying** interactions with `verify(...)`
-- **Argument matchers** (`any()`, `eq()`, `argThat(...)`) for flexible expectations
-- **Advanced**: deep stubs (`RETURNS_DEEP_STUBS`) and static mocking (`MockedStatic`) for legacy/utility code
+[//]: # ()
+[//]: # (- **Stubbing** with `when&#40;...&#41;.thenReturn&#40;...&#41;` and **verifying** interactions with `verify&#40;...&#41;`)
 
-```java
-when(customerRepository.findById(42L))
-  .thenReturn(Optional.of(customer));
+[//]: # (- **Argument matchers** &#40;`any&#40;&#41;`, `eq&#40;&#41;`, `argThat&#40;...&#41;`&#41; for flexible expectations)
 
-verify(eventPublisher).publish(any(CustomerCreated.class));
-```
+[//]: # (- **Advanced**: deep stubs &#40;`RETURNS_DEEP_STUBS`&#41; and static mocking &#40;`MockedStatic`&#41; for legacy/utility code)
 
----
+[//]: # ()
+[//]: # (```java)
 
-## AssertJ & Hamcrest: Readable Assertions
+[//]: # (when&#40;customerRepository.findById&#40;42L&#41;&#41;)
 
-- **AssertJ**: fluent, chainable, IDE-friendly auto-completion
-- **Hamcrest**: composable matchers, useful with matcher-driven APIs like Mockito `argThat(...)`
-- Pick one for general assertions and stick with it within a test class
+[//]: # (  .thenReturn&#40;Optional.of&#40;customer&#41;&#41;;)
 
-```java
-// AssertJ - chainable & expressive
-assertThat(customers)
-  .hasSize(3)
-  .extracting(Customer::firstName)
-  .containsExactly("Alice", "Bob", "Charlie");
+[//]: # ()
+[//]: # (verify&#40;eventPublisher&#41;.publish&#40;any&#40;CustomerCreated.class&#41;&#41;;)
 
-// Hamcrest - composable matchers
-assertThat("duke".toUpperCase(), equalTo("DUKE"));
-```
+[//]: # (```)
 
----
+[//]: # ()
+[//]: # (---)
 
-## JsonPath & JSONAssert: Working With JSON
+[//]: # ()
+[//]: # (## AssertJ & Hamcrest: Readable Assertions)
 
-- **JsonPath**: query JSON like XPath - drill into responses without deserializing
-- **JSONAssert**: compare JSON strings with **lenient** or **strict** mode - order-insensitive, ignores extra fields
+[//]: # ()
+[//]: # (- **AssertJ**: fluent, chainable, IDE-friendly auto-completion)
 
-```java
-String json = "{ ... }";
+[//]: # (- **Hamcrest**: composable matchers, useful with matcher-driven APIs like Mockito `argThat&#40;...&#41;`)
 
-// JsonPath - query a JSON document directly
-String firstName = JsonPath.parse(json).read("$.firstName", String.class);
-Long tagCount = JsonPath.parse(json).read("$.tags.length()", Long.class);
+[//]: # (- Pick one for general assertions and stick with it within a test class)
 
-// JSONAssert - lenient: extra fields in actual are OK
-String expected = "{ \"name\": \"duke\" }";
-String actual = "{ \"name\": \"duke\", \"age\": 42 }";
+[//]: # ()
+[//]: # (```java)
 
-JSONAssert.assertEquals(expected, actual, JSONCompareMode.LENIENT);
-```
+[//]: # (// AssertJ - chainable & expressive)
 
----
+[//]: # (assertThat&#40;customers&#41;)
 
-## XMLUnit: Comparing XML Documents
+[//]: # (  .hasSize&#40;3&#41;)
 
-- Compare and validate XML with **whitespace-aware**, **namespace-aware**, **order-tolerant** diffs
-- Still relevant for SOAP, configuration files, and legacy enterprise integrations
+[//]: # (  .extracting&#40;Customer::firstName&#41;)
 
-```java
-String control = "<customer>...</customer>";
-String test = "<customer>...</customer>";
+[//]: # (  .containsExactly&#40;"Alice", "Bob", "Charlie"&#41;;)
 
-Diff diff = DiffBuilder.compare(control)
-  .withTest(test)
-  .ignoreWhitespace()
-  .checkForSimilar()
-  .build();
+[//]: # ()
+[//]: # (// Hamcrest - composable matchers)
 
-assertThat(diff.hasDifferences()).isFalse();
-```
+[//]: # (assertThat&#40;"duke".toUpperCase&#40;&#41;, equalTo&#40;"DUKE"&#41;&#41;;)
 
----
+[//]: # (```)
 
-## Awaitility: Taming Asynchronous Tests
+[//]: # ()
+[//]: # (---)
 
-- Fluent **polling** for eventually-consistent assertions - message queues, async event handlers, scheduled jobs
-- Replaces brittle `Thread.sleep(...)` with explicit conditions and timeouts
+[//]: # ()
+[//]: # (## JsonPath & JSONAssert: Working With JSON)
 
-```java
-await()
-  .atMost(5, SECONDS)
-  .pollInterval(100, MILLISECONDS)
-  .untilAsserted(() ->
-    assertThat(orderRepository.findAll()).hasSize(1)
-  );
-```
+[//]: # ()
+[//]: # (- **JsonPath**: query JSON like XPath - drill into responses without deserializing)
+
+[//]: # (- **JSONAssert**: compare JSON strings with **lenient** or **strict** mode - order-insensitive, ignores extra fields)
+
+[//]: # ()
+[//]: # (```java)
+
+[//]: # (String json = "{ ... }";)
+
+[//]: # ()
+[//]: # (// JsonPath - query a JSON document directly)
+
+[//]: # (String firstName = JsonPath.parse&#40;json&#41;.read&#40;"$.firstName", String.class&#41;;)
+
+[//]: # (Long tagCount = JsonPath.parse&#40;json&#41;.read&#40;"$.tags.length&#40;&#41;", Long.class&#41;;)
+
+[//]: # ()
+[//]: # (// JSONAssert - lenient: extra fields in actual are OK)
+
+[//]: # (String expected = "{ \"name\": \"duke\" }";)
+
+[//]: # (String actual = "{ \"name\": \"duke\", \"age\": 42 }";)
+
+[//]: # ()
+[//]: # (JSONAssert.assertEquals&#40;expected, actual, JSONCompareMode.LENIENT&#41;;)
+
+[//]: # (```)
+
+[//]: # ()
+[//]: # (---)
+
+[//]: # ()
+[//]: # (## XMLUnit: Comparing XML Documents)
+
+[//]: # ()
+[//]: # (- Compare and validate XML with **whitespace-aware**, **namespace-aware**, **order-tolerant** diffs)
+
+[//]: # (- Still relevant for SOAP, configuration files, and legacy enterprise integrations)
+
+[//]: # ()
+[//]: # (```java)
+
+[//]: # (String control = "<customer>...</customer>";)
+
+[//]: # (String test = "<customer>...</customer>";)
+
+[//]: # ()
+[//]: # (Diff diff = DiffBuilder.compare&#40;control&#41;)
+
+[//]: # (  .withTest&#40;test&#41;)
+
+[//]: # (  .ignoreWhitespace&#40;&#41;)
+
+[//]: # (  .checkForSimilar&#40;&#41;)
+
+[//]: # (  .build&#40;&#41;;)
+
+[//]: # ()
+[//]: # (assertThat&#40;diff.hasDifferences&#40;&#41;&#41;.isFalse&#40;&#41;;)
+
+[//]: # (```)
+
+[//]: # ()
+[//]: # (---)
+
+[//]: # ()
+[//]: # (## Awaitility: Taming Asynchronous Tests)
+
+[//]: # ()
+[//]: # (- Fluent **polling** for eventually-consistent assertions - message queues, async event handlers, scheduled jobs)
+
+[//]: # (- Replaces brittle `Thread.sleep&#40;...&#41;` with explicit conditions and timeouts)
+
+[//]: # ()
+[//]: # (```java)
+
+[//]: # (await&#40;&#41;)
+
+[//]: # (  .atMost&#40;5, SECONDS&#41;)
+
+[//]: # (  .pollInterval&#40;100, MILLISECONDS&#41;)
+
+[//]: # (  .untilAsserted&#40;&#40;&#41; ->)
+
+[//]: # (    assertThat&#40;orderRepository.findAll&#40;&#41;&#41;.hasSize&#40;1&#41;)
+
+[//]: # (  &#41;;)
+
+[//]: # (```)
 
 ---
 
@@ -465,6 +548,7 @@ await()
 - **Pitfall**: Poor class design leads to untestable god classes. Good tests start with good design.
 
 - **Tools**: JUnit, Mockito, AssertJ (or Spock, TestNG, Hamcrest).
+
 ---
 
 ## Unit Testing has Limits
@@ -608,13 +692,16 @@ void shouldCreateCustomerWhenPayloadRequestIsValid() {
 
 ---
 
-# Quest 2
-
-## The Slice Testing Hydra
-
-### Multiple Heads, Each Guarding a Layer
+<!-- _class: light section -->
+<!-- _paginate: false -->
 
 ![bg right:33%](assets/hydra-act.png)
+
+## Quest 2
+
+# The Slice Testing Hydra
+
+_Multiple Heads, Each Guarding a Layer_
 
 ---
 
@@ -689,15 +776,16 @@ class CustomerControllerTest {
 
 ---
 
-
-# Quest 3
-
-## The Integration Testing Dragon
-
-### Guards the Full Treasure - but Demands Patience
-
+<!-- _class: light section -->
+<!-- _paginate: false -->
 
 ![bg right:33%](assets/dragon-act.png)
+
+## Quest 3
+
+# The Integration Testing Dragon
+
+_Guards the Full Treasure - but Demands Patience_
 
 ---
 
@@ -871,25 +959,30 @@ class ApplicationServletContainerIT {
 
 ---
 
-... but what about **Problem #3**: How to Keep our Build Time at a reasonable Duration?
+<!-- _class: light statement -->
+<!-- _paginate: false -->
+
+# ... but what about **Problem #3**: How to Keep our Build Time at a reasonable Duration?
 
 ---
 
-# Quest Item 1
-
-## The Caching Amulet
-
-### Helps You Reuse What You Already Built
-
+<!-- _class: light section -->
+<!-- _paginate: false -->
 
 ![bg right:33%](assets/caching-amulet.png)
+
+## Quest Item 1
+
+# The Caching Amulet
+
+_Helps You Reuse What You Already Built_
 
 ---
 
 ## Integration Testing - The Need for Speed
 
 - **The Problem:** Integration tests require a started & initialized Spring `ApplicationContext`, which slows down the build
-- **The Solution:** Spring Test `TestContext` Caching – stores an already started Spring `ApplicationContext` for reuse
+- **The Solution:** Spring Test `TestContext` Caching - stores an already started Spring `ApplicationContext` for reuse
 - This feature is part of Spring Test (included in every Spring Boot project via `spring-boot-starter-test`)
 
 Example of speed improvement:
@@ -988,31 +1081,42 @@ public abstract class AbstractIntegrationTest {
 
 The setup above will **disable** the context caching feature and slow down the builds significantly!
 
+[//]: # (### New in Spring Framework 7: Pausing Contexts)
+
+[//]: # ()
+[//]: # (See Release Notes von [Spring Framework 7]&#40;https://spring.io/blog/2025/07/17/spring-framework-7-0-0-M7-available-now&#41;.)
+
+[//]: # ()
+[//]: # (> Pausing of Test Application Contexts)
+
+[//]: # (>)
+
+[//]: # (> The Spring TestContext framework is caching application context instances within test suites for faster runs. As of Spring Framework 7.0, we now pause test application contexts when)
+
+[//]: # (> they're not used.)
+
+[//]: # (>)
+
+[//]: # (> This means an application context stored in the context cache will be stopped when it is no longer actively in use and automatically restarted the next time the)
+
+[//]: # (> context is retrieved from the cache.)
+
+[//]: # (>)
+
+[//]: # (> Specifically, the latter will restart all auto-startup beans in the application context, effectively restoring the lifecycle state.)
+
 ---
 
-### New in Spring Framework 7: Pausing Contexts
-
-See Release Notes von [Spring Framework 7](https://spring.io/blog/2025/07/17/spring-framework-7-0-0-M7-available-now).
-
-> Pausing of Test Application Contexts
->
-> The Spring TestContext framework is caching application context instances within test suites for faster runs. As of Spring Framework 7.0, we now pause test application contexts when
-> they're not used.
->
-> This means an application context stored in the context cache will be stopped when it is no longer actively in use and automatically restarted the next time the
-> context is retrieved from the cache.
->
-> Specifically, the latter will restart all auto-startup beans in the application context, effectively restoring the lifecycle state.
-
----
-
-# Quest Item 2
-
-## The Lightning Shield
-
-### Many Cores, One Goal
+<!-- _class: light section -->
+<!-- _paginate: false -->
 
 ![bg right:33%](assets/lightning-shield.png)
+
+## Quest Item 2
+
+# The Lightning Shield
+
+_Many Cores, One Goal_
 
 ---
 
@@ -1092,14 +1196,16 @@ junit.jupiter.execution.parallel.mode.classes.default = concurrent
 
 ---
 
-# Quest Item 3
-
-## The Scroll of Truth
-
-### Coverage Lies, Mutants Don't
-
+<!-- _class: light section -->
+<!-- _paginate: false -->
 
 ![bg right:33%](assets/scroll-of-truth.png)
+
+## Quest Item 3
+
+# The Scroll of Truth
+
+_Coverage Lies, Mutants Don't_
 
 ---
 
@@ -1365,16 +1471,30 @@ public Long registerUser(int age, String username) {
 ## Optimizing AI-written Tests with Skills
 
 
-![center h:500 w:1050](assets/skills.jpg)
+Get a **skillset** for fast & comprehensive tests, including a **test strategy** for the given project:
+
+```text
+.claude/skills/
+├── unit-testing            fast tests without context bloat
+├── slice-testing           right-sized Spring context slices
+├── slice-testing-webmvc    web layer with @WebMvcTest
+├── integration-testing     full-context tests that stay fast
+├── e2e-testing             user journeys against the running app
+├── testcontainers-setup    real infrastructure, reused containers
+└── test-setup-reviewer     flags test anti-patterns for you
+```
+
+Each skill includes rules, references, best-practices and antipatterns described as code and text.
+
 
 ---
 
 
 ## Let's Finalize the Menti Survey
 
-Go to [menti.com](https://www.menti.com/) and use the code **8677 1883** to finalize the poll and add your questions for the Q&A.
+Go to [menti.com](https://www.menti.com/) and use the code **3982 6427** to finalize the poll and add your questions for the Q&A.
 
-![h:200 center](assets/mentimeter-vestas.png)
+![h:250 center](assets/mentimeter-jug-nuremberg.png)
 
 
 ---
@@ -1417,15 +1537,18 @@ Go to [menti.com](https://www.menti.com/) and use the code **8677 1883** to fina
 
 ---
 
-<!-- paginate: false -->
-
-
-## Joyful Testing!
-
-Get your Spring Boot Testing eBook (120+ pages):
-
-![center h:300 w:300](assets/newsletter-signup-qr.png)
+<!-- _class: light closing -->
+<!-- _paginate: false -->
+<!-- _header: '' -->
 
 ![bg right:33%](assets/end.jpg)
 
-Reach out any time via: [LinkedIn](https://www.linkedin.com/in/rieckpil) (Philip Riecks) or [Mail](mailto:philip@pragmatech.digital) (philip@pragmatech.digital)
+# Joyful Testing!
+
+Get your Spring Boot Testing eBook (120+ pages):
+
+![h:260 center](assets/newsletter-signup-qr.png)
+
+Reach out any time
+- [LinkedIn](https://www.linkedin.com/in/rieckpil) (Philip Riecks)
+- [Mail](mailto:philip@pragmatech.digital) (philip@pragmatech.digital)
