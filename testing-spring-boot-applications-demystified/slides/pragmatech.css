@@ -534,6 +534,27 @@ section.statement.reveal ul > li:last-child {
   margin-top: 0.6em;
 }
 
+/* Plain slide revealed step by step: same fragmented-list trick (`*` items) on a
+   regular slide. Bullets are hidden so paragraphs and images build up in place. */
+section.reveal:not(.statement) > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+section.reveal:not(.statement) > ul > li {
+  margin: 0 0 0.9em;
+  padding: 0;
+}
+
+section.reveal:not(.statement) > ul > li::marker {
+  content: '';
+}
+
+section.reveal:not(.statement) > ul > li > p {
+  margin: 0 0 0.6em;
+}
+
 /* Metrics / stats */
 section.metrics .columns,
 section.metrics ul {

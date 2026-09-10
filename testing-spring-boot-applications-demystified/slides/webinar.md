@@ -48,7 +48,7 @@ Java User Group Nürnberg · September 10, 2026
 
 - Self-employed developer from Herzogenaurach, now living in Erlangen, Germany (Bavaria) 🍻
 - Blogging & content creation with a focus on testing Java and specifically Spring Boot applications 🍃
-- Founder of [PragmaTech GmbH](https://pragmatech.digital/) - **Enabling Developers to Frequently Deliver** Software with **More Confidence** 🚤
+- Founder of [PragmaTech GmbH](https://pragmatech.digital/) - We **Enable Developers to Frequently Deliver** Software with **More Confidence** 🚤
 
 ---
 
@@ -86,18 +86,25 @@ Please answer the **first three questions**:
 
 ---
 
+<!-- _class: light reveal -->
 <!-- _paginate: false -->
 
+<!--
+Notes:
+- Revealed step by step (fragmented list, works in the HTML deck only):
+  headline and image first, then the pull request, then the question.
+- PDF and PNG exports show everything at once.
+-->
 
 ![bg right:33%](assets/northstar.jpg)
 
 ### My Overall Northstar for Engineering Excellence
 
-Imagine seeing this pull request on a Friday afternoon:
+* Imagine seeing this pull request on a Friday afternoon:
 
-![](assets/northstar-pr.png)
+  ![](assets/northstar-pr.png)
 
-How **confident** are you to merge this major Spring Boot upgrade and **deploy** it to production once the pipeline turns green?
+* How **confident** are you to merge this major Spring Boot upgrade and **deploy** it to production once the pipeline turns green?
 
 ---
 
@@ -979,18 +986,23 @@ _Helps You Reuse What You Already Built_
 
 ---
 
+
+<!-- _class: light reveal --->
+
 ## Integration Testing - The Need for Speed
 
-- **The Problem:** Integration tests require a started & initialized Spring `ApplicationContext`, which slows down the build
-- **The Solution:** Spring Test `TestContext` Caching - stores an already started Spring `ApplicationContext` for reuse
-- This feature is part of Spring Test (included in every Spring Boot project via `spring-boot-starter-test`)
+* **The Problem:** Integration tests require a started & initialized Spring `ApplicationContext`, which slows down the build
+* **The Solution:** Spring Test `TestContext` Caching - stores an already started Spring `ApplicationContext` for later reuse
+* This feature is part of Spring Test (included in every Spring Boot project via `spring-boot-starter-test`)
 
-Example of speed improvement:
-
-![](assets/context-cache-improvements.png)
+* Example of speed improvement:
+  ![](assets/context-cache-improvements.png)
 
 
 ---
+
+<!-- _class: light --->
+
 
 ![](assets/caching-explained-00.png)
 
@@ -1067,7 +1079,7 @@ An [open-source Spring Test utility](https://github.com/PragmaTech-GmbH/spring-t
 
 ### The Final Boss
 
-Developers tend to consult AI/StackOverflow for integration test issues and often copy advice from the internet without knowing the implications:
+Developers tend to consult AI/Stack Overflow (🥲) for integration test issues and often copy advice from the internet without knowing the implications:
 
 ```java
 @SpringBootTest
@@ -1503,6 +1515,9 @@ Go to [menti.com](https://www.menti.com/) and use the code **3982 6427** to fina
 
 [//]: # ()
 [//]: # (---)
+
+<!-- _paginate: false -->
+
 
 ## Don't Leave Empty-Handed
 
