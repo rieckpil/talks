@@ -1,6 +1,7 @@
 ---
 marp: true
 theme: pragmatech
+title: 'Stop Fighting Your Spring Boot Tests'
 class: light
 paginate: true
 transition: pt-fade
@@ -26,7 +27,7 @@ footer: '![](assets/logo.webp) Philip Riecks · [PragmaTech GmbH](https://pragma
 
 # Stop **Fighting** Your Spring Boot Tests
 
-## Why your tests fight back - and how to make them fight for you
+## Why your tests fight back - and how to make them fight for you 🥊
 
 Software Craft Community @ DATEV · September 22, 2026
 
@@ -118,12 +119,6 @@ Notes:
 - A test goes red and you cannot tell whether the code or the test is broken
 - You reach for `@SpringBootTest` because it is the only thing that works
 - The pipeline is green and you still do not want to deploy on a Friday
-
----
-
-<!-- _class: light statement -->
-
-# It is almost never the framework. It&nbsp;is **three myths** we keep repeating.
 
 ---
 
