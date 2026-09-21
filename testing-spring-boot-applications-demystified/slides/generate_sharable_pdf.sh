@@ -46,7 +46,7 @@ if [ ! -d "$GENERATED_DIR" ]; then
     fi
     # Generate PDF with original images
     echo "Generating PDF with original images..."
-    marp --pdf "$MARKDOWN_FILE" --theme "$THEME_FILE" --engine "$ENGINE_FILE" --allow-local-files -o "$OUTPUT_PDF"
+    marp --pdf "$MARKDOWN_FILE" --theme "$THEME_FILE" --engine "$ENGINE_FILE" --allow-local-files -o "$OUTPUT_PDF" < /dev/null
     echo "PDF generated successfully: $OUTPUT_PDF"
     exit 0
 fi
@@ -91,7 +91,7 @@ fi
 
 # Generate the PDF using Marp
 echo "Generating PDF: $OUTPUT_PDF"
-marp --pdf "$MARKDOWN_FILE" --theme "$THEME_FILE" --engine "$ENGINE_FILE" --allow-local-files -o "$OUTPUT_PDF"
+marp --pdf "$MARKDOWN_FILE" --theme "$THEME_FILE" --engine "$ENGINE_FILE" --allow-local-files -o "$OUTPUT_PDF" < /dev/null
 
 # Check if PDF was generated
 if [ ! -f "$OUTPUT_PDF" ]; then
@@ -101,6 +101,33 @@ fi
 
 raw_size=$(du -h "$OUTPUT_PDF" | cut -f1)
 echo "Raw PDF generated: $OUTPUT_PDF ($raw_size)"
+
+# Ghostscript reduction runs by default, but ONLY if the theme carries the
+# "@media print" export fix. Without it gs is destructive: it flattens CSS
+# transparency, which ERASES gradient-clipped text (section.statement strong,
+# section.metrics li strong - the words vanish from the page) and turns the
+# code block box-shadow into a hard grey rectangle. The print block replaces
+# both with solid equivalents, so gs then has nothing left to flatten.
+# Set REDUCE=0 to skip the pass anyway.
+if ! grep -q "@media print" "$THEME_FILE"; then
+    echo ""
+    echo "! $THEME_FILE has no '@media print' block - skipping Ghostscript."
+    echo "  Reducing without it would erase gradient-clipped text from the PDF."
+    echo "  Copy the print block from the stop-fighting-your-spring-boot-tests theme."
+    echo ""
+    echo "✓ PDF generated (unreduced): $OUTPUT_PDF"
+    echo "  File size: $raw_size"
+    echo ""
+    exit 0
+fi
+
+if [[ "${REDUCE:-1}" != "1" ]]; then
+    echo ""
+    echo "✓ PDF generated successfully (REDUCE=0, unreduced): $OUTPUT_PDF"
+    echo "  File size: $raw_size"
+    echo ""
+    exit 0
+fi
 
 source ~/.zshrc
 

@@ -102,17 +102,29 @@ fi
 raw_size=$(du -h "$OUTPUT_PDF" | cut -f1)
 echo "Raw PDF generated: $OUTPUT_PDF ($raw_size)"
 
-# Ghostscript reduction is OPT-IN (REDUCE=1) because it is destructive with this
-# theme: gs pdfwrite flattens CSS transparency, which
-#   - turns the code block box-shadow into a hard grey rectangle,
-#   - ERASES gradient-clipped text (section.metrics li strong, e.g. "Oct 6"),
-#   - leaves a stray outline box around section.title h1 strong.
-# Image size is already handled by resize_images.sh / assets/generated.
-if [[ "${REDUCE:-0}" != "1" ]]; then
+# Ghostscript reduction runs by default, but ONLY if the theme carries the
+# "@media print" export fix. Without it gs is destructive: it flattens CSS
+# transparency, which ERASES gradient-clipped text (section.statement strong,
+# section.metrics li strong - the words vanish from the page) and turns the
+# code block box-shadow into a hard grey rectangle. The print block replaces
+# both with solid equivalents, so gs then has nothing left to flatten.
+# Set REDUCE=0 to skip the pass anyway.
+if ! grep -q "@media print" "$THEME_FILE"; then
     echo ""
-    echo "✓ PDF generated successfully: $OUTPUT_PDF"
+    echo "! $THEME_FILE has no '@media print' block - skipping Ghostscript."
+    echo "  Reducing without it would erase gradient-clipped text from the PDF."
+    echo "  Copy the print block from the stop-fighting-your-spring-boot-tests theme."
+    echo ""
+    echo "✓ PDF generated (unreduced): $OUTPUT_PDF"
     echo "  File size: $raw_size"
-    echo "  (set REDUCE=1 to run the Ghostscript pass - see note in this script)"
+    echo ""
+    exit 0
+fi
+
+if [[ "${REDUCE:-1}" != "1" ]]; then
+    echo ""
+    echo "✓ PDF generated successfully (REDUCE=0, unreduced): $OUTPUT_PDF"
+    echo "  File size: $raw_size"
     echo ""
     exit 0
 fi
