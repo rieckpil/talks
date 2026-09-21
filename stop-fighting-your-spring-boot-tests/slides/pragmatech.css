@@ -738,3 +738,34 @@ pre .highlighted-line > * {
 .pyramid .int  { width: 62%; }
 .pyramid .unit { width: 92%; border-color: var(--pt-link); color: var(--pt-link); }
 .pyramid .layer small { display: block; font-size: 0.7em; color: var(--pt-muted); }
+
+/* ============================================================
+ * PDF export fixes (print media only — the HTML deck is unaffected)
+ *
+ * Chrome's print-to-PDF path does not honour two effects the screen
+ * deck relies on. It draws their bounding boxes instead:
+ *   - gradient-clipped text (background-clip: text + transparent fill)
+ *     gets a visible rectangle around the words,
+ *   - box-shadow becomes a hard grey block rather than a soft blur.
+ * Both render correctly in the browser and in PNG export, so the fix is
+ * scoped to @media print: solid accent colour instead of the gradient,
+ * and no shadows. Visually near-identical, and it exports clean.
+ * ============================================================ */
+@media print {
+  section.title h1 strong,
+  section.statement strong,
+  section.metrics ul > li strong,
+  section.agenda ol > li::before {
+    background: none;
+    -webkit-background-clip: border-box;
+    background-clip: border-box;
+    -webkit-text-fill-color: var(--pt-link);
+    color: var(--pt-link);
+  }
+
+  pre,
+  section.agenda ol > li,
+  section.metrics ul > li {
+    box-shadow: none;
+  }
+}

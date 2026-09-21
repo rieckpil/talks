@@ -11,10 +11,12 @@ footer: '![](assets/logo.webp) Philip Riecks · [PragmaTech GmbH](https://pragma
 <!-- _paginate: false -->
 <!-- _header: '' -->
 <!-- _footer: '' -->
+<!-- _backgroundColor: '#090d14' -->
 
-![bg](./assets/stop-fighting-your-spring-boot-tests.jpg)
+![bg fit](assets/datev-coding-craft-2026.png)
 
 ---
+
 
 <!-- _class: light title -->
 <!-- _paginate: false -->
@@ -22,9 +24,9 @@ footer: '![](assets/logo.webp) Philip Riecks · [PragmaTech GmbH](https://pragma
 
 ![bg left:33%](assets/stop-fighting-your-spring-boot-tests.jpg)
 
-# Stop Fighting Your Spring Boot Tests
+# Stop **Fighting** Your Spring Boot Tests
 
-## Three myths that turn your test suite against you
+## Why your tests fight back - and how to make them fight for you
 
 Software Craft Community @ DATEV · September 22, 2026
 
@@ -36,15 +38,18 @@ Software Craft Community @ DATEV · September 22, 2026
 
 ## About Philip
 
-- Self-employed developer from Germany (close to Nuremberg) 🍻
+- Self-employed developer from **Herzogenaurach**, Germany (close to Nuremberg) 🍻
+- Met Sven Hansen during the **Spring I/O** conference in Barcelona this year 🇪🇸
 - Blogging & content creation with a focus on testing Java and specifically Spring Boot applications 🍃
-- Founder of PragmaTech GmbH - Enabling Developers to Frequently Deliver Software with More Confidence 🚤
+- Founder of **PragmaTech GmbH** - We Help Developers to Frequently Deliver Software with More Confidence 🚤
 
 ---
 
 ## Participate During the Talk
 
-Go to [menti.com](https://www.menti.com/) and use the code **2322 7818** to **anonymously** submit answers and add your questions during the talk.
+Go to [menti.com](https://www.menti.com/) and use the code **7735 0833** to **anonymously** submit answers:
+
+![center h:250](assets/mentimeter-datev-coding-craft-2026.png)
 
 Please answer the **first three questions**:
 
@@ -54,7 +59,7 @@ Please answer the **first three questions**:
 
 ---
 
-<!-- header: 'Software Craft Community @ DATEV · September 22, 2026 · Questions @ menti.com Code: <strong>2322 7818</strong>' -->
+<!-- header: 'Software Craft Community @ DATEV · September 22, 2026 · Questions @ menti.com Code: <strong>7735 0833</strong>' -->
 <!-- _paginate: false -->
 
 ![bg right:33%](assets/why-test-software.jpg)
@@ -107,9 +112,9 @@ Notes:
 
 ![bg right:33%](assets/fight-back.jpg)
 
-## When Your Tests Fight Back
+## When Your **Spring Boot Tests** Fight Back
 
-- The suite takes 25 minutes, so nobody runs it before pushing
+- The suite takes > 30 minutes, so nobody runs it before pushing
 - A test goes red and you cannot tell whether the code or the test is broken
 - You reach for `@SpringBootTest` because it is the only thing that works
 - The pipeline is green and you still do not want to deploy on a Friday
@@ -118,7 +123,7 @@ Notes:
 
 <!-- _class: light statement -->
 
-# It is almost never the framework. It is **three myths** we keep repeating.
+# It is almost never the framework. It&nbsp;is **three myths** we keep repeating.
 
 ---
 
@@ -126,9 +131,9 @@ Notes:
 
 ## The Three Myths We Bust Today
 
-1. "I need @SpringBootTest for that." - which test to actually pick
-2. "Spring Boot tests are slow. That is the price." - fast feedback from four angles
-3. "It is green, so it works." - the tooling that makes green mean something
+1. "I need @SpringBootTest for that."
+2. "Spring Boot tests are slow."
+3. "It is green, so it works."
 
 ---
 
@@ -269,7 +274,7 @@ A simplified decision table:
 
 ## Myth #2
 
-# "Spring Boot tests are slow. That is the price."
+# "Spring Boot tests are slow."
 
 _You are not paying for tests. You are paying for context starts._
 
@@ -485,22 +490,36 @@ Mocking the client with Mockito skips exactly the part that breaks in production
 
 ---
 
-## The Wider Ecosystem
 
-![center h:480](assets/it-testing-libraries.png)
+<!-- _class: light agenda -->
+
+## The Three Myths, Busted
+
+1. Most tests need no Spring context - climb only when forced to
+2. Your suite is not slow, it is restarting contexts - cache, align, parallelize
+3. Green is not proof - real infrastructure, real HTTP, real assertions
 
 ---
 
-<!-- _class: light statement -->
+<!-- _class: light metrics -->
 
-# AI writes tests in seconds. **Trusting** them still **takes human judgment.**
+## Coming Up: **Ship Fast, Sleep Well**
+
+_Fearless Spring Boot Deployments in the AI Era_ - my next talk at the **DATEV Coding Festival**. We pick up where today stops: shipping the code an agent wrote, without losing sleep over it.
+
+Come and join:
+
+- **Oct 6** 2026
+- **14:30** to 15:15
+- **DATEV** Coding Festival
+
 
 ---
+
 
 ## What I Do to Build Confidence in the Agentic Coding Era
 
 - **Review generated tests** like a pull request from a new hire
-- **Put the bridges in the repo**: test slices, shared test configuration, Testcontainers best practices
 - **Make the rules executable**: ArchUnit rules, testing conventions in `CLAUDE.md` / `AGENTS.md`, mutation score thresholds in CI
 - **Custom skills**: define once per project how testing is tackled, with best practices and antipatterns
 - **Keep the feedback loop tight**: fast, trustworthy tests let the agent iterate without me watching every step
@@ -542,23 +561,16 @@ Notes:
 
 ---
 
-<!-- _class: light agenda -->
-
-## The Three Myths, Busted
-
-1. Most tests need no Spring context - climb only when forced to
-2. Your suite is not slow, it is restarting contexts - cache, align, parallelize
-3. Green is not proof - real infrastructure, real HTTP, real assertions
-
----
-
 ## Get Notified
 
 I am building an **agentic Spring Boot testing course**: how to make code agents produce tests you would have written yourself.
 
-Scan to join the waitlist:
+<center>
 
-![center h:300](assets/agentic-testing-course-qr.png)
+![h:340](assets/agentic-testing-course.png) &nbsp; ![h:200](assets/agentic-testing-course-qr.png)
+
+</center>
+
 
 ---
 
@@ -570,8 +582,9 @@ Scan to join the waitlist:
 
 # Joyful Testing!
 
-The slides & code will be shared after the talk.
+Get notified for Agentic Testing for Spring Boot:
 
-Reach out any time
+![center h:300](assets/agentic-testing-course-qr.png)
+
 - [LinkedIn](https://www.linkedin.com/in/rieckpil) (Philip Riecks)
 - [Mail](mailto:philip@pragmatech.digital) (philip@pragmatech.digital)
