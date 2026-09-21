@@ -157,16 +157,109 @@ Notes:
 
 ---
 
-## Two Families of Tests
+<!--
+Notes:
+- One question decides most of it: most tests answer "no" and never need Spring.
+- Only the "yes" branch splits again. Annotations come on the next slides.
+-->
 
-**Without a Spring context** - plain JUnit and Mockito. Milliseconds per test. Your business logic, your algorithms, your edge cases.
+## Which Test Do I Actually Need?
 
-**With a Spring context** - Spring wires the beans for you. Seconds per context start. Needed when the framework itself is part of the behaviour you verify.
+![center h:500](assets/test-choice.png)
 
-The second family splits again:
+---
 
-- **Sliced context** - only the layer under test (`@WebMvcTest`, `@DataJpaTest`, ...)
-- **Full context** - the whole application (`@SpringBootTest`)
+<!--
+Notes:
+- Green column first, then the red one. The red column is the bridge to slicing.
+-->
+
+<!-- _class: light split -->
+
+## No Context: Plain Unit Tests
+
+<div class="yes">
+
+### Enough when
+
+- The logic is **yours**: calculations, branching, validation rules, state transitions
+- Collaborators can be **handed in** from the outside
+- You want many **edge cases** cheaply, e.g. parameterized tests
+
+</div>
+
+<div class="no">
+
+### Not enough when
+
+- The behaviour lives in the **framework**: mapping, validation, serialization, security
+- The bug would come from **wiring**, not from logic
+- You need a **real query** against a real database
+
+</div>
+
+---
+
+<!--
+Notes:
+- The middle ground people skip. Most "I need @SpringBootTest" cases land here.
+-->
+
+<!-- _class: light split -->
+
+## Sliced Context: One Layer, Wired
+
+<div class="yes">
+
+### Enough when
+
+- You verify **one layer's contract** with Spring: `@WebMvcTest`, `@DataJpaTest`, `@JsonTest`
+- The collaborators behind it can be **replaced** with `@MockitoBean`
+- You want framework behaviour **without paying** for the whole application
+
+</div>
+
+<div class="no">
+
+### Not enough when
+
+- One flow **crosses several layers** and you want to see it end to end
+- The slice **leaves out** what you need, e.g. security filters not registered
+- You need **real infrastructure**, not a stub
+
+</div>
+
+---
+
+<!--
+Notes:
+- Note the flipped right column: with the full context the risk is overuse, not shortfall.
+- This is the slide that arms Myth 2.
+-->
+
+<!-- _class: light split -->
+
+## Full Context: The Whole Application
+
+<div class="yes">
+
+### Enough when
+
+- You verify a **complete flow** through the running application
+- You need everything wired **as in production**: `@SpringBootTest` plus Testcontainers
+- The **wiring itself** is under test: does the app start with this configuration?
+
+</div>
+
+<div class="warn">
+
+### Too much when
+
+- A **slice would answer** the same question
+- You only added it to make an **autowiring error** go away
+- Every test class brings its **own configuration**, so the context cache never hits
+
+</div>
 
 ---
 

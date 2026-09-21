@@ -740,6 +740,25 @@ pre .highlighted-line > * {
 .pyramid .layer small { display: block; font-size: 0.7em; color: var(--pt-muted); }
 
 /* ============================================================
+ * Verdict columns: "enough when" / "not enough when" inside a split slide.
+ * Wrap each column in <div class="yes|no|warn"> and the heading picks up a
+ * colour and an underline, so the contrast reads before the text does.
+ * Plain colours only, so it survives PDF export unchanged.
+ * ============================================================ */
+section.split .yes > h3,
+section.split .no > h3,
+section.split .warn > h3 {
+  display: inline-block;
+  margin-bottom: 0.5em;
+  padding-bottom: 0.12em;
+  border-bottom: 3px solid currentColor;
+}
+
+section.split .yes  > h3 { color: #00a34a; }
+section.split .no   > h3 { color: #dc2626; }
+section.split .warn > h3 { color: #c98a00; }
+
+/* ============================================================
  * PDF export fixes (print media only — the HTML deck is unaffected)
  *
  * Chrome's print-to-PDF path does not honour two effects the screen
