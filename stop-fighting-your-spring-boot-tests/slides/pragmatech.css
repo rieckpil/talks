@@ -754,6 +754,14 @@ section.split .warn > h3 {
   border-bottom: 3px solid currentColor;
 }
 
+/* A closing line written directly on a split slide (not inside a column)
+   spans the full width instead of dropping into the left column. */
+section.split > p {
+  grid-column: 1 / -1;
+  margin-top: 0.6em;
+  text-align: center;
+}
+
 section.split .yes  > h3 { color: #00a34a; }
 section.split .no   > h3 { color: #dc2626; }
 section.split .warn > h3 { color: #c98a00; }

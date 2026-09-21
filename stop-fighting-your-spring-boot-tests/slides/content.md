@@ -145,17 +145,6 @@ _Spoiler: you don't always need `@SpringBootTest`._
 
 ---
 
-<!--
-Notes:
-- Looks fine. Passes. Green. Everybody copies it.
-- Ask the room: what does this test actually need?
--->
-
-## The `@SpringBootTest` Obsession
-
-![](assets/spring-boot-test-obsession.png)
-
----
 
 <!--
 Notes:
@@ -163,7 +152,7 @@ Notes:
 - Only the "yes" branch splits again. Annotations come on the next slides.
 -->
 
-## Which Test Do I Actually Need?
+## There are Three Ways to Write Tests
 
 ![center h:500](assets/test-choice.png)
 
@@ -171,95 +160,36 @@ Notes:
 
 <!--
 Notes:
-- Green column first, then the red one. The red column is the bridge to slicing.
+- Ask: who has tried to unit test a @PreAuthorize rule? It always passes.
+- The right column is the reason the rest of this section exists.
 -->
 
 <!-- _class: light split -->
 
-## No Context: Plain Unit Tests
+## Do We Even Need a Context?
 
 <div class="yes">
 
-### Enough when
+### A plain unit test is fine
 
-- The logic is **yours**: calculations, branching, validation rules, state transitions
-- Collaborators can be **handed in** from the outside
-- You want many **edge cases** cheaply, e.g. parameterized tests
+- Business logic: calculations, branching, state transitions
+- Validation rules you wrote yourself
+- Verify small units of work independently
+- Usually the core parts of your application
 
 </div>
 
 <div class="no">
 
-### Not enough when
+### But it can never tell you
 
-- The behaviour lives in the **framework**: mapping, validation, serialization, security
-- The bug would come from **wiring**, not from logic
-- You need a **real query** against a real database
-
-</div>
-
----
-
-<!--
-Notes:
-- The middle ground people skip. Most "I need @SpringBootTest" cases land here.
--->
-
-<!-- _class: light split -->
-
-## Sliced Context: One Layer, Wired
-
-<div class="yes">
-
-### Enough when
-
-- You verify **one layer's contract** with Spring: `@WebMvcTest`, `@DataJpaTest`, `@JsonTest`
-- The collaborators behind it can be **replaced** with `@MockitoBean`
-- You want framework behaviour **without paying** for the whole application
+- Does `@PreAuthorize` actually **block** that caller?
+- Does `GET /api/customers/{id}` **map** to this method?
+- Does that JPQL return what you think against **real SQL**?
+- Does an invalid body give **400**, not an accidental 201?
 
 </div>
 
-<div class="no">
-
-### Not enough when
-
-- One flow **crosses several layers** and you want to see it end to end
-- The slice **leaves out** what you need, e.g. security filters not registered
-- You need **real infrastructure**, not a stub
-
-</div>
-
----
-
-<!--
-Notes:
-- Note the flipped right column: with the full context the risk is overuse, not shortfall.
-- This is the slide that arms Myth 2.
--->
-
-<!-- _class: light split -->
-
-## Full Context: The Whole Application
-
-<div class="yes">
-
-### Enough when
-
-- You verify a **complete flow** through the running application
-- You need everything wired **as in production**: `@SpringBootTest` plus Testcontainers
-- The **wiring itself** is under test: does the app start with this configuration?
-
-</div>
-
-<div class="warn">
-
-### Too much when
-
-- A **slice would answer** the same question
-- You only added it to make an **autowiring error** go away
-- Every test class brings its **own configuration**, so the context cache never hits
-
-</div>
 
 ---
 
@@ -275,63 +205,51 @@ Notes:
 
 ---
 
-## Family 1: No Context At All - Milliseconds
+<!--
+Notes:
+- Both start a context. The question is only how much of one you pay for.
+- Land the last line: the slice is the default, the full context is the exception.
+-->
 
-```java
-@ExtendWith(MockitoExtension.class)
-class CustomerServiceTest {
+<!-- _class: light split -->
 
-  @Mock
-  private CustomerRepository customerRepository;
+## Sliced or Full Context?
 
-  @InjectMocks
-  private CustomerService customerService;
+<div class="yes">
 
-  @Test
-  void shouldCreateNewCustomerWhenNameDoesNotExist() {
-    when(customerRepository.findByCustomerName("duke")).thenReturn(empty());
+### Slice it when
 
-    String customerId = customerService.createNewCustomer("duke");
+- You verify **one layer's contract** with Spring
+- The collaborators behind it can be **replaced** with `@MockitoBean`
+- You want framework behaviour **without paying** for the whole application
+- Annotations of choice: `@WebMvcTest`, `@DataJpaTest`, `@JsonTest`, etc.
 
-    assertThat(customerId).isEqualTo("42");
-  }
-}
-```
+</div>
 
----
+<div class="warn">
 
-## Things We Can't Cover Without a Context
+### Take the full context when
 
-- **Request Mapping**: Does HTTP GET `/api/customers/{id}` actually resolve to our desired method?
-- **Validation**: Will an incomplete request body result in a 400 Bad Request or an accidental 201?
-- **Serialization**: Are our JSON objects serialized and deserialized correctly?
-- **Headers**: Are we setting `Content-Type` or custom headers correctly?
-- **Security**: Are our Spring Security configuration and authorization checks enforced?
+- One flow **crosses several layers** end to end
+- You need everything wired **as in production**
+- Verification of entire user journeys
+- Annotation of choice: `@SpringBootTest`
 
-**This** is where a context earns its cost - and a sliced one is usually enough.
+</div>
 
 ---
 
-## Family 2: A Sliced Context
+<!--
+Notes:
+- Looks fine. Passes. Green. Everybody copies it.
+- Ask the room: what does this test actually need?
+-->
 
-```java
-@WebMvcTest(CustomerController.class)
-@Import(SecurityConfig.class)
-class CustomerControllerTest {
+## The `@SpringBootTest` Obsession
 
-  @Autowired
-  private MockMvc mockMvc;
+![](assets/spring-boot-test-obsession.png)
 
-  @MockitoBean
-  private CustomerService customerService;
 
-  @Test
-  @WithMockUser
-  void shouldReturnLocationOfNewlyCreatedCustomer() throws Exception {
-    // web layer only: mapping, validation, serialization, security
-  }
-}
-```
 
 ---
 
@@ -351,7 +269,7 @@ A simplified decision table:
 
 <!-- _class: light statement -->
 
-# Start at the level that answers your question. **Climb only when the test forces you to.**
+# Strategy: Pick the test type that gives you the **most confidence** in your safety net for the **cheapest execution time**.
 
 ---
 
@@ -381,7 +299,6 @@ Attack it from four angles:
 1. **Right test level** - the cheapest test that answers the question (Myth #1)
 2. **Fewer context starts** - Spring already caches contexts, if you let it
 3. **Parallel execution** - use the cores you are paying for
-4. **Reused infrastructure** - stop restarting Docker containers (Myth #3)
 
 ---
 
@@ -394,6 +311,20 @@ Attack it from four angles:
 Speed improvement example:
 
 ![](assets/context-cache-improvements.png)
+
+---
+
+<!--
+Notes:
+- Animated GIF: loops on its own, ~19s per cycle. Let it run one full loop.
+- Beat 1 OrderIT misses and pays 3506 ms. Beat 2 PaymentIT hits, 406 ms.
+- Beat 3 CheckoutIT has one different key, so it pays full price again.
+- In the exported PDF this shows the first frame only (empty cache).
+-->
+
+## Context Caching in Action
+
+![center h:470](assets/context-caching.gif)
 
 ---
 
@@ -440,15 +371,25 @@ The setup above **disables** context caching and slows the build down significan
 
 ---
 
-## Identify Context Restarts
+## Detect Context Restarts - Visually
 
-![bg right:38%](assets/context-caching-hints.png)
+![](assets/context-caching-hints.png)
 
-- **Visually**: watch for repeated Spring banners and startup logs in your build output
-- **With logs**: set `logging.level.org.springframework.test.context.cache=DEBUG`
-- **With tools**: [spring-test-profiler](https://github.com/PragmaTech-GmbH/spring-test-profiler), our open-source utility that visualizes context caching statistics for your suite
+---
 
-**Goal**: find the few test classes that force an extra context, and align them.
+## Detect Context Restarts - with Logs
+
+![](assets/context-caching-logs.png)
+
+---
+
+## Detect Context Restarts - with Tooling
+
+![center](assets/spring-test-profiler-logo.png)
+
+An [open-source Spring Test utility](https://github.com/PragmaTech-GmbH/spring-test-profiler) that provides visualization and insights for Spring Test execution, with a focus on Spring context caching statistics.
+
+**Overall goal**: Identify optimization opportunities in your Spring Test suite to speed up your builds and ship to production faster and with more confidence.
 
 ---
 
@@ -489,7 +430,7 @@ Two ways to get there:
 - Understand how the cache key is built before you add another annotation
 - Monitor and investigate context restarts instead of guessing
 - Align the number of unique context configurations across the suite
-- Then, and only then, turn on parallel execution
+- Turn on parallel test execution, start selectively
 
 ---
 
@@ -565,16 +506,44 @@ Mocking the client with Mockito skips exactly the part that breaks in production
 
 ---
 
-## Must-Have #3: Mutation Testing (Real Assertions)
+## Be Aware of: Watermelon Tests
 
-- High code coverage gives you a **false sense of security**: it shows which lines ran, not which bugs you would catch
-- [PIT](https://pitest.org/quickstart/) **mutates your source code** - flips conditionals, changes return values - and re-runs your tests
-- If a mutation survives, no test noticed the change. That is a **blind spot** with high line coverage on top of it
-- A mutation score threshold in CI is a quality gate that coverage can never be
+... green on the outside, red on the inside.
+
+- **100% coverage** and still broken: coverage measures which lines *ran*, not which behavior was *verified*
+- A test that asserts the mock works as previously instructed
+- Auto-generated tests can give you the **feeling** of safety
+- Agents produce these at scale: plausible names, green checks, zero judgment
 
 ---
 
-![center h:400 w:1300](assets/mutation-testing-explained.png)
+## Let's Challenge Code Coverage
+
+Imagine a set of unit tests for this isolated business logic:
+
+```java
+public Long registerUser(int age, String username) {
+
+  if (age <= 18) {
+    throw new IllegalArgumentException("User must be at least 18 years old");
+  }
+
+  if ("ADMIN".equalsIgnoreCase(username)) {
+    throw new IllegalArgumentException("Username 'ADMIN' is not allowed");
+  }
+
+  // ...
+
+}
+```
+
+---
+
+## Idea: Introduce Regressions to Verify Test Quality
+
+... with the help of PIT:
+
+![center](assets/mutation-testing-explained-corrected.png)
 
 ---
 
