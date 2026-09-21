@@ -1,89 +1,36 @@
 ---
 marp: true
 theme: pragmatech
-header: 'Stop Fighting Your Spring Boot Tests @ Nürnberger Versicherung 03.12.2025'
+class: light
+paginate: true
+transition: pt-fade
+header: 'Stop Fighting Your Spring Boot Tests · Software Craft Community @ DATEV · September 22, 2026'
+footer: '![](assets/logo.webp) Philip Riecks · [PragmaTech GmbH](https://pragmatech.digital/) · [@rieckpil](https://x.com/rieckpil)'
 ---
+
+<!-- _paginate: false -->
+<!-- _header: '' -->
+<!-- _footer: '' -->
 
 ![bg](./assets/stop-fighting-your-spring-boot-tests.jpg)
-<!-- header: "" -->
-<!-- footer: ""-->
 
 ---
+
+<!-- _class: light title -->
+<!-- _paginate: false -->
+<!-- _header: '' -->
 
 ![bg left:33%](assets/stop-fighting-your-spring-boot-tests.jpg)
 
 # Stop Fighting Your Spring Boot Tests
 
-## Optimizing your test suite for speed, stability, and developer happiness
+## Three myths that turn your test suite against you
 
-_Infinum Webinar 15.01.2026_
-
-Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](https://x.com/rieckpil)
+Software Craft Community @ DATEV · September 22, 2026
 
 ---
 
-
-## Participate During the Talk
-
-Go to [menti.com](https://www.menti.com/) and use the code **2322 7818** to **anonymously** submit answers for the quizzes and add your questions during the talk.
-
-Start with the first two questions:
-- Despite having LLMs and Code Agents, do you still write your tests by hand?
-- Do You Enjoy Writing Automated Tests?
-
----
-
-<!-- header: 'Infinum Webinar 15.01.2026 - Questions @ menti.com Code: <strong>2322 7818</strong>' -->
-
-
-![bg right:33%](assets/why-test-software.jpg)
-
-# Why Test Software?
-
----
-
-
-[//]: # (<!-- footer: '![w:32 h:32]&#40;assets/logo.webp&#41;' -->)
-## Spring Boot Testing - The Bad & Ugly
-
-
-![center h:500 w:900](assets/spring-boot-testing-the-bad.png)
-
----
-
-
-## Spring Boot Testing - The Good
-
-![center h:500 w:900](assets/tests-benefit-en.png)
-
-
----
-
-
-![bg left:33%](assets/northstar.jpg)
-
-## My Overall Northstar
-
-Imagine seeing this pull request on a Friday afternoon:
-
-![](assets/northstar-pr.png)
-
-How confident are you to merge this major Spring Boot upgrade and deploy it to production once the pipeline turns green?
-
-Good tests don't just catch bugs - they give you the confidence to say "yes" without hesitation.
-
----
-
-## Goals for The Next 45 Minutes
-
-![bg right:33%](assets/best-practices.jpg)
-
-- Laying the foundation for successfully testing Spring Boot applications
-- Introduction to Spring Boot's excellent testing support
-- Spring Boot testing best practices and common pitfalls
-- Hands-on tips for optimizing build times
-
----
+<!-- _paginate: false -->
 
 ![bg right:33%](assets/hza.jpg)
 
@@ -95,63 +42,147 @@ Good tests don't just catch bugs - they give you the confidence to say "yes" wit
 
 ---
 
+## Participate During the Talk
 
-## Agenda
+Go to [menti.com](https://www.menti.com/) and use the code **2322 7818** to **anonymously** submit answers and add your questions during the talk.
 
-![bg right:33%](assets/steps.jpg)
+Please answer the **first three questions**:
 
-- Introduction
-- Testing with Spring Boot
-  - Part 1: The Spring Boot Test "Pyramid"
-  - Part 2: Speed & Stability for your Spring Boot Test Suite
-  - Part 3: Why & When Spring Boot Tests Fight Back
-- Wrap-up & Next Steps
-- FAQ
+- Who wrote your tests last week?
+- How long does your test suite take end to end?
+- How confident are you deploying on a Friday afternoon (0 to 10)?
 
 ---
 
+<!-- header: 'Software Craft Community @ DATEV · September 22, 2026 · Questions @ menti.com Code: <strong>2322 7818</strong>' -->
+<!-- _paginate: false -->
 
-![bg right:33%](assets/testing-pyramid.jpg)
+![bg right:33%](assets/why-test-software.jpg)
 
-# Part 1: The Spring Boot Test "Pyramid"
-
----
-
-
-## Testing - Pyramid, Honeycomb, Diamond, Trophy?
-
-- The classic test pyramid is a good starting point, but not a dogma
-- It cannot be applied 1-to-1 to every project
-- Many alternative models: Testing Trophy, Testing Honeycomb, Testing Diamond, etc.
-- The right testing strategy depends heavily on the project context
-- Hard to measure, but crucial: subjective confidence during development & deployment
+# Why Test Software?
 
 ---
 
-## Spring Boot Test Types
+<!-- _class: light statement -->
 
-![center h:500 w:1000](assets/decision-tree-testing-en.png)
-
----
-![bg right:33%](assets/101.jpg)
-
-## Unit Testing with Spring Boot
+# In 2026, most of our code is **not written by us**.
 
 ---
 
-### Unit Testing with Spring Boot 101
+<!--
+Notes:
+- The joke lands, then the point: we ship code we did not type.
+- The test suite is the only thing that still reads every line.
+-->
 
-- The Spring Boot Starter Test ("The Testing Swiss Army Knife") includes necessary test libraries (JUnit, Mockito, AssertJ, etc.)
-- When designing classes:
-  - Provide dependencies from the outside (Dependency Injection)
-  - Develop small classes/methods with a single responsibility
-  - Test only the public API of the class/method
-  - Verify behavior, not implementation details
-- TDD can help design (better testable) classes
+![center h:500](assets/ai-frog-meme.jpg)
 
 ---
 
-### Basic Spring Boot Unit Test Example
+<!-- _paginate: false -->
+
+![bg right:33%](assets/northstar.jpg)
+
+### My Overall Northstar for Engineering Excellence
+
+Imagine seeing this pull request on a Friday afternoon:
+
+![](assets/northstar-pr.png)
+
+How confident are you to merge this major Spring Boot upgrade and deploy it to production once the pipeline turns green?
+
+---
+
+<!-- _class: light statement -->
+
+# Good tests don't just catch bugs - they give you **fast feedback** and **confident deployments**.
+
+---
+
+<!--
+Notes:
+- Ask the room which of these they recognize. Hands go up on all four.
+- Name the feeling first, then promise the diagnosis.
+-->
+
+![bg right:33%](assets/fight-back.jpg)
+
+## When Your Tests Fight Back
+
+- The suite takes 25 minutes, so nobody runs it before pushing
+- A test goes red and you cannot tell whether the code or the test is broken
+- You reach for `@SpringBootTest` because it is the only thing that works
+- The pipeline is green and you still do not want to deploy on a Friday
+
+---
+
+<!-- _class: light statement -->
+
+# It is almost never the framework. It is **three myths** we keep repeating.
+
+---
+
+<!-- _class: light agenda -->
+
+## The Three Myths We Bust Today
+
+1. "I need @SpringBootTest for that." - which test to actually pick
+2. "Spring Boot tests are slow. That is the price." - fast feedback from four angles
+3. "It is green, so it works." - the tooling that makes green mean something
+
+---
+
+<!-- _class: light section -->
+<!-- _paginate: false -->
+
+![bg right:40%](assets/pitfalls.jpg)
+
+## Myth #1
+
+# "Every test needs the full context."
+
+_Spoiler: you don't always need `@SpringBootTest`._
+
+---
+
+<!--
+Notes:
+- Looks fine. Passes. Green. Everybody copies it.
+- Ask the room: what does this test actually need?
+-->
+
+## The `@SpringBootTest` Obsession
+
+![](assets/spring-boot-test-obsession.png)
+
+---
+
+## Two Families of Tests
+
+**Without a Spring context** - plain JUnit and Mockito. Milliseconds per test. Your business logic, your algorithms, your edge cases.
+
+**With a Spring context** - Spring wires the beans for you. Seconds per context start. Needed when the framework itself is part of the behaviour you verify.
+
+The second family splits again:
+
+- **Sliced context** - only the layer under test (`@WebMvcTest`, `@DataJpaTest`, ...)
+- **Full context** - the whole application (`@SpringBootTest`)
+
+---
+
+## A Typical Spring `ApplicationContext`
+
+![center h:500](assets/spring-context.png)
+
+---
+
+## You Don't Always Need the Entire Context
+
+![center h:500](assets/spring-sliced-context.png)
+
+---
+
+## Family 1: No Context At All - Milliseconds
 
 ```java
 @ExtendWith(MockitoExtension.class)
@@ -165,16 +196,7 @@ class CustomerServiceTest {
 
   @Test
   void shouldCreateNewCustomerWhenNameDoesNotExist() {
-
-    when(customerRepository.findByCustomerName("duke"))
-      .thenReturn(empty());
-
-    when(customerRepository.save(any(CustomerEntity.class)))
-      .thenAnswer(invocation -> {
-        CustomerEntity storedCustomer = invocation.getArgument(0);
-        storedCustomer.setId("42");
-        return storedCustomer;
-      });
+    when(customerRepository.findByCustomerName("duke")).thenReturn(empty());
 
     String customerId = customerService.createNewCustomer("duke");
 
@@ -185,45 +207,19 @@ class CustomerServiceTest {
 
 ---
 
-## Things We Can't Cover with a Unit Test
+## Things We Can't Cover Without a Context
 
 - **Request Mapping**: Does HTTP GET `/api/customers/{id}` actually resolve to our desired method?
-- **Validation**: Will incomplete request bodys result in a 400 bad request or return an accidental 201?
-- **Serialization**: Are we JSON objects serialized and deserialized correctly?
+- **Validation**: Will an incomplete request body result in a 400 Bad Request or an accidental 201?
+- **Serialization**: Are our JSON objects serialized and deserialized correctly?
 - **Headers**: Are we setting `Content-Type` or custom headers correctly?
-- **Security**: Are we Spring Security configuration and other authorization checks enforced?
+- **Security**: Are our Spring Security configuration and authorization checks enforced?
 
-
----
-
-![bg right:33%](assets/slice.jpg)
-
-## Sliced Testing with Spring Boot
-
-Verify specific layers of your Spring Boot application with a minimal `ApplicationContext`.
+**This** is where a context earns its cost - and a sliced one is usually enough.
 
 ---
 
-![center h:600 w:700](assets/typical-context.png)
-
----
-
-![center h:600 w:700](assets/typical-context-colored.png)
-
----
-
-
-![center h:500 w:600](assets/typical-context-sliced.png)
-
----
-
-
-![](assets/typical-context-webmvctest-example.png)
-
----
-
-### Spring Boot Test Slice Beispiel: `@WebMvcTest`
-
+## Family 2: A Sliced Context
 
 ```java
 @WebMvcTest(CustomerController.class)
@@ -239,174 +235,72 @@ class CustomerControllerTest {
   @Test
   @WithMockUser
   void shouldReturnLocationOfNewlyCreatedCustomer() throws Exception {
-    // ...
+    // web layer only: mapping, validation, serialization, security
   }
 }
 ```
 
 ---
 
-## Sliced Testing Spring Boot Applications 101
+## Decision Paralysis: When to Include a Context
 
-- **Core Concept**: Test a specific "slice" or layer of your application by loading a minimal, relevant part of the Spring `ApplicationContext`.
+A simplified decision table:
 
-- **Confidence Gained**: Helps validate parts of your application where pure unit testing is insufficient, like the web, messaging, or data layer.
-
-- **Prominent Examples:** Web layer (`@WebMvcTest`) and database layer (`@DataJpaTest`)
-
-- **Pitfalls**: Requires careful configuration to ensure only the necessary slice of the context is loaded.
-
-- **Tools**: JUnit, Mockito, Spring Test, Spring Boot, Testcontainers
-
----
-
-## Common Test Slices
-
-- `@WebMvcTest`/`@WebFluxTest` - Controller layer
-- `@DataJpaTest`/`@JdbcTest` - Persistence layer
-- `@JsonTest` - JSON serialization/deserialization
-- `@RestClientTest` - RestTemplate testing
-- etc.
+| Question                                        | Tool                                             |
+|-------------------------------------------------|--------------------------------------------------|
+| Does my business logic work?                    | Plain JUnit + Mockito, no Spring                 |
+| Does my HTTP layer map, validate, serialize?    | `@WebMvcTest`                                    |
+| Does my query return what I think?              | `@DataJpaTest`                                   |
+| Does my client talk to the remote API?          | `@RestClientTest` (including a mock HTTP server) |
+| Does the whole thing start and work end to end? | `@SpringBootTest`                                |
 
 ---
 
-![center](assets/slicing-annotations.png)
+<!-- _class: light statement -->
+
+# Start at the level that answers your question. **Climb only when the test forces you to.**
 
 ---
 
-## Integration Testing
+<!-- _class: light section -->
+<!-- _paginate: false -->
 
-Writing tests against the whole `ApplicationContext`.
+![bg right:40%](assets/speed.jpg)
 
-![bg right:33%](assets/full.jpg)
+## Myth #2
+
+# "Spring Boot tests are slow. That is the price."
+
+_You are not paying for tests. You are paying for context starts._
 
 ---
 
 <!--
-
 Notes:
-
-- Ask who is using Testcontainers?
-
+- Reframe: nobody complains about a slow test. They complain about slow feedback.
+- Four angles, and we have already used the first one in part 1.
 -->
 
-![](assets/spring-boot-test-setup.png)
+## Slow Tests Are Not the Problem. Slow **Feedback** Is.
+
+Attack it from four angles:
+
+1. **Right test level** - the cheapest test that answers the question (Myth #1)
+2. **Fewer context starts** - Spring already caches contexts, if you let it
+3. **Parallel execution** - use the cores you are paying for
+4. **Reused infrastructure** - stop restarting Docker containers (Myth #3)
 
 ---
 
-## Challenges when Starting the Entire `ApplicationContext`
+## Angle 2: Spring Context Caching
 
-- **Problem #1**: How to ensure surrounding infrastructure (e.g. database, queues, etc.) is present?
-- **Problem #2**: How to handle HTTP communication from our application to remote services?
-- **Problem #3**: How to keep our build time at a reasonable duration?
-
----
-
-## Integration Testing with Spring Boot  101
-
-- **Core Concept**: Start the entire Spring application context, often on a random local port, and test the application through its external interfaces (e.g., REST API).
-
-- **Confidence Gained**: Validates the integration of all internal components working together as a complete application.
-
-- **Best Practices**: Use `@SpringBootTest` to run the app on a local port.
-
-- **Pitfalls**: Slower to run than unit or sliced tests. Managing the lifecycle of dependent services can be complex.
-
-- **Tools**: JUnit, Mockito, Spring Test, Spring Boot, Testcontainers, WireMock (for mocking external HTTP services), Selenium (for browser-based UI testing)
-
----
-
-
-## Provide External Infrastructure with Testcontainers (Problem #1)
-
-Running infrastructure components (databases, message brokers, etc.) in Docker containers for our tests becomes a breeze with [Testcontainers](https://testcontainers.com/):
-
-```java
-@Container // <-- Testcontainers manages the lifecycle of the container
-@ServiceConnection // <-- automatically configures Spring Boot datasource properties
-static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:16-alpine")
-  .withDatabaseName("testdb")
-  .withUsername("test")
-  .withPassword("test")
-  .withInitScript("init-postgres.sql");
-```
-
-This gives us an ephemeral PostgreSQL database for our tests:
-
-```shell {3}
-$ docker ps
-CONTAINER ID   IMAGE                        COMMAND                  CREATED          STATUS         PORTS                                           NAMES
-a958ee2887c6   postgres:16-alpine           "docker-entrypoint.s…"   10 seconds ago   Up 9 seconds   0.0.0.0:32776->5432/tcp, [::]:32776->5432/tcp   affectionate_cannon
-ad0f804068dc   testcontainers/ryuk:0.12.0   "/bin/ryuk"              10 seconds ago   Up 9 seconds   0.0.0.0:32775->8080/tcp, [::]:32775->8080/tcp   testcontainers-ryuk-1f9f76a6-46d4-4e19-85c1-e8364da12804
-```
-
----
-
-### Full Integration Test Example
-
-```java {1-2,13}
-@AutoConfigureWebTestClient // Spring Boot 4.0
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class ApplicationServletContainerIT {
-
-  @LocalServerPort
-  private int port; // <-- we're running on a real port
-
-  @Test
-  void contextLoads(@Autowired WebTestClient webTestClient) {
-    webTestClient
-      .get()
-      .uri("/api/customers")
-      .header("Authorization", "Basic " + Base64.getEncoder().encodeToString("user:dummy".getBytes()))
-      .exchange()
-      .expectStatus()
-      .isOk();
-  }
-}
-```
-
----
-
-
-![bg right:33%](assets/speed.jpg)
-
-# Part 2: Speed & Stability for your Spring Boot Test Suite
-
-
----
-<!--
-
-- Go to `DefaultContextCache` to show the cache
-
--->
-
-## Speed Hack #1 - Spring Context Caching
-
-- **The** **problem**: Integration tests require a started & initialized Spring `ApplicationContext`, which takes time to start
-- **The** **solution**: Spring Test `TestContext` caching, caches an already started Spring `ApplicationContext` for later reuse
-- This feature is part of Spring Test (part of every Spring Boot project via `spring-boot-starter-test`)
+- **The problem**: integration tests need a started and initialized `ApplicationContext`, which takes time
+- **The solution**: the Spring TestContext framework caches a started context for later reuse
+- Part of every Spring Boot project already, via `spring-boot-starter-test`
 
 Speed improvement example:
 
 ![](assets/context-cache-improvements.png)
-
----
-
-### How Caching Works: Step 0
-
-![center h:500 w:700](assets/caching-step-0.png)
-
----
-
-### How Caching Works: Step 1
-
-![center h:500 w:700](assets/caching-step-1.png)
-
----
-
-### How Caching Works: Step 2
-
-![center h:500 w:700](assets/caching-step-2.png)
 
 ---
 
@@ -421,40 +315,23 @@ private final Map<MergedContextConfiguration, ApplicationContext> contextMap =
 This goes into the cache key (`MergedContextConfiguration`):
 
 - activeProfiles (`@ActiveProfiles`)
-- contextInitializersClasses (`@ContextConfiguration`)
-- propertySourceLocations (`@TestPropertySource`)
 - propertySourceProperties (`@TestPropertySource`)
 - contextCustomizer (`@MockitoBean`, `@MockBean`, `@DynamicPropertySource`, ...)
 - etc.
 
----
-## Identify Context Restarts - Visually
-
-![](assets/context-caching-hints.png)
-
+**Every unique combination is a new context start.**
 
 ---
 
-## Identify Context Restarts - with Logs
-
-![](assets/context-caching-logs.png)
-
----
-
-## Identify Context Restarts - with Tools
-
-![center](assets/spring-test-profiler-logo.png)
-
-An [open-source Spring Test utility](https://github.com/PragmaTech-GmbH/spring-test-profiler) that provides visualization and insights for Spring Test execution, with a focus on Spring context caching statistics.
-
-**Overall goal**: Identify optimization opportunities in your Spring Test suite to speed up your builds and ship to production faster and with more confidence.
-
----
-
+<!--
+Notes:
+- This is the single most copied line from StackOverflow and LLM answers.
+- Ask: who has this in an abstract base class right now?
+-->
 
 ## The Final Boss
 
-Developers tend to consult AI/StackOverflow for integration test issues and often copy advice from the internet without knowing the implications:
+Developers consult AI and StackOverflow for integration test issues and copy advice without knowing the implications:
 
 ```java
 @SpringBootTest
@@ -466,51 +343,46 @@ public abstract class AbstractIntegrationTest {
 }
 ```
 
-The setup above will **disable** the context caching feature and slow down the builds significantly!
-
+The setup above **disables** context caching and slows the build down significantly.
 
 ---
 
+## Identify Context Restarts
+
+![bg right:38%](assets/context-caching-hints.png)
+
+- **Visually**: watch for repeated Spring banners and startup logs in your build output
+- **With logs**: set `logging.level.org.springframework.test.context.cache=DEBUG`
+- **With tools**: [spring-test-profiler](https://github.com/PragmaTech-GmbH/spring-test-profiler), our open-source utility that visualizes context caching statistics for your suite
+
+**Goal**: find the few test classes that force an extra context, and align them.
+
+---
+
+<!-- _class: light quote -->
 
 ## New in Spring Framework 7: Pausing of Test Contexts
 
-See the release notes of [Spring Framework 7.0.0 M7](https://spring.io/blog/2025/07/17/spring-framework-7-0-0-M7-available-now).
-
-> Pausing of Test Application Contexts
+> As of Spring Framework 7.0, we now pause test application contexts when they are not used.
 >
-> The Spring TestContext framework is caching application context instances within test suites for faster runs. As of Spring Framework 7.0, we now pause test application contexts when
-> they're not used.
->
-> This means an application context stored in the context cache will be stopped when it is no longer actively in use and automatically restarted the next time the
-> context is retrieved from the cache.
->
-> Specifically, the latter will restart all auto-startup beans in the application context, effectively restoring the lifecycle state.
-
+> An application context stored in the context cache will be stopped when it is no longer actively in use and automatically restarted the next time the context is retrieved from the cache.
 
 ---
 
-## Make the Most of the Caching Feature
+## Angle 3: Test Parallelization
 
-
-- Avoid `@DirtiesContext` when possible, especially central places
-- Understand how the cache key is built
-- Monitor and investigate the context restarts
-- Align the number of unique context configurations for your test suite
-
----
-
-### Speed Hack #2: Test Parallelization
-
-**Goal**: Reduce build time and get faster feedback
+**Goal**: use the cores you already pay for.
 
 Requirements:
+
 - No shared state
-- No dependency between tests and their execution order
+- No dependency between tests or their execution order
 - No mutation of global state
 
-Two ways to achieve this:
-- Fork a new JVM with Maven/Gradle and let it run in parallel -> more resources but isolated execution
-- Use JUnit Jupiter's parallelization mode and let it run in the same JVM with multiple threads
+Two ways to get there:
+
+- Fork a new JVM with Maven/Gradle - more resources, fully isolated
+- Use JUnit Jupiter's parallel execution mode - same JVM, multiple threads
 
 ---
 
@@ -518,86 +390,94 @@ Two ways to achieve this:
 
 ---
 
-<!--
+## Make the Most of Both
 
-Notes:
-- Useful to get started
-- Boilerplate and skeleton help
-- LLM very usueful for boilerplate setup, test data, test migration (e.g. Kotlin -> Java)
-- ChatBots might not produce compilable/working test code, agents are better
--->
-
-### Speed Hack #3 - Get Help from AI
-
-- [Diffblue Cover](https://www.diffblue.com/): AI Agent for unit testing complex (Spring Boot) Java code at scale
-- My go-to CLI code agent: Claude Code
-- TDD with an LLM?
-- (Not AI but still useful) OpenRewrite for [automatic code migrations](https://docs.openrewrite.org/recipes/java/testing) (e.g. JUnit 4 -> JUnit 5 -> JUnit 6)
-- Clearly define your requirements in e.g. `claude.md` or Cursor rule files to adopt a common test structure
+- Avoid `@DirtiesContext`, especially in central base classes
+- Understand how the cache key is built before you add another annotation
+- Monitor and investigate context restarts instead of guessing
+- Align the number of unique context configurations across the suite
+- Then, and only then, turn on parallel execution
 
 ---
 
+<!-- _class: light section -->
+<!-- _paginate: false -->
 
-## Speed Hack #4 - Reuse Testcontainers Container
+![bg right:40%](assets/prod-example.jpg)
 
-- Enable container reuse in Testcontainers if possible: `.withReuse(true)`
-- Singleton containers per test run are better suited than `@Testcontainers` (container per test class)
-- Speed up container startup, e.g., by using predefined database snapshots
+## Myth #3
+
+# "It is green, so it works."
+
+_Green proves your tests ran. Not that they would have caught anything._
+
+---
+
+## Where Tests Drift Away From Production
+
+- **The database**: H2 in tests, PostgreSQL in production. Different SQL dialect, different constraints, different behaviour.
+- **Remote services**: mocked away with Mockito, so the HTTP layer, the serialization and the error handling are never exercised.
+- **The test itself**: it asserts that the code ran, not that the code is right.
+
+Each gap is a place where a green build still ships a bug.
+
+---
+
+## Must-Have #1: Testcontainers (Real Infrastructure)
+
+**Use case**: your test needs the real database, broker or cache - not an in-memory stand-in.
 
 ```java
-private static PostgreSQLContainer<?> postgresModule = new PostgreSQLContainer<>("myteampostgres:42")
+@Container // <-- Testcontainers manages the lifecycle of the container
+@ServiceConnection // <-- automatically configures Spring Boot datasource properties
+static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:16-alpine")
   .withDatabaseName("testdb")
-  .withUsername("testuser")
-  .withPassword("testpass");
+  .withInitScript("init-postgres.sql");
+```
+
+Same engine, same version, same dialect as production. Thrown away after the run.
+
+---
+
+## Keep Testcontainers Fast
+
+- Enable container reuse where possible: `.withReuse(true)`
+- Prefer a singleton container per test run over `@Testcontainers` (which starts one per test class)
+- Speed up startup with prebuilt images that already contain your schema and seed data
+
+```java
+private static PostgreSQLContainer<?> postgres =
+  new PostgreSQLContainer<>("myteampostgres:42");
 
 static {
-  postgresModule.start();
+  postgres.start(); // started once, shared by every test that needs it
 }
 ```
 
 ---
 
-# Part 3: Why & When Spring Boot Tests Fight Back
+## Must-Have #2: WireMock (Real HTTP)
 
-![bg right:33%](assets/fight-back.jpg)
+**Use case**: your application calls a remote API. You want to exercise your own HTTP client, serialization and error handling - without depending on someone else's uptime.
 
----
+Mocking the client with Mockito skips exactly the part that breaks in production:
 
-## Pitfall 1: `@SpringBootTest` Obsession
-
-- The name could apply it's a one size fits all solution, but it isn't
-- It comes with costs: starting the (entire) application context
-- Useful for integration tests that verify the whole application but not for testing a single service in isolation
-- Start with unit tests, see if sliced tests are applicable and only then use `@SpringBootTest`
+- Wrong URL or query parameter
+- Unexpected response shape
+- Timeouts, 500s, and retry behaviour
 
 ---
 
-## @SpringBootTest Obsession Visualized
-
-![](assets/spring-boot-test-obsession.png)
+![bg w:900 center](assets/wiremock-usage.svg)
 
 ---
 
-## Pitfall 2: @MockitoBean vs. @MockBean vs. @Mock
+## Must-Have #3: Mutation Testing (Real Assertions)
 
-- `@MockBean` is a Spring Boot specific annotation that replaces a bean in the application context with a Mockito mock
-- `@MockBean` is deprecated in favor of the new `@MockitoBean` annotation
-- `@Mock` is a Mockito annotation, only for unit tests
-
-- Golden Mockito Rules:
-  - Do not mock types you don't own
-  - Don't mock value objects
-  - Don't mock everything
-  - Show some love with your tests
-
----
-
-## Pitfall 3: Code Coverage Illusion
-
-- Having high code coverage might give you a **false sense of security**
-- Mutation Testing with [PIT](https://pitest.org/quickstart/)
-- Beyond Line Coverage: Traditional tools like JaCoCo show which code runs during tests, but PIT verifies if our tests actually detect when code behaves incorrectly by introducing "**mutations**" to our source code.
-- Quality Guarantee: PIT automatically **modifies our code** (changing conditionals, return values, etc.) to ensure our tests fail when they should, **revealing blind spots** in seemingly comprehensive test suites.
+- High code coverage gives you a **false sense of security**: it shows which lines ran, not which bugs you would catch
+- [PIT](https://pitest.org/quickstart/) **mutates your source code** - flips conditionals, changes return values - and re-runs your tests
+- If a mutation survives, no test noticed the change. That is a **blind spot** with high line coverage on top of it
+- A mutation score threshold in CI is a quality gate that coverage can never be
 
 ---
 
@@ -605,101 +485,93 @@ static {
 
 ---
 
-## Pitfall 4: JUnit 4 vs. JUnit 5 vs. JUnit 6
+## The Wider Ecosystem
 
-![bg right:33%](assets/car-comparison.jpg)
-
-- You can mix all three versions in the same project but not in the same test class
-- Browsing through the internet (aka. StackOverflow/blogs/LLMs) for solutions, you might find test setups that are still for JUnit 4
-- Easily import the wrong `@Test` and you end up wasting one hour because the Spring context does not work as expected
+![center h:480](assets/it-testing-libraries.png)
 
 ---
 
-<center>
+<!-- _class: light statement -->
 
-| JUnit 4              | JUnit 5                            |
-|----------------------|------------------------------------|
-| @Test from org.junit | @Test from org.junit.jupiter.api   |
-| @RunWith             | @ExtendWith/@RegisterExtension     |
-| @ClassRule/@Rule     | -                                  |
-| @Before              | @BeforeEach                        |
-| @Ignore              | @Disabled                          |
-| @Category            | @Tag                               |
-
-</center>
+# AI writes tests in seconds. **Trusting** them still **takes human judgment.**
 
 ---
+
+## What I Do to Build Confidence in the Agentic Coding Era
+
+- **Review generated tests** like a pull request from a new hire
+- **Put the bridges in the repo**: test slices, shared test configuration, Testcontainers best practices
+- **Make the rules executable**: ArchUnit rules, testing conventions in `CLAUDE.md` / `AGENTS.md`, mutation score thresholds in CI
+- **Custom skills**: define once per project how testing is tackled, with best practices and antipatterns
+- **Keep the feedback loop tight**: fast, trustworthy tests let the agent iterate without me watching every step
+
+---
+
+## My Agentic Testing Setup for Spring Boot
+
+Define a **skillset** for fast and comprehensive tests, including a **test strategy** for the given project:
+
+```text
+.claude/skills/
+├── unit-testing            fast tests without context bloat
+├── slice-testing           right-sized Spring context slices
+├── slice-testing-webmvc    web layer with @WebMvcTest
+├── integration-testing     full-context tests that stay fast
+├── e2e-testing             user journeys against the running app
+├── testcontainers-setup    real infrastructure, reused containers
+└── test-setup-reviewer     flags test anti-patterns for you
+```
+
+Each skill carries rules, references, best practices and antipatterns, described as code and text.
+
+---
+
+<!-- _class: light statement reveal -->
+<!-- _paginate: false -->
 
 <!--
-
 Notes:
-
-- Rich ecosystem: LocalStack, Contract testing (Pact), GreenMail, Selenide, Performance Testing
-
+- One line per click (fragmented list, HTML deck only).
+- The agent can write the code and the tests, but the pager still rings for you.
 -->
 
-## Wrap-Up: Key Takeaways
-
-- Spring Boot applications come with batteries-included for testing
-- Spring and Spring Boot provides many excellent testing features
-- Java provides a mature & rich testing ecosystem
-- Consider the context caching feature for fast builds
-- Sliced testing can help write isolated tests with a minimal context
-- Still many new testing-related features are part of new releases: pausing a `TestContext`, `@ServiceConnection`, Testcontainers support, Docker Compose support, more AssertJ integrations, etc.
+# You can delegate the typing.
+* You can't delegate the ownership.
+* **You** get paged at 3 AM.
+* Invest in a test suite that gives you **confidence in every commit**.
 
 ---
 
-![bg right:23%](assets/philip-jug-zurich-2025-audience.jpg)
+<!-- _class: light agenda -->
 
+## The Three Myths, Busted
 
-## What's Next?
-
-Testing is a team sport, make sure your whole team levels up together!
-
-- Further Spring Boot testing resources (courses, eBooks, articles) at [rieckpil.de](https://rieckpil.de/)
-- Spring Boot [testing workshops](https://pragmatech.digital/workshops/) (in-house/remote/hybrid)
-- [Consulting offerings](https://pragmatech.digital/consulting/), e.g. the Test Maturity Assessment for projects/teams
+1. Most tests need no Spring context - climb only when forced to
+2. Your suite is not slow, it is restarting contexts - cache, align, parallelize
+3. Green is not proof - real infrastructure, real HTTP, real assertions
 
 ---
 
-## My Entire Spring Boot Testing Knowledge Combined
+## Get Notified
 
-... in one on-demand online course.
+I am building an **agentic Spring Boot testing course**: how to make code agents produce tests you would have written yourself.
 
-Learn how to test and verify a real-world self-contained system with the [Testing Spring Boot Applications Masterclass](https://rieckpil.de/testing-spring-boot-applications-masterclass/)
+Scan to join the waitlist:
 
-![center w:400 h:400](assets/masterclass-architecture.png)
-
-
----
-
-## Covering Unit, Sliced, Integration and E2E Tests
-
-... with 130 course lessons and 12h+ of content
-
-![center](assets/tsbam-recording.gif)
-
----
-## Don't Leave Empty-Handed
-
-![bg h:720 w:450 right:33%](assets/tsbad-cover.png)
-
-- Get the complementary **Testing Spring Boot Applications Demystified** for free (instead of $9)
-- 120+ Pages with practical hands-on advice to ship code with confidence
-- Get the eBook by joining our [newsletter](https://rieckpil.de/free-spring-boot-testing-book/)
-
+![center h:300](assets/agentic-testing-course-qr.png)
 
 ---
 
-<!-- paginate: false -->
-
-## Joyful Testing!
-
-The slides & code  will be shared after the webinar.
+<!-- _class: light closing -->
+<!-- _paginate: false -->
+<!-- _header: '' -->
 
 ![bg right:33%](assets/end.jpg)
 
-Reach out any time via:
+# Joyful Testing!
+
+The slides & code will be shared after the talk.
+
+Reach out any time
 - [LinkedIn](https://www.linkedin.com/in/rieckpil) (Philip Riecks)
-- [X](https://x.com/rieckpil) (@rieckpil)
 - [Mail](mailto:philip@pragmatech.digital) (philip@pragmatech.digital)
