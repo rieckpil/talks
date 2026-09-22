@@ -39,10 +39,10 @@ Software Craft Community @ DATEV · September 22, 2026
 
 ## About Philip
 
-- Self-employed developer from **Herzogenaurach**, Germany (close to Nuremberg) 🍻
+- Self-employed developer from **Herzogenaurach**, living in Erlangen, Germany (close to Nuremberg) 🍻
 - Met Sven Hansen during the **Spring I/O** conference in Barcelona this year 🇪🇸
-- Blogging & content creation with a focus on testing Java and specifically Spring Boot applications 🍃
-- Founder of **PragmaTech GmbH** - We Help Developers to Frequently Deliver Software with More Confidence 🚤
+- Blogging & content creation with a focus on **testing Java Spring Boot** applications 🍃
+- Founded **PragmaTech GmbH** - We Help Developers to Frequently Deliver Software with More Confidence 🚤
 
 ---
 
@@ -118,13 +118,13 @@ Notes:
 - The suite takes > 30 minutes, so nobody runs it before pushing
 - A test goes red and you cannot tell whether the code or the test is broken
 - You reach for `@SpringBootTest` because it is the only thing that works
-- The pipeline is green and you still do not want to deploy on a Friday
+- The pipeline is green and you are hesitant to deploy
 
 ---
 
 <!-- _class: light agenda -->
 
-## The Three Myths We Bust Today
+## The Three Spring Boot Testing Myths We Bust Today
 
 1. "I need @SpringBootTest for that."
 2. "Spring Boot tests are slow."
@@ -152,7 +152,7 @@ Notes:
 - Only the "yes" branch splits again. Annotations come on the next slides.
 -->
 
-## There are Three Ways to Write Tests
+## Three Ways to Write Tests for Spring Boot applications
 
 ![center h:500](assets/test-choice.png)
 
@@ -247,7 +247,7 @@ Notes:
 
 ## The `@SpringBootTest` Obsession
 
-![](assets/spring-boot-test-obsession.png)
+![](assets/spring-boot-test-obsession-masked.png)
 
 
 
@@ -297,20 +297,20 @@ Notes:
 Attack it from four angles:
 
 1. **Right test level** - the cheapest test that answers the question (Myth #1)
-2. **Fewer context starts** - Spring already caches contexts, if you let it
+2. **Fewer context starts** - Spring Test's hidden gem
 3. **Parallel execution** - use the cores you are paying for
 
 ---
 
-## Angle 2: Spring Context Caching
+## Angle 2: Spring Context Caching (Spring Test's Hidden Gem)
 
-- **The problem**: integration tests need a started and initialized `ApplicationContext`, which takes time
-- **The solution**: the Spring TestContext framework caches a started context for later reuse
-- Part of every Spring Boot project already, via `spring-boot-starter-test`
+* **The problem**: integration tests need a started and initialized `ApplicationContext`, which takes time
+* **The solution**: the Spring TestContext framework caches a started context for later reuse
+* Part of every Spring Boot project already, via `spring-boot-starter-test`
 
-Speed improvement example:
+* Speed improvement example:
 
-![](assets/context-cache-improvements.png)
+  ![](assets/context-cache-improvements.png)
 
 ---
 
@@ -347,30 +347,6 @@ This goes into the cache key (`MergedContextConfiguration`):
 
 ---
 
-<!--
-Notes:
-- This is the single most copied line from StackOverflow and LLM answers.
-- Ask: who has this in an abstract base class right now?
--->
-
-## The Final Boss
-
-Developers consult AI and StackOverflow for integration test issues and copy advice without knowing the implications:
-
-```java
-@SpringBootTest
-@DirtiesContext
-// this instructs Spring to remove the context from the cache
-// and rebuild a new context on every request
-public abstract class AbstractIntegrationTest {
-
-}
-```
-
-The setup above **disables** context caching and slows the build down significantly.
-
----
-
 ## Detect Context Restarts - Visually
 
 ![](assets/context-caching-hints.png)
@@ -390,16 +366,6 @@ The setup above **disables** context caching and slows the build down significan
 An [open-source Spring Test utility](https://github.com/PragmaTech-GmbH/spring-test-profiler) that provides visualization and insights for Spring Test execution, with a focus on Spring context caching statistics.
 
 **Overall goal**: Identify optimization opportunities in your Spring Test suite to speed up your builds and ship to production faster and with more confidence.
-
----
-
-<!-- _class: light quote -->
-
-## New in Spring Framework 7: Pausing of Test Contexts
-
-> As of Spring Framework 7.0, we now pause test application contexts when they are not used.
->
-> An application context stored in the context cache will be stopped when it is no longer actively in use and automatically restarted the next time the context is retrieved from the cache.
 
 ---
 
@@ -426,8 +392,8 @@ Two ways to get there:
 
 ## Make the Most of Both
 
-- Avoid `@DirtiesContext`, especially in central base classes
 - Understand how the cache key is built before you add another annotation
+- Avoid `@DirtiesContext`, especially in central base classes
 - Monitor and investigate context restarts instead of guessing
 - Align the number of unique context configurations across the suite
 - Turn on parallel test execution, start selectively
@@ -464,12 +430,12 @@ Each gap is a place where a green build still ships a bug.
 ```java
 @Container // <-- Testcontainers manages the lifecycle of the container
 @ServiceConnection // <-- automatically configures Spring Boot datasource properties
-static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:16-alpine")
+static PostgreSQLContainer postgres = new PostgreSQLContaine("postgres:16-alpine")
   .withDatabaseName("testdb")
-  .withInitScript("init-postgres.sql");
+  .withInitScript("init-postgres-users.sql");
 ```
 
-Same engine, same version, same dialect as production. Thrown away after the run.
+Same engine, same version, same dialect as production.
 
 ---
 
@@ -480,8 +446,8 @@ Same engine, same version, same dialect as production. Thrown away after the run
 - Speed up startup with prebuilt images that already contain your schema and seed data
 
 ```java
-private static PostgreSQLContainer<?> postgres =
-  new PostgreSQLContainer<>("myteampostgres:42");
+private static PostgreSQLContainer postgres =
+  new PostgreSQLContainer("myteampostgres:42");
 
 static {
   postgres.start(); // started once, shared by every test that needs it
@@ -554,17 +520,17 @@ public Long registerUser(int age, String username) {
 
 1. Most tests need no Spring context - climb only when forced to
 2. Your suite is not slow, it is restarting contexts - cache, align, parallelize
-3. Green is not proof - real infrastructure, real HTTP, real assertions
+3. Green is not proof - real infrastructure, real HTTP, meaningful assertions
 
 ---
 
 <!-- _class: light metrics -->
 
-## Coming Up: **Ship Fast, Sleep Well**
+## Upcoming Talk at the DATEV Coding Festival
 
-_Fearless Spring Boot Deployments in the AI Era_ - my next talk at the **DATEV Coding Festival**. We pick up where today stops: shipping the code an agent wrote, without losing sleep over it.
+_Ship Fast, Sleep Well: Fearless Spring Boot Deployments in the AI Era_ - my next talk at the **DATEV Coding Festival**.
 
-Come and join:
+We pick up where today stops: shipping the code an agent wrote, without losing sleep over it. Come and join:
 
 - **Oct 6** 2026
 - **14:30** to 15:15
@@ -602,6 +568,18 @@ Each skill carries rules, references, best practices and antipatterns, described
 
 ---
 
+
+## Get Notified
+
+I am building an **agentic Spring Boot testing course**: how to make code agents produce tests you would have written yourself.
+
+![h:340 center](assets/agentic-testing-course.png)
+
+See the QR code on the slide for more information.
+
+---
+
+
 <!-- _class: light statement reveal -->
 <!-- _paginate: false -->
 
@@ -615,18 +593,6 @@ Notes:
 * You can't delegate the ownership.
 * **You** get paged at 3 AM.
 * Invest in a test suite that gives you **confidence in every commit**.
-
----
-
-## Get Notified
-
-I am building an **agentic Spring Boot testing course**: how to make code agents produce tests you would have written yourself.
-
-<center>
-
-![h:340](assets/agentic-testing-course.png) &nbsp; ![h:200](assets/agentic-testing-course-qr.png)
-
-</center>
 
 
 ---
