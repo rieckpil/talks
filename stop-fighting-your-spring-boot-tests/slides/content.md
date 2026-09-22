@@ -415,17 +415,20 @@ _Green proves your tests ran. Not that they would have caught anything._
 
 ## Where Tests Drift Away From Production
 
-- **The database**: H2 in tests, PostgreSQL in production. Different SQL dialect, different constraints, different behaviour.
-- **Remote services**: mocked away with Mockito, so the HTTP layer, the serialization and the error handling are never exercised.
-- **The test itself**: it asserts that the code ran, not that the code is right.
+Every test environment takes shortcuts.
 
-Each gap is a place where a green build still ships a bug.
+Each one is a small drift - and drifts compound:
 
+- **Database**: in-memory H2 instead of the production engine and version
+- **Servlet container**: `@SpringBootTest` defaults to a **mocked** servlet environment - `webEnvironment = RANDOM_PORT` starts the real one (Tomcat, etc.)
+- **External services**: mocked mail, object storage, message queues, IDPs
+- **Schema**: Hibernate `ddl-auto` in tests, Flyway/Liquibase migrations in production
+- **Environment**: clock, timezone, locale, JVM flags, OS of the CI runner
 ---
 
 ## Must-Have #1: Testcontainers (Real Infrastructure)
 
-**Use case**: your test needs the real database, broker or cache - not an in-memory stand-in.
+Running infrastructure components (databases, message brokers, etc.) in Docker containers for our tests becomes a breeze with [Testcontainers](https://testcontainers.com/):
 
 ```java
 @Container // <-- Testcontainers manages the lifecycle of the container
@@ -435,7 +438,7 @@ static PostgreSQLContainer postgres = new PostgreSQLContaine("postgres:16-alpine
   .withInitScript("init-postgres-users.sql");
 ```
 
-Same engine, same version, same dialect as production.
+This launches an ephemeral Docker container for testing purposes.
 
 ---
 
