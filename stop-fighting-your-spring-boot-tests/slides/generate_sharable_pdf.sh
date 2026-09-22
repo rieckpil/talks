@@ -66,6 +66,25 @@ cleanup() {
 # Set trap to cleanup on exit (error or success)
 trap cleanup EXIT
 
+# An animated GIF exports to PDF as its FIRST frame, which for the context-caching
+# animation is an empty cache - the setup, not the conclusion. Swap in the still of
+# the last frame for the PDF only; the HTML deck keeps the animation.
+# Add "<animated.gif> <still.png>" pairs here to cover further animations.
+PDF_STILL_SWAPS=(
+  "context-caching.gif context-caching-final.png"
+)
+
+for swap in "${PDF_STILL_SWAPS[@]}"; do
+    animated="${swap%% *}"
+    still="${swap##* }"
+    if [ -f "./assets/$still" ]; then
+        sed -i '' "s|assets/$animated|assets/$still|g" "$MARKDOWN_FILE"
+        echo "PDF: using $still in place of $animated"
+    else
+        echo "! assets/$still missing - PDF will show the first frame of $animated"
+    fi
+done
+
 # Get list of all generated images
 if [ "$(ls -A $GENERATED_DIR)" ]; then
     echo "Updating image references to use resized images..."
