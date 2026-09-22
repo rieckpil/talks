@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Test choice decision tree</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  /* Palette mirrors pragmatech.css section.light so the exported PNG sits
+     seamlessly on a light slide. */
+  :root {
+    --ink: #0f172a;
+    --muted: #64748b;
+    --accent: #0284c7;
+    --green: #00a34a;
+    --amber: #c98a00;
+    --surface: #f1f5f9;
+    --border: #e2e8f0;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: transparent;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  #scene {
+    position: relative;
+    width: 1600px;
+    height: 770px;
+    background: transparent;
+  }
+
+  svg.wires {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  .node {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 18px;
+    padding: 26px 30px;
+  }
+
+  /* The question at the top of the tree */
+  .question {
+    left: 300px;
+    width: 1000px;
+    top: 0;
+    min-height: 118px;
+    align-items: center;
+    text-align: center;
+    background: #ffffff;
+    border: 2px solid var(--ink);
+    box-shadow: 0 2px 0 var(--ink);
+  }
+
+  .question h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 40px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+
+  .question code { font-family: 'JetBrains Mono', monospace; font-size: 0.88em; }
+
+  /* An outcome card */
+  .answer {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 8px solid var(--accent);
+  }
+
+  .answer h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 37px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    line-height: 1.15;
+    margin-bottom: 12px;
+  }
+
+  .answer p {
+    font-size: 24px;
+    line-height: 1.4;
+    color: var(--muted);
+  }
+
+  .answer .cost {
+    margin-top: 16px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+  }
+
+  .answer.fast { border-left-color: var(--green); }
+  .answer.fast .cost { color: var(--green); }
+  .answer.ctx  { border-left-color: var(--accent); }
+  .answer.ctx .cost { color: var(--accent); }
+  .answer.slow { border-left-color: var(--amber); }
+  .answer.slow .cost { color: var(--amber); }
+
+  /* Yes / No labels that sit on the wires */
+  .branch {
+    position: absolute;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    background: #ffffff;
+    padding: 3px 14px;
+    border-radius: 999px;
+  }
+
+  .branch.no  { color: var(--green); }
+  .branch.yes { color: var(--accent); }
+
+  /* Row 1 of answers: the two halves of the first decision, side by side at
+     the same height so the green / blue split reads as one row. */
+  .a-nocontext  { left: 120px;  top: 270px; width: 480px; }
+  .a-context    { left: 1000px; top: 270px; width: 480px; }
+
+  /* Row 2: the blue branch splits again. Equal min-height so the two cards
+     line up even though one description wraps and the other does not. */
+  .a-sliced { left: 920px;  top: 575px; width: 320px; }
+  .a-full   { left: 1270px; top: 575px; width: 320px; }
+
+  .a-sliced, .a-full { min-height: 148px; }
+  .a-sliced h3, .a-full h3 { font-size: 30px; margin-bottom: 8px; }
+  .a-sliced p,  .a-full p  { font-size: 21px; }
+</style>
+</head>
+<body>
+<div id="scene">
+  <svg class="wires" preserveAspectRatio="none" fill="none"></svg>
+
+  <div class="node question q-context">
+    <h2>Does this test need a Spring <code>ApplicationContext</code>?</h2>
+  </div>
+
+  <div class="node answer fast a-nocontext">
+    <h3>No Context</h3>
+    <p>Plain JUnit and Mockito. You construct the class yourself.</p>
+    <div class="cost">milliseconds</div>
+  </div>
+
+  <div class="node answer ctx a-context">
+    <h3>With a Context</h3>
+    <p>Spring wires the beans, so the framework is part of the test.</p>
+    <div class="cost">seconds</div>
+  </div>
+
+  <div class="node answer ctx a-sliced">
+    <h3>Sliced Context</h3>
+    <p>Only the layer under test</p>
+  </div>
+
+  <div class="node answer slow a-full">
+    <h3>Full Context</h3>
+    <p>The entire application</p>
+  </div>
+</div>
+
+<script>
+  // Wires are drawn after layout so they always meet the real card edges.
+  function drawWires() {
+    const scene = document.getElementById('scene');
+    const svg = scene.querySelector('svg.wires');
+    const sceneBox = scene.getBoundingClientRect();
+    svg.setAttribute('viewBox', `0 0 ${sceneBox.width} ${sceneBox.height}`);
+
+    const edge = (selector, side) => {
+      const box = document.querySelector(selector).getBoundingClientRect();
+      const x = box.left - sceneBox.left + box.width / 2;
+      const yTop = box.top - sceneBox.top;
+      return { x, y: side === 'top' ? yTop : yTop + box.height };
+    };
+
+    const elbow = (from, to) => {
+      const midY = from.y + (to.y - from.y) / 2;
+      return `M ${from.x} ${from.y} V ${midY} H ${to.x} V ${to.y}`;
+    };
+
+    const wires = [
+      ['.q-context', '.a-nocontext', 'var(--green)'],
+      ['.q-context', '.a-context',   'var(--accent)'],
+      ['.a-context', '.a-sliced',    'var(--accent)'],
+      ['.a-context', '.a-full',      'var(--amber)']
+    ];
+
+    svg.innerHTML = wires.map(([fromSel, toSel, stroke]) =>
+      `<path d="${elbow(edge(fromSel, 'bottom'), edge(toSel, 'top'))}" stroke="${stroke}"
+             stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" />`
+    ).join('');
+
+    // Yes / No labels, centred on the horizontal run of the first decision.
+    scene.querySelectorAll('.branch').forEach(el => el.remove());
+    [['.a-nocontext', 'No', 'no'], ['.a-context', 'Yes', 'yes']].forEach(([selector, text, kind]) => {
+      const from = edge('.q-context', 'bottom');
+      const to = edge(selector, 'top');
+      const label = document.createElement('div');
+      label.className = `branch ${kind}`;
+      label.textContent = text;
+      scene.appendChild(label);
+      const box = label.getBoundingClientRect();
+      label.style.left = `${(from.x + to.x) / 2 - box.width / 2}px`;
+      label.style.top = `${from.y + (to.y - from.y) / 2 - box.height / 2}px`;
+    });
+  }
+
+  document.fonts.ready.then(() => {
+    drawWires();
+    requestAnimationFrame(() => { window.__rendered = true; });
+  });
+</script>
+</body>
+</html>

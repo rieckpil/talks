@@ -35,3 +35,6 @@ build/
 .vscode/
 
 **/.claude/settings.local.json
+
+# Remotion animation sources (node_modules only; sources are tracked)
+**/visuals/remotion/node_modules/

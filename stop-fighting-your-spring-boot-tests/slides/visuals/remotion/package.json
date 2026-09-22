@@ -1,0 +1,18 @@
+{
+  "name": "context-cache-animation",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Remotion animation explaining Spring TestContext caching, rendered to a GIF for the slide deck.",
+  "scripts": {
+    "preview": "remotion studio",
+    "render": "remotion render ContextCache ../../assets/context-caching.gif --codec=gif --number-of-gif-loops=0",
+    "still": "remotion still ContextCache ../../assets/context-caching-final.png --frame=284",
+    "build": "npm run render && npm run still"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.404",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "remotion": "4.0.404"
+  }
+}
