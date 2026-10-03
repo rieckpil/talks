@@ -1,6 +1,6 @@
 # Demo 2: One container per image (6 min)
 
-Where: Part 3b.
+Where: block 2, parallel and cache part.
 
 ## Setup
 - Docker running, `mysql:9.7` pulled

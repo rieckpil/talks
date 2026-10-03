@@ -5,14 +5,15 @@ Rule: if a block runs more than 3 min over, use the cut list in `../TALK-PLAN.md
 | Clock (Mon) | Elapsed min | Block | Key message | Slide section |
 |---|---|---|---|---|
 | 09:30 | 0 | Opening | You will leave with a plan, not a pitch. Beginner level on purpose | Opening |
-| 09:35 | 5 | **Block 1** Crash course (60 min) | Pick the cheapest test that proves the behavior. Ends with the five properties of a good suite | Part 1 |
+| 09:35 | 5 | **Block 1** Crash course (60 min) | Pick the cheapest test that proves the behavior. Ends with the five properties of a good suite | 01 |
 | 10:35 | 65 | **Block 1 FAQ** (10 min) | Answer questions from the room | FAQ 1 |
 | 10:45 | 75 | BREAK (30 min) | Back at 11:15 sharp | Break |
-| 11:15 | 105 | **Block 2** Rationale (15 min) | The green check must carry the weight | Part 2 |
-| 11:30 | 120 | **Block 2** Skills (20 min) | Teach the agent how YOU test | Part 3a |
-| 11:50 | 140 | **Block 2** Fast feedback (12 min) | Fast feedback is a feature for agents | Part 3b |
-| 12:02 | 152 | **Block 2** Tooling (13 min) | Small steps, good tools, guardrails | Part 3c |
-| 12:15 | 165 | **Block 2** Wrap-up (5 min) | Evidence, five takeaways, one soft pointer | Wrap-up |
+| 11:15 | 105 | **Block 2** The goal (10 min) | Fast and comprehensive suite, DORA | 02 |
+| 11:25 | 115 | **Block 2** Skill library (17 min) | Deterministic results with skills adapted per project | 03 |
+| 11:42 | 132 | **Block 2** Parallel and cache (15 min) | Most important: parallelizable, context-cache friendly | 04 |
+| 11:57 | 147 | **Block 2** MCP setup (8 min) | Few, trusted servers | 05 |
+| 12:05 | 155 | **Block 2** Engineering practices (10 min) | Be ready to act fast | 06 |
+| 12:15 | 165 | **Block 2** Wrap-up (5 min) | Evidence, five takeaways, one soft pointer | 07 |
 | 12:20 | 170 | **Block 2 FAQ** (10 min) | Answer questions from the room | FAQ 2 |
 | 12:30 | 180 | End | | Closing |
 

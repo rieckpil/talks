@@ -1,6 +1,6 @@
 # Demo 4: MCP servers and the CI loop (8 min)
 
-Where: Part 3c (live option B, or screenshots only).
+Where: backup, MCP part (optional).
 
 ## Setup
 - Servers added: Context7, GitHub (read-only, Actions toolset), Playwright

@@ -6,7 +6,7 @@ class: light
 paginate: true
 transition: pt-fade
 header: 'Prompt It Right @ Devoxx Belgium 2026 - Questions @ menti.com Code: <strong>7108 0067</strong>'
-footer: '![](assets/logo.webp) Philip Riecks · [PragmaTech GmbH](https://pragmatech.digital/) · [@rieckpil](https://x.com/rieckpil)'
+footer: '![](assets/logo.webp) Philip Riecks · [@rieckpil](https://x.com/rieckpil) · [PragmaTech GmbH](https://pragmatech.digital/)'
 ---
 
 <!--
@@ -53,8 +53,6 @@ Notes:
 ![center w:1100](assets/talk-overview.png)
 
 ---
-
-<!-- footer: '![](assets/logo.webp)' -->
 
 ### About Philip
 
@@ -115,7 +113,7 @@ Notes:
 <div class="stack">
   <div class="sketch accent alt top">
     <strong>2 · Agentic Development and Testing</strong>
-    <small>11:15 - 12:30 · rationale · skills · fast pipeline · tooling · demos · FAQ</small>
+    <small>11:15 - 12:30 · goal · skills · parallel · MCPs · practices · FAQ</small>
   </div>
   <div class="sketch pause">☕ Break · 10:45 - 11:15</div>
   <div class="sketch accent base">
@@ -136,7 +134,7 @@ Notes:
 
 <!-- _class: light statement -->
 
-You will leave with **ideas you can use on Monday**, not a sales pitch.
+# You will leave with **ideas you can use on Monday**, not a sales pitch.
 
 <!--
 Notes:
@@ -147,6 +145,8 @@ Notes:
 
 <!-- _class: light section -->
 <!-- header: 'Block 1: Spring Boot Testing in a Nutshell - Questions @ menti.com Code: <strong>7108 0067</strong>' -->
+
+![bg right:33%](assets/m1-welcome.jpg)
 
 ## 01 - Spring Boot Testing in a Nutshell
 
@@ -161,7 +161,7 @@ Notes:
 
 <!-- _class: light statement -->
 
-Good tests don't just catch bugs - they give you **fast feedback** and **confident deployments**.
+# Good tests don't just catch bugs - they give you **fast feedback** and **confident deployments**.
 
 ---
 
@@ -196,7 +196,7 @@ Notes:
 
 <!-- _class: light statement -->
 
-Pick the **cheapest test** that proves the behavior.
+# Pick the **cheapest test** that proves the behavior.
 
 ---
 
@@ -312,6 +312,18 @@ Notes:
 
 ---
 
+<!--
+Notes:
+- One question decides most of it: most tests answer "no" and never need Spring.
+- Only the "yes" branch splits again. Annotations come on the next slides.
+-->
+
+## Three Ways to Write Tests for Spring Boot Applications
+
+![center h:500](assets/test-choice.png)
+
+---
+
 ## Unit Testing Java/Spring Boot Applications 101
 
 - **Core Concept**: Test individual components in isolation from dependencies - one unit of work at a time.
@@ -399,6 +411,8 @@ Notes:
 ---
 
 <!-- _class: light section -->
+
+![bg right:33%](assets/m2-past.jpg)
 
 ## 01.2 - Slice tests
 
@@ -626,11 +640,13 @@ class ApplicationServletContainerIT {
 
 <!-- _class: light statement -->
 
-... but what about **Problem #3**: How to keep our build time at a reasonable duration?
+# ... but what about **Problem #3**: How to keep our build time at a reasonable duration?
 
 ---
 
 <!-- _class: light section -->
+
+![bg right:33%](assets/m4-feature.jpg)
 
 ## 01.5 - The context cache
 
@@ -949,408 +965,283 @@ Notes:
 ---
 
 <!-- _class: light section -->
-<!-- header: 'Block 2 · Why It Matters - Questions @ menti.com Code: <strong>7108 0067</strong>' -->
+<!-- header: 'Block 2 · The Goal - Questions @ menti.com Code: <strong>7108 0067</strong>' -->
 
-## 02 - Why it matters
+![bg right:33%](assets/m1-overview.jpg)
 
-# Verification is the new constraint
+## 02 - The goal
+
+# A fast and comprehensive test suite
 
 <!--
 Notes:
-- 15 min. Baseline: course module 2 (testing as afterthought, Formula 1 engine, trustworthy suite).
-- Open with the recap slide you just showed, then say: now we put an AI agent on top of this fundament.
+- 10 min. Align on the goal first. Reasoning: DORA, as on pragmatech.digital.
+- Block 2 is my setup, not the course content 1:1. Hints and structure, no hard sell.
 -->
 
 ---
 
 <!-- _class: light statement -->
 
-Most developers have a **love-hate relationship** with testing.
+# With AI, the bottleneck moves from **writing** code to **verifying** it.
+
+---
+
+<!-- _class: light statement -->
+
+# Somebody handed your team a **Formula 1 engine**.
+
+---
+
+## On a Bumpy Road, Faster Does Not Mean Safer
+
+![center h:500](assets/f1-bumpy-road.png)
 
 <!--
 Notes:
-- Honest, not accusatory. Everyone in the room has done this.
+- The engine is the AI: code in seconds. Nobody fixed the brakes, the road, or the driver.
+- On a bumpy road, faster does not mean safer. It means the wall (production) arrives sooner.
 -->
 
 ---
 
-## Be Honest About the Last Five Years
+## Fix the Brakes, the Road, and the Driver
 
-<div class="flow">
-  <div class="sketch">Written last<small>after the feature</small></div>
-  <div class="sketch alt">Skimmed fastest<small>in code review</small></div>
-  <div class="sketch">A dashboard number<small>nobody reads closely</small></div>
-  <div class="sketch alt">"Later"<small>said, not meant</small></div>
-</div>
-
-That was the deal we already had with testing, before any of this.
-
----
-
-## Coding Was Never the Whole Job
-
-<div class="flow">
-  <div class="sketch alt">Understand<small>customer wants, bug analysis</small></div>
-  <div class="arrow">&#8594;</div>
-  <div class="sketch">Write<small>code and tests, minutes now</small></div>
-  <div class="arrow">&#8594;</div>
-  <div class="sketch accent">Verify<small>the new bottleneck</small></div>
-  <div class="arrow">&#8594;</div>
-  <div class="sketch alt">Ship<small>seconds</small></div>
-</div>
-
-AI made the write box fast. It never touched the other three.
-
----
-
-<!-- _class: light statement -->
-
-Everything got faster **except the part where you decide it is correct**.
-
----
-
-## The Pipeline, Honestly Drawn
-
-<div class="flow">
-  <div class="sketch">Prompt<small>seconds</small></div>
-  <div class="arrow">&#8594;</div>
-  <div class="sketch alt">Diff<small>seconds</small></div>
-  <div class="arrow">&#8594;</div>
-  <div class="sketch accent">Review<small>you, reading</small></div>
-  <div class="arrow">&#8594;</div>
-  <div class="sketch alt">Merge<small>seconds</small></div>
-</div>
-
-Three of these four boxes got an order of magnitude faster. The blue one did not.
-
----
-
-## The Prompt Everybody Types
-
-```text
-add tests for OrderService
-```
-
-Forty seconds later there is a new file, it is green, and the pull request is open.
-
-You have typed this. I have typed this. It is the path of least resistance, and the tool was built to make that path shorter.
-
----
-
-<!-- _class: light statement -->
-
-It is green. **That is the only thing you know.**
-
----
-
-## What Is Missing Is Not Effort
-
-The agent did not get lazy. It has no way to know:
-
-<div class="flow">
-  <div class="sketch">Which behavior is worth proving?</div>
-  <div class="sketch alt">Does the mock prove the query?</div>
-  <div class="sketch">Will this read at 3am?</div>
-  <div class="sketch alt">Does it run in parallel?</div>
-</div>
-
-Those are judgments. They came from you, and you stopped supplying them at scale.
-
----
-
-<!-- _class: light quote -->
-
-> Somebody handed your team a Formula 1 engine. Nobody fixed the brakes, the road, or the driver. On a bumpy road, faster does not mean safer. It means the wall arrives sooner.
-
----
-
-## You Are the Conductor Now
-
-<div class="flow">
-  <div class="sketch alt">You typed it<small>line by line</small></div>
-  <div class="arrow">&#8594;</div>
-  <div class="sketch accent">You guide it<small>and judge what comes back</small></div>
-</div>
-
-What is left for you to supply is **judgment**. In production code and in tests.
-
----
-
-<!-- _class: light statement -->
-
-The outage is still **yours to explain**.
+![center h:500](assets/f1-smooth-road.png)
 
 <!--
 Notes:
-- Nobody at the incident review wants to hear which model wrote the method. Accountability did not move, only the typing did.
+- Brakes: a fast and comprehensive test suite. Road: fast feedback in CI. Driver: you, with your testing standards written down as skills.
+- Same engine, but now you can go fast and arrive with confidence.
 -->
-
----
-
-<!-- _class: light statement -->
-
-If review cannot scale, the **green check** has to carry more.
 
 ---
 
 <!-- _class: light reveal -->
 
-## Good News: The Fix Got Cheap Too
+## Throughput Is No Longer the Constraint
 
-* The same shift that made generation cheap also made **verification at scale** almost free
-* With clear guidelines and context, the agent that wrote the mock-everything test writes a **fast, comprehensive** one instead
-* The goal: **confidence in every commit**
-
----
-
-## Which Property Breaks First With an Agent?
-
-| Property | What the agent does when it is missing |
-|---|---|
-| **Fast** | Spawns a new Spring context per test class, the loop gets slow |
-| **Deterministic** | `Instant.now()` and `Thread.sleep`, flaky tests teach everyone to re-run |
-| **Isolated** | Shared fields and `@DirtiesContext`, no parallel runs |
-| **One reason to fail** | Six assertions in one test, a name like `shouldWorkCorrectly` |
-| **Locating message** | A red build that costs a nine minute debug |
+* Writing code is cheap, **human time and attention** are not
+* The hard problem: design **feedback loops and control systems** so agents build reliable software
+* Unattended agents **parallelize** the work, only fast feedback keeps developer attention from becoming the next bottleneck
 
 ---
 
-## Telling It Once Per Prompt Does Not Scale
+## Fast Feedback: The Engine in the AI World
 
-<div class="flow">
-  <div class="sketch">Per prompt<small>retyped, reworded, forgotten</small></div>
-  <div class="arrow">&#8800;</div>
-  <div class="sketch accent">Permanent<small>written down once</small></div>
-</div>
-
-That permanent version is what a **skill** is.
-
----
-
-<!-- _class: light section -->
-<!-- header: 'Block 2 · Skills - Questions @ menti.com Code: <strong>7108 0067</strong>' -->
-
-## 03 - Skills
-
-# Your testing judgment, written down once
+![center h:470](assets/fast-feedback-foundation.png)
 
 <!--
 Notes:
-- 20 min. Baseline: course module 3 (what is a skill, the seven skills) and module 4 (set up, review).
-- Hints only: show two skills in detail, name the others. No hard sell.
+- Fast feedback loops (CI and test automation) turn AI output into shipped, reliable value.
 -->
 
 ---
 
-## Every Agent Session Starts From Zero
+## Backed by the DORA Research
 
-| A prompt | A skill |
+![bg right:50% fit](assets/dora-core-summary.png)
+
+DORA's core model puts **fast feedback** next to fast flow and a climate for learning.
+
+- These capabilities predict **software delivery performance**
+- Delivery performance predicts **organizational performance** and well-being
+
+<!--
+Notes:
+- Source: DORA Core Model, as summarized on pragmatech.digital.
+-->
+
+---
+
+## What a Slow or Weak Suite Does to the DORA Metrics
+
+| Metric | With a slow or untrusted suite |
 |---|---|
-| Lives in one chat window | Lives in the repository |
-| Gets retyped, reworded, forgotten | Loads automatically when the task fits |
-| Quality depends on your patience that day | Applies the same rules in every session |
+| Deployment frequency | Teams fear the next deployment and slow down |
+| Lead time for changes | Feedback takes minutes, so everything waits |
+| Change failure rate | A green build that proves little lets bugs through |
+| Time to restore service | Nobody is sure the fix is safe |
+
+<!--
+Notes:
+- This is my reasoning, not a quote from DORA.
+-->
+
+---
+
+## The Goal: Fast and Comprehensive
+
+<div class="flow">
+  <div class="sketch accent">Fast<small>seconds in the agent loop, minutes in CI</small></div>
+  <div class="sketch alt">Comprehensive<small>proves behavior, not just coverage</small></div>
+  <div class="arrow">&#8594;</div>
+  <div class="sketch accent">Confidence in every commit</div>
+</div>
+
+Both at once. Fast but shallow gives false confidence. Deep but slow, nobody runs it.
+
+---
+
+<!-- _class: light section -->
+<!-- header: 'Block 2 · Skill Library - Questions @ menti.com Code: <strong>7108 0067</strong>' -->
+
+![bg right:33%](assets/m4-setup.jpg)
+
+## 03 - Deterministic results
+
+# A test skill library, adapted to each project
+
+<!--
+Notes:
+- 17 min including Demo 1. Hints from my setup, not a full tour of every skill.
+-->
 
 ---
 
 <!-- _class: light statement -->
 
-"Write meaningful tests, make no mistakes" **fails** because the agent never learned what meaningful means in your project.
+# Same prompt, different tests. **Every day.**
 
 ---
 
-<!-- _class: light split split-60 -->
-
-## A Skill Is a Folder With One Markdown File
-
-- **Frontmatter** is the trigger
-- **Body** is the instruction
-- `references/` loads on demand
-
-```yaml {3-4}
----
-name: unit-testing
-description: Write, review or
-  refactor unit tests ... Use when
-  the user asks for a unit test,
-  mentions JUnit, Mockito ...
-  Not for @SpringBootTest ...
----
-```
-
----
-
-## Why the Rules Live in `references/`
-
-```text
-.claude/skills/
-└── spring-boot-testing/
-    └── unit-testing/
-        ├── SKILL.md                     always loaded when the skill fires
-        └── references/
-            ├── testing-standards.md     rule catalog, loaded when needed
-            ├── examples.md              good and bad pairs
-            └── project-setup.md         config you copy once
-```
-
-The agent reads `SKILL.md` first and pulls a reference file only when it needs it. A large library does not cost you its full size in context on every prompt.
-
----
-
-## How a Skill Loads
+## Make the Agent's Result More Deterministic
 
 <div class="flow">
-  <div class="sketch accent">Always<small>name and description sit in context</small></div>
+  <div class="sketch">My testing standards<small>written down once</small></div>
   <div class="arrow">&#8594;</div>
-  <div class="sketch alt">Task matches<small>the agent reads the full SKILL.md</small></div>
+  <div class="sketch accent">Skills<small>markdown in the repository</small></div>
   <div class="arrow">&#8594;</div>
-  <div class="sketch">A rule points to it<small>references load on demand</small></div>
+  <div class="sketch alt">Every agent session<small>same rules</small></div>
 </div>
-
-The description is the trigger. Write it like a routing rule: when to use the skill, and when **not** to.
-
----
-
-## Skills Turn Open Questions Into Fixed Decisions
-
-| Decision | Without a skill | With a skill |
-|---|---|---|
-| Assertions | JUnit, Hamcrest and AssertJ mixed | AssertJ, every time |
-| Test scope | `@SpringBootTest` by default | Smallest slice that proves the behavior |
-| Mocking | Mock everything, verify mock calls | Mock only at the boundaries |
-| Test data | Copy-pasted setup in every class | Shared builders with sensible defaults |
-| What to test | Getters, setters, framework code | Behavior that can actually break |
 
 More predictable, not deterministic: the model still varies, but inside your guardrails.
 
 ---
 
-## Instruction Files Are Always On, Skills Load on Demand
-
-| Always-on instructions | Skills |
-|---|---|
-| `CLAUDE.md`, `AGENTS.md`, `.github/copilot-instructions.md` | `.claude/skills/*/SKILL.md`, `.agents/skills/*/SKILL.md` |
-| Read in every session | Loaded only when the task matches |
-| Keep them short: how to build, how to run the tests, project facts | The place for detailed judgment |
-
-<!--
-Notes:
-- Install paths differ per tool: .claude/skills (Claude Code), .agents/skills (Codex, Cursor, Copilot), .github/skills (Copilot). Folder conventions change quickly, check the tool docs.
--->
-
----
-
-<!-- _class: light statement -->
-
-"How to run the tests" goes in AGENTS.md. "How to write **good** tests" goes in a skill.
-
----
-
-## One Namespace, Seven Specialist Skills
-
-| Skill | Handles |
-|---|---|
-| `unit-testing` | plain classes, no Spring context |
-| `slice-testing` | `@DataJpaTest`, `@JsonTest`, HTTP clients, message listeners |
-| `slice-web-testing` | `@WebMvcTest`, controllers, filters, Spring Security |
-| `integration-testing` | `@SpringBootTest`, a full journey through the API |
-| `testcontainers-setup` | container definitions the other skills consume |
-| `e2e-ui-testing` | a few critical journeys through the browser |
-| `test-setup-review` | reviews a test or the whole suite and gives hints |
-
-<!--
-Notes:
-- One router skill is the only one the tool lists. It opens the right child skill by path. The cheapest test that proves the behavior wins: unit, slice, integration, browser.
--->
-
----
-
-## Each Skill Splits Universal Rules From Your Conventions
-
-- Test behavior, not implementation details
-- Pick the smallest scope that proves the behavior
-- One reason to fail per test
-- Don't test framework or generated code
-
-```markdown
-## Project conventions
-- Assertions: AssertJ
-- Test names: shouldDoXWhenY
-- Base class: AbstractIntegrationTest
-- Database: postgres:16-alpine
-- Run tests: ./mvnw verify
-```
-
----
-
-## Example: The `unit-testing` Skill
-
-| Always | Never |
-|---|---|
-| One assertion chain, as the last statement `[T2-H]` | No test-class fields, `@BeforeEach` or shared fixtures `[T9-H]` |
-| A failure message on every assertion `[T7-H]` | No `@SpringBootTest` or `@Autowired` `[U1-H]` |
-| Time from an injected `Clock`, never `now()` `[U2-H]` | No `Thread.sleep` or an unbounded `await()` `[T27-H]` |
-| Run the suite twice before calling it done `[U8-H]` | No test that only passes when another test ran first `[U8-H]` |
-
-Every rule has an ID and a severity (C, H, M, L). The agent reports them, so you can see which rule fired.
-
----
-
-## Example: The `slice-web-testing` Skill
-
-| Always | Never |
-|---|---|
-| Security matrix for every endpoint `[W1-H]` | `addFilters = false` `[W2-H]` |
-| CSRF proven once per controller `[W3-H]` | Request DTO via `ObjectMapper` `[W4-H]` |
-| Status code asserted first `[W6-H]` | `@WithMockUser` on the class `[W14-M]` |
-| Strict JSON contract per response `[W5-H]` | Filters tested with mocks `[W11-H]` |
-
----
-
-## Setting It Up: Copy, Onboard, Install
+## One Template Library, Adapted to Each Project
 
 <div class="flow">
-  <div class="sketch">Copy<small>the library into your project</small></div>
+  <div class="sketch">Template library<small>my default conventions</small></div>
   <div class="arrow">&#8594;</div>
-  <div class="sketch accent">Onboard<small>one prompt, the agent adapts it</small></div>
+  <div class="sketch accent">Onboarding prompt<small>detect, ask, replace</small></div>
   <div class="arrow">&#8594;</div>
-  <div class="sketch alt">Install<small>for this project or for you</small></div>
+  <div class="sketch alt">Your project's skills<small>your build, your conventions</small></div>
 </div>
 
-```text
-Read spring-boot-testing/ONBOARDING-PROMPT.md and follow it exactly. Start with step 0.
-```
-
-The agent detects your build tool, Java, Spring Boot version and assertions, asks only what it cannot find, and answers to "no opinion" are `default`.
+The agent reads your build file and existing tests, asks only what it cannot detect, and replaces every template value. Answer `default` if you have no opinion.
 
 ---
 
-<!-- _class: light statement -->
+<style scoped>
+.skills { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 0.4em; font-family: 'Architects Daughter', cursive; }
+.skills .sketch { box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; min-height: 150px; font-size: 0.95em; padding: 0.4em 0.4em; }
+.skills .sketch small { font-size: 0.72em; margin-top: 0.4em; }
+</style>
 
-Six skills write tests. This one **reviews them** and gives you **hints**.
+## The Seven Skills
 
----
-
-## The `test-setup-review` Skill
-
-It reads, it runs the build, it measures, it reports, it hints. **No edits.**
-
-| | Test review | Suite review |
-|---|---|---|
-| Use it for | One test, a class, the tests in a pull request | The whole suite: "why is the build slow?" |
-| It checks | The rules of the skill that owns the test type | Shape, build phases, context cache, containers, signals |
-| You get | Findings with a hint each | Numbers, findings, an order by payoff |
-
-A review that also rewrites gives you a diff instead of a decision.
-
----
-
-<!-- _class: light statement -->
-
-**Demo 1:** review a real test suite
+<div class="skills">
+  <div class="sketch accent"><strong>unit-testing</strong><small>plain classes, no Spring</small></div>
+  <div class="sketch alt"><strong>slice-testing</strong><small>JPA, JSON, HTTP clients</small></div>
+  <div class="sketch accent"><strong>slice-web-testing</strong><small>controllers, security</small></div>
+  <div class="sketch alt"><strong>integration-testing</strong><small>one journey, real HTTP</small></div>
+  <div class="sketch accent"><strong>testcontainers-setup</strong><small>one container per image</small></div>
+  <div class="sketch alt"><strong>e2e-ui-testing</strong><small>few browser journeys</small></div>
+  <div class="sketch accent"><strong>test-setup-review</strong><small>review, read-only</small></div>
+  <div class="sketch alt"><strong>spring-boot-testing</strong><small>the router, entry point</small></div>
+</div>
 
 <!--
 Notes:
-- 9 min. See script/demos/demo-1-review-skill.md. Project: Spring PetClinic, pinned commit.
+- Name them, do not explain each one. The router is the only skill the tool lists. It opens the right child skill by path.
+-->
+
+---
+
+## How a Skill Is Built
+
+```text
+.claude/skills/spring-boot-testing/
+├── SKILL.md                      router, project profile, change workflow
+├── unit-testing/
+│   ├── SKILL.md                  trigger, scope, non-negotiables, workflow
+│   └── references/
+│       ├── testing-standards.md  the rule catalog with IDs and severity
+│       ├── examples.md           good and bad pairs
+│       └── project-setup.md      config you copy once
+├── slice-testing/   slice-web-testing/   integration-testing/
+├── testcontainers-setup/   e2e-ui-testing/   test-setup-review/
+└── ONBOARDING-PROMPT.md          adapts all of it to your project
+```
+
+---
+
+## Inside `SKILL.md`
+
+- **Frontmatter**: name and a description written like a routing rule, "Use when ... Not for ..."
+- **Adapt this template**: the knobs for your project (assertions, naming, base class, database, build command)
+- **Scope**: when the skill is the right tool and what it hands over to
+- **Non-negotiables**: the rules that always apply, each with an ID
+- **Workflow**: the steps the agent follows, including how to review its own output
+
+---
+
+## `testing-standards.md`: Rules With IDs and Severity
+
+```text
+[T7-H]   a failure message on every assertion
+[T9-H]   no test-class fields, no @BeforeEach
+[U1-H]   no Spring context in a unit test
+[U2-H]   time from an injected Clock, never now()
+[T27-H]  bounded waits, never Thread.sleep
+```
+
+Severity: **C** blocks, **H** must fix, **M** fix or justify, **L** mention only.
+
+The agent reports the rule IDs, so you can see which rule fired and why.
+
+---
+
+## `examples.md`: Good and Bad Pairs
+
+```java {1-2,6-8}
+// bad: no message, tells you nothing at 3 AM
+assertThat(order.status()).isEqualTo(PLACED);
+
+// good: one chain, a message that locates the defect
+assertThat(order.status())
+  .as("Order is placed after a successful payment")
+  .isEqualTo(PLACED);
+```
+
+Models copy examples better than they follow prose.
+
+---
+
+## The Router: Cheapest Test That Proves It
+
+<div class="flow">
+  <div class="sketch">A change<small>feature or fix</small></div>
+  <div class="arrow">&#8594;</div>
+  <div class="sketch accent">Router<small>test plan per behavior</small></div>
+  <div class="arrow">&#8594;</div>
+  <div class="sketch alt">Owner skills<small>write the tests</small></div>
+  <div class="arrow">&#8594;</div>
+  <div class="sketch">Run<small>fast phase, then containers</small></div>
+</div>
+
+The final report has a plan table and a **not tested** list. The agent says what it skipped.
+
+---
+
+<!-- _class: light statement -->
+
+# **Demo 1:** review a real test suite
+
+<!--
+Notes:
+- 8 min. See script/demos/demo-1-review-skill.md. Spring PetClinic, pinned commit.
 - Prompt: Review this project's test suite with the test-setup-review skill. Why is the build slow, and what should we fix first?
 -->
 
@@ -1366,7 +1257,7 @@ Notes:
 
 ---
 
-## What It Finds
+## What the Review Finds
 
 ```text
 [R9-H]  no Surefire or Failsafe split, no Docker-free fast phase
@@ -1380,362 +1271,376 @@ Each line carries a hint, and the file and line behind it.
 
 ---
 
-## Then It Orders the Fixes by Payoff
-
-<div class="flow">
-  <div class="sketch accent">Split phases<small>hours</small></div>
-  <div class="arrow">&#8594;</div>
-  <div class="sketch">One container per image<small>hours</small></div>
-  <div class="arrow">&#8594;</div>
-  <div class="sketch alt">One base class<small>a day</small></div>
-  <div class="arrow">&#8594;</div>
-  <div class="sketch">Off H2<small>a day</small></div>
-</div>
-
-No rewrite. A sequence, and the first two steps are build configuration.
-
----
-
 <!-- _class: light section -->
-<!-- header: 'Block 2 · Fast Feedback - Questions @ menti.com Code: <strong>7108 0067</strong>' -->
+<!-- header: 'Block 2 · Parallel and Cached - Questions @ menti.com Code: <strong>7108 0067</strong>' -->
 
-## 04 - Fast feedback
+![bg right:33%](assets/m2-present.jpg)
 
-# Seconds, not minutes
+## 04 - Most important
+
+# Parallelizable and optimized for context caching
 
 <!--
 Notes:
-- 12 min. Baseline: course skills testcontainers-setup and integration-testing, module 4 review.
-- The agent loop pays for every second of the suite, per iteration.
+- 15 min including Demo 2. This is the part with the biggest payoff for build time.
+- Refer back to block 1: context cache and parallelization.
 -->
 
 ---
 
 <!-- _class: light statement -->
 
-How many containers does your build start? **Most teams guess wrong.**
+# Two properties decide your build time: **parallel** and **cache-friendly**.
 
 ---
 
-## Count Before You Tune
+## Why the Agent Loop Cares
+
+<div class="flow">
+  <div class="sketch">Edit</div>
+  <div class="arrow">&#8594;</div>
+  <div class="sketch accent">Run tests<small>every second counts</small></div>
+  <div class="arrow">&#8594;</div>
+  <div class="sketch alt">Read failure</div>
+  <div class="arrow">&#8594;</div>
+  <div class="sketch">Edit</div>
+</div>
+
+A slow suite makes the loop useless, the agent runs one test or none. Every extra Spring context is a full application start.
+
+---
+
+## Parallel by Construction
+
+| The skills enforce | Why it matters |
+|---|---|
+| Random business keys, own rows per test | No collisions between concurrent tests |
+| No test-class fields, no `@BeforeEach` state | Nothing shared between methods |
+| Injected `Clock`, no `Thread.sleep` | No timing flakiness |
+| Run the suite twice, random order | Order dependence shows up before CI |
+
+Unit tests run concurrent. Slice tests stay same-thread (shared mocks in a cached context). Integration tests run concurrent with random data.
+
+---
+
+## Cache-Friendly by Construction
+
+| The skills enforce | Effect on the context cache |
+|---|---|
+| One abstract base class for integration tests | One shared context |
+| No `@MockitoBean` replacing application beans | No new cache key per test class |
+| No `@DirtiesContext` | The context is never thrown away |
+| A context limit (single digit, default 9) | Regressions fail the review |
+
+The agent adds a test class, and the context count stays the same.
+
+---
+
+## One Container per Image, Two Build Phases
+
+<div class="flow">
+  <div class="sketch accent">Fast phase<small>*Test, no Docker, seconds</small></div>
+  <div class="arrow">&#8594;</div>
+  <div class="sketch alt">Container phase<small>*IT, one static container per image</small></div>
+  <div class="arrow">&#8594;</div>
+  <div class="sketch">E2E<small>separate profile, a few journeys</small></div>
+</div>
+
+The agent runs the fast phase after every change, the container phase before it calls the work done. A single-test-class command is a knob in the skill, so it never reruns everything for one test.
+
+---
+
+## Measure It, Gate It in CI
 
 ```shell
 docker events --filter event=start \
   --format '{{.Actor.Attributes.image}}' | sort | uniq -c
 ```
 
-- One command, run it while the suite runs
-- Two starts of `mysql:9.7` means two containers for one image
-- Every extra container is startup time and a context-cache entry that does not need to exist
-
----
-
-## Optimized for One Container per Image
-
-| Always | Never |
-|---|---|
-| One container, `static final` `[C1-H]` | No `latest` tag `[C2-H]` |
-| `@ServiceConnection` by default `[C3-H]` | No non-static `@Container` `[C4-H]` |
-| An explicit wait strategy `[C6-H]` | No fixed host ports `[C5-H]` |
-
-Container reuse is opt-in per machine, never committed, never on CI `[C9]`.
-
----
-
-## Two Phases: A Docker-Free Fast Build and a Slow One
-
-<div class="flow">
-  <div class="sketch accent">Fast phase<small>Surefire, *Test, no Docker</small></div>
-  <div class="arrow">&#8594;</div>
-  <div class="sketch alt">Container phase<small>Failsafe, *IT, Testcontainers</small></div>
-  <div class="arrow">&#8594;</div>
-  <div class="sketch">E2E<small>separate profile, a few journeys</small></div>
-</div>
-
-The agent runs the fast phase after every change, the whole build before it calls the work done.
-
----
-
-## Optimized for One Context, Real HTTP, Parallel Safe
-
-| Always | Never |
-|---|---|
-| Extend the one abstract base class, end with `IT` `[I1-H]` | No second `@SpringBootTest` or `@DirtiesContext` `[I5-H]` |
-| Talk HTTP only, treat the app as a black box `[I2-H]` | No `@MockitoBean` replacing an application bean `[I4-H]` |
-| Random keys for every piece of test data `[I7-H]` | No `Thread.sleep`, no fixed IDs, no shared state |
-
-Five good journeys beat fifty `@SpringBootTest` classes.
-
----
-
-## Keep the Context Count in the Single Digits
-
-- Every new combination of mocks, properties and profiles is a new application start
-- Set a limit (single digit by default) and let the review compare your suite against it
-- **Spring Test Profiler** records how many contexts a run starts, fail the build when the limit is crossed
-
 ```shell
 jq '.contextsCreated' target/spring-test-profiler/results.json
 ```
 
+- Count containers per image while the suite runs
+- **Spring Test Profiler** records the contexts a run starts, fail the build above your limit
+
 ---
 
-## Parallelism Per Test Type
+## What the Profiler JSON Looks Like
 
-| Test type | Execution |
-|---|---|
-| Unit | Concurrent, random order |
-| Slice | Same thread (shared mocks in a cached context) |
-| Integration | Concurrent with random data |
+```json {5,8,10}
+{
+  "schemaVersion": 1,
+  "profilerVersion": "0.3.0",
+  "totalDurationMs": 1825,
+  "contextsCreated": 2,
+  "contextCacheHits": 0,
+  "contextCacheMisses": 2,
+  "contextCacheHitRatio": 0.0,
+  "springContextCacheSize": 2,
+  "totalContextCreationTimeMs": 1074,
+  "potentialTimeSavingsMs": 273
+}
+```
 
-Isolation is what makes parallel runs possible: no shared fields, no rows from another test.
+`target/spring-test-profiler/results.json`, one flat object per run (shortened). Sample project: `prompt-it-right`.
+
+---
+
+## Fail the Build Above the Limit
+
+```yaml {1,2}
+- name: Check the Spring context count
+  run: scripts/check-context-count.sh "$MAX_CONTEXTS" \
+         target/spring-test-profiler/results.json
+```
+
+```shell
+contextsCreated=$(jq -r '.contextsCreated' results.json)
+[ "$contextsCreated" -gt "$maxContexts" ] && exit 1
+```
+
+Limit as a workflow variable, default 9. The HTML report is uploaded as a build artifact.
 
 ---
 
 <!-- _class: light statement -->
 
-**Demo 2:** count the containers
+# **Demo 2:** count the containers
 
 <!--
 Notes:
-- 6 min. See script/demos/demo-2-containers.md. docker events before and after merging the two MySQL declarations.
+- 5 min. See script/demos/demo-2-containers.md. docker events before and after merging the two MySQL declarations.
 - Known issue: PostgresIntegrationTests needs port 5432 free. Use -Dtest='!PostgresIntegrationTests'.
 -->
 
 ---
 
 <!-- _class: light section -->
-<!-- header: 'Block 2 · Tooling Around It - Questions @ menti.com Code: <strong>7108 0067</strong>' -->
+<!-- header: 'Block 2 · MCP Setup - Questions @ menti.com Code: <strong>7108 0067</strong>' -->
 
-## 05 - Tooling
+![bg right:33%](assets/m4-review.jpg)
 
-# Small steps, good tools, guardrails
+## 05 - MCP servers
+
+# How I configure them
 
 <!--
 Notes:
-- 13 min. Baseline: course module 5 (workmode, eyes and budget, MCPs and guardrails) and module 4 lesson 3.
-- This is preference, not doctrine. Say so.
+- 8 min. Baseline: my MCP setup. Keep the number small, trust each server.
 -->
 
 ---
 
-## Four Habits
+## Three Servers, Three Gaps
 
-1. **Git worktrees** - so a bad run costs one directory
-2. **Plan mode** - read and argue before anything is written
-3. **Small units** - a diff you will actually read
-4. **Fast local verification** - seconds, not minutes
-
-None of these are about testing. All of them decide how much testing you get away with.
-
----
-
-<!-- _class: light split split-60 -->
-
-## Worktrees
-
-Same repository, separate directory, separate branch, separate build output.
-
-```bash {1,5}
-git worktree add ../pc-unit \
-  -b lesson/unit-testing
-
-# a run went badly:
-git worktree remove --force ../pc-unit
-```
-
----
-
-## Plan Mode: Argue With It for Free
-
-Reading and searching are allowed. Writing is not.
-
-- You see the approach before there is a diff to feel attached to
-- Wrong assumptions surface as sentences, not as forty files
-- "Use the existing `AbstractIntegrationTest`" costs one line here
-
-Rejecting a plan is cheap. Rejecting a pull request is not.
-
----
-
-## Small Units and Fast Local Checks
-
-You will not read a large diff, so do not create one.
-
-- One class, one behavior, one prompt, commit at every green point
-- The agent must be able to check one thing in seconds without asking you
-
-```bash {1}
-./mvnw -q test -Dtest=PetTypeFormatterTests
-
-# not this, to check one file:
-./mvnw verify
-```
-
----
-
-<!-- _class: light statement -->
-
-Grep is for **strings**. The language server is for **code**.
-
----
-
-## Eyes: a Language Server Instead of Grep
-
-| Question | Operation |
+| Server | The gap it closes |
 |---|---|
-| Where is this defined? | `goToDefinition` |
-| Who calls this? | `findReferences` |
-| Where is this interface implemented? | `goToImplementation` |
-| What is in this file? | `documentSymbol` |
-
-`findReferences` before any rename. Every time.
+| **Context7** | Docs for the framework version you actually use |
+| **GitHub** | The agent reads its own workflow runs and job logs |
+| **Playwright** | The agent sees the rendered page, locators are observed |
 
 ---
 
-## A Budget: Less Noise in the Context Window
+## Adding a Server, and Who Gets It
 
-```text
-./mvnw verify        ~4,000 lines
-./mvnw dependency:tree  ~900 lines
-docker compose up      ~300 lines
+```shell
+claude mcp add --transport http <name> <url>
+claude mcp add <name> -- <command> [args...]
 ```
 
-- Almost none of it is about your code, and all of it goes into the context window
-- Keep: failures, stack traces, the summary line. Drop: downloads, banners, per-module success lines
-- Tools like RTK filter it, `2>&1 | tail -40` gets you most of the way
+| Scope | Stored in | Who gets it |
+|---|---|---|
+| local (default) | `~/.claude.json` | only you, this project |
+| project | `.mcp.json` | the whole team via git |
+| user | your user config | all your projects |
 
 ---
 
-## MCP Servers: Let It See CI, Docs and the Browser
+## Context7 and GitHub
 
-| Server | What it gives the agent |
-|---|---|
-| **GitHub MCP** | Reads workflow runs and job logs, closes the CI loop |
-| **Playwright MCP** | The rendered DOM, real locators instead of guesses |
-| **Context7** | Docs for the version you actually use |
-
-Reading CI state: always on. Opening pull requests, merging: **not without me**.
-
----
-
-## MCP Rules I Follow
-
-- **Trust each server**: tool output is input to the model, prompt injection is real
-- **Keep the number small**: tool descriptions cost context
-- **Minimal scopes**: read-only where possible, never put a token in `.mcp.json`
-
-```bash
+```shell
 claude mcp add --scope user --transport http context7 https://mcp.context7.com/mcp
+```
+
+- **Context7**: add `use context7` to the prompt, name the version if it matters
+- **GitHub**: Actions toolset to read runs and job logs
+- **Read access always on**, write access only with me
+- Read-only mode and a token with minimal scopes
+
+---
+
+## Playwright
+
+```shell
 claude mcp add playwright npx @playwright/mcp@latest
 ```
 
----
-
-<!-- _class: light statement -->
-
-Everything so far still depends on the model **choosing** to cooperate.
-
----
-
-## A Rule That Fails the Build
-
-A skill is a prompt, and a prompt can be overridden. Anything you would block a pull request over belongs in the build.
-
-```java {3-5}
-@ArchTest
-static final ArchRule noFieldInjection =
-    noFields().should()
-        .beAnnotatedWith(Autowired.class)
-        .because("constructor injection only");
-```
+- Works with the accessibility tree, no vision model needed
+- `--isolated` keeps the profile in memory, `--storage-state` reuses a saved login
+- Visible browser while I watch, a small `slowMo` for debugging
+- Only point it at your own applications
 
 ---
 
-## Which Rules Go Where
+<style scoped>
+.hub { display: grid; grid-template-columns: 1fr 0.55fr 1.2fr 0.55fr 1fr; grid-template-rows: auto auto auto auto auto; align-items: center; gap: 4px 8px; margin-top: 0.3em; font-family: 'Architects Daughter', cursive; }
+.hub .sketch { box-sizing: border-box; font-size: 1em; padding: 0.45em 0.3em; }
+.hub .sketch small { font-size: 0.68em; }
+.hub .agent { font-size: 1.25em; padding: 0.8em 0.3em; border-width: 4px; }
+.hub .link { text-align: center; font-size: 0.78em; line-height: 1.1; color: var(--pt-link); }
+.hub .link b { display: block; font-size: 1.6em; line-height: 1; }
+.hub .gh { grid-column: 3; grid-row: 1; }
+.hub .l1 { grid-column: 3; grid-row: 2; }
+.hub .tests { grid-column: 1; grid-row: 3; }
+.hub .l2 { grid-column: 2; grid-row: 3; }
+.hub .agent { grid-column: 3; grid-row: 3; }
+.hub .l3 { grid-column: 4; grid-row: 3; }
+.hub .browser { grid-column: 5; grid-row: 3; }
+.hub .l4 { grid-column: 3; grid-row: 4; }
+.hub .app { grid-column: 3; grid-row: 5; }
+</style>
 
-| ArchUnit (the build) | The skill |
-|---|---|
-| Layering and package dependencies | How to name a test |
-| No field injection | Which assertion library |
-| No `@SpringBootTest` outside `*IT` | Which slice to pick |
-| Controllers return DTOs, not entities | How to phrase a failure message |
+## Local Development With PetClinic: The Agent Closes the Loop
 
----
-
-<!-- _class: light statement -->
-
-A rule in the build does not care **which model** wrote the code.
-
----
-
-## Demo 3: A Normal Feature Request, No Skill Named
-
-```text
-A pet cannot have two visits on the same day. When someone books
-a second visit for a pet on a day that already has a visit for that
-pet, the booking form is shown again with an error on the date field
-and a clear message, and nothing is saved. Booking on another day
-still works. Make sure the feature is properly tested.
-```
+<div class="hub">
+  <div class="sketch gh">GitHub<small>PRs, Actions runs, job logs</small></div>
+  <div class="link l1"><b>&#8597;</b>GitHub MCP</div>
+  <div class="sketch tests">Tests<small>./mvnw test, unit to E2E</small></div>
+  <div class="link l2"><b>&#8596;</b>shell</div>
+  <div class="sketch accent agent">Agent<small>plan, code, test, fix</small></div>
+  <div class="link l3"><b>&#8596;</b>Playwright MCP</div>
+  <div class="sketch browser">Browser<small>rendered page, screenshots</small></div>
+  <div class="link l4"><b>&#8597;</b>spring-boot:run</div>
+  <div class="sketch alt app">PetClinic, local<small>http://localhost:8080</small></div>
+</div>
 
 <!--
 Notes:
-- 8 min live (or Demo 4, MCP + CI, as the backup). See script/demos/demo-3-feature-flow.md.
-- Start in plan mode on the onboarded PetClinic, in a fresh session.
+- Three things the agent reaches on its own: GitHub (CI state), the UI (Playwright), the tests (shell). No copy and paste between you and the agent.
+- The browser opens the locally running PetClinic.
 -->
 
 ---
 
-## What Happens on Its Own
+<!-- _class: light reveal -->
 
-<div class="flow">
-  <div class="sketch">Your prompt<small>a feature</small></div>
-  <div class="arrow">&#8594;</div>
-  <div class="sketch accent">Router<small>spring-boot-testing</small></div>
-  <div class="arrow">&#8594;</div>
-  <div class="sketch alt">Two skills<small>unit and slice-web</small></div>
-  <div class="arrow">&#8594;</div>
-  <div class="sketch">Tests<small>in your standards</small></div>
-</div>
+## The Loop in Five Steps
 
-The router looks at what changed, not at what you asked for.
+* **Start** PetClinic locally, the agent runs `./mvnw spring-boot:run`
+* **Look** through Playwright MCP: open the page, read the rendered DOM and the real element ids
+* **Change** code and tests, page objects use the observed locators instead of guessed ones
+* **Run** the fast phase, then the browser journey
+* **Push**, then read the GitHub Actions run and job logs through GitHub MCP, and fix what failed
 
----
-
-## A Test Plan, Not Just Tests
-
-| Behavior | Test | Skill |
-|---|---|---|
-| The rule: another visit on the same day | unit test of the `Pet` method | `unit-testing` |
-| Form shown again, error on `date`, nothing saved | web slice test | `slice-web-testing` |
-| A full journey on a real database | skipped, with the reason | - |
+<!--
+Notes:
+- Reading CI state is always on. Opening or merging a pull request stays with me.
+- Playwright only against my own applications, here the local PetClinic.
+-->
 
 ---
 
-## Watch for These in the Output
+## Rules I Follow
 
-<div class="flow">
-  <div class="sketch accent">Skill calls<small>router first</small></div>
-  <div class="sketch alt">Test plan<small>behavior to test</small></div>
-  <div class="sketch">Whole suite<small>run before done</small></div>
-  <div class="sketch alt">Not tested<small>said out loud</small></div>
+- **Trust each server**: content it fetches is input, and input can contain instructions
+- **Keep the number small**: tool descriptions cost context
+- **Never put a token in `.mcp.json`**: use environment variables
+- Run `claude mcp list` every few weeks and remove what you do not use
+
+---
+
+<!-- _class: light section -->
+<!-- header: 'Block 2 · Engineering Practices - Questions @ menti.com Code: <strong>7108 0067</strong>' -->
+
+![bg right:33%](assets/m2-future.jpg)
+
+## 06 - Engineering practices
+
+# Mistakes will happen. Be ready to act fast.
+
+<!--
+Notes:
+- 10 min. General engineering hints around the test suite. Tests reduce the failures, these practices reduce the damage.
+-->
+
+---
+
+<style scoped>
+.cycle { display: grid; grid-template-columns: 1fr 0.35fr 1fr 0.35fr 1fr 0.35fr 1fr; align-items: center; gap: 10px; margin-top: 0.8em; font-family: 'Architects Daughter', cursive; }
+.cycle .sketch { box-sizing: border-box; font-size: 1.15em; padding: 0.9em 0.3em; }
+.cycle .sketch small { font-size: 0.62em; }
+.cycle .arrow { text-align: center; }
+.cycle .down { grid-column: 7; text-align: center; }
+.cycle .skip { grid-column: 1 / span 6; }
+</style>
+
+## The Dev Lifecycle and the Practices That Matter
+
+<div class="cycle">
+  <div class="sketch accent">Shift left<small>tests in the agent loop</small></div>
+  <div class="arrow">&#8594;</div>
+  <div class="sketch">CI<small>fast feedback</small></div>
+  <div class="arrow">&#8594;</div>
+  <div class="sketch">CD<small>small, frequent releases</small></div>
+  <div class="arrow">&#8594;</div>
+  <div class="sketch alt">Feature flags<small>decouple deploy from release</small></div>
+  <div class="skip"></div>
+  <div class="arrow down">&#8595;</div>
+  <div class="sketch accent">Fast rollback<small>undo in minutes</small></div>
+  <div class="arrow">&#8592;</div>
+  <div class="sketch">Runbooks<small>know what to do</small></div>
+  <div class="arrow">&#8592;</div>
+  <div class="sketch">Alerting<small>the right people, fast</small></div>
+  <div class="arrow">&#8592;</div>
+  <div class="sketch alt">Monitoring<small>see it in production</small></div>
 </div>
 
-An agent that follows the skills tells you what it tested, what it skipped, and why.
+<!--
+Notes:
+- Draw the loop. Left to right on top, back right to left on the bottom. The lesson of each failure goes back into shift left: a new test, a new rule in the skill.
+-->
+
+---
+
+## Shift Left: Prevent It Early
+
+- Tests are part of the agent loop, not something after it
+- Small, atomic changes you can actually review
+- Rules in the build for what you would block a pull request over (ArchUnit)
+- A review pass on the tests the agent writes
+
+---
+
+## Ship Safely: CI/CD and Feature Flags
+
+- A fast pipeline gives a verdict in minutes, small releases keep the blast radius small
+- **Feature flags** decouple deploying from releasing, switch off instead of redeploying
+- Roll out progressively: a few users first, then everyone
+
+---
+
+## Act Fast: Monitor, Alert, Run, Roll Back
+
+- **Monitoring** that shows the user impact, not only CPU
+- **Alerting** that wakes the right person, with a clear owner
+- **Runbooks** so the 3 AM decision is a checklist, not a debate
+- **Fast rollback** or a flag switch, then fix forward with a new small change
 
 ---
 
 <!-- _class: light statement -->
 
-The agent writes. **You** judge.
+# You will ship a bug. **How fast you recover is what counts.**
 
 ---
 
 <!-- _class: light section -->
 <!-- header: 'Wrap-up - Questions @ menti.com Code: <strong>7108 0067</strong>' -->
 
-## 06 - Wrap-up
+![bg right:33%](assets/m6-thank-you.jpg)
+
+## 07 - Wrap-up
 
 # What to take home
 
@@ -1768,12 +1673,6 @@ Notes:
 - **One run per arm.** One sample, not a benchmark
 - **No coverage and no mutation score** were measured
 - **The prompt named the skill.** In real use the description must trigger it on its own
-- Where the AI was already good, say so: a static `@ServiceConnection` container
-
-<!--
-Notes:
-- Honesty buys credibility. Say it out loud.
--->
 
 ---
 
@@ -1781,19 +1680,14 @@ Notes:
 
 ## Five Takeaways
 
-* Pick the cheapest test that proves the behavior
-* Verification is the new constraint
-* Teach the agent your rules with skills
-* Keep feedback fast: two phases, one container per image, few contexts
-* Work in small steps and add guardrails to the build
+* A **fast and comprehensive** suite is the engine for moving fast with agents
+* **Skills** written down once make the agent's result more deterministic
+* Optimize for **parallel runs** and **context-cache reuse**
+* Configure **few, trusted MCP servers**
+* Practice **fast recovery**: feature flags, monitoring, runbooks, rollback
 
 ---
 
-<!-- _class: light statement -->
-
-You are not trying to write more tests. You are trying to **trust the green check**.
-
----
 <!-- header: 'Take It Further - Questions @ menti.com Code: <strong>7108 0067</strong>' -->
 
 ## Take It Further: The Online Course
@@ -1897,16 +1791,35 @@ Notes:
 
 ---
 
+<!-- _class: light statement reveal -->
+<!-- _paginate: false -->
+
+<!--
+Notes:
+- One line per click (fragmented list, works in the HTML deck only).
+- The agent can write the code and the tests, but the pager still rings for you.
+-->
+
+# You can delegate the typing.
+* You can't delegate the ownership.
+* **You** get paged at 3 AM.
+* Invest in a test suite that gives you **confidence in every commit**.
+
+---
+
 <!-- _class: light closing -->
 <!-- _paginate: false -->
 <!-- _header: '' -->
+<!-- _footer: '' -->
 
-# Thank you
+![bg right:33%](assets/end.jpg)
 
-## Questions?
+# Thank you!
 
-![h:240 center](assets/agentic-testing-course-qr.png)
+Get my template skill structure and **33% off** until the end of Devoxx (Course or Bundle edition):
 
-Agentic Testing for Spring Boot: [pragmatech.digital/agentic-spring-boot-testing-course](https://pragmatech.digital/agentic-spring-boot-testing-course/)
+![center h:260](assets/offer-qr.png)
 
-Philip Riecks · [pragmatech.digital](https://pragmatech.digital/) · [@rieckpil](https://x.com/rieckpil)
+Philip Riecks · [PragmaTech GmbH](https://pragmatech.digital/)
+- [LinkedIn](https://www.linkedin.com/in/rieckpil) (Philip Riecks)
+- [Mail](mailto:philip@pragmatech.digital) (philip@pragmatech.digital)

@@ -1,6 +1,6 @@
 # Demo 1: Review the PetClinic suite with the review skill (10 min)
 
-Where: Part 3a. Project: `demo/spring-petclinic` (pinned commit, skills installed by `demo/setup.sh`).
+Where: block 2, skill library part. Project: `demo/spring-petclinic` (pinned commit, skills installed by `demo/setup.sh`).
 
 ## Setup
 - `./demo/setup.sh`, then `cd demo/spring-petclinic`

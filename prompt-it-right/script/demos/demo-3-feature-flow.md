@@ -1,6 +1,6 @@
 # Demo 3: Build a feature with the router skill (8 min)
 
-Where: Part 3c (live option A).
+Where: backup only (not on the slides anymore).
 
 ## Prompt
 > A pet cannot have two visits on the same day. Implement it. Use plan mode first.

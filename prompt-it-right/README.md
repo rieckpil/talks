@@ -34,3 +34,10 @@ marp content.md -o content.html < /dev/null
 - [ ] MCP servers added and tested (Context7, GitHub, Playwright)
 - [ ] Terminal font size 20+, notifications off
 - [ ] Fallback recordings ready (`script/demos/fallbacks.md`)
+
+## Spring Test Profiler and the context gate
+
+- The sample project runs with the [Spring Test Profiler](https://github.com/PragmaTech-GmbH/spring-test-profiler) (`src/test/resources/META-INF/spring.factories`).
+- After `./mvnw verify` the JSON is in `target/spring-test-profiler/results.json`.
+- `scripts/check-context-count.sh <max> <resultsFile>` fails when `contextsCreated` is above the limit.
+- The workflow `.github/workflows/prompt-it-right-context-gate.yml` runs the build and the check (limit via `MAX_CONTEXTS`, default 9).

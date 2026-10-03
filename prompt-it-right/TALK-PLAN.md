@@ -14,7 +14,7 @@ When AI writes the code, the test suite is the only thing that tells you the cod
 
 ## Timeline
 
-Block 1 is the complete crash course (the fundament). Block 2 starts with the rationale, then skills, structure, tooling. Each block ends with a 10 min FAQ. 75 + 30 + 75 = 180.
+Block 1 is the complete crash course (the fundament). Block 2 aligns on the goal, then shows my setup: skill library, parallel and cache-friendly tests, MCPs, engineering practices. Each block ends with a 10 min FAQ. 75 + 30 + 75 = 180.
 
 | Start (Mon) | Min | Block | Script |
 |---|---|---|---|
@@ -22,14 +22,15 @@ Block 1 is the complete crash course (the fundament). Block 2 starts with the ra
 | 09:35 | 60 | **Block 1**: Spring Boot testing in a nutshell, the full crash course, ends with "what makes a good suite" | script/01-crash-course.md |
 | 10:35 | 10 | **Block 1 FAQ** | script/faq-block-1.md |
 | 10:45 | 30 | BREAK | |
-| 11:15 | 15 | **Block 2** Rationale: why a fast, complete suite is the constraint for agents | script/02-why-it-matters.md |
-| 11:30 | 20 | **Block 2** Skills: how I structure them + Demo 1 | script/03-skills.md |
-| 11:50 | 12 | **Block 2** Fast feedback (pipeline) + Demo 2 | script/04-fast-pipeline.md |
-| 12:02 | 13 | **Block 2** Tooling around it: workmode, LSP, RTK, MCPs, guardrails + Demo 3 or 4 | script/05-agent-setup.md |
-| 12:15 | 5 | **Block 2** Evidence, takeaways, soft pointer | script/06-wrap-up.md |
+| 11:15 | 10 | **Block 2** The goal: a fast and comprehensive suite, DORA reasoning | script/02-goal-dora.md |
+| 11:25 | 17 | **Block 2** Deterministic results: the test skill library + Demo 1 | script/03-skill-library.md |
+| 11:42 | 15 | **Block 2** Most important: parallelizable and context-cache friendly + Demo 2 | script/04-parallel-context-cache.md |
+| 11:57 | 8 | **Block 2** How I configure MCP servers | script/05-mcp-setup.md |
+| 12:05 | 10 | **Block 2** Engineering practices: be ready to act fast | script/06-engineering-practices.md |
+| 12:15 | 5 | **Block 2** Evidence, takeaways, soft pointer | script/07-wrap-up.md |
 | 12:20 | 10 | **Block 2 FAQ** | script/faq-block-2.md |
 
-Check: block 1 = 5 + 60 + 10 = 75. Block 2 = 15 + 20 + 12 + 13 + 5 + 10 = 75. No buffer in block 2, so use the cut list early.
+Check: block 1 = 5 + 60 + 10 = 75. Block 2 = 10 + 17 + 15 + 8 + 10 + 5 + 10 = 75. No buffer in block 2, so use the cut list early.
 
 FAQ method: questions arrive live (interrupting is welcome) and as comments in the Devoxx app talk page (QR on the 'How to ask' slide). Pick the best ones at the end of each block. Prepared fallback questions are in the FAQ scripts.
 
@@ -40,7 +41,7 @@ FAQ method: questions arrive live (interrupting is welcome) and as comments in t
 3. TDD-or-not slide, ArchUnit slide (3 min)
 4. Skip live run of Demo 2, show the recorded output (4 min)
 5. Shorten a FAQ to 5 min (never skip it)
-6. Block 2 has no buffer: drop Demo 4 and the TDD/ArchUnit slides first
+6. Block 2 has no buffer: shorten the MCP part and the engineering practices detail slides first
 
 ## Demo plan (PetClinic, pinned commit, see `demo/setup.sh`)
 
@@ -67,14 +68,15 @@ FAQ method: questions arrive live (interrupting is welcome) and as comments in t
 - [ ] Write one example GitHub Actions workflow for Part 3b (the course repo has none)
 - [ ] Rerun the PetClinic skill comparison with more than one run per arm (current evidence is one run)
 
-## Block 2 slide baseline (course repo `slides/`)
+## Block 2 content sources
 
-| Deck section | Adapted from |
+Block 2 is my own structure, not a 1:1 copy of the course. The course (so the buyer gets more than the talk) is only a source for facts.
+
+| Deck section | Sources |
 |---|---|
-| Why it matters | `m2-verification-constraint/` (afterthought, Formula 1 engine, trustworthy suite) |
-| Skills | `m3-skill-library/` (what is a skill, unit, slice-web, review) and `m4-adoption/` (set up, review) |
-| Fast feedback | `m3-skill-library/` (testcontainers-setup, integration-testing cheat sheets) and `m4-adoption/02-reviewing-your-tests` |
-| Tooling | `m5-agentic-setup/` (how I work, eyes and budget, MCPs and guardrails) and `m4-adoption/03-building-a-feature` |
-| Wrap-up | `resources/petclinic-skill-comparison.md`, `m6-wrap-up/01-where-to-go` |
-
-Course branding, "module" and "lesson" wording and the course-specific CTAs were removed. Only the soft pointer slide at the end mentions the course.
+| The goal | `pragmatech.digital/data/homepage.yaml` (fast feedback, DORA core model), images `fast-feedback-foundation.png`, `dora-core-summary.png` |
+| Skill library | Course skills (`spring-boot-testing-skills/`): names, folder structure, rule IDs. Course images for the side panels (`m*.jpg`) |
+| Parallel and cache-friendly | Course skills (unit, integration, testcontainers-setup rules), Spring Test Profiler |
+| MCP servers | Course lesson `m5-agentic-setup/03-mcp-servers.lesson.md` |
+| Engineering practices | Own hints (shift left, CI/CD, feature flags, monitoring, alerting, runbooks, rollback) |
+| Wrap-up | `resources/petclinic-skill-comparison.md` |
