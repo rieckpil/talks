@@ -14,7 +14,7 @@ See [TALK-PLAN.md](TALK-PLAN.md) for the timeline and [script/](script/) for the
 | `slides/README.md` | Build commands |
 | `script/` | Speaker script per block, run sheet, demo scripts |
 | `demo/setup.sh` | Clones PetClinic (pinned) and installs the testing skills |
-| `src/`, `pom.xml` | Spring Boot 4 starter for crash course code samples |
+| `src/`, `pom.xml` | Spring Boot 4 / Java 25 project with the crash course samples: `CustomerController` + `CustomerControllerTest` (slice test) and `CustomerControllerUnitTests`. Build: `JAVA_HOME=<jdk25> ./mvnw verify` (also runs in the GitHub Actions matrix) |
 
 ## Build the slides
 

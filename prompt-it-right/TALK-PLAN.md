@@ -60,6 +60,7 @@ FAQ method: questions arrive live (interrupting is welcome) and as comments in t
 ## Open points
 
 - [ ] Devoxx room (Mentimeter code is 7108 0067)
+- [x] Offer QR points to https://pragmatech.digital/lp/devoxx-belgium-2026/
 - [ ] Decide: live Demo 3 or Demo 4 (only one fits)
 - [ ] Record fallback videos for all demos
 - [ ] Check the missing image `m3-what-is-a-skill.jpg` from the course deck (draw a new one)

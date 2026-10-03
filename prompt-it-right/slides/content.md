@@ -1794,14 +1794,64 @@ Notes:
 You are not trying to write more tests. You are trying to **trust the green check**.
 
 ---
+<!-- header: 'Take It Further - Questions @ menti.com Code: <strong>7108 0067</strong>' -->
 
-## Want More?
+## Take It Further: The Online Course
 
-![bg right:33% h:400](assets/agentic-testing-course-qr.png)
+![center h:500](assets/agentic-testing-course.png)
 
-- Everything in this talk works without the course
-- Deeper walkthrough: [pragmatech.digital/agentic-spring-boot-testing-course](https://pragmatech.digital/agentic-spring-boot-testing-course/)
-- Newsletter: tips on testing Spring Boot applications
+<!--
+Notes:
+- Soft pitch, 1 minute. Everything in this talk works without the course. This is the longer, structured version of block 2.
+-->
+
+---
+
+## Optimizing AI-Written Tests With Skills
+
+Get a **skillset** for fast and comprehensive tests, including a **test strategy** for your project:
+
+```text
+.claude/skills/spring-boot-testing/
+├── unit-testing            fast tests without context bloat
+├── slice-testing           right-sized Spring context slices
+├── slice-web-testing       web layer with @WebMvcTest
+├── integration-testing     full-context tests that stay fast
+├── testcontainers-setup    real infrastructure, one container per image
+├── e2e-ui-testing          user journeys against the running app
+└── test-setup-review       flags test anti-patterns for you
+```
+
+Each skill includes rules, references, best practices and anti-patterns as code and text.
+
+---
+
+<!-- _class: light reveal -->
+
+## What the Course Covers
+
+* **Verification is the new constraint**: why a trustworthy suite is the base of agentic development
+* **The skill library**: the seven skills above, with the rule catalogs behind them
+* **Adopting the skills**: one onboarding prompt adapts them to your project, then review your tests and build a feature
+* **My agentic setup**: workmode, language server, MCP servers, TDD or not
+
+---
+
+<!-- header: 'Template and Offer - Questions @ menti.com Code: <strong>7108 0067</strong>' -->
+
+## Get the Template Skill Structure
+
+![bg right:36% h:420](assets/offer-qr.png)
+
+Scan the QR code to get my **template skill structure**.
+
+**33% off until the end of Devoxx** if you enroll in the **Course** or the **Bundle** edition.
+
+<!--
+Notes:
+- assets/offer-qr.png leads to https://pragmatech.digital/lp/devoxx-belgium-2026/ (lead signup landing page).
+- Offer text: 33% off, Course or Bundle edition, valid until the end of Devoxx Belgium 2026.
+-->
 
 ---
 
@@ -1854,5 +1904,9 @@ Notes:
 # Thank you
 
 ## Questions?
+
+![h:240 center](assets/agentic-testing-course-qr.png)
+
+Agentic Testing for Spring Boot: [pragmatech.digital/agentic-spring-boot-testing-course](https://pragmatech.digital/agentic-spring-boot-testing-course/)
 
 Philip Riecks · [pragmatech.digital](https://pragmatech.digital/) · [@rieckpil](https://x.com/rieckpil)
