@@ -1,4 +1,4 @@
-package pragmatech.digital.prompt_it_right.customer;
+package pragmatech.digital.conference.customer;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,7 +13,7 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class CustomerControllerUnitTests {
+class CustomerControllerTests {
 
   @Mock
   private CustomerService customerService;

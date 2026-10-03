@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Germany map - Erlangen and Munich</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; background: transparent; }
+  body.grid {
+    background-color: #ffffff;
+    background-image: radial-gradient(rgba(15, 23, 42, 0.08) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+  canvas { display: block; background: transparent; }
+</style>
+</head>
+<body>
+<canvas id="scene"></canvas>
+<script>
+/*
+ * Hand-drawn Germany map for the About Philip slide. Same rough-stroke helpers as the
+ * trap map of the Bozen talk. Export with: node slides/visuals/export-visuals.mjs
+ *   &grid=1  paint the slide dot grid behind the canvas (preview only)
+ */
+const params = new URLSearchParams(location.search);
+if (params.get('grid') === '1') document.body.classList.add('grid');
+const WIDTH = 420;
+const HEIGHT = 720;
+
+const C = {
+  ink: '#0f172a',
+  muted: '#64748b',
+  accent: '#0284c7',
+  cyan: '#22d0eb',
+  red: '#fb2c36',
+  green: '#00c758',
+  amber: '#edb200',
+  amberDark: '#b98600',
+  surface: '#f1f5f9',
+  border: '#cbd5e1',
+  pit: '#1e293b',
+  pitDeep: '#0a0e16',
+  wood: '#d9a066',
+  woodDark: '#8b5a2b',
+  ground: '#f0f7f1',
+  cardboard: '#e7d3b1',
+  steel: '#cbd5e1',
+  white: '#ffffff'
+};
+
+const canvas = document.getElementById('scene');
+const ctx = canvas.getContext('2d');
+const dpr = window.devicePixelRatio || 1;
+canvas.style.width = WIDTH + 'px';
+canvas.style.height = HEIGHT + 'px';
+canvas.width = Math.round(WIDTH * dpr);
+canvas.height = Math.round(HEIGHT * dpr);
+ctx.scale(dpr, dpr);
+
+
+function mulberry32(seed) {
+  return function () {
+    seed |= 0; seed = seed + 0x6D2B79F5 | 0;
+    let t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
+}
+let rnd = mulberry32(1337);
+const jit = amount => (rnd() - 0.5) * 2 * amount;
+function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+
+/* ---------- rough drawing helpers ---------- */
+function setStroke(o) {
+  ctx.strokeStyle = o.color || C.ink;
+  ctx.lineWidth = o.width || 3;
+  ctx.globalAlpha = o.alpha ?? 1;
+  ctx.lineCap = 'round';
+  ctx.lineJoin = 'round';
+  if (o.dash) ctx.setLineDash(o.dash);
+}
+
+function roughLine(x1, y1, x2, y2, o = {}) {
+  const passes = o.passes ?? 2;
+  const len = Math.hypot(x2 - x1, y2 - y1);
+  const j = Math.min(4, 1 + len * 0.012) * (o.rough ?? 1);
+  ctx.save();
+  setStroke(o);
+  for (let p = 0; p < passes; p++) {
+    ctx.beginPath();
+    ctx.moveTo(x1 + jit(j * 0.6), y1 + jit(j * 0.6));
+    const cx1 = x1 + (x2 - x1) * 0.3 + jit(j * 1.5), cy1 = y1 + (y2 - y1) * 0.3 + jit(j * 1.5);
+    const cx2 = x1 + (x2 - x1) * 0.7 + jit(j * 1.5), cy2 = y1 + (y2 - y1) * 0.7 + jit(j * 1.5);
+    ctx.bezierCurveTo(cx1, cy1, cx2, cy2, x2 + jit(j * 0.6), y2 + jit(j * 0.6));
+    ctx.stroke();
+  }
+  ctx.restore();
+}
+
+function hachure(pts, color, gap, angle, lineWidth) {
+  const xs = pts.map(p => p[0]), ys = pts.map(p => p[1]);
+  const minX = Math.min(...xs), maxX = Math.max(...xs), minY = Math.min(...ys), maxY = Math.max(...ys);
+  const cx = (minX + maxX) / 2, cy = (minY + maxY) / 2;
+  const r = Math.hypot(maxX - minX, maxY - minY) / 2 + gap;
+  ctx.save();
+  ctx.translate(cx, cy);
+  ctx.rotate(angle * Math.PI / 180);
+  ctx.strokeStyle = color;
+  ctx.lineWidth = lineWidth;
+  ctx.lineCap = 'round';
+  for (let y = -r; y <= r; y += gap) {
+    ctx.beginPath();
+    ctx.moveTo(-r + jit(2), y + jit(1.5));
+    ctx.lineTo(r + jit(2), y + jit(1.5));
+    ctx.stroke();
+  }
+  ctx.restore();
+}
+
+function fillPoly(pts, o) {
+  ctx.save();
+  ctx.beginPath();
+  pts.forEach((p, i) => i ? ctx.lineTo(p[0] + jit(1.2), p[1] + jit(1.2)) : ctx.moveTo(p[0], p[1]));
+  ctx.closePath();
+  ctx.globalAlpha = o.fillAlpha ?? 1;
+  if ((o.fillStyle || 'solid') === 'solid') {
+    ctx.fillStyle = o.fill;
+    ctx.fill();
+  } else {
+    ctx.clip();
+    hachure(pts, o.fill, o.hachureGap || 9, o.hachureAngle ?? -45, o.hachureWidth || 1.6);
+  }
+  ctx.restore();
+}
+
+function roughPoly(pts, o = {}) {
+  const close = o.close ?? true;
+  if (o.fill) fillPoly(pts, o);
+  if (o.stroke === false) return;
+  const count = close ? pts.length : pts.length - 1;
+  for (let i = 0; i < count; i++) {
+    const a = pts[i], b = pts[(i + 1) % pts.length];
+    roughLine(a[0], a[1], b[0], b[1], o);
+  }
+}
+
+function roughRect(x, y, w, h, o = {}) {
+  roughPoly([[x, y], [x + w, y], [x + w, y + h], [x, y + h]], o);
+}
+
+function ellipsePts(cx, cy, rx, ry, n, j) {
+  const pts = [];
+  for (let i = 0; i < n; i++) {
+    const t = i / n * Math.PI * 2;
+    pts.push([cx + Math.cos(t) * (rx + jit(j)), cy + Math.sin(t) * (ry + jit(j))]);
+  }
+  return pts;
+}
+
+function smoothClosed(pts) {
+  const n = pts.length;
+  ctx.moveTo((pts[0][0] + pts[n - 1][0]) / 2, (pts[0][1] + pts[n - 1][1]) / 2);
+  for (let i = 0; i < n; i++) {
+    const p = pts[i], q = pts[(i + 1) % n];
+    ctx.quadraticCurveTo(p[0], p[1], (p[0] + q[0]) / 2, (p[1] + q[1]) / 2);
+  }
+  ctx.closePath();
+}
+
+function roughEllipse(cx, cy, rx, ry, o = {}) {
+  if (o.fill) fillPoly(ellipsePts(cx, cy, rx, ry, 48, 0.4), o);
+  if (o.stroke === false) return;
+  const passes = o.passes ?? 2;
+  for (let p = 0; p < passes; p++) {
+    ctx.save();
+    setStroke(o);
+    ctx.beginPath();
+    smoothClosed(ellipsePts(cx, cy, rx, ry, 30, (o.rough ?? 1) * 1.4));
+    ctx.stroke();
+    ctx.restore();
+  }
+}
+
+function text(str, x, y, o = {}) {
+  ctx.save();
+  ctx.translate(x, y);
+  if (o.rotate) ctx.rotate(o.rotate);
+  ctx.globalAlpha = o.alpha ?? 1;
+  ctx.fillStyle = o.color || C.ink;
+  ctx.font = `${o.weight || ''} ${o.size || 28}px "Architects Daughter", "Comic Sans MS", cursive`;
+  ctx.textAlign = o.align || 'center';
+  ctx.textBaseline = o.baseline || 'middle';
+  ctx.fillText(str, 0, 0);
+  ctx.restore();
+}
+
+function dot(x, y, r, color) {
+  ctx.save();
+  ctx.fillStyle = color || C.ink;
+  ctx.beginPath();
+  ctx.arc(x, y, r, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.restore();
+}
+
+/* ---------- scene: Germany with Erlangen (home) and Munich (hint) ---------- */
+function renderGermanyMap() {
+  rnd = mulberry32(1337);
+  // white panel so the image fills the right side of the slide
+  ctx.fillStyle = C.white;
+  ctx.fillRect(0, 0, WIDTH, HEIGHT);
+  text('Where I am from', WIDTH / 2, 48, { size: 34, color: C.ink, weight: 'bold' });
+
+  // simplified Germany outline, clockwise from the Danish border (lon, lat)
+  const border = [
+    [8.7, 54.9], [9.5, 54.8], [10.0, 54.5], [11.0, 54.4], [12.5, 54.4], [13.7, 54.5],
+    [14.2, 53.9], [14.4, 53.3], [14.1, 52.8], [14.6, 52.6], [14.7, 52.1], [14.6, 51.5],
+    [15.0, 51.3], [14.8, 50.9], [14.3, 51.0], [13.0, 50.5], [12.3, 50.2], [12.5, 49.9],
+    [13.8, 48.7], [13.4, 48.4], [12.9, 47.9], [13.0, 47.5], [12.2, 47.6], [11.6, 47.5],
+    [10.9, 47.4], [10.2, 47.3], [9.6, 47.5], [8.6, 47.6], [7.6, 47.5], [7.5, 48.3],
+    [8.2, 48.9], [6.8, 49.2], [6.4, 49.5], [6.1, 49.6], [6.0, 50.2], [5.9, 50.8],
+    [6.2, 51.5], [6.8, 52.2], [7.0, 52.4], [6.7, 52.6], [7.2, 53.3], [7.0, 53.6],
+    [8.0, 53.7], [8.5, 53.9], [8.9, 53.8], [8.6, 54.3]
+  ];
+  const px = lon => 36 + (lon - 5.9) * 38;
+  const py = lat => 92 + (55.1 - lat) * 60;
+  roughPoly(border.map(([lon, lat]) => [px(lon), py(lat)]), { fill: C.surface, fillStyle: 'solid', width: 3, rough: 1.2 });
+
+  // Erlangen, my home
+  const ex = px(11.0), ey = py(49.6);
+  // Munich, the hint
+  const mx = px(11.58), my = py(48.14);
+  dot(mx, my, 8, C.accent);
+  text('Munich', mx + 16, my + 4, { size: 28, color: C.accent, weight: 'bold', align: 'left' });
+
+  dot(ex, ey, 10, C.red);
+  roughEllipse(ex, ey, 17, 17, { color: C.red, width: 2.5, passes: 1 });
+  text('Erlangen', ex, ey - 36, { size: 34, color: C.red, weight: 'bold' });
+
+  text('Erlangen, Bavaria', WIDTH / 2, 668, { size: 28, color: C.ink });
+}
+
+async function main() {
+  try {
+    await document.fonts.load('30px "Architects Daughter"');
+    await document.fonts.ready;
+  } catch (e) { /* offline: fall back to the cursive stack */ }
+  ctx.clearRect(0, 0, WIDTH, HEIGHT);
+  renderGermanyMap();
+  window.__rendered = true;
+}
+main();
+</script>
+</body>
+</html>

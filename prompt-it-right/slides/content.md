@@ -5,7 +5,7 @@ title: 'Prompt It Right: Spring Boot Testing in the AI Era'
 class: light
 paginate: true
 transition: pt-fade
-header: 'Prompt It Right @ Devoxx Belgium 2026 - Questions @ menti.com Code: <strong>7108 0067</strong>'
+header: 'Prompt It Right: Spring Boot Testing in the AI Era - Questions @ menti.com Code: <strong>7108 0067</strong>'
 footer: '![](assets/logo.webp) Philip Riecks · [@rieckpil](https://x.com/rieckpil) · [PragmaTech GmbH](https://pragmatech.digital/)'
 ---
 
@@ -31,11 +31,13 @@ Notes:
 <!-- _paginate: false -->
 <!-- _header: '' -->
 
+![bg left:33%](assets/abstract-blue-left.png)
+
 # Prompt It Right: **Spring Boot Testing** in the AI Era
 
-## Your agent writes the code. Your test suite decides if it ships.
+## AI writes the code. Your test suite decides what ships.
 
-Devoxx Belgium 2026 · Monday, October 5, 2026 · 09:30
+A 3-hour deep dive · Devoxx Belgium 2026 · October 5, 09:30
 
 <!--
 Notes:
@@ -54,6 +56,8 @@ Notes:
 
 ---
 
+![bg right:33% fit](assets/germany-erlangen-munich.png)
+
 ### About Philip
 
 - Software Engineer from Erlangen, Germany 🍻
@@ -63,23 +67,28 @@ Notes:
 
 <!--
 Notes:
-- TODO add assets/location.png as bg right panel: ![bg right:33%](assets/location.png)
+- Erlangen is in Bavaria, north of Munich.
 -->
 
 ---
 
-## Participate During the Talk
+## Help Me Understand You Better
 
 ![bg right:36% h:420](assets/mentimeter-qr-devoxx-be-2026-padded.png)
 
-Go to [menti.com](https://www.menti.com/) and use the code **7108 0067** to **anonymously** submit answers for the polls during the talk.
+Go to [menti.com](https://www.menti.com/) and enter the code **7108 0067**.
 
-- How much of your code is AI-written today?
-- How long does your test suite take?
-- Do you trust a green build?
+Please answer all **ten questions** - **anonymously**. Your answers help me tailor this session to you.
+
+I will give you a few minutes before we start.
+
+<!--
+Notes:
+- Give the room a few minutes to answer all ten questions, then use the results in the opening and in the rationale part of block 2.
+- The opening block is planned with 5 minutes. Waiting for the answers eats into it, so keep the about slide short.
+-->
 ---
 
-<!-- _header: 'How to Ask Questions - Questions @ menti.com Code: <strong>7108 0067</strong>' -->
 
 ## Questions? Three Ways to Ask
 
@@ -99,25 +108,27 @@ Notes:
 
 <!-- _class: light -->
 
-## Today's Deep Dive: 180 Minutes, Two Blocks
-
 <style scoped>
-.stack { display: flex; flex-direction: column; align-items: center; gap: 14px; margin-top: 0.4em; }
+.stack { display: flex; flex-direction: column; align-items: center; gap: 16px; margin-top: 0; }
 .stack .sketch { box-sizing: border-box; }
-.stack .top   { width: 62%; font-size: 1.15em; padding: 0.8em 1em; }
-.stack .pause { width: 34%; font-size: 1em; border-style: dashed; transform: rotate(0.3deg); }
-.stack .base  { width: 100%; font-size: 1.3em; border-width: 5px; padding: 1.1em 1em; }
-.stack small  { font-size: 0.7em; }
+.stack .sketch strong { font-size: 1.05em; }
+.stack .sketch small { display: block; font-size: 0.7em; color: var(--pt-heading); margin-top: 0.3em; }
+.stack .top   { width: 88%; font-size: 1.32em; padding: 0.7em 0.8em; }
+.stack .pause { width: 54%; font-size: 1.2em; padding: 0.45em 0.8em; border-style: dashed; transform: rotate(0.3deg); }
+.stack .base  { width: 100%; font-size: 1.5em; border-width: 5px; padding: 0.9em 0.8em; }
 </style>
 
 <div class="stack">
   <div class="sketch accent alt top">
-    <strong>2 · Agentic Development and Testing</strong>
-    <small>11:15 - 12:30 · goal · skills · parallel · MCPs · practices · FAQ</small>
+    <strong>2 · Agentic Development and Testing (75 min)</strong>
+    <small>11:15 - 12:30 · problem · skills · best practices · FAQ</small>
   </div>
-  <div class="sketch pause">☕ Break · 10:45 - 11:15</div>
+  <div class="sketch pause">
+    <strong>☕ Break (30 min)</strong>
+    <small>10:45 - 11:15</small>
+  </div>
   <div class="sketch accent base">
-    <strong>1 · Spring Boot Testing in a Nutshell</strong>
+    <strong>1 · Spring Boot Testing in a Nutshell (75 min)</strong>
     <small>09:30 - 10:45 · unit · slice · integration · Testcontainers · context cache · FAQ</small>
   </div>
 </div>
@@ -132,36 +143,15 @@ Notes:
 
 ---
 
-<!-- _class: light statement -->
+<!-- _paginate: false -->
 
-# You will leave with **ideas you can use on Monday**, not a sales pitch.
+![bg right:33%](assets/why-test-software.jpg)
 
-<!--
-Notes:
-- Say it: everything shown works without buying anything. One pointer at the end.
--->
+# Why Test Software?
 
 ---
 
-<!-- _class: light section -->
-<!-- header: 'Block 1: Spring Boot Testing in a Nutshell - Questions @ menti.com Code: <strong>7108 0067</strong>' -->
-
-![bg right:33%](assets/m1-welcome.jpg)
-
-## 01 - Spring Boot Testing in a Nutshell
-
-# Know your toolbox
-
-<!--
-Notes:
-- Block 1 is the fundament: 60 minutes, five topics. Beginner level on purpose.
--->
-
----
-
-<!-- _class: light statement -->
-
-# Good tests don't just catch bugs - they give you **fast feedback** and **confident deployments**.
+![center h:500](assets/ai-frog-meme.jpg)
 
 ---
 
@@ -185,12 +175,53 @@ Notes:
 
 ---
 
+<!-- _class: light statement -->
+
+# Good tests don't just catch bugs - they give you **fast feedback** and **confident deployments**.
+
+---
+
+<style scoped>
+.goals { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 0.6em; font-family: 'Architects Daughter', cursive; }
+.goals .sketch { box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; min-height: 190px; font-size: 1.3em; padding: 0.6em 0.8em; }
+.goals .sketch strong { font-size: 1.2em; }
+.goals .sketch small { font-size: 0.85em; color: var(--pt-heading); margin-top: 0.5em; }
+</style>
+
 ### Goals for Block 1
 
-- **Provide a clear mental map** for choosing between unit, slice, and integration tests
-- Get **better judgment** for AI-written tests
-- Understand the **testing concepts** to better reason about a test strategy or test failures
-- **Build confidence** into your development work to **ship fearlessly**
+<div class="goals">
+  <div class="sketch accent">
+    <strong>A Clear Mental Map</strong>
+    <small>Unit, slice or integration test?</small>
+  </div>
+  <div class="sketch alt">
+    <strong>Better Judgment</strong>
+    <small>Review AI-written tests with confidence</small>
+  </div>
+  <div class="sketch alt">
+    <strong>The Core Concepts</strong>
+    <small>Reason about test strategy and failures</small>
+  </div>
+  <div class="sketch accent">
+    <strong>Ship Fearlessly</strong>
+    <small>Build confidence into your daily work</small>
+  </div>
+</div>
+
+---
+
+<!-- _class: light section -->
+![bg right:33%](assets/m1-welcome.jpg)
+
+## 01 - Spring Boot Testing in a Nutshell
+
+# Know your toolbox
+
+<!--
+Notes:
+- Block 1 is the fundament: 60 minutes, five topics. Beginner level on purpose.
+-->
 
 ---
 
@@ -201,36 +232,119 @@ Notes:
 ---
 
 <style scoped>
-.pyramid { width: 78%; margin: 0.2em auto 0; }
-.pyramid .e2e   { width: 30%; }
-.pyramid .int   { width: 52%; }
-.pyramid .slice { width: 72%; }
-.pyramid .unit  { width: 92%; }
-.pyramid .layer { font-size: 0.85em; }
+.shapes { display: flex; justify-content: center; align-items: flex-end; gap: 110px; margin: 0.6em 0 1em; font-family: 'Architects Daughter', cursive; }
+.shape-card { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.shape-card strong { font-size: 1.6em; }
+.shape-card small { font-size: 1.05em; color: var(--pt-heading); text-align: center; line-height: 1.25; }
+.mini-stack { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.mini-bar { height: 38px; border: 3px solid var(--pt-heading); background: #ffffff; border-radius: 8px 4px 8px 4px / 4px 8px 4px 8px; }
+.mini-bar.accent { border-color: var(--pt-link); background: #e0f2fe; }
+.pyr .b1 { width: 80px; } .pyr .b2 { width: 170px; } .pyr .b3 { width: 270px; }
+.tro .b1 { width: 110px; } .tro .b2 { width: 270px; } .tro .b3 { width: 170px; }
+.hc { display: flex; gap: 16px; align-items: center; height: 158px; }
+.hex { width: 88px; height: 78px; background: var(--pt-heading); clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%); }
+.hex.accent { background: var(--pt-link); }
 </style>
 
-## The Shape of Your Test Suite
+## Pyramid, Honeycomb, Trophy: It Depends
 
-<div class="pyramid">
-  <div class="layer e2e">E2E<small>few · slow · expensive</small></div>
-  <div class="layer int">Integration<small>whole application · real infrastructure</small></div>
-  <div class="layer slice">Slice<small>one layer of the application context</small></div>
-  <div class="layer unit">Unit<small>many · fast · cheap</small></div>
+<div class="shapes">
+  <div class="shape-card">
+    <div class="mini-stack pyr">
+      <div class="mini-bar b1"></div>
+      <div class="mini-bar b2"></div>
+      <div class="mini-bar accent b3"></div>
+    </div>
+    <strong>Pyramid</strong>
+    <small>one deployable,<br>layered</small>
+  </div>
+  <div class="shape-card">
+    <div class="hc">
+      <div class="hex"></div>
+      <div class="hex accent"></div>
+      <div class="hex"></div>
+    </div>
+    <strong>Honeycomb</strong>
+    <small>many small<br>services</small>
+  </div>
+  <div class="shape-card">
+    <div class="mini-stack tro">
+      <div class="mini-bar b1"></div>
+      <div class="mini-bar accent b2"></div>
+      <div class="mini-bar b3"></div>
+    </div>
+    <strong>Trophy</strong>
+    <small>integration-<br>heavy</small>
+  </div>
 </div>
+
+I don't care about the name. The right shape depends on your project. What matters: **confidence** and **fast feedback**.
 
 <!--
 Notes:
-- Pyramid, honeycomb, trophy: the names do not matter. Speed and confidence matter.
+- There are multiple forms of a test strategy: pyramid, honeycomb, trophy and more. The names do not matter, the project decides.
 - Every level has a job. The skill is choosing the cheapest level that proves the behavior.
 -->
 
 ---
 
-<!-- _class: light section -->
+<!--
+Notes:
+- One question decides most of it: most tests answer "no" and never need Spring.
+- Only the "yes" branch splits again. Annotations come on the next slides.
+-->
 
-## 01.1 - Unit tests
+## Three Ways to Write Tests for Spring Boot Applications
 
-# No Spring. No excuses.
+![center h:500](assets/test-choice.png)
+
+---
+
+<style scoped>
+.names { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; margin-top: 0.8em; font-family: 'Architects Daughter', cursive; }
+.names .sketch { box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; min-height: 330px; font-size: 1.2em; padding: 0.8em 0.8em; }
+.names .sketch strong { font-size: 1.15em; }
+.names .sketch .suffix { font-size: 2.4em; line-height: 1.1; margin: 0.15em 0; }
+.names .sketch small { font-size: 0.85em; color: var(--pt-heading); }
+</style>
+
+## Naming Tests: Keep It Simple
+
+<div class="names">
+  <div class="sketch accent">
+    <strong>Unit test</strong>
+    <small>no Spring context</small>
+    <span class="suffix">*Test</span>
+    <small>CustomerServiceTest</small>
+  </div>
+  <div class="sketch alt">
+    <strong>Everything else</strong>
+    <small>slice, integration, E2E</small>
+    <span class="suffix">*IT</span>
+    <small>CustomerControllerIT</small>
+  </div>
+</div>
+
+<!--
+Notes:
+- My simplified rule: no context means *Test, anything that starts a context or infrastructure is *IT.
+- The suffix drives the build phase on the next slide.
+-->
+
+---
+
+![bg right:36% fit](assets/lifecycle.svg)
+
+## Why Separate the Tests?
+
+- **Different build phases**: Maven Surefire runs `*Test` in the `test` phase, Failsafe runs `*IT` in `integration-test` and `verify`. Gradle: a separate `integrationTest` task
+- **Fast feedback first**: unit tests give a verdict in seconds, integration tests run afterwards
+- **Configure parallelization differently**: unit tests run fully parallel, integration tests with shared contexts and containers need more care
+
+<!--
+Notes:
+- The Maven lifecycle image is the one from the demystified talk: ./mvnw verify, Surefire in the test phase, Failsafe in integration-test and verify.
+-->
 
 ---
 
@@ -312,15 +426,11 @@ Notes:
 
 ---
 
-<!--
-Notes:
-- One question decides most of it: most tests answer "no" and never need Spring.
-- Only the "yes" branch splits again. Annotations come on the next slides.
--->
+<!-- _class: light section -->
 
-## Three Ways to Write Tests for Spring Boot Applications
+## 01.1 - Unit tests
 
-![center h:500](assets/test-choice.png)
+# No Spring. No excuses.
 
 ---
 
@@ -394,18 +504,84 @@ class CustomerControllerUnitTests {
 
 ---
 
-<!-- _class: light reveal -->
+## Things a Unit Test Can't Cover: Request Mapping
 
-## What a Unit Test Can't Cover
+**Request mapping**: Does HTTP GET `/api/customers/{id}` actually resolve to our desired method?
 
-* **Request mapping**: Does HTTP GET `/api/customers/{id}` actually resolve to our desired method?
-* **Validation**: Will an incomplete request body result in a 400 bad request or return an accidental 201?
-* **Serialization**: Are our JSON objects serialized and deserialized correctly?
-* **Security**: Are our Spring Security configuration and other authorization checks enforced?
+```java
+@Test
+void shouldCreateCustomerWhenPayloadRequestIsValid() {
+
+  // ...
+
+  ResponseEntity<Void> result = customerController.createNewCustomer(
+    new CustomerCreationRequest("Java", "Duke", "duke@spring.io"),
+    UriComponentsBuilder.newInstance()
+  );
+}
+```
+
+---
+
+## Things a Unit Test Can't Cover: Validation
+
+**Validation**: Will an incomplete request body result in a 400 bad request or return an accidental 201?
+
+```java {7}
+@Test
+void shouldCreateCustomerWhenPayloadRequestIsValid() {
+
+  // ...
+
+  ResponseEntity<Void> result = customerController.createNewCustomer(
+    new CustomerCreationRequest("Java", "Duke", "NOT_AN_EMAIL"),
+    UriComponentsBuilder.newInstance()
+  );
+}
+```
+
+---
+
+## Things a Unit Test Can't Cover: Serialization
+
+**Serialization**: Are our JSON objects serialized and deserialized correctly?
+
+```java {2}
+ResponseEntity<Void> result = customerController.createNewCustomer(
+  new CustomerCreationRequest("Java", "Duke", "NOT_AN_EMAIL"),
+  UriComponentsBuilder.newInstance());
+```
+
+```json
+{
+  "first-name": "Java",
+  "last_Name": "Duke",
+  "email": "duke@spring.io"
+}
+```
+
+---
+
+## Things a Unit Test Can't Cover: Security
+
+**Security**: Are our Spring Security configuration and other authorization checks enforced?
+
+```java {7}
+@Test
+void shouldCreateCustomerWhenPayloadRequestIsValid() {
+
+  // ...
+
+  ResponseEntity<Void> result = customerController.createNewCustomer(
+    new CustomerCreationRequest("Java", "Duke", "NOT_AN_EMAIL"),
+    UriComponentsBuilder.newInstance()
+  );
+}
+```
 
 <!--
 Notes:
-- Every item needs the framework in the loop. This is where slice tests come in.
+- Each of these needs the framework in the loop. This is where slice tests come in.
 -->
 
 ---
@@ -441,7 +617,7 @@ Notes:
 ```java {1,12,6}
 @WebMvcTest(CustomerController.class)
 @Import(SecurityConfig.class)
-class CustomerControllerTest {
+class CustomerControllerIT {
 
   @Autowired
   private MockMvc mockMvc;
@@ -479,7 +655,7 @@ class CustomerControllerTest {
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Import(TestcontainersConfiguration.class)
-class CustomerRepositoryTest {
+class CustomerRepositoryIT {
 
   @Autowired
   private CustomerRepository customerRepository;
@@ -508,13 +684,33 @@ class CustomerRepositoryTest {
 
 <!-- _class: light section -->
 
-## 01.3 - Testcontainers
+## 01.3 - Integration tests
 
-# Real infrastructure, no mocks
+# The whole app, over HTTP
 
 ---
 
-## Provide External Infrastructure with Testcontainers
+![](assets/spring-boot-test-setup.png)
+
+---
+
+## Challenges when Starting the Entire `ApplicationContext`
+
+- **Problem #1**: How to ensure surrounding infrastructure (e.g. database, queues, etc.) is present?
+- **Problem #2**: How to interact with our application for integration tests?
+- **Problem #3**: How to keep our build time at a reasonable duration?
+
+---
+
+## There's Even More...
+
+- **Problem #4**: How to handle HTTP communication from our application to remote services?
+- **Problem #5**: How to provide test data and maintain a clean state between tests?
+- **Problem #6**: How to handle authentication and security contexts during tests?
+
+---
+
+## Provide External Infrastructure with Testcontainers (Problem #1)
 
 Running infrastructure components (databases, message brokers, etc.) in Docker containers for our tests becomes a breeze with [Testcontainers](https://testcontainers.com/):
 
@@ -542,34 +738,6 @@ Notes:
 - Ask who is using Testcontainers.
 - `@ServiceConnection` wires the container into the Spring Boot properties, no `@DynamicPropertySource` needed.
 -->
-
----
-
-<!-- _class: light section -->
-
-## 01.4 - Integration tests
-
-# The whole app, over HTTP
-
----
-
-![](assets/spring-boot-test-setup.png)
-
----
-
-## Challenges when Starting the Entire `ApplicationContext`
-
-- **Problem #1**: How to ensure surrounding infrastructure (e.g. database, queues, etc.) is present?
-- **Problem #2**: How to interact with our application for integration tests?
-- **Problem #3**: How to keep our build time at a reasonable duration?
-
----
-
-## There's Even More...
-
-- **Problem #4**: How to handle HTTP communication from our application to remote services?
-- **Problem #5**: How to provide test data and maintain a clean state between tests?
-- **Problem #6**: How to handle authentication and security contexts during tests?
 
 ---
 
@@ -648,7 +816,7 @@ class ApplicationServletContainerIT {
 
 ![bg right:33%](assets/m4-feature.jpg)
 
-## 01.5 - The context cache
+## 01.4 - The context cache
 
 # The silent speed killer
 
@@ -759,7 +927,7 @@ The setup above will **disable** the context caching feature and slow down the b
 
 <!-- _class: light section -->
 
-## 01.6 - Speed and quality
+## 01.5 - Speed and quality
 
 # Run faster, test better
 
@@ -883,8 +1051,6 @@ Notes:
 
 ---
 
-<!-- header: 'Block 1 FAQ - Questions @ menti.com Code: <strong>7108 0067</strong>' -->
-
 ## FAQ 1: Your Questions
 
 ![bg right:36% h:420](assets/devoxx-questions-qr.png)
@@ -905,8 +1071,6 @@ Notes:
 ---
 
 <!-- _class: light section -->
-<!-- header: 'Break - Questions @ menti.com Code: <strong>7108 0067</strong>' -->
-
 ## Break
 
 # Back at 11:15
@@ -918,7 +1082,6 @@ Notes:
 
 ---
 
-<!-- _header: 'Block 2 · Recap of Block 1 - Questions @ menti.com Code: <strong>7108 0067</strong>' -->
 
 <style scoped>
 .recap { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 0.5em; font-family: 'Architects Daughter', cursive; }
@@ -965,17 +1128,15 @@ Notes:
 ---
 
 <!-- _class: light section -->
-<!-- header: 'Block 2 · The Goal - Questions @ menti.com Code: <strong>7108 0067</strong>' -->
-
 ![bg right:33%](assets/m1-overview.jpg)
 
-## 02 - The goal
+## 02 - The problem today
 
-# A fast and comprehensive test suite
+# Code is generated. Trust is not.
 
 <!--
 Notes:
-- 10 min. Align on the goal first. Reasoning: DORA, as on pragmatech.digital.
+- 10 min. The problem today: generated code, testing as an afterthought, AI will not fix it. Then the Formula 1 engine, verification as the constraint, DORA, and the goal.
 - Block 2 is my setup, not the course content 1:1. Hints and structure, no hard sell.
 -->
 
@@ -983,7 +1144,37 @@ Notes:
 
 <!-- _class: light statement -->
 
-# With AI, the bottleneck moves from **writing** code to **verifying** it.
+# Today, most of our code is **generated**.
+
+---
+
+<style scoped>
+.flow .sketch { font-size: 1.3em; padding: 0.8em 1em; }
+.flow .sketch small { font-size: 0.72em; color: var(--pt-heading); }
+.flow .arrow { font-size: 2em; }
+</style>
+
+## Testing Was Often an Afterthought
+
+<div class="flow">
+  <div class="sketch">Written last<small>after the feature</small></div>
+  <div class="sketch alt">Skimmed fastest<small>in code review</small></div>
+  <div class="sketch">A dashboard number<small>nobody reads closely</small></div>
+  <div class="sketch alt">"Later"<small>said, not meant</small></div>
+</div>
+
+That was the deal long before AI.
+
+---
+
+<!-- _class: light statement -->
+
+# AI won't fix this **by itself**.
+
+<!--
+Notes:
+- AI will not magically change our not so optimal processes. It makes the old habits faster.
+-->
 
 ---
 
@@ -1005,6 +1196,32 @@ Notes:
 
 ---
 
+<!-- _class: light statement -->
+
+# Verification is the new **constraint**.
+
+---
+
+<style scoped>
+.flow .sketch { font-size: 1.3em; padding: 0.8em 1em; }
+.flow .sketch small { font-size: 0.72em; color: var(--pt-heading); }
+.flow .arrow { font-size: 2em; }
+</style>
+
+## Code in Seconds, Review Capacity Is Limited
+
+<div class="flow">
+  <div class="sketch accent">AI<small>generates code in seconds</small></div>
+  <div class="arrow">&#8800;</div>
+  <div class="sketch alt">You<small>review capacity is limited</small></div>
+  <div class="arrow">&#8594;</div>
+  <div class="sketch accent">A safety net<small>a fast, comprehensive test suite</small></div>
+</div>
+
+The faster the engine, the more we need brakes we can trust.
+
+---
+
 ## Fix the Brakes, the Road, and the Driver
 
 ![center h:500](assets/f1-smooth-road.png)
@@ -1013,27 +1230,6 @@ Notes:
 Notes:
 - Brakes: a fast and comprehensive test suite. Road: fast feedback in CI. Driver: you, with your testing standards written down as skills.
 - Same engine, but now you can go fast and arrive with confidence.
--->
-
----
-
-<!-- _class: light reveal -->
-
-## Throughput Is No Longer the Constraint
-
-* Writing code is cheap, **human time and attention** are not
-* The hard problem: design **feedback loops and control systems** so agents build reliable software
-* Unattended agents **parallelize** the work, only fast feedback keeps developer attention from becoming the next bottleneck
-
----
-
-## Fast Feedback: The Engine in the AI World
-
-![center h:470](assets/fast-feedback-foundation.png)
-
-<!--
-Notes:
-- Fast feedback loops (CI and test automation) turn AI output into shipped, reliable value.
 -->
 
 ---
@@ -1054,21 +1250,11 @@ Notes:
 
 ---
 
-## What a Slow or Weak Suite Does to the DORA Metrics
-
-| Metric | With a slow or untrusted suite |
-|---|---|
-| Deployment frequency | Teams fear the next deployment and slow down |
-| Lead time for changes | Feedback takes minutes, so everything waits |
-| Change failure rate | A green build that proves little lets bugs through |
-| Time to restore service | Nobody is sure the fix is safe |
-
-<!--
-Notes:
-- This is my reasoning, not a quote from DORA.
--->
-
----
+<style scoped>
+.flow .sketch { font-size: 1.3em; padding: 0.8em 1em; }
+.flow .sketch small { font-size: 0.72em; color: var(--pt-heading); }
+.flow .arrow { font-size: 2em; }
+</style>
 
 ## The Goal: Fast and Comprehensive
 
@@ -1084,24 +1270,75 @@ Both at once. Fast but shallow gives false confidence. Deep but slow, nobody run
 ---
 
 <!-- _class: light section -->
-<!-- header: 'Block 2 · Skill Library - Questions @ menti.com Code: <strong>7108 0067</strong>' -->
 
 ![bg right:33%](assets/m4-setup.jpg)
 
-## 03 - Deterministic results
+## 03 - Meaningful tests
 
-# A test skill library, adapted to each project
+# Prompt it right?
 
 <!--
 Notes:
-- 17 min including Demo 1. Hints from my setup, not a full tour of every skill.
+- 4 min. Open with the prompt everybody starts with, then argue what meaningful means.
 -->
+
+---
+
+## The Prompt Everybody Starts With
+
+```text
+Write meaningful tests. Make no mistakes.
+```
+
+You have typed something like this. I have typed this.
 
 ---
 
 <!-- _class: light statement -->
 
-# Same prompt, different tests. **Every day.**
+# Models get better. But what is **meaningful**?
+
+---
+
+## Meaningful Is Not Obvious
+
+New developers might not prompt the AI to think about **fast and parallel** tests:
+
+| Nobody asked for it | What the agent does |
+|---|---|
+| Fast | A new Spring context per test class |
+| Parallel | Shared fields and fixed IDs, tests collide |
+| Deterministic | `Instant.now()` and `Thread.sleep` |
+| One reason to fail | Six assertions in one test |
+| A message that locates it | A red build and a nine minute debug |
+
+---
+
+<!-- _class: light statement -->
+
+# Timing is a big thing. **Keep the suite fast.**
+
+---
+
+<!-- _class: light statement -->
+
+# To get there, we use **skills**.
+
+---
+
+<!-- _class: light section -->
+
+![bg right:33%](assets/m4-feature.jpg)
+
+## 04 - Skills
+
+# Testing judgment, written down once
+
+<!--
+Notes:
+- 14 min. Explain skills with one sample skill: unit-testing with its testing-standards reference. The sample lives in this repo: .claude/skills/unit-testing/
+- Then show my seven skills as boxes.
+-->
 
 ---
 
@@ -1116,6 +1353,93 @@ Notes:
 </div>
 
 More predictable, not deterministic: the model still varies, but inside your guardrails.
+
+---
+
+## A Skill Is a Folder With One Markdown File
+
+```text
+.claude/skills/unit-testing/
+├── SKILL.md                       trigger, project knobs, scope, rules, workflow
+└── references/
+    ├── testing-standards.md       the rule catalog with IDs and severity
+    └── examples.md                good and bad pairs
+```
+
+Sample in this repo: `prompt-it-right/.claude/skills/unit-testing/`.
+
+---
+
+## The Frontmatter Is the Trigger
+
+```yaml
+---
+name: unit-testing
+description: Write, review or refactor unit tests for Spring Boot
+  classes ... without a Spring context. Use when the user asks for
+  a unit test, mentions JUnit, Mockito or AssertJ ... Not for
+  @SpringBootTest, slice tests or Testcontainers ...
+---
+```
+
+Write the description like a routing rule: when to use it, and when **not** to.
+
+---
+
+## Inside `SKILL.md`
+
+- **Frontmatter**: name and a description written like a routing rule, "Use when ... Not for ..."
+- **Adapt this template**: the knobs for your project (assertions, naming, base class, database, build command)
+- **Scope**: when the skill is the right tool and what it hands over to
+- **Non-negotiables**: the rules that always apply, each with an ID
+- **Workflow**: the steps the agent follows, including how to review its own output
+
+---
+
+## Adapt This Template
+
+| Knob | Default |
+|---|---|
+| Assertion library | AssertJ with `.as("...")` |
+| Unit test naming | `<ClassUnderTest>Test` |
+| Build command (single class) | `./mvnw -q test -Dtest=OrderServiceTest` |
+| Build command (unit suite) | `./mvnw -q test` |
+| Parallel execution | JUnit parallel, random order |
+| Disabled rules | none |
+
+The knobs live in one table at the top of `SKILL.md`. The onboarding prompt fills it for your project.
+
+---
+
+## `testing-standards.md`: Rules With IDs and Severity
+
+```text
+[T7-H]   a failure message on every assertion
+[T9-H]   no test-class fields, no @BeforeEach
+[U1-H]   no Spring context in a unit test
+[U2-H]   time from an injected Clock, never now()
+[T27-H]  bounded waits, never Thread.sleep
+```
+
+Severity: **C** blocks, **H** must fix, **M** fix or justify, **L** mention only.
+
+The agent reports the rule IDs, so you can see which rule fired and why.
+
+---
+
+## `examples.md`: Good and Bad Pairs
+
+```java {1-2,6-8}
+// bad: no message, tells you nothing at 3 AM
+assertThat(order.status()).isEqualTo(PLACED);
+
+// good: one chain, a message that locates the defect
+assertThat(order.status())
+  .as("Order is placed after a successful payment")
+  .isEqualTo(PLACED);
+```
+
+Models copy examples better than they follow prose.
 
 ---
 
@@ -1159,82 +1483,6 @@ Notes:
 
 ---
 
-## How a Skill Is Built
-
-```text
-.claude/skills/spring-boot-testing/
-├── SKILL.md                      router, project profile, change workflow
-├── unit-testing/
-│   ├── SKILL.md                  trigger, scope, non-negotiables, workflow
-│   └── references/
-│       ├── testing-standards.md  the rule catalog with IDs and severity
-│       ├── examples.md           good and bad pairs
-│       └── project-setup.md      config you copy once
-├── slice-testing/   slice-web-testing/   integration-testing/
-├── testcontainers-setup/   e2e-ui-testing/   test-setup-review/
-└── ONBOARDING-PROMPT.md          adapts all of it to your project
-```
-
----
-
-## Inside `SKILL.md`
-
-- **Frontmatter**: name and a description written like a routing rule, "Use when ... Not for ..."
-- **Adapt this template**: the knobs for your project (assertions, naming, base class, database, build command)
-- **Scope**: when the skill is the right tool and what it hands over to
-- **Non-negotiables**: the rules that always apply, each with an ID
-- **Workflow**: the steps the agent follows, including how to review its own output
-
----
-
-## `testing-standards.md`: Rules With IDs and Severity
-
-```text
-[T7-H]   a failure message on every assertion
-[T9-H]   no test-class fields, no @BeforeEach
-[U1-H]   no Spring context in a unit test
-[U2-H]   time from an injected Clock, never now()
-[T27-H]  bounded waits, never Thread.sleep
-```
-
-Severity: **C** blocks, **H** must fix, **M** fix or justify, **L** mention only.
-
-The agent reports the rule IDs, so you can see which rule fired and why.
-
----
-
-## `examples.md`: Good and Bad Pairs
-
-```java {1-2,6-8}
-// bad: no message, tells you nothing at 3 AM
-assertThat(order.status()).isEqualTo(PLACED);
-
-// good: one chain, a message that locates the defect
-assertThat(order.status())
-  .as("Order is placed after a successful payment")
-  .isEqualTo(PLACED);
-```
-
-Models copy examples better than they follow prose.
-
----
-
-## The Router: Cheapest Test That Proves It
-
-<div class="flow">
-  <div class="sketch">A change<small>feature or fix</small></div>
-  <div class="arrow">&#8594;</div>
-  <div class="sketch accent">Router<small>test plan per behavior</small></div>
-  <div class="arrow">&#8594;</div>
-  <div class="sketch alt">Owner skills<small>write the tests</small></div>
-  <div class="arrow">&#8594;</div>
-  <div class="sketch">Run<small>fast phase, then containers</small></div>
-</div>
-
-The final report has a plan table and a **not tested** list. The agent says what it skipped.
-
----
-
 <!-- _class: light statement -->
 
 # **Demo 1:** review a real test suite
@@ -1272,13 +1520,11 @@ Each line carries a hint, and the file and line behind it.
 ---
 
 <!-- _class: light section -->
-<!-- header: 'Block 2 · Parallel and Cached - Questions @ menti.com Code: <strong>7108 0067</strong>' -->
-
 ![bg right:33%](assets/m2-present.jpg)
 
-## 04 - Most important
+## 05 - Best practices
 
-# Parallelizable and optimized for context caching
+# Parallelizable and context-cache friendly
 
 <!--
 Notes:
@@ -1417,11 +1663,9 @@ Notes:
 ---
 
 <!-- _class: light section -->
-<!-- header: 'Block 2 · MCP Setup - Questions @ menti.com Code: <strong>7108 0067</strong>' -->
-
 ![bg right:33%](assets/m4-review.jpg)
 
-## 05 - MCP servers
+## 06 - MCP servers
 
 # How I configure them
 
@@ -1551,11 +1795,9 @@ Notes:
 ---
 
 <!-- _class: light section -->
-<!-- header: 'Block 2 · Engineering Practices - Questions @ menti.com Code: <strong>7108 0067</strong>' -->
-
 ![bg right:33%](assets/m2-future.jpg)
 
-## 06 - Engineering practices
+## 07 - Engineering practices
 
 # Mistakes will happen. Be ready to act fast.
 
@@ -1635,12 +1877,35 @@ Notes:
 
 ---
 
-<!-- _class: light section -->
-<!-- header: 'Wrap-up - Questions @ menti.com Code: <strong>7108 0067</strong>' -->
+<style scoped>
+.recap { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 0.5em; font-family: 'Architects Daughter', cursive; }
+.recap .sketch { box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; min-height: 190px; font-size: 1.15em; padding: 0.6em 0.5em; }
+.recap .sketch strong { font-size: 1.15em; }
+.recap .sketch small { font-size: 0.8em; margin-top: 0.5em; color: var(--pt-heading); }
+</style>
 
+## Recap: The Last Minutes
+
+<div class="recap">
+  <div class="sketch accent"><strong>Verification</strong><small>the new constraint</small></div>
+  <div class="sketch alt"><strong>Test Suite</strong><small>fast and comprehensive</small></div>
+  <div class="sketch accent"><strong>Skills</strong><small>judgment written down</small></div>
+  <div class="sketch alt"><strong>Parallel and Cached</strong><small>profiler gate in CI</small></div>
+  <div class="sketch accent"><strong>MCP Servers</strong><small>few, trusted</small></div>
+  <div class="sketch alt"><strong>Fast Recovery</strong><small>flags, alerts, rollback</small></div>
+</div>
+
+<!--
+Notes:
+- 1 minute. Read the six boxes, do not explain them again.
+-->
+
+---
+
+<!-- _class: light section -->
 ![bg right:33%](assets/m6-thank-you.jpg)
 
-## 07 - Wrap-up
+## 08 - Wrap-up
 
 # What to take home
 
@@ -1688,8 +1953,6 @@ Notes:
 
 ---
 
-<!-- header: 'Take It Further - Questions @ menti.com Code: <strong>7108 0067</strong>' -->
-
 ## Take It Further: The Online Course
 
 ![center h:500](assets/agentic-testing-course.png)
@@ -1731,26 +1994,6 @@ Each skill includes rules, references, best practices and anti-patterns as code 
 
 ---
 
-<!-- header: 'Template and Offer - Questions @ menti.com Code: <strong>7108 0067</strong>' -->
-
-## Get the Template Skill Structure
-
-![bg right:36% h:420](assets/offer-qr.png)
-
-Scan the QR code to get my **template skill structure**.
-
-**33% off until the end of Devoxx** if you enroll in the **Course** or the **Bundle** edition.
-
-<!--
-Notes:
-- assets/offer-qr.png leads to https://pragmatech.digital/lp/devoxx-belgium-2026/ (lead signup landing page).
-- Offer text: 33% off, Course or Bundle edition, valid until the end of Devoxx Belgium 2026.
--->
-
----
-
-<!-- header: 'Block 2 FAQ - Questions @ menti.com Code: <strong>7108 0067</strong>' -->
-
 ## FAQ 2: Your Questions
 
 ![bg right:36% h:420](assets/devoxx-questions-qr.png)
@@ -1769,8 +2012,6 @@ Notes:
 -->
 
 ---
-
-<!-- header: 'Feedback - Questions @ menti.com Code: <strong>7108 0067</strong>' -->
 
 ## Rate this Session
 

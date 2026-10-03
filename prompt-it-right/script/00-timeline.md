@@ -8,12 +8,12 @@ Rule: if a block runs more than 3 min over, use the cut list in `../TALK-PLAN.md
 | 09:35 | 5 | **Block 1** Crash course (60 min) | Pick the cheapest test that proves the behavior. Ends with the five properties of a good suite | 01 |
 | 10:35 | 65 | **Block 1 FAQ** (10 min) | Answer questions from the room | FAQ 1 |
 | 10:45 | 75 | BREAK (30 min) | Back at 11:15 sharp | Break |
-| 11:15 | 105 | **Block 2** The goal (10 min) | Fast and comprehensive suite, DORA | 02 |
-| 11:25 | 115 | **Block 2** Skill library (17 min) | Deterministic results with skills adapted per project | 03 |
-| 11:42 | 132 | **Block 2** Parallel and cache (15 min) | Most important: parallelizable, context-cache friendly | 04 |
-| 11:57 | 147 | **Block 2** MCP setup (8 min) | Few, trusted servers | 05 |
-| 12:05 | 155 | **Block 2** Engineering practices (10 min) | Be ready to act fast | 06 |
-| 12:15 | 165 | **Block 2** Wrap-up (5 min) | Evidence, five takeaways, one soft pointer | 07 |
+| 11:15 | 105 | **Block 2** Problem and goal (10 min) | Generated code, verification is the constraint, fast and comprehensive suite | 02 |
+| 11:25 | 115 | **Block 2** Meaningful tests and skills (17 min) | Skills make the agent's tests meaningful and fast | 03, 04 |
+| 11:42 | 132 | **Block 2** Parallel and cache (15 min) | Best practice: parallelizable, context-cache friendly | 05 |
+| 11:57 | 147 | **Block 2** MCP setup (8 min) | Few, trusted servers | 06 |
+| 12:05 | 155 | **Block 2** Engineering practices (10 min) | Be ready to act fast | 07 |
+| 12:15 | 165 | **Block 2** Recap and wrap-up (5 min) | Recap boxes, evidence, five takeaways, soft pointer without QR | 08 |
 | 12:20 | 170 | **Block 2 FAQ** (10 min) | Answer questions from the room | FAQ 2 |
 | 12:30 | 180 | End | | Closing |
 

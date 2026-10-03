@@ -1,4 +1,4 @@
-package pragmatech.digital.prompt_it_right;
+package pragmatech.digital.conference;
 
 import org.springframework.boot.test.context.TestConfiguration;
 

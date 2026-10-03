@@ -1,6 +1,6 @@
-package pragmatech.digital.prompt_it_right.customer;
+package pragmatech.digital.conference.customer;
 
-import pragmatech.digital.prompt_it_right.config.SecurityConfig;
+import pragmatech.digital.conference.config.SecurityConfig;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(CustomerController.class)
 @Import(SecurityConfig.class)
-class CustomerControllerTest {
+class CustomerControllerIT {
 
   @Autowired
   private MockMvc mockMvc;

@@ -1,4 +1,4 @@
-package pragmatech.digital.prompt_it_right.customer;
+package pragmatech.digital.conference.customer;
 
 import java.util.List;
 import java.util.Optional;

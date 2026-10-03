@@ -1,4 +1,4 @@
-package pragmatech.digital.prompt_it_right.config;
+package pragmatech.digital.conference.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

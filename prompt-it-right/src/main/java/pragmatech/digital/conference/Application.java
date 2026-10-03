@@ -1,13 +1,13 @@
-package pragmatech.digital.prompt_it_right;
+package pragmatech.digital.conference;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class PromptItRightApplication {
+public class Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(PromptItRightApplication.class, args);
+		SpringApplication.run(Application.class, args);
 	}
 
 }

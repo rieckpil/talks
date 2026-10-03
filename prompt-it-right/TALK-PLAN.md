@@ -22,9 +22,9 @@ Block 1 is the complete crash course (the fundament). Block 2 aligns on the goal
 | 09:35 | 60 | **Block 1**: Spring Boot testing in a nutshell, the full crash course, ends with "what makes a good suite" | script/01-crash-course.md |
 | 10:35 | 10 | **Block 1 FAQ** | script/faq-block-1.md |
 | 10:45 | 30 | BREAK | |
-| 11:15 | 10 | **Block 2** The goal: a fast and comprehensive suite, DORA reasoning | script/02-goal-dora.md |
-| 11:25 | 17 | **Block 2** Deterministic results: the test skill library + Demo 1 | script/03-skill-library.md |
-| 11:42 | 15 | **Block 2** Most important: parallelizable and context-cache friendly + Demo 2 | script/04-parallel-context-cache.md |
+| 11:15 | 10 | **Block 2** The problem today and the goal: generated code, Formula 1 engine, verification, DORA | script/02-problem-and-goal.md |
+| 11:25 | 17 | **Block 2** Meaningful tests and skills: the prompt, a sample skill (unit-testing), the seven skills, Demo 1 | script/03-prompt-and-skills.md |
+| 11:42 | 15 | **Block 2** Best practices: parallelizable and context-cache friendly + Demo 2 | script/04-parallel-context-cache.md |
 | 11:57 | 8 | **Block 2** How I configure MCP servers | script/05-mcp-setup.md |
 | 12:05 | 10 | **Block 2** Engineering practices: be ready to act fast | script/06-engineering-practices.md |
 | 12:15 | 5 | **Block 2** Evidence, takeaways, soft pointer | script/07-wrap-up.md |
