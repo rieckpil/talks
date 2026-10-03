@@ -1600,19 +1600,44 @@ public abstract class AbstractIntegrationTest {
 
 ---
 
-## Measure It, Gate It in CI
+## Measure Container Starts With Docker
 
 ```shell
 docker events --filter event=start \
   --format '{{.Actor.Attributes.image}}' | sort | uniq -c
 ```
 
+Run it in a second terminal while the suite runs. Example output:
+
+```text
+   2 mysql:9.7                         <- two containers for one image
+   1 testcontainers/ryuk:0.12.0
+```
+
+- Every image should start **once** per build
+- `ryuk` is the Testcontainers cleanup container, ignore it
+
+<!--
+Notes:
+- Start the command before the test run, stop it with Ctrl+C afterwards. Used in Demo 2.
+-->
+
+---
+
+## Measure Context Starts With the Profiler
+
+Every new combination of mocks, properties and profiles is a new Spring context start.
+
+```properties
+logging.level.org.springframework.test.context.cache = DEBUG
+```
+
+- The cache log shows `size`, `hitCount` and `missCount`
+- **Spring Test Profiler** writes the numbers to a JSON file
+
 ```shell
 jq '.contextsCreated' target/spring-test-profiler/results.json
 ```
-
-- Count containers per image while the suite runs
-- **Spring Test Profiler** records the contexts a run starts, fail the build above your limit
 
 ---
 
