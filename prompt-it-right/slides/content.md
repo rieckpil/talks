@@ -1163,8 +1163,6 @@ Notes:
   <div class="sketch alt">"Later"<small>said, not meant</small></div>
 </div>
 
-That was the deal long before AI.
-
 ---
 
 <!-- _class: light statement -->
@@ -1218,8 +1216,6 @@ Notes:
   <div class="sketch accent">A safety net<small>a fast, comprehensive test suite</small></div>
 </div>
 
-The faster the engine, the more we need brakes we can trust.
-
 ---
 
 ## Fix the Brakes, the Road, and the Driver
@@ -1236,7 +1232,7 @@ Notes:
 
 ## Backed by the DORA Research
 
-![bg right:50% fit](assets/dora-core-summary.png)
+![h:20%](assets/dora-core-summary.png)
 
 DORA's core model puts **fast feedback** next to fast flow and a climate for learning.
 
@@ -1265,8 +1261,6 @@ Notes:
   <div class="sketch accent">Confidence in every commit</div>
 </div>
 
-Both at once. Fast but shallow gives false confidence. Deep but slow, nobody runs it.
-
 ---
 
 <!-- _class: light section -->
@@ -1287,10 +1281,8 @@ Notes:
 ## The Prompt Everybody Starts With
 
 ```text
-Write meaningful tests. Make no mistakes.
+$ Write meaningful tests. Make no mistakes.
 ```
-
-You have typed something like this. I have typed this.
 
 ---
 
@@ -1304,25 +1296,19 @@ You have typed something like this. I have typed this.
 
 New developers might not prompt the AI to think about **fast and parallel** tests:
 
-| Nobody asked for it | What the agent does |
-|---|---|
-| Fast | A new Spring context per test class |
-| Parallel | Shared fields and fixed IDs, tests collide |
-| Deterministic | `Instant.now()` and `Thread.sleep` |
-| One reason to fail | Six assertions in one test |
-| A message that locates it | A red build and a nine minute debug |
+| Nobody asked for it | What the agent does                        |
+|---------------------|--------------------------------------------|
+| Fast                | A new Spring context per test class        |
+| Parallel            | Shared fields and fixed IDs, tests collide |
+| Deterministic       | `Instant.now()` and `Thread.sleep`         |
+| One reason to fail  | Six different assertions in one test       |
+| Failure Indicators  | A red tests and a nine minute debug        |
 
 ---
 
 <!-- _class: light statement -->
 
 # Timing is a big thing. **Keep the suite fast.**
-
----
-
-<!-- _class: light statement -->
-
-# To get there, we use **skills**.
 
 ---
 
@@ -1342,7 +1328,12 @@ Notes:
 
 ---
 
-## Make the Agent's Result More Deterministic
+<style scoped>
+.flow { flex-wrap: nowrap; gap: 18px; }
+.flow .sketch { flex: 1 1 0; font-size: 1.55em; padding: 1.3em 0.6em; }
+.flow .sketch small { font-size: 0.7em; color: var(--pt-heading); }
+.flow .arrow { flex: 0 0 auto; font-size: 2.6em; }
+</style>
 
 <div class="flow">
   <div class="sketch">My testing standards<small>written down once</small></div>
@@ -1351,8 +1342,6 @@ Notes:
   <div class="arrow">&#8594;</div>
   <div class="sketch alt">Every agent session<small>same rules</small></div>
 </div>
-
-More predictable, not deterministic: the model still varies, but inside your guardrails.
 
 ---
 
@@ -1443,7 +1432,12 @@ Models copy examples better than they follow prose.
 
 ---
 
-## One Template Library, Adapted to Each Project
+<style scoped>
+.flow { flex-wrap: nowrap; gap: 18px; }
+.flow .sketch { flex: 1 1 0; font-size: 1.55em; padding: 1.3em 0.6em; }
+.flow .sketch small { font-size: 0.7em; color: var(--pt-heading); }
+.flow .arrow { flex: 0 0 auto; font-size: 2.6em; }
+</style>
 
 <div class="flow">
   <div class="sketch">Template library<small>my default conventions</small></div>
@@ -1452,8 +1446,6 @@ Models copy examples better than they follow prose.
   <div class="arrow">&#8594;</div>
   <div class="sketch alt">Your project's skills<small>your build, your conventions</small></div>
 </div>
-
-The agent reads your build file and existing tests, asks only what it cannot detect, and replaces every template value. Answer `default` if you have no opinion.
 
 ---
 
@@ -1556,43 +1548,55 @@ A slow suite makes the loop useless, the agent runs one test or none. Every extr
 
 ---
 
-## Parallel by Construction
+## Must Have: Parallelizable Unit Tests
 
-| The skills enforce | Why it matters |
-|---|---|
-| Random business keys, own rows per test | No collisions between concurrent tests |
-| No test-class fields, no `@BeforeEach` state | Nothing shared between methods |
-| Injected `Clock`, no `Thread.sleep` | No timing flakiness |
-| Run the suite twice, random order | Order dependence shows up before CI |
+- No test-class fields, no `@BeforeEach` state: each test builds its own objects
+- Time from an injected `Clock`, never `Instant.now()`. No `Thread.sleep`
+- Run concurrent and in random order
 
-Unit tests run concurrent. Slice tests stay same-thread (shared mocks in a cached context). Integration tests run concurrent with random data.
-
----
-
-## Cache-Friendly by Construction
-
-| The skills enforce | Effect on the context cache |
-|---|---|
-| One abstract base class for integration tests | One shared context |
-| No `@MockitoBean` replacing application beans | No new cache key per test class |
-| No `@DirtiesContext` | The context is never thrown away |
-| A context limit (single digit, default 9) | Regressions fail the review |
-
-The agent adds a test class, and the context count stays the same.
+```properties
+# src/test/resources/junit-platform.properties
+junit.jupiter.execution.parallel.enabled = true
+junit.jupiter.execution.parallel.mode.default = concurrent
+junit.jupiter.testclass.order.default = org.junit.jupiter.api.ClassOrderer$Random
+junit.jupiter.testmethod.order.default = org.junit.jupiter.api.MethodOrderer$Random
+```
 
 ---
 
-## One Container per Image, Two Build Phases
+## Must Have: Parallelizable Integration Tests
 
-<div class="flow">
-  <div class="sketch accent">Fast phase<small>*Test, no Docker, seconds</small></div>
-  <div class="arrow">&#8594;</div>
-  <div class="sketch alt">Container phase<small>*IT, one static container per image</small></div>
-  <div class="arrow">&#8594;</div>
-  <div class="sketch">E2E<small>separate profile, a few journeys</small></div>
-</div>
+- **Random business keys** for every piece of test data, own rows per test, no `findAll()` or `count()`
+- **Black box over HTTP** on a random port, no shared state in the JVM
+- External HTTP stubbed with **WireMock** on a dynamic port, matched on the random values
+- `@Execution(CONCURRENT)` on the abstract base class
+- Run the suite twice: order dependence shows up before CI
 
-The agent runs the fast phase after every change, the container phase before it calls the work done. A single-test-class command is a knob in the skill, so it never reruns everything for one test.
+---
+
+## Testcontainers: Use Them Properly
+
+- **One** `static final` container per image, shared by the whole build
+- `@ServiceConnection` wires it into Spring Boot, no manual properties
+- Pinned image tags, never `latest`. No fixed host ports. An explicit wait strategy
+- Same database as production, schema from Flyway or Liquibase, no H2
+- Reuse only locally and opt-in, never committed, never on CI. Pre-pull images in CI
+
+---
+
+## Context Caching: One Abstract Base Class
+
+```java {1,2,3}
+@SpringBootTest(webEnvironment = RANDOM_PORT)
+@Import(TestcontainersConfiguration.class)
+@Execution(ExecutionMode.CONCURRENT)
+public abstract class AbstractIntegrationTest {
+}
+```
+
+- All integration tests extend it: **one shared context**
+- No `@MockitoBean` on application beans, no `@DirtiesContext`
+- A context limit (single digit), enforced by the **profiler** in the pipeline
 
 ---
 
@@ -1665,13 +1669,13 @@ Notes:
 <!-- _class: light section -->
 ![bg right:33%](assets/m4-review.jpg)
 
-## 06 - MCP servers
+## 06 - My dev setup
 
-# How I configure them
+# MCP servers and a local harness
 
 <!--
 Notes:
-- 8 min. Baseline: my MCP setup. Keep the number small, trust each server.
+- 8 min. My dev setup: MCP servers and a local harness. The agent reaches the app, the browser, the tests and CI itself.
 -->
 
 ---
@@ -1745,7 +1749,7 @@ claude mcp add playwright npx @playwright/mcp@latest
 .hub .app { grid-column: 3; grid-row: 5; }
 </style>
 
-## Local Development With PetClinic: The Agent Closes the Loop
+## My Local Harness: The Agent Closes the Feedback Loop
 
 <div class="hub">
   <div class="sketch gh">GitHub<small>PRs, Actions runs, job logs</small></div>
@@ -1797,7 +1801,7 @@ Notes:
 <!-- _class: light section -->
 ![bg right:33%](assets/m2-future.jpg)
 
-## 07 - Engineering practices
+## 07 - Engineering excellence
 
 # Mistakes will happen. Be ready to act fast.
 
@@ -1808,66 +1812,29 @@ Notes:
 
 ---
 
+<!-- _class: light reveal -->
+
 <style scoped>
-.cycle { display: grid; grid-template-columns: 1fr 0.35fr 1fr 0.35fr 1fr 0.35fr 1fr; align-items: center; gap: 10px; margin-top: 0.8em; font-family: 'Architects Daughter', cursive; }
-.cycle .sketch { box-sizing: border-box; font-size: 1.15em; padding: 0.9em 0.3em; }
-.cycle .sketch small { font-size: 0.62em; }
-.cycle .arrow { text-align: center; }
-.cycle .down { grid-column: 7; text-align: center; }
-.cycle .skip { grid-column: 1 / span 6; }
+section > ul { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; list-style: none; padding: 0; margin: 0.8em 0 0; }
+section > ul > li { box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; min-height: 200px; margin: 0; padding: 0.6em 0.5em; border: 2.5px solid var(--pt-heading); background: var(--pt-bg-1); border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px; box-shadow: 2px 3px 0 rgba(15, 23, 42, 0.12); font-family: 'Architects Daughter', cursive; font-size: 1.25em; line-height: 1.2; }
+section > ul > li strong { font-size: 1.2em; color: var(--pt-link); }
+section > ul > li small { display: block; margin-top: 0.4em; font-size: 0.75em; color: var(--pt-heading); }
 </style>
 
-## The Dev Lifecycle and the Practices That Matter
-
-<div class="cycle">
-  <div class="sketch accent">Shift left<small>tests in the agent loop</small></div>
-  <div class="arrow">&#8594;</div>
-  <div class="sketch">CI<small>fast feedback</small></div>
-  <div class="arrow">&#8594;</div>
-  <div class="sketch">CD<small>small, frequent releases</small></div>
-  <div class="arrow">&#8594;</div>
-  <div class="sketch alt">Feature flags<small>decouple deploy from release</small></div>
-  <div class="skip"></div>
-  <div class="arrow down">&#8595;</div>
-  <div class="sketch accent">Fast rollback<small>undo in minutes</small></div>
-  <div class="arrow">&#8592;</div>
-  <div class="sketch">Runbooks<small>know what to do</small></div>
-  <div class="arrow">&#8592;</div>
-  <div class="sketch">Alerting<small>the right people, fast</small></div>
-  <div class="arrow">&#8592;</div>
-  <div class="sketch alt">Monitoring<small>see it in production</small></div>
-</div>
+* **Shift left**<small>tests in the agent loop</small>
+* **CI**<small>fast feedback</small>
+* **CD**<small>small, frequent releases</small>
+* **Feature flags**<small>deploy is not release</small>
+* **Monitoring**<small>see it in production</small>
+* **Alerting**<small>the right people, fast</small>
+* **Runbooks**<small>know what to do</small>
+* **Fast rollback**<small>undo in minutes</small>
 
 <!--
 Notes:
-- Draw the loop. Left to right on top, back right to left on the bottom. The lesson of each failure goes back into shift left: a new test, a new rule in the skill.
+- One box per click (fragmented list, works in the HTML deck only). Tests reduce failures, these practices reduce the damage.
+- Lessons of every failure go back into shift left: a new test, a new rule in the skill.
 -->
-
----
-
-## Shift Left: Prevent It Early
-
-- Tests are part of the agent loop, not something after it
-- Small, atomic changes you can actually review
-- Rules in the build for what you would block a pull request over (ArchUnit)
-- A review pass on the tests the agent writes
-
----
-
-## Ship Safely: CI/CD and Feature Flags
-
-- A fast pipeline gives a verdict in minutes, small releases keep the blast radius small
-- **Feature flags** decouple deploying from releasing, switch off instead of redeploying
-- Roll out progressively: a few users first, then everyone
-
----
-
-## Act Fast: Monitor, Alert, Run, Roll Back
-
-- **Monitoring** that shows the user impact, not only CPU
-- **Alerting** that wakes the right person, with a clear owner
-- **Runbooks** so the 3 AM decision is a checklist, not a debate
-- **Fast rollback** or a flag switch, then fix forward with a new small change
 
 ---
 
