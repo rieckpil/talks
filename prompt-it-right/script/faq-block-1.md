@@ -1,6 +1,6 @@
-# FAQ block 1: Spring Boot testing in a nutshell (10 min, 1:05 - 1:15)
+# FAQ block 1: Spring Boot testing in a nutshell (10 min, 10:35 - 10:45)
 
-Collect live questions through the Mentimeter Q&A. If the room is quiet, use these prepared ones.
+Read the comments on the Devoxx app talk page and take live questions. If the room is quiet, use these prepared ones.
 
 | Question | Short answer |
 |---|---|

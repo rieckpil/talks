@@ -1,6 +1,6 @@
-# FAQ block 2: Agentic development and testing (10 min, 2:50 - 3:00)
+# FAQ block 2: Agentic development and testing (10 min, 12:20 - 12:30)
 
-Collect live questions through the Mentimeter Q&A. If the room is quiet, use these prepared ones.
+Read the comments on the Devoxx app talk page and take live questions. If the room is quiet, use these prepared ones.
 
 | Question | Short answer |
 |---|---|

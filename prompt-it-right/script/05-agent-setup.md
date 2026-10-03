@@ -1,4 +1,4 @@
-# Part 3c: Tooling around the skills - workmode, MCPs, guardrails (13 min, 2:32 - 2:45)
+# Part 3c: Tooling around the skills - workmode, MCPs, guardrails (13 min, 12:02 - 12:15)
 
 | Min | Beat | Content |
 |---|---|---|

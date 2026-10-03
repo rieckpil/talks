@@ -1,6 +1,6 @@
-# Part 2: Why a fast, complete suite matters (15 min, 1:45 - 2:00, first part of block 2)
+# Part 2: Why a fast, complete suite matters (15 min, 11:15 - 11:30, first part of block 2)
 
-Goal: change the mindset. Open block 2 with a one-minute recall of the five properties from block 1. Verification is the new constraint, not code generation.
+Goal: change the mindset. Open block 2 with the six-box recap slide (1 min, keywords only: toolbox, test types, Testcontainers, context caching, parallelization, mutation testing) and a recall of the five properties from block 1. Verification is the new constraint, not code generation.
 
 | Min | Beat | Content |
 |---|---|---|

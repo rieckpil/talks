@@ -8,7 +8,7 @@ Where: Part 3b.
 
 ## Steps
 1. Show the two MySQL declarations (`MySqlIntegrationTests`, `MysqlTestApplication`)
-2. Terminal 2: `docker events --filter event=start | tee events.log`
+2. Terminal 2: `docker events --filter event=start --format '{{.Actor.Attributes.image}}' | tee events.log`
 3. Run the MySQL tests: `./mvnw -q test -Dtest='MySqlIntegrationTests,MysqlTestApplication*'`
 4. Count: `sort events.log | uniq -c` shows two MySQL starts
 5. Prompt the agent: "Refactor to one `@TestConfiguration` with one static MySQL container and `@ServiceConnection`. Follow the testcontainers skill."

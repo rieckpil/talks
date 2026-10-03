@@ -1,0 +1,16 @@
+- generic [ref=e2]:
+  - heading "QR Code Generator" [level=1] [ref=e3]
+  - generic [ref=e4]:
+    - generic [ref=e5]: "Enter URL:"
+    - textbox "Enter URL:" [ref=e6]:
+      - /placeholder: https://www.example.com
+  - generic [ref=e7]:
+    - generic [ref=e8]: "Select QR Code Size:"
+    - combobox "Select QR Code Size:" [ref=e9]:
+      - option "128x128"
+      - option "180x180 (Default)" [selected]
+      - option "256x256"
+      - option "384x384"
+      - option "512x512"
+  - button "Generate QR Code" [ref=e10]
+  - paragraph [ref=e12]: Your QR code will appear here

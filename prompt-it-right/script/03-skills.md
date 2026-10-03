@@ -1,4 +1,4 @@
-# Block 2, Part 3a: Teach the agent how you test (skills and how I structure them) (20 min, 2:00 - 2:20)
+# Block 2, Part 3a: Teach the agent how you test (skills and how I structure them) (20 min, 11:30 - 11:50)
 
 Goal: show how a skill library is built. Give ideas, not a full tour of every skill.
 

@@ -1,22 +1,29 @@
-# Part 1: Spring Boot testing crash course (60 min, 0:05 - 1:05)
+# Block 1: Spring Boot testing in a nutshell (60 min, 09:35 - 10:35)
 
-Goal: everyone shares the same vocabulary. Not a deep dive. The agent needs these terms later.
-Style: short code slides with `{ranges}`, then one pitfall per topic. Boot 4 and Java 25 first.
+Goal: everyone shares the same vocabulary and mental map. Not a deep dive. The agent part in block 2 builds on these terms.
+Style: content first, no story line. Slides are adapted from `testing-spring-boot-applications-demystified/slides/webinar.md` without the quest and boss narrative. Boot 4 and Java 25.
 
-| Min | Topic | Key message | Code or visual |
+| Min | Section (deck) | Key message | Slides and visuals |
 |---|---|---|---|
-| 5 | Why test + shape of the suite | Pyramid, honeycomb, trophy: the names do not matter, speed and confidence do | `.pyramid` CSS slide, mini graphic |
-| 9 | Unit tests | No Spring context. JUnit 5 + AssertJ + Mockito. One assertion chain, `.as(...)` message, injected `Clock` | `PetTypeFormatter` style example |
-| 10 | Slice tests: web | `@WebMvcTest`, `MockMvcTester`, security matrix (anonymous, wrong role, right role), validation 400 | Controller test |
-| 6 | Slice tests: data + JSON | `@DataJpaTest` on the real DB via Testcontainers (no H2), `@JsonTest`, `TestEntityManager` flush and clear | Repository test |
-| 7 | Testcontainers | `@ServiceConnection`, one static container per image, no fixed ports | `TestcontainersConfiguration` |
-| 10 | Integration tests | `@SpringBootTest(RANDOM_PORT)`, `RestTestClient`, WireMock, one abstract base class, black box via HTTP | Journey test |
-| 5 | The context cache | Every new combination of `@MockitoBean`, properties, profiles, `@Import` = new context = slow. `@DirtiesContext` is a smell | Cache DEBUG log, `context-caching-logs.png` |
-| 3 | E2E (brief) | Few journeys, page objects, run in a separate profile. Cut if late | One slide |
-| 5 | What makes a good test suite | Closing beat: five properties - fast, deterministic, isolated, one reason to fail, a message that locates the defect. Block 2 builds on these | "Five properties" slide |
+| 5 | Intro + shape of the suite | Fast feedback and confident deploys. Pick the cheapest test that proves the behavior | Statement, Northstar (Friday PR) reveal, goals, statement, pyramid (CSS, 4 layers) |
+| 10 | 01.1 Unit tests | No Spring context. Know the tools in `spring-boot-starter-test` and what a unit test cannot cover | Starter test, dependency tree, Swiss army knife, unit 101, controller example, "can't cover" reveal (mapping, validation, serialization, security) |
+| 10 | 01.2 Slice tests | Load only one layer. Real DB for the persistence slice | 4 context diagrams, `@WebMvcTest`, common slices, slicing annotations, `@DataJpaTest` on Testcontainers, slice 101 |
+| 5 | 01.3 Testcontainers | Real infrastructure, `@ServiceConnection` | Container code, `docker ps` |
+| 9 | 01.4 Integration tests | Whole app over HTTP. Six problems to solve | Setup diagram, problems 1-6, MockMvc vs `RANDOM_PORT` client, integration 101 |
+| 9 | 01.5 Context cache | Every new combination of mocks, properties, profiles = new context = slow. Detect it | Need for speed, caching diagrams 00-02, cache key, hints, logs, Spring Test Profiler, `@DirtiesContext` anti-pattern |
+| 4 | 01.6 Speed and quality | Parallelization needs isolated tests. Coverage lies, mutation testing tells | Parallelization (3 slides), coverage, PIT mutation (3 slides) |
+| 3 | E2E + Boot 4 | Few journeys, separate profile. What is new in Boot 4 | E2E in one slide, Boot 4 testing improvements |
+| 5 | What makes a good test suite | Closing beat: fast, deterministic, isolated, one reason to fail, a message that locates the defect | "Five properties" reveal (block 2 builds on it) |
+
+Sum: 5 + 10 + 10 + 5 + 9 + 9 + 4 + 3 + 5 = 60.
 
 Transition to the FAQ and break: "That is the fundament. After the break we put an AI agent on top of it."
 
-Reuse: `testing-spring-boot-applications-demystified/slides/webinar.md` (quests), `stop-fighting-your-spring-boot-tests/slides/content.md` (context cache), `top-5-.../content.md`.
+Cut candidates if late: E2E slide, dependency tree slide, Boot 4 slide, one of the three caching diagrams, mutation testing (keep one slide).
 
-TODO: pick final code samples. Prefer the PetClinic classes so Part 3 demos connect back.
+## Notes
+
+- Images copied from the demystified talk into `slides/assets/`: context diagrams, cache diagrams and logs, Spring Test Profiler logo, parallelization SVG, mutation testing image, Northstar images.
+- Not reused on purpose: quest and boss artwork, Hero's Journey map, Act slides.
+- Code samples use `WebTestClient` as in the original talk. Check the `RestTestClient` API in Spring Boot 4 before the talk and consider swapping it in, since the skills use it.
+- TODO: confirm the `@DataJpaTest` slide imports for Boot 4 (the `@AutoConfigureTestDatabase` package moved in Boot 4).

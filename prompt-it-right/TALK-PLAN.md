@@ -1,6 +1,6 @@
 # Prompt It Right: Spring Boot Testing in the AI Era
 
-Format: 180 min session (150 min content + 30 min break) · Devoxx Belgium 2026 · October 5, 2026
+Format: 180 min session (150 min content + 30 min break) · Devoxx Belgium 2026 · Monday, October 5, 2026, 09:30 - 12:30
 
 ## One-sentence thesis
 
@@ -16,22 +16,22 @@ When AI writes the code, the test suite is the only thing that tells you the cod
 
 Block 1 is the complete crash course (the fundament). Block 2 starts with the rationale, then skills, structure, tooling. Each block ends with a 10 min FAQ. 75 + 30 + 75 = 180.
 
-| Start | Min | Block | Script |
+| Start (Mon) | Min | Block | Script |
 |---|---|---|---|
-| 0:00 | 5 | Opening: Mentimeter, About Philip, goals, agenda | script/00-timeline.md |
-| 0:05 | 60 | **Block 1**: Spring Boot testing in a nutshell, the full crash course, ends with "what makes a good suite" | script/01-crash-course.md |
-| 1:05 | 10 | **Block 1 FAQ** | script/faq-block-1.md |
-| 1:15 | 30 | BREAK | |
-| 1:45 | 15 | **Block 2** Rationale: why a fast, complete suite is the constraint for agents | script/02-why-it-matters.md |
-| 2:00 | 20 | **Block 2** Skills: how I structure them + Demo 1 | script/03-skills.md |
-| 2:20 | 12 | **Block 2** Fast feedback (pipeline) + Demo 2 | script/04-fast-pipeline.md |
-| 2:32 | 13 | **Block 2** Tooling around it: workmode, LSP, RTK, MCPs, guardrails + Demo 3 or 4 | script/05-agent-setup.md |
-| 2:45 | 5 | **Block 2** Evidence, takeaways, soft pointer | script/06-wrap-up.md |
-| 2:50 | 10 | **Block 2 FAQ** | script/faq-block-2.md |
+| 09:30 | 5 | Opening: Mentimeter, About Philip, goals, agenda | script/00-timeline.md |
+| 09:35 | 60 | **Block 1**: Spring Boot testing in a nutshell, the full crash course, ends with "what makes a good suite" | script/01-crash-course.md |
+| 10:35 | 10 | **Block 1 FAQ** | script/faq-block-1.md |
+| 10:45 | 30 | BREAK | |
+| 11:15 | 15 | **Block 2** Rationale: why a fast, complete suite is the constraint for agents | script/02-why-it-matters.md |
+| 11:30 | 20 | **Block 2** Skills: how I structure them + Demo 1 | script/03-skills.md |
+| 11:50 | 12 | **Block 2** Fast feedback (pipeline) + Demo 2 | script/04-fast-pipeline.md |
+| 12:02 | 13 | **Block 2** Tooling around it: workmode, LSP, RTK, MCPs, guardrails + Demo 3 or 4 | script/05-agent-setup.md |
+| 12:15 | 5 | **Block 2** Evidence, takeaways, soft pointer | script/06-wrap-up.md |
+| 12:20 | 10 | **Block 2 FAQ** | script/faq-block-2.md |
 
 Check: block 1 = 5 + 60 + 10 = 75. Block 2 = 15 + 20 + 12 + 13 + 5 + 10 = 75. No buffer in block 2, so use the cut list early.
 
-FAQ method: collect questions during the block (Mentimeter Q&A). Pick the top ones at the end. Prepared fallback questions are in the FAQ scripts.
+FAQ method: questions arrive live (interrupting is welcome) and as comments in the Devoxx app talk page (QR on the 'How to ask' slide). Pick the best ones at the end of each block. Prepared fallback questions are in the FAQ scripts.
 
 ## Cut list (if you run late)
 
@@ -59,9 +59,21 @@ FAQ method: collect questions during the block (Mentimeter Q&A). Pick the top on
 
 ## Open points
 
-- [ ] Devoxx room, Mentimeter code
+- [ ] Devoxx room (Mentimeter code is 7108 0067)
 - [ ] Decide: live Demo 3 or Demo 4 (only one fits)
 - [ ] Record fallback videos for all demos
 - [ ] Check the missing image `m3-what-is-a-skill.jpg` from the course deck (draw a new one)
 - [ ] Write one example GitHub Actions workflow for Part 3b (the course repo has none)
 - [ ] Rerun the PetClinic skill comparison with more than one run per arm (current evidence is one run)
+
+## Block 2 slide baseline (course repo `slides/`)
+
+| Deck section | Adapted from |
+|---|---|
+| Why it matters | `m2-verification-constraint/` (afterthought, Formula 1 engine, trustworthy suite) |
+| Skills | `m3-skill-library/` (what is a skill, unit, slice-web, review) and `m4-adoption/` (set up, review) |
+| Fast feedback | `m3-skill-library/` (testcontainers-setup, integration-testing cheat sheets) and `m4-adoption/02-reviewing-your-tests` |
+| Tooling | `m5-agentic-setup/` (how I work, eyes and budget, MCPs and guardrails) and `m4-adoption/03-building-a-feature` |
+| Wrap-up | `resources/petclinic-skill-comparison.md`, `m6-wrap-up/01-where-to-go` |
+
+Course branding, "module" and "lesson" wording and the course-specific CTAs were removed. Only the soft pointer slide at the end mentions the course.

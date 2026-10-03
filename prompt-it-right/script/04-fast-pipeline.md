@@ -1,4 +1,4 @@
-# Part 3b: Fast feedback and pipeline (12 min, 2:20 - 2:32)
+# Part 3b: Fast feedback and pipeline (12 min, 11:50 - 12:02)
 
 Goal: the agent and CI both need a fast, trustworthy signal.
 
