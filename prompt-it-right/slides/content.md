@@ -1149,9 +1149,10 @@ Notes:
 ---
 
 <style scoped>
-.flow .sketch { font-size: 1.3em; padding: 0.8em 1em; }
+.flow { flex-wrap: nowrap; gap: 14px; }
+.flow .sketch { flex: 1 1 0; font-size: 1.15em; padding: 0.9em 0.5em; }
 .flow .sketch small { font-size: 0.72em; color: var(--pt-heading); }
-.flow .arrow { font-size: 2em; }
+.flow .arrow { flex: 0 0 auto; font-size: 2em; }
 </style>
 
 ## Testing Was Often an Afterthought
@@ -1201,9 +1202,10 @@ Notes:
 ---
 
 <style scoped>
-.flow .sketch { font-size: 1.3em; padding: 0.8em 1em; }
+.flow { flex-wrap: nowrap; gap: 14px; }
+.flow .sketch { flex: 1 1 0; font-size: 1.15em; padding: 0.9em 0.5em; }
 .flow .sketch small { font-size: 0.72em; color: var(--pt-heading); }
-.flow .arrow { font-size: 2em; }
+.flow .arrow { flex: 0 0 auto; font-size: 2em; }
 </style>
 
 ## Code in Seconds, Review Capacity Is Limited
@@ -1247,9 +1249,10 @@ Notes:
 ---
 
 <style scoped>
-.flow .sketch { font-size: 1.3em; padding: 0.8em 1em; }
+.flow { flex-wrap: nowrap; gap: 14px; }
+.flow .sketch { flex: 1 1 0; font-size: 1.15em; padding: 0.9em 0.5em; }
 .flow .sketch small { font-size: 0.72em; color: var(--pt-heading); }
-.flow .arrow { font-size: 2em; }
+.flow .arrow { flex: 0 0 auto; font-size: 2em; }
 </style>
 
 ## The Goal: Fast and Comprehensive
