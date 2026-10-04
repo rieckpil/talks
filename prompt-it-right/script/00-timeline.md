@@ -5,7 +5,7 @@ Rule: if a block runs more than 3 min over, use the cut list in `../TALK-PLAN.md
 | Clock (Mon) | Elapsed min | Block | Key message | Slide section |
 |---|---|---|---|---|
 | 09:30 | 0 | Opening | You will leave with a plan, not a pitch. Beginner level on purpose | Opening |
-| 09:35 | 5 | **Block 1** Crash course (60 min) | Pick the cheapest test that proves the behavior. Ends with the five properties of a good suite | 01 |
+| 09:35 | 5 | **Block 1** Crash course (60 min) | Pick the cheapest test that proves the behavior. Ends with speed and quality (parallelization, mutation testing) and Boot 4 | 01 |
 | 10:35 | 65 | **Block 1 FAQ** (10 min) | Answer questions from the room | FAQ 1 |
 | 10:45 | 75 | BREAK (30 min) | Back at 11:15 sharp | Break |
 | 11:15 | 105 | **Block 2** Problem and goal (10 min) | Generated code, verification is the constraint, fast and comprehensive suite | 02 |

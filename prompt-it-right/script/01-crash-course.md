@@ -6,19 +6,18 @@ Style: content first, no story line. Slides are adapted from `testing-spring-boo
 | Min | Section (deck) | Key message | Slides and visuals |
 |---|---|---|---|
 | 5 | Intro, shape, naming, phases | Goals as four boxes. Pyramid, honeycomb or trophy: it depends on the project. Decision tree: does the test need a context? Naming: unit test (no context) is `*Test`, everything else `*IT`. Why separate: Surefire vs Failsafe phases (lifecycle image), parallelization configured differently | Goals boxes, shape cards, decision tree, naming boxes, Maven lifecycle image |
-| 10 | Toolbox + 01.1 Unit tests | Toolbox first: `spring-boot-starter-test`, dependency tree, Swiss army knife. Then unit tests: no Spring context, and four slides on what a unit test cannot cover (request mapping, validation, serialization, security) | Starter test, dependency tree, Swiss army knife, unit 101, controller example, four limit slides |
-| 10 | 01.2 Slice tests | Load only one layer. Real DB for the persistence slice | 4 context diagrams, `@WebMvcTest`, common slices, slicing annotations, `@DataJpaTest` on Testcontainers, slice 101 |
+| 12 | Toolbox + 01.1 Unit tests | Toolbox first: `spring-boot-starter-test`, dependency tree, Swiss army knife. Then unit tests: no Spring context, and four slides on what a unit test cannot cover (request mapping, validation, serialization, security) | Starter test, dependency tree, Swiss army knife, unit 101, controller example, four limit slides |
+| 11 | 01.2 Slice tests | Load only one layer. Slices for each layer | 4 context diagrams, `@WebMvcTest`, common slices, slicing annotations, slice 101 |
 | 14 | 01.3 Integration tests | Whole app over HTTP. Six problems to solve, Testcontainers as the answer to problem #1 | Setup diagram, problems 1-6, Testcontainers code and `docker ps`, MockMvc vs `RANDOM_PORT` client, integration 101 |
 | 9 | 01.4 Context cache | Every new combination of mocks, properties, profiles = new context = slow. Detect it | Need for speed, caching diagrams 00-02, cache key, hints, logs, Spring Test Profiler, `@DirtiesContext` anti-pattern |
-| 4 | 01.5 Speed and quality | Parallelization needs isolated tests. Coverage lies, mutation testing tells | Parallelization (3 slides), coverage, PIT mutation (3 slides) |
-| 3 | E2E + Boot 4 | Few journeys, separate profile. What is new in Boot 4 | E2E in one slide, Boot 4 testing improvements |
-| 5 | What makes a good test suite | Closing beat: fast, deterministic, isolated, one reason to fail, a message that locates the defect | "Five properties" reveal (block 2 builds on it) |
+| 7 | 01.5 Speed and quality | Parallelization needs isolated tests. Coverage lies, mutation testing tells | Parallelization (3 slides), coverage, PIT mutation (3 slides) |
+| 2 | Boot 4 | What is new in Boot 4 testing | Boot 4 testing improvements |
 
-Sum: 5 + 10 + 10 + 5 + 9 + 9 + 4 + 3 + 5 = 60.
+Sum: 5 + 12 + 11 + 14 + 9 + 7 + 2 = 60.
 
 Transition to the FAQ and break: "That is the fundament. After the break we put an AI agent on top of it."
 
-Cut candidates if late: E2E slide, dependency tree slide, Boot 4 slide, one of the three caching diagrams, mutation testing (keep one slide).
+Cut candidates if late: dependency tree slide, Boot 4 slide, one of the three caching diagrams, mutation testing (keep one slide).
 
 ## Notes
 
@@ -26,4 +25,3 @@ Cut candidates if late: E2E slide, dependency tree slide, Boot 4 slide, one of t
 - Not reused on purpose: quest and boss artwork, Hero's Journey map, Act slides.
 - Code samples use `WebTestClient` as in the original talk. Check the `RestTestClient` API in Spring Boot 4 before the talk and consider swapping it in, since the skills use it.
 - Slide code names slice tests `*IT` (`CustomerControllerIT`). The sample repo class is still `CustomerControllerTest` and Failsafe is not configured in its pom yet.
-- TODO: confirm the `@DataJpaTest` slide imports for Boot 4 (the `@AutoConfigureTestDatabase` package moved in Boot 4).

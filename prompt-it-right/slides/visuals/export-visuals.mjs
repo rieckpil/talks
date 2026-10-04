@@ -14,7 +14,11 @@ const deviceScaleFactor = Number(process.env.SCALE || 2);
 
 const scenes = [
   { page: 'germany-map.html', query: '', file: 'germany-erlangen-munich.png', width: 420, height: 720 },
-  { page: 'abstract-blue.html', query: '', file: 'abstract-blue-left.png', width: 422, height: 720 }
+  { page: 'abstract-blue.html', query: '', file: 'abstract-blue-left.png', width: 422, height: 720 },
+  { page: 'context-diagrams.html', query: 'view=typical', file: 'context-v2-typical.png', width: 1920, height: 1080 },
+  { page: 'context-diagrams.html', query: 'view=colored', file: 'context-v2-colored.png', width: 1920, height: 1080 },
+  { page: 'context-diagrams.html', query: 'view=sliced', file: 'context-v2-sliced.png', width: 1920, height: 1080 },
+  { page: 'context-diagrams.html', query: 'view=webmvc', file: 'context-v2-webmvc.png', width: 1920, height: 1080 }
 ];
 
 async function launchBrowser() {

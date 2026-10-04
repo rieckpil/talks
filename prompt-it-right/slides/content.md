@@ -5,7 +5,7 @@ title: 'Prompt It Right: Spring Boot Testing in the AI Era'
 class: light
 paginate: true
 transition: pt-fade
-header: 'Prompt It Right: Spring Boot Testing in the AI Era · menti.com Code: <strong>7108 0067</strong> · Questions as comments in the Devoxx Companion Tool'
+header: 'Prompt It Right: Spring Boot Testing in the AI Era · Devoxx Belgium 2k26 · Questions as Comments @ Devoxx Companion Tool'
 footer: '![](assets/logo.webp) Philip Riecks · [@rieckpil](https://x.com/rieckpil) · [PragmaTech GmbH](https://pragmatech.digital/)'
 ---
 
@@ -63,7 +63,7 @@ Notes:
 - Software Engineer from Erlangen, Germany 🍻
 - Blogging and content creation about testing Java and Spring Boot applications 🍃
 - Founder of [PragmaTech GmbH](https://pragmatech.digital/) - **Enabling Developers to Frequently Deliver** Software with **More Confidence**
-- Using coding agents daily for Spring Boot projects
+- Last at Devoxx Belgium 4 years ago, with "Things I Wish I Knew When I Started Testing Spring Boot Applications"
 
 <!--
 Notes:
@@ -80,7 +80,7 @@ Go to [menti.com](https://www.menti.com/) and enter the code **7108 0067**.
 
 Please answer all **ten questions** - **anonymously**. Your answers help me tailor this session to you.
 
-I will give you a few minutes before we start.
+I will give you a few minutes before we take a look at the live results.
 
 <!--
 Notes:
@@ -430,7 +430,7 @@ Notes:
 
 ## 01.1 - Unit tests
 
-# No Spring. No excuses.
+# Unit Tests: Small, Fast, Isolated Confidence
 
 ---
 
@@ -590,17 +590,21 @@ Notes:
 
 ![bg right:33%](assets/m2-past.jpg)
 
+<style scoped>
+section.section h1 { font-size: 1.9em; }
+</style>
+
 ## 01.2 - Slice tests
 
-# Test one layer
+# Starting to Test with an ApplicationContext
 
 ---
 
-![center h:600 w:700](assets/typical-context.png)
+![center h:620](assets/context-v2-typical.png)
 
 ---
 
-![center h:600 w:700](assets/typical-context-colored.png)
+![center h:620](assets/context-v2-colored.png)
 
 ---
 
@@ -649,29 +653,6 @@ class CustomerControllerIT {
 
 ---
 
-### Persistence Slice: `@DataJpaTest` on the Real Database
-
-```java {1,2,3}
-@DataJpaTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@Import(TestcontainersConfiguration.class)
-class CustomerRepositoryIT {
-
-  @Autowired
-  private CustomerRepository customerRepository;
-
-  @Test
-  void shouldFindCustomerByEmail() {
-    // ...
-  }
-}
-```
-
-- Do not test against an embedded database when production runs on another one
-- Same SQL dialect, same constraints, same behavior - start the real one with Testcontainers
-
----
-
 ## Sliced Testing Spring Boot Applications 101
 
 - **Core Concept**: Test a specific "slice" or layer of your application by loading a minimal, relevant part of the Spring `ApplicationContext`.
@@ -686,7 +667,7 @@ class CustomerRepositoryIT {
 
 ## 01.3 - Integration tests
 
-# The whole app, over HTTP
+# Starting the Entire Application Context
 
 ---
 
@@ -1013,16 +994,6 @@ public Long registerUser(int age, String username) {
 
 ---
 
-## E2E Tests in One Slide
-
-- Drive the **running application** through the browser, like a user would
-- Keep them **few**: only the critical user journeys
-- Use page objects, no locators inside the tests
-- Run them in a **separate profile**, not in the fast build
-- Tools: Selenium or Playwright, browser in a Testcontainers container
-
----
-
 ## Spring Boot 4 - Testing Support Keeps Improving
 
 - **RestTestClient**: Modern, fluent alternative for the `TestRestTemplate`/`WebTestClient`/`RestAssured`.
@@ -1030,24 +1001,6 @@ public Long registerUser(int age, String username) {
 - **JUnit 6**: Drop-in upgrade from JUnit 5 - far smoother than the JUnit 4 → 5 migration.
 - **Testcontainers 2.0**: New `testcontainers-` prefix for modules, JUnit 4 support removed.
 - **Bean overrides for non-singletons**: `@MockitoBean` and `@TestBean` now work with prototype and custom-scoped beans.
-
----
-
-<!-- _class: light reveal -->
-
-## What makes a good test suite: five properties
-
-* **Fast** - the agent loop needs seconds, not minutes
-* **Deterministic** - flaky tests teach the agent to retry and ignore
-* **Isolated** - parallel runs, random order, no shared state
-* **One reason to fail** - a red test points at one defect
-* **A message that locates it** - `.as("...")` on every assertion
-
-<!--
-Notes:
-- Closing beat of block 1 (5 min). Sum up the crash course as the five properties a good suite has.
-- Block 2 starts from these: what happens to an agent when one of them is missing.
--->
 
 ---
 
@@ -1378,12 +1331,36 @@ Write the description like a routing rule: when to use it, and when **not** to.
 
 ## Inside `SKILL.md`
 
-- **Frontmatter**: name and a description written like a routing rule, "Use when ... Not for ..."
-- **Variable parts**: the knobs I adjust per project (assertions, naming, base class, database, build command)
-- **Scope**: when the skill is the right tool and what it hands over to
-- **Non-negotiables**: the rules that always apply, each with an ID
-- **Workflow**: the steps the agent follows, including how to review its own output
+- **Frontmatter**: name and a trigger description, "Use when ... Not for ..."
+- **Variable parts**: define your team's or company's standards
+- **Scope** and **rules**: what the skill covers, the rules with IDs
+- **Workflow**: the steps the agent follows
 
+
+---
+
+<style scoped>
+.repos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 0.4em; font-family: 'Architects Daughter', cursive; }
+.repos .sketch { box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; min-height: 190px; font-size: 1.05em; padding: 0.6em 0.6em; }
+.repos .sketch strong { font-size: 1.1em; }
+.repos .sketch small { font-size: 0.8em; margin-top: 0.5em; color: var(--pt-heading); }
+</style>
+
+## Common Java and Spring Boot Skills on GitHub
+
+<div class="repos">
+  <div class="sketch accent"><strong>jdubois/dr-jskill</strong><small>Generates Spring Boot applications with best practices (Julien Dubois)</small></div>
+  <div class="sketch alt"><strong>piomin/claude-ai-spring-boot</strong><small>Claude Code template with skills and agents for Spring Boot (Piotr Minkowski)</small></div>
+  <div class="sketch accent"><strong>mtkhawaja/java-skills</strong><small>Plugin: Java development, testing, concurrency and Maven</small></div>
+  <div class="sketch alt"><strong>decebals/claude-code-java</strong><small>18 Java skills</small></div>
+  <div class="sketch accent"><strong>rrezartprebreza/spring-boot-skills</strong><small>33 skills for Spring Boot 3 and 4</small></div>
+  <div class="sketch alt"><strong>mattpocock/skills</strong><small>General skills, e.g. grill-me: the agent interviews you about a plan</small></div>
+</div>
+
+<!--
+Notes:
+- Community skills from the online course tooling lesson. None is an official source. Read a skill before you install it, treat it like code you run, and install fewer rather than more: two skills that both say how to write a test will disagree somewhere.
+-->
 ---
 
 ## Variable Parts per Project
@@ -1455,14 +1432,14 @@ assertThat(order.status())
 .skills .sketch small { font-size: 0.72em; margin-top: 0.4em; }
 </style>
 
-## The Seven Skills
+## My Default Skill Library
 
 <div class="skills">
   <div class="sketch accent"><strong>unit-testing</strong><small>plain classes, no Spring</small></div>
   <div class="sketch alt"><strong>slice-testing</strong><small>JPA, JSON, HTTP clients</small></div>
   <div class="sketch accent"><strong>slice-web-testing</strong><small>controllers, security</small></div>
   <div class="sketch alt"><strong>integration-testing</strong><small>one journey, real HTTP</small></div>
-  <div class="sketch accent"><strong>testcontainers-setup</strong><small>one container per image</small></div>
+  <div class="sketch accent"><strong>testcontainers-setup</strong><small>fast &amp; reusable container</small></div>
   <div class="sketch alt"><strong>e2e-ui-testing</strong><small>few browser journeys</small></div>
   <div class="sketch accent"><strong>test-setup-review</strong><small>review, read-only</small></div>
   <div class="sketch alt"><strong>spring-boot-testing</strong><small>the router, entry point</small></div>
@@ -1509,9 +1486,11 @@ Notes:
 
 ## Must Have: Parallelizable Unit Tests
 
-- No test-class fields, no `@BeforeEach` state: each test builds its own objects
-- Time from an injected `Clock`, never `Instant.now()`. No `Thread.sleep`
-- Run concurrent and in random order
+- Require separation from other tests
+- No shared state
+- JUnit parallelization is usually the best option
+- Run massively in parallel
+- The first time you parallelize, you'll identify the issues
 
 ```properties
 # src/test/resources/junit-platform.properties
@@ -1526,20 +1505,19 @@ junit.jupiter.testmethod.order.default = org.junit.jupiter.api.MethodOrderer$Ran
 ## Must Have: Parallelizable Integration Tests
 
 - **Random business keys** for every piece of test data, own rows per test, no `findAll()` or `count()`
-- **Black box over HTTP** on a random port, no shared state in the JVM
 - External HTTP stubbed with **WireMock** on a dynamic port, matched on the random values
 - Not parallel yet? Back off for a set of tests with `@Execution(SAME_THREAD)` until they are ready
-- Run the suite twice: order dependence shows up before CI
+- Think about **data visibility**: with `@Transactional` on the test, the data is never committed, so the application on a random port does not see it
 
 ---
 
 ## Testcontainers: Use Them Properly
 
 - **One** `static final` container per image, shared by the whole build
-- `@ServiceConnection` wires it into Spring Boot, no manual properties
 - Pinned image tags, never `latest`. No fixed host ports. An explicit wait strategy
 - Same database as production, schema from Flyway or Liquibase, no H2
 - `.withReuse(true)` helps locally to keep the containers warm between runs
+- Advanced idea: prepopulate the database in a **custom image**, so every start is fast
 
 ---
 
@@ -1554,7 +1532,7 @@ public abstract class AbstractIntegrationTest {
 
 - All integration tests extend it: **one shared context**
 - No `@MockitoBean` on application beans, no `@DirtiesContext`
-- A context limit (single digit), enforced by the **profiler** in the pipeline
+- A context limit (single digit), enforced by the **Spring Test Profiler** in the pipeline
 
 ---
 
@@ -1616,7 +1594,7 @@ jq '.contextsCreated' target/spring-test-profiler/results.json
 }
 ```
 
-`target/spring-test-profiler/results.json`, one flat object per run (shortened). Sample project: `prompt-it-right`.
+`target/spring-test-profiler/results.json`, one flat object per run (shortened).
 
 ---
 
@@ -1633,7 +1611,7 @@ contextsCreated=$(jq -r '.contextsCreated' results.json)
 [ "$contextsCreated" -gt "$maxContexts" ] && exit 1
 ```
 
-Limit as a workflow variable, default 9. The HTML report is uploaded as a build artifact.
+Limit as a workflow variable, e.g. 10
 
 ---
 
@@ -1647,12 +1625,11 @@ Full mutation runs are slow. Run PIT **incrementally**, only for what changed - 
 
 - PIT keeps a **history file** and only re-analyzes what changed since the last run
 - Cache the history file between CI runs: a pull request only pays for its own changes
-- Alternative: `pitest:scmMutationCoverage` analyzes only the files changed in Git
 
 <!--
 Notes:
 - Best practice for the mutation testing slides in block 1: do not run it on the whole code base on every build. Incremental analysis keeps it fast enough for a pull request.
-- Check the exact options against the PIT Maven plugin docs before the talk (withHistory, historyInputFile, historyOutputFile, scmMutationCoverage).
+- Check the exact options against the PIT Maven plugin docs before the talk (withHistory, historyInputFile, historyOutputFile).
 -->
 
 ---
@@ -1722,6 +1699,7 @@ Notes:
 
 
 The actual MCP servers vary per project and tech stack, but these are the ones I use the most.
+
 ---
 
 ## Context7 and GitHub

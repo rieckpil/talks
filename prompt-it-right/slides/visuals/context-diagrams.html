@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Spring ApplicationContext diagrams</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; background: transparent; }
+  body.grid {
+    background-color: #ffffff;
+    background-image: radial-gradient(rgba(15, 23, 42, 0.08) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+  canvas { display: block; background: transparent; }
+</style>
+</head>
+<body>
+<canvas id="scene"></canvas>
+<script>
+/*
+ * Spring ApplicationContext diagrams with fewer beans and big labels.
+ * Views: ?view=typical | colored | sliced | webmvc. Export: node slides/visuals/export-visuals.mjs
+ */
+const params = new URLSearchParams(location.search);
+if (params.get('grid') === '1') document.body.classList.add('grid');
+const WIDTH = 1920;
+const HEIGHT = 1080;
+
+const C = {
+  ink: '#0f172a',
+  muted: '#64748b',
+  accent: '#0284c7',
+  cyan: '#22d0eb',
+  red: '#fb2c36',
+  green: '#00c758',
+  amber: '#edb200',
+  amberDark: '#b98600',
+  surface: '#f1f5f9',
+  border: '#cbd5e1',
+  pit: '#1e293b',
+  pitDeep: '#0a0e16',
+  wood: '#d9a066',
+  woodDark: '#8b5a2b',
+  ground: '#f0f7f1',
+  cardboard: '#e7d3b1',
+  steel: '#cbd5e1',
+  white: '#ffffff'
+};
+
+
+const canvas = document.getElementById('scene');
+const ctx = canvas.getContext('2d');
+const dpr = window.devicePixelRatio || 1;
+canvas.style.width = WIDTH + 'px';
+canvas.style.height = HEIGHT + 'px';
+canvas.width = Math.round(WIDTH * dpr);
+canvas.height = Math.round(HEIGHT * dpr);
+ctx.scale(dpr, dpr);
+
+
+function mulberry32(seed) {
+  return function () {
+    seed |= 0; seed = seed + 0x6D2B79F5 | 0;
+    let t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
+}
+let rnd = mulberry32(1337);
+const jit = amount => (rnd() - 0.5) * 2 * amount;
+function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+
+/* ---------- rough drawing helpers ---------- */
+function setStroke(o) {
+  ctx.strokeStyle = o.color || C.ink;
+  ctx.lineWidth = o.width || 3;
+  ctx.globalAlpha = o.alpha ?? 1;
+  ctx.lineCap = 'round';
+  ctx.lineJoin = 'round';
+  if (o.dash) ctx.setLineDash(o.dash);
+}
+
+function roughLine(x1, y1, x2, y2, o = {}) {
+  const passes = o.passes ?? 2;
+  const len = Math.hypot(x2 - x1, y2 - y1);
+  const j = Math.min(4, 1 + len * 0.012) * (o.rough ?? 1);
+  ctx.save();
+  setStroke(o);
+  for (let p = 0; p < passes; p++) {
+    ctx.beginPath();
+    ctx.moveTo(x1 + jit(j * 0.6), y1 + jit(j * 0.6));
+    const cx1 = x1 + (x2 - x1) * 0.3 + jit(j * 1.5), cy1 = y1 + (y2 - y1) * 0.3 + jit(j * 1.5);
+    const cx2 = x1 + (x2 - x1) * 0.7 + jit(j * 1.5), cy2 = y1 + (y2 - y1) * 0.7 + jit(j * 1.5);
+    ctx.bezierCurveTo(cx1, cy1, cx2, cy2, x2 + jit(j * 0.6), y2 + jit(j * 0.6));
+    ctx.stroke();
+  }
+  ctx.restore();
+}
+
+function hachure(pts, color, gap, angle, lineWidth) {
+  const xs = pts.map(p => p[0]), ys = pts.map(p => p[1]);
+  const minX = Math.min(...xs), maxX = Math.max(...xs), minY = Math.min(...ys), maxY = Math.max(...ys);
+  const cx = (minX + maxX) / 2, cy = (minY + maxY) / 2;
+  const r = Math.hypot(maxX - minX, maxY - minY) / 2 + gap;
+  ctx.save();
+  ctx.translate(cx, cy);
+  ctx.rotate(angle * Math.PI / 180);
+  ctx.strokeStyle = color;
+  ctx.lineWidth = lineWidth;
+  ctx.lineCap = 'round';
+  for (let y = -r; y <= r; y += gap) {
+    ctx.beginPath();
+    ctx.moveTo(-r + jit(2), y + jit(1.5));
+    ctx.lineTo(r + jit(2), y + jit(1.5));
+    ctx.stroke();
+  }
+  ctx.restore();
+}
+
+function fillPoly(pts, o) {
+  ctx.save();
+  ctx.beginPath();
+  pts.forEach((p, i) => i ? ctx.lineTo(p[0] + jit(1.2), p[1] + jit(1.2)) : ctx.moveTo(p[0], p[1]));
+  ctx.closePath();
+  ctx.globalAlpha = o.fillAlpha ?? 1;
+  if ((o.fillStyle || 'solid') === 'solid') {
+    ctx.fillStyle = o.fill;
+    ctx.fill();
+  } else {
+    ctx.clip();
+    hachure(pts, o.fill, o.hachureGap || 9, o.hachureAngle ?? -45, o.hachureWidth || 1.6);
+  }
+  ctx.restore();
+}
+
+function roughPoly(pts, o = {}) {
+  const close = o.close ?? true;
+  if (o.fill) fillPoly(pts, o);
+  if (o.stroke === false) return;
+  const count = close ? pts.length : pts.length - 1;
+  for (let i = 0; i < count; i++) {
+    const a = pts[i], b = pts[(i + 1) % pts.length];
+    roughLine(a[0], a[1], b[0], b[1], o);
+  }
+}
+
+function roughRect(x, y, w, h, o = {}) {
+  roughPoly([[x, y], [x + w, y], [x + w, y + h], [x, y + h]], o);
+}
+
+function ellipsePts(cx, cy, rx, ry, n, j) {
+  const pts = [];
+  for (let i = 0; i < n; i++) {
+    const t = i / n * Math.PI * 2;
+    pts.push([cx + Math.cos(t) * (rx + jit(j)), cy + Math.sin(t) * (ry + jit(j))]);
+  }
+  return pts;
+}
+
+function smoothClosed(pts) {
+  const n = pts.length;
+  ctx.moveTo((pts[0][0] + pts[n - 1][0]) / 2, (pts[0][1] + pts[n - 1][1]) / 2);
+  for (let i = 0; i < n; i++) {
+    const p = pts[i], q = pts[(i + 1) % n];
+    ctx.quadraticCurveTo(p[0], p[1], (p[0] + q[0]) / 2, (p[1] + q[1]) / 2);
+  }
+  ctx.closePath();
+}
+
+function roughEllipse(cx, cy, rx, ry, o = {}) {
+  if (o.fill) fillPoly(ellipsePts(cx, cy, rx, ry, 48, 0.4), o);
+  if (o.stroke === false) return;
+  const passes = o.passes ?? 2;
+  for (let p = 0; p < passes; p++) {
+    ctx.save();
+    setStroke(o);
+    ctx.beginPath();
+    smoothClosed(ellipsePts(cx, cy, rx, ry, 30, (o.rough ?? 1) * 1.4));
+    ctx.stroke();
+    ctx.restore();
+  }
+}
+
+function text(str, x, y, o = {}) {
+  ctx.save();
+  ctx.translate(x, y);
+  if (o.rotate) ctx.rotate(o.rotate);
+  ctx.globalAlpha = o.alpha ?? 1;
+  ctx.fillStyle = o.color || C.ink;
+  ctx.font = `${o.weight || ''} ${o.size || 28}px "Architects Daughter", "Comic Sans MS", cursive`;
+  ctx.textAlign = o.align || 'center';
+  ctx.textBaseline = o.baseline || 'middle';
+  ctx.fillText(str, 0, 0);
+  ctx.restore();
+}
+
+function dot(x, y, r, color) {
+  ctx.save();
+  ctx.fillStyle = color || C.ink;
+  ctx.beginPath();
+  ctx.arc(x, y, r, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.restore();
+}
+
+
+function cylinder(cx, cy, rx, ry, h, o = {}) {
+  // body
+  const body = [[cx - rx, cy - h / 2], [cx + rx, cy - h / 2], [cx + rx, cy + h / 2], [cx - rx, cy + h / 2]];
+  if (o.fill) fillPoly(body, o);
+  if (o.fill) fillPoly(ellipsePts(cx, cy + h / 2, rx, ry, 40, 0.3), o);
+  roughLine(cx - rx, cy - h / 2, cx - rx, cy + h / 2, o);
+  roughLine(cx + rx, cy - h / 2, cx + rx, cy + h / 2, o);
+  // bottom arc (front half)
+  ctx.save(); setStroke(o);
+  for (let p = 0; p < 2; p++) {
+    ctx.beginPath();
+    for (let i = 0; i <= 20; i++) {
+      const t = i / 20 * Math.PI;
+      const x = cx + Math.cos(t) * (rx + jit(1)), y = cy + h / 2 + Math.sin(t) * (ry + jit(1));
+      i ? ctx.lineTo(x, y) : ctx.moveTo(x, y);
+    }
+    ctx.stroke();
+  }
+  ctx.restore();
+  // top ellipse
+  roughEllipse(cx, cy - h / 2, rx, ry, { ...o, fill: o.topFill || o.fill, fillStyle: 'solid', fillAlpha: 1 });
+}
+
+
+/* ---------- scenes ---------- */
+const BEAN_COLORS = { web: ['#cfe8fb', '#0284c7'], biz: ['#fdf1c4', '#b98600'], data: ['#d6f5df', '#00a34a'], client: ['#fde0e3', '#e11d48'] };
+
+function bean(x, y, label, kind, o = {}) {
+  const r = o.r || 92;
+  const col = kind ? BEAN_COLORS[kind] : [C.white, C.ink];
+  const fill = o.colored === false ? C.white : col[0];
+  roughEllipse(x, y, r, r * 0.78, { fill, fillStyle: 'solid', color: o.colored === false ? C.ink : col[1], width: 3.5 });
+  const lines = label.split('\n');
+  lines.forEach((ln, i) => text(ln, x, y + (i - (lines.length - 1) / 2) * 34, { size: o.size || 30, color: C.ink, weight: 'bold' }));
+}
+
+function bigCircle(cx, cy, r, o = {}) {
+  roughEllipse(cx, cy, r, r, { color: o.color || C.ink, width: 4.5, passes: 2 });
+}
+
+function arrowBoth(x1, y1, x2, y2) {
+  const dx = x2 - x1, dy = y2 - y1, len = Math.hypot(dx, dy), nx = -dy / len * 14, ny = dx / len * 14;
+  [[1, 1], [-1, -1]].forEach(([s]) => {
+    const a = s === 1 ? [x1 + nx, y1 + ny, x2 + nx, y2 + ny] : [x2 - nx, y2 - ny, x1 - nx, y1 - ny];
+    roughLine(a[0], a[1], a[2], a[3], { color: C.ink, width: 4 });
+    const ang = Math.atan2(a[3] - a[1], a[2] - a[0]);
+    roughLine(a[2], a[3], a[2] - 26 * Math.cos(ang - 0.45), a[3] - 26 * Math.sin(ang - 0.45), { color: C.ink, width: 4, passes: 1 });
+    roughLine(a[2], a[3], a[2] - 26 * Math.cos(ang + 0.45), a[3] - 26 * Math.sin(ang + 0.45), { color: C.ink, width: 4, passes: 1 });
+  });
+}
+
+function oneWay(x1, y1, x2, y2) {
+  roughLine(x1, y1, x2, y2, { color: C.ink, width: 5 });
+  const ang = Math.atan2(y2 - y1, x2 - x1);
+  roughLine(x2, y2, x2 - 30 * Math.cos(ang - 0.45), y2 - 30 * Math.sin(ang - 0.45), { color: C.ink, width: 5, passes: 1 });
+  roughLine(x2, y2, x2 - 30 * Math.cos(ang + 0.45), y2 - 30 * Math.sin(ang + 0.45), { color: C.ink, width: 5, passes: 1 });
+}
+
+function browserIcon(cx, cy) {
+  roughRect(cx - 110, cy - 70, 220, 140, { fill: C.white, fillStyle: 'solid', width: 4 });
+  roughLine(cx - 110, cy - 38, cx + 110, cy - 38, { color: C.ink, width: 3 });
+  dot(cx - 88, cy - 54, 6, '#ef4444'); dot(cx - 68, cy - 54, 6, '#f59e0b'); dot(cx - 48, cy - 54, 6, '#22c55e');
+  roughEllipse(cx, cy + 14, 38, 38, { fill: '#38bdf8', fillStyle: 'solid', color: C.ink, width: 3 });
+  text('Browser', cx, cy + 112, { size: 32, weight: 'bold' });
+}
+
+function dbIcon(cx, cy) {
+  cylinder(cx, cy, 90, 24, 120, { fill: '#b6efc8', fillStyle: 'solid', color: C.ink, width: 3.5 });
+  text('Database', cx, cy + 112, { size: 32, weight: 'bold' });
+}
+
+function worldIcon(cx, cy) {
+  roughEllipse(cx, cy, 70, 70, { fill: C.white, fillStyle: 'solid', width: 4 });
+  roughEllipse(cx, cy, 70, 26, { color: C.ink, width: 3, passes: 1 });
+  roughLine(cx - 70, cy, cx + 70, cy, { color: C.ink, width: 3, passes: 1 });
+  roughLine(cx, cy - 70, cx, cy + 70, { color: C.ink, width: 3, passes: 1 });
+  text('Other systems', cx, cy + 112, { size: 32, weight: 'bold' });
+}
+
+const BEANS = [
+  // x, y, label, kind
+  [-190, -250, 'Controller', 'web'],
+  [190, -250, 'Security\nConfig', 'web'],
+  [-290, -10, 'Order\nService', 'biz'],
+  [0, -10, 'Scheduled\nJob', 'biz'],
+  [290, -10, 'Billing\nService', 'biz'],
+  [-230, 205, 'Repository', 'data'],
+  [0, 262, 'Entity\nManager', 'data'],
+  [230, 205, 'HTTP\nClient', 'client']
+];
+
+function drawContext(cx, cy, colored) {
+  bigCircle(cx, cy, 440);
+  BEANS.forEach(([dx, dy, label, kind]) => bean(cx + dx, cy + dy, label, kind, { colored, r: 100, size: 30 }));
+}
+
+function renderTypical(colored) {
+  rnd = mulberry32(1337);
+  const cx = 960, cy = 560;
+  text('A Typical Spring ApplicationContext', 960, 52, { size: 54, weight: 'bold' });
+  drawContext(cx, cy, colored);
+  browserIcon(250, 330); arrowBoth(370, 380, cx - 430, 450);
+  dbIcon(250, 800); arrowBoth(340, 780, cx - 430, 700);
+  worldIcon(1700, 560); arrowBoth(cx + 440, 560, 1610, 560);
+  if (colored) {
+    const items = [['web', 'Web'], ['biz', 'Business'], ['data', 'Persistence'], ['client', 'Clients']];
+    items.forEach(([k, label], i) => {
+      const x = 1500, y = 150 + i * 62;
+      roughEllipse(x, y, 20, 20, { fill: BEAN_COLORS[k][0], fillStyle: 'solid', color: BEAN_COLORS[k][1], width: 3 });
+      text(label, x + 36, y, { size: 32, align: 'left', weight: 'bold' });
+    });
+  }
+}
+
+function renderSliced() {
+  rnd = mulberry32(1337);
+  const cx = 800, cy = 570;
+  text('Slice the Context: Test One Layer', 960, 52, { size: 54, weight: 'bold' });
+  bigCircle(cx, cy, 440);
+  roughLine(cx - 428, cy - 100, cx + 428, cy - 100, { color: C.ink, width: 4 });
+  roughLine(cx - 428, cy + 100, cx + 428, cy + 100, { color: C.ink, width: 4 });
+  BEANS.forEach(([dx, dy, label, kind]) => bean(cx + dx, cy + dy, label, kind, { r: 96, size: 28 }));
+  const lx = 1320;
+  text('@WebMvcTest', lx, cy - 250, { size: 48, color: BEAN_COLORS.web[1], weight: 'bold', align: 'left' });
+  roughLine(cx + 450, cy - 250, lx - 20, cy - 250, { color: BEAN_COLORS.web[1], width: 3, dash: [8, 8], passes: 1 });
+  text('no slice: unit tests', lx, cy - 10, { size: 40, color: C.muted, weight: 'bold', align: 'left' });
+  roughLine(cx + 450, cy - 10, lx - 20, cy - 10, { color: C.muted, width: 3, dash: [8, 8], passes: 1 });
+  text('@DataJpaTest', lx, cy + 200, { size: 48, color: BEAN_COLORS.data[1], weight: 'bold', align: 'left' });
+  text('@RestClientTest', lx, cy + 270, { size: 48, color: BEAN_COLORS.client[1], weight: 'bold', align: 'left' });
+  roughLine(cx + 450, cy + 235, lx - 20, cy + 235, { color: C.muted, width: 3, dash: [8, 8], passes: 1 });
+}
+
+function renderWebExample() {
+  rnd = mulberry32(1337);
+  text('@WebMvcTest: A Minimal ApplicationContext', 960, 52, { size: 54, weight: 'bold' });
+  // left: full context with web slice highlighted
+  const lx = 430, ly = 560;
+  bigCircle(lx, ly, 330);
+  roughLine(lx - 300, ly - 60, lx + 300, ly - 60, { color: C.ink, width: 4 });
+  bean(lx - 130, ly - 190, 'Controller', 'web', { r: 84, size: 26 });
+  bean(lx + 130, ly - 190, 'Security\nConfig', 'web', { r: 84, size: 26 });
+  bean(lx - 150, ly + 60, 'Order\nService', 'biz', { r: 84, size: 26 });
+  bean(lx + 150, ly + 60, 'Repository', 'data', { r: 84, size: 26 });
+  bean(lx, ly + 220, 'HTTP\nClient', 'client', { r: 84, size: 26 });
+  // arrow with annotation
+  oneWay(780, 560, 1100, 560);
+  text('@WebMvcTest', 940, 480, { size: 42, color: BEAN_COLORS.web[1], weight: 'bold' });
+  // right: minimal context
+  const rx = 1480, ry = 560;
+  ctx.save(); ctx.setLineDash([14, 12]);
+  roughEllipse(rx, ry, 330, 330, { color: C.ink, width: 4.5, passes: 1, dash: [14, 12] });
+  ctx.restore();
+  bean(rx - 120, ry - 130, 'Controller', 'web', { r: 90, size: 28 });
+  bean(rx + 130, ry - 130, 'Security\nConfig', 'web', { r: 90, size: 28 });
+  bean(rx, ry + 110, 'Order\nService', 'biz', { r: 90, size: 28 });
+  roughLine(rx - 80, ry - 60, rx - 20, ry + 40, { color: C.muted, width: 3, dash: [8, 8], passes: 1 });
+  text('mock it', rx + 150, ry + 110, { size: 38, color: C.red, weight: 'bold', align: 'left' });
+  text('Only the web beans are started', rx, ry + 390, { size: 38, color: C.muted, weight: 'bold' });
+}
+
+async function main() {
+  try { await document.fonts.load('30px "Architects Daughter"'); await document.fonts.ready; } catch (e) {}
+  ctx.clearRect(0, 0, WIDTH, HEIGHT);
+  const view = params.get('view') || 'typical';
+  if (view === 'typical') renderTypical(false);
+  else if (view === 'colored') renderTypical(true);
+  else if (view === 'sliced') renderSliced();
+  else renderWebExample();
+  window.__rendered = true;
+}
+main();
+</script>
+</body>
+</html>
