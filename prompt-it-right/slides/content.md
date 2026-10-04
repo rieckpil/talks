@@ -1702,16 +1702,27 @@ The actual MCP servers vary per project and tech stack, but these are the ones I
 
 ---
 
-## Context7 and GitHub
+## Context7: Docs for the Version You Use
+
+Models are trained on documentation from the past. Context7 puts **up-to-date, version-specific documentation** and code examples into the prompt.
 
 ```shell
 claude mcp add --scope user --transport http context7 https://mcp.context7.com/mcp
 ```
 
-- **Context7**: add `use context7` to the prompt, name the version if it matters
-- **GitHub**: Actions toolset to read runs and job logs
-- **Read access always on**, write access only with me
-- Read-only mode and a token with minimal scopes
+- Add `use context7` to the prompt, name the version if it matters
+- I use it for new major versions, unfamiliar libraries, and APIs I cannot find in the docs
+
+---
+
+## GitHub MCP: Let the Agent Read Its Own Pipeline
+
+Without it: the agent pushes, you wait, you read the failure, you paste it back.
+
+With it, the agent reads the **workflow run**, finds the failing job and reads its **log**. Then it fixes the problem and pushes again.
+
+- The Actions toolset covers workflow runs, jobs and job logs
+- Remote server by GitHub, authenticated with a token
 
 ---
 
@@ -1724,7 +1735,6 @@ claude mcp add playwright npx @playwright/mcp@latest
 - Works with the accessibility tree, no vision model needed
 - `--isolated` keeps the profile in memory, `--storage-state` reuses a saved login
 - Visible browser while I watch, a small `slowMo` for debugging
-- Only point it at your own applications
 
 ---
 
@@ -1781,17 +1791,7 @@ Notes:
 <!--
 Notes:
 - Reading CI state is always on. Opening or merging a pull request stays with me.
-- Playwright only against my own applications, here the local PetClinic.
 -->
-
----
-
-## Rules I Follow
-
-- **Trust each server**: content it fetches is input, and input can contain instructions
-- **Keep the number small**: tool descriptions cost context
-- **Never put a token in `.mcp.json`**: use environment variables
-- Run `claude mcp list` every few weeks and remove what you do not use
 
 ---
 
@@ -1818,7 +1818,7 @@ section > ul > li strong { font-size: 1.2em; color: var(--pt-link); }
 section > ul > li small { display: block; margin-top: 0.4em; font-size: 0.75em; color: var(--pt-heading); }
 </style>
 
-* **Shift left**<small>tests in the agent loop</small>
+* **Shift left**<small>get feedback as early as possible</small>
 * **CI**<small>fast feedback</small>
 * **CD**<small>small, frequent releases</small>
 * **Feature flags**<small>deploy is not release</small>
@@ -1922,20 +1922,9 @@ Each skill includes rules, references, best practices and anti-patterns as code 
 
 ---
 
-<!-- _class: light reveal -->
-
-## What the Course Covers
-
-* **Verification is the new constraint**: why a trustworthy suite is the base of agentic development
-* **The skill library**: the seven skills above, with the rule catalogs behind them
-* **Adopting the skills**: one onboarding prompt adapts them to your project, then review your tests and build a feature
-* **My agentic setup**: workmode, language server, MCP servers
-
----
-
 ## FAQ 2: Your Questions
 
-![bg right:36% h:420](assets/devoxx-questions-qr.png)
+![bg right:36% h:420](assets/devoxx-feedback-qr.png)
 
 Where and how to ask:
 
@@ -1960,8 +1949,6 @@ Your feedback helps me improve the talk and helps Devoxx.
 - Find **"Prompt It Right"** and leave a rating
 - Tell me what worked and what to change
 
-
-![bg right:36% h:420](assets/devoxx-feedback-qr.png)
 
 <!--
 Notes:
@@ -1995,7 +1982,7 @@ Notes:
 
 # Joyful Testing!
 
-Get my template skill structure and **33% off** the **Agentic Testing for Spring Boot** online course (Course or Bundle edition) until the end of Devoxx:
+Get **33% off** the **Agentic Testing for Spring Boot** online course (Course or Bundle edition) until the end of Devoxx:
 
 ![center h:260](assets/offer-qr.png)
 
