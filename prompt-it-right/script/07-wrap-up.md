@@ -3,8 +3,7 @@
 | Min | Beat | Content |
 |---|---|---|
 | 1 | Recap | Six boxes: verification, test suite, skills, parallel and cached, MCP servers, fast recovery |
-| 1 | Evidence | PetClinic comparison, then the limits slide (one run per arm, no coverage or mutation score, prompt named the skill). Source: course repo `resources/petclinic-skill-comparison.md` |
-| 1 | Five takeaways | Fast and comprehensive suite, skills for deterministic results, parallel and cache-friendly, few trusted MCP servers, fast recovery |
+| 2 | Five takeaways | Fast and comprehensive suite, skills for deterministic results, parallel and cache-friendly, few trusted MCP servers, fast recovery |
 | 2 | Soft pointer | Course title image, skill tree, what it covers. No QR code here, the QR comes only on the very last slide |
 
 FAQ 2 follows at 12:20 - 12:30. After the feedback slide: "You can delegate the typing" and the thank-you slide with the offer QR.

@@ -5,7 +5,7 @@ title: 'Prompt It Right: Spring Boot Testing in the AI Era'
 class: light
 paginate: true
 transition: pt-fade
-header: 'Prompt It Right: Spring Boot Testing in the AI Era - Questions @ menti.com Code: <strong>7108 0067</strong>'
+header: 'Prompt It Right: Spring Boot Testing in the AI Era · menti.com Code: <strong>7108 0067</strong> · Questions as comments in the Devoxx app'
 footer: '![](assets/logo.webp) Philip Riecks · [@rieckpil](https://x.com/rieckpil) · [PragmaTech GmbH](https://pragmatech.digital/)'
 ---
 
@@ -1202,13 +1202,11 @@ Notes:
 ---
 
 <style scoped>
-.flow { flex-wrap: nowrap; gap: 14px; }
-.flow .sketch { flex: 1 1 0; font-size: 1.15em; padding: 0.9em 0.5em; }
-.flow .sketch small { font-size: 0.72em; color: var(--pt-heading); }
-.flow .arrow { flex: 0 0 auto; font-size: 2em; }
+.flow { flex-wrap: nowrap; gap: 18px; }
+.flow .sketch { flex: 1 1 0; font-size: 1.55em; padding: 1.3em 0.6em; }
+.flow .sketch small { font-size: 0.7em; color: var(--pt-heading); }
+.flow .arrow { flex: 0 0 auto; font-size: 2.6em; }
 </style>
-
-## Code in Seconds, Review Capacity Is Limited
 
 <div class="flow">
   <div class="sketch accent">AI<small>generates code in seconds</small></div>
@@ -1305,7 +1303,7 @@ New developers might not prompt the AI to think about **fast and parallel** test
 | Parallel            | Shared fields and fixed IDs, tests collide |
 | Deterministic       | `Instant.now()` and `Thread.sleep`         |
 | One reason to fail  | Six different assertions in one test       |
-| Failure Indicators  | A red tests and a nine minute debug        |
+| Failure Indicators  | A red tests and an unclear assertion message |
 
 ---
 
@@ -1348,7 +1346,7 @@ Notes:
 
 ---
 
-## A Skill Is a Folder With One Markdown File
+## A Skill in a Nutshell: A Markdown File
 
 ```text
 .claude/skills/unit-testing/
@@ -1381,14 +1379,14 @@ Write the description like a routing rule: when to use it, and when **not** to.
 ## Inside `SKILL.md`
 
 - **Frontmatter**: name and a description written like a routing rule, "Use when ... Not for ..."
-- **Adapt this template**: the knobs for your project (assertions, naming, base class, database, build command)
+- **Variable parts**: the knobs I adjust per project (assertions, naming, base class, database, build command)
 - **Scope**: when the skill is the right tool and what it hands over to
 - **Non-negotiables**: the rules that always apply, each with an ID
 - **Workflow**: the steps the agent follows, including how to review its own output
 
 ---
 
-## Adapt This Template
+## Variable Parts per Project
 
 | Knob | Default |
 |---|---|
@@ -1399,7 +1397,7 @@ Write the description like a routing rule: when to use it, and when **not** to.
 | Parallel execution | JUnit parallel, random order |
 | Disabled rules | none |
 
-The knobs live in one table at the top of `SKILL.md`. The onboarding prompt fills it for your project.
+I keep skill templates and reuse them across projects. Only this table changes per project.
 
 ---
 
@@ -1431,7 +1429,6 @@ assertThat(order.status())
   .isEqualTo(PLACED);
 ```
 
-Models copy examples better than they follow prose.
 
 ---
 
@@ -1443,9 +1440,9 @@ Models copy examples better than they follow prose.
 </style>
 
 <div class="flow">
-  <div class="sketch">Template library<small>my default conventions</small></div>
+  <div class="sketch">Skill templates<small>reused across projects</small></div>
   <div class="arrow">&#8594;</div>
-  <div class="sketch accent">Onboarding prompt<small>detect, ask, replace</small></div>
+  <div class="sketch accent">Adjust the knobs<small>the variable parts per project</small></div>
   <div class="arrow">&#8594;</div>
   <div class="sketch alt">Your project's skills<small>your build, your conventions</small></div>
 </div>
@@ -1480,37 +1477,12 @@ Notes:
 
 <!-- _class: light statement -->
 
-# **Demo 1:** review a real test suite
+# **Demo:** the basic skill setup
 
 <!--
 Notes:
-- 8 min. See script/demos/demo-1-review-skill.md. Spring PetClinic, pinned commit.
-- Prompt: Review this project's test suite with the test-setup-review skill. Why is the build slow, and what should we fix first?
+- Live demo of the basic skill setup: the skill folder in a project, the router, and what the agent does with it. See script/demos/demo-1-review-skill.md. Spring PetClinic, pinned commit.
 -->
-
----
-
-<!-- _class: light metrics -->
-
-## Numbers First: PetClinic Suite Review
-
-- **18** test classes, 76 test methods
-- **10** cached Spring contexts
-- **0** Docker-free fast phases
-
----
-
-## What the Review Finds
-
-```text
-[R9-H]  no Surefire or Failsafe split, no Docker-free fast phase
-[R16-H] mysql:9.7 declared twice, two containers for one image
-[R16-H] fixed host port 5432, the Postgres test fails when it is taken
-[R17-H] H2 in the tests, MySQL and PostgreSQL in production
-[R13-H] 10 cached contexts, every test class is its own key
-```
-
-Each line carries a hint, and the file and line behind it.
 
 ---
 
@@ -1523,7 +1495,7 @@ Each line carries a hint, and the file and line behind it.
 
 <!--
 Notes:
-- 15 min including Demo 2. This is the part with the biggest payoff for build time.
+- 15 min. This is the part with the biggest payoff for build time.
 - Refer back to block 1: context cache and parallelization.
 -->
 
@@ -1532,22 +1504,6 @@ Notes:
 <!-- _class: light statement -->
 
 # Two properties decide your build time: **parallel** and **cache-friendly**.
-
----
-
-## Why the Agent Loop Cares
-
-<div class="flow">
-  <div class="sketch">Edit</div>
-  <div class="arrow">&#8594;</div>
-  <div class="sketch accent">Run tests<small>every second counts</small></div>
-  <div class="arrow">&#8594;</div>
-  <div class="sketch alt">Read failure</div>
-  <div class="arrow">&#8594;</div>
-  <div class="sketch">Edit</div>
-</div>
-
-A slow suite makes the loop useless, the agent runs one test or none. Every extra Spring context is a full application start.
 
 ---
 
@@ -1572,7 +1528,7 @@ junit.jupiter.testmethod.order.default = org.junit.jupiter.api.MethodOrderer$Ran
 - **Random business keys** for every piece of test data, own rows per test, no `findAll()` or `count()`
 - **Black box over HTTP** on a random port, no shared state in the JVM
 - External HTTP stubbed with **WireMock** on a dynamic port, matched on the random values
-- `@Execution(CONCURRENT)` on the abstract base class
+- Not parallel yet? Back off for a set of tests with `@Execution(SAME_THREAD)` until they are ready
 - Run the suite twice: order dependence shows up before CI
 
 ---
@@ -1583,16 +1539,15 @@ junit.jupiter.testmethod.order.default = org.junit.jupiter.api.MethodOrderer$Ran
 - `@ServiceConnection` wires it into Spring Boot, no manual properties
 - Pinned image tags, never `latest`. No fixed host ports. An explicit wait strategy
 - Same database as production, schema from Flyway or Liquibase, no H2
-- Reuse only locally and opt-in, never committed, never on CI. Pre-pull images in CI
+- `.withReuse(true)` helps locally to keep the containers warm between runs
 
 ---
 
 ## Context Caching: One Abstract Base Class
 
-```java {1,2,3}
+```java {1,2}
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 @Import(TestcontainersConfiguration.class)
-@Execution(ExecutionMode.CONCURRENT)
 public abstract class AbstractIntegrationTest {
 }
 ```
@@ -1622,7 +1577,7 @@ Run it in a second terminal while the suite runs. Example output:
 
 <!--
 Notes:
-- Start the command before the test run, stop it with Ctrl+C afterwards. Used in Demo 2.
+- Start the command before the test run, stop it with Ctrl+C afterwards.
 -->
 
 ---
@@ -1682,14 +1637,63 @@ Limit as a workflow variable, default 9. The HTML report is uploaded as a build 
 
 ---
 
-<!-- _class: light statement -->
+## Mutation Testing Only for Your Changes
 
-# **Demo 2:** count the containers
+Full mutation runs are slow. Run PIT **incrementally**, only for what changed - like the "new code" setting in SonarQube.
+
+```shell {1}
+./mvnw test-compile org.pitest:pitest-maven:mutationCoverage -DwithHistory
+```
+
+- PIT keeps a **history file** and only re-analyzes what changed since the last run
+- Cache the history file between CI runs: a pull request only pays for its own changes
+- Alternative: `pitest:scmMutationCoverage` analyzes only the files changed in Git
 
 <!--
 Notes:
-- 5 min. See script/demos/demo-2-containers.md. docker events before and after merging the two MySQL declarations.
-- Known issue: PostgresIntegrationTests needs port 5432 free. Use -Dtest='!PostgresIntegrationTests'.
+- Best practice for the mutation testing slides in block 1: do not run it on the whole code base on every build. Incremental analysis keeps it fast enough for a pull request.
+- Check the exact options against the PIT Maven plugin docs before the talk (withHistory, historyInputFile, historyOutputFile, scmMutationCoverage).
+-->
+
+---
+
+<style scoped>
+.takes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 0.5em; }
+.takes .take { box-sizing: border-box; padding: 0.8em 0.9em; border: 2.5px solid var(--pt-heading); background: var(--pt-bg-1); border-radius: 18px 8px 22px 8px / 8px 20px 8px 18px; box-shadow: 2px 3px 0 rgba(15, 23, 42, 0.12); font-size: 0.78em; line-height: 1.3; }
+.takes .take.yes { border-color: var(--pt-link); }
+.takes .take strong { display: block; font-size: 1.25em; }
+.takes .take em { display: block; margin-top: 0.4em; color: var(--pt-link); font-style: normal; font-weight: 700; }
+.takes .take small { display: block; margin-top: 0.6em; color: var(--pt-muted); font-size: 0.75em; }
+</style>
+
+## TDD With Agents: Yes or No?
+
+<div class="takes">
+  <div class="take yes">
+    <strong>Kent Beck</strong>
+    TDD is a superpower with agents: they introduce regressions and tests catch them. But agents may delete tests to make them pass.
+    <em>Yes, and guard the tests</em>
+    <small>The Pragmatic Engineer interview</small>
+  </div>
+  <div class="take yes">
+    <strong>Simon Willison</strong>
+    Red/green TDD fits agents: no code that does not work, no unnecessary code, a regression suite. Always confirm the red step.
+    <em>Yes, and see it fail first</em>
+    <small>Agentic engineering patterns</small>
+  </div>
+  <div class="take">
+    <strong>Birgitta B&ouml;ckeler</strong>
+    In her Thoughtworks experiment TDD showed no clear quality difference and used more tokens. She prefers automated feedback, like mutation testing.
+    <em>Not by default</em>
+    <small>Martin Fowler's site, early experiment</small>
+  </div>
+</div>
+
+<!--
+Notes:
+- All three are paraphrases from the course lesson 04-tdd-or-not, not direct quotes. Sources: Pragmatic Engineer interview with Kent Beck, Simon Willison "Red/green TDD", Birgitta Böckeler "TDD inside the agent loop - theater or actual value?" on martinfowler.com.
+- My take: test-first for bug fixes and clear rules, skip it for exploration. Protect existing tests, review tests like code, add an objective check (mutation testing). Skills do not require test-first.
+- Caveat: Böckeler's sample was small, greenfield, business logic only.
 -->
 
 ---
@@ -1708,7 +1712,7 @@ Notes:
 
 ---
 
-## Three Servers, Three Gaps
+## My Three Go-To MCPs
 
 | Server | The gap it closes |
 |---|---|
@@ -1716,21 +1720,8 @@ Notes:
 | **GitHub** | The agent reads its own workflow runs and job logs |
 | **Playwright** | The agent sees the rendered page, locators are observed |
 
----
 
-## Adding a Server, and Who Gets It
-
-```shell
-claude mcp add --transport http <name> <url>
-claude mcp add <name> -- <command> [args...]
-```
-
-| Scope | Stored in | Who gets it |
-|---|---|---|
-| local (default) | `~/.claude.json` | only you, this project |
-| project | `.mcp.json` | the whole team via git |
-| user | your user config | all your projects |
-
+The actual MCP servers vary per project and tech stack, but these are the ones I use the most.
 ---
 
 ## Context7 and GitHub
@@ -1911,31 +1902,6 @@ Notes:
 
 ---
 
-<!-- _class: light metrics -->
-
-## PetClinic: What the Skill Changed
-
-- **5 to 1** Spring contexts: team integration tests vs one skill-guided journey
-- **0 to 18** `.as()` failure messages in the unit tests: AI only vs AI + skill
-- **H2 to Postgres** in the slice tests: AI only vs AI + skill
-
-<!--
-Notes:
-- Source: course repo resources/petclinic-skill-comparison.md, experiment dated 2026-09-29.
-- Integration: the team has 10 tests in 5 classes, 5 contexts, fixed IDs. AI + skill wrote 1 journey test, 1 context.
-- Unit: AI only 17 tests with 0 messages, AI + skill 18 methods with 18 .as() messages.
--->
-
----
-
-## Read This Evidence With Care
-
-- **One run per arm.** One sample, not a benchmark
-- **No coverage and no mutation score** were measured
-- **The prompt named the skill.** In real use the description must trigger it on its own
-
----
-
 <!-- _class: light reveal -->
 
 ## Five Takeaways
@@ -2056,6 +2022,7 @@ Get my template skill structure and **33% off** until the end of Devoxx (Course 
 
 ![center h:260](assets/offer-qr.png)
 
-Philip Riecks · [PragmaTech GmbH](https://pragmatech.digital/)
+The slides will be uploaded to the talk overview.
+
 - [LinkedIn](https://www.linkedin.com/in/rieckpil) (Philip Riecks)
 - [Mail](mailto:philip@pragmatech.digital) (philip@pragmatech.digital)
