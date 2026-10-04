@@ -5,7 +5,7 @@ title: 'Prompt It Right: Spring Boot Testing in the AI Era'
 class: light
 paginate: true
 transition: pt-fade
-header: 'Prompt It Right: Spring Boot Testing in the AI Era · menti.com Code: <strong>7108 0067</strong> · Questions as comments in the Devoxx app'
+header: 'Prompt It Right: Spring Boot Testing in the AI Era · menti.com Code: <strong>7108 0067</strong> · Questions as comments in the Devoxx Companion Tool'
 footer: '![](assets/logo.webp) Philip Riecks · [@rieckpil](https://x.com/rieckpil) · [PragmaTech GmbH](https://pragmatech.digital/)'
 ---
 
@@ -1951,7 +1951,7 @@ Each skill includes rules, references, best practices and anti-patterns as code 
 * **Verification is the new constraint**: why a trustworthy suite is the base of agentic development
 * **The skill library**: the seven skills above, with the rule catalogs behind them
 * **Adopting the skills**: one onboarding prompt adapts them to your project, then review your tests and build a feature
-* **My agentic setup**: workmode, language server, MCP servers, TDD or not
+* **My agentic setup**: workmode, language server, MCP servers
 
 ---
 
@@ -1982,7 +1982,6 @@ Your feedback helps me improve the talk and helps Devoxx.
 - Find **"Prompt It Right"** and leave a rating
 - Tell me what worked and what to change
 
-[m.devoxx.com/events/dvbe26/talks/7006](https://m.devoxx.com/events/dvbe26/talks/7006/prompt-it-right-spring-boot-testing-in-the-ai-era)
 
 ![bg right:36% h:420](assets/devoxx-feedback-qr.png)
 
@@ -2016,13 +2015,11 @@ Notes:
 
 ![bg right:33%](assets/end.jpg)
 
-# Thank you!
+# Joyful Testing!
 
-Get my template skill structure and **33% off** until the end of Devoxx (Course or Bundle edition):
+Get my template skill structure and **33% off** the **Agentic Testing for Spring Boot** online course (Course or Bundle edition) until the end of Devoxx:
 
 ![center h:260](assets/offer-qr.png)
 
-The slides will be uploaded to the talk overview.
+The slides will be uploaded in the Devoxx Companion Tool at this talk's overview. Enjoy Devoxx Belgium 2026!
 
-- [LinkedIn](https://www.linkedin.com/in/rieckpil) (Philip Riecks)
-- [Mail](mailto:philip@pragmatech.digital) (philip@pragmatech.digital)
