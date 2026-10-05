@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Germany map - Erlangen and Munich</title>
+<title>Germany map - Herzogenaurach and Munich</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap" rel="stylesheet">
@@ -205,7 +205,7 @@ function dot(x, y, r, color) {
   ctx.restore();
 }
 
-/* ---------- scene: Germany with Erlangen (home) and Munich (hint) ---------- */
+/* ---------- scene: Germany with Herzogenaurach (home) and Munich (hint) ---------- */
 function renderGermanyMap() {
   rnd = mulberry32(1337);
   // white panel so the image fills the right side of the slide
@@ -228,8 +228,8 @@ function renderGermanyMap() {
   const py = lat => 92 + (55.1 - lat) * 60;
   roughPoly(border.map(([lon, lat]) => [px(lon), py(lat)]), { fill: C.surface, fillStyle: 'solid', width: 3, rough: 1.2 });
 
-  // Erlangen, my home
-  const ex = px(11.0), ey = py(49.6);
+  // Herzogenaurach, my home
+  const ex = px(10.88), ey = py(49.57);
   // Munich, the hint
   const mx = px(11.58), my = py(48.14);
   dot(mx, my, 8, C.accent);
@@ -237,9 +237,9 @@ function renderGermanyMap() {
 
   dot(ex, ey, 10, C.red);
   roughEllipse(ex, ey, 17, 17, { color: C.red, width: 2.5, passes: 1 });
-  text('Erlangen', ex, ey - 36, { size: 34, color: C.red, weight: 'bold' });
+  text('Herzogenaurach', ex, ey - 36, { size: 34, color: C.red, weight: 'bold' });
 
-  text('Erlangen, Bavaria', WIDTH / 2, 668, { size: 28, color: C.ink });
+  text('Herzogenaurach, Bavaria', WIDTH / 2, 668, { size: 28, color: C.ink });
 }
 
 async function main() {

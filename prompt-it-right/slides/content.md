@@ -56,18 +56,18 @@ Notes:
 
 ---
 
-![bg right:33% fit](assets/germany-erlangen-munich.png)
+![bg right:33% fit](assets/germany-herzogenaurach-munich.png)
 
 ### About Philip
 
-- Software Engineer from Erlangen, Germany 🍻
+- Software Engineer from Herzogenaurach (HQ of adidas & Puma), Germany 🍻
 - Blogging and content creation about testing Java and Spring Boot applications 🍃
 - Founder of [PragmaTech GmbH](https://pragmatech.digital/) - **Enabling Developers to Frequently Deliver** Software with **More Confidence**
 - Last at Devoxx Belgium 4 years ago, with "Things I Wish I Knew When I Started Testing Spring Boot Applications"
 
 <!--
 Notes:
-- Erlangen is in Bavaria, north of Munich.
+- Herzogenaurach is in Bavaria, north of Munich, near Nuremberg.
 -->
 
 ---
