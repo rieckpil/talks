@@ -1,10 +1,8 @@
 HELP.md
 target/
-!.mvn/wrapper/maven-wrapper.jar
+.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-
-.DS_Store
 
 ### STS ###
 .apt_generated
@@ -34,10 +32,12 @@ build/
 ### VS Code ###
 .vscode/
 
-**/.claude/settings.local.json
+### Marp ###
+slides/content.pdf
+slides/content.html
+slides/preview/
+slides/assets/generated/
+slides/node_modules/
 
-# Remotion animation sources (node_modules only; sources are tracked)
-**/visuals/remotion/node_modules/
-
-# Playwright MCP session files
-.playwright-mcp/
+### Demo ###
+demo/spring-petclinic/

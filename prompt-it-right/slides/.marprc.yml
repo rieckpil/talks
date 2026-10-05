@@ -1,0 +1,4 @@
+engine: ./engine.js
+themeSet:
+  - ./pragmatech.css
+allowLocalFiles: true

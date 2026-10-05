@@ -1,0 +1,58 @@
+name: Prompt It Right - context gate
+
+# Builds the sample project with the Spring Test Profiler and fails the build
+# when the test suite creates more Spring contexts than allowed.
+
+on:
+  push:
+    paths:
+      - 'prompt-it-right/**'
+      - '.github/workflows/prompt-it-right-context-gate.yml'
+  pull_request:
+    paths:
+      - 'prompt-it-right/**'
+  workflow_dispatch:
+    inputs:
+      maxContexts:
+        description: 'Maximum number of Spring contexts the test suite may create'
+        required: false
+        default: '9'
+
+env:
+  MAX_CONTEXTS: ${{ inputs.maxContexts || '9' }}
+
+jobs:
+  context-gate:
+    runs-on: ubuntu-latest
+    name: Fail above the Spring context limit
+    defaults:
+      run:
+        working-directory: prompt-it-right
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: 25
+          java-package: jdk
+          distribution: temurin
+          cache: maven
+
+      - name: Build and test
+        run: ./mvnw -B verify
+
+      - name: Show the profiler JSON
+        if: always()
+        run: cat target/spring-test-profiler/results.json
+
+      - name: Check the Spring context count
+        run: scripts/check-context-count.sh "$MAX_CONTEXTS" target/spring-test-profiler/results.json
+
+      - name: Upload the profiler report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: spring-test-profiler-report
+          path: prompt-it-right/target/spring-test-profiler/

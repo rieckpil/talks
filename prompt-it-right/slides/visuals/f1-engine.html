@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Formula 1 engine scenes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap" rel="stylesheet" />
+<style>
+  html, body { margin: 0; background: transparent; }
+  canvas { display: block; }
+</style>
+</head>
+<body>
+<canvas id="scene" width="1600" height="800"></canvas>
+<script>
+// Usage: f1-engine.html?scene=bumpy  or  ?scene=fixed
+const params = new URLSearchParams(location.search);
+const scene = params.get('scene') || 'bumpy';
+const canvas = document.getElementById('scene');
+const ctx = canvas.getContext('2d');
+
+const INK = '#0f172a';
+const ACCENT = '#0288d1';
+const DANGER = '#e5484d';
+const GOOD = '#2f9e44';
+const SOFT = '#e0f2fe';
+const FONT = '"Architects Daughter", cursive';
+
+// deterministic jitter so the export is stable
+let seed = 7;
+function rand() { seed = (seed * 16807) % 2147483647; return seed / 2147483647; }
+function jitter(amount) { return (rand() - 0.5) * amount; }
+
+function stroke(color, width) { ctx.strokeStyle = color; ctx.lineWidth = width; ctx.lineCap = 'round'; ctx.lineJoin = 'round'; }
+
+// hand-drawn polyline: drawn twice with small offsets
+function sketchPath(points, color = INK, width = 4, close = false, fill = null) {
+  for (let pass = 0; pass < 2; pass++) {
+    ctx.beginPath();
+    points.forEach(([x, y], i) => {
+      const px = x + jitter(3), py = y + jitter(3);
+      if (i === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+    });
+    if (close) ctx.closePath();
+    if (fill && pass === 0) { ctx.fillStyle = fill; ctx.fill(); }
+    stroke(color, width - pass);
+    ctx.stroke();
+  }
+}
+
+function sketchCircle(cx, cy, r, color = INK, width = 4, fill = null) {
+  for (let pass = 0; pass < 2; pass++) {
+    ctx.beginPath();
+    for (let a = 0; a <= Math.PI * 2 + 0.2; a += 0.3) {
+      const x = cx + Math.cos(a) * (r + jitter(3)), y = cy + Math.sin(a) * (r + jitter(3));
+      if (a === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+    }
+    if (fill && pass === 0) { ctx.fillStyle = fill; ctx.fill(); }
+    stroke(color, width - pass);
+    ctx.stroke();
+  }
+}
+
+function text(str, x, y, size = 34, color = INK, align = 'left') {
+  ctx.font = `${size}px ${FONT}`;
+  ctx.fillStyle = color;
+  ctx.textAlign = align;
+  ctx.textBaseline = 'middle';
+  ctx.fillText(str, x, y);
+}
+
+function arrow(x1, y1, x2, y2, color = INK) {
+  sketchPath([[x1, y1], [x2, y2]], color, 4);
+  const angle = Math.atan2(y2 - y1, x2 - x1);
+  const head = 18;
+  sketchPath([
+    [x2 - head * Math.cos(angle - 0.45), y2 - head * Math.sin(angle - 0.45)],
+    [x2, y2],
+    [x2 - head * Math.cos(angle + 0.45), y2 - head * Math.sin(angle + 0.45)],
+  ], color, 4);
+}
+
+const ROAD_Y = 610;
+
+function roadY(x) {
+  if (scene !== 'bumpy') return ROAD_Y;
+  let y = ROAD_Y + 10 * Math.sin(x / 38);
+  const bumps = [[230, -46], [470, -38], [760, 34], [980, -50], [1160, 28]];
+  bumps.forEach(([bx, h]) => { y += h * Math.exp(-Math.pow((x - bx) / 38, 2)); });
+  return y;
+}
+
+function drawRoad(xEnd) {
+  const points = [];
+  for (let x = 20; x <= xEnd; x += 12) points.push([x, roadY(x)]);
+  // ground
+  sketchPath([...points, [xEnd, ROAD_Y + 90], [20, ROAD_Y + 90]], INK, 4, true, scene === 'bumpy' ? '#f1f5f9' : '#ecfdf5');
+  if (scene === 'fixed') {
+    for (let x = 60; x < xEnd - 60; x += 140) sketchPath([[x, ROAD_Y + 45], [x + 70, ROAD_Y + 45]], GOOD, 4);
+  } else {
+    // stones and potholes
+    [[330, ROAD_Y + 50], [600, ROAD_Y + 62], [880, ROAD_Y + 48], [1080, ROAD_Y + 60]].forEach(([x, y]) => sketchCircle(x, y, 10, INK, 3));
+  }
+}
+
+function drawCar(cx, cy, scale, tilt) {
+  ctx.save();
+  ctx.translate(cx, cy);
+  ctx.rotate(tilt);
+  ctx.scale(scale, scale);
+
+  // speed lines
+  [[-300, -40], [-340, -10], [-310, 20], [-360, 45]].forEach(([x, y]) => sketchPath([[x, y], [x + 100, y]], ACCENT, 5));
+
+  // rear wing
+  sketchPath([[-170, -45], [-170, 10]], INK, 5);
+  sketchPath([[-205, -52], [-135, -52], [-135, -40], [-205, -40]], INK, 4, true, '#ffffff');
+
+  // exhaust flames
+  sketchPath([[-160, -4], [-215, -14], [-190, -2], [-235, 4], [-190, 8], [-215, 22], [-160, 14]], '#f59e0b', 4, true, '#fde68a');
+
+  // body
+  sketchPath([[-160, 20], [-150, -8], [-95, -26], [-20, -30], [10, -52], [48, -52], [64, -28], [150, -8], [200, 6], [200, 24], [-160, 24]], INK, 5, true, '#ffffff');
+
+  // engine block (the big bolted-on engine)
+  sketchPath([[-140, -34], [-60, -34], [-60, -78], [-140, -78]], ACCENT, 5, true, SOFT);
+  [-124, -100, -76].forEach((x) => sketchPath([[x, -78], [x, -92], [x + 12, -92], [x + 12, -78]], ACCENT, 4));
+  text('AI', -100, -56, 30, ACCENT, 'center');
+
+  // driver
+  sketchCircle(30, -64, 17, INK, 4, '#ffffff');
+  sketchPath([[34, -70], [48, -70], [48, -60], [34, -60]], INK, 3, true, '#334155');
+
+  // front wing
+  sketchPath([[190, 30], [250, 30], [250, 40], [190, 40]], INK, 4, true, '#ffffff');
+
+  // wheels
+  sketchCircle(-95, 30, 42, INK, 5, '#334155');
+  sketchCircle(-95, 30, 16, INK, 3, '#ffffff');
+  sketchCircle(120, 30, 36, INK, 5, '#334155');
+  sketchCircle(120, 30, 14, INK, 3, '#ffffff');
+
+  ctx.restore();
+}
+
+function drawWall() {
+  const x0 = 1330, y0 = 300, w = 130, h = 330;
+  sketchPath([[x0, y0], [x0 + w, y0], [x0 + w, y0 + h], [x0, y0 + h]], DANGER, 5, true, '#fee2e2');
+  for (let y = y0 + 55; y < y0 + h; y += 55) sketchPath([[x0, y], [x0 + w, y]], DANGER, 3);
+  for (let row = 0; row < 6; row++) {
+    const y = y0 + row * 55;
+    const offset = row % 2 === 0 ? 0 : 33;
+    for (let x = x0 + 33 + offset; x < x0 + w; x += 66) sketchPath([[x, y], [x, y + 55]], DANGER, 3);
+  }
+  text('PROD', x0 + w / 2, y0 - 34, 40, DANGER, 'center');
+}
+
+function drawFlag() {
+  const x0 = 1380;
+  sketchPath([[x0, 280], [x0, ROAD_Y]], INK, 6);
+  const size = 36;
+  for (let r = 0; r < 3; r++) {
+    for (let c = 0; c < 4; c++) {
+      const fill = (r + c) % 2 === 0 ? INK : '#ffffff';
+      sketchPath([[x0 + c * size, 280 + r * size], [x0 + (c + 1) * size, 280 + r * size], [x0 + (c + 1) * size, 280 + (r + 1) * size], [x0 + c * size, 280 + (r + 1) * size]], INK, 3, true, fill);
+    }
+  }
+  text('production,', x0 + 70, 200, 34, GOOD, 'center');
+  text('with confidence', x0 + 70, 240, 34, GOOD, 'center');
+}
+
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  drawRoad(1300);
+  const carX = 700;
+  const carY = scene === 'bumpy' ? 410 : 500;
+  drawCar(carX, carY, 1.15, scene === 'bumpy' ? -0.07 : 0);
+
+  if (scene === 'bumpy') {
+    drawWall();
+    text('AI engine: code in seconds', 300, 190, 36, ACCENT, 'left');
+    arrow(560, 225, 640, 345, ACCENT);
+    text('who is driving?', 880, 215, 36, DANGER, 'left');
+    arrow(900, 250, 760, 355, DANGER);
+    text('no brakes?', 1010, 560, 36, DANGER, 'left');
+    arrow(1030, 530, 880, 480, DANGER);
+    text('bumpy road', 380, 730, 36, DANGER, 'center');
+    arrow(380, 700, 360, 640, DANGER);
+    text('the wall arrives sooner', 1170, 730, 36, DANGER, 'center');
+  } else {
+    drawFlag();
+    text('AI engine: code in seconds', 300, 250, 36, ACCENT, 'left');
+    arrow(560, 285, 640, 410, ACCENT);
+    text('driver: you + skills', 860, 255, 36, GOOD, 'left');
+    arrow(900, 290, 770, 425, GOOD);
+    text('brakes: fast,', 960, 450, 36, GOOD, 'left');
+    text('comprehensive tests', 960, 492, 36, GOOD, 'left');
+    arrow(950, 505, 885, 525, GOOD);
+    text('smooth road: fast feedback in CI', 150, 730, 36, GOOD, 'left');
+    arrow(300, 700, 330, 650, GOOD);
+  }
+}
+
+document.fonts.load(`34px ${FONT}`).then(() => document.fonts.ready).then(() => { draw(); document.title = 'ready'; });
+</script>
+</body>
+</html>

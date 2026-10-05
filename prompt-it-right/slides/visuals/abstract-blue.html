@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Abstract blue side image</title>
+<style>
+  html, body { margin: 0; background: transparent; }
+  canvas { display: block; }
+</style>
+</head>
+<body>
+<canvas id="scene"></canvas>
+<script>
+/*
+ * Abstract blue gradient for the left side of the title slide (portrait, 422 x 720).
+ * Export with: node slides/visuals/export-visuals.mjs
+ */
+const WIDTH = 422;
+const HEIGHT = 720;
+const canvas = document.getElementById('scene');
+const ctx = canvas.getContext('2d');
+const dpr = window.devicePixelRatio || 1;
+canvas.style.width = WIDTH + 'px';
+canvas.style.height = HEIGHT + 'px';
+canvas.width = Math.round(WIDTH * dpr);
+canvas.height = Math.round(HEIGHT * dpr);
+ctx.scale(dpr, dpr);
+
+function mulberry32(seed) {
+  return function () {
+    seed |= 0; seed = seed + 0x6D2B79F5 | 0;
+    let t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
+}
+const rnd = mulberry32(2026);
+
+// base gradient
+const base = ctx.createLinearGradient(0, 0, WIDTH, HEIGHT);
+base.addColorStop(0, '#0a2a6b');
+base.addColorStop(0.5, '#0b66c3');
+base.addColorStop(1, '#4cc0f2');
+ctx.fillStyle = base;
+ctx.fillRect(0, 0, WIDTH, HEIGHT);
+
+// soft blurred blobs
+ctx.filter = 'blur(55px)';
+[
+  [330, 110, 210, '#7dd3fc', 0.85],
+  [40, 420, 250, '#1d4ed8', 0.9],
+  [310, 640, 210, '#22d3ee', 0.7],
+  [110, 40, 150, '#312e81', 0.7],
+  [200, 330, 120, '#e0f2fe', 0.55]
+].forEach(([x, y, r, color, alpha]) => {
+  ctx.globalAlpha = alpha;
+  ctx.fillStyle = color;
+  ctx.beginPath();
+  ctx.arc(x, y, r, 0, Math.PI * 2);
+  ctx.fill();
+});
+ctx.filter = 'none';
+ctx.globalAlpha = 1;
+
+// flowing light streaks
+ctx.lineCap = 'round';
+[
+  [-40, 520, 220, 380, 470, 250, 0.10, 54],
+  [-20, 620, 260, 500, 450, 360, 0.08, 36],
+  [-30, 300, 180, 160, 440, 90, 0.07, 28]
+].forEach(([x0, y0, cx, cy, x1, y1, alpha, width]) => {
+  ctx.strokeStyle = `rgba(255,255,255,${alpha})`;
+  ctx.lineWidth = width;
+  ctx.beginPath();
+  ctx.moveTo(x0, y0);
+  ctx.quadraticCurveTo(cx, cy, x1, y1);
+  ctx.stroke();
+});
+
+// fine grain
+for (let i = 0; i < 5000; i++) {
+  ctx.fillStyle = `rgba(255,255,255,${(rnd() * 0.05).toFixed(3)})`;
+  ctx.fillRect(rnd() * WIDTH, rnd() * HEIGHT, 1, 1);
+}
+
+window.__rendered = true;
+</script>
+</body>
+</html>
