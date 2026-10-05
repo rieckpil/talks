@@ -35,7 +35,7 @@ Notes:
 
 # Prompt It Right: **Spring Boot Testing** in the AI Era
 
-## AI writes the code. Your test suite decides what ships.
+## AI writes the code. Your test suite decides what ships to production.
 
 A 3-hour deep dive · Devoxx Belgium 2026 · October 5, 09:30
 
@@ -1778,23 +1778,6 @@ Notes:
 
 ---
 
-<!-- _class: light reveal -->
-
-## The Loop in Five Steps
-
-* **Start** PetClinic locally, the agent runs `./mvnw spring-boot:run`
-* **Look** through Playwright MCP: open the page, read the rendered DOM and the real element ids
-* **Change** code and tests, page objects use the observed locators instead of guessed ones
-* **Run** the fast phase, then the browser journey
-* **Push**, then read the GitHub Actions run and job logs through GitHub MCP, and fix what failed
-
-<!--
-Notes:
-- Reading CI state is always on. Opening or merging a pull request stays with me.
--->
-
----
-
 <!-- _class: light section -->
 ![bg right:33%](assets/m2-future.jpg)
 
@@ -1838,6 +1821,24 @@ Notes:
 <!-- _class: light statement -->
 
 # You will ship a bug. **How fast you recover is what counts.**
+
+---
+
+![bg right:34% fit](assets/testing-ai-cover.jpg)
+
+## Building AI Features? A Go-To Book for Testing Them
+
+**Testing AI: Engineering Confidence in Non-Deterministic Systems** by Jason Arbon
+
+- Everything today assumes **deterministic** code under test
+- LLM, RAG and agent parts of your application give different answers to the same question
+- The book covers evals, statistics, safety and how to build confidence in such systems
+
+<!--
+Notes:
+- 1 minute. A pointer, not a deep dive: split the feature into the deterministic part (test it with everything from today) and the model call.
+- Book site: testingaibook.com (Jason Arbon). Cover image from the official book site. I have not read it chapter by chapter, say it is a recommendation based on the table of contents.
+-->
 
 ---
 
