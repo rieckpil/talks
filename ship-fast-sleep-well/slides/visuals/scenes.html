@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Ship Fast, Sleep Well - hand-drawn scenes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; background: #fbfaf6; }
+  svg { display: block; height: 1080px; }
+  text { font-family: 'Architects Daughter', cursive; fill: #1b1b1b; text-transform: uppercase; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+// Usage: scenes.html?view=horror  or  scenes.html?view=target
+const ink = '#1b1b1b';
+const S = `stroke="${ink}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"`;
+const RED = '#d9372b', ORANGE = '#f59e0b', YELLOW = '#fde68a', GREEN = '#4ade80', BLUE = '#bfdbfe', TEAL = '#5eb7b0';
+
+const label = (text, x, y, size = 40, rot = 0, color = ink, anchor = 'start') =>
+  `<text x="${x}" y="${y}" font-size="${size}" fill="${color}" style="fill:${color}" stroke="none" text-anchor="${anchor}" transform="rotate(${rot} ${x} ${y})">${text}</text>`;
+
+const arrow = (d, color = ink) =>
+  `<path d="${d}" fill="none" stroke="${color}" stroke-width="4.5" stroke-linecap="round" marker-end="url(#head-${color.replace('#', '')})"/>`;
+
+function flame(x, y, k = 1, rot = 0) {
+  return `<g transform="translate(${x} ${y}) rotate(${rot}) scale(${k})" ${S}>
+    <path d="M0,0 C-40,-20 -50,-70 -20,-110 C-18,-80 0,-80 5,-120 C40,-90 55,-30 30,-5 C20,5 8,5 0,0 Z" fill="${ORANGE}"/>
+    <path d="M0,-2 C-18,-14 -20,-40 -5,-60 C0,-45 12,-45 14,-62 C28,-42 26,-14 12,-4 Z" fill="${YELLOW}" stroke-width="3"/>
+  </g>`;
+}
+
+function smoke(x, y) {
+  return `<g fill="#e5e7eb" ${S} stroke-width="4">
+    <circle cx="${x}" cy="${y}" r="26"/><circle cx="${x + 28}" cy="${y - 40}" r="34"/><circle cx="${x - 10}" cy="${y - 90}" r="40"/>
+  </g>`;
+}
+
+function head(cx, cy, mood) {
+  const hair = [];
+  for (let a = 195; a <= 345; a += 25) {
+    const r = (a * Math.PI) / 180;
+    hair.push(`<circle cx="${cx + 66 * Math.cos(r)}" cy="${cy + 66 * Math.sin(r)}" r="24" fill="#fff" ${S}/>`);
+  }
+  const eyeY = cy + 2;
+  let eyes, mouth, extra = '';
+  if (mood === 'panic') {
+    eyes = `<circle cx="${cx - 28}" cy="${eyeY}" r="22" fill="#fff" ${S}/><circle cx="${cx + 28}" cy="${eyeY}" r="22" fill="#fff" ${S}/>
+            <circle cx="${cx - 28}" cy="${eyeY}" r="5" fill="${ink}"/><circle cx="${cx + 28}" cy="${eyeY}" r="5" fill="${ink}"/>
+            <path d="M${cx - 50},${cy - 32} L${cx - 14},${cy - 24} M${cx + 50},${cy - 32} L${cx + 14},${cy - 24}" ${S} stroke-width="4"/>`;
+    mouth = `<ellipse cx="${cx}" cy="${cy + 40}" rx="16" ry="22" fill="#7f1d1d" ${S} stroke-width="4"/>`;
+    extra = `<path d="M${cx + 88},${cy - 30} q8,16 0,24 q-8,-8 0,-24 Z M${cx - 92},${cy - 6} q8,16 0,24 q-8,-8 0,-24 Z" fill="${BLUE}" ${S} stroke-width="3"/>`;
+  } else if (mood === 'tired') {
+    eyes = `<circle cx="${cx - 28}" cy="${eyeY}" r="22" fill="#fff" ${S}/><circle cx="${cx + 28}" cy="${eyeY}" r="22" fill="#fff" ${S}/>
+            <circle cx="${cx - 26}" cy="${eyeY + 3}" r="6" fill="${ink}"/><circle cx="${cx + 30}" cy="${eyeY + 3}" r="6" fill="${ink}"/>
+            <path d="M${cx - 48},${eyeY + 26} q20,10 40,0 M${cx + 8},${eyeY + 26} q20,10 40,0" fill="none" ${S} stroke-width="3"/>
+            <path d="M${cx - 50},${cy - 26} L${cx - 14},${cy - 34} M${cx + 50},${cy - 26} L${cx + 14},${cy - 34}" ${S} stroke-width="4"/>`;
+    mouth = `<path d="M${cx - 18},${cy + 44} q18,-14 36,0" fill="none" ${S} stroke-width="4"/>`;
+  } else if (mood === 'sleep') {
+    eyes = `<path d="M${cx - 48},${eyeY} q20,16 40,0 M${cx + 8},${eyeY} q20,16 40,0" fill="none" ${S} stroke-width="4"/>`;
+    mouth = `<path d="M${cx - 14},${cy + 40} q14,12 28,0" fill="none" ${S} stroke-width="4"/>`;
+  } else { // calm
+    eyes = `<circle cx="${cx - 28}" cy="${eyeY}" r="22" fill="#fff" ${S}/><circle cx="${cx + 28}" cy="${eyeY}" r="22" fill="#fff" ${S}/>
+            <circle cx="${cx - 26}" cy="${eyeY + 2}" r="5" fill="${ink}"/><circle cx="${cx + 30}" cy="${eyeY + 2}" r="5" fill="${ink}"/>`;
+    mouth = `<path d="M${cx - 24},${cy + 34} q24,26 48,0" fill="none" ${S} stroke-width="4"/>`;
+  }
+  const glassesBridge = mood === 'sleep' ? '' : `<path d="M${cx - 6},${eyeY} L${cx + 6},${eyeY}" ${S} stroke-width="4"/>`;
+  return `<g>${hair.join('')}<circle cx="${cx}" cy="${cy}" r="70" fill="#fff" ${S}/>
+    <circle cx="${cx - 28}" cy="${eyeY}" r="26" fill="none" ${S} stroke-width="4" ${mood === 'sleep' ? 'opacity="0"' : ''}/>
+    <circle cx="${cx + 28}" cy="${eyeY}" r="26" fill="none" ${S} stroke-width="4" ${mood === 'sleep' ? 'opacity="0"' : ''}/>
+    ${glassesBridge}${eyes}${mouth}${extra}</g>`;
+}
+
+function clock(cx, cy, r, color) {
+  return `<g><circle cx="${cx}" cy="${cy}" r="${r}" fill="#fff" ${S}/>
+    <path d="M${cx},${cy} L${cx},${cy - r * 0.6} M${cx},${cy} L${cx - r * 0.5},${cy + r * 0.4}" ${S} stroke="${color}" style="stroke:${color}"/>
+    <circle cx="${cx}" cy="${cy}" r="5" fill="${color}"/></g>`;
+}
+
+function server(x, y, burning, withSmoke = true) {
+  const unit = (dy) => `<g><rect x="${x}" y="${y + dy}" width="150" height="46" rx="6" fill="#f1f5f9" ${S}/>
+    <circle cx="${x + 24}" cy="${y + dy + 23}" r="7" fill="${burning ? RED : GREEN}" ${S} stroke-width="2.5"/>
+    <path d="M${x + 60},${y + dy + 23} L${x + 126},${y + dy + 23}" ${S} stroke-width="3"/></g>`;
+  return `<g>${unit(0)}${unit(54)}${unit(108)}${burning ? flame(x + 40, y + 10, 1.1) + flame(x + 110, y + 4, 1.4) + (withSmoke ? smoke(x + 30, y - 120) : '') : ''}</g>`;
+}
+
+function phone(x, y, ringing) {
+  const vib = ringing
+    ? `<path d="M${x - 24},${y + 30} l-18,20 l18,20 M${x - 44},${y + 20} l-22,30 l22,30 M${x + 84},${y + 30} l18,20 l-18,20 M${x + 104},${y + 20} l22,30 l-22,30" fill="none" stroke="${RED}" stroke-width="5" stroke-linecap="round"/>` : '';
+  const screen = ringing
+    ? `<rect x="${x + 8}" y="${y + 10}" width="52" height="86" rx="6" fill="#fecaca"/>${label('!!', x + 34, y + 70, 40, 0, RED, 'middle')}`
+    : `<rect x="${x + 8}" y="${y + 10}" width="52" height="86" rx="6" fill="#f1f5f9"/>
+       <path d="M${x - 4},${y - 4} L${x + 72},${y + 112}" stroke="${ink}" stroke-width="7" stroke-linecap="round"/>`;
+  return `<g transform="rotate(${ringing ? -8 : 0} ${x + 34} ${y + 54})"><rect x="${x}" y="${y}" width="68" height="108" rx="12" fill="#fff" ${S}/>${screen}</g>${vib}`;
+}
+
+function toggle(x, y, on) {
+  return `<g><rect x="${x}" y="${y}" width="120" height="58" rx="29" fill="${on ? GREEN : '#e5e7eb'}" ${S}/>
+    <circle cx="${on ? x + 91 : x + 29}" cy="${y + 29}" r="21" fill="#fff" ${S}/>
+    ${label(on ? 'ON' : 'OFF', on ? x + 40 : x + 84, y + 40, 28, 0, ink, 'middle')}</g>`;
+}
+
+function rocket(x, y, rot, crash) {
+  return `<g transform="translate(${x} ${y}) rotate(${rot})">
+    <path d="M0,-90 C40,-50 40,20 30,60 L-30,60 C-40,20 -40,-50 0,-90 Z" fill="#fff" ${S}/>
+    <circle cx="0" cy="-20" r="16" fill="${BLUE}" ${S}/>
+    <path d="M-30,30 L-62,74 L-30,60 Z M30,30 L62,74 L30,60 Z" fill="${RED}" ${S}/>
+    ${flame(0, 62, 0.6, 180)}
+  </g>`;
+}
+
+function net(x1, x2, y, sag, mode) {
+  const mid = (x1 + x2) / 2;
+  const curve = `M${x1},${y} Q${mid},${y + sag * 2} ${x2},${y}`;
+  const lines = [];
+  const n = 9;
+  for (let i = 1; i < n; i++) {
+    const t = i / n;
+    const bx = x1 + (x2 - x1) * t;
+    const by = y + sag * 2 * t * (1 - t) * 2 * 0.5 * 2; // approximated sag along the curve
+    lines.push(`<path d="M${bx},${y - 4} L${bx + (t < 0.5 ? 40 : -40)},${by + 24}" stroke="${ink}" stroke-width="2.5" fill="none" opacity="0.55"/>`);
+  }
+  const marks = [];
+  for (let i = 0; i < 6; i++) {
+    const t = (i + 1) / 7;
+    const px = x1 + (x2 - x1) * t, py = y + sag * 4 * t * (1 - t) * 0.5 + 26;
+    if (mode === 'ok') {
+      marks.push(`<circle cx="${px}" cy="${py}" r="22" fill="#bbf7d0"/><path d="M${px - 11},${py} l8,10 l16,-20" fill="none" stroke="#15803d" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>`);
+    } else if (i !== 2 && i !== 3) {
+      marks.push(`<path d="M${px - 12},${py - 12} l24,24 M${px + 12},${py - 12} l-24,24" stroke="${RED}" stroke-width="6" stroke-linecap="round"/>`);
+    }
+  }
+  const hole = mode === 'ok' ? '' : `<path d="M${mid - 70},${y + sag - 6} l24,30 l20,-26 l24,34 l20,-30 l22,22" fill="none" stroke="${RED}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>`;
+  return `<g><path d="${curve}" fill="#f1f5f9" opacity="0.7"/>${lines.join('')}<path d="${curve}" fill="none" ${S}/>${marks.join('')}${hole}
+    <circle cx="${x1}" cy="${y}" r="9" fill="${ink}"/><circle cx="${x2}" cy="${y}" r="9" fill="${ink}"/></g>`;
+}
+
+function desk() {
+  return `<g ${S}><path d="M120,720 L760,720 L760,752 L120,752 Z" fill="#fff"/><path d="M160,752 L160,900 M720,752 L720,900" fill="none"/>
+    </g>`;
+}
+
+function laptop(x, y, good) {
+  const screenFill = good ? '#dcfce7' : '#fee2e2';
+  const content = good
+    ? `<path d="M${x + 40},${y - 60} l22,28 l52,-62" fill="none" stroke="#15803d" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>${label('ALL GREEN', x + 100, y - 20, 22, 0, '#15803d', 'middle')}`
+    : `${label('500', x + 100, y - 72, 52, 0, RED, 'middle')}${label('ERROR', x + 100, y - 30, 30, 0, RED, 'middle')}<path d="M${x + 24},${y - 108} l22,0 l-11,-20 Z" fill="${RED}"/>`;
+  return `<g ${S}><path d="M${x},${y} L${x + 20},${y - 150} L${x + 190},${y - 150} L${x + 200},${y} Z" fill="${screenFill}"/>${content}
+    <path d="M${x - 24},${y} L${x + 224},${y}" stroke-width="8" fill="none"/></g>`;
+}
+
+function bubble(x, y, w, h, lines, color) {
+  const tx = x + w / 2;
+  return `<g ${S}><path d="M${x + 20},${y} H${x + w - 20} Q${x + w},${y} ${x + w},${y + 20} V${y + h - 20} Q${x + w},${y + h} ${x + w - 20},${y + h} H${x + 90} L${x + 50},${y + h + 40} L${x + 56},${y + h} H${x + 20} Q${x},${y + h} ${x},${y + h - 20} V${y + 20} Q${x},${y} ${x + 20},${y} Z" fill="#fff"/></g>
+    ${lines.map((l, i) => label(l.t, tx, y + 48 + i * 44, l.s || 34, 0, l.c || color, 'middle')).join('')}`;
+}
+
+function divider() {
+  let wave = 'M960,330';
+  for (let y = 330; y < 1040; y += 40) wave += ` q-16,20 0,40 q16,20 0,40`.slice(0, 0) + ` q-14,10 0,20 q14,10 0,20`;
+  return `<g><path d="M960,40 L960,300" stroke="${ink}" stroke-width="3" stroke-dasharray="3 14" stroke-linecap="round"/>
+    <path d="${wave}" fill="none" stroke="${TEAL}" stroke-width="12" stroke-linecap="round" opacity="0.8"/>
+    <path d="${wave}" fill="none" stroke="${ink}" stroke-width="4" stroke-linecap="round" transform="translate(6 0)"/></g>`;
+}
+
+function stars() {
+  const pts = [[1590, 130], [1860, 110], [1660, 270], [1840, 300], [1100, 110], [1260, 190]];
+  return pts.map(([x, y]) => `<path d="M${x},${y - 16} L${x + 5},${y - 5} L${x + 17},${y} L${x + 5},${y + 5} L${x},${y + 16} L${x - 5},${y + 5} L${x - 17},${y} L${x - 5},${y - 5} Z" fill="${YELLOW}" ${S} stroke-width="3"/>`).join('');
+}
+
+function moon() {
+  return `<g><circle cx="1720" cy="190" r="86" fill="#fff" ${S}/><circle cx="1768" cy="170" r="76" fill="#fbfaf6"/>
+    <path d="M1690,106 C1630,140 1630,250 1700,282" fill="none" ${S}/></g>`;
+}
+
+function sunPanic() {
+  // a dim, sickly sun behind a cloud: the day is not going well
+  return `<g><circle cx="150" cy="150" r="80" fill="#fed7aa" ${S}/><path d="M150,30 L150,50 M150,250 L150,270 M30,150 L50,150 M250,150 L270,150 M65,65 L80,80 M235,65 L220,80" ${S} stroke-width="5"/></g>`;
+}
+function sunHappy() {
+  return `<g><circle cx="150" cy="150" r="80" fill="${YELLOW}" ${S}/><path d="M150,22 L150,48 M150,252 L150,278 M22,150 L48,150 M252,150 L278,150 M60,60 L80,80 M240,60 L220,80 M60,240 L80,220" ${S} stroke-width="5"/></g>`;
+}
+
+function horror() {
+  return `
+  ${sunPanic()}
+  ${label('FRIDAY 16:00', 210, 300, 40, -4, RED)}
+  ${rocket(720, 200, 150)}
+  ${label('BOOM!', 760, 100, 54, 8, RED)}
+  ${desk()}
+  <g>
+    <path d="M270,580 L330,560 L400,580 L400,720 L270,720 Z" fill="${BLUE}" ${S}/>
+    <path d="M272,590 L238,500 M398,590 L420,500" fill="none" ${S} stroke-width="22" stroke="${ink}"/>
+    <path d="M272,590 L238,500 M398,590 L420,500" fill="none" stroke="${BLUE}" stroke-width="12" stroke-linecap="round"/>
+    <circle cx="236" cy="488" r="16" fill="#fff" ${S}/><circle cx="422" cy="488" r="16" fill="#fff" ${S}/>
+    ${head(335, 470, 'panic')}
+  </g>
+  ${laptop(470, 720, false)}
+  ${bubble(520, 330, 300, 150, [{ t: 'AI: FIX IT NOW!!', s: 36, c: ink }, { t: '(vibe coding)', s: 26, c: '#6b7280' }], ink)}
+  ${label('NO RUNBOOK', 700, 600, 34, -4, RED)}
+  ${label('NO FEATURE FLAG', 700, 650, 28, -3, RED)}
+  ${label('TESTS NOBODY TRUSTS', 190, 850, 36, 0, RED)}
+  ${label('PIPELINE: 45 MIN', 130, 960, 38, 0, ink)}
+  <rect x="130" y="975" width="640" height="50" rx="12" fill="#fff" ${S}/><rect x="136" y="981" width="76" height="38" rx="8" fill="${RED}"/>
+  ${label('12%', 800, 1012, 34, 0, RED)}
+
+  ${divider()}
+  ${stars()}${moon()}
+  ${label('3 AM', 1720, 330, 44, 0, ink, 'middle')}
+  <g>
+    <path d="M1040,570 q0,-30 30,-30 q30,0 30,30 L1100,830 L1040,830 Z" fill="#fff" ${S}/>
+    <path d="M1070,740 H1740 V830 H1070 Z" fill="#fff" ${S}/>
+    <path d="M1220,730 C1300,700 1500,700 1740,730 L1740,830 L1220,830 Z" fill="#e0e7ff" ${S}/>
+    <path d="M1160,700 L1190,630 L1260,700 Z" fill="${BLUE}" ${S}/>
+    ${head(1190, 600, 'tired')}
+    <path d="M1260,560 q40,-30 50,-60 M1272,620 q50,-20 80,-50" fill="none" stroke="none"/>
+  </g>
+<g ${S}><circle cx="1262" cy="520" r="10" fill="#fff" stroke-width="3"/><circle cx="1298" cy="480" r="16" fill="#fff" stroke-width="4"/>
+    <path d="M1330,430 q-56,-6 -44,-64 q12,-54 78,-44 q22,-62 98,-50 q66,-8 82,52 q74,2 74,66 q0,60 -64,60 Z" fill="#fff"/></g>
+  <g transform="translate(1415 345) scale(0.55)">${server(0, 0, true, false)}</g>
+  ${label('PROD IS DOWN', 1290, 240, 38, -4, RED)}
+  <g><rect x="1710" y="840" width="130" height="14" rx="4" fill="#fff" ${S}/><path d="M1730,854 V920 M1820,854 V920" ${S} fill="none"/>${phone(1750, 726, true)}</g>
+  ${label('PAGER!!', 1800, 690, 46, -6, RED, 'end')}
+  ${net(1050, 1740, 905, 70, 'bad')}
+  ${label('NO SAFETY NET', 1395, 1040, 42, 0, RED, 'middle')}
+  `;
+}
+
+function target() {
+  return `
+  ${sunHappy()}
+  ${label('FRIDAY 16:00', 200, 300, 40, -4, '#15803d')}
+  ${rocket(700, 250, 35)}
+  ${label('FAST DEPLOYMENTS', 600, 410, 34, -4, ink)}
+  ${desk()}
+  <g>
+    <path d="M270,580 L330,560 L400,580 L400,720 L270,720 Z" fill="${BLUE}" ${S}/>
+    <path d="M272,590 C230,640 240,690 290,700 M398,590 C440,520 430,440 400,400" fill="none" ${S} stroke-width="22" stroke="${ink}"/>
+    <path d="M272,590 C230,640 240,690 290,700 M398,590 C440,520 430,440 400,400" fill="none" stroke="${BLUE}" stroke-width="12" stroke-linecap="round"/>
+    <circle cx="400" cy="396" r="16" fill="#fff" ${S}/>
+    ${head(335, 470, 'calm')}
+  </g>
+  ${laptop(470, 720, true)}
+  <g ${S}><path d="M720,590 h70 v50 q0,24 -24,24 h-22 q-24,0 -24,-24 Z" fill="#fff"/><path d="M790,604 q26,4 0,34" fill="none"/>
+    <path d="M740,570 q-8,-14 0,-26 M764,570 q-8,-14 0,-26" fill="none" stroke-width="3.5"/></g>
+  ${label('FAST PIPELINE', 130, 950, 38, 0, '#15803d')}
+  <rect x="130" y="965" width="640" height="50" rx="12" fill="#fff" ${S}/><rect x="136" y="971" width="628" height="38" rx="8" fill="${GREEN}"/>
+  ${label('6 MIN', 800, 1002, 34, 0, '#15803d')}
+  ${label('MEANINGFUL TESTS', 190, 850, 36, 0, ink)}
+  <g transform="translate(680 470)">${toggle(0, 0, true)}${label('FEATURE FLAG', 0, -14, 30, 0, ink)}</g>
+
+  ${divider()}
+  ${stars()}${moon()}
+  ${label('3 AM', 1720, 330, 44, 0, ink, 'middle')}
+  <g>
+    <path d="M1040,570 q0,-30 30,-30 q30,0 30,30 L1100,830 L1040,830 Z" fill="#fff" ${S}/>
+    <path d="M1070,740 H1740 V830 H1070 Z" fill="#fff" ${S}/>
+    <path d="M1180,730 C1300,690 1500,690 1740,730 L1740,830 L1180,830 Z" fill="#dcfce7" ${S}/>
+    <path d="M1130,740 C1160,700 1240,700 1270,740 Z" fill="#fff" ${S}/>
+    ${head(1215, 700, 'sleep')}
+    ${label('Z', 1300, 640, 50, -8)}${label('Z', 1340, 590, 40, -8)}${label('Z', 1370, 550, 32, -8)}
+  </g>
+  <g><rect x="1710" y="840" width="130" height="14" rx="4" fill="#fff" ${S}/><path d="M1730,854 V920 M1820,854 V920" ${S} fill="none"/>${phone(1750, 726, false)}</g>
+  ${label('SILENCE', 1800, 690, 44, -4, ink, 'end')}
+  <g transform="translate(1060 190)">${toggle(0, 0, true)}</g>
+  <g ${S} transform="translate(1220 150)"><path d="M0,60 L70,40 L70,140 L0,160 Z M70,40 L140,60 L140,160 L70,140" fill="${GREEN}" opacity="0.5"/><path d="M0,60 L70,40 L140,60 L140,160 L70,140 L0,160 Z M70,40 V140" fill="none"/></g>
+  <g ${S} transform="translate(1380 150)"><rect x="0" y="0" width="100" height="130" rx="10" fill="#fff"/><path d="M20,40 l12,12 l22,-26 M20,80 l12,12 l22,-26" fill="none" stroke="#15803d" stroke-width="6"/><path d="M62,44 h24 M62,84 h24" stroke-width="4"/></g>
+  <g ${S} transform="translate(1510 140)"><circle cx="30" cy="40" r="24" fill="${GREEN}" opacity="0.6"/><circle cx="30" cy="40" r="24" fill="none"/><circle cx="82" cy="86" r="16" fill="${GREEN}" opacity="0.6"/><circle cx="82" cy="86" r="16" fill="none"/></g>
+  ${label('RUNBOOKS + ALERTS READY', 1330, 360, 36, 3, ink)}
+  ${label('CANARY TESTS RUNNING', 1330, 410, 32, 3, '#15803d')}
+  ${net(1050, 1740, 905, 70, 'ok')}
+  ${label('CI/CD SAFETY NET', 1395, 1040, 42, 0, ink, 'middle')}
+  `;
+}
+
+
+function canaryScene() {
+  const WOOD = '#e7cfa8', ROCK = '#ece6dc';
+  return `
+  ${label('CANARY TEST', 450, 110, 64, -2, ink, 'middle')}
+  <g ${S}>
+    <path d="M60,170 L840,170 L840,930 L60,930 Z" fill="${ROCK}" stroke="none"/>
+    <path d="M250,360 L650,360 L650,800 L250,800 Z" fill="#d6cdbd" stroke="none"/>
+    <path d="M110,200 L110,900 M790,200 L790,900" stroke-width="22" fill="none" stroke="${ink}"/>
+    <path d="M110,200 L110,900 M790,200 L790,900" stroke-width="12" fill="none" stroke="${WOOD}"/>
+    <path d="M80,200 L820,200" stroke-width="26" fill="none" stroke="${ink}"/><path d="M80,200 L820,200" stroke-width="16" fill="none" stroke="${WOOD}"/>
+    <path d="M250,380 L250,800 M650,380 L650,800" stroke-width="16" fill="none" stroke="${ink}"/>
+    <path d="M250,380 L250,800 M650,380 L650,800" stroke-width="8" fill="none" stroke="${WOOD}"/>
+    <path d="M230,380 L670,380" stroke-width="18" fill="none" stroke="${ink}"/><path d="M230,380 L670,380" stroke-width="10" fill="none" stroke="${WOOD}"/>
+    <path d="M330,930 L430,800 M570,930 L470,800" fill="none"/>
+    <path d="M300,880 L580,880 M350,840 L550,840 M395,810 L505,810" stroke-width="4" fill="none" opacity="0.7"/>
+  </g>
+  <g ${S}>
+    <path d="M450,205 L450,300" fill="none"/>
+    <circle cx="450" cy="296" r="9" fill="#fff" stroke-width="4"/>
+    <path d="M375,470 C375,330 525,330 525,470 Z" fill="#fff" fill-opacity="0.35"/>
+    <path d="M395,350 L395,470 M425,336 L425,470 M455,332 L455,470 M485,336 L485,470 M512,352 L512,470" fill="none" stroke-width="3.5"/>
+    <path d="M370,470 L530,470" stroke-width="7" fill="none"/>
+    <ellipse cx="452" cy="428" rx="40" ry="32" fill="#fde047"/>
+    <circle cx="486" cy="400" r="22" fill="#fde047"/>
+    <path d="M506,396 L528,404 L506,412 Z" fill="${ORANGE}" stroke-width="3.5"/>
+    <circle cx="490" cy="396" r="4.5" fill="${ink}" stroke="none"/>
+    <path d="M425,430 C440,410 465,414 470,436" fill="#facc15" stroke-width="3.5"/>
+    <path d="M414,430 L392,420 M414,438 L390,442" fill="none" stroke-width="4"/>
+    <path d="M440,460 L440,470 M462,460 L462,470" stroke-width="4" fill="none"/>
+  </g>
+  <g ${S}>
+    <path d="M530,330 q60,-6 70,-48 q10,-40 80,-34 q68,0 76,48 q4,40 -50,46 q-24,24 -60,10 q-30,10 -50,-6 q-26,0 -66,-16 Z" fill="#fff"/>
+  </g>
+  ${label('ALERT!!', 648, 312, 36, -4, RED, 'middle')}
+  <g ${S}>
+    <path d="M590,620 q-50,-6 -40,-56 q8,-46 62,-36 q20,-54 86,-40 q56,4 64,50 q56,6 50,58 q-6,46 -60,40 q-30,28 -70,10 q-40,12 -62,-6 q-24,2 -30,-20 Z" fill="#fecaca" stroke="${RED}"/>
+  </g>
+  ${label('BUG', 686, 596, 56, -3, RED, 'middle')}
+  <g ${S}>
+    <path d="M200,880 L200,780 L330,780 L330,880 Z" fill="${BLUE}"/>
+    <path d="M205,790 L170,830 M325,790 L360,830" fill="none" stroke-width="20" stroke="${ink}"/>
+    <path d="M205,790 L170,830 M325,790 L360,830" fill="none" stroke-width="10" stroke="${BLUE}"/>
+  </g>
+  ${head(265, 700, 'calm')}
+  <g ${S}>
+    <path d="M198,672 C198,600 332,600 332,672 Z" fill="${YELLOW}"/>
+    <path d="M186,674 L344,674" stroke-width="9" fill="none"/>
+    <circle cx="265" cy="626" r="16" fill="#fff"/>
+    <path d="M285,610 l40,-26 M287,624 l50,-8 M284,638 l44,16" stroke="${ORANGE}" stroke-width="4" fill="none"/>
+  </g>
+  ${label('WARNS BEFORE', 450, 985, 44, 0, ink, 'middle')}
+  ${label('USERS NOTICE', 450, 1035, 44, 0, ink, 'middle')}
+  `;
+}
+
+const view = new URLSearchParams(location.search).get('view') || 'horror';
+const isCanary = view === 'canary';
+const body = isCanary ? canaryScene() : view === 'target' ? target() : horror();
+const vbWidth = isCanary ? 900 : 1920;
+document.getElementById('root').innerHTML = `
+<svg viewBox="0 0 ${vbWidth} 1080" width="${vbWidth}" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="2" seed="4" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="5" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+  <rect width="${vbWidth}" height="1080" fill="#fbfaf6"/>
+  <g filter="url(#rough)">${body}</g>
+</svg>`;
+document.title = view;
+</script>
+</body>
+</html>
