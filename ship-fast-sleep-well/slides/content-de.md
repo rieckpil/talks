@@ -80,20 +80,6 @@ Notes:
 
 ---
 
-<!-- _paginate: false -->
-<!-- _header: '' -->
-<!-- _footer: '' -->
-
-<!--
-Notes:
-- Bildprompt: visuals/image-prompts.md (Horror-Bild). assets/horror-friday.png ersetzen.
-- Geschichte erzählen: Freitag, 16 Uhr, der Pager klingelt, ein kritischer Bug in Production.
--->
-
-![bg fit](assets/horror-friday.png)
-
----
-
 <!-- _class: light reveal cards3 dark -->
 
 <!--
@@ -101,7 +87,7 @@ Notes:
 - Eine Box pro Klick (nur im HTML-Deck). Frage in den Raum: Wer kennt mindestens drei davon?
 -->
 
-## Freitag, 16 Uhr. Du hast Bereitschaft.
+## Freitag, 3 Uhr morgens. Du hast Bereitschaft. Alle Endpunkte geben 5xx zurück
 
 * **Vibe-codierter Hotfix**<small>die KI sagt: sieht gut aus</small>
 * **45 Minuten Pipeline**<small>für eine Ein-Zeilen-Änderung</small>
@@ -112,27 +98,14 @@ Notes:
 
 ---
 
-<!-- _paginate: false -->
-<!-- _header: '' -->
-<!-- _footer: '' -->
-
-<!--
-Notes:
-- Bildprompt: visuals/image-prompts.md (Zielbild). assets/target-state.png ersetzen.
--->
-
-![bg fit](assets/target-state.png)
-
----
-
 <!-- _class: light -->
 
 <!--
 Notes:
-- Das ist das Ziel des Talks: wie ein Team von Alt nach Zukunft kommt, welche Rolle KI spielt und welche Prozesse wir brauchen.
+- Das ist das Ziel des Talks: wie ein Team von Alt nach Neu kommt, welche Rolle KI spielt und welche Prozesse wir brauchen.
 -->
 
-## Unsere Agenda für heute: von Alt nach Zukunft
+## Unsere Agenda für heute: von Alt nach Neu
 
 <div class="flow nw xl">
   <div class="sketch" style="border-color:#b91c1c;color:#b91c1c">Alt: Hoffen und Heldentum<small>langsam, beängstigend, Bereitschaft</small></div>
@@ -141,7 +114,7 @@ Notes:
   <div class="arrow">+</div>
   <div class="sketch accent alt">AI<small>Tooling und Skills</small></div>
   <div class="arrow">→</div>
-  <div class="sketch">Zukunft: Selbstsicher deployen<small>schnell, ruhig, wiederholbar</small></div>
+  <div class="sketch">Neu: Selbstsicher deployen<small>schnell, ruhig, wiederholbar</small></div>
 </div>
 
 <div class="ribbon">KI macht uns schneller. Prozesse machen uns sicher.</div>
@@ -187,20 +160,17 @@ Notes:
 
 ![bg right:36% h:420](assets/mentimeter-datev-coding-festival-2k26-padded.png)
 
-## Hilf mir, euren Prozess zu verstehen
+## Wie sieht es bei euch im Team aus?
 
 Geh auf [menti.com](https://www.menti.com/) und gib den Code **1354 9993** ein.
 
-Drei anonyme Fragen:
+Es gibt **drei Fragen**, bitte beantworte sie.
 
-1. Wie lange dauert es von Commit bis Production?
-2. Wie stoppt ihr ein kaputtes Feature?
-3. Was habt ihr, wenn der Pager klingelt?
+Wir schauen uns die Ergebnisse gleich **live** an.
 
 ---
 
 <!-- _class: light -->
-<!-- _header: 'Der Softwareentwicklungszyklus' -->
 
 <!--
 Notes:
@@ -220,7 +190,6 @@ Notes:
 ---
 
 <!-- _class: light section -->
-<!-- _header: 'Teil 1: Build' -->
 
 ## 01 - Build
 
@@ -415,24 +384,27 @@ Regeln, Best Practices und Anti-Patterns, **einmal** aufgeschrieben. Der Agent f
 
 <!--
 Notes:
-- Aus Prompt It Right übernommen. Der Agent erreicht den CI-Stand (GitHub MCP), den Browser (Playwright MCP), die Tests (Shell) und die laufende Anwendung selbst. Kein Copy-and-paste zwischen dir und dem Agenten. Der Mensch prüft jeden Schritt: ein enger Loop, in Sekunden statt Tagen.
+- High-Level-View des Skills unit-testing aus meiner Skill-Library (agentic-testing-for-spring-boot-course/spring-boot-testing-skills/unit-testing). SKILL.md beschreibt wann der Skill greift, den Scope (wann reicht ein Unit-Test, wann nicht) und die Non-negotiables. Die testing-standards.md ist der Regelkatalog mit ID und Severity: C blockiert die Änderung, H muss vor "fertig" behoben sein, M wird behoben oder begründet, L wird nur genannt. Der Agent nennt in jedem Befund die Regel-ID.
 -->
 
-## Build mit engem Feedback-Loop: Agent und Mensch
+## Beispiel: unit-testing Skill und testing-standards.md
 
-<div class="hub">
-  <div class="sketch gh">CI<small>PRs, Pipeline-Läufe, Job-Logs</small></div>
-  <div class="link l1"><b>&#8597;</b>GitHub MCP</div>
-  <div class="sketch tests">Tests<small>./mvnw test</small></div>
-  <div class="link l2"><b>&#8596;</b>shell</div>
-  <div class="sketch accent agent">Agent<small>planen, coden, testen, fixen</small></div>
-  <div class="link l3"><b>&#8596;</b>Playwright MCP</div>
-  <div class="sketch browser">Browser<small>gerenderte Seite, Screenshots</small></div>
-  <div class="link l4"><b>&#8597;</b>spring-boot:run</div>
-  <div class="sketch alt app">Anwendung, lokal<small>http://localhost:8080</small></div>
-</div>
+```text
+unit-testing/
+├── SKILL.md                     wann nutzen, Scope, Non-negotiables
+└── references/
+    └── testing-standards.md     Regelkatalog mit ID und Severity
+```
 
-<div class="ribbon">Du prüfst jeden Schritt: ein enger Loop, Sekunden statt Tage</div>
+```text
+[T1-C]   Every behavior change ships with a unit test
+[T2-H]   One assertion per test
+[T7-H]   Every assertion carries a failure message
+[T9-H]   No @BeforeEach and no test-class fields
+[T27-H]  Every wait has a timeout, never Thread.sleep
+```
+
+Jede Regel hat eine **ID** und eine **Severity** (C, H, M, L). Der Agent nennt sie in jedem Befund.
 
 ---
 
@@ -455,7 +427,6 @@ Notes:
 ---
 
 <!-- _class: light section -->
-<!-- _header: 'Teil 2: Ship' -->
 
 ## 02 - Ship
 
@@ -569,7 +540,6 @@ Notes:
 ---
 
 <!-- _class: light section -->
-<!-- _header: 'Teil 3: Operate' -->
 
 ## 03 - Operate
 
@@ -742,7 +712,6 @@ Notes:
 ---
 
 <!-- _class: light section -->
-<!-- _header: 'KI und Skills' -->
 
 ## 04 - Die Rolle von KI
 
@@ -768,6 +737,31 @@ Notes:
 
 ---
 
+<!-- _class: light -->
+
+<!--
+Notes:
+- Aus Prompt It Right übernommen. Der Agent erreicht den CI-Stand (GitHub MCP), den Browser (Playwright MCP), die Tests (Shell) und die laufende Anwendung selbst. Kein Copy-and-paste zwischen dir und dem Agenten. Der Mensch prüft jeden Schritt: ein enger Loop, in Sekunden statt Tagen.
+-->
+
+## KI-Agent-Loop: enger Feedback-Loop mit dem Menschen
+
+<div class="hub">
+  <div class="sketch gh">CI<small>PRs, Pipeline-Läufe, Job-Logs</small></div>
+  <div class="link l1"><b>&#8597;</b>GitHub MCP</div>
+  <div class="sketch tests">Tests<small>./mvnw test</small></div>
+  <div class="link l2"><b>&#8596;</b>shell</div>
+  <div class="sketch accent agent">Agent<small>planen, coden, testen, fixen</small></div>
+  <div class="link l3"><b>&#8596;</b>Playwright MCP</div>
+  <div class="sketch browser">Browser<small>gerenderte Seite, Screenshots</small></div>
+  <div class="link l4"><b>&#8597;</b>spring-boot:run</div>
+  <div class="sketch alt app">Anwendung, lokal<small>http://localhost:8080</small></div>
+</div>
+
+<div class="ribbon">Du prüfst jeden Schritt: ein enger Loop, Sekunden statt Tage</div>
+
+---
+
 <!-- _class: light reveal cards4 big -->
 
 <!--
@@ -788,7 +782,7 @@ Notes:
 
 <!-- _class: light statement -->
 
-# Ganz ohne Fehler geht es nicht. **Entscheidend ist, wie gut du vorbereitet bist und wie niedrig du die Fehlerrate hältst.**
+# Fehler lassen sich nicht vermeiden. **Viel wichtiger ist, sie früh zu erkennen und im Ernstfall schnell und sicher handeln zu können.**
 
 ---
 
