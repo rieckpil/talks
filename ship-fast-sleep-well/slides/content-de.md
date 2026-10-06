@@ -39,6 +39,7 @@ style: |
   .hub .link b { display: block; font-size: 1.4em; line-height: 1; }
   .hub .gh { grid-column: 3; grid-row: 1; } .hub .l1 { grid-column: 3; grid-row: 2; } .hub .tests { grid-column: 1; grid-row: 3; } .hub .l2 { grid-column: 2; grid-row: 3; }
   .hub .agent { grid-column: 3; grid-row: 3; } .hub .l3 { grid-column: 4; grid-row: 3; } .hub .browser { grid-column: 5; grid-row: 3; } .hub .l4 { grid-column: 3; grid-row: 4; } .hub .app { grid-column: 3; grid-row: 5; }
+  .center { text-align: center; }
   .flow.bad .sketch { border-color: #b91c1c; color: #b91c1c; }
   .ribbon { margin-top: 0.8em; padding: 0.5em 1em; text-align: center; font-family: 'Architects Daughter', cursive; font-size: 1.2em; border: 3px dashed var(--pt-link); border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px; color: var(--pt-link); }
   .spans { font-family: 'Architects Daughter', cursive; margin-top: 0.5em; }
@@ -203,19 +204,18 @@ Drei anonyme Fragen:
 
 <!--
 Notes:
-- Vier Teile, wir gehen sie von links nach rechts durch. KI hilft überall, aber nur mit dem Prozess dahinter.
+- Drei Teile, wir gehen sie von links nach rechts durch. KI hilft überall, aber nur mit dem Prozess dahinter.
 -->
 
-## Vier Teile des Softwareentwicklungszyklus
+## Drei Teile des Softwareentwicklungszyklus
 
-<div class="phases">
-  <div class="phase"><h3>1 · Build</h3><ul><li>Aussagekräftige, schnelle Testsuite</li><li>Context caching</li><li>Parallelisierung</li><li>Testcontainers</li><li>Mutation testing</li></ul></div>
-  <div class="phase"><h3>2 · Verify</h3><ul><li>SonarQube</li><li>Statische Codeanalyse</li><li>Formatting</li><li>Schnelle, reproduzierbare CI/CD</li></ul></div>
-  <div class="phase"><h3>3 · Ship</h3><ul><li>Schnelle Deployments</li><li>Rolling · Blue/Green · A/B</li><li>Feature flags</li><li>Kill Switch</li></ul></div>
-  <div class="phase"><h3>4 · Operate</h3><ul><li>Structured logging + MDC</li><li>Distributed tracing</li><li>Alerting</li><li>Runbooks</li><li>Canary tests</li></ul></div>
+<div class="phases three">
+  <div class="phase"><h3>1 · Build</h3><ul><li>Aussagekräftige, schnelle Testsuite</li><li>Context caching</li><li>Parallelisierung</li><li>Testcontainers</li><li>Mutation testing</li><li>Statische Checks</li></ul></div>
+  <div class="phase"><h3>2 · Ship</h3><ul><li>Schnelle Deployments</li><li>Rolling Update</li><li>Feature flags</li><li>Kill Switch</li></ul></div>
+  <div class="phase"><h3>3 · Operate</h3><ul><li>Structured logging + MDC</li><li>Distributed tracing</li><li>Alerting</li><li>Runbooks</li><li>Canary tests</li></ul></div>
 </div>
 
-<div class="ribbon">KI und Skills über alle vier Teile</div>
+<div class="ribbon">KI und Skills über alle drei Teile</div>
 
 ---
 
@@ -323,7 +323,7 @@ Notes:
 
 ## Spring Test Profiler
 
-![h:70](assets/spring-test-profiler-logo.png)
+![center h:70](assets/spring-test-profiler-logo.png)
 
 - Open-Source-Tool: zeigt, **wie viele Contexts** deine Testsuite startet
 - **Cache Hits**, **Misses** und die Zeit für Context-Starts
@@ -436,15 +436,6 @@ Notes:
 
 ---
 
-<!-- _class: light section -->
-<!-- _header: 'Teil 2: Verify' -->
-
-## 02 - Verify
-
-# Alles prüfen, was man vorher prüfen kann
-
----
-
 <!-- _class: light reveal cards3 -->
 
 <!--
@@ -464,9 +455,9 @@ Notes:
 ---
 
 <!-- _class: light section -->
-<!-- _header: 'Teil 3: Ship' -->
+<!-- _header: 'Teil 2: Ship' -->
 
-## 03 - Ship
+## 02 - Ship
 
 # Deployment ≠ Release
 
@@ -578,9 +569,9 @@ Notes:
 ---
 
 <!-- _class: light section -->
-<!-- _header: 'Teil 4: Operate' -->
+<!-- _header: 'Teil 3: Operate' -->
 
-## 04 - Operate
+## 03 - Operate
 
 # Sehen, finden, beheben
 
@@ -681,6 +672,32 @@ Notes:
 
 <!--
 Notes:
+- Beispiel für den Text eines Datadog Monitors (Notification Message). Die Links sind Platzhalter. Wichtig: der Alert verlinkt direkt aufs Runbook und auf die passenden Logs, damit die Person on call nicht suchen muss. @pagerduty-... ist ein Notification-Handle, {{value}} und {{threshold}} sind Datadog-Template-Variablen.
+-->
+
+## Beispiel: Datadog Alert mit Runbook-Link
+
+```text
+[Triggered] checkout-service: Fehlerrate über 5 %
+
+{{#is_alert}}
+Fehlerrate: {{value}} % (Schwellwert: {{threshold}} %)
+
+Runbook: https://wiki.example.com/runbooks/checkout-5xx
+Logs:    https://app.datadoghq.eu/logs?query=service:checkout status:error
+
+@pagerduty-checkout-oncall
+{{/is_alert}}
+```
+
+Der Alert nennt das **Symptom** und führt mit **einem Klick** zum Runbook und zu den Logs.
+
+---
+
+<!-- _class: light -->
+
+<!--
+Notes:
 - Ein echtes Beispiel-Runbook aus unserem Buch Stratospheric. Hinweisen auf: Diagnose-Schritte mit Deep Links, und die Maßnahme 'Payment Provider nicht erreichbar: Feature abschalten', also genau ein Feature Flag. Maßnahme bei schlechtem Release: Revert und Redeploy.
 -->
 
@@ -702,26 +719,32 @@ Notes:
 - Wir können nicht alles vor Production testen. Canary-Tests sind End-to-End-Tests, die dauerhaft laufen, idealerweise in Production, mit einem eigenen Testuser. Sie geben echtes Feedback und lösen den Alert aus, bevor ein Kunde anruft.
 -->
 
-## Canary-Tests: dauerhaft in Production testen
+![bg right:34% fit](assets/canary-mine.png)
+
+## Canary Testing in a Nutshell
+
+**Cron-basierte E2E-Tests**, die regelmäßig laufen
 
 <div class="flow nw xl">
-  <div class="sketch">Scheduler<small>alle paar Minuten</small></div>
+  <div class="sketch">Cron-Job<small>alle paar Minuten</small></div>
   <div class="arrow">→</div>
-  <div class="sketch accent">Testuser<small>echte User Journeys</small></div>
-  <div class="arrow">→</div>
-  <div class="sketch">Production</div>
-  <div class="arrow">→</div>
-  <div class="sketch accent">Prüfen + Alert<small>bevor User es merken</small></div>
+  <div class="sketch accent">E2E-Test<small>Testuser, echte User Journeys</small></div>
 </div>
 
-<div class="ribbon">End-to-End-Tests, die dauerhaft laufen: echtes Feedback aus Production</div>
+<div class="flow nw xl">
+  <div class="sketch">Production</div>
+  <div class="arrow">→</div>
+  <div class="sketch accent">Alert<small>wenn ein Test fehlschlägt</small></div>
+</div>
+
+<div class="ribbon">Ziel: Probleme erkennen, bevor der Kunde sie merkt</div>
 
 ---
 
 <!-- _class: light section -->
 <!-- _header: 'KI und Skills' -->
 
-## 05 - Die Rolle von KI
+## 04 - Die Rolle von KI
 
 # KI kontrolliert einsetzen
 
@@ -765,7 +788,7 @@ Notes:
 
 <!-- _class: light statement -->
 
-# Du wirst einen Bug ausliefern. **Entscheidend ist, wie schnell du dich erholst.**
+# Ganz ohne Fehler geht es nicht. **Entscheidend ist, wie gut du vorbereitet bist und wie niedrig du die Fehlerrate hältst.**
 
 ---
 
@@ -778,11 +801,8 @@ Notes:
 
 # Fearless Shipping!
 
-Danke! Fragen?
-
 Der **Spring Boot Testing Newsletter**: Best Practices, Recipes & Quick Wins direkt in dein Postfach - **rieckpil.de/newsletter**
 
-![h:170](assets/newsletter-qr.png)
+![center h:260](assets/newsletter-qr.png)
 
-- [LinkedIn: linkedin.com/in/rieckpil](https://www.linkedin.com/in/rieckpil)
-- [Mail: philip@pragmatech.digital](mailto:philip@pragmatech.digital)
+<div class="center"><a href="https://www.linkedin.com/in/rieckpil">LinkedIn (Philip Riecks)</a></div>
