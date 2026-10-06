@@ -24,17 +24,30 @@ style: |
   .phase ul { list-style: none; padding: 0; margin: 0; }
   .phase li { margin: 0.35em 0; font-size: 0.85em; }
   .phases.two { grid-template-columns: repeat(2, 1fr); } .phases.two .phase { min-height: 300px; font-size: 1.2em; }
+  .phases.three { grid-template-columns: repeat(3, 1fr); } .phases.three .phase { min-height: 280px; font-size: 1.1em; }
+  .phase p { text-align: center; margin: 0.8em 0 0; font-size: 0.85em; }
+  .flow.mini { margin: 0.6em 0 0; gap: 8px; } .flow.mini .sketch { font-size: 1em; padding: 0.4em 0.7em; }
   .phase.hot { background: var(--pt-bg-1); box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.25), 3px 4px 0 rgba(15, 23, 42, 0.12); }
   .flow.xl { gap: 22px; } .flow.xl .sketch { font-size: 1.15em; padding: 0.7em 1em; } .flow.xl .arrow { font-size: 2.2em; }
   .flow.nw { flex-wrap: nowrap; } .flow.nw .sketch { font-size: 0.95em; padding: 0.5em 0.6em; } .flow.nw .arrow { font-size: 1.6em; }
   .flow.nw.big .sketch { font-size: 1.2em; padding: 0.8em 1em; }
+  .hub { display: grid; grid-template-columns: 1fr 0.55fr 1.2fr 0.55fr 1fr; grid-template-rows: auto auto auto auto auto; align-items: center; gap: 2px 8px; margin-top: 0.1em; font-family: 'Architects Daughter', cursive; }
+  .hub .sketch { box-sizing: border-box; font-size: 1em; padding: 0.4em 0.3em; }
+  .hub .sketch small { font-size: 0.68em; }
+  .hub .agent { font-size: 1.25em; padding: 0.6em 0.3em; border-width: 4px; }
+  .hub .link { text-align: center; font-size: 0.78em; line-height: 1.1; color: var(--pt-link); }
+  .hub .link b { display: block; font-size: 1.4em; line-height: 1; }
+  .hub .gh { grid-column: 3; grid-row: 1; } .hub .l1 { grid-column: 3; grid-row: 2; } .hub .tests { grid-column: 1; grid-row: 3; } .hub .l2 { grid-column: 2; grid-row: 3; }
+  .hub .agent { grid-column: 3; grid-row: 3; } .hub .l3 { grid-column: 4; grid-row: 3; } .hub .browser { grid-column: 5; grid-row: 3; } .hub .l4 { grid-column: 3; grid-row: 4; } .hub .app { grid-column: 3; grid-row: 5; }
   .flow.bad .sketch { border-color: #b91c1c; color: #b91c1c; }
   .ribbon { margin-top: 0.8em; padding: 0.5em 1em; text-align: center; font-family: 'Architects Daughter', cursive; font-size: 1.2em; border: 3px dashed var(--pt-link); border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px; color: var(--pt-link); }
   .spans { font-family: 'Architects Daughter', cursive; margin-top: 0.5em; }
   .spans .row { display: flex; align-items: center; gap: 12px; margin: 10px 0; font-size: 1.05em; }
-  .spans .label { width: 300px; white-space: nowrap; text-align: right; }
-  .spans .bar { box-sizing: border-box; height: 38px; border: 2.5px solid var(--pt-heading); background: var(--pt-bg-1); border-radius: 18px 8px 22px 8px / 8px 20px 8px 18px; padding: 0 0.6em; display: flex; align-items: center; font-size: 0.8em; color: var(--pt-muted); }
+  .spans .label { box-sizing: border-box; width: 500px; white-space: nowrap; text-align: left; font-size: 0.78em; }
+  .spans .bar { box-sizing: border-box; height: 38px; border: 2.5px solid var(--pt-heading); background: var(--pt-bg-1); border-radius: 18px 8px 22px 8px / 8px 20px 8px 18px; padding: 0 0.6em; display: flex; align-items: center; white-space: nowrap; font-size: 0.8em; color: var(--pt-muted); }
   .spans .bar.slow { border-color: #b91c1c; color: #b91c1c; background: #fef2f2; }
+  .spans .row:nth-child(1) .bar { margin-left: 0%; width: 100%; } .spans .row:nth-child(2) .bar { margin-left: 2%; width: 96%; } .spans .row:nth-child(3) .bar { margin-left: 4%; width: 70%; } .spans .row:nth-child(4) .bar { margin-left: 7%; width: 64%; } .spans .row:nth-child(5) .bar { margin-left: 76%; width: 22%; }
+  .spans .row:nth-child(2) .label { padding-left: 28px; } .spans .row:nth-child(3) .label { padding-left: 56px; } .spans .row:nth-child(4) .label { padding-left: 84px; } .spans .row:nth-child(5) .label { padding-left: 56px; }
   .spans .track { flex: 1; }
 
 ---
@@ -129,22 +142,6 @@ Notes:
 
 ---
 
-<!--
-Notes:
-- Source: DORA Core Model, as summarized on pragmatech.digital. Fast feedback is a capability that predicts delivery performance.
--->
-
-## Backed by the DORA Research
-
-![h:20%](assets/dora-core-summary.png)
-
-DORA's core model puts **fast feedback** next to fast flow and a climate for learning.
-
-- These capabilities predict **software delivery performance**
-- Delivery performance predicts **organizational performance** and well-being
-
----
-
 <!-- _class: light -->
 
 <!--
@@ -203,19 +200,21 @@ Notes:
 
 <!--
 Notes:
-- TODO: create the Mentimeter, add code and QR code (assets/mentimeter-qr-datev.png), then replace the TODO below.
-- Suggested questions, as on the slide. Look at the live results together, then use them in the lifecycle part.
+- Give the room a few minutes to answer. Then look at the live results together and use them in the lifecycle part.
+- TODO: check that the three questions in the Mentimeter match this slide.
 -->
+
+![bg right:36% h:420](assets/mentimeter-datev-coding-festival-2k26-padded.png)
 
 ## Help Me Understand Your Process
 
-Go to [menti.com](https://www.menti.com/) and enter the code **TODO**. Three anonymous questions:
+Go to [menti.com](https://www.menti.com/) and enter the code **1354 9993**.
 
-<div class="flow nw xl big">
-  <div class="sketch accent">1<small>How long from commit to production?</small></div>
-  <div class="sketch alt">2<small>How do you stop a broken feature?</small></div>
-  <div class="sketch accent">3<small>What do you have when the pager rings?</small></div>
-</div>
+Three anonymous questions:
+
+1. How long from commit to production?
+2. How do you stop a broken feature?
+3. What do you have when the pager rings?
 
 ---
 
@@ -237,6 +236,22 @@ Notes:
 </div>
 
 <div class="ribbon">AI and skills across all four parts</div>
+
+---
+
+<!--
+Notes:
+- Source: DORA Core Model, as summarized on pragmatech.digital. Fast feedback is a capability that predicts delivery performance.
+-->
+
+## Backed by the DORA Research
+
+![h:20%](assets/dora-core-summary.png)
+
+DORA's core model puts **fast feedback** next to fast flow and a climate for learning.
+
+- These capabilities predict **software delivery performance**
+- Delivery performance predicts **organizational performance** and well-being
 
 ---
 
@@ -278,6 +293,41 @@ Notes:
   <div class="phase hot"><h3>Fast</h3><ul><li>Parallelization</li><li>Context caching</li><li>Testcontainers optimizations</li><li><em>high level, next slides</em></li></ul></div>
   <div class="phase"><h3>Reliable</h3><ul><li>Needs <strong>knowledge</strong> and <strong>judgment</strong></li><li>What to test, which slice, no flaky tests</li><li>Mutation testing</li><li>Best practices become <strong>skills</strong></li></ul></div>
 </div>
+
+---
+
+<!-- _class: light -->
+
+<!--
+Notes:
+- Visuals reused from the talk Top 5 Spring Boot Testing Mistakes. Results are from one of my clients.
+-->
+
+## The No. #1 Spring Test Hidden Gem
+
+- Starting the `ApplicationContext` costs test execution time
+- Every context launch (sliced or full) takes multiple seconds
+- Spring Test fixes this with: **TestContext Context Caching**
+
+Results from one of my clients:
+
+![center w:1100](assets/context-cache-improvements.png)
+
+---
+
+<!-- _class: light -->
+
+## Context Caching in a Nutshell
+
+```java
+// DefaultContextCache.java
+private final Map<MergedContextConfiguration, ApplicationContext> contextMap =
+  Collections.synchronizedMap(new LinkedHashMap<>(32, 0.75f, true));
+```
+
+- Spring Test builds a unique `ApplicationContext` configuration from profiles, properties, classes, etc. (`MergedContextConfiguration`)
+- If a later test needs the exact same configuration, Spring hands over a "hot" context
+- Goal: as few configuration variants as possible, as many cache hits as possible
 
 ---
 
@@ -327,23 +377,41 @@ Notes:
 
 <!--
 Notes:
-- Mutation testing answers: would my tests notice a bug? PIT changes the code (flips a condition, removes a call) and runs the tests. A surviving mutant is a gap. Great check for AI-written tests.
+- High coverage can give a false sense of security. Ask: would any test fail if one of these conditions were wrong?
 -->
 
-## Mutation Testing: Do Your Tests Notice Bugs?
+## Let's Challenge Code Coverage
 
-<div class="flow nw xl">
-  <div class="sketch">Your code</div>
-  <div class="arrow">→</div>
-  <div class="sketch accent">PIT changes it<small>flip a condition, drop a call</small></div>
-  <div class="arrow">→</div>
-  <div class="sketch">Run the tests</div>
-</div>
+Imagine a set of unit tests for this isolated business logic:
 
-<div class="flow nw xl">
-  <div class="sketch accent">Test fails = mutant killed<small>the test has teeth</small></div>
-  <div class="sketch alt" style="border-color:#b91c1c;color:#b91c1c">Tests pass = mutant survived<small>a gap in your safety net</small></div>
-</div>
+```java
+public Long registerUser(int age, String username) {
+
+  if (age <= 18) {
+    throw new IllegalArgumentException("User must be at least 18 years old");
+  }
+
+  if ("ADMIN".equalsIgnoreCase(username)) {
+    throw new IllegalArgumentException("Username 'ADMIN' is not allowed");
+  }
+
+  // ...
+
+}
+```
+
+---
+
+<!-- _class: light -->
+
+<!--
+Notes:
+- PIT changes the code (flips a condition, changes a return value) and runs the tests. A failing test kills the mutant. A surviving mutant is a blind spot in the safety net. Great check for AI-written tests. Run it incrementally, only for changed code.
+-->
+
+## Idea: Introduce Regressions to Verify Test Quality
+
+![center](assets/mutation-testing-explained-corrected.png)
 
 ---
 
@@ -368,6 +436,31 @@ Notes:
 ```
 
 Rules, best practices and anti-patterns, written down **once**. The agent follows **your** judgment.
+
+---
+
+<!-- _class: light -->
+
+<!--
+Notes:
+- Adapted from Prompt It Right. The agent reaches the CI state (GitHub MCP), the browser (Playwright MCP), the tests (shell) and the running application itself. No copy and paste between you and the agent. The human reviews every step: a tight loop, in seconds, not days.
+-->
+
+## Build with a Tight Feedback Loop: Agent and Human
+
+<div class="hub">
+  <div class="sketch gh">CI<small>PRs, pipeline runs, job logs</small></div>
+  <div class="link l1"><b>&#8597;</b>GitHub MCP</div>
+  <div class="sketch tests">Tests<small>./mvnw test</small></div>
+  <div class="link l2"><b>&#8596;</b>shell</div>
+  <div class="sketch accent agent">Agent<small>plan, code, test, fix</small></div>
+  <div class="link l3"><b>&#8596;</b>Playwright MCP</div>
+  <div class="sketch browser">Browser<small>rendered page, screenshots</small></div>
+  <div class="link l4"><b>&#8597;</b>spring-boot:run</div>
+  <div class="sketch alt app">Application, local<small>http://localhost:8080</small></div>
+</div>
+
+<div class="ribbon">You review every step: a tight loop, seconds instead of days</div>
 
 ---
 
@@ -438,18 +531,54 @@ Notes:
 
 ---
 
-<!-- _class: light reveal cards3 -->
+<!-- _class: light -->
 
 <!--
 Notes:
-- Rolling: replace instances step by step. Blue/green: two environments, switch traffic, switch back if needed. A/B or canary release: a small share of traffic gets the new version first.
+- Focus on a fast deployment. Rolling update with 2-3 Spring Boot containers: start the new version, wait for the health check, shift traffic, stop the old container, repeat. Target: whole rollout in about 5-8 minutes, the faster the better. Slow startup is a cost here: use the context and startup optimizations you know. Also possible: blue/green (two environments, switch traffic) and canary or A/B (small share of traffic first).
 -->
 
-## Fast Deployment Strategies
+## Fast Deployments: Rolling Update
 
-* **Rolling update**<small>replace instances step by step</small>
-* **Blue / Green**<small>two environments, switch traffic</small>
-* **A/B and canary release**<small>a small share of traffic first</small>
+<div class="phases three">
+  <div class="phase"><h3>1 · Start v2</h3>
+    <div class="flow nw mini"><div class="sketch">v1</div><div class="sketch">v1</div><div class="sketch">v1</div><div class="sketch accent">v2</div></div>
+    <p>New container starts, health check turns green</p></div>
+  <div class="phase"><h3>2 · Swap</h3>
+    <div class="flow nw mini"><div class="sketch">v1</div><div class="sketch">v1</div><div class="sketch accent">v2</div></div>
+    <p>Traffic shifts, one old container stops</p></div>
+  <div class="phase"><h3>3 · Repeat</h3>
+    <div class="flow nw mini"><div class="sketch accent">v2</div><div class="sketch accent">v2</div><div class="sketch accent">v2</div></div>
+    <p>All 2-3 containers run the new version</p></div>
+</div>
+
+<div class="ribbon">The whole rollout in ~5-8 minutes. The faster, the better.</div>
+
+---
+
+<!-- _class: light -->
+
+<!--
+Notes:
+- A fast deployment makes small, frequent deployments cheap. Feature flags then decouple the deployment from the release: the code is in production but switched off, and we release when we are ready.
+-->
+
+## Decouple Deployment from Release
+
+<div class="flow nw xl">
+  <div class="sketch">Deploy<small>new code in production, feature OFF</small></div>
+  <div class="arrow">→</div>
+  <div class="sketch accent">Release<small>flip the flag: key users first</small></div>
+  <div class="arrow">→</div>
+  <div class="sketch accent alt">Everyone<small>gradual rollout, kill switch ready</small></div>
+</div>
+
+<div class="flow nw xl">
+  <div class="sketch">~5-8 min<small>deploy small and often</small></div>
+  <div class="sketch alt">seconds<small>release and undo</small></div>
+</div>
+
+<div class="ribbon">Deploy small and often. Release when you are ready.</div>
 
 ---
 
@@ -459,7 +588,7 @@ Notes:
 Notes:
 - Togglz is a Java library with a Spring Boot starter and an admin console (dashboard). You can switch features on and off at runtime and use activation strategies, for example by username, by role or gradual rollout. Verify the exact strategy names against the current docs before the talk.
 - More advanced: LaunchDarkly (managed service, targeting, experiments).
-- TODO: check the Togglz version and starter coordinates for Spring Boot 4.
+- Verified in the demo project of this repo: Togglz 4.6.4 with the Spring Boot starter and togglz-console runs on Spring Boot 4.1.1.
 -->
 
 ## Feature Flags with Togglz
@@ -484,18 +613,14 @@ Dashboard: switch on for **key users** or **roles** first, then everyone. More a
 
 <!--
 Notes:
-- Official screenshot from togglz.org (Togglz 2.0, old look, the console is still the same idea). The strategies visible here: gradual rollout (10 percent) and users by name. Credit togglz.org. TODO: replace with a fresh screenshot of the demo if time allows.
+- Own screenshot of the demo project in this repository (Spring Boot 4.1.1, Java 21, Togglz 4.6.4, togglz-console). Strategies shown: users by name and gradual rollout. Run it with: JAVA_HOME=<jdk21> ./mvnw spring-boot:run and open /togglz-console/index.
 -->
 
 ## The Togglz Admin Console
 
-![bg right:50% fit](assets/togglz-admin-console.png)
+![center w:1040](assets/togglz-admin-console.png)
 
-- Every feature with its **status**
-- **Strategy** per feature: gradual rollout, users by name, roles
-- Switch **on or off at runtime**, no deployment
-
-<small>Screenshot: togglz.org</small>
+**Status** and **strategy** per feature: key users first, gradual rollout, switch **at runtime** without a deployment.
 
 ---
 
@@ -535,11 +660,30 @@ Notes:
 
 <!--
 Notes:
-- Spring Boot supports structured logging out of the box (ECS, Logstash, GELF). MDC entries are added to the JSON. A filter puts the user ID into the MDC so every log line carries it. Clear the MDC afterwards.
+- The default Spring Boot log line: readable for a human, but hard for a machine. Which user? Which order? Which request? We grep and hope.
+-->
+
+## Default Log: Readable, but Hard to Query
+
+```text
+2026-10-06T10:15:32.481+02:00 ERROR 4711 --- [nio-8080-exec-3] d.p.shipfast.CheckoutService : Payment failed
+2026-10-06T10:15:32.502+02:00  WARN 4711 --- [nio-8080-exec-7] d.p.shipfast.CheckoutService : Retrying payment
+2026-10-06T10:15:33.114+02:00 ERROR 4711 --- [nio-8080-exec-3] d.p.shipfast.CheckoutService : Payment failed
+```
+
+Which **user**? Which **order**? Which **request**? You grep and hope.
+
+---
+
+<!-- _class: light -->
+
+<!--
+Notes:
+- Spring Boot supports structured logging out of the box (ECS, Logstash, GELF). MDC entries are added to the JSON as extra fields. A filter puts the user ID into the MDC so every log line carries it. Clear the MDC afterwards.
 - TODO: verify the property and field names with the Spring Boot version used in the demo.
 -->
 
-## Structured Logging and MDC
+## Structured Logging with MDC: JSON and Extra Fields
 
 ```yaml
 logging.structured.format.console: ecs
@@ -552,10 +696,16 @@ finally { MDC.clear(); }
 ```
 
 ```json
-{"log.level":"ERROR","message":"Payment failed","userId":"u-4711","trace.id":"4bf92f35"}
+{
+  "log.level": "ERROR",
+  "message": "Payment failed",
+  "userId": "u-4711",
+  "orderId": "o-815",
+  "trace.id": "4bf92f3577b34da6"
+}
 ```
 
-Now the log query `userId:u-4711` finds exactly what this user did.
+The log query `userId:u-4711` now finds exactly what this user did.
 
 ---
 
@@ -563,20 +713,20 @@ Now the log query `userId:u-4711` finds exactly what this user did.
 
 <!--
 Notes:
-- Illustrative trace: one request across the HTTP layer, service, database and an external call. The slow span shows where the problem is. Replace with a real screenshot (Grafana Tempo, Jaeger, Zipkin) from the demo.
+- Illustrative trace: one HTTP POST on our endpoint, an HTTP call to the neighbor team, then our own DB access. Spans are indented by nesting. The slow span sits in the neighbor team's service: without tracing we would search in our own code. Replace with a real screenshot (Grafana Tempo, Jaeger, Zipkin) from the demo if possible.
 -->
 
 ## Distributed Tracing: Where Is the Problem?
 
 <div class="spans">
-  <div class="row"><div class="label">POST /orders</div><div class="track"><div class="bar" style="width:100%">2.4 s</div></div></div>
-  <div class="row"><div class="label">OrderService.place()</div><div class="track"><div class="bar" style="width:92%;margin-left:4%">2.3 s</div></div></div>
-  <div class="row"><div class="label">SELECT customer</div><div class="track"><div class="bar" style="width:6%;margin-left:6%"></div></div></div>
-  <div class="row"><div class="label">POST payment-service</div><div class="track"><div class="bar slow" style="width:78%;margin-left:14%">2.0 s</div></div></div>
-  <div class="row"><div class="label">INSERT order</div><div class="track"><div class="bar" style="width:5%;margin-left:93%"></div></div></div>
+  <div class="row"><div class="label">POST /orders</div><div class="track"><div class="bar">480 ms</div></div></div>
+  <div class="row"><div class="label">OrderService.placeOrder()</div><div class="track"><div class="bar">465 ms</div></div></div>
+  <div class="row"><div class="label">HTTP POST payment-service (neighbor team)</div><div class="track"><div class="bar slow">340 ms</div></div></div>
+  <div class="row"><div class="label">POST /payments (their endpoint)</div><div class="track"><div class="bar slow">310 ms</div></div></div>
+  <div class="row"><div class="label">INSERT INTO orders (our DB)</div><div class="track"><div class="bar">65 ms</div></div></div>
 </div>
 
-From the HTTP call through the services and the database and back: **one trace shows the slow span**.
+One trace crosses the **team boundary**: the slow span sits in the **neighbor team's** service, not in our code.
 
 ---
 
@@ -600,6 +750,26 @@ Notes:
 </div>
 
 <div class="ribbon">A runbook: symptom · impact · first checks with deep links to logs, traces and dashboards · mitigation · escalation</div>
+
+---
+
+<!-- _class: light -->
+
+<!--
+Notes:
+- A real sample runbook, from our book Stratospheric. Open the link live. Point out: diagnosis steps with deep links, and the mitigation 'payment provider unavailable: disable the feature' which is exactly a feature flag. Mitigation for a bad release: revert and redeploy.
+-->
+
+## Example Runbook: ELB 5xx Alarm
+
+<div class="phases">
+  <div class="phase"><h3>Meaning</h3><ul><li>Users see a high rate of HTTP 5xx errors</li></ul></div>
+  <div class="phase"><h3>Impact</h3><ul><li>Users cannot work with the app</li><li>Clients cannot sync</li></ul></div>
+  <div class="phase hot"><h3>Diagnosis</h3><ul><li>Ongoing platform incident?</li><li>Logs</li><li>Operational dashboard</li></ul></div>
+  <div class="phase hot"><h3>Mitigation</h3><ul><li>Provider down: disable the feature</li><li>Bad release: revert and redeploy</li></ul></div>
+</div>
+
+[github.com/stratospheric-dev/stratospheric/.../elb5xxAlarm.md](https://github.com/stratospheric-dev/stratospheric/blob/main/docs/runbooks/elb5xxAlarm.md)
 
 ---
 
@@ -677,34 +847,6 @@ Notes:
 
 ---
 
-<!-- _class: light statement reveal -->
-<!-- _paginate: false -->
-
-# You can delegate the typing.
-* You can't delegate the ownership.
-* **You** get paged at 3 AM.
-* Invest in the processes that give you **confidence in every commit**.
-
----
-
-<!-- _class: light -->
-
-<!--
-Notes:
-- Soft pointer. Replace or remove what does not fit the DATEV audience.
--->
-
-## Learn More
-
-![bg right:36% fit](assets/agentic-testing-course.png)
-
-- **Newsletter and blog** on testing Spring Boot applications: [rieckpil.de](https://rieckpil.de)
-- Online course: **Agentic Testing for Spring Boot**
-- Spring Test Profiler for context caching insights
-- TODO: add links to Togglz, PIT and the demo repository
-
----
-
 <!-- _class: light closing -->
 <!-- _paginate: false -->
 <!-- _header: '' -->
@@ -716,9 +858,9 @@ Notes:
 
 Thank you! Questions?
 
+The **Spring Boot Testing Newsletter**: best practices, recipes and quick wins in your inbox - **rieckpil.de/newsletter**
+
+![h:170](assets/newsletter-qr.png)
+
 - [LinkedIn: linkedin.com/in/rieckpil](https://www.linkedin.com/in/rieckpil)
 - [Mail: philip@pragmatech.digital](mailto:philip@pragmatech.digital)
-
-Spring Boot testing newsletter: **rieckpil.de/newsletter**
-
-![h:200](assets/newsletter-qr.png)

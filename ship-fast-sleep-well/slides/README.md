@@ -22,3 +22,13 @@ marp content.md --images png -o preview/slide.png < /dev/null   # PNG per slide 
 - Update `<!-- header: '...' -->` at each section start.
 - Speaker notes: `<!-- Notes: ... -->` above the slide.
 - Slide marker `TODO:` means content is not written yet. Find them with `grep -n TODO content.md`.
+
+## Hand-drawn pictures (slide 3 and slide 5)
+
+`visuals/scenes.html` draws the horror and target pictures in HTML and SVG. Export them to `assets/horror-friday.png` and `assets/target-state.png` with:
+
+```bash
+node visuals/export-scenes.mjs
+```
+
+Needs Google Chrome and the global Marp CLI (it uses the `puppeteer-core` of Marp).
