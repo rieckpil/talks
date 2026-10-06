@@ -23,6 +23,7 @@ style: |
   .phase h3 { margin: 0 0 0.4em; color: var(--pt-link); font-size: 1.35em; text-align: center; }
   .phase ul { list-style: none; padding: 0; margin: 0; }
   .phase li { margin: 0.35em 0; font-size: 0.85em; }
+  .phases.two { grid-template-columns: repeat(2, 1fr); } .phases.two .phase { min-height: 300px; font-size: 1.2em; }
   .phase.hot { background: var(--pt-bg-1); box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.25), 3px 4px 0 rgba(15, 23, 42, 0.12); }
   .flow.xl { gap: 22px; } .flow.xl .sketch { font-size: 1.15em; padding: 0.7em 1em; } .flow.xl .arrow { font-size: 2.2em; }
   .flow.nw { flex-wrap: nowrap; } .flow.nw .sketch { font-size: 0.95em; padding: 0.5em 0.6em; } .flow.nw .arrow { font-size: 1.6em; }
@@ -128,6 +129,22 @@ Notes:
 
 ---
 
+<!--
+Notes:
+- Quelle: DORA Core Model, zusammengefasst auf pragmatech.digital. Fast Feedback ist eine Capability, die Delivery Performance vorhersagt.
+-->
+
+## Belegt durch die DORA-Forschung
+
+![h:20%](assets/dora-core-summary.png)
+
+Das DORA Core Model stellt **Fast Feedback** neben Fast Flow und ein Klima des Lernens.
+
+- Diese Capabilities sagen die **Software Delivery Performance** voraus
+- Delivery Performance sagt die **Organizational Performance** und das Wohlbefinden voraus
+
+---
+
 <!-- _class: light -->
 
 <!--
@@ -151,7 +168,7 @@ Notes:
 
 ---
 
-![bg right:33% fit](assets/germany-herzogenaurach-munich.png)
+![bg right:33%](assets/herzogenaurach.jpg)
 
 ### Über Philip
 
@@ -159,10 +176,26 @@ Notes:
 - Fokus auf **Testing** von Java- und Spring-Boot-Anwendungen, Blog und Content 🍃
 - Gründer der [PragmaTech GmbH](https://pragmatech.digital/) - **Entwickler befähigen, häufig auszuliefern**, mit **mehr Vertrauen**
 
+- Nicht zum ersten Mal bei DATEV: **DATEV Coding Festival 2025** mit einem ganztägigen Workshop zu Spring Boot Testing, und vor zwei Wochen die **DATEV Software Craft Community**, ebenfalls zu Spring Boot Testing
+
 <!--
 Notes:
 - Herzogenaurach liegt nahe Nürnberg, die DATEV-Leute kennen es. Kurz halten.
 -->
+
+---
+
+<!-- _class: light reveal -->
+
+<!--
+Notes:
+- Eine Zeile pro Klick (nur im HTML-Deck). Erwartung setzen: keine Theorie und kein Framework, sondern was ich in echten Teams funktionieren und scheitern sah, auch in Nächten mit Bereitschaft.
+-->
+
+## Was dich erwartet: Best Practices aus der Praxis
+* Was ich selbst in **10 Jahren** in mehreren Teams gesehen habe
+* Auch aus eigener Erfahrung **on call**
+* Nimm mit, was zu deinem Team passt
 
 ---
 
@@ -221,19 +254,30 @@ Notes:
 
 ---
 
-<!-- _class: light reveal cards4 -->
+<!-- _class: light statement -->
 
 <!--
 Notes:
-- Vier Hebel, um eine Spring-Boot-Testsuite schnell und aussagekräftig zu halten. Die nächsten Folien gehen tiefer.
+- Die Testsuite ist das Sicherheitsnetz. Ein Netz mit Löchern oder ein Netz, dessen Prüfung eine Stunde dauert, fängt dich nicht auf. Es muss schnell UND zuverlässig sein.
 -->
 
-## Vier Hebel für deine Testsuite
+# Die Testsuite ist dein **Sicherheitsnetz**. Sie muss **schnell** und **zuverlässig** sein.
 
-* **Context caching**<small>Spring nur einmal starten</small>
-* **Parallelisierung**<small>alle Kerne nutzen</small>
-* **Testcontainers**<small>echte Infrastruktur, einmal gestartet</small>
-* **Mutation testing**<small>finden die Tests Bugs?</small>
+---
+
+<!-- _class: light -->
+
+<!--
+Notes:
+- Schnell: die drei Hebel zeigen wir nur auf hohem Niveau, auf den nächsten Folien. Zuverlässig: das braucht Wissen und Judgment. Was testen, welcher Slice, wie vermeidet man flaky Tests. Diese Best Practices schreibe ich als Skills auf.
+-->
+
+## Schnell und zuverlässig
+
+<div class="phases two">
+  <div class="phase hot"><h3>Schnell</h3><ul><li>Parallelisierung</li><li>Context caching</li><li>Testcontainers-Optimierungen</li><li><em>high level, nächste Folien</em></li></ul></div>
+  <div class="phase"><h3>Zuverlässig</h3><ul><li>Braucht <strong>Wissen</strong> und <strong>Judgment</strong></li><li>Was testen, welcher Slice, keine flaky Tests</li><li>Mutation testing</li><li>Best Practices werden zu <strong>Skills</strong></li></ul></div>
+</div>
 
 ---
 
@@ -300,6 +344,30 @@ Notes:
   <div class="sketch accent">Test schlägt fehl = Mutant getötet<small>der Test hat Zähne</small></div>
   <div class="sketch alt" style="border-color:#b91c1c;color:#b91c1c">Tests grün = Mutant überlebt<small>eine Lücke im Sicherheitsnetz</small></div>
 </div>
+
+---
+
+<!-- _class: light -->
+
+<!--
+Notes:
+- Zuverlässige Tests brauchen Judgment. Meines habe ich als Skill-Library für Spring Boot Testing aufgeschrieben, damit ein KI-Agent dieselben Regeln befolgt wie ich. Gleiche Struktur wie im Talk Prompt It Right.
+-->
+
+## Meine Skill-Library für Spring Boot Testing
+
+```text
+.claude/skills/spring-boot-testing/
+├── unit-testing            schnelle Tests ohne Context-Ballast
+├── slice-testing           passend große Spring-Context-Slices
+├── slice-web-testing       Web-Schicht mit @WebMvcTest
+├── integration-testing     Full-Context-Tests, die schnell bleiben
+├── testcontainers-setup    echte Infrastruktur, ein Container pro Image
+├── e2e-ui-testing          User Journeys gegen die laufende App
+└── test-setup-review       erkennt Test-Anti-Patterns für dich
+```
+
+Regeln, Best Practices und Anti-Patterns, **einmal** aufgeschrieben. Der Agent folgt **deinem** Judgment.
 
 ---
 
@@ -409,6 +477,25 @@ public enum Features implements Feature {
 ```
 
 Dashboard: erst für **Key User** oder **Rollen** aktivieren, dann für alle. Fortgeschrittener: **LaunchDarkly**.
+
+---
+
+<!-- _class: light -->
+
+<!--
+Notes:
+- Offizieller Screenshot von togglz.org (Togglz 2.0, alter Look, die Konsole funktioniert noch gleich). Sichtbare Strategien: Gradual Rollout (10 Prozent) und Users by name. Quelle togglz.org nennen. TODO: bei Zeit durch einen frischen Screenshot der Demo ersetzen.
+-->
+
+## Die Togglz Admin Console
+
+![bg right:50% fit](assets/togglz-admin-console.png)
+
+- Jedes Feature mit seinem **Status**
+- **Strategie** pro Feature: Gradual Rollout, Users by name, Rollen
+- **Zur Laufzeit** an- oder ausschalten, ohne Deployment
+
+<small>Screenshot: togglz.org</small>
 
 ---
 
@@ -625,8 +712,13 @@ Notes:
 
 ![bg right:33%](assets/end.jpg)
 
-# Danke! Fragen?
+# Fearless Shipping!
 
-Ship Fast, Sleep Well.
+Danke! Fragen?
 
-TODO: Kontakt, Newsletter-QR-Code und Link zu den Folien
+- [LinkedIn: linkedin.com/in/rieckpil](https://www.linkedin.com/in/rieckpil)
+- [Mail: philip@pragmatech.digital](mailto:philip@pragmatech.digital)
+
+Spring-Boot-Testing-Newsletter: **rieckpil.de/newsletter**
+
+![h:200](assets/newsletter-qr.png)

@@ -23,6 +23,7 @@ style: |
   .phase h3 { margin: 0 0 0.4em; color: var(--pt-link); font-size: 1.35em; text-align: center; }
   .phase ul { list-style: none; padding: 0; margin: 0; }
   .phase li { margin: 0.35em 0; font-size: 0.85em; }
+  .phases.two { grid-template-columns: repeat(2, 1fr); } .phases.two .phase { min-height: 300px; font-size: 1.2em; }
   .phase.hot { background: var(--pt-bg-1); box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.25), 3px 4px 0 rgba(15, 23, 42, 0.12); }
   .flow.xl { gap: 22px; } .flow.xl .sketch { font-size: 1.15em; padding: 0.7em 1em; } .flow.xl .arrow { font-size: 2.2em; }
   .flow.nw { flex-wrap: nowrap; } .flow.nw .sketch { font-size: 0.95em; padding: 0.5em 0.6em; } .flow.nw .arrow { font-size: 1.6em; }
@@ -128,6 +129,22 @@ Notes:
 
 ---
 
+<!--
+Notes:
+- Source: DORA Core Model, as summarized on pragmatech.digital. Fast feedback is a capability that predicts delivery performance.
+-->
+
+## Backed by the DORA Research
+
+![h:20%](assets/dora-core-summary.png)
+
+DORA's core model puts **fast feedback** next to fast flow and a climate for learning.
+
+- These capabilities predict **software delivery performance**
+- Delivery performance predicts **organizational performance** and well-being
+
+---
+
 <!-- _class: light -->
 
 <!--
@@ -151,7 +168,7 @@ Notes:
 
 ---
 
-![bg right:33% fit](assets/germany-herzogenaurach-munich.png)
+![bg right:33%](assets/herzogenaurach.jpg)
 
 ### About Philip
 
@@ -159,10 +176,26 @@ Notes:
 - Focus on **testing** Java and Spring Boot applications, blogging and content creation 🍃
 - Founder of [PragmaTech GmbH](https://pragmatech.digital/) - **Enabling Developers to Frequently Deliver** Software with **More Confidence**
 
+- Here before: **DATEV Coding Festival 2025** with a full-day workshop on Spring Boot testing, and two weeks ago the **DATEV Software Craft Community**, also on Spring Boot testing
+
 <!--
 Notes:
 - Herzogenaurach is close to Nuremberg, the DATEV crowd knows it. Keep it short.
 -->
+
+---
+
+<!-- _class: light reveal -->
+
+<!--
+Notes:
+- One line per click (HTML deck only). Set expectations: this is not theory and not a framework, it is what I saw work and fail in real teams, including nights on call.
+-->
+
+## What to Expect: Best Practices from the Field
+* What I have seen myself in **10 years** in multiple teams
+* Including **being on call** myself
+* Take what fits your team
 
 ---
 
@@ -221,19 +254,30 @@ Notes:
 
 ---
 
-<!-- _class: light reveal cards4 -->
+<!-- _class: light statement -->
 
 <!--
 Notes:
-- Four levers to keep a Spring Boot test suite fast and meaningful. Next slides go deeper.
+- The test suite is the safety net. A net with holes or a net that takes an hour to check does not catch you. It must be fast AND reliable.
 -->
 
-## Four Levers for Your Test Suite
+# The test suite is your **safety net**. It must be **fast** and **reliable**.
 
-* **Context caching**<small>start Spring once</small>
-* **Parallelization**<small>use all your cores</small>
-* **Testcontainers**<small>real infra, started once</small>
-* **Mutation testing**<small>do tests catch bugs?</small>
+---
+
+<!-- _class: light -->
+
+<!--
+Notes:
+- Fast: we only look at the three levers on a high level, in the next slides. Reliable: this needs knowledge and judgment. What to test, which slice, how to avoid flaky tests. I write these best practices down as skills.
+-->
+
+## Fast and Reliable
+
+<div class="phases two">
+  <div class="phase hot"><h3>Fast</h3><ul><li>Parallelization</li><li>Context caching</li><li>Testcontainers optimizations</li><li><em>high level, next slides</em></li></ul></div>
+  <div class="phase"><h3>Reliable</h3><ul><li>Needs <strong>knowledge</strong> and <strong>judgment</strong></li><li>What to test, which slice, no flaky tests</li><li>Mutation testing</li><li>Best practices become <strong>skills</strong></li></ul></div>
+</div>
 
 ---
 
@@ -300,6 +344,30 @@ Notes:
   <div class="sketch accent">Test fails = mutant killed<small>the test has teeth</small></div>
   <div class="sketch alt" style="border-color:#b91c1c;color:#b91c1c">Tests pass = mutant survived<small>a gap in your safety net</small></div>
 </div>
+
+---
+
+<!-- _class: light -->
+
+<!--
+Notes:
+- Reliable tests need judgment. I wrote mine down as a skill library for Spring Boot testing, so an AI agent follows the same rules I would. Same structure as in the Prompt It Right talk.
+-->
+
+## My Skill Library for Spring Boot Testing
+
+```text
+.claude/skills/spring-boot-testing/
+├── unit-testing            fast tests without context bloat
+├── slice-testing           right-sized Spring context slices
+├── slice-web-testing       web layer with @WebMvcTest
+├── integration-testing     full-context tests that stay fast
+├── testcontainers-setup    real infrastructure, one container per image
+├── e2e-ui-testing          user journeys against the running app
+└── test-setup-review       flags test anti-patterns for you
+```
+
+Rules, best practices and anti-patterns, written down **once**. The agent follows **your** judgment.
 
 ---
 
@@ -409,6 +477,25 @@ public enum Features implements Feature {
 ```
 
 Dashboard: switch on for **key users** or **roles** first, then everyone. More advanced: **LaunchDarkly**.
+
+---
+
+<!-- _class: light -->
+
+<!--
+Notes:
+- Official screenshot from togglz.org (Togglz 2.0, old look, the console is still the same idea). The strategies visible here: gradual rollout (10 percent) and users by name. Credit togglz.org. TODO: replace with a fresh screenshot of the demo if time allows.
+-->
+
+## The Togglz Admin Console
+
+![bg right:50% fit](assets/togglz-admin-console.png)
+
+- Every feature with its **status**
+- **Strategy** per feature: gradual rollout, users by name, roles
+- Switch **on or off at runtime**, no deployment
+
+<small>Screenshot: togglz.org</small>
 
 ---
 
@@ -625,8 +712,13 @@ Notes:
 
 ![bg right:33%](assets/end.jpg)
 
-# Thank you! Questions?
+# Fearless Shipping!
 
-Ship Fast, Sleep Well.
+Thank you! Questions?
 
-TODO: contact, newsletter QR code and slides link
+- [LinkedIn: linkedin.com/in/rieckpil](https://www.linkedin.com/in/rieckpil)
+- [Mail: philip@pragmatech.digital](mailto:philip@pragmatech.digital)
+
+Spring Boot testing newsletter: **rieckpil.de/newsletter**
+
+![h:200](assets/newsletter-qr.png)
