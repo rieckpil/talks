@@ -3,8 +3,8 @@
 # Usage: shared/scripts/sharable-pdf.sh <deck-dir> <output-pdf-name>
 # Example: shared/scripts/sharable-pdf.sh ship-fast-sleep-well slides-ship-fast-sleep-well.pdf
 #
-# Steps: swap image links to assets/generated/* (made by resize-images.sh, for the deck
-# and for shared/), build the PDF with Marp, then shrink it with Ghostscript.
+# Steps: swap image links to assets/generated/* (made by resize-images.sh for shared/,
+# and for the deck if it still has its own assets/), build the PDF with Marp, then shrink it with Ghostscript.
 # The deck's content.md is restored afterwards (also on errors).
 #
 # Optional per-deck file <deck-dir>/pdf-swaps.txt: one "<animated.gif> <still.png>" pair per
@@ -37,7 +37,7 @@ cd "$DECK_DIR"
 GENERATED_DIRS=("$DECK_DIR/assets/generated" "$SHARED_DIR/assets/generated")
 
 if [ ! -d "${GENERATED_DIRS[1]}" ] && [ ! -d "${GENERATED_DIRS[2]}" ]; then
-  echo "Warning: no resized images found. Run resize-images.sh for this deck and for shared/ first."
+  echo "Warning: no resized images found. Run resize-images.sh shared first."
   read -q "REPLY?Continue with original images? (y/n) " || exit 1
   echo
 fi
@@ -54,20 +54,20 @@ trap cleanup EXIT
 # "assets/x" -> "assets/generated/x" also covers "../../shared/assets/x".
 for generated_dir in "${GENERATED_DIRS[@]}"; do
   [ -d "$generated_dir" ] || continue
-  for img in "$generated_dir"/*(N.); do
-    filename=$(basename "$img")
-    sed -i '' "s|assets/$filename|assets/generated/$filename|g" "$MARKDOWN_FILE"
+  for img in "$generated_dir"/**/*(N.); do
+    relative_path="${img#$generated_dir/}"
+    sed -i '' "s|assets/$relative_path|assets/generated/$relative_path|g" "$MARKDOWN_FILE"
   done
 done
 
 if [ -f pdf-swaps.txt ]; then
   while read -r animated still; do
     [ -z "$animated" ] && continue
-    if [ -f "assets/$still" ]; then
+    if [ -f "assets/$still" ] || [ -f "$SHARED_DIR/assets/$still" ]; then
       sed -i '' "s|assets/$animated|assets/$still|g" "$MARKDOWN_FILE"
       echo "PDF: using $still in place of $animated"
     else
-      echo "! assets/$still missing - PDF will show the first frame of $animated"
+      echo "! $still missing in assets/ and shared/assets/ - PDF will show the first frame of $animated"
     fi
   done < pdf-swaps.txt
 fi

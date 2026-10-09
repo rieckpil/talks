@@ -14,7 +14,7 @@ footer: '![](../../shared/assets/logo.webp) Philip Riecks · [PragmaTech GmbH](h
 <!-- _footer: '' -->
 <!-- _backgroundColor: '#090d14' -->
 
-![bg fit](assets/datev-coding-craft-2026.png)
+![bg fit](../../shared/assets/datev-coding-craft-2026.png)
 
 ---
 
@@ -23,7 +23,7 @@ footer: '![](../../shared/assets/logo.webp) Philip Riecks · [PragmaTech GmbH](h
 <!-- _paginate: false -->
 <!-- _header: '' -->
 
-![bg left:33%](assets/stop-fighting-your-spring-boot-tests.jpg)
+![bg left:33%](../../shared/assets/stop-fighting-your-spring-boot-tests.jpg)
 
 # Stop **Fighting** Your Spring Boot Tests
 
@@ -50,7 +50,7 @@ Software Craft Community @ DATEV · September 22, 2026
 
 Go to [menti.com](https://www.menti.com/) and use the code **7735 0833** to **anonymously** submit answers:
 
-![center h:250](assets/mentimeter-datev-coding-craft-2026.png)
+![center h:250](../../shared/assets/mentimeter-datev-coding-craft-2026.png)
 
 Please answer the **first three questions**:
 
@@ -111,7 +111,7 @@ Notes:
 - Name the feeling first, then promise the diagnosis.
 -->
 
-![bg right:33%](assets/fight-back.jpg)
+![bg right:33%](../../shared/assets/fight-back.jpg)
 
 ## When Your **Spring Boot Tests** Fight Back
 
@@ -247,7 +247,7 @@ Notes:
 
 ## The `@SpringBootTest` Obsession
 
-![](assets/spring-boot-test-obsession-masked.png)
+![](../../shared/assets/spring-boot-test-obsession-masked.png)
 
 
 
@@ -276,7 +276,7 @@ A simplified decision table:
 <!-- _class: light section -->
 <!-- _paginate: false -->
 
-![bg right:40%](assets/speed.jpg)
+![bg right:40%](../../shared/assets/speed.jpg)
 
 ## Myth #2
 
@@ -324,7 +324,7 @@ Notes:
 
 ## Context Caching in Action
 
-![center h:470](assets/context-caching.gif)
+![center h:470](../../shared/assets/context-caching.gif)
 
 ---
 

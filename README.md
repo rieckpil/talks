@@ -11,7 +11,7 @@ Links:
 
 ## Slide tooling
 
-All Marp decks share one setup in [`shared/`](shared/): theme (`shared/theme/pragmatech.css`), engine, common images (`shared/assets/`), build scripts and a Remotion project for complex animations. A deck folder only holds its `slides/content.md` and its own images.
+All Marp decks share one setup in [`shared/`](shared/): theme (`shared/theme/pragmatech.css`), engine, all images (`shared/assets/`), build scripts and a Remotion project for complex animations. A deck folder only holds its `slides/content.md`, visual sources and PDFs.
 
 ```bash
 shared/scripts/new-deck.sh my-talk "My **Talk**" "Event 2027" "March 3, 2027" [banner.jpg]   # new deck

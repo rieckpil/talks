@@ -10,7 +10,7 @@ Run from this folder. Always add `< /dev/null` in scripts, or Marp waits for std
 marp -p -w content.md                                   # live preview
 marp content.md -o content.html < /dev/null             # HTML (transitions, presenter mode)
 marp content.md --images png -o preview/slide.png < /dev/null   # PNG per slide (gitignored)
-../../shared/scripts/resize-images.sh . && ../../shared/scripts/resize-images.sh ../../shared && ../../shared/scripts/sharable-pdf.sh . slides-devoxx-be-2026-10-05.pdf   # resizes images, swaps links, Ghostscript-reduces, restores content.md
+../../shared/scripts/resize-images.sh ../../shared && ../../shared/scripts/sharable-pdf.sh . slides-devoxx-be-2026-10-05.pdf   # resizes images, swaps links, Ghostscript-reduces, restores content.md
 ```
 
 ## House style

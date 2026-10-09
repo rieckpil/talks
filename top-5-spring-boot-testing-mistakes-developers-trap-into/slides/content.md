@@ -21,7 +21,7 @@ Notes:
 - Opener: Bozen, the town of this talk. Warm welcome before the title slide.
 -->
 
-![bg](assets/bolzano-town.jpg)
+![bg](../../shared/assets/bolzano-town.jpg)
 
 ---
 
@@ -29,7 +29,7 @@ Notes:
 <!-- _paginate: false -->
 <!-- _header: '' -->
 
-![bg left:36%](assets/cover-mouse-traps.png)
+![bg left:36%](../../shared/assets/cover-mouse-traps.png)
 
 # Top 5 Spring Boot Testing Mistakes **Developers Trap Into**
 
@@ -41,7 +41,7 @@ Tech Talks South Tyrol #14 · September 8, 2026
 
 <!-- footer: '![](../../shared/assets/logo.webp)' -->
 
-![bg h:500 right:33%](assets/philip-in-erlangen-map.jpg)
+![bg h:500 right:33%](../../shared/assets/philip-in-erlangen-map.jpg)
 
 ### About Philip
 
@@ -57,7 +57,7 @@ Tech Talks South Tyrol #14 · September 8, 2026
 
 Go to [menti.com](https://www.menti.com/) and use the code **2636 4022** to **anonymously** submit answers:
 
-![center h:250](assets/mentimeter-bozen.png)
+![center h:250](../../shared/assets/mentimeter-bozen.png)
 
 Please answer the **first three questions**:
 
@@ -118,7 +118,7 @@ Notes:
 - We are the mouse. The cheese is always a shortcut that feels great today.
 -->
 
-![bg](assets/agenda-mouse-traps.png)
+![bg](../../shared/assets/agenda-mouse-traps.png)
 
 ---
 
@@ -126,7 +126,7 @@ Notes:
 <!-- _class: light section -->
 <!-- _paginate: true -->
 
-![bg right:40%](assets/trap-card-1.png)
+![bg right:40%](../../shared/assets/trap-card-1.png)
 
 ## Testing Trap #1
 
@@ -173,7 +173,7 @@ A simplified decision table:
 <!-- _class: light section -->
 <!-- _paginate: true -->
 
-![bg right:40%](assets/trap-card-2.png)
+![bg right:40%](../../shared/assets/trap-card-2.png)
 
 ## Testing Trap #2
 
@@ -234,7 +234,7 @@ An [open-source Spring Test utility](https://github.com/PragmaTech-GmbH/spring-t
 <!-- _class: light section -->
 <!-- _paginate: false -->
 
-![bg right:40%](assets/trap-card-3.png)
+![bg right:40%](../../shared/assets/trap-card-3.png)
 
 ## Testing Trap #3
 
@@ -296,7 +296,7 @@ class OrderRepositoryTest {
 <!-- _class: light section -->
 <!-- _paginate: false -->
 
-![bg right:40%](assets/trap-card-4.png)
+![bg right:40%](../../shared/assets/trap-card-4.png)
 
 ## Testing Trap #4
 
@@ -367,7 +367,7 @@ void greenButMeaningless() {
 <!-- _class: light section -->
 <!-- _paginate: false -->
 
-![bg right:40%](assets/trap-card-5.png)
+![bg right:40%](../../shared/assets/trap-card-5.png)
 
 ## Testing Trap #5
 
@@ -428,7 +428,7 @@ public Long registerUser(int age, String username) {
 
 ---
 
-![bg](assets/summary-mouse-traps.png)
+![bg](../../shared/assets/summary-mouse-traps.png)
 
 ---
 
@@ -495,7 +495,7 @@ Notes:
 
 Get the slides here:
 
-![h:260 center](assets/slides-pdf-bozen.png)
+![h:260 center](../../shared/assets/slides-pdf-bozen.png)
 
 Reach out any time
 - [LinkedIn](https://www.linkedin.com/in/rieckpil) (Philip Riecks)

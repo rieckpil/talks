@@ -57,7 +57,7 @@ style: |
 <!-- _header: '' -->
 <!-- _footer: '' -->
 
-![bg fit](assets/datev-coding-festival.png)
+![bg fit](../../shared/assets/datev-coding-festival.png)
 
 ---
 
@@ -121,7 +121,7 @@ Notes:
 
 ---
 
-![bg right:33%](assets/herzogenaurach.jpg)
+![bg right:33%](../../shared/assets/herzogenaurach.jpg)
 
 ### Über Philip
 
@@ -158,7 +158,7 @@ Notes:
 - TODO: prüfen, ob die drei Fragen im Mentimeter zu dieser Folie passen.
 -->
 
-![bg right:36% h:420](assets/mentimeter-datev-coding-festival-2k26-padded.png)
+![bg right:36% h:420](../../shared/assets/mentimeter-datev-coding-festival-2k26-padded.png)
 
 ## Wie sieht es bei euch im Team aus?
 
@@ -288,7 +288,7 @@ Notes:
 - Projekt: https://github.com/PragmaTech-GmbH/spring-test-profiler (Version 0.3.0 im Demo-Projekt).
 -->
 
-![bg right:55% fit](assets/spring-test-profiler-report.png)
+![bg right:55% fit](../../shared/assets/spring-test-profiler-report.png)
 
 ## Spring Test Profiler
 
@@ -512,7 +512,7 @@ Notes:
 
 ## Die Togglz Admin Console
 
-![center w:1040](assets/togglz-admin-console.png)
+![center w:1040](../../shared/assets/togglz-admin-console.png)
 
 ---
 
@@ -689,7 +689,7 @@ Notes:
 - Wir können nicht alles vor Production testen. Canary-Tests sind End-to-End-Tests, die dauerhaft laufen, idealerweise in Production, mit einem eigenen Testuser. Sie geben echtes Feedback und lösen den Alert aus, bevor ein Kunde anruft.
 -->
 
-![bg right:34% fit](assets/canary-mine.png)
+![bg right:34% fit](../../shared/assets/canary-mine.png)
 
 ## Canary Testing in a Nutshell
 
@@ -797,6 +797,6 @@ Notes:
 
 Der **Spring Boot Testing Newsletter**: Best Practices, Recipes & Quick Wins direkt in dein Postfach - **rieckpil.de/newsletter**
 
-![center h:260](assets/newsletter-qr.png)
+![center h:260](../../shared/assets/newsletter-qr.png)
 
 <div class="center"><a href="https://www.linkedin.com/in/rieckpil">LinkedIn (Philip Riecks)</a></div>

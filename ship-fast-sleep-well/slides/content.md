@@ -56,7 +56,7 @@ style: |
 <!-- _header: '' -->
 <!-- _footer: '' -->
 
-![bg fit](assets/datev-coding-festival.png)
+![bg fit](../../shared/assets/datev-coding-festival.png)
 
 ---
 
@@ -85,11 +85,11 @@ Notes:
 
 <!--
 Notes:
-- Image prompt: visuals/image-prompts.md (horror picture). Replace assets/horror-friday.png.
+- Image prompt: visuals/image-prompts.md (horror picture). Replace ../../shared/assets/horror-friday.png.
 - Tell the story: it is Friday, 16:00, the pager rings, a critical bug in production.
 -->
 
-![bg fit](assets/horror-friday.png)
+![bg fit](../../shared/assets/horror-friday.png)
 
 ---
 
@@ -117,10 +117,10 @@ Notes:
 
 <!--
 Notes:
-- Image prompt: visuals/image-prompts.md (target picture). Replace assets/target-state.png.
+- Image prompt: visuals/image-prompts.md (target picture). Replace ../../shared/assets/target-state.png.
 -->
 
-![bg fit](assets/target-state.png)
+![bg fit](../../shared/assets/target-state.png)
 
 ---
 
@@ -165,7 +165,7 @@ Notes:
 
 ---
 
-![bg right:33%](assets/herzogenaurach.jpg)
+![bg right:33%](../../shared/assets/herzogenaurach.jpg)
 
 ### About Philip
 
@@ -204,7 +204,7 @@ Notes:
 - TODO: check that the three questions in the Mentimeter match this slide.
 -->
 
-![bg right:36% h:420](assets/mentimeter-datev-coding-festival-2k26-padded.png)
+![bg right:36% h:420](../../shared/assets/mentimeter-datev-coding-festival-2k26-padded.png)
 
 ## Help Me Understand Your Process
 
@@ -618,7 +618,7 @@ Notes:
 
 ## The Togglz Admin Console
 
-![center w:1040](assets/togglz-admin-console.png)
+![center w:1040](../../shared/assets/togglz-admin-console.png)
 
 **Status** and **strategy** per feature: key users first, gradual rollout, switch **at runtime** without a deployment.
 
@@ -860,7 +860,7 @@ Thank you! Questions?
 
 The **Spring Boot Testing Newsletter**: best practices, recipes and quick wins in your inbox - **rieckpil.de/newsletter**
 
-![h:170](assets/newsletter-qr.png)
+![h:170](../../shared/assets/newsletter-qr.png)
 
 - [LinkedIn: linkedin.com/in/rieckpil](https://www.linkedin.com/in/rieckpil)
 - [Mail: philip@pragmatech.digital](mailto:philip@pragmatech.digital)

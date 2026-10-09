@@ -16,8 +16,8 @@ Menti: https://www.menti.com/ - code 3982 6427
 <!-- _header: '' -->
 <!-- _footer: '' -->
 
-<!-- ![bg](assets/tsbad-beginning.png) -->
-![bg](assets/jug-nuremberg.jpg)
+<!-- ![bg](../../shared/assets/tsbad-beginning.png) -->
+![bg](../../shared/assets/jug-nuremberg.jpg)
 
 ---
 
@@ -30,7 +30,7 @@ Notes:
 
 -->
 
-![bg left:33%](assets/tsbad-beginning-split-middle.png)
+![bg left:33%](../../shared/assets/tsbad-beginning-split-middle.png)
 
 # Testing Spring Boot Applications **Demystified**
 
@@ -56,7 +56,7 @@ Java User Group Nürnberg · September 10, 2026
 
 Go to [menti.com](https://www.menti.com/) and use the code **3982 6427** to **anonymously** submit answers for the quizzes and add your questions during the talk.
 
-![h:200 center](assets/mentimeter-jug-nuremberg.png)
+![h:200 center](../../shared/assets/mentimeter-jug-nuremberg.png)
 
 
 Please answer the **first three questions**:
@@ -118,7 +118,7 @@ Notes:
 [//]: # (## DORA &#40;DevOps Research Assessment&#41;)
 
 [//]: # ()
-[//]: # (![center]&#40;assets/dora-core-v2.1.0-summary-raw.png&#41;)
+[//]: # (![center]&#40;../../shared/assets/dora-core-v2.1.0-summary-raw.png&#41;)
 
 [//]: # ()
 [//]: # ()
@@ -127,7 +127,7 @@ Notes:
 [//]: # (## More Than a One-Line Prompt)
 
 [//]: # ()
-[//]: # (![bg right:40% fit]&#40;assets/ai-judgement-layer.svg&#41;)
+[//]: # (![bg right:40% fit]&#40;../../shared/assets/ai-judgement-layer.svg&#41;)
 
 [//]: # ()
 [//]: # (- You can't just run `claude -p "Write meaningful tests, make no mistakes"` and walk away)
@@ -143,7 +143,7 @@ Notes:
 [//]: # (## From Developer to AI-Code Auditor)
 
 [//]: # ()
-[//]: # (![bg right:40% fit]&#40;assets/ai-auditor-loop.svg&#41;)
+[//]: # (![bg right:40% fit]&#40;../../shared/assets/ai-auditor-loop.svg&#41;)
 
 [//]: # ()
 [//]: # (- AI writes more code, faster - your job becomes **auditing** it with confidence)
@@ -205,7 +205,7 @@ Notes:
 -->
 
 
-![h:500 w:900 center](assets/tsbad-map-parts.png)
+![h:500 w:900 center](../../shared/assets/tsbad-map-parts.png)
 
 ---
 
@@ -223,7 +223,7 @@ Notes:
 ---
 
 
-![bg left:33%](assets/tsbad-act-one.png)
+![bg left:33%](../../shared/assets/tsbad-act-one.png)
 
 ## Act 1: The Grand Entrance
 
@@ -249,7 +249,7 @@ Notes:
 
 -->
 
-![bg right:33%](assets/unit-gatekeeper-act.png)
+![bg right:33%](../../shared/assets/unit-gatekeeper-act.png)
 
 ## Quest 1
 
@@ -702,7 +702,7 @@ void shouldCreateCustomerWhenPayloadRequestIsValid() {
 <!-- _class: light section -->
 <!-- _paginate: false -->
 
-![bg right:33%](assets/hydra-act.png)
+![bg right:33%](../../shared/assets/hydra-act.png)
 
 ## Quest 2
 
@@ -786,7 +786,7 @@ class CustomerControllerTest {
 <!-- _class: light section -->
 <!-- _paginate: false -->
 
-![bg right:33%](assets/dragon-act.png)
+![bg right:33%](../../shared/assets/dragon-act.png)
 
 ## Quest 3
 
@@ -976,7 +976,7 @@ class ApplicationServletContainerIT {
 <!-- _class: light section -->
 <!-- _paginate: false -->
 
-![bg right:33%](assets/caching-amulet.png)
+![bg right:33%](../../shared/assets/caching-amulet.png)
 
 ## Quest Item 1
 
@@ -1122,7 +1122,7 @@ The setup above will **disable** the context caching feature and slow down the b
 <!-- _class: light section -->
 <!-- _paginate: false -->
 
-![bg right:33%](assets/lightning-shield.png)
+![bg right:33%](../../shared/assets/lightning-shield.png)
 
 ## Quest Item 2
 
@@ -1211,7 +1211,7 @@ junit.jupiter.execution.parallel.mode.classes.default = concurrent
 <!-- _class: light section -->
 <!-- _paginate: false -->
 
-![bg right:33%](assets/scroll-of-truth.png)
+![bg right:33%](../../shared/assets/scroll-of-truth.png)
 
 ## Quest Item 3
 
@@ -1260,7 +1260,7 @@ public Long registerUser(int age, String username) {
 
 ## Act 5: The Triumphant Exit
 
-![bg right:33%](assets/tsbad-end.png)
+![bg right:33%](../../shared/assets/tsbad-end.png)
 
 - Spring Boot applications come with batteries-included and excellent testing support
 - We've completed three main quests: Unit testing, Sliced testing, and Integration testing
@@ -1363,7 +1363,7 @@ public Long registerUser(int age, String username) {
 
 [//]: # ()
 [//]: # ()
-[//]: # (![bg h:600 center]&#40;assets/tsbam-testimonials.png&#41;)
+[//]: # (![bg h:600 center]&#40;../../shared/assets/tsbam-testimonials.png&#41;)
 
 [//]: # ()
 [//]: # (---)
@@ -1506,12 +1506,12 @@ Each skill includes rules, references, best-practices and antipatterns described
 
 Go to [menti.com](https://www.menti.com/) and use the code **3982 6427** to finalize the poll and add your questions for the Q&A.
 
-![h:250 center](assets/mentimeter-jug-nuremberg.png)
+![h:250 center](../../shared/assets/mentimeter-jug-nuremberg.png)
 
 
 ---
 
-[//]: # (![]&#40;assets/pragmatech-main-offering.png&#41;)
+[//]: # (![]&#40;../../shared/assets/pragmatech-main-offering.png&#41;)
 
 [//]: # ()
 [//]: # (---)
@@ -1543,9 +1543,9 @@ Go to [menti.com](https://www.menti.com/) and use the code **3982 6427** to fina
 [//]: # (Use Slido &#40;or Menti&#41; to ask questions:)
 
 [//]: # ()
-[//]: # (![center h:250 w:250]&#40;assets/jcon-slido-2026-qr.png&#41;)
+[//]: # (![center h:250 w:250]&#40;../../shared/assets/jcon-slido-2026-qr.png&#41;)
 
-[//]: # (![center w:250]&#40;assets/jcon-rate.png&#41;)
+[//]: # (![center w:250]&#40;../../shared/assets/jcon-rate.png&#41;)
 
 [//]: # ()
 [//]: # (Feedback for this session is highly appreciated, please use the JCON schedule.)

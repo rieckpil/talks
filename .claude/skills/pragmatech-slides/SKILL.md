@@ -6,14 +6,14 @@ description: Create and maintain Philip's conference talk decks (Marp, PragmaTec
 # PragmaTech Slides (Marp, talks repo)
 
 All talks live in the `talks` repo. Every deck shares one setup in `shared/`. Nothing is copied
-into a deck: a deck folder only holds its content and its own images.
+into a deck: a deck folder only holds its content, visual sources and PDFs. All images live in `shared/assets/`.
 
 ```
 talks/
   shared/
     theme/pragmatech.css      one theme: dark default, light via `class: light`, plus reveal, verdict columns, .flow/.sketch helpers, @media print
     theme/engine.js           code line numbers and {n,m-k} highlighting
-    assets/                   images used by 2+ decks (logo, end.jpg, QR codes, location.png, abstract-blue-left.png, ...)
+    assets/                   ALL images of all talks. Common ones flat (logo.webp, end.jpg, QR codes, ...), new talks in assets/<talk-slug>/
     templates/content.md      scaffold for a new deck
     scripts/                  build.sh, new-deck.sh, resize-images.sh, sharable-pdf.sh, compare-pdfs.sh
     visuals/export-visuals.mjs  HTML/canvas scene -> PNG exporter
@@ -21,7 +21,6 @@ talks/
   <talk-slug>/slides/
     content.md                the deck (content-de.md for a German version)
     .marprc.yml               3 lines, points at shared/ (editor preview and plain `marp` work)
-    assets/                   images only this talk uses
     visuals/                  scenes.mjs + HTML sources for exported scenes
     pdf-swaps.txt             optional, see "PDF export"
     slides-<venue>-<date>.pdf shareable PDFs, committed
@@ -35,9 +34,10 @@ shared/scripts/build.sh <slug> watch      # live preview with hot reload
 ```
 
 This creates `<slug>/slides/` from `shared/templates/content.md`: banner slide 0, title,
-Mentimeter, About Philip, agenda, section, statement and closing slide. Without a banner image
-it generates a gradient placeholder, so ask the user for the venue photo or find one.
-Then replace the Mentimeter QR (`assets/mentimeter-qr.png`) and the code, and write the talk.
+Mentimeter, About Philip, agenda, section, statement and closing slide. Images for the talk go
+to `shared/assets/<slug>/`. Without a banner image it generates a gradient placeholder, so ask
+the user for the venue photo or find one. Then replace the Mentimeter QR
+(`shared/assets/<slug>/mentimeter-qr.png`) and the code, and write the talk.
 
 ## General requirements (apply to every deck)
 
@@ -50,7 +50,7 @@ no title text. It hides all chrome, and the Mentimeter URL sits in an HTML comme
 <!-- _header: '' -->
 <!-- _footer: '' -->
 
-![bg](assets/antwerp.jpg)
+![bg](../../shared/assets/<slug>/antwerp.jpg)
 ```
 
 Use `![bg fit](...)` when the image is a designed banner that must not be cropped. The title
@@ -78,10 +78,12 @@ footer: '![](../../shared/assets/logo.webp) Philip Riecks · [@rieckpil](https:/
 With `class: light` every per-slide directive is `<!-- _class: light <layout> -->`. Speaker
 notes go in a `<!-- Notes: ... -->` comment on the slide.
 
-**Images.** Talk-only images go in `assets/` and are referenced as `assets/x.png`. An image
-used by 2+ decks lives in `shared/assets/` and is referenced as `../../shared/assets/x.png`.
-Before adding a file to a deck, check `shared/assets/` for an existing copy. If the same file
-exists in another deck, move it to `shared/assets/` and rewrite both references. Sizing:
+**Images.** Every image lives in `shared/assets/` and is referenced as
+`../../shared/assets/x.png`. A deck has no `assets/` folder of its own. Existing images are flat
+in `shared/assets/`. Put the images of a new talk in `shared/assets/<talk-slug>/` so names
+cannot clash. Before adding a file, check `shared/assets/` for an existing copy (logo, QR codes,
+`end.jpg`, `location.png`, ...). If a name already exists with different content, use a
+talk-specific name. Sizing:
 `![center h:500](...)`, `![bg right:33% h:750](...)`, `![bg left:38%](...)`.
 
 **Copy rules.**
@@ -135,17 +137,17 @@ Pick the lightest tool that works, in this order:
      `WIDTH`, `HEIGHT` (see `src/stop-fighting/ContextCache.tsx`).
   2. Register a `<Composition id="MyAnimation" ...>` in `src/Root.tsx`.
   3. Add scripts to `package.json` that render into the owning deck:
-     `remotion render MyAnimation ../<slug>/slides/assets/my-animation.gif --codec=gif --number-of-gif-loops=0`
-     and a still of the last frame: `remotion still MyAnimation ../<slug>/slides/assets/my-animation-final.png --frame=<last>`.
+     `remotion render MyAnimation ../assets/<slug>/my-animation.gif --codec=gif --number-of-gif-loops=0`
+     and a still of the last frame: `remotion still MyAnimation ../assets/<slug>/my-animation-final.png --frame=<last>`.
   4. `cd shared/remotion && npm ci && npm run preview` to design it, run the render scripts
-     when done, embed the GIF with `![center](assets/my-animation.gif)`.
+     when done, embed the GIF with `![center](../../shared/assets/<slug>/my-animation.gif)`.
   5. A GIF exports to PDF as its first frame. Add the line `my-animation.gif my-animation-final.png`
      to the deck's `pdf-swaps.txt` so the sharable PDF shows the final state.
   Chrome path for Remotion is configured in `remotion.config.ts` (override with `CHROME_PATH`).
 - **Exported scenes**: `<slides>/visuals/scenes.mjs` lists scenes (`page`, `query`, `file`,
   `width`, `height`, `selector`, `waitRendered`, `scale`), then
-  `node shared/visuals/export-visuals.mjs <slug>` writes PNGs to `<slug>/slides/assets/`.
-  A scene `file` of `../../../shared/assets/x.png` writes into the shared folder.
+  `node shared/visuals/export-visuals.mjs <slug>` writes the PNGs to `shared/assets/`. The scene
+  `file` is relative to it (`'<slug>/map.png'`).
 
 ## Layout classes
 
@@ -178,8 +180,7 @@ shared/scripts/build.sh <slug> html|pdf|png|pptx|watch [output]   # raw output n
 **PDF export (sharable, small).** Run from the repo root:
 
 ```bash
-shared/scripts/resize-images.sh <slug>      # resize deck images into assets/generated (gitignored)
-shared/scripts/resize-images.sh shared      # same for shared images
+shared/scripts/resize-images.sh shared      # resize all images into shared/assets/generated (gitignored)
 shared/scripts/sharable-pdf.sh <slug> slides-<venue>-<date>.pdf
 ```
 

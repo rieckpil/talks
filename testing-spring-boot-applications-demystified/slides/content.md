@@ -4,7 +4,7 @@ theme: pragmatech
 header: 'Testing Spring Boot Applications Demystified @ 20.01.2026'
 ---
 
-![bg](./assets/tsbad-beginning.png)
+![bg](../../shared/assets/tsbad-beginning.png)
 <!-- header: "" -->
 <!-- footer: ""-->
 
@@ -18,7 +18,7 @@ Notes:
 
 -->
 <!-- _class: title -->
-![bg left:33%](assets/tsbad-beginning-split-middle.png)
+![bg left:33%](../../shared/assets/tsbad-beginning-split-middle.png)
 
 # Testing Spring Boot Applications Demystified
 
@@ -42,7 +42,7 @@ Start with the first two questions:
 
 ---
 
-![bg left:33%](assets/tsbad-act-one.png)
+![bg left:33%](../../shared/assets/tsbad-act-one.png)
 
 ## Act 1: The Grand Entrance
 
@@ -96,7 +96,7 @@ Good tests don't just catch bugs - they give you **fast feedback** and **confide
 
 <!-- footer: '![w:32 h:32](../../shared/assets/logo.webp)' -->
 
-![h:500 w:900 center](assets/tsbad-map-parts.png)
+![h:500 w:900 center](../../shared/assets/tsbad-map-parts.png)
 
 ---
 
@@ -142,7 +142,7 @@ Notes:
 
 ### The Swift Gatekeeper - Blocks Those Who Overcomplicate
 
-![bg right:33%](assets/unit-gatekeeper-act.png)
+![bg right:33%](../../shared/assets/unit-gatekeeper-act.png)
 
 ---
 
@@ -153,7 +153,7 @@ Notes:
 
 ### Multiple Heads, Each Guarding a Layer
 
-![bg right:33%](assets/hydra-act.png)
+![bg right:33%](../../shared/assets/hydra-act.png)
 
 ---
 
@@ -165,7 +165,7 @@ Notes:
 ### Guards the Full Treasure - but Demands Patience
 
 
-![bg right:33%](assets/dragon-act.png)
+![bg right:33%](../../shared/assets/dragon-act.png)
 
 ---
 
@@ -177,7 +177,7 @@ Notes:
 ### Helps You Reuse What You Already Built
 
 
-![bg right:33%](assets/caching-amulet.png)
+![bg right:33%](../../shared/assets/caching-amulet.png)
 
 ---
 
@@ -189,7 +189,7 @@ Notes:
 ### Many Cores, One Goal
 
 
-![bg right:33%](assets/lightning-shield.png)
+![bg right:33%](../../shared/assets/lightning-shield.png)
 
 ---
 
@@ -200,7 +200,7 @@ Notes:
 ### Coverage Lies, Mutants Don't
 
 
-![bg right:33%](assets/scroll-of-truth.png)
+![bg right:33%](../../shared/assets/scroll-of-truth.png)
 
 ---
 
@@ -924,7 +924,7 @@ Notes:
 
 ## Act 5: The Triumphant Exit
 
-![bg right:33%](assets/tsbad-end.png)
+![bg right:33%](../../shared/assets/tsbad-end.png)
 
 - Spring Boot applications come with batteries-included for testing
 - Spring and Spring Boot provides many excellent testing features

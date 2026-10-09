@@ -1,7 +1,8 @@
-// Exports HTML/canvas scenes of a deck to PNG files in <deck>/slides/assets.
+// Exports HTML/canvas scenes of a deck to PNG files in shared/assets.
 // Usage: node shared/visuals/export-visuals.mjs <deck-dir>
 // The deck provides slides/visuals/scenes.mjs with `export const scenes = [...]`:
 //   { page, query, file, width, height, selector?, waitRendered?, scale? }
+//   file          output path below shared/assets, e.g. 'my-talk/map.png'
 //   page          HTML file in slides/visuals (default scenes.html)
 //   query         query string appended to the page URL
 //   selector      element to screenshot (default: the whole page)
@@ -23,7 +24,7 @@ if (!deckArg) {
 let slidesDir = path.resolve(deckArg);
 if (fs.existsSync(path.join(slidesDir, 'slides'))) slidesDir = path.join(slidesDir, 'slides');
 const visualsDir = path.join(slidesDir, 'visuals');
-const assetsDir = path.join(slidesDir, 'assets');
+const assetsDir = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..', 'assets');
 const { scenes } = await import(pathToFileURL(path.join(visualsDir, 'scenes.mjs')).href);
 const defaultScale = Number(process.env.SCALE || 2);
 
@@ -47,6 +48,7 @@ async function exportScene({ kind, browser }, scene) {
   const deviceScaleFactor = scene.scale ?? defaultScale;
   const url = `${pathToFileURL(path.join(visualsDir, pageFile)).href}${query ? `?${query}` : ''}`;
   const outputPath = path.join(assetsDir, file);
+  fs.mkdirSync(path.dirname(outputPath), { recursive: true });
   let page;
   if (kind === 'playwright') {
     const context = await browser.newContext({ viewport: { width, height }, deviceScaleFactor });

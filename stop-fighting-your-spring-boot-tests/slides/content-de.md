@@ -4,7 +4,7 @@ theme: pragmatech
 header: 'Stop Fighting Your Spring Boot Tests @ Firma & Datum'
 ---
 
-![bg](./assets/nuremberg-view.jpg)
+![bg](../../shared/assets/nuremberg-view.jpg)
 <!-- header: "" -->
 <!-- footer: ""-->
 
@@ -18,7 +18,7 @@ Notes:
 
 -->
 <!-- _class: title -->
-![bg left:33%](assets/stop-fighting-your-spring-boot-tests.jpg)
+![bg left:33%](../../shared/assets/stop-fighting-your-spring-boot-tests.jpg)
 
 # Stop Fighting Your Spring Boot Tests
 
@@ -34,7 +34,7 @@ Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](htt
 ## Interaktive Teilnahme
 
 
-![h:200 w:200 center](assets/mentimeter-nuernberger.png)
+![h:200 w:200 center](../../shared/assets/mentimeter-nuernberger.png)
 
 Gehe auf [menti.com](https://www.menti.com/) und verwende den Code **5490 0636**, um **anonym** Antworten zu den Quizfragen einzureichen und während des Vortrags Fragen zu stellen.
 
@@ -73,7 +73,7 @@ Starte mit den ersten beiden Fragen:
 
 ## Spring Boot Testing - The Good
 
-![center h:500 w:900](assets/spring-boot-testing-the-good.png)
+![center h:500 w:900](../../shared/assets/spring-boot-testing-the-good.png)
 
 <!--
 - Es geht aber auch anders
@@ -143,7 +143,7 @@ Notes:
 
 -->
 
-![bg right:33%](assets/testing-pyramid.jpg)
+![bg right:33%](../../shared/assets/testing-pyramid.jpg)
 
 # Part 1: Die Spring Boot Test Pyramide
 
@@ -162,7 +162,7 @@ Notes:
 
 ## Spring Boot Testarten
 
-![center h:500 w:1000](assets/spring-boot-test-decision-tree-de.png)
+![center h:500 w:1000](../../shared/assets/spring-boot-test-decision-tree-de.png)
 
 ---
 ![bg right:33%](../../shared/assets/101.jpg)
@@ -334,11 +334,11 @@ class ApplicationServletContainerIT {
 
 ### Zusammenfassung Part 1
 
-![center h:400 w:800](assets/slice-test-recommendation.png)
+![center h:400 w:800](../../shared/assets/slice-test-recommendation.png)
 
 ---
 
-![bg right:33%](assets/speed.jpg)
+![bg right:33%](../../shared/assets/speed.jpg)
 
 # Part 2: Geschwindigkeit & Stabilität für deine Spring Boot Test Suite
 
@@ -358,19 +358,19 @@ Beispiel für Geschwindigkeitsverbesserung:
 
 ### Wie der Cache funktioniert: Schritt 0
 
-![center h:500 w:700](assets/caching-step-0.png)
+![center h:500 w:700](../../shared/assets/caching-step-0.png)
 
 ---
 
 ### Wie der Cache funktioniert: Schritt 1
 
-![center h:500 w:700](assets/caching-step-1.png)
+![center h:500 w:700](../../shared/assets/caching-step-1.png)
 
 ---
 
 ### Wie der Cache funktioniert: Schritt 2
 
-![center h:500 w:700](assets/caching-step-2.png)
+![center h:500 w:700](../../shared/assets/caching-step-2.png)
 
 ---
 
@@ -505,7 +505,7 @@ static {
 ---
 
 
-![bg right:33%](assets/fight-back.jpg)
+![bg right:33%](../../shared/assets/fight-back.jpg)
 
 # Part 3: Warum & wann Spring Boot Tests Probleme machen
 
@@ -549,7 +549,7 @@ static {
 - Qualitätsgarantie: PIT **modifiziert unseren Code** automatisch (ändert Bedingungen, Rückgabewerte, etc.), um sicherzustellen, dass unsere Tests fehlschlagen, wenn sie sollten, und **deckt blind Spots** in scheinbar umfassenden Test Suites auf.
 ---
 
-![center h:400 w:1300](assets/mutation-testing-explained-de.png)
+![center h:400 w:1300](../../shared/assets/mutation-testing-explained-de.png)
 
 ---
 

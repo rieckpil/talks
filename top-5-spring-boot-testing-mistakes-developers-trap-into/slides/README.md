@@ -17,7 +17,7 @@ shared/scripts/build.sh <slug> png        # PNG per slide in preview/ (gitignore
 ## Shareable PDF
 
 ```bash
-shared/scripts/resize-images.sh <slug> && shared/scripts/resize-images.sh shared
+shared/scripts/resize-images.sh shared
 shared/scripts/sharable-pdf.sh <slug> slides-<venue>-<date>.pdf
 ```
 

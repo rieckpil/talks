@@ -14,7 +14,7 @@ footer: '![](../../shared/assets/logo.webp) Philip Riecks · [@rieckpil](https:/
 <!-- _header: '' -->
 <!-- _footer: '' -->
 
-![bg](assets/{{BANNER_FILE}})
+![bg](../../shared/assets/{{SLUG}}/{{BANNER_FILE}})
 
 ---
 
@@ -39,13 +39,13 @@ Notes:
 
 ## Participate During the Talk
 
-![bg right:36% h:420](assets/mentimeter-qr.png)
+![bg right:36% h:420](../../shared/assets/{{SLUG}}/mentimeter-qr.png)
 
 Go to [menti.com](https://www.menti.com/) and enter the code **0000 0000**.
 
 <!--
 Notes:
-- Replace the QR image (assets/mentimeter-qr.png) and the code.
+- Replace the QR image (shared/assets/{{SLUG}}/mentimeter-qr.png) and the code.
 -->
 
 ---
