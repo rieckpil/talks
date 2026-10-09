@@ -5,7 +5,7 @@ class: light
 paginate: true
 transition: pt-fade
 header: 'Top 5 Spring Boot Testing Mistakes Developers Trap Into @ Tech Talks South Tyrol #14 · September 8, 2026'
-footer: '![](assets/logo.webp) Philip Riecks · [PragmaTech GmbH](https://pragmatech.digital/) · [@rieckpil](https://x.com/rieckpil)'
+footer: '![](../../shared/assets/logo.webp) Philip Riecks · [PragmaTech GmbH](https://pragmatech.digital/) · [@rieckpil](https://x.com/rieckpil)'
 ---
 
 <!--
@@ -39,7 +39,7 @@ Tech Talks South Tyrol #14 · September 8, 2026
 
 ---
 
-<!-- footer: '![](assets/logo.webp)' -->
+<!-- footer: '![](../../shared/assets/logo.webp)' -->
 
 ![bg h:500 right:33%](assets/philip-in-erlangen-map.jpg)
 
@@ -70,7 +70,7 @@ Please answer the **first three questions**:
 <!-- _paginate: false -->
 
 
-![bg right:33%](assets/why-test-software.jpg)
+![bg right:33%](../../shared/assets/why-test-software.jpg)
 
 # Why Test Software?
 
@@ -83,20 +83,20 @@ Please answer the **first three questions**:
 
 ---
 
-![center h:500](assets/ai-frog-meme.jpg)
+![center h:500](../../shared/assets/ai-frog-meme.jpg)
 
 ---
 
 <!-- _paginate: false -->
 
 
-![bg right:33%](assets/northstar.jpg)
+![bg right:33%](../../shared/assets/northstar.jpg)
 
 ### My Overall Northstar for Engineering Excellence
 
 Imagine seeing this pull request on a Friday afternoon:
 
-![](assets/northstar-pr.png)
+![](../../shared/assets/northstar-pr.png)
 
 How confident are you to merge this major Spring Boot upgrade and deploy it to production once the pipeline turns green?
 
@@ -145,13 +145,13 @@ Notes:
 ## The `@SpringBootTest` Obsession
 
 
-![](assets/spring-boot-test-setup.png)
+![](../../shared/assets/spring-boot-test-setup.png)
 
 ---
 
 ## You Don't Always Need the Entire Context
 
-![center h:500](assets/spring-sliced-context.png)
+![center h:500](../../shared/assets/spring-sliced-context.png)
 
 ---
 
@@ -197,7 +197,7 @@ Notes:
 
 Results from one of our clients:
 
-![center](assets/context-cache-improvements.png)
+![center](../../shared/assets/context-cache-improvements.png)
 
 ---
 
@@ -217,13 +217,13 @@ private final Map<MergedContextConfiguration, ApplicationContext> contextMap =
 
 ## How to Identify Context Restarts - Simplified
 
-![](assets/context-caching-logs.png)
+![](../../shared/assets/context-caching-logs.png)
 
 ---
 
 ## How to Identify Context Restarts - Visualized
 
-![center](assets/spring-test-profiler-logo.png)
+![center](../../shared/assets/spring-test-profiler-logo.png)
 
 An [open-source Spring Test utility](https://github.com/PragmaTech-GmbH/spring-test-profiler) that provides visualization and insights for Spring Test execution, with a focus on Spring context caching statistics.
 
@@ -423,7 +423,7 @@ public Long registerUser(int age, String username) {
 ... with the help of PIT:
 
 
-![center](assets/mutation-testing-explained-corrected.png)
+![center](../../shared/assets/mutation-testing-explained-corrected.png)
 
 
 ---
@@ -489,7 +489,7 @@ Notes:
 <!-- _paginate: false -->
 <!-- _header: '' -->
 
-![bg right:33%](assets/end.jpg)
+![bg right:33%](../../shared/assets/end.jpg)
 
 # Joyful Testing!
 

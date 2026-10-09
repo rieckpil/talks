@@ -1,159 +1,28 @@
-# Testing Spring Boot Applications Demystified - Slides
+# Stop Fighting Your Spring Boot Tests - Slides
 
-This directory contains the presentation slides for the "Testing Spring Boot Applications Demystified" talk.
+Marp deck: content.md (English) and content-de.md (German, keep in sync). Theme, engine, shared images and scripts live in `../../shared/`,
+see the `pragmatech-slides` skill (`.claude/skills/pragmatech-slides/SKILL.md`) for layouts,
+house style and the full workflow. `.marprc.yml` wires the theme into plain `marp` and the editor preview.
 
-## Prerequisites
+## Build
 
-To generate the slides, you'll need:
-
-1. [Node.js](https://nodejs.org/) (latest LTS version recommended)
-2. [Marp CLI](https://github.com/marp-team/marp-cli) for converting Markdown to PDF/HTML
-
-## Installation
-
-Install Marp CLI globally:
+Run from the repo root. `<slug>` is `stop-fighting-your-spring-boot-tests`.
 
 ```bash
-npm install -g @marp-team/marp-cli
+shared/scripts/build.sh <slug> watch      # live preview
+shared/scripts/build.sh <slug> html       # content.html (transitions, presenter mode)
+shared/scripts/build.sh <slug> png        # PNG per slide in preview/ (gitignored)
 ```
 
-## Generating Slides
-
-### HTML Slides
-
-To generate HTML slides that you can view in a browser:
+## Shareable PDF
 
 ```bash
-marp --html content.md --theme pragmatech.css --engine engine.js
+shared/scripts/resize-images.sh <slug> && shared/scripts/resize-images.sh shared
+shared/scripts/sharable-pdf.sh <slug> slides-<venue>-<date>.pdf
 ```
 
-This will create `marp-slides.html` in the current directory.
+Resizes images, swaps links to the resized copies, builds the PDF, shrinks it with
+Ghostscript and restores `content.md`. Commit the PDF next to the deck.
 
-### PDF Slides
-
-To generate a PDF version of the slides:
-
-```bash
- marp --pdf content.md --theme pragmatech.css --allow-local-files
-```
-
-This will create `marp-slides.pdf` in the current directory.
-
-You can also use the Chrome PDF engine for better rendering:
-
-```bash
-marp --pdf --engine chrome marp-slides.md
-```
-
-If you encounter any layout issues, you can also try adjusting the PDF size:
-
-```bash
-marp --pdf --size 16:9 --engine chrome marp-slides.md
-```
-
-### Presentation Mode
-
-For presenting the slides with speaker notes:
-
-```bash
-marp -s marp-slides.md
-```
-
-This will start a local server and open the presentation in your default browser.
-
-## Customization
-
-The slides use a custom PragmaTech theme defined in `pragmatech.css`. The theme includes:
-
-- Custom colors matching PragmaTech's branding
-- A footer with the PragmaTech logo on the left, company name in the center, and page numbers on the right
-- Proper content padding to prevent overflow
-- Responsive layout for different screen sizes
-
-### Images and Assets
-
-- All images are stored in the `assets/` directory
-- The PragmaTech logo is included in the footer of each slide
-- SVG diagrams for context caching and other concepts
-
-## Image Optimization
-
-To reduce the size of the generated PDF, you can use the included image optimization scripts:
-
-### Quick Method: Generate Shareable PDF (Recommended)
-
-The easiest way to generate a shareable PDF with optimized images:
-
-```bash
-./generate_sharable_pdf.sh talk-abc-2025.pdf
-```
-
-This script will:
-1. Check if resized images exist in `assets/generated` (if not, prompts to run `resize_images.sh` first)
-2. Temporarily update image references in `content.md` to use resized images
-3. Generate the PDF with Marp using the specified filename
-4. Automatically restore the original `content.md` file
-
-**Usage:**
-```bash
-./generate_sharable_pdf.sh <output-pdf-name>
-
-# Examples:
-./generate_sharable_pdf.sh talk-jug-zurich-2025.pdf
-./generate_sharable_pdf.sh presentation.pdf
-```
-
-The script handles all the temporary modifications and cleanup automatically, so you don't have to worry about manually restoring your markdown file.
-
-### Manual Method: Step-by-Step
-
-If you prefer to do it manually or need more control:
-
-1. Resize and optimize all images:
-
-```bash
-./resize_images.sh
-```
-
-This script creates resized versions of all images in an `assets/generated` directory.
-
-2. Update image references in the markdown file:
-
-```bash
-./update_image_links.sh
-```
-
-This script updates all image references in `content.md` to point to the optimized versions.
-
-3. Generate the PDF as usual:
-
-```bash
-marp --pdf content.md --theme pragmatech.css --allow-local-files
-```
-
-4. Restore the original markdown file:
-
-```bash
-mv content.md.bak content.md
-```
-
-## Troubleshooting
-
-If you encounter any issues with slide rendering:
-
-1. **Footer issues**: Make sure the assets/logo.webp file exists and is correctly referenced
-2. **Content overflow**: If content is still overflowing, consider breaking into multiple slides
-3. **Image scaling**: Try adding `width="X%"` to image tags to control their size
-4. **PDF generation**: Use the `--engine chrome` option for better PDF output
-
-For any CSS-specific issues:
-
-```bash
-marp --html --preview marp-slides.md
-```
-
-This will open a preview where you can inspect elements and debug styling.
-
-## License
-
-This presentation is copyright Philip Riecks / PragmaTech Digital - All rights reserved.
+`pdf-swaps.txt` swaps the animated context-caching GIF for its final still in the PDF.
+The animation itself is a Remotion composition in `shared/remotion/` (`npm run build:context-cache`).

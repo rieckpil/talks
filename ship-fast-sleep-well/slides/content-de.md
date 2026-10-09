@@ -6,7 +6,7 @@ class: light
 paginate: true
 transition: pt-fade
 header: 'Ship Fast, Sleep Well: Fearless Spring Boot Deployments in the AI Era · DATEV Coding Festival 2k26'
-footer: '![](assets/logo.webp) Philip Riecks · [@rieckpil](https://x.com/rieckpil) · [PragmaTech GmbH](https://pragmatech.digital/)'
+footer: '![](../../shared/assets/logo.webp) Philip Riecks · [@rieckpil](https://x.com/rieckpil) · [PragmaTech GmbH](https://pragmatech.digital/)'
 style: |
   section[class*="cards"] > ul { display: grid; gap: 20px; list-style: none; padding: 0; margin: 0.5em 0 0; }
   section.cards2 > ul { grid-template-columns: repeat(2, 1fr); }
@@ -65,7 +65,7 @@ style: |
 <!-- _paginate: false -->
 <!-- _header: '' -->
 
-![bg left:33%](assets/abstract-blue-left.png)
+![bg left:33%](../../shared/assets/abstract-blue-left.png)
 
 # Ship Fast, **Sleep Well**
 
@@ -220,7 +220,7 @@ Notes:
 
 ## Belegt durch die DORA-Forschung
 
-![h:20%](assets/dora-core-summary.png)
+![h:20%](../../shared/assets/dora-core-summary.png)
 
 Das DORA Core Model stellt **Fast Feedback** neben Fast Flow und ein Klima des Lernens.
 
@@ -260,7 +260,7 @@ Notes:
 
 Ergebnisse bei einem meiner Kunden:
 
-![center w:1100](assets/context-cache-improvements.png)
+![center w:1100](../../shared/assets/context-cache-improvements.png)
 
 ---
 
@@ -292,7 +292,7 @@ Notes:
 
 ## Spring Test Profiler
 
-![center h:70](assets/spring-test-profiler-logo.png)
+![center h:70](../../shared/assets/spring-test-profiler-logo.png)
 
 - Open-Source-Tool: zeigt, **wie viele Contexts** deine Testsuite startet
 - **Cache Hits**, **Misses** und die Zeit für Context-Starts
@@ -352,7 +352,7 @@ Notes:
 
 ## Idee: Regressionen einbauen, um die Testqualität zu prüfen
 
-![center](assets/mutation-testing-explained-corrected.png)
+![center](../../shared/assets/mutation-testing-explained-corrected.png)
 
 ---
 
@@ -791,7 +791,7 @@ Notes:
 <!-- _header: '' -->
 <!-- _footer: '' -->
 
-![bg right:33%](assets/end.jpg)
+![bg right:33%](../../shared/assets/end.jpg)
 
 # Fearless Shipping!
 

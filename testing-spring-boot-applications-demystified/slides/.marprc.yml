@@ -1,4 +1,4 @@
-engine: ./engine.js
+engine: ../../shared/theme/engine.js
 themeSet:
-  - ./pragmatech.css
+  - ../../shared/theme/pragmatech.css
 allowLocalFiles: true

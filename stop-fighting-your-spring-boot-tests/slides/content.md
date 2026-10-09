@@ -6,7 +6,7 @@ class: light
 paginate: true
 transition: pt-fade
 header: 'Stop Fighting Your Spring Boot Tests · Software Craft Community @ DATEV · September 22, 2026'
-footer: '![](assets/logo.webp) Philip Riecks · [PragmaTech GmbH](https://pragmatech.digital/) · [@rieckpil](https://x.com/rieckpil)'
+footer: '![](../../shared/assets/logo.webp) Philip Riecks · [PragmaTech GmbH](https://pragmatech.digital/) · [@rieckpil](https://x.com/rieckpil)'
 ---
 
 <!-- _paginate: false -->
@@ -35,7 +35,7 @@ Software Craft Community @ DATEV · September 22, 2026
 
 <!-- _paginate: false -->
 
-![bg right:33%](assets/hza.jpg)
+![bg right:33%](../../shared/assets/hza.jpg)
 
 ## About Philip
 
@@ -63,7 +63,7 @@ Please answer the **first three questions**:
 <!-- header: 'Software Craft Community @ DATEV · September 22, 2026 · Questions @ menti.com Code: <strong>7735 0833</strong>' -->
 <!-- _paginate: false -->
 
-![bg right:33%](assets/why-test-software.jpg)
+![bg right:33%](../../shared/assets/why-test-software.jpg)
 
 # Why Test Software?
 
@@ -81,19 +81,19 @@ Notes:
 - The test suite is the only thing that still reads every line.
 -->
 
-![center h:500](assets/ai-frog-meme.jpg)
+![center h:500](../../shared/assets/ai-frog-meme.jpg)
 
 ---
 
 <!-- _paginate: false -->
 
-![bg right:33%](assets/northstar.jpg)
+![bg right:33%](../../shared/assets/northstar.jpg)
 
 ### My Overall Northstar for Engineering Excellence
 
 Imagine seeing this pull request on a Friday afternoon:
 
-![](assets/northstar-pr.png)
+![](../../shared/assets/northstar-pr.png)
 
 How confident are you to merge this major Spring Boot upgrade and deploy it to production once the pipeline turns green?
 
@@ -135,7 +135,7 @@ Notes:
 <!-- _class: light section -->
 <!-- _paginate: false -->
 
-![bg right:40%](assets/pitfalls.jpg)
+![bg right:40%](../../shared/assets/pitfalls.jpg)
 
 ## Myth #1
 
@@ -154,7 +154,7 @@ Notes:
 
 ## Three Ways to Write Tests for Spring Boot applications
 
-![center h:500](assets/test-choice.png)
+![center h:500](../../shared/assets/test-choice.png)
 
 ---
 
@@ -195,13 +195,13 @@ Notes:
 
 ## A Typical Spring `ApplicationContext`
 
-![center h:500](assets/spring-context.png)
+![center h:500](../../shared/assets/spring-context.png)
 
 ---
 
 ## You Don't Always Need the Entire Context
 
-![center h:500](assets/spring-sliced-context.png)
+![center h:500](../../shared/assets/spring-sliced-context.png)
 
 ---
 
@@ -310,7 +310,7 @@ Attack it from four angles:
 
 * Speed improvement example:
 
-  ![](assets/context-cache-improvements.png)
+  ![](../../shared/assets/context-cache-improvements.png)
 
 ---
 
@@ -349,19 +349,19 @@ This goes into the cache key (`MergedContextConfiguration`):
 
 ## Detect Context Restarts - Visually
 
-![](assets/context-caching-hints.png)
+![](../../shared/assets/context-caching-hints.png)
 
 ---
 
 ## Detect Context Restarts - with Logs
 
-![](assets/context-caching-logs.png)
+![](../../shared/assets/context-caching-logs.png)
 
 ---
 
 ## Detect Context Restarts - with Tooling
 
-![center](assets/spring-test-profiler-logo.png)
+![center](../../shared/assets/spring-test-profiler-logo.png)
 
 An [open-source Spring Test utility](https://github.com/PragmaTech-GmbH/spring-test-profiler) that provides visualization and insights for Spring Test execution, with a focus on Spring context caching statistics.
 
@@ -386,7 +386,7 @@ Two ways to get there:
 
 ---
 
-![bg w:800 h:900 center](assets/parallel-testing.svg)
+![bg w:800 h:900 center](../../shared/assets/parallel-testing.svg)
 
 ---
 
@@ -403,7 +403,7 @@ Two ways to get there:
 <!-- _class: light section -->
 <!-- _paginate: false -->
 
-![bg right:40%](assets/prod-example.jpg)
+![bg right:40%](../../shared/assets/prod-example.jpg)
 
 ## Myth #3
 
@@ -471,7 +471,7 @@ Mocking the client with Mockito skips exactly the part that breaks in production
 
 ---
 
-![bg w:900 center](assets/wiremock-usage.svg)
+![bg w:900 center](../../shared/assets/wiremock-usage.svg)
 
 ---
 
@@ -512,7 +512,7 @@ public Long registerUser(int age, String username) {
 
 ... with the help of PIT:
 
-![center](assets/mutation-testing-explained-corrected.png)
+![center](../../shared/assets/mutation-testing-explained-corrected.png)
 
 ---
 
@@ -576,7 +576,7 @@ Each skill carries rules, references, best practices and antipatterns, described
 
 I am building an **agentic Spring Boot testing course**: how to make code agents produce tests you would have written yourself.
 
-![h:340 center](assets/agentic-testing-course.png)
+![h:340 center](../../shared/assets/agentic-testing-course.png)
 
 See the QR code on the slide for more information.
 
@@ -604,13 +604,13 @@ Notes:
 <!-- _paginate: false -->
 <!-- _header: '' -->
 
-![bg right:33%](assets/end.jpg)
+![bg right:33%](../../shared/assets/end.jpg)
 
 # Joyful Testing!
 
 Get notified for Agentic Testing for Spring Boot:
 
-![center h:300](assets/agentic-testing-course-qr.png)
+![center h:300](../../shared/assets/agentic-testing-course-qr.png)
 
 - [LinkedIn](https://www.linkedin.com/in/rieckpil) (Philip Riecks)
 - [Mail](mailto:philip@pragmatech.digital) (philip@pragmatech.digital)

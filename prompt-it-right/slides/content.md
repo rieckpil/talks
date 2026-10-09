@@ -6,7 +6,7 @@ class: light
 paginate: true
 transition: pt-fade
 header: 'Prompt It Right: Spring Boot Testing in the AI Era · Devoxx Belgium 2k26 · Questions as Comments @ Devoxx Companion Tool'
-footer: '![](assets/logo.webp) Philip Riecks · [@rieckpil](https://x.com/rieckpil) · [PragmaTech GmbH](https://pragmatech.digital/)'
+footer: '![](../../shared/assets/logo.webp) Philip Riecks · [@rieckpil](https://x.com/rieckpil) · [PragmaTech GmbH](https://pragmatech.digital/)'
 ---
 
 <!--
@@ -31,7 +31,7 @@ Notes:
 <!-- _paginate: false -->
 <!-- _header: '' -->
 
-![bg left:33%](assets/abstract-blue-left.png)
+![bg left:33%](../../shared/assets/abstract-blue-left.png)
 
 # Prompt It Right: **Spring Boot Testing** in the AI Era
 
@@ -145,13 +145,13 @@ Notes:
 
 <!-- _paginate: false -->
 
-![bg right:33%](assets/why-test-software.jpg)
+![bg right:33%](../../shared/assets/why-test-software.jpg)
 
 # Why Test Software?
 
 ---
 
-![center h:500](assets/ai-frog-meme.jpg)
+![center h:500](../../shared/assets/ai-frog-meme.jpg)
 
 ---
 
@@ -163,13 +163,13 @@ Notes:
 - PDF and PNG exports show everything at once.
 -->
 
-![bg right:33%](assets/northstar.jpg)
+![bg right:33%](../../shared/assets/northstar.jpg)
 
 ### My Northstar for Engineering Excellence
 
 * Imagine seeing this pull request on a Friday afternoon:
 
-  ![](assets/northstar-pr.png)
+  ![](../../shared/assets/northstar-pr.png)
 
 * How **confident** are you to merge this major Spring Boot upgrade and **deploy** it to production once the pipeline turns green?
 
@@ -296,7 +296,7 @@ Notes:
 
 ## Three Ways to Write Tests for Spring Boot Applications
 
-![center h:500](assets/test-choice.png)
+![center h:500](../../shared/assets/test-choice.png)
 
 ---
 
@@ -333,7 +333,7 @@ Notes:
 
 ---
 
-![bg right:36% fit](assets/lifecycle.svg)
+![bg right:36% fit](../../shared/assets/lifecycle.svg)
 
 ## Why Separate the Tests?
 
@@ -356,7 +356,7 @@ Notes:
 - Tips: favor JUnit over JUnit 4. Pick one assertion library or at least do not mix them within the same test class.
 -->
 
-![bg right:33%](assets/swiss.jpg)
+![bg right:33%](../../shared/assets/swiss.jpg)
 
 - The "Testing Swiss Army Knife"
 
@@ -608,11 +608,11 @@ section.section h1 { font-size: 1.9em; }
 
 ---
 
-![center h:500 w:600](assets/typical-context-sliced.png)
+![center h:500 w:600](../../shared/assets/typical-context-sliced.png)
 
 ---
 
-![](assets/typical-context-webmvctest-example.png)
+![](../../shared/assets/typical-context-webmvctest-example.png)
 
 ---
 
@@ -649,7 +649,7 @@ class CustomerControllerIT {
 
 ---
 
-![center](assets/slicing-annotations.png)
+![center](../../shared/assets/slicing-annotations.png)
 
 ---
 
@@ -671,7 +671,7 @@ class CustomerControllerIT {
 
 ---
 
-![](assets/spring-boot-test-setup.png)
+![](../../shared/assets/spring-boot-test-setup.png)
 
 ---
 
@@ -812,19 +812,19 @@ class ApplicationServletContainerIT {
 * This feature is part of Spring Test (included in every Spring Boot project via `spring-boot-starter-test`)
 * Example of speed improvement:
 
-  ![](assets/context-cache-improvements.png)
+  ![](../../shared/assets/context-cache-improvements.png)
 
 ---
 
-![](assets/caching-explained-00.png)
+![](../../shared/assets/caching-explained-00.png)
 
 ---
 
-![](assets/caching-explained-01.png)
+![](../../shared/assets/caching-explained-01.png)
 
 ---
 
-![](assets/caching-explained-02.png)
+![](../../shared/assets/caching-explained-02.png)
 
 ---
 
@@ -868,19 +868,19 @@ Cache miss? → start new context and store it 🆕
 
 ### Detect Context Restarts - Visually
 
-![](assets/context-caching-hints.png)
+![](../../shared/assets/context-caching-hints.png)
 
 ---
 
 ### Detect Context Restarts - with Logs
 
-![](assets/context-caching-logs.png)
+![](../../shared/assets/context-caching-logs.png)
 
 ---
 
 ### Detect Context Restarts - with Tooling
 
-![center](assets/spring-test-profiler-logo.png)
+![center](../../shared/assets/spring-test-profiler-logo.png)
 
 An [open-source Spring Test utility](https://github.com/PragmaTech-GmbH/spring-test-profiler) that provides visualization and insights for Spring Test execution, with a focus on Spring context caching statistics.
 
@@ -929,7 +929,7 @@ Two ways to achieve this:
 
 ---
 
-![bg w:800 h:900 center](assets/parallel-testing.svg)
+![bg w:800 h:900 center](../../shared/assets/parallel-testing.svg)
 
 ---
 
@@ -981,7 +981,7 @@ public Long registerUser(int age, String username) {
 
 ## Idea: Introduce Regressions to Verify Test Quality
 
-![center](assets/mutation-testing-explained-corrected.png)
+![center](../../shared/assets/mutation-testing-explained-corrected.png)
 
 ---
 
@@ -1185,7 +1185,7 @@ Notes:
 
 ## Backed by the DORA Research
 
-![h:20%](assets/dora-core-summary.png)
+![h:20%](../../shared/assets/dora-core-summary.png)
 
 DORA's core model puts **fast feedback** next to fast flow and a climate for learning.
 
@@ -1779,7 +1779,7 @@ Notes:
 ---
 
 <!-- _class: light section -->
-![bg right:33%](assets/m2-future.jpg)
+![bg right:33%](../../shared/assets/m2-future.jpg)
 
 ## 07 - Engineering excellence
 
@@ -1868,7 +1868,7 @@ Notes:
 ---
 
 <!-- _class: light section -->
-![bg right:33%](assets/m6-thank-you.jpg)
+![bg right:33%](../../shared/assets/m6-thank-you.jpg)
 
 ## 08 - Wrap-up
 
@@ -1895,7 +1895,7 @@ Notes:
 
 ## Take It Further: The Online Course
 
-![center h:500](assets/agentic-testing-course.png)
+![center h:500](../../shared/assets/agentic-testing-course.png)
 
 <!--
 Notes:
@@ -1979,7 +1979,7 @@ Notes:
 <!-- _header: '' -->
 <!-- _footer: '' -->
 
-![bg right:33%](assets/end.jpg)
+![bg right:33%](../../shared/assets/end.jpg)
 
 # Joyful Testing!
 

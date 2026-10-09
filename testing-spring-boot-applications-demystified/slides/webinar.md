@@ -5,7 +5,7 @@ class: light
 paginate: true
 transition: pt-fade
 header: 'Testing Spring Boot Applications Demystified @ JUG Nürnberg 10.09.2026'
-footer: '![](assets/logo.webp) Philip Riecks · [PragmaTech GmbH](https://pragmatech.digital/) · [@rieckpil](https://x.com/rieckpil)'
+footer: '![](../../shared/assets/logo.webp) Philip Riecks · [PragmaTech GmbH](https://pragmatech.digital/) · [@rieckpil](https://x.com/rieckpil)'
 ---
 
 <!--
@@ -40,9 +40,9 @@ Java User Group Nürnberg · September 10, 2026
 
 ---
 
-<!-- footer: '![](assets/logo.webp)' -->
+<!-- footer: '![](../../shared/assets/logo.webp)' -->
 
-![bg right:33% h:750](assets/hza.jpg)
+![bg right:33% h:750](../../shared/assets/hza.jpg)
 
 ### About Philip
 
@@ -69,7 +69,7 @@ Please answer the **first three questions**:
 <!-- header: 'Testing Spring Boot Applications Demystified  @ JUG Nürnberg 10.09.2026 - Questions @ menti.com Code: <strong>3982 6427</strong>' -->
 <!-- _paginate: false -->
 
-![bg right:33%](assets/why-test-software.jpg)
+![bg right:33%](../../shared/assets/why-test-software.jpg)
 
 # Why Test Software?
 
@@ -82,7 +82,7 @@ Please answer the **first three questions**:
 
 ---
 
-![center h:500](assets/ai-frog-meme.jpg)
+![center h:500](../../shared/assets/ai-frog-meme.jpg)
 
 ---
 
@@ -96,13 +96,13 @@ Notes:
 - PDF and PNG exports show everything at once.
 -->
 
-![bg right:33%](assets/northstar.jpg)
+![bg right:33%](../../shared/assets/northstar.jpg)
 
 ### My Overall Northstar for Engineering Excellence
 
 * Imagine seeing this pull request on a Friday afternoon:
 
-  ![](assets/northstar-pr.png)
+  ![](../../shared/assets/northstar-pr.png)
 
 * How **confident** are you to merge this major Spring Boot upgrade and **deploy** it to production once the pipeline turns green?
 
@@ -164,12 +164,12 @@ Notes:
 ---
 
 [//]: # ()
-[//]: # ([//]: # &#40;<!-- footer: '![w:32 h:32]&#40;assets/logo.webp&#41;' -->&#41;)
+[//]: # ([//]: # &#40;<!-- footer: '![w:32 h:32]&#40;../../shared/assets/logo.webp&#41;' -->&#41;)
 [//]: # (## Spring Boot Testing - The Bad & Ugly)
 
 [//]: # ()
 [//]: # ()
-[//]: # (![center h:500 w:900]&#40;assets/spring-boot-testing-the-bad.png&#41;)
+[//]: # (![center h:500 w:900]&#40;../../shared/assets/spring-boot-testing-the-bad.png&#41;)
 
 [//]: # ()
 [//]: # (---)
@@ -179,7 +179,7 @@ Notes:
 [//]: # (## Spring Boot Testing - The Good)
 
 [//]: # ()
-[//]: # (![center h:500 w:900]&#40;assets/tests-benefit-en.png&#41;)
+[//]: # (![center h:500 w:900]&#40;../../shared/assets/tests-benefit-en.png&#41;)
 
 [//]: # ()
 [//]: # ()
@@ -211,7 +211,7 @@ Notes:
 
 ### Goals For This Talk
 
-![bg h:500 right:33%](assets/demystify.png)
+![bg h:500 right:33%](../../shared/assets/demystify.png)
 
 
 - **Provide a clear mental map** for choosing between unit, slice, and integration tests
@@ -272,7 +272,7 @@ Notes:
 
 -->
 
-![bg right:33%](assets/swiss.jpg)
+![bg right:33%](../../shared/assets/swiss.jpg)
 
 - The "Testing Swiss Army Knife"
 
@@ -713,21 +713,21 @@ _Multiple Heads, Each Guarding a Layer_
 ---
 
 
-![center h:600 w:700](assets/typical-context.png)
+![center h:600 w:700](../../shared/assets/typical-context.png)
 
 ---
 
-![center h:600 w:700](assets/typical-context-colored.png)
-
----
-
-
-![center h:500 w:600](assets/typical-context-sliced.png)
+![center h:600 w:700](../../shared/assets/typical-context-colored.png)
 
 ---
 
 
-![](assets/typical-context-webmvctest-example.png)
+![center h:500 w:600](../../shared/assets/typical-context-sliced.png)
+
+---
+
+
+![](../../shared/assets/typical-context-webmvctest-example.png)
 
 ---
 
@@ -765,7 +765,7 @@ class CustomerControllerTest {
 
 ---
 
-![center](assets/slicing-annotations.png)
+![center](../../shared/assets/slicing-annotations.png)
 
 ---
 
@@ -804,7 +804,7 @@ Notes:
 
 -->
 
-![](assets/spring-boot-test-setup.png)
+![](../../shared/assets/spring-boot-test-setup.png)
 
 ---
 
@@ -856,7 +856,7 @@ ad0f804068dc   testcontainers/ryuk:0.12.0   "/bin/ryuk"              10 seconds 
 [//]: # (Consider [WireMock]&#40;http://wiremock.org/&#41; to stub external HTTP services during tests.)
 
 [//]: # ()
-[//]: # (![h:400 center]&#40;assets/wiremock-usage.svg&#41;)
+[//]: # (![h:400 center]&#40;../../shared/assets/wiremock-usage.svg&#41;)
 
 [//]: # ()
 [//]: # (---)
@@ -996,7 +996,7 @@ _Helps You Reuse What You Already Built_
 * This feature is part of Spring Test (included in every Spring Boot project via `spring-boot-starter-test`)
 
 * Example of speed improvement:
-  ![](assets/context-cache-improvements.png)
+  ![](../../shared/assets/context-cache-improvements.png)
 
 
 ---
@@ -1004,15 +1004,15 @@ _Helps You Reuse What You Already Built_
 <!-- _class: light --->
 
 
-![](assets/caching-explained-00.png)
+![](../../shared/assets/caching-explained-00.png)
 
 ---
 
-![](assets/caching-explained-01.png)
+![](../../shared/assets/caching-explained-01.png)
 
 ---
 
-![](assets/caching-explained-02.png)
+![](../../shared/assets/caching-explained-02.png)
 
 ---
 
@@ -1056,20 +1056,20 @@ Cache miss? → start new context and store it 🆕
 
 ###  Detect Context Restarts - Visually
 
-![](assets/context-caching-hints.png)
+![](../../shared/assets/context-caching-hints.png)
 
 
 ---
 
 ### Detect Context Restarts - with Logs
 
-![](assets/context-caching-logs.png)
+![](../../shared/assets/context-caching-logs.png)
 
 ---
 
 ### Detect Context Restarts - with Tooling
 
-![center](assets/spring-test-profiler-logo.png)
+![center](../../shared/assets/spring-test-profiler-logo.png)
 
 An [open-source Spring Test utility](https://github.com/PragmaTech-GmbH/spring-test-profiler) that provides visualization and insights for Spring Test execution, with a focus on Spring context caching statistics.
 
@@ -1147,7 +1147,7 @@ Two ways to achieve this:
 
 ---
 
-![bg w:800 h:900 center](assets/parallel-testing.svg)
+![bg w:800 h:900 center](../../shared/assets/parallel-testing.svg)
 
 ---
 
@@ -1245,7 +1245,7 @@ public Long registerUser(int age, String username) {
 ## Idea: Introduce Regressions to Verify Test Quality
 
 
-![center](assets/mutation-testing-explained-corrected.png)
+![center](../../shared/assets/mutation-testing-explained-corrected.png)
 
 ---
 
@@ -1286,7 +1286,7 @@ public Long registerUser(int age, String username) {
 [//]: # (---)
 
 [//]: # ()
-[//]: # (![bg right:30%]&#40;assets/why-test.jpg&#41;)
+[//]: # (![bg right:30%]&#40;../../shared/assets/why-test.jpg&#41;)
 
 [//]: # ()
 [//]: # ()
@@ -1307,7 +1307,7 @@ public Long registerUser(int age, String username) {
 [//]: # (## Bring This Talk to Your Company!)
 
 [//]: # ()
-[//]: # (![bg right:23%]&#40;assets/philip-jug-zurich-2025-audience.jpg&#41;)
+[//]: # (![bg right:23%]&#40;../../shared/assets/philip-jug-zurich-2025-audience.jpg&#41;)
 
 [//]: # ()
 [//]: # (I offer this and similar Spring Boot testing talks **for free** for companies as:)
@@ -1338,7 +1338,7 @@ public Long registerUser(int age, String username) {
 
 [//]: # ()
 [//]: # ()
-[//]: # (![center w:400 h:400]&#40;assets/masterclass-architecture.png&#41;)
+[//]: # (![center w:400 h:400]&#40;../../shared/assets/masterclass-architecture.png&#41;)
 
 [//]: # ()
 [//]: # ()
@@ -1355,7 +1355,7 @@ public Long registerUser(int age, String username) {
 
 [//]: # ()
 [//]: # ()
-[//]: # (![center]&#40;assets/tsbam-recording.gif&#41;)
+[//]: # (![center]&#40;../../shared/assets/tsbam-recording.gif&#41;)
 
 [//]: # ()
 [//]: # ()
@@ -1368,7 +1368,7 @@ public Long registerUser(int age, String username) {
 [//]: # ()
 [//]: # (---)
 
-[//]: # (![bg h:900 right:20%]&#40;assets/offers-w.png&#41;)
+[//]: # (![bg h:900 right:20%]&#40;../../shared/assets/offers-w.png&#41;)
 
 [//]: # (## Limited Webinar Offer for the Next 24 Hours)
 
@@ -1399,7 +1399,7 @@ public Long registerUser(int age, String username) {
 
 [//]: # ()
 [//]: # ()
-[//]: # (![bg right:23%]&#40;assets/philip-jug-zurich-2025-audience.jpg&#41;)
+[//]: # (![bg right:23%]&#40;../../shared/assets/philip-jug-zurich-2025-audience.jpg&#41;)
 
 [//]: # ()
 [//]: # ()
@@ -1476,7 +1476,7 @@ public Long registerUser(int age, String username) {
 
 ## Upcoming Online Course
 
-![center h:500 ](assets/agentic-testing-course.png)
+![center h:500 ](../../shared/assets/agentic-testing-course.png)
 
 ---
 
@@ -1522,7 +1522,7 @@ Go to [menti.com](https://www.menti.com/) and use the code **3982 6427** to fina
 ## Don't Leave Empty-Handed
 
 
-![bg h:720 w:450 right:33%](assets/tsbad-cover.png)
+![bg h:720 w:450 right:33%](../../shared/assets/tsbad-cover.png)
 
 
 
@@ -1556,13 +1556,13 @@ Go to [menti.com](https://www.menti.com/) and use the code **3982 6427** to fina
 <!-- _paginate: false -->
 <!-- _header: '' -->
 
-![bg right:33%](assets/end.jpg)
+![bg right:33%](../../shared/assets/end.jpg)
 
 # Joyful Testing!
 
 Get your Spring Boot Testing eBook (120+ pages):
 
-![h:260 center](assets/newsletter-signup-qr.png)
+![h:260 center](../../shared/assets/newsletter-signup-qr.png)
 
 Reach out any time
 - [LinkedIn](https://www.linkedin.com/in/rieckpil) (Philip Riecks)

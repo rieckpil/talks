@@ -64,13 +64,13 @@ The Cost of Being Lost
 -
 ---
 
-![bg right:33%](assets/northstar.jpg)
+![bg right:33%](../../shared/assets/northstar.jpg)
 
 ### My Overall Northstar for Automated Testing
 
 Imagine seeing this pull request on a Friday afternoon:
 
-![](assets/northstar-pr.png)
+![](../../shared/assets/northstar-pr.png)
 
 How confident are you to merge this major Spring Boot upgrade and deploy it to production once the pipeline turns green?
 
@@ -94,7 +94,7 @@ Good tests don't just catch bugs - they give you **fast feedback** and **confide
 - Act 5: The Exit
 -->
 
-<!-- footer: '![w:32 h:32](assets/logo.webp)' -->
+<!-- footer: '![w:32 h:32](../../shared/assets/logo.webp)' -->
 
 ![h:500 w:900 center](assets/tsbad-map-parts.png)
 
@@ -102,7 +102,7 @@ Good tests don't just catch bugs - they give you **fast feedback** and **confide
 
 ### Goals For This Talk
 
-![bg h:500 right:33%](assets/demystify.png)
+![bg h:500 right:33%](../../shared/assets/demystify.png)
 
 
 - **Provide a clear mental map** for choosing between unit, slice, and integration tests so developers stop guessing which tool to use
@@ -112,7 +112,7 @@ Good tests don't just catch bugs - they give you **fast feedback** and **confide
 
 ---
 
-![bg right:33%](assets/hza.jpg)
+![bg right:33%](../../shared/assets/hza.jpg)
 
 ### About Philip
 
@@ -205,7 +205,7 @@ Notes:
 ---
 
 
-![bg right:33%](assets/101.jpg)
+![bg right:33%](../../shared/assets/101.jpg)
 
 # Spring Boot Testing 101
 
@@ -213,7 +213,7 @@ Notes:
 
 ## Maven Build Lifecycle
 
-![bg h:500 right](assets/lifecycle.svg)
+![bg h:500 right](../../shared/assets/lifecycle.svg)
 
 - **Maven Surefire Plugin** for unit tests: default postfix  `*Test` (e.g. `CustomerTest`)
 - **Maven Failsafe Plugin** for integration tests: default postfix `*IT` (e.g. `CheckoutIT`)
@@ -256,7 +256,7 @@ Notes:
 
 -->
 
-![bg right:33%](assets/swiss.jpg)
+![bg right:33%](../../shared/assets/swiss.jpg)
 
 - aka. "Testing Swiss Army Knife"
 
@@ -433,7 +433,7 @@ Notes:
 
 -->
 
-![bg right:33%](assets/slice.jpg)
+![bg right:33%](../../shared/assets/slice.jpg)
 
 ---
 
@@ -442,7 +442,7 @@ Notes:
 Our application context consists of many different components (Spring beans):
 
 
-![w:400 h:400 center](assets/spring-context.png)
+![w:400 h:400 center](../../shared/assets/spring-context.png)
 
 ---
 
@@ -450,14 +450,14 @@ Our application context consists of many different components (Spring beans):
 
 Spring Boot allows to load only specific parts (slices) of the application context:
 
-![w:600 h:500 center](assets/spring-sliced-context.png)
+![w:600 h:500 center](../../shared/assets/spring-sliced-context.png)
 
 ---
 ## Slicing in Action
 
 Spring Boot's test slice component scanning will only include relevant beans in the sliced context. We need to provide or mock beans that are not part of the slice:
 
-![h:450 w:1200](assets/slicing-in-action.png)
+![h:450 w:1200](../../shared/assets/slicing-in-action.png)
 
 ---
 
@@ -506,7 +506,7 @@ class CustomerControllerTest {
 
 ---
 
-![center](assets/slicing-annotations.png)
+![center](../../shared/assets/slicing-annotations.png)
 
 ---
 
@@ -514,7 +514,7 @@ class CustomerControllerTest {
 
 Writing tests against the whole `ApplicationContext`.
 
-![bg right:33%](assets/full.jpg)
+![bg right:33%](../../shared/assets/full.jpg)
 
 ---
 
@@ -526,7 +526,7 @@ Notes:
 
 -->
 
-![](assets/spring-boot-test-setup.png)
+![](../../shared/assets/spring-boot-test-setup.png)
 
 ---
 
@@ -581,7 +581,7 @@ ad0f804068dc   testcontainers/ryuk:0.12.0   "/bin/ryuk"              10 seconds 
 
 Consider [WireMock](http://wiremock.org/) to stub external HTTP services during tests.
 
-![h:400 center](assets/wiremock-usage.svg)
+![h:400 center](../../shared/assets/wiremock-usage.svg)
 
 ---
 
@@ -677,7 +677,7 @@ class ApplicationMockWebIT {
 
 Speed improvement example:
 
-![](assets/context-cache-improvements.png)
+![](../../shared/assets/context-cache-improvements.png)
 
 ---
 
@@ -685,7 +685,7 @@ Speed improvement example:
 
 How the caching mechanism works:
 
-![center](assets/cache.svg)
+![center](../../shared/assets/cache.svg)
 
 ---
 
@@ -709,20 +709,20 @@ This goes into the cache key (`MergedContextConfiguration`):
 ---
 ## Identify Context Restarts - Visually
 
-![](assets/context-caching-hints.png)
+![](../../shared/assets/context-caching-hints.png)
 
 
 ---
 
 ## Identify Context Restarts - with Logs
 
-![](assets/context-caching-logs.png)
+![](../../shared/assets/context-caching-logs.png)
 
 ---
 
 ## Identify Context Restarts - with Tools
 
-![center](assets/spring-test-profiler-logo.png)
+![center](../../shared/assets/spring-test-profiler-logo.png)
 
 An [open-source Spring Test utility](https://github.com/PragmaTech-GmbH/spring-test-profiler) that provides visualization and insights for Spring Test execution, with a focus on Spring context caching statistics.
 
@@ -752,7 +752,7 @@ The setup above will **disable** the context caching feature and slow down the b
 
 ## Spot the Issues for Context Caching
 
-![](assets/context-caching-bad.png)
+![](../../shared/assets/context-caching-bad.png)
 
 
 ---
@@ -787,7 +787,7 @@ See the release notes of [Spring Framework 7.0.0 M7](https://spring.io/blog/2025
 
 ## E2E Testing - the Holy Grail of Confidence
 
-![bg right:33%](assets/prod-example.jpg)
+![bg right:33%](../../shared/assets/prod-example.jpg)
 
 - For applications involving a UI consider tools like Selenium, Selenide, Cypress, Playwright, etc.
 - Detect issues that only appear in production-like environments, also for downstream systems
@@ -799,7 +799,7 @@ See the release notes of [Spring Framework 7.0.0 M7](https://spring.io/blog/2025
 
 # Spring Boot Testing Best Practices
 
-![bg right:33%](assets/best-practices.jpg)
+![bg right:33%](../../shared/assets/best-practices.jpg)
 
 ---
 
@@ -818,7 +818,7 @@ Two ways to achieve this:
 
 ---
 
-![bg w:800 h:900 center](assets/parallel-testing.svg)
+![bg w:800 h:900 center](../../shared/assets/parallel-testing.svg)
 
 ---
 
@@ -850,13 +850,13 @@ Notes:
 
 ---
 
-![center w:800 h:600](assets/mutation.svg)
+![center w:800 h:600](../../shared/assets/mutation.svg)
 
 ---
 
 # Common Spring Boot Testing Pitfalls to Avoid
 
-![bg right:33%](assets/pitfalls.jpg)
+![bg right:33%](../../shared/assets/pitfalls.jpg)
 
 ---
 
@@ -871,7 +871,7 @@ Notes:
 
 ## @SpringBootTest Obsession Visualized
 
-![](assets/spring-boot-test-obsession.png)
+![](../../shared/assets/spring-boot-test-obsession.png)
 
 ---
 
@@ -891,7 +891,7 @@ Notes:
 
 ## Testing Pitfall 3: JUnit 4 vs. JUnit 5
 
-![bg right:33%](assets/car-comparison.jpg)
+![bg right:33%](../../shared/assets/car-comparison.jpg)
 
 - You can mix both versions in the same project but not in the same test class
 - Browsing through the internet (aka. StackOverflow/blogs/LLMs) for solutions, you might find test setups that are still for JUnit 4
@@ -937,7 +937,7 @@ Notes:
 
 ## What's Next? Additional Testing Resources
 
-![bg h:900 right:20%](assets/offers-w.png)
+![bg h:900 right:20%](../../shared/assets/offers-w.png)
 
 
 - Online Course: [Testing Spring Boot Applications Masterclass](https://rieckpil.de/testing-spring-boot-applications-masterclass/) (on-demand, 12 hours, 130+ modules)
@@ -950,7 +950,7 @@ Notes:
 
 ## Don't Leave Empty-Handed
 
-![bg h:720 w:450 right:33%](assets/spring-boot-testing-book-cover.png)
+![bg h:720 w:450 right:33%](../../shared/assets/spring-boot-testing-book-cover.png)
 
 - Get the complementary **Spring Boot Testing eBook** for free (instead of $9)
 - 120+ Pages with practical hands-on advice to ship code with confidence
@@ -967,9 +967,9 @@ Notes:
 
 Get your free Spring Boot Testing eBook copy:
 
-![bg right:33%](assets/end.jpg)
+![bg right:33%](../../shared/assets/end.jpg)
 
-![center h:200 w:200](assets/newsletter-signup-qr.png)
+![center h:200 w:200](../../shared/assets/newsletter-signup-qr.png)
 
 Reach out any time via:
 - [LinkedIn](https://www.linkedin.com/in/rieckpil) (Philip Riecks)
