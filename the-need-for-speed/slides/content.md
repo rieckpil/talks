@@ -5,7 +5,7 @@ title: 'The Need for Speed: Cut Your Spring Boot Build Times by 70%'
 class: light
 paginate: true
 transition: pt-fade
-header: 'The Need for Speed · Event TBD'
+header: 'The Need for Speed · JavaCro 2026'
 footer: '![](../../shared/assets/logo.webp) Philip Riecks · [@rieckpil](https://x.com/rieckpil) · [PragmaTech GmbH](https://pragmatech.digital/)'
 ---
 
@@ -22,13 +22,13 @@ footer: '![](../../shared/assets/logo.webp) Philip Riecks · [@rieckpil](https:/
 <!-- _paginate: false -->
 <!-- _header: '' -->
 
-![bg left:33%](../../shared/assets/abstract-blue-left.png)
+![bg left:33%](../../shared/assets/the-need-for-speed/speedometer.jpg)
 
 # The Need for **Speed**: Cut Your Spring Boot Build Times by 70%
 
 ## Spring TestContext caching: the hidden gem of Spring Test
 
-Event TBD · Date TBD
+JavaCro 2026 · October 13, 2026
 
 <!--
 Notes:
