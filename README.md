@@ -9,6 +9,19 @@ Links:
 - [Twitter](https://twitter.com/rieckpil)
 - Speaker Image Reference: [400x400](/resources/rieckpil-400x400.jpg) or [200x257](/resources/rieckpil-200x257.jpg)
 
+## Slide tooling
+
+All Marp decks share one setup in [`shared/`](shared/): theme (`shared/theme/pragmatech.css`), engine, all images (`shared/assets/`), build scripts and a Remotion project for complex animations. A deck folder only holds its `slides/content.md`, visual sources and PDFs.
+
+```bash
+shared/scripts/new-deck.sh my-talk "My **Talk**" "Event 2027" "March 3, 2027" [banner.jpg]   # new deck
+shared/scripts/build.sh my-talk watch                                                         # live preview
+shared/scripts/sharable-pdf.sh my-talk slides-event-2027-03-03.pdf                            # small PDF
+shared/scripts/compare-pdfs.sh before.pdf after.pdf                                           # pixel diff after theme changes
+```
+
+Rules, layouts, diagrams and animations are documented in the `pragmatech-slides` skill (`.claude/skills/pragmatech-slides/SKILL.md`).
+
 ## Hands-On
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/rieckpil/talks)

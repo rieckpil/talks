@@ -4,7 +4,7 @@ theme: pragmatech
 header: 'Stop Fighting Your Spring Boot Tests @ Firma & Datum'
 ---
 
-![bg](./assets/nuremberg-view.jpg)
+![bg](../../shared/assets/nuremberg-view.jpg)
 <!-- header: "" -->
 <!-- footer: ""-->
 
@@ -18,7 +18,7 @@ Notes:
 
 -->
 <!-- _class: title -->
-![bg left:33%](assets/stop-fighting-your-spring-boot-tests.jpg)
+![bg left:33%](../../shared/assets/stop-fighting-your-spring-boot-tests.jpg)
 
 # Stop Fighting Your Spring Boot Tests
 
@@ -34,7 +34,7 @@ Philip Riecks - [PragmaTech GmbH](https://pragmatech.digital/) - [@rieckpil](htt
 ## Interaktive Teilnahme
 
 
-![h:200 w:200 center](assets/mentimeter-nuernberger.png)
+![h:200 w:200 center](../../shared/assets/mentimeter-nuernberger.png)
 
 Gehe auf [menti.com](https://www.menti.com/) und verwende den Code **5490 0636**, um **anonym** Antworten zu den Quizfragen einzureichen und während des Vortrags Fragen zu stellen.
 
@@ -54,11 +54,11 @@ Starte mit den ersten beiden Fragen:
 -->
 
 <!-- header: 'Firma & Datum - Fragen & FAQ @ menti.com Code: <strong>5490 0636</strong>' -->
-<!-- footer: '![w:32 h:32](assets/logo.webp)' -->
+<!-- footer: '![w:32 h:32](../../shared/assets/logo.webp)' -->
 ## Spring Boot Testing - The Bad & Ugly
 
 
-![center h:500 w:900](assets/spring-boot-testing-the-bad.png)
+![center h:500 w:900](../../shared/assets/spring-boot-testing-the-bad.png)
 
 ---
 
@@ -73,7 +73,7 @@ Starte mit den ersten beiden Fragen:
 
 ## Spring Boot Testing - The Good
 
-![center h:500 w:900](assets/spring-boot-testing-the-good.png)
+![center h:500 w:900](../../shared/assets/spring-boot-testing-the-good.png)
 
 <!--
 - Es geht aber auch anders
@@ -82,13 +82,13 @@ Starte mit den ersten beiden Fragen:
 
 ---
 
-![bg right:33%](assets/northstar.jpg)
+![bg right:33%](../../shared/assets/northstar.jpg)
 
 ## Mein Nordstern
 
 Stell dir vor, du siehst diesen Pull Request an einem Freitagnachmittag:
 
-![](assets/northstar-pr.png)
+![](../../shared/assets/northstar-pr.png)
 
 Wie zuversichtlich bist du, dieses Spring Boot Upgrade zu mergen und in Produktion zu deployen, sobald die Pipeline grün ist?
 
@@ -98,7 +98,7 @@ Gute Tests finden nicht nur Bugs – Tests (plus Automatisierung) geben dir das 
 
 ## Ziele für die nächsten 45 Minuten
 
-![bg right:33%](assets/best-practices.jpg)
+![bg right:33%](../../shared/assets/best-practices.jpg)
 
 
 - Das Fundament für erfolgreiches Testen von Spring Boot Anwendungen legen
@@ -109,7 +109,7 @@ Gute Tests finden nicht nur Bugs – Tests (plus Automatisierung) geben dir das 
 
 ---
 
-![bg right:33%](assets/hza.jpg)
+![bg right:33%](../../shared/assets/hza.jpg)
 
 ## Über Philip
 
@@ -122,7 +122,7 @@ Gute Tests finden nicht nur Bugs – Tests (plus Automatisierung) geben dir das 
 
 ## Agenda
 
-![bg right:33%](assets/steps.jpg)
+![bg right:33%](../../shared/assets/steps.jpg)
 
 - Einführung
 - Testen mit Spring Boot
@@ -143,7 +143,7 @@ Notes:
 
 -->
 
-![bg right:33%](assets/testing-pyramid.jpg)
+![bg right:33%](../../shared/assets/testing-pyramid.jpg)
 
 # Part 1: Die Spring Boot Test Pyramide
 
@@ -162,10 +162,10 @@ Notes:
 
 ## Spring Boot Testarten
 
-![center h:500 w:1000](assets/spring-boot-test-decision-tree-de.png)
+![center h:500 w:1000](../../shared/assets/spring-boot-test-decision-tree-de.png)
 
 ---
-![bg right:33%](assets/101.jpg)
+![bg right:33%](../../shared/assets/101.jpg)
 
 ## Unit Testing mit Spring Boot
 
@@ -216,28 +216,28 @@ class CustomerServiceTest {
 
 ---
 
-![bg right:33%](assets/slice.jpg)
+![bg right:33%](../../shared/assets/slice.jpg)
 
 ## Sliced Testing mit Spring Boot
 
 
 ---
 
-![center h:600 w:700](assets/typical-context.png)
+![center h:600 w:700](../../shared/assets/typical-context.png)
 
 ---
 
-![center h:600 w:700](assets/typical-context-colored.png)
-
----
-
-
-![center h:500 w:600](assets/typical-context-sliced.png)
+![center h:600 w:700](../../shared/assets/typical-context-colored.png)
 
 ---
 
 
-![](assets/typical-context-webmvctest-example.png)
+![center h:500 w:600](../../shared/assets/typical-context-sliced.png)
+
+---
+
+
+![](../../shared/assets/typical-context-webmvctest-example.png)
 
 ---
 
@@ -265,7 +265,7 @@ class CustomerControllerTest {
 
 ---
 
-![bg right:33%](assets/full.jpg)
+![bg right:33%](../../shared/assets/full.jpg)
 
 ## Integration Testing mit Spring Boot
 
@@ -334,11 +334,11 @@ class ApplicationServletContainerIT {
 
 ### Zusammenfassung Part 1
 
-![center h:400 w:800](assets/slice-test-recommendation.png)
+![center h:400 w:800](../../shared/assets/slice-test-recommendation.png)
 
 ---
 
-![bg right:33%](assets/speed.jpg)
+![bg right:33%](../../shared/assets/speed.jpg)
 
 # Part 2: Geschwindigkeit & Stabilität für deine Spring Boot Test Suite
 
@@ -352,25 +352,25 @@ class ApplicationServletContainerIT {
 
 Beispiel für Geschwindigkeitsverbesserung:
 
-![](assets/context-cache-improvements.png)
+![](../../shared/assets/context-cache-improvements.png)
 
 ---
 
 ### Wie der Cache funktioniert: Schritt 0
 
-![center h:500 w:700](assets/caching-step-0.png)
+![center h:500 w:700](../../shared/assets/caching-step-0.png)
 
 ---
 
 ### Wie der Cache funktioniert: Schritt 1
 
-![center h:500 w:700](assets/caching-step-1.png)
+![center h:500 w:700](../../shared/assets/caching-step-1.png)
 
 ---
 
 ### Wie der Cache funktioniert: Schritt 2
 
-![center h:500 w:700](assets/caching-step-2.png)
+![center h:500 w:700](../../shared/assets/caching-step-2.png)
 
 ---
 
@@ -395,20 +395,20 @@ Folgendes fließt in den Cache Key (`MergedContextConfiguration`) ein:
 ---
 ### Context Restarts erkennen - Visuell
 
-![](assets/context-caching-hints.png)
+![](../../shared/assets/context-caching-hints.png)
 
 
 ---
 
 ### Context Restarts erkennen - Logs
 
-![](assets/context-caching-logs.png)
+![](../../shared/assets/context-caching-logs.png)
 
 ---
 
 ### Context Restarts erkennen - Tooling
 
-![center](assets/spring-test-profiler-logo.png)
+![center](../../shared/assets/spring-test-profiler-logo.png)
 
 Ein [Open-Source Spring Test Utility](https://github.com/PragmaTech-GmbH/spring-test-profiler), das Visualisierung und Einblicke in die Spring Test Ausführung bietet, mit Fokus auf Spring Context Caching Statistiken.
 
@@ -462,7 +462,7 @@ Zwei Wege, um das zu erreichen:
 - JUnit Jupiters Parallelisierungsmodus nutzen und in derselben JVM mit mehreren Threads laufen lassen
 ---
 
-![bg w:800 h:900 center](assets/parallel-testing.svg)
+![bg w:800 h:900 center](../../shared/assets/parallel-testing.svg)
 
 ---
 
@@ -505,7 +505,7 @@ static {
 ---
 
 
-![bg right:33%](assets/fight-back.jpg)
+![bg right:33%](../../shared/assets/fight-back.jpg)
 
 # Part 3: Warum & wann Spring Boot Tests Probleme machen
 
@@ -522,7 +522,7 @@ static {
 
 ## `@SpringBootTest` "Besessenheit" Visuell
 
-![](assets/spring-boot-test-obsession.png)
+![](../../shared/assets/spring-boot-test-obsession.png)
 
 ---
 
@@ -549,13 +549,13 @@ static {
 - Qualitätsgarantie: PIT **modifiziert unseren Code** automatisch (ändert Bedingungen, Rückgabewerte, etc.), um sicherzustellen, dass unsere Tests fehlschlagen, wenn sie sollten, und **deckt blind Spots** in scheinbar umfassenden Test Suites auf.
 ---
 
-![center h:400 w:1300](assets/mutation-testing-explained-de.png)
+![center h:400 w:1300](../../shared/assets/mutation-testing-explained-de.png)
 
 ---
 
 ## Testing Pitfall 4: JUnit 4 vs. JUnit 5 (vs. JUnit 6)
 
-![bg right:33%](assets/car-comparison.jpg)
+![bg right:33%](../../shared/assets/car-comparison.jpg)
 
 - Man kann beide Versionen im selben Projekt mischen, aber nicht in derselben Testklasse
 - Beim Durchsuchen des Internets (aka. StackOverflow/Blogs/LLMs) nach Lösungen findet man möglicherweise Test-Setups, die noch für JUnit 4 sind
@@ -591,7 +591,7 @@ static {
 
 ## Weitere Spring Boot Testing Angebote
 
-![bg h:900 right:20%](assets/offers-w.png)
+![bg h:900 right:20%](../../shared/assets/offers-w.png)
 
 
 - Online Kurs: [Testing Spring Boot Applications Masterclass](https://rieckpil.de/testing-spring-boot-applications-masterclass/) (on-demand, 12 Stunden, 130+ Module)
@@ -604,7 +604,7 @@ static {
 
 ## Ergänzendes Spring Boot Testing eBook
 
-![bg h:720 w:450 right:33%](assets/spring-boot-testing-book-cover.png)
+![bg h:720 w:450 right:33%](../../shared/assets/spring-boot-testing-book-cover.png)
 
 - Hol dir das ergänzende Spring Boot Testing eBook **kostenlos** (statt $9)
 - 120+ Seiten mit praktischen Hands-on-Tipps, um Code mit Vertrauen zu deployen
@@ -618,9 +618,9 @@ static {
 
 Hol dir dein kostenloses Spring Boot Testing eBook:
 
-![bg right:33%](assets/end.jpg)
+![bg right:33%](../../shared/assets/end.jpg)
 
-![center h:200 w:200](assets/newsletter-signup-qr.png)
+![center h:200 w:200](../../shared/assets/newsletter-signup-qr.png)
 
 Melde dich jederzeit via:
 - [LinkedIn](https://www.linkedin.com/in/rieckpil) (Philip Riecks)

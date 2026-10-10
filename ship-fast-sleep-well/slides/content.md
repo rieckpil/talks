@@ -6,7 +6,7 @@ class: light
 paginate: true
 transition: pt-fade
 header: 'Ship Fast, Sleep Well: Fearless Spring Boot Deployments in the AI Era · DATEV Coding Festival 2k26'
-footer: '![](assets/logo.webp) Philip Riecks · [@rieckpil](https://x.com/rieckpil) · [PragmaTech GmbH](https://pragmatech.digital/)'
+footer: '![](../../shared/assets/logo.webp) Philip Riecks · [@rieckpil](https://x.com/rieckpil) · [PragmaTech GmbH](https://pragmatech.digital/)'
 style: |
   section[class*="cards"] > ul { display: grid; gap: 20px; list-style: none; padding: 0; margin: 0.5em 0 0; }
   section.cards2 > ul { grid-template-columns: repeat(2, 1fr); }
@@ -56,7 +56,7 @@ style: |
 <!-- _header: '' -->
 <!-- _footer: '' -->
 
-![bg fit](assets/datev-coding-festival.png)
+![bg fit](../../shared/assets/datev-coding-festival.png)
 
 ---
 
@@ -64,7 +64,7 @@ style: |
 <!-- _paginate: false -->
 <!-- _header: '' -->
 
-![bg left:33%](assets/abstract-blue-left.png)
+![bg left:33%](../../shared/assets/abstract-blue-left.png)
 
 # Ship Fast, **Sleep Well**
 
@@ -85,11 +85,11 @@ Notes:
 
 <!--
 Notes:
-- Image prompt: visuals/image-prompts.md (horror picture). Replace assets/horror-friday.png.
+- Image prompt: visuals/image-prompts.md (horror picture). Replace ../../shared/assets/horror-friday.png.
 - Tell the story: it is Friday, 16:00, the pager rings, a critical bug in production.
 -->
 
-![bg fit](assets/horror-friday.png)
+![bg fit](../../shared/assets/horror-friday.png)
 
 ---
 
@@ -117,10 +117,10 @@ Notes:
 
 <!--
 Notes:
-- Image prompt: visuals/image-prompts.md (target picture). Replace assets/target-state.png.
+- Image prompt: visuals/image-prompts.md (target picture). Replace ../../shared/assets/target-state.png.
 -->
 
-![bg fit](assets/target-state.png)
+![bg fit](../../shared/assets/target-state.png)
 
 ---
 
@@ -165,7 +165,7 @@ Notes:
 
 ---
 
-![bg right:33%](assets/herzogenaurach.jpg)
+![bg right:33%](../../shared/assets/herzogenaurach.jpg)
 
 ### About Philip
 
@@ -204,7 +204,7 @@ Notes:
 - TODO: check that the three questions in the Mentimeter match this slide.
 -->
 
-![bg right:36% h:420](assets/mentimeter-datev-coding-festival-2k26-padded.png)
+![bg right:36% h:420](../../shared/assets/mentimeter-datev-coding-festival-2k26-padded.png)
 
 ## Help Me Understand Your Process
 
@@ -246,7 +246,7 @@ Notes:
 
 ## Backed by the DORA Research
 
-![h:20%](assets/dora-core-summary.png)
+![h:20%](../../shared/assets/dora-core-summary.png)
 
 DORA's core model puts **fast feedback** next to fast flow and a climate for learning.
 
@@ -311,7 +311,7 @@ Notes:
 
 Results from one of my clients:
 
-![center w:1100](assets/context-cache-improvements.png)
+![center w:1100](../../shared/assets/context-cache-improvements.png)
 
 ---
 
@@ -411,7 +411,7 @@ Notes:
 
 ## Idea: Introduce Regressions to Verify Test Quality
 
-![center](assets/mutation-testing-explained-corrected.png)
+![center](../../shared/assets/mutation-testing-explained-corrected.png)
 
 ---
 
@@ -618,7 +618,7 @@ Notes:
 
 ## The Togglz Admin Console
 
-![center w:1040](assets/togglz-admin-console.png)
+![center w:1040](../../shared/assets/togglz-admin-console.png)
 
 **Status** and **strategy** per feature: key users first, gradual rollout, switch **at runtime** without a deployment.
 
@@ -852,7 +852,7 @@ Notes:
 <!-- _header: '' -->
 <!-- _footer: '' -->
 
-![bg right:33%](assets/end.jpg)
+![bg right:33%](../../shared/assets/end.jpg)
 
 # Fearless Shipping!
 
@@ -860,7 +860,7 @@ Thank you! Questions?
 
 The **Spring Boot Testing Newsletter**: best practices, recipes and quick wins in your inbox - **rieckpil.de/newsletter**
 
-![h:170](assets/newsletter-qr.png)
+![h:170](../../shared/assets/newsletter-qr.png)
 
 - [LinkedIn: linkedin.com/in/rieckpil](https://www.linkedin.com/in/rieckpil)
 - [Mail: philip@pragmatech.digital](mailto:philip@pragmatech.digital)

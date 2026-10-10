@@ -5,7 +5,7 @@ class: light
 paginate: true
 transition: pt-fade
 header: 'Top 5 Spring Boot Testing Mistakes Developers Trap Into @ Tech Talks South Tyrol #14 · September 8, 2026'
-footer: '![](assets/logo.webp) Philip Riecks · [PragmaTech GmbH](https://pragmatech.digital/) · [@rieckpil](https://x.com/rieckpil)'
+footer: '![](../../shared/assets/logo.webp) Philip Riecks · [PragmaTech GmbH](https://pragmatech.digital/) · [@rieckpil](https://x.com/rieckpil)'
 ---
 
 <!--
@@ -21,7 +21,7 @@ Notes:
 - Opener: Bozen, the town of this talk. Warm welcome before the title slide.
 -->
 
-![bg](assets/bolzano-town.jpg)
+![bg](../../shared/assets/bolzano-town.jpg)
 
 ---
 
@@ -29,7 +29,7 @@ Notes:
 <!-- _paginate: false -->
 <!-- _header: '' -->
 
-![bg left:36%](assets/cover-mouse-traps.png)
+![bg left:36%](../../shared/assets/cover-mouse-traps.png)
 
 # Top 5 Spring Boot Testing Mistakes **Developers Trap Into**
 
@@ -39,9 +39,9 @@ Tech Talks South Tyrol #14 · September 8, 2026
 
 ---
 
-<!-- footer: '![](assets/logo.webp)' -->
+<!-- footer: '![](../../shared/assets/logo.webp)' -->
 
-![bg h:500 right:33%](assets/philip-in-erlangen-map.jpg)
+![bg h:500 right:33%](../../shared/assets/philip-in-erlangen-map.jpg)
 
 ### About Philip
 
@@ -57,7 +57,7 @@ Tech Talks South Tyrol #14 · September 8, 2026
 
 Go to [menti.com](https://www.menti.com/) and use the code **2636 4022** to **anonymously** submit answers:
 
-![center h:250](assets/mentimeter-bozen.png)
+![center h:250](../../shared/assets/mentimeter-bozen.png)
 
 Please answer the **first three questions**:
 
@@ -70,7 +70,7 @@ Please answer the **first three questions**:
 <!-- _paginate: false -->
 
 
-![bg right:33%](assets/why-test-software.jpg)
+![bg right:33%](../../shared/assets/why-test-software.jpg)
 
 # Why Test Software?
 
@@ -83,20 +83,20 @@ Please answer the **first three questions**:
 
 ---
 
-![center h:500](assets/ai-frog-meme.jpg)
+![center h:500](../../shared/assets/ai-frog-meme.jpg)
 
 ---
 
 <!-- _paginate: false -->
 
 
-![bg right:33%](assets/northstar.jpg)
+![bg right:33%](../../shared/assets/northstar.jpg)
 
 ### My Overall Northstar for Engineering Excellence
 
 Imagine seeing this pull request on a Friday afternoon:
 
-![](assets/northstar-pr.png)
+![](../../shared/assets/northstar-pr.png)
 
 How confident are you to merge this major Spring Boot upgrade and deploy it to production once the pipeline turns green?
 
@@ -118,7 +118,7 @@ Notes:
 - We are the mouse. The cheese is always a shortcut that feels great today.
 -->
 
-![bg](assets/agenda-mouse-traps.png)
+![bg](../../shared/assets/agenda-mouse-traps.png)
 
 ---
 
@@ -126,7 +126,7 @@ Notes:
 <!-- _class: light section -->
 <!-- _paginate: true -->
 
-![bg right:40%](assets/trap-card-1.png)
+![bg right:40%](../../shared/assets/trap-card-1.png)
 
 ## Testing Trap #1
 
@@ -145,13 +145,13 @@ Notes:
 ## The `@SpringBootTest` Obsession
 
 
-![](assets/spring-boot-test-setup.png)
+![](../../shared/assets/spring-boot-test-setup.png)
 
 ---
 
 ## You Don't Always Need the Entire Context
 
-![center h:500](assets/spring-sliced-context.png)
+![center h:500](../../shared/assets/spring-sliced-context.png)
 
 ---
 
@@ -173,7 +173,7 @@ A simplified decision table:
 <!-- _class: light section -->
 <!-- _paginate: true -->
 
-![bg right:40%](assets/trap-card-2.png)
+![bg right:40%](../../shared/assets/trap-card-2.png)
 
 ## Testing Trap #2
 
@@ -197,7 +197,7 @@ Notes:
 
 Results from one of our clients:
 
-![center](assets/context-cache-improvements.png)
+![center](../../shared/assets/context-cache-improvements.png)
 
 ---
 
@@ -217,13 +217,13 @@ private final Map<MergedContextConfiguration, ApplicationContext> contextMap =
 
 ## How to Identify Context Restarts - Simplified
 
-![](assets/context-caching-logs.png)
+![](../../shared/assets/context-caching-logs.png)
 
 ---
 
 ## How to Identify Context Restarts - Visualized
 
-![center](assets/spring-test-profiler-logo.png)
+![center](../../shared/assets/spring-test-profiler-logo.png)
 
 An [open-source Spring Test utility](https://github.com/PragmaTech-GmbH/spring-test-profiler) that provides visualization and insights for Spring Test execution, with a focus on Spring context caching statistics.
 
@@ -234,7 +234,7 @@ An [open-source Spring Test utility](https://github.com/PragmaTech-GmbH/spring-t
 <!-- _class: light section -->
 <!-- _paginate: false -->
 
-![bg right:40%](assets/trap-card-3.png)
+![bg right:40%](../../shared/assets/trap-card-3.png)
 
 ## Testing Trap #3
 
@@ -296,7 +296,7 @@ class OrderRepositoryTest {
 <!-- _class: light section -->
 <!-- _paginate: false -->
 
-![bg right:40%](assets/trap-card-4.png)
+![bg right:40%](../../shared/assets/trap-card-4.png)
 
 ## Testing Trap #4
 
@@ -367,7 +367,7 @@ void greenButMeaningless() {
 <!-- _class: light section -->
 <!-- _paginate: false -->
 
-![bg right:40%](assets/trap-card-5.png)
+![bg right:40%](../../shared/assets/trap-card-5.png)
 
 ## Testing Trap #5
 
@@ -423,12 +423,12 @@ public Long registerUser(int age, String username) {
 ... with the help of PIT:
 
 
-![center](assets/mutation-testing-explained-corrected.png)
+![center](../../shared/assets/mutation-testing-explained-corrected.png)
 
 
 ---
 
-![bg](assets/summary-mouse-traps.png)
+![bg](../../shared/assets/summary-mouse-traps.png)
 
 ---
 
@@ -489,13 +489,13 @@ Notes:
 <!-- _paginate: false -->
 <!-- _header: '' -->
 
-![bg right:33%](assets/end.jpg)
+![bg right:33%](../../shared/assets/end.jpg)
 
 # Joyful Testing!
 
 Get the slides here:
 
-![h:260 center](assets/slides-pdf-bozen.png)
+![h:260 center](../../shared/assets/slides-pdf-bozen.png)
 
 Reach out any time
 - [LinkedIn](https://www.linkedin.com/in/rieckpil) (Philip Riecks)

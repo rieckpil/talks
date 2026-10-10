@@ -22,7 +22,7 @@ See [TALK-PLAN.md](TALK-PLAN.md) for the timeline and [script/](script/) for the
 cd slides
 marp -p -w content.md < /dev/null          # live preview
 marp content.md -o content.html < /dev/null
-./resize_images.sh && ./generate_sharable_pdf.sh slides-devoxx-be-2026-10-05.pdf
+../../shared/scripts/resize-images.sh ../../shared && ../../shared/scripts/sharable-pdf.sh . slides-devoxx-be-2026-10-05.pdf
 ```
 
 ## Demo preparation checklist

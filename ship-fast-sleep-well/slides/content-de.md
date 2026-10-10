@@ -6,7 +6,7 @@ class: light
 paginate: true
 transition: pt-fade
 header: 'Ship Fast, Sleep Well: Fearless Spring Boot Deployments in the AI Era · DATEV Coding Festival 2k26'
-footer: '![](assets/logo.webp) Philip Riecks · [@rieckpil](https://x.com/rieckpil) · [PragmaTech GmbH](https://pragmatech.digital/)'
+footer: '![](../../shared/assets/logo.webp) Philip Riecks · [@rieckpil](https://x.com/rieckpil) · [PragmaTech GmbH](https://pragmatech.digital/)'
 style: |
   section[class*="cards"] > ul { display: grid; gap: 20px; list-style: none; padding: 0; margin: 0.5em 0 0; }
   section.cards2 > ul { grid-template-columns: repeat(2, 1fr); }
@@ -57,7 +57,7 @@ style: |
 <!-- _header: '' -->
 <!-- _footer: '' -->
 
-![bg fit](assets/datev-coding-festival.png)
+![bg fit](../../shared/assets/datev-coding-festival.png)
 
 ---
 
@@ -65,7 +65,7 @@ style: |
 <!-- _paginate: false -->
 <!-- _header: '' -->
 
-![bg left:33%](assets/abstract-blue-left.png)
+![bg left:33%](../../shared/assets/abstract-blue-left.png)
 
 # Ship Fast, **Sleep Well**
 
@@ -121,7 +121,7 @@ Notes:
 
 ---
 
-![bg right:33%](assets/herzogenaurach.jpg)
+![bg right:33%](../../shared/assets/herzogenaurach.jpg)
 
 ### Über Philip
 
@@ -158,7 +158,7 @@ Notes:
 - TODO: prüfen, ob die drei Fragen im Mentimeter zu dieser Folie passen.
 -->
 
-![bg right:36% h:420](assets/mentimeter-datev-coding-festival-2k26-padded.png)
+![bg right:36% h:420](../../shared/assets/mentimeter-datev-coding-festival-2k26-padded.png)
 
 ## Wie sieht es bei euch im Team aus?
 
@@ -220,7 +220,7 @@ Notes:
 
 ## Belegt durch die DORA-Forschung
 
-![h:20%](assets/dora-core-summary.png)
+![h:20%](../../shared/assets/dora-core-summary.png)
 
 Das DORA Core Model stellt **Fast Feedback** neben Fast Flow und ein Klima des Lernens.
 
@@ -260,7 +260,7 @@ Notes:
 
 Ergebnisse bei einem meiner Kunden:
 
-![center w:1100](assets/context-cache-improvements.png)
+![center w:1100](../../shared/assets/context-cache-improvements.png)
 
 ---
 
@@ -288,11 +288,11 @@ Notes:
 - Projekt: https://github.com/PragmaTech-GmbH/spring-test-profiler (Version 0.3.0 im Demo-Projekt).
 -->
 
-![bg right:55% fit](assets/spring-test-profiler-report.png)
+![bg right:55% fit](../../shared/assets/spring-test-profiler-report.png)
 
 ## Spring Test Profiler
 
-![center h:70](assets/spring-test-profiler-logo.png)
+![center h:70](../../shared/assets/spring-test-profiler-logo.png)
 
 - Open-Source-Tool: zeigt, **wie viele Contexts** deine Testsuite startet
 - **Cache Hits**, **Misses** und die Zeit für Context-Starts
@@ -352,7 +352,7 @@ Notes:
 
 ## Idee: Regressionen einbauen, um die Testqualität zu prüfen
 
-![center](assets/mutation-testing-explained-corrected.png)
+![center](../../shared/assets/mutation-testing-explained-corrected.png)
 
 ---
 
@@ -512,7 +512,7 @@ Notes:
 
 ## Die Togglz Admin Console
 
-![center w:1040](assets/togglz-admin-console.png)
+![center w:1040](../../shared/assets/togglz-admin-console.png)
 
 ---
 
@@ -689,7 +689,7 @@ Notes:
 - Wir können nicht alles vor Production testen. Canary-Tests sind End-to-End-Tests, die dauerhaft laufen, idealerweise in Production, mit einem eigenen Testuser. Sie geben echtes Feedback und lösen den Alert aus, bevor ein Kunde anruft.
 -->
 
-![bg right:34% fit](assets/canary-mine.png)
+![bg right:34% fit](../../shared/assets/canary-mine.png)
 
 ## Canary Testing in a Nutshell
 
@@ -791,12 +791,12 @@ Notes:
 <!-- _header: '' -->
 <!-- _footer: '' -->
 
-![bg right:33%](assets/end.jpg)
+![bg right:33%](../../shared/assets/end.jpg)
 
 # Fearless Shipping!
 
 Der **Spring Boot Testing Newsletter**: Best Practices, Recipes & Quick Wins direkt in dein Postfach - **rieckpil.de/newsletter**
 
-![center h:260](assets/newsletter-qr.png)
+![center h:260](../../shared/assets/newsletter-qr.png)
 
 <div class="center"><a href="https://www.linkedin.com/in/rieckpil">LinkedIn (Philip Riecks)</a></div>

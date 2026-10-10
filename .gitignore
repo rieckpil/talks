@@ -37,7 +37,11 @@ build/
 **/.claude/settings.local.json
 
 # Remotion animation sources (node_modules only; sources are tracked)
-**/visuals/remotion/node_modules/
 
 # Playwright MCP session files
 .playwright-mcp/
+
+### Shared slide tooling ###
+**/assets/generated/
+shared/remotion/node_modules/
+shared/remotion/out/
