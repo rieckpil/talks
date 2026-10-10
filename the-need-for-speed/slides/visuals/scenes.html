@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The Need for Speed scenes</title>
+<link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --ink:#0f172a; --muted:#64748b; --accent:#0284c7; --red:#e11d48; --green:#00a34a; --gold:#e0a100; --border:#cbd5e1; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: transparent; font-family: 'Inter', system-ui, sans-serif; }
+  .scene { display: none; position: relative; width: 1600px; background: transparent; }
+  .scene.on { display: block; }
+  svg { display: block; }
+  .hand { font-family: 'Architects Daughter', cursive; }
+</style>
+</head>
+<body>
+
+<!-- Treasure map: the hidden gem is buried under a pile of testing topics -->
+<div id="treasure" class="scene" style="height:800px">
+<svg viewBox="0 0 1600 800" width="1600" height="800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="rough"><feTurbulence baseFrequency="0.02" numOctaves="2" seed="4"/><feDisplacementMap in="SourceGraphic" scale="6"/></filter>
+    <linearGradient id="gem" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7dd3fc"/><stop offset="1" stop-color="#0284c7"/></linearGradient>
+  </defs>
+  <!-- parchment -->
+  <g filter="url(#rough)">
+    <rect x="40" y="30" width="1520" height="740" rx="30" fill="#fdf3d4" stroke="#b9893a" stroke-width="6"/>
+  </g>
+  <!-- trail -->
+  <path d="M170 640 C 380 560, 420 380, 640 420 S 860 520, 1010 520 S 1230 400, 1360 330"
+        fill="none" stroke="#7c5a1e" stroke-width="6" stroke-dasharray="4 20" stroke-linecap="round"/>
+  <!-- stops along the path -->
+  <g class="hand" font-size="30" fill="#5b4012" text-anchor="middle">
+    <g transform="translate(170 640)"><circle r="16" fill="#7c5a1e"/><text x="-70" y="56" text-anchor="start">Start: @SpringBootTest</text></g>
+    <g transform="translate(640 420)"><circle r="14" fill="#7c5a1e"/><text y="-30">Swamp of @MockitoBean</text></g>
+    <g transform="translate(1010 520)"><circle r="14" fill="#7c5a1e"/><text y="56">Cliffs of @DirtiesContext</text></g>
+  </g>
+  <!-- X marks the spot -->
+  <g transform="translate(1360 330)">
+    <path d="M-34 -34 L34 34 M34 -34 L-34 34" stroke="#e11d48" stroke-width="14" stroke-linecap="round"/>
+  </g>
+  <text class="hand" x="1360" y="410" font-size="34" text-anchor="middle" fill="#5b4012">here be the</text>
+  <text class="hand" x="1360" y="454" font-size="38" text-anchor="middle" fill="#e11d48" font-weight="700">TestContext cache</text>
+  <!-- chest -->
+  <g transform="translate(1200 90)">
+    <rect x="0" y="70" width="190" height="100" rx="10" fill="#8b5a1b" stroke="#4a2f0b" stroke-width="6"/>
+    <path d="M0 80 Q95 -10 190 80 Z" fill="#a8701f" stroke="#4a2f0b" stroke-width="6"/>
+    <rect x="80" y="82" width="30" height="40" rx="6" fill="#e0a100" stroke="#4a2f0b" stroke-width="4"/>
+    <polygon points="95,20 125,45 95,75 65,45" fill="url(#gem)" stroke="#075985" stroke-width="4"/>
+  </g>
+  <!-- compass -->
+  <g transform="translate(180 150)" class="hand">
+    <circle r="62" fill="none" stroke="#7c5a1e" stroke-width="5"/>
+    <polygon points="0,-52 12,0 0,52 -12,0" fill="#e11d48" opacity="0.85"/>
+    <text y="-72" font-size="30" text-anchor="middle" fill="#5b4012">N</text>
+  </g>
+</svg>
+</div>
+
+<!-- Build time grows linearly with the number of tests when every test starts a context -->
+<div id="linear" class="scene" style="height:760px">
+<svg viewBox="0 0 1600 760" width="1600" height="760" xmlns="http://www.w3.org/2000/svg">
+  <g id="chart"></g>
+</svg>
+</div>
+
+<script>
+const params = new URLSearchParams(location.search);
+const scene = params.get('scene') || 'treasure';
+const cached = scene === 'linear-cached';
+document.getElementById(scene === 'treasure' ? 'treasure' : 'linear').classList.add('on');
+
+if (scene !== 'treasure') {
+  const ns = 'http://www.w3.org/2000/svg';
+  const g = document.getElementById('chart');
+  const add = (tag, attrs, text) => {
+    const el = document.createElementNS(ns, tag);
+    for (const [k, v] of Object.entries(attrs)) el.setAttribute(k, v);
+    if (text) el.textContent = text;
+    g.appendChild(el);
+    return el;
+  };
+  const x0 = 160, y0 = 640, w = 1340, h = 540;
+  // axes
+  add('path', { d: `M${x0} ${y0 - h} V${y0} H${x0 + w}`, fill: 'none', stroke: '#0f172a', 'stroke-width': 5, 'stroke-linecap': 'round' });
+  add('text', { x: x0 + w / 2, y: y0 + 80, 'text-anchor': 'middle', 'font-size': 36, 'font-family': 'Architects Daughter', fill: '#0f172a' }, 'number of test classes with their own context');
+  const yl = add('text', { transform: `translate(60 ${y0 - h / 2}) rotate(-90)`, 'text-anchor': 'middle', 'font-size': 36, 'font-family': 'Architects Daughter', fill: '#0f172a' }, 'build time');
+  // linear: every test class pays for a context start
+  const linearEnd = [x0 + w, y0 - h + 20];
+  add('line', { x1: x0, y1: y0 - 40, x2: linearEnd[0], y2: linearEnd[1], stroke: '#e11d48', 'stroke-width': 8, 'stroke-linecap': 'round' });
+  add('text', { x: 1230, y: 200, 'text-anchor': 'end', 'font-size': 38, 'font-family': 'Architects Daughter', fill: '#e11d48' }, 'every class starts a context');
+  if (cached) {
+    // with caching: one big step, then almost flat
+    add('path', { d: `M${x0} ${y0 - 40} L${x0 + 120} ${y0 - 200} L${x0 + w} ${y0 - 250}`, fill: 'none', stroke: '#00a34a', 'stroke-width': 8, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' });
+    add('text', { x: x0 + w - 20, y: y0 - 290, 'text-anchor': 'end', 'font-size': 38, 'font-family': 'Architects Daughter', fill: '#00a34a' }, 'context cache: pay once, reuse');
+  }
+}
+window.__rendered = true;
+document.fonts.ready.then(() => { window.__rendered = true; });
+</script>
+</body>
+</html>

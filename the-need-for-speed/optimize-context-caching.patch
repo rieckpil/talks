@@ -1,0 +1,155 @@
+diff -ruN a/src/test/java/de/rieckpil/talks/book/AbstractIntegrationTest.java b/src/test/java/de/rieckpil/talks/book/AbstractIntegrationTest.java
+--- a/src/test/java/de/rieckpil/talks/book/AbstractIntegrationTest.java
++++ b/src/test/java/de/rieckpil/talks/book/AbstractIntegrationTest.java
+@@ -0,0 +1,11 @@
++package de.rieckpil.talks.book;
++
++import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureTestRestTemplate;
++import org.springframework.boot.test.context.SpringBootTest;
++import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
++
++@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
++@AutoConfigureMockMvc
++@AutoConfigureTestRestTemplate
++abstract class AbstractIntegrationTest {
++}
+diff -ruN a/src/test/java/de/rieckpil/talks/book/BookApiSpringBootTest.java b/src/test/java/de/rieckpil/talks/book/BookApiSpringBootTest.java
+--- a/src/test/java/de/rieckpil/talks/book/BookApiSpringBootTest.java
++++ b/src/test/java/de/rieckpil/talks/book/BookApiSpringBootTest.java
+@@ -3,16 +3,12 @@
+ import org.junit.jupiter.api.Test;
+ import org.springframework.beans.factory.annotation.Autowired;
+ import org.springframework.boot.resttestclient.TestRestTemplate;
+-import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureTestRestTemplate;
+-import org.springframework.boot.test.context.SpringBootTest;
+ import org.springframework.http.HttpStatus;
+ import org.springframework.http.ResponseEntity;
+ 
+ import static org.assertj.core.api.Assertions.assertThat;
+ 
+-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+-@AutoConfigureTestRestTemplate
+-class BookApiSpringBootTest {
++class BookApiSpringBootTest extends AbstractIntegrationTest {
+ 
+   @Autowired
+   private TestRestTemplate testRestTemplate;
+diff -ruN a/src/test/java/de/rieckpil/talks/book/BookControllerSpringBootTest.java b/src/test/java/de/rieckpil/talks/book/BookControllerSpringBootTest.java
+--- a/src/test/java/de/rieckpil/talks/book/BookControllerSpringBootTest.java
++++ b/src/test/java/de/rieckpil/talks/book/BookControllerSpringBootTest.java
+@@ -1,38 +1,31 @@
+ package de.rieckpil.talks.book;
+ 
+-import java.util.List;
+-
+ import org.junit.jupiter.api.Test;
+ import org.springframework.beans.factory.annotation.Autowired;
+-import org.springframework.boot.test.context.SpringBootTest;
+-import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
+ import org.springframework.http.MediaType;
+-import org.springframework.test.context.bean.override.mockito.MockitoBean;
+ import org.springframework.test.web.servlet.MockMvc;
+ 
+-import static org.mockito.BDDMockito.given;
++import static org.hamcrest.Matchers.hasItem;
+ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+ 
+-@SpringBootTest
+-@AutoConfigureMockMvc
+-class BookControllerSpringBootTest {
++class BookControllerSpringBootTest extends AbstractIntegrationTest {
+ 
+   @Autowired
+   private MockMvc mockMvc;
+ 
+-  @MockitoBean
+-  private BookService bookService;
++  @Autowired
++  private BookRepository bookRepository;
+ 
+   @Test
+   void shouldReturnAllBooks() throws Exception {
+-    given(bookService.findAll()).willReturn(List.of(new Book("Effective Java", "Joshua Bloch", "9780134685991")));
++    bookRepository.save(new Book("Effective Java", "Joshua Bloch", "9780134685991"));
+ 
+     mockMvc.perform(get("/api/books"))
+       .andExpect(status().isOk())
+-      .andExpect(jsonPath("$[0].title").value("Effective Java"));
++      .andExpect(jsonPath("$[*].title").value(hasItem("Effective Java")));
+   }
+ 
+   @Test
+diff -ruN a/src/test/java/de/rieckpil/talks/book/BookDeleteSpringBootTest.java b/src/test/java/de/rieckpil/talks/book/BookDeleteSpringBootTest.java
+--- a/src/test/java/de/rieckpil/talks/book/BookDeleteSpringBootTest.java
++++ b/src/test/java/de/rieckpil/talks/book/BookDeleteSpringBootTest.java
+@@ -2,14 +2,10 @@
+ 
+ import org.junit.jupiter.api.Test;
+ import org.springframework.beans.factory.annotation.Autowired;
+-import org.springframework.boot.test.context.SpringBootTest;
+-import org.springframework.test.annotation.DirtiesContext;
+ 
+ import static org.assertj.core.api.Assertions.assertThat;
+ 
+-@SpringBootTest
+-@DirtiesContext
+-class BookDeleteSpringBootTest {
++class BookDeleteSpringBootTest extends AbstractIntegrationTest {
+ 
+   @Autowired
+   private BookService bookService;
+diff -ruN a/src/test/java/de/rieckpil/talks/book/BookRepositorySpringBootTest.java b/src/test/java/de/rieckpil/talks/book/BookRepositorySpringBootTest.java
+--- a/src/test/java/de/rieckpil/talks/book/BookRepositorySpringBootTest.java
++++ b/src/test/java/de/rieckpil/talks/book/BookRepositorySpringBootTest.java
+@@ -2,12 +2,10 @@
+ 
+ import org.junit.jupiter.api.Test;
+ import org.springframework.beans.factory.annotation.Autowired;
+-import org.springframework.boot.test.context.SpringBootTest;
+ 
+ import static org.assertj.core.api.Assertions.assertThat;
+ 
+-@SpringBootTest(properties = "spring.jpa.show-sql=true")
+-class BookRepositorySpringBootTest {
++class BookRepositorySpringBootTest extends AbstractIntegrationTest {
+ 
+   @Autowired
+   private BookRepository bookRepository;
+diff -ruN a/src/test/java/de/rieckpil/talks/book/BookServiceSpringBootTest.java b/src/test/java/de/rieckpil/talks/book/BookServiceSpringBootTest.java
+--- a/src/test/java/de/rieckpil/talks/book/BookServiceSpringBootTest.java
++++ b/src/test/java/de/rieckpil/talks/book/BookServiceSpringBootTest.java
+@@ -2,22 +2,15 @@
+ 
+ import org.junit.jupiter.api.Test;
+ import org.springframework.beans.factory.annotation.Autowired;
+-import org.springframework.boot.test.context.SpringBootTest;
+-import org.springframework.test.context.bean.override.mockito.MockitoSpyBean;
+ 
+ import static org.assertj.core.api.Assertions.assertThat;
+ import static org.assertj.core.api.Assertions.assertThatThrownBy;
+-import static org.mockito.Mockito.verify;
+ 
+-@SpringBootTest
+-class BookServiceSpringBootTest {
++class BookServiceSpringBootTest extends AbstractIntegrationTest {
+ 
+   @Autowired
+   private BookService bookService;
+ 
+-  @MockitoSpyBean
+-  private BookRepository bookRepository;
+-
+   @Test
+   void shouldUpdateBook() {
+     Book createdBook = bookService.create(new BookRequest("Old title", "Author", "111"));
+@@ -25,7 +18,6 @@
+     Book updatedBook = bookService.update(createdBook.getId(), new BookRequest("New title", "Author", "111"));
+ 
+     assertThat(updatedBook.getTitle()).isEqualTo("New title");
+-    verify(bookRepository).findById(createdBook.getId());
+   }
+ 
+   @Test
