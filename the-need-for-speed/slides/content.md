@@ -194,20 +194,6 @@ Whether sliced or full, a Spring test needs an `ApplicationContext`:
 10:19:18.320 INFO  BookApiSpringBootTest : Started BookApiSpringBootTest in 2.289 seconds
 ```
 
-The Spring Boot banner means: a lot just happened.
-
----
-
-## What Happens Behind the Banner
-
-- Classpath scanning and component discovery
-- Auto-configuration evaluation
-- Bean creation, wiring and post-processing
-- JPA, Hibernate and database initialization
-- Embedded web server startup
-
-**It takes time. It is expensive. And every test class pays it again.**
-
 ---
 
 ## To Avoid: Linear Build Time Growth
