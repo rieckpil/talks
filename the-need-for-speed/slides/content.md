@@ -5,7 +5,7 @@ title: 'The Need for Speed: Cut Your Spring Boot Build Times by 70%'
 class: light
 paginate: true
 transition: pt-fade
-header: 'The Need for Speed · JavaCro 2026'
+header: 'The Need for Speed: Cut Your Spring Boot Build Times by 70% - JavaCro 2026'
 footer: '![](../../shared/assets/logo.webp) Philip Riecks · [@rieckpil](https://x.com/rieckpil) · [PragmaTech GmbH](https://pragmatech.digital/)'
 ---
 
@@ -26,7 +26,7 @@ footer: '![](../../shared/assets/logo.webp) Philip Riecks · [@rieckpil](https:/
 
 # The Need for **Speed**: Cut Your Spring Boot Build Times by 70%
 
-## Spring TestContext caching: the hidden gem of Spring Test
+## The hidden gem of Spring Test to unlock blazing fast feedback
 
 JavaCro 2026 · October 13, 2026
 
@@ -51,7 +51,7 @@ Notes:
 
 ---
 
-![bg right:33% fit](../../shared/assets/location.png)
+![bg right:33% fit](../../shared/assets/the-need-for-speed/germany-map.png)
 
 ### About Philip
 
@@ -61,99 +61,112 @@ Notes:
 
 ---
 
-<!-- header: 'The Need for Speed · Intro' -->
-<!-- _class: light statement -->
+<!-- _paginate: false -->
 
-# Somewhere in your project, a **treasure** is hidden.
+![bg right:33%](../../shared/assets/why-test-software.jpg)
 
-<!--
-Notes:
-- Hook. Do not name it yet.
--->
-
----
-
-<!--
-Notes:
-- Walk the map: you start with @SpringBootTest, you cross the swamp of mocks and the cliffs of @DirtiesContext.
-- The treasure: Spring's TestContext cache. Most teams walk right past it.
--->
-
-![center h:520](../../shared/assets/the-need-for-speed/treasure-map.png)
-
----
-
-## Quick Check: Who Is in the Room?
-
-Answer on Mentimeter:
-
-- Do you write **Spring Boot** applications?
-- How long does your **build** take?
-- Have you heard of **context caching** in Spring Test?
-
-<!--
-Notes:
-- Read the results out loud. Comment on the build times.
-- Most hands go up for Spring Boot, few for context caching. That is the gap.
--->
+# Why Test Software?
 
 ---
 
 <!-- _class: light statement -->
 
-# In 2026, most of our code is **not written by us**.
-
----
+# Most of the code is generated, but you **can't prompt** confidence.
 
 <!--
 Notes:
-- The joke lands, then the point: we ship code we did not type.
+- The point of the whole talk in one sentence.
 -->
-
-![center h:500](../../shared/assets/ai-frog-meme.jpg)
-
----
-
-<!-- _class: light statement -->
-
-# So **automated tests** matter more than ever.
-
----
-
-## What Modern Tests Need to Be
-
-- **Fast** - feedback in seconds or minutes, not hours
-- **Comprehensive** - they cover what really matters, including the real framework wiring
-- **Trustworthy** - green means you can deploy
-
-Today: **fast**.
 
 ---
 
 <!-- _class: light reveal -->
 
-## How Do You Get Fast Tests?
+![bg right:33%](../../shared/assets/lightning-shield.png)
 
-* **Option 1:** write no tests 🙈
-* **Option 2:** parallelize them 🧵
-* **Option 3:** use a hidden gem 💎 - **Spring's context caching**
+## When Code Generation Scales ...
+
+* ... **verification** becomes the bottleneck.
+* So we need a **safety net**: a test suite we can trust.
 
 <!--
 Notes:
-- Click by click. Option 1 gets the laugh, option 2 is real but needs isolated tests, option 3 is today.
+- Generation is cheap and fast now. Reading and verifying every line is not.
+- The safety net is an automated test suite.
 -->
 
 ---
 
-<!-- header: 'The Need for Speed · 1 Understand' -->
+<style scoped>
+.flow { gap: 40px; align-items: stretch; margin-top: 1.6em; }
+.sketch {
+  flex: 1; padding: 1.1em 1.2em; font-size: 1.15em; line-height: 1.3;
+  background: rgba(2, 132, 199, 0.08);
+}
+.sketch .title { display: block; font-size: 1.9em; margin-bottom: 0.25em; }
+.sketch small { font-size: 0.75em; }
+</style>
+
+## What We Expect From the Safety Net
+
+<div class="flow">
+  <div class="sketch accent"><span class="title">Fast</span>Feedback in <b>minutes</b>, not hours<small>so we run it on every change</small></div>
+  <div class="sketch accent alt"><span class="title">Comprehensive</span>Enough <b>correct tests</b><small>for confidence in every commit</small></div>
+</div>
+
+---
+
+<!-- _class: light statement -->
+
+# Today we focus on **fast** tests.
+
+---
+
+<!-- _class: light reveal -->
+
+<style scoped>
+ul { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 1.2em; }
+ul > li {
+  margin: 0; padding: 0.6em 0.5em; min-height: 9.5em;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.15em;
+  text-align: center; font-size: 1.3em; line-height: 1.15;
+  font-family: 'Architects Daughter', cursive;
+  border: 3px solid var(--pt-heading);
+  border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+  box-shadow: 3px 4px 0 rgba(15, 23, 42, 0.14);
+}
+ul > li:nth-child(3) { border-color: var(--pt-link); color: var(--pt-link); }
+ul > li .icon { font-size: 2.6em; line-height: 1.1; }
+ul > li img:not(.emoji) { height: 120px; }
+ul > li small { display: block; font-size: 0.6em; line-height: 1.2; color: var(--pt-muted); }
+</style>
+
+## How Do You Get Fast Tests?
+
+* <span class="icon">🙈</span>No tests at all<small>fastest build, zero confidence</small>
+* <span class="icon">🧵</span>Parallelize tests<small>use the cores you pay for</small>
+* ![](../../shared/assets/the-need-for-speed/treasure-chest.png)Something else ...<small>a treasure that helps us</small>
+
+<!--
+Notes:
+- Click by click. Box 1 gets the laugh, box 2 is real but needs isolated tests.
+- Box 3: the treasure chest. Opens up in the next section: context caching.
+-->
+
+---
+
 <!-- _class: light section -->
 <!-- _paginate: false -->
 
 ![bg right:40%](../../shared/assets/speed.jpg)
 
-## 01 - Understand
+<style scoped>
+h1 { font-size: 54px; }
+</style>
 
-# How context caching works
+## The Spring Test hidden gem
+
+# Reusing an ApplicationContext for tests
 
 ---
 
@@ -161,12 +174,24 @@ Notes:
 
 Whether sliced or full, a Spring test needs an `ApplicationContext`:
 
-```text
-Starting BookApiSpringBootTest using Java 25
-Bootstrapping Spring Data JPA repositories in DEFAULT mode
-Initialized JPA EntityManagerFactory for persistence unit 'default'
-Tomcat started on port 38213 (http)
-Started BookApiSpringBootTest in 2.5 seconds
+```text {17}
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.1)
+
+10:19:16.157 INFO  BookApiSpringBootTest : Starting BookApiSpringBootTest using Java 25.0.2
+10:19:16.548 INFO  RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories
+10:19:16.863 INFO  TomcatWebServer : Tomcat initialized with port 0 (http)
+10:19:17.064 INFO  org.hibernate.orm.core : HHH000001: Hibernate ORM core version 7.4.5.Final
+...
+10:19:17.824 INFO  LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory
+...
+10:19:18.320 INFO  BookApiSpringBootTest : Started BookApiSpringBootTest in 2.289 seconds
 ```
 
 The Spring Boot banner means: a lot just happened.
@@ -185,11 +210,9 @@ The Spring Boot banner means: a lot just happened.
 
 ---
 
-## Linear Growth: The Bad News
+## To Avoid: Linear Build Time Growth
 
-![center h:480](../../shared/assets/the-need-for-speed/linear-build-time.png)
-
-More test classes with their own context means a build time that grows linearly.
+![center h:500](../../shared/assets/the-need-for-speed/linear-build-time.png)
 
 ---
 
@@ -286,7 +309,6 @@ You pay for a context once per unique configuration, not once per test class.
 
 ---
 
-<!-- header: 'The Need for Speed · Demo' -->
 <!-- _class: light section -->
 <!-- _paginate: false -->
 
@@ -314,7 +336,6 @@ _Spring Boot 4.1, Java 25, 5 test classes, 9 tests._
 
 ---
 
-<!-- header: 'The Need for Speed · Optimize in 3 steps' -->
 <!-- _class: light agenda -->
 
 ## Three Steps to Faster Builds
@@ -521,7 +542,6 @@ A new `@DirtiesContext` or a stray `@MockitoBean` now fails the build.
 
 ---
 
-<!-- header: 'The Need for Speed · Summary' -->
 <!-- _class: light agenda -->
 
 ## Summary
@@ -543,7 +563,17 @@ Notes:
 # Fast feedback is a **feature**.
 * The treasure was in your project all along.
 * **Go and find it.**
-* Good luck - and reach out if you need a hand.
+
+---
+
+
+## Need Help Optimizing Your Build?
+
+![center h:300](../../shared/assets/pragmatech-main-offering.png)
+
+- Spring Boot test suite too slow? Let's find your context cache killers together
+- Test audits, team workshops and hands-on pairing at [pragmatech.digital](https://pragmatech.digital/)
+- **Reach out:** [philip@pragmatech.digital](mailto:philip@pragmatech.digital) or [LinkedIn](https://www.linkedin.com/in/rieckpil)
 
 ---
 
@@ -554,13 +584,8 @@ Notes:
 
 ![bg right:33%](../../shared/assets/end.jpg)
 
-# Thank you!
-
-Questions?
+# Joyful (and fast) testing!
 
 The **Spring Boot Testing Newsletter**: best practices, recipes and quick wins in your inbox - **rieckpil.de/newsletter**
 
-![h:170](../../shared/assets/newsletter-signup-qr.png)
-
-- [LinkedIn: linkedin.com/in/rieckpil](https://www.linkedin.com/in/rieckpil)
-- [Mail: philip@pragmatech.digital](mailto:philip@pragmatech.digital)
+![center h:260](../../shared/assets/newsletter-signup-qr.png)
