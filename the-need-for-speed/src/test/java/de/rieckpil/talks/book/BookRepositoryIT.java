@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(properties = "spring.jpa.show-sql=true")
-class BookRepositorySpringBootTest {
+class BookRepositoryIT {
 
   @Autowired
   private BookRepository bookRepository;

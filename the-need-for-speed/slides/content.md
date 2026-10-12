@@ -232,14 +232,14 @@ Notes:
 
  :: Spring Boot ::                (v4.1.1)
 
-10:19:16.157 INFO  BookApiIT : Starting BookApiIT using Java 25.0.2
-10:19:16.548 INFO  RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories
-10:19:16.863 INFO  TomcatWebServer : Tomcat initialized with port 0 (http)
-10:19:17.064 INFO  org.hibernate.orm.core : HHH000001: Hibernate ORM core version 7.4.5.Final
+14:55:37.602 INFO  BookApiIT : Starting BookApiIT using Java 25.0.2
+14:55:37.931 INFO  RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories
+14:55:38.218 INFO  TomcatWebServer : Tomcat initialized with port 0 (http)
+14:55:38.385 INFO  org.hibernate.orm.core : HHH000001: Hibernate ORM core version 7.4.5.Final
 ...
-10:19:17.824 INFO  LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory
+14:55:39.060 INFO  LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory
 ...
-10:19:18.320 INFO  BookApiIT : Started BookApiIT in 2.289 seconds
+14:55:39.523 INFO  BookApiIT : Started BookApiIT in 2.034 seconds
 ```
 
 ---
@@ -324,17 +324,22 @@ Notes:
 <!-- _class: light -->
 
 <style scoped>
-.row { display: grid; grid-template-columns: 1.25fr 0.18fr 0.9fr; gap: 12px; align-items: start; margin-top: 0; }
+.row { display: grid; grid-template-columns: 1.25fr 0.32fr 0.85fr; gap: 12px; align-items: start; margin-top: 0; }
 .row p { margin: 0; text-align: center; }
 .row pre { margin: 0; }
+.row + .row { margin-top: 44px; }
 .row img { margin-top: -26px; }
 .row .arrow {
-  align-self: center; text-align: center; margin-top: 0.4em;
-  font-family: 'Architects Daughter', cursive; font-size: 3.2em; font-weight: 700; line-height: 1; color: var(--pt-link);
+  position: relative; align-self: center; justify-self: stretch; margin: 0.5em 14px 0 8px;
+  height: 0; border-top: 5px solid var(--pt-link); font-size: 0; color: transparent; transform: none;
+}
+.row .arrow::after {
+  content: ''; position: absolute; right: -4px; top: -12px;
+  border-left: 18px solid var(--pt-link); border-top: 9.5px solid transparent; border-bottom: 9.5px solid transparent;
 }
 </style>
 
-## They Share One Need: A Context
+## Each Test Requires a Different Context
 
 <div class="row">
 
@@ -348,7 +353,7 @@ class BookControllerIT {
 
 <div class="arrow">→</div>
 
-![h:230](../../shared/assets/the-need-for-speed/context-sliced.png)
+![h:205](../../shared/assets/the-need-for-speed/context-sliced.png)
 
 </div>
 
@@ -364,7 +369,7 @@ class BookApiIT {
 
 <div class="arrow">→</div>
 
-![h:230](../../shared/assets/the-need-for-speed/context-full.png)
+![h:205](../../shared/assets/the-need-for-speed/context-full.png)
 
 </div>
 
@@ -380,7 +385,7 @@ Notes:
 
 
 
-## How the Cache Key Is Built
+## Spring TestContext Caching Behind the Scenes
 
 ```java
 // DefaultContextCache.java
@@ -388,14 +393,11 @@ private final Map<MergedContextConfiguration, ApplicationContext> contextMap =
   Collections.synchronizedMap(new LruCache(32, 0.75f));
 ```
 
-This goes into the cache key (`MergedContextConfiguration`):
+The cache key is a `MergedContextConfiguration`: **the store of all context customization points** of a test class.
 
-- activeProfiles (`@ActiveProfiles`)
-- propertySourceProperties (`@TestPropertySource`, `properties = ...`)
-- contextCustomizers (`@MockitoBean`, `@MockitoSpyBean`, `@DynamicPropertySource`, ...)
-- configuration classes, initializers, web environment, etc.
-
-**Every unique combination is a new context start.**
+- Spring collects **more than 10 things** to identify a context
+- Any change results in a **new hash code** of this Java object
+- A new hash code means a cache miss and a new context start
 
 ---
 
@@ -411,71 +413,45 @@ Notes:
 
 ---
 
+## Detect Context Restarts - Visually
 
-## What Is "Bad" for Context Caching Here?
-
-![center h:480](../../shared/assets/context-caching-bad.png)
+![](../../shared/assets/context-caching-hints.png)
 
 ---
+
+## Detect Context Restarts - with Logs
+
+![](../../shared/assets/context-caching-logs.png)
+
+---
+
+## Detect Context Restarts - with Tooling
+
+![center](../../shared/assets/spring-test-profiler-logo.png)
+
+An [open-source Spring Test utility](https://github.com/PragmaTech-GmbH/spring-test-profiler) that provides visualization and insights for Spring Test execution, with a focus on Spring context caching statistics.
+
+**Overall goal**: Identify optimization opportunities in your Spring Test suite to speed up your builds and ship to production faster and with more confidence.
+
+---
+
+<!-- _class: light section -->
+<!-- _paginate: false -->
 
 <!--
 Notes:
-- One annotation, spread over the whole suite by inheritance.
-- @DirtiesContext closes the context after every test class, so no subclass ever reuses it.
-- The configuration is identical for all subclasses and the cache is still useless.
+- Quick demo of the report only: ./mvnw verify, open target/spring-test-profiler/latest.html.
+- Show the cache hit rate, the timeline and why the contexts differ.
+- Activation (dependency and spring.factories) follows on the slides after the three steps.
 -->
 
-## One `@DirtiesContext` in a Base Class Hurts Every Subclass
+![bg right:40%](../../shared/assets/the-need-for-speed/profiler-report.png)
 
-```java {1}
-@DirtiesContext
-@SpringBootTest(webEnvironment = RANDOM_PORT)
-abstract class AbstractIntegrationTest {
-}
+## Spring Test Profiler
 
-class BookApiIT extends AbstractIntegrationTest { }
+# Demo Time
 
-class BookServiceIT extends AbstractIntegrationTest { }
-
-class BookDeleteIT extends AbstractIntegrationTest { }
-```
-
-Identical configuration, but every class closes the context: **3 test classes, 3 context starts**.
-
----
-
-
-<!-- _class: light split -->
-
-## Hit or Miss?
-
-<div class="yes">
-
-### Cache hit: same key
-
-- Same annotations on the test class
-- Same properties and profiles
-- Same mocks and spies
-- Context is reused, cost close to zero
-
-</div>
-
-<div class="no">
-
-### Cache miss: one tiny difference
-
-- Extra `properties = ...` on one class
-- A `@MockitoBean` only in one test
-- `@DirtiesContext` closes the context
-- New context start, pay full price
-
-</div>
-
----
-
-## The Goal: Steady Build Times
-
-![center w:1120](../../shared/assets/the-need-for-speed/linear-build-time-cached.png)
+_A quick look at the report._
 
 ---
 
@@ -499,7 +475,7 @@ ul > li .num { font-size: 1.9em; line-height: 1; }
 ul > li .step { font-size: 1.5em; font-weight: 700; color: var(--pt-link); }
 </style>
 
-## Three Steps to Faster Builds
+## How to Cut Build Time by 70%
 
 * <span class="num">1</span><span class="step">Understand</span>Measure the context starts with the Spring Test Profiler
 * <span class="num">2</span><span class="step">Optimize</span>Align the configurations so contexts get reused
@@ -507,12 +483,40 @@ ul > li .step { font-size: 1.5em; font-weight: 700; color: var(--pt-link); }
 
 ---
 
-<!-- _class: light section -->
-<!-- _paginate: false -->
+## The Goal: Steady Build Times
 
-## Step 1
+![center w:1120](../../shared/assets/the-need-for-speed/linear-build-time-cached.png)
 
-# Understand: measure before you guess
+---
+
+<!-- _class: light -->
+
+<style scoped>
+.cards { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 1.4em; }
+.card {
+  padding: 1.1em 0.8em; text-align: center; color: #000; background: #fff;
+  border: 3px solid var(--pt-link);
+  border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+  box-shadow: 3px 4px 0 rgba(15, 23, 42, 0.14);
+}
+.card:nth-child(2) { border-radius: 15px 255px 15px 225px / 225px 15px 255px 15px; }
+.card .big { display: block; font-family: 'Space Grotesk', 'Inter', sans-serif; font-weight: 700; font-size: 2.6em; line-height: 1.1; color: var(--pt-link); }
+.card .what { display: block; font-family: 'Architects Daughter', cursive; font-size: 1.5em; margin-top: 0.3em; }
+.card .gain { display: block; font-family: 'Architects Daughter', cursive; font-size: 1.2em; margin-top: 0.4em; }
+</style>
+
+## Real Results: Builds I Optimized at Clients
+
+<div class="cards">
+  <div class="card"><span class="big">26 → 12 min</span><span class="what">build time</span><span class="gain">about 54% faster</span></div>
+  <div class="card"><span class="big">15 → 3 min</span><span class="what">build time</span><span class="gain">about 80% faster</span></div>
+</div>
+
+<!--
+Notes:
+- Real client projects, no new framework and no rewrite: aligned context configurations, no @DirtiesContext, shared base class.
+- Anonymous on purpose.
+-->
 
 ---
 
@@ -551,48 +555,12 @@ open target/spring-test-profiler/latest.html
 
 ---
 
-<!--
-Notes:
-- Live demo here: run ./mvnw verify and open the report in the browser.
-- Fallback: the screenshots on the next slides.
--->
+## Don't Customize the Context Heavily
 
-## The Baseline: 5 Test Classes, 5 Contexts
-
-![center h:380](../../shared/assets/the-need-for-speed/profiler-before-summary.png)
-
-Cache hit rate 44.4%, **4.0s** of the 4.9s are context startup.
-
----
-
-## The Timeline: Five Contexts, One per Class
-
-![center h:480](../../shared/assets/the-need-for-speed/profiler-before-timeline.png)
-
----
-
-## Why Do the Contexts Differ?
-
-![center h:480](../../shared/assets/the-need-for-speed/profiler-before-configs.png)
-
----
-
-<!-- _class: light section -->
-<!-- _paginate: false -->
-
-## Step 2
-
-# Optimize: from five contexts to one
-
----
-
-## Three Levers to Reuse Contexts
-
-1. **Abstract integration test class** - one place for all context configuration
-2. **Context initializer / `@DynamicPropertySource`** - shared setup, same key for everyone
-3. **Fewer mocks and no `@DirtiesContext`** - use real beans and clean up your own data
-
-Align first, then slice only where it really pays off.
+- Every `@MockitoBean`, `@MockitoSpyBean`, `@TestPropertySource` or `@ActiveProfiles` variation is **a new context**
+- Keep **one shared base class** and one shared test configuration
+- Put mocks into shared configuration instead of annotating single test classes
+- Slice only where it really pays off, and align the slices as well
 
 ---
 
@@ -607,7 +575,7 @@ Align first, then slice only where it really pays off.
 abstract class AbstractIntegrationTest {
 }
 
-class BookApiSpringBootTest
+class BookApiIT
     extends AbstractIntegrationTest {
   // no own annotations anymore
 }
@@ -615,45 +583,31 @@ class BookApiSpringBootTest
 
 - One annotation set for all tests
 - No `@MockitoBean` or `@MockitoSpyBean`
-- No `@DirtiesContext`
 - No extra `properties`
 
 ---
 
 <!--
 Notes:
-- Live demo: git apply optimize-context-caching.patch (or type it), run ./mvnw verify again.
+- The typical advice from AI and StackOverflow when an integration test is flaky: just dirty the context.
+- It is copied into the central base class and silently disables the cache for the whole suite.
 -->
 
-## The Result: 1 Context
+## The Final Boss
 
-![center h:380](../../shared/assets/the-need-for-speed/profiler-after-summary.png)
+Developers tend to consult AI/StackOverflow for integration test issues and often copy advice from the internet without knowing the implications:
 
-Cache hit rate **88.9%**, **1** context created, total runtime 4.9s down to **3.0s**.
+```java {2}
+@SpringBootTest
+@DirtiesContext
+// this instructs Spring to remove the context from the cache
+// and rebuild a new context on every request
+public abstract class AbstractIntegrationTest {
 
----
+}
+```
 
-<!-- _class: light metrics -->
-
-## Demo Result
-
-- **5 → 1** Contexts created
-- **44% → 89%** Cache hit rate
-- **-39%** Total runtime on a tiny suite
-
-<!--
-Notes:
-- 4.9s to 3.0s on 9 tests. On a real suite with 50 contexts and heavy startup (databases, containers) the same effect gives the 70% from the title.
--->
-
----
-
-<!-- _class: light section -->
-<!-- _paginate: false -->
-
-## Step 3
-
-# Ensure: keep it fast
+The setup above will **disable** the context caching feature and slow down the builds significantly!
 
 ---
 
@@ -662,7 +616,7 @@ Notes:
 - Explain the **cache key**: every new annotation combination costs a context start
 - Put shared configuration into **one base class**, and review changes to it
 - Treat `@DirtiesContext` and a new `@MockitoBean` like a performance decision
-- Run the profiler report from time to time, share it in the team
+- Don't religiously optimize for only **one context**, a handful works
 
 ---
 
@@ -682,14 +636,35 @@ Point the skill to your `AbstractIntegrationTest` and name the antipatterns.
 
 ---
 
-## Let the Pipeline Guard the Context Count
+## The Profiler Also Writes a JSON Report
 
-The profiler writes `target/spring-test-profiler/results.json`:
+`target/spring-test-profiler/results.json` - flat and easy to consume from a pipeline:
 
-```bash {3-7}
+```json {7}
+{
+  "schemaVersion": 1,
+  "profilerVersion": "0.3.1",
+  "generatedAt": "2026-10-12T12:57:46Z",
+  "buildTool": "MAVEN",
+  ...
+  "contextsCreated": 5,
+  "contextCacheHits": 4,
+  "contextCacheMisses": 5,
+  "contextCacheHitRatio": 0.4444,
+  ...
+}
+```
+
+---
+
+## Let the CI/CD Pipeline Guard the Context Count
+
+Add one step at the end of the pipeline that reads the report:
+
+```bash {3-5}
 ./mvnw verify
 
-expectedContexts=1
+expectedContexts=5
 actualContexts=$(jq -r '.contextsCreated' \
   target/spring-test-profiler/results.json)
 
@@ -698,8 +673,6 @@ if [ "$actualContexts" -gt "$expectedContexts" ]; then
   exit 1
 fi
 ```
-
-A new `@DirtiesContext` or a stray `@MockitoBean` now fails the build.
 
 ---
 
@@ -741,6 +714,26 @@ Notes:
 
 ---
 
+<!-- _class: light -->
+<!-- _paginate: false -->
+<!-- _header: '' -->
+<!-- _footer: '' -->
+
+<style scoped>
+section { padding: 0; }
+section img { display: block; margin: -36px auto 0; height: 720px; }
+</style>
+
+![h:720](../../shared/assets/sessionize-feedback-javacro-2026-speed-talk.png)
+
+<!--
+Notes:
+- Feedback via Sessionize: https://sfeedback.com/Xd59D2
+- Full screen, leave it up for a moment before the last slide.
+-->
+
+---
+
 <!-- _class: light closing -->
 <!-- _paginate: false -->
 <!-- _header: '' -->
@@ -750,6 +743,6 @@ Notes:
 
 # Joyful Testing!
 
-The **Spring Boot Testing Newsletter**: best practices, recipes and quick wins in your inbox - **rieckpil.de/newsletter**
+Join my **Spring Boot Testing Newsletter** for best practices, recipes and quick wins in your inbox: **rieckpil.de/newsletter**
 
 ![center h:260](../../shared/assets/newsletter-signup-qr.png)

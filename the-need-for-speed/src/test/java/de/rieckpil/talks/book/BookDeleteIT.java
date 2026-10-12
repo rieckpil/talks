@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @DirtiesContext
-class BookDeleteSpringBootTest {
+class BookDeleteIT {
 
   @Autowired
   private BookService bookService;

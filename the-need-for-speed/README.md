@@ -14,10 +14,10 @@ Slides: [slides/content.md](slides/content.md), see [slides/README.md](slides/RE
 
 Spring Boot 4.1.1, Java 25, Spring Web MVC, Spring Data JPA with H2 and the [Spring Test Profiler](https://github.com/PragmaTech-GmbH/spring-test-profiler) 0.3.1. Bootstrapped with the Spring Boot CLI (`spring init`). It is a small CRUD API for books (`/api/books`).
 
-The test suite is **unoptimized on purpose**: five test classes create five different application contexts (`RANDOM_PORT` with `TestRestTemplate`, `@MockitoBean`, `@MockitoSpyBean`, `@DirtiesContext`, an extra property). Use it as the baseline and optimize it step by step during the talk.
+The test suite is **unoptimized on purpose**. All classes end with `IT` and run through the Maven Failsafe plugin (`./mvnw verify`): five test classes create five different application contexts (`RANDOM_PORT` with `TestRestTemplate`, `@MockitoBean`, `@MockitoSpyBean`, `@DirtiesContext`, an extra property). Use it as the baseline and optimize it step by step during the talk.
 
 ```bash
-JAVA_HOME=<jdk25> ./mvnw verify                      # runs all tests, writes the profiler report
+JAVA_HOME=<jdk25> ./mvnw verify                      # runs the *IT classes with Failsafe, writes the profiler report
 open target/spring-test-profiler/latest.html         # context cache report
 jq . target/spring-test-profiler/results.json        # flat metrics for CI
 ```
