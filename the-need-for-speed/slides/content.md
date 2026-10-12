@@ -9,7 +9,7 @@ header: 'The Need for Speed: Cut Your Spring Boot Build Times by 70% - JavaCro 2
 footer: '![](../../shared/assets/logo.webp) Philip Riecks · [@rieckpil](https://x.com/rieckpil) · [PragmaTech GmbH](https://pragmatech.digital/)'
 ---
 
-<!-- Menti: add the join URL / code here so it is at hand while presenting -->
+<!-- Menti: https://www.menti.com/alduhjtw1r39 -->
 <!-- _paginate: false -->
 <!-- _header: '' -->
 <!-- _footer: '' -->
@@ -37,15 +37,14 @@ Notes:
 
 ---
 
-## Participate During the Talk
+## Let's See Who Has the Fastest Build
 
-![bg right:36% h:420](../../shared/assets/the-need-for-speed/mentimeter-qr.png)
-
-Go to [menti.com](https://www.menti.com/) and enter the code **0000 0000**.
+![center h:520](../../shared/assets/mentimeter-javacro-2026-first-talk-padded.png)
 
 <!--
 Notes:
-- Replace the QR image (shared/assets/the-need-for-speed/mentimeter-qr.png) and the code.
+- QR leads to https://www.menti.com/alduhjtw1r39 (shared/assets/mentimeter-javacro-2026-first-talk.png).
+- The room is long: keep the QR big and centered, give people a moment before moving on.
 - Menti questions: Who writes Spring Boot apps? How long does your build take? Do you know Spring's context caching?
 -->
 
@@ -69,49 +68,47 @@ Notes:
 
 ---
 
-<!-- _class: light statement -->
-
-# Most of the code is generated, but you **can't prompt** confidence.
+<!-- _class: light statement reveal -->
 
 <!--
 Notes:
-- The point of the whole talk in one sentence.
+- Two clicks. First: most of the code is generated. Pause.
+- Then: but you still own the liability, and you can't prompt confidence in your pipeline.
 -->
+
+# Most of the code is generated ...
+* ... but you still own the liability and **can't prompt** confidence in your pipeline.
 
 ---
 
-<!-- _class: light reveal -->
+<!-- _paginate: false -->
 
-![bg right:33%](../../shared/assets/lightning-shield.png)
+![bg right:20%](../../shared/assets/northstar.jpg)
 
-## When Code Generation Scales ...
-
-* ... **verification** becomes the bottleneck.
-* So we need a **safety net**: a test suite we can trust.
+![w:960](../../shared/assets/northstar-pr.png)
 
 <!--
 Notes:
-- Generation is cheap and fast now. Reading and verifying every line is not.
-- The safety net is an automated test suite.
+- My northstar: a major Spring Boot upgrade, opened by a bot, green pipeline, merged on a Friday afternoon without fear.
+- That only works with a safety net you trust.
 -->
 
 ---
 
 <style scoped>
-.flow { gap: 40px; align-items: stretch; margin-top: 1.6em; }
+.flow { gap: 40px; align-items: stretch; margin-top: 1.2em; }
 .sketch {
-  flex: 1; padding: 1.1em 1.2em; font-size: 1.15em; line-height: 1.3;
+  flex: 1; padding: 1.4em 1.2em; font-size: 1.7em; line-height: 1.3;
   background: rgba(2, 132, 199, 0.08);
 }
-.sketch .title { display: block; font-size: 1.9em; margin-bottom: 0.25em; }
-.sketch small { font-size: 0.75em; }
+.sketch .title { display: block; font-size: 1.6em; margin-bottom: 0.3em; }
 </style>
 
 ## What We Expect From the Safety Net
 
 <div class="flow">
-  <div class="sketch accent"><span class="title">Fast</span>Feedback in <b>minutes</b>, not hours<small>so we run it on every change</small></div>
-  <div class="sketch accent alt"><span class="title">Comprehensive</span>Enough <b>correct tests</b><small>for confidence in every commit</small></div>
+  <div class="sketch accent"><span class="title">Fast</span>Feedback in <b>minutes</b>, not hours</div>
+  <div class="sketch accent alt"><span class="title">Comprehensive</span>The <b>correct types of tests</b> to get confidence</div>
 </div>
 
 ---
@@ -125,26 +122,24 @@ Notes:
 <!-- _class: light reveal -->
 
 <style scoped>
-ul { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 1.2em; }
+ul { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin: 0; }
 ul > li {
-  margin: 0; padding: 0.6em 0.5em; min-height: 9.5em;
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.15em;
-  text-align: center; font-size: 1.3em; line-height: 1.15;
+  margin: 0; padding: 0.8em 0.5em; min-height: 11.5em;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.25em;
+  text-align: center; font-size: 1.45em; line-height: 1.15;
   font-family: 'Architects Daughter', cursive;
   border: 3px solid var(--pt-heading);
   border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
   box-shadow: 3px 4px 0 rgba(15, 23, 42, 0.14);
 }
 ul > li:nth-child(3) { border-color: var(--pt-link); color: var(--pt-link); }
-ul > li .icon { font-size: 2.6em; line-height: 1.1; }
-ul > li img:not(.emoji) { height: 120px; }
-ul > li small { display: block; font-size: 0.6em; line-height: 1.2; color: var(--pt-muted); }
+ul > li .icon { font-size: 2.8em; line-height: 1.1; }
+ul > li img:not(.emoji) { height: 150px; }
+ul > li small { display: block; font-size: 0.8em; line-height: 1.2; color: #000; }
 </style>
 
-## How Do You Get Fast Tests?
-
 * <span class="icon">🙈</span>No tests at all<small>fastest build, zero confidence</small>
-* <span class="icon">🧵</span>Parallelize tests<small>use the cores you pay for</small>
+* <span class="icon">🧵</span>Parallelize tests<small>use all your cores</small>
 * ![](../../shared/assets/the-need-for-speed/treasure-chest.png)Something else ...<small>a treasure that helps us</small>
 
 <!--
@@ -166,13 +161,66 @@ h1 { font-size: 54px; }
 
 ## The Spring Test hidden gem
 
-# Reusing an ApplicationContext for tests
+# Introducing: Spring TestContext Context Caching
+
+---
+
+<!-- _class: light split -->
+
+## What Do These Tests Share?
+
+<div>
+
+```java
+@WebMvcTest(BookController.class)
+class BookControllerIT {
+
+  @Autowired
+  private MockMvc mockMvc;
+
+  @MockitoBean
+  private BookService bookService;
+
+  @Test
+  void shouldReturnAllBooks() {
+    // ...
+  }
+}
+```
+
+</div>
+
+<div>
+
+```java
+@SpringBootTest(
+  webEnvironment = RANDOM_PORT)
+class BookApiIT {
+
+  @Autowired
+  private TestRestTemplate template;
+
+  @Autowired
+  private BookRepository repository;
+
+  @Test
+  void shouldCreateAndFetchBook() {
+    // ...
+  }
+}
+```
+
+</div>
+
+<!--
+Notes:
+- Ask the room. Different annotations, different collaborators, different test types.
+- Answer: both need a Spring ApplicationContext before the first test method runs.
+-->
 
 ---
 
 ## The Culprit: Every Test Starts a Context
-
-Whether sliced or full, a Spring test needs an `ApplicationContext`:
 
 ```text {17}
   .   ____          _            __ _ _
@@ -184,41 +232,54 @@ Whether sliced or full, a Spring test needs an `ApplicationContext`:
 
  :: Spring Boot ::                (v4.1.1)
 
-10:19:16.157 INFO  BookApiSpringBootTest : Starting BookApiSpringBootTest using Java 25.0.2
+10:19:16.157 INFO  BookApiIT : Starting BookApiIT using Java 25.0.2
 10:19:16.548 INFO  RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories
 10:19:16.863 INFO  TomcatWebServer : Tomcat initialized with port 0 (http)
 10:19:17.064 INFO  org.hibernate.orm.core : HHH000001: Hibernate ORM core version 7.4.5.Final
 ...
 10:19:17.824 INFO  LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory
 ...
-10:19:18.320 INFO  BookApiSpringBootTest : Started BookApiSpringBootTest in 2.289 seconds
+10:19:18.320 INFO  BookApiIT : Started BookApiIT in 2.289 seconds
 ```
 
 ---
 
 ## To Avoid: Linear Build Time Growth
 
-![center h:500](../../shared/assets/the-need-for-speed/linear-build-time.png)
+![center w:1120](../../shared/assets/the-need-for-speed/linear-build-time.png)
 
 ---
 
-<!-- _class: light statement -->
+<!-- _class: light reveal -->
 
-# Lucky for us, Spring Test has a **fix** built in.
+<style scoped>
+ul { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin: 0.8em 0 0; }
+ul > li {
+  margin: 0; padding: 0.7em 0.55em; min-height: 11.5em;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.35em;
+  text-align: center; font-size: 1.5em; line-height: 1.12; font-weight: 700;
+  font-family: 'Architects Daughter', cursive;
+  color: #000;
+  background: #fff;
+  border: 3px solid var(--pt-link);
+  border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+  box-shadow: 3px 4px 0 rgba(15, 23, 42, 0.14);
+}
+ul > li:nth-child(2) { border-radius: 15px 255px 15px 225px / 225px 15px 255px 15px; }
+ul > li .num { font-size: 1.9em; line-height: 1; color: #000; }
+</style>
 
----
+## Understanding the Caching
+
+* <span class="num">1</span>Spring caches an already started context for later reuse
+* <span class="num">2</span>A test with a similar context configuration gets a "hot" context handed over
+* <span class="num">3</span>No dependency needed, it works out of the box
 
 <!--
 Notes:
-- Part of every Spring Boot project via spring-boot-starter-test. No setup, no dependency.
+- Click by click. Part of every Spring Boot project via spring-boot-starter-test.
+- Box 2: "similar" means the same cache key, next slides show what goes into it.
 -->
-
-## Spring TestContext Context Caching
-
-- The **TestContext framework** caches an already started `ApplicationContext`
-- A test with the **same configuration** gets the cached context instantly
-- Available **out of the box** - nobody has to switch it on
-- Part of Spring Framework's test support, so it works for JUnit 4, 5 and every slice
 
 ---
 
@@ -287,11 +348,9 @@ This goes into the cache key (`MergedContextConfiguration`):
 
 ---
 
-## The Gem in One Picture
+## The Goal: Steady Build Times
 
-![center h:480](../../shared/assets/the-need-for-speed/linear-build-time-cached.png)
-
-You pay for a context once per unique configuration, not once per test class.
+![center w:1120](../../shared/assets/the-need-for-speed/linear-build-time-cached.png)
 
 ---
 
@@ -322,13 +381,31 @@ _Spring Boot 4.1, Java 25, 5 test classes, 9 tests._
 
 ---
 
-<!-- _class: light agenda -->
+<!-- _class: light -->
+
+<style scoped>
+ul { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin: 0.8em 0 0; padding: 0; list-style: none; }
+ul > li {
+  margin: 0; padding: 0.8em 0.7em; min-height: 12.5em;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.3em;
+  text-align: center; font-size: 1.35em; line-height: 1.2;
+  font-family: 'Architects Daughter', cursive;
+  color: #000; background: #fff;
+  border: 3px solid var(--pt-link);
+  border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+  box-shadow: 3px 4px 0 rgba(15, 23, 42, 0.14);
+}
+ul > li:nth-child(2) { border-radius: 15px 255px 15px 225px / 225px 15px 255px 15px; }
+ul > li::before, ul > li::marker { content: none; }
+ul > li .num { font-size: 1.9em; line-height: 1; }
+ul > li .step { font-size: 1.5em; font-weight: 700; color: var(--pt-link); }
+</style>
 
 ## Three Steps to Faster Builds
 
-1. **Understand** - measure the context starts with the Spring Test Profiler
-2. **Optimize** - align the configurations so contexts get reused
-3. **Ensure** - keep it fast, for your team and for your AI agents
+* <span class="num">1</span><span class="step">Understand</span>Measure the context starts with the Spring Test Profiler
+* <span class="num">2</span><span class="step">Optimize</span>Align the configurations so contexts get reused
+* <span class="num">3</span><span class="step">Ensure</span>Keep it fast, for your team and for your AI agents
 
 ---
 
@@ -537,21 +614,6 @@ A new `@DirtiesContext` or a stray `@MockitoBean` now fails the build.
 3. Understand with the profiler, optimize with a base class, ensure with CI and skills
 
 ---
-
-<!-- _class: light statement reveal -->
-<!-- _paginate: false -->
-
-<!--
-Notes:
-- One line per click.
--->
-
-# Fast feedback is a **feature**.
-* The treasure was in your project all along.
-* **Go and find it.**
-
----
-
 
 ## Need Help Optimizing Your Build?
 

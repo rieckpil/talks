@@ -59,8 +59,8 @@
 </div>
 
 <!-- Build time grows linearly with the number of tests when every test starts a context -->
-<div id="linear" class="scene" style="height:760px">
-<svg viewBox="0 0 1600 760" width="1600" height="760" xmlns="http://www.w3.org/2000/svg">
+<div id="linear" class="scene" style="height:720px">
+<svg viewBox="0 0 1600 720" width="1600" height="720" xmlns="http://www.w3.org/2000/svg">
   <g id="chart"></g>
 </svg>
 </div>
@@ -103,38 +103,38 @@ if (scene.startsWith('linear')) {
     g.appendChild(el);
     return el;
   };
-  const x0 = 230, y0 = 640, w = 1280, h = 540;
+  const x0 = 310, y0 = 560, w = 1240, h = 470;
   const maxTests = 16, maxMinutes = 20;
   const px = (tests) => x0 + (tests / maxTests) * w;
   const py = (minutes) => y0 - (minutes / maxMinutes) * h;
   const font = { 'font-family': 'Architects Daughter', fill: '#0f172a' };
   // axes
-  add('path', { d: `M${x0} ${y0 - h} V${y0} H${x0 + w}`, fill: 'none', stroke: '#0f172a', 'stroke-width': 5, 'stroke-linecap': 'round' });
+  add('path', { d: `M${x0} ${y0 - h} V${y0} H${x0 + w}`, fill: 'none', stroke: '#0f172a', 'stroke-width': 6, 'stroke-linecap': 'round' });
   // ticks: 5, 10, 15, 20 min and 1, 5, 10, 15 tests
   for (const minutes of [5, 10, 15, 20]) {
     add('line', { x1: x0 - 12, y1: py(minutes), x2: x0, y2: py(minutes), stroke: '#0f172a', 'stroke-width': 4 });
     add('line', { x1: x0, y1: py(minutes), x2: x0 + w, y2: py(minutes), stroke: '#cbd5e1', 'stroke-width': 2, 'stroke-dasharray': '6 10' });
-    add('text', { x: x0 - 22, y: py(minutes) + 10, 'text-anchor': 'end', 'font-size': 32, ...font }, `${minutes} min`);
+    add('text', { x: x0 - 24, y: py(minutes) + 15, 'text-anchor': 'end', 'font-size': 46, ...font }, `${minutes} min`);
   }
   for (const tests of [1, 5, 10, 15]) {
     add('line', { x1: px(tests), y1: y0, x2: px(tests), y2: y0 + 12, stroke: '#0f172a', 'stroke-width': 4 });
-    add('text', { x: px(tests), y: y0 + 50, 'text-anchor': 'middle', 'font-size': 32, ...font }, `${tests}`);
+    add('text', { x: px(tests), y: y0 + 62, 'text-anchor': 'middle', 'font-size': 46, ...font }, `${tests}`);
   }
-  add('text', { x: x0 + w / 2, y: y0 + 110, 'text-anchor': 'middle', 'font-size': 36, ...font }, 'test classes with their own context');
-  add('text', { transform: `translate(52 ${y0 - h / 2}) rotate(-90)`, 'text-anchor': 'middle', 'font-size': 36, ...font }, 'build time');
+  add('text', { x: x0 + w / 2, y: y0 + 140, 'text-anchor': 'middle', 'font-size': 50, ...font }, 'test classes with their own context');
+  add('text', { transform: `translate(60 ${y0 - h / 2}) rotate(-90)`, 'text-anchor': 'middle', 'font-size': 50, ...font }, 'build time');
   // linear: every test class pays about 1.2 min for a context start
   const start = [px(0), py(0)];
   const end = [px(16), py(19.2)];
-  add('line', { x1: start[0], y1: start[1], x2: end[0], y2: end[1], stroke: '#e11d48', 'stroke-width': 8, 'stroke-linecap': 'round' });
+  add('line', { x1: start[0], y1: start[1], x2: end[0], y2: end[1], stroke: '#e11d48', 'stroke-width': 10, 'stroke-linecap': 'round' });
   // label parallel to the line, sitting just above it
   const angle = Math.atan2(end[1] - start[1], end[0] - start[0]) * 180 / Math.PI;
   const labelAt = [start[0] + (end[0] - start[0]) * 0.62, start[1] + (end[1] - start[1]) * 0.62];
-  add('text', { transform: `translate(${labelAt[0]} ${labelAt[1]}) rotate(${angle}) translate(0 -22)`, 'text-anchor': 'middle', 'font-size': 38, 'font-family': 'Architects Daughter', fill: '#e11d48' }, 'every class starts a context');
+  add('text', { transform: `translate(${labelAt[0]} ${labelAt[1]}) rotate(${angle}) translate(0 -26)`, 'text-anchor': 'middle', 'font-size': 54, 'font-family': 'Architects Daughter', fill: '#e11d48' }, 'every class starts a context');
   if (cached) {
     // with caching: pay once (about 5 min), then almost flat
     const cacheEnd = [px(16), py(6.6)];
-    add('path', { d: `M${px(0)} ${py(0)} L${px(1)} ${py(5)} L${cacheEnd[0]} ${cacheEnd[1]}`, fill: 'none', stroke: '#00a34a', 'stroke-width': 8, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' });
-    add('text', { x: cacheEnd[0] - 20, y: cacheEnd[1] - 24, 'text-anchor': 'end', 'font-size': 38, 'font-family': 'Architects Daughter', fill: '#00a34a' }, 'context cache: pay once, reuse');
+    add('path', { d: `M${px(0)} ${py(0)} L${px(1)} ${py(5)} L${cacheEnd[0]} ${cacheEnd[1]}`, fill: 'none', stroke: '#00a34a', 'stroke-width': 10, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' });
+    add('text', { x: cacheEnd[0] - 20, y: cacheEnd[1] + 70, 'text-anchor': 'end', 'font-size': 52, 'font-family': 'Architects Daughter', fill: '#00a34a' }, 'context cache: pay once, reuse');
   }
 }
 window.__rendered = true;
