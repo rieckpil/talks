@@ -83,9 +83,15 @@ Notes:
 
 <!-- _paginate: false -->
 
-![bg right:20%](../../shared/assets/northstar.jpg)
+![bg right:33%](../../shared/assets/northstar.jpg)
 
-![w:960](../../shared/assets/northstar-pr.png)
+## How Much Testing Do We Need?
+
+**No coverage goal**, but **engineering excellence**:
+
+- **Confidence** in every commit
+- Being able to **deploy fast** anytime
+- **Fast** feedback & **fast** flow
 
 <!--
 Notes:

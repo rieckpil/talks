@@ -4,26 +4,17 @@ theme: pragmatech
 class: light
 paginate: true
 transition: pt-fade
-header: 'Top 5 Spring Boot Testing Mistakes Developers Trap Into @ Tech Talks South Tyrol #14 · September 8, 2026'
+header: 'Top 5 Spring Boot Testing Mistakes Developers Trap Into - JavaCro 2026'
 footer: '![](../../shared/assets/logo.webp) Philip Riecks · [PragmaTech GmbH](https://pragmatech.digital/) · [@rieckpil](https://x.com/rieckpil)'
 ---
 
 <!--
-Menti: https://www.menti.com/albx4ndyi8ni
+Menti QR: shared/assets/mentimeter-javacro-2026-second-talk.png
 -->
 
 <!-- _paginate: false -->
 <!-- _header: '' -->
 <!-- _footer: '' -->
-
-<!--
-Notes:
-- Opener: Bozen, the town of this talk. Warm welcome before the title slide.
--->
-
-![bg](../../shared/assets/bolzano-town.jpg)
-
----
 
 <!-- _class: light title -->
 <!-- _paginate: false -->
@@ -35,29 +26,28 @@ Notes:
 
 ## Your tests are green. But do you feel confident deploying?
 
-Tech Talks South Tyrol #14 · September 8, 2026
+JavaCro 2026 · October 13, 2026
 
 ---
 
 <!-- footer: '![](../../shared/assets/logo.webp)' -->
 
-![bg h:500 right:33%](../../shared/assets/philip-in-erlangen-map.jpg)
+![bg right:33% fit](../../shared/assets/the-need-for-speed/germany-map.png)
 
 ### About Philip
 
-- Software Engineer from Erlangen (Bolzano's partner town since 2018), Germany (Bavaria) 🍻
+- Software Engineer from Herzogenaurach (HQ of adidas & Puma), Germany 🍻
 - Blogging & content creation with a focus on testing Java and specifically Spring Boot applications 🍃
 - Founder of [PragmaTech GmbH](https://pragmatech.digital/) - **Enabling Developers to Frequently Deliver** Software with **More Confidence**
-- Worked together with Alex & Martin from AboutBits last year
 
 ---
 
 
 ## Participate During the Talk
 
-Go to [menti.com](https://www.menti.com/) and use the code **2636 4022** to **anonymously** submit answers:
+Scan the QR code to **anonymously** submit answers:
 
-![center h:250](../../shared/assets/mentimeter-bozen.png)
+![center h:400](../../shared/assets/mentimeter-javacro-2026-second-talk-padded.png)
 
 Please answer the **first three questions**:
 
@@ -485,6 +475,25 @@ Notes:
 
 ---
 
+<!-- _class: light -->
+<!-- _paginate: false -->
+<!-- _header: '' -->
+<!-- _footer: '' -->
+
+<style scoped>
+section { padding: 0; }
+section img { display: block; margin: -36px auto 0; height: 720px; }
+</style>
+
+![h:720](../../shared/assets/sessionize-feedback-javacro-2026-top-5-talk.png)
+
+<!--
+Notes:
+- Feedback via Sessionize QR. Full screen, leave it up for a moment before the last slide.
+-->
+
+---
+
 <!-- _class: light closing -->
 <!-- _paginate: false -->
 <!-- _header: '' -->
@@ -493,9 +502,9 @@ Notes:
 
 # Joyful Testing!
 
-Get the slides here:
+Join my **Spring Boot Testing Newsletter** for best practices, recipes and quick wins in your inbox: **rieckpil.de/newsletter**
 
-![h:260 center](../../shared/assets/slides-pdf-bozen.png)
+![h:260 center](../../shared/assets/newsletter-signup-qr.png)
 
 Reach out any time
 - [LinkedIn](https://www.linkedin.com/in/rieckpil) (Philip Riecks)
