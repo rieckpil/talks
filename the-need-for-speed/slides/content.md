@@ -282,18 +282,103 @@ Notes:
 -->
 
 ---
+<!-- _class: light reveal -->
+
+<style scoped>
+ul { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 64px; margin: 1em 0 0; padding: 0; list-style: none; }
+ul > li {
+  position: relative; display: block; margin: 0 !important; padding: 1em 1.1em !important; min-height: 16em;
+  font-size: 0.95em; line-height: 1.45; color: #000; background: #fff;
+  border: 3px solid var(--pt-heading);
+  border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+  box-shadow: 3px 4px 0 rgba(15, 23, 42, 0.14);
+}
+ul > li::marker { content: none; }
+ul > li:not(:first-child)::before {
+  content: '→'; position: absolute; left: -64px; width: 64px; top: 50%; transform: translateY(-50%);
+  text-align: center; line-height: 1;
+  font-family: 'Architects Daughter', cursive; font-size: 2.6em; font-weight: 700; color: var(--pt-link);
+}
+ul > li:nth-child(3) { border-color: var(--pt-link); background: rgba(2, 132, 199, 0.07); }
+.tag { display: block; margin-bottom: 0.5em; font-family: 'Architects Daughter', cursive; font-size: 1.3em; font-weight: 700; line-height: 1.15; color: var(--pt-link); }
+.code { display: block; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.9em; line-height: 1.5; }
+</style>
+
+## How Does the Cache Find Your Context?
+
+* <span class="tag">Step 1: Implement a test with a context</span><span class="code">@SpringBootTest<br>class BookApiIT {<br>&nbsp;&nbsp;// ...<br>}</span>
+* <span class="tag">Step 2: Spring analyzes your context requirements</span><b>Profiles:</b> default<br><b>Beans:</b> mocks, spies<br><b>Properties:</b> server.port=0<br>...
+* <span class="tag">Step 3: Computation of the cache key and trying to look up an existing context</span><b>Cache hit:</b> Reuse hot context<br><b>Cache miss:</b> Your test needs to start the context
 
 <!--
 Notes:
-- Animated GIF: loops on its own. Let it run one full loop.
-- In the exported PDF this shows the first frame only.
+- Click by click. Spring does not compare your test classes, it compares the merged configuration.
+- Everything that ends up in the configuration is part of the key: profiles, mocks, properties, config classes.
+- The class behind the key is MergedContextConfiguration (next slides).
 -->
 
-## Context Caching in Action
+---
 
-![center h:470](../../shared/assets/context-caching.gif)
+
+
+<!-- _class: light -->
+
+<style scoped>
+.row { display: grid; grid-template-columns: 1.25fr 0.18fr 0.9fr; gap: 12px; align-items: start; margin-top: 0; }
+.row p { margin: 0; text-align: center; }
+.row pre { margin: 0; }
+.row img { margin-top: -26px; }
+.row .arrow {
+  align-self: center; text-align: center; margin-top: 0.4em;
+  font-family: 'Architects Daughter', cursive; font-size: 3.2em; font-weight: 700; line-height: 1; color: var(--pt-link);
+}
+</style>
+
+## They Share One Need: A Context
+
+<div class="row">
+
+```java
+@WebMvcTest(BookController.class)
+class BookControllerIT {
+  @MockitoBean BookService bookService;
+  // ...
+}
+```
+
+<div class="arrow">→</div>
+
+![h:230](../../shared/assets/the-need-for-speed/context-sliced.png)
+
+</div>
+
+<div class="row">
+
+```java
+@SpringBootTest(webEnvironment = RANDOM_PORT)
+class BookApiIT {
+  @Autowired TestRestTemplate template;
+  // ...
+}
+```
+
+<div class="arrow">→</div>
+
+![h:230](../../shared/assets/the-need-for-speed/context-full.png)
+
+</div>
+
+<!--
+Notes:
+- Both tests need an ApplicationContext, but not the same one.
+- The slice starts only the web layer. @SpringBootTest starts the whole application.
+- Different configuration, different cache key, two context starts.
+-->
 
 ---
+
+
+
 
 ## How the Cache Key Is Built
 
@@ -314,11 +399,51 @@ This goes into the cache key (`MergedContextConfiguration`):
 
 ---
 
+<!--
+Notes:
+- Animated GIF: loops on its own. Let it run one full loop.
+- In the exported PDF this shows the first frame only.
+-->
+
+## Context Caching in Action
+
+![center h:470](../../shared/assets/context-caching.gif)
+
+---
+
+
 ## What Is "Bad" for Context Caching Here?
 
 ![center h:480](../../shared/assets/context-caching-bad.png)
 
 ---
+
+<!--
+Notes:
+- One annotation, spread over the whole suite by inheritance.
+- @DirtiesContext closes the context after every test class, so no subclass ever reuses it.
+- The configuration is identical for all subclasses and the cache is still useless.
+-->
+
+## One `@DirtiesContext` in a Base Class Hurts Every Subclass
+
+```java {1}
+@DirtiesContext
+@SpringBootTest(webEnvironment = RANDOM_PORT)
+abstract class AbstractIntegrationTest {
+}
+
+class BookApiIT extends AbstractIntegrationTest { }
+
+class BookServiceIT extends AbstractIntegrationTest { }
+
+class BookDeleteIT extends AbstractIntegrationTest { }
+```
+
+Identical configuration, but every class closes the context: **3 test classes, 3 context starts**.
+
+---
+
 
 <!-- _class: light split -->
 
@@ -351,33 +476,6 @@ This goes into the cache key (`MergedContextConfiguration`):
 ## The Goal: Steady Build Times
 
 ![center w:1120](../../shared/assets/the-need-for-speed/linear-build-time-cached.png)
-
----
-
-<!-- _class: light section -->
-<!-- _paginate: false -->
-
-## Demo
-
-# A small Spring Boot CRUD API and its test suite
-
-_Spring Boot 4.1, Java 25, 5 test classes, 9 tests._
-
----
-
-## The Demo Application
-
-- Book CRUD API: `GET/POST/PUT/DELETE /api/books`
-- Spring Web MVC, Spring Data JPA, H2
-- 5 test classes, all `@SpringBootTest`, each a little different
-
-| Test class | What is different |
-|------------|-------------------|
-| `BookApiSpringBootTest` | `RANDOM_PORT` and `TestRestTemplate` |
-| `BookControllerSpringBootTest` | `@MockitoBean` and `MockMvc` |
-| `BookServiceSpringBootTest` | `@MockitoSpyBean` |
-| `BookDeleteSpringBootTest` | `@DirtiesContext` |
-| `BookRepositorySpringBootTest` | one extra `property` |
 
 ---
 

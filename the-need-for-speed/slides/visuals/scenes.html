@@ -87,11 +87,16 @@
   <div class="hand" style="position:absolute;left:0;top:30px;width:840px;text-align:center;font-size:92px;line-height:1.2;color:#0f172a">Germany</div>
 </div>
 
+<!-- Context visuals: dots are beans, colors are layers. Sliced context is small, full context is big -->
+<div id="ctx" class="scene" style="width:640px;height:470px">
+  <svg id="ctxsvg" viewBox="0 0 640 470" width="640" height="470" xmlns="http://www.w3.org/2000/svg"></svg>
+</div>
+
 <script>
 const params = new URLSearchParams(location.search);
 const scene = params.get('scene') || 'treasure';
 const cached = scene === 'linear-cached';
-document.getElementById(['treasure', 'chest', 'germany'].includes(scene) ? scene : 'linear').classList.add('on');
+document.getElementById(['treasure', 'chest', 'germany'].includes(scene) ? scene : scene.startsWith('ctx') ? 'ctx' : 'linear').classList.add('on');
 
 if (scene.startsWith('linear')) {
   const ns = 'http://www.w3.org/2000/svg';
@@ -136,6 +141,46 @@ if (scene.startsWith('linear')) {
     add('path', { d: `M${px(0)} ${py(0)} L${px(1)} ${py(5)} L${cacheEnd[0]} ${cacheEnd[1]}`, fill: 'none', stroke: '#00a34a', 'stroke-width': 10, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' });
     add('text', { x: cacheEnd[0] - 20, y: cacheEnd[1] + 70, 'text-anchor': 'end', 'font-size': 52, 'font-family': 'Architects Daughter', fill: '#00a34a' }, 'context cache: pay once, reuse');
   }
+}
+
+if (scene.startsWith('ctx')) {
+  const ns = 'http://www.w3.org/2000/svg';
+  const svg = document.getElementById('ctxsvg');
+  const add = (tag, attrs, text) => {
+    const el = document.createElementNS(ns, tag);
+    for (const [k, v] of Object.entries(attrs)) el.setAttribute(k, v);
+    if (text) el.textContent = text;
+    svg.appendChild(el);
+    return el;
+  };
+  const rng = (seed) => () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+  const colors = { web: '#0284c7', service: '#e0a100', data: '#00a34a', config: '#7c3aed', infra: '#e11d48' };
+  const full = scene === 'ctx-full';
+  // circle geometry: the sliced context is small, the full context is big
+  const circle = full ? { cx: 320, cy: 268, r: 146 } : { cx: 320, cy: 290, r: 88 };
+  const palette = full ? ['web', 'web', 'service', 'service', 'data', 'data', 'config', 'infra'] : ['web'];
+  const count = full ? 44 : 6;
+  const random = rng(full ? 11 : 5);
+  add('circle', { cx: circle.cx, cy: circle.cy, r: circle.r, fill: full ? '#eaf4fb' : '#f3f8fc', stroke: '#0f172a', 'stroke-width': 5 });
+  const placed = [];
+  let guard = 0;
+  while (placed.length < count && guard++ < 8000) {
+    const r = full ? 10 + random() * 8 : 12 + random() * 7;
+    const angle = random() * Math.PI * 2;
+    const distance = Math.sqrt(random()) * (circle.r - r - 14);
+    const cx = circle.cx + Math.cos(angle) * distance;
+    const cy = circle.cy + Math.sin(angle) * distance;
+    if (placed.some(p => Math.hypot(p.cx - cx, p.cy - cy) < p.r + r + 7)) continue;
+    placed.push({ cx, cy, r });
+    const layer = palette[Math.floor(random() * palette.length)];
+    add('circle', { cx, cy, r, fill: colors[layer], opacity: 0.9 });
+  }
+  const label = full ? 'context #2' : 'context #1';
+  const contextId = full ? '4b82e60d' : '9f3c1a7e';
+  const top = circle.cy - circle.r;
+  add('text', { x: circle.cx, y: top - 52, 'text-anchor': 'middle', 'font-size': 40, 'font-family': 'Architects Daughter', fill: '#0f172a' }, label);
+  add('text', { x: circle.cx, y: top - 16, 'text-anchor': 'middle', 'font-size': 30, 'font-family': 'JetBrains Mono, ui-monospace, monospace', fill: '#e11d48' }, `ID: ${contextId}`);
+  add('text', { x: circle.cx, y: circle.cy + circle.r + 40, 'text-anchor': 'middle', 'font-size': 32, 'font-family': 'Architects Daughter', fill: '#64748b' }, full ? 'whole application' : 'web layer only');
 }
 window.__rendered = true;
 document.fonts.ready.then(() => { window.__rendered = true; });
