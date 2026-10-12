@@ -605,23 +605,41 @@ A new `@DirtiesContext` or a stray `@MockitoBean` now fails the build.
 
 ---
 
-<!-- _class: light agenda -->
+<!-- _class: light -->
+
+<style scoped>
+ul { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin: 0.8em 0 0; padding: 0; list-style: none; }
+ul > li {
+  margin: 0; padding: 0.8em 0.7em; min-height: 12em;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.3em;
+  text-align: center; font-size: 1.3em; line-height: 1.2;
+  font-family: 'Architects Daughter', cursive; color: #000; background: #fff;
+  border: 3px solid var(--pt-link);
+  border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+  box-shadow: 3px 4px 0 rgba(15, 23, 42, 0.14);
+}
+ul > li:nth-child(2) { border-radius: 15px 255px 15px 225px / 225px 15px 255px 15px; }
+ul > li::marker { content: none; }
+ul > li .icon { font-size: 2.2em; line-height: 1.1; }
+ul > li .step { font-size: 1.3em; font-weight: 700; color: var(--pt-link); }
+</style>
 
 ## Summary
 
-1. Every context start costs time, and the build time grows with every test class
-2. Context caching is the hidden gem: same configuration, same context
-3. Understand with the profiler, optimize with a base class, ensure with CI and skills
+* <span class="icon">🐌</span><span class="step">The problem</span>Every context start costs time, so build time grows with every test class
+* <span class="icon">💎</span><span class="step">The gem</span>Context caching: same configuration, same context
+* <span class="icon">🚀</span><span class="step">The plan</span>Understand with the profiler, optimize, ensure with CI and skills
 
 ---
 
-## Need Help Optimizing Your Build?
+## Need Help Further Optimizing Your Build?
 
-![center h:300](../../shared/assets/pragmatech-main-offering.png)
+![center w:1120](../../shared/assets/pragmatech-main-offering.png)
 
-- Spring Boot test suite too slow? Let's find your context cache killers together
-- Test audits, team workshops and hands-on pairing at [pragmatech.digital](https://pragmatech.digital/)
-- **Reach out:** [philip@pragmatech.digital](mailto:philip@pragmatech.digital) or [LinkedIn](https://www.linkedin.com/in/rieckpil)
+<!--
+Notes:
+- Say it out loud: reach out on LinkedIn or by mail, philip@pragmatech.digital.
+-->
 
 ---
 
@@ -632,7 +650,7 @@ A new `@DirtiesContext` or a stray `@MockitoBean` now fails the build.
 
 ![bg right:33%](../../shared/assets/end.jpg)
 
-# Joyful (and fast) testing!
+# Joyful Testing!
 
 The **Spring Boot Testing Newsletter**: best practices, recipes and quick wins in your inbox - **rieckpil.de/newsletter**
 
