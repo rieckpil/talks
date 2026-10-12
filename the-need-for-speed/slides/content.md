@@ -310,7 +310,7 @@ ul > li:nth-child(3) { border-color: var(--pt-link); background: rgba(2, 132, 19
 .code { display: block; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.9em; line-height: 1.5; }
 </style>
 
-## How Does the Cache Find Your Context?
+## How Does Spring Cache Your Context?
 
 * <span class="tag">Step 1: Implement a test with a context</span><span class="code">@SpringBootTest<br>class BookApiIT {<br>&nbsp;&nbsp;// ...<br>}</span>
 * <span class="tag">Step 2: Spring analyzes your context requirements</span><b>Profiles:</b> default<br><b>Beans:</b> mocks, spies<br><b>Properties:</b> server.port=0<br>...
@@ -574,9 +574,8 @@ open target/spring-test-profiler/latest.html
 
 ## The Fix: One Base Class
 
-```java {1-4}
+```java {1-3}
 @SpringBootTest(webEnvironment = RANDOM_PORT)
-@AutoConfigureMockMvc
 @AutoConfigureTestRestTemplate
 abstract class AbstractIntegrationTest {
 }
