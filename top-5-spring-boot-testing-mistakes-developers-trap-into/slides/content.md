@@ -92,6 +92,7 @@ Notes:
 
 ---
 
+<!-- _class: light reveal -->
 <!-- _paginate: false -->
 
 
@@ -99,11 +100,9 @@ Notes:
 
 ### My Overall Northstar for Engineering Excellence
 
-Imagine seeing this pull request on a Friday afternoon:
-
-![](../../shared/assets/northstar-pr.png)
-
-How confident are you to merge this major Spring Boot upgrade and deploy it to production once the pipeline turns green?
+* Imagine seeing this pull request on a Friday afternoon:
+* ![](../../shared/assets/northstar-pr.png)
+* How confident are you to merge this major Spring Boot upgrade and deploy it to production once the pipeline turns green?
 
 ---
 
@@ -157,6 +156,18 @@ Notes:
 ## You Don't Always Need the Entire Context
 
 ![center h:500](../../shared/assets/spring-sliced-context.png)
+
+---
+
+## A Decision Tree for Your Spring Test
+
+![center h:500](../../shared/assets/test-choice.png)
+
+<!--
+Notes:
+- Two questions: does the test need a Spring ApplicationContext at all? Do we start all of it?
+- No context: plain JUnit and Mockito, milliseconds. With a context: seconds. Sliced context for the layer under test, full context for the entire application.
+-->
 
 ---
 
