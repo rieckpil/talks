@@ -49,11 +49,11 @@ Scan the QR code to **anonymously** submit answers:
 
 ![center h:400](../../shared/assets/mentimeter-javacro-2026-second-talk-padded.png)
 
-Please answer the **first three questions**:
-
-- Who wrote your tests last week?
-- How would you rate your Spring Boot testing knowledge?
-- How confident are you deploying on a Friday afternoon (0 to 10)?
+<!--
+Notes:
+- Menti: please answer the first three questions.
+- Who wrote your tests last week? How would you rate your Spring Boot testing knowledge? How confident are you deploying on a Friday afternoon (0 to 10)?
+-->
 
 ---
 
@@ -506,6 +506,3 @@ Join my **Spring Boot Testing Newsletter** for best practices, recipes and quick
 
 ![h:260 center](../../shared/assets/newsletter-signup-qr.png)
 
-Reach out any time
-- [LinkedIn](https://www.linkedin.com/in/rieckpil) (Philip Riecks)
-- [Mail](mailto:philip@pragmatech.digital) (philip@pragmatech.digital)
