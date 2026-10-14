@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The Need for Speed scenes</title>
+<link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --ink:#0f172a; --muted:#64748b; --accent:#0284c7; --red:#e11d48; --green:#00a34a; --gold:#e0a100; --border:#cbd5e1; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: transparent; font-family: 'Inter', system-ui, sans-serif; }
+  .scene { display: none; position: relative; width: 1600px; background: transparent; }
+  .scene.on { display: block; }
+  svg { display: block; }
+  .hand { font-family: 'Architects Daughter', cursive; }
+</style>
+</head>
+<body>
+
+<!-- Treasure map: the hidden gem is buried under a pile of testing topics -->
+<div id="treasure" class="scene" style="height:800px">
+<svg viewBox="0 0 1600 800" width="1600" height="800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="rough"><feTurbulence baseFrequency="0.02" numOctaves="2" seed="4"/><feDisplacementMap in="SourceGraphic" scale="6"/></filter>
+    <linearGradient id="gem" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7dd3fc"/><stop offset="1" stop-color="#0284c7"/></linearGradient>
+  </defs>
+  <!-- parchment -->
+  <g filter="url(#rough)">
+    <rect x="40" y="30" width="1520" height="740" rx="30" fill="#fdf3d4" stroke="#b9893a" stroke-width="6"/>
+  </g>
+  <!-- trail -->
+  <path d="M170 640 C 380 560, 420 380, 640 420 S 860 520, 1010 520 S 1230 400, 1360 330"
+        fill="none" stroke="#7c5a1e" stroke-width="6" stroke-dasharray="4 20" stroke-linecap="round"/>
+  <!-- stops along the path -->
+  <g class="hand" font-size="30" fill="#5b4012" text-anchor="middle">
+    <g transform="translate(170 640)"><circle r="16" fill="#7c5a1e"/><text x="-70" y="56" text-anchor="start">Start: @SpringBootTest</text></g>
+    <g transform="translate(640 420)"><circle r="14" fill="#7c5a1e"/><text y="-30">Swamp of @MockitoBean</text></g>
+    <g transform="translate(1010 520)"><circle r="14" fill="#7c5a1e"/><text y="56">Cliffs of @DirtiesContext</text></g>
+  </g>
+  <!-- X marks the spot -->
+  <g transform="translate(1360 330)">
+    <path d="M-34 -34 L34 34 M34 -34 L-34 34" stroke="#e11d48" stroke-width="14" stroke-linecap="round"/>
+  </g>
+  <text class="hand" x="1360" y="410" font-size="34" text-anchor="middle" fill="#5b4012">here be the</text>
+  <text class="hand" x="1360" y="454" font-size="38" text-anchor="middle" fill="#e11d48" font-weight="700">TestContext cache</text>
+  <!-- chest -->
+  <g transform="translate(1200 90)">
+    <rect x="0" y="70" width="190" height="100" rx="10" fill="#8b5a1b" stroke="#4a2f0b" stroke-width="6"/>
+    <path d="M0 80 Q95 -10 190 80 Z" fill="#a8701f" stroke="#4a2f0b" stroke-width="6"/>
+    <rect x="80" y="82" width="30" height="40" rx="6" fill="#e0a100" stroke="#4a2f0b" stroke-width="4"/>
+    <polygon points="95,20 125,45 95,75 65,45" fill="url(#gem)" stroke="#075985" stroke-width="4"/>
+  </g>
+  <!-- compass -->
+  <g transform="translate(180 150)" class="hand">
+    <circle r="62" fill="none" stroke="#7c5a1e" stroke-width="5"/>
+    <polygon points="0,-52 12,0 0,52 -12,0" fill="#e11d48" opacity="0.85"/>
+    <text y="-72" font-size="30" text-anchor="middle" fill="#5b4012">N</text>
+  </g>
+</svg>
+</div>
+
+<!-- Build time grows linearly with the number of tests when every test starts a context -->
+<div id="linear" class="scene" style="height:720px">
+<svg viewBox="0 0 1600 720" width="1600" height="720" xmlns="http://www.w3.org/2000/svg">
+  <g id="chart"></g>
+</svg>
+</div>
+
+<!-- Treasure chest with the gem, used on the "something else" box -->
+<div id="chest" class="scene" style="height:300px;width:340px">
+<svg viewBox="0 0 340 300" width="340" height="300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gem2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7dd3fc"/><stop offset="1" stop-color="#0284c7"/></linearGradient>
+  </defs>
+  <g transform="translate(20 40) scale(1.4)">
+    <rect x="0" y="70" width="190" height="100" rx="10" fill="#8b5a1b" stroke="#4a2f0b" stroke-width="6"/>
+    <path d="M0 80 Q95 -10 190 80 Z" fill="#a8701f" stroke="#4a2f0b" stroke-width="6"/>
+    <rect x="80" y="82" width="30" height="40" rx="6" fill="#e0a100" stroke="#4a2f0b" stroke-width="4"/>
+    <polygon points="95,10 130,42 95,80 60,42" fill="url(#gem2)" stroke="#075985" stroke-width="4"/>
+  </g>
+</svg>
+</div>
+
+<!-- Germany map with the headline "Germany" instead of "Where I am from" -->
+<div id="germany" class="scene" style="width:840px;height:1440px;background:#fff">
+  <img src="../../../shared/assets/germany-herzogenaurach-munich.png" width="840" height="1440" style="position:absolute;left:0;top:0" alt="">
+  <div style="position:absolute;left:0;top:20px;width:840px;height:150px;background:#fff"></div>
+  <div class="hand" style="position:absolute;left:0;top:30px;width:840px;text-align:center;font-size:92px;line-height:1.2;color:#0f172a">Germany</div>
+</div>
+
+<!-- Context visuals: dots are beans, colors are layers. Sliced context is small, full context is big -->
+<div id="ctx" class="scene" style="width:640px;height:470px">
+  <svg id="ctxsvg" viewBox="0 0 640 470" width="640" height="470" xmlns="http://www.w3.org/2000/svg"></svg>
+</div>
+
+<script>
+const params = new URLSearchParams(location.search);
+const scene = params.get('scene') || 'treasure';
+const cached = scene === 'linear-cached';
+document.getElementById(['treasure', 'chest', 'germany'].includes(scene) ? scene : scene.startsWith('ctx') ? 'ctx' : 'linear').classList.add('on');
+
+if (scene.startsWith('linear')) {
+  const ns = 'http://www.w3.org/2000/svg';
+  const g = document.getElementById('chart');
+  const add = (tag, attrs, text) => {
+    const el = document.createElementNS(ns, tag);
+    for (const [k, v] of Object.entries(attrs)) el.setAttribute(k, v);
+    if (text) el.textContent = text;
+    g.appendChild(el);
+    return el;
+  };
+  const x0 = 310, y0 = 560, w = 1240, h = 470;
+  const maxTests = 16, maxMinutes = 20;
+  const px = (tests) => x0 + (tests / maxTests) * w;
+  const py = (minutes) => y0 - (minutes / maxMinutes) * h;
+  const font = { 'font-family': 'Architects Daughter', fill: '#0f172a' };
+  // axes
+  add('path', { d: `M${x0} ${y0 - h} V${y0} H${x0 + w}`, fill: 'none', stroke: '#0f172a', 'stroke-width': 6, 'stroke-linecap': 'round' });
+  // ticks: 5, 10, 15, 20 min and 1, 5, 10, 15 tests
+  for (const minutes of [5, 10, 15, 20]) {
+    add('line', { x1: x0 - 12, y1: py(minutes), x2: x0, y2: py(minutes), stroke: '#0f172a', 'stroke-width': 4 });
+    add('line', { x1: x0, y1: py(minutes), x2: x0 + w, y2: py(minutes), stroke: '#cbd5e1', 'stroke-width': 2, 'stroke-dasharray': '6 10' });
+    add('text', { x: x0 - 24, y: py(minutes) + 15, 'text-anchor': 'end', 'font-size': 46, ...font }, `${minutes} min`);
+  }
+  for (const tests of [1, 5, 10, 15]) {
+    add('line', { x1: px(tests), y1: y0, x2: px(tests), y2: y0 + 12, stroke: '#0f172a', 'stroke-width': 4 });
+    add('text', { x: px(tests), y: y0 + 62, 'text-anchor': 'middle', 'font-size': 46, ...font }, `${tests}`);
+  }
+  add('text', { x: x0 + w / 2, y: y0 + 140, 'text-anchor': 'middle', 'font-size': 50, ...font }, 'test classes with their own context');
+  add('text', { transform: `translate(60 ${y0 - h / 2}) rotate(-90)`, 'text-anchor': 'middle', 'font-size': 50, ...font }, 'build time');
+  // linear: every test class pays about 1.2 min for a context start
+  const start = [px(0), py(0)];
+  const end = [px(16), py(19.2)];
+  add('line', { x1: start[0], y1: start[1], x2: end[0], y2: end[1], stroke: '#e11d48', 'stroke-width': 10, 'stroke-linecap': 'round' });
+  // label parallel to the line, sitting just above it
+  const angle = Math.atan2(end[1] - start[1], end[0] - start[0]) * 180 / Math.PI;
+  const labelAt = [start[0] + (end[0] - start[0]) * 0.62, start[1] + (end[1] - start[1]) * 0.62];
+  add('text', { transform: `translate(${labelAt[0]} ${labelAt[1]}) rotate(${angle}) translate(0 -26)`, 'text-anchor': 'middle', 'font-size': 54, 'font-family': 'Architects Daughter', fill: '#e11d48' }, 'every class starts a context');
+  if (cached) {
+    // with caching: pay once (about 5 min), then almost flat
+    const cacheEnd = [px(16), py(6.6)];
+    add('path', { d: `M${px(0)} ${py(0)} L${px(1)} ${py(5)} L${cacheEnd[0]} ${cacheEnd[1]}`, fill: 'none', stroke: '#00a34a', 'stroke-width': 10, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' });
+    add('text', { x: cacheEnd[0] - 20, y: cacheEnd[1] + 70, 'text-anchor': 'end', 'font-size': 52, 'font-family': 'Architects Daughter', fill: '#00a34a' }, 'context cache: pay once, reuse');
+  }
+}
+
+if (scene.startsWith('ctx')) {
+  const ns = 'http://www.w3.org/2000/svg';
+  const svg = document.getElementById('ctxsvg');
+  const add = (tag, attrs, text) => {
+    const el = document.createElementNS(ns, tag);
+    for (const [k, v] of Object.entries(attrs)) el.setAttribute(k, v);
+    if (text) el.textContent = text;
+    svg.appendChild(el);
+    return el;
+  };
+  const rng = (seed) => () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+  const colors = { web: '#0284c7', service: '#e0a100', data: '#00a34a', config: '#7c3aed', infra: '#e11d48' };
+  const full = scene === 'ctx-full';
+  // circle geometry: the sliced context is small, the full context is big
+  const circle = full ? { cx: 320, cy: 268, r: 146 } : { cx: 320, cy: 290, r: 88 };
+  const palette = full ? ['web', 'web', 'service', 'service', 'data', 'data', 'config', 'infra'] : ['web'];
+  const count = full ? 44 : 6;
+  const random = rng(full ? 11 : 5);
+  add('circle', { cx: circle.cx, cy: circle.cy, r: circle.r, fill: full ? '#eaf4fb' : '#f3f8fc', stroke: '#0f172a', 'stroke-width': 5 });
+  const placed = [];
+  let guard = 0;
+  while (placed.length < count && guard++ < 8000) {
+    const r = full ? 10 + random() * 8 : 12 + random() * 7;
+    const angle = random() * Math.PI * 2;
+    const distance = Math.sqrt(random()) * (circle.r - r - 14);
+    const cx = circle.cx + Math.cos(angle) * distance;
+    const cy = circle.cy + Math.sin(angle) * distance;
+    if (placed.some(p => Math.hypot(p.cx - cx, p.cy - cy) < p.r + r + 7)) continue;
+    placed.push({ cx, cy, r });
+    const layer = palette[Math.floor(random() * palette.length)];
+    add('circle', { cx, cy, r, fill: colors[layer], opacity: 0.9 });
+  }
+  const label = full ? 'context #2' : 'context #1';
+  const contextId = full ? '4b82e60d' : '9f3c1a7e';
+  const top = circle.cy - circle.r;
+  add('text', { x: circle.cx, y: top - 52, 'text-anchor': 'middle', 'font-size': 40, 'font-family': 'Architects Daughter', fill: '#0f172a' }, label);
+  add('text', { x: circle.cx, y: top - 16, 'text-anchor': 'middle', 'font-size': 30, 'font-family': 'JetBrains Mono, ui-monospace, monospace', fill: '#e11d48' }, `ID: ${contextId}`);
+  add('text', { x: circle.cx, y: circle.cy + circle.r + 40, 'text-anchor': 'middle', 'font-size': 32, 'font-family': 'Architects Daughter', fill: '#64748b' }, full ? 'whole application' : 'web layer only');
+}
+window.__rendered = true;
+document.fonts.ready.then(() => { window.__rendered = true; });
+</script>
+</body>
+</html>

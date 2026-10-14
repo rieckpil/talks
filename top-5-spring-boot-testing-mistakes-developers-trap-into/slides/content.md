@@ -4,26 +4,17 @@ theme: pragmatech
 class: light
 paginate: true
 transition: pt-fade
-header: 'Top 5 Spring Boot Testing Mistakes Developers Trap Into @ Tech Talks South Tyrol #14 · September 8, 2026'
+header: 'Top 5 Spring Boot Testing Mistakes Developers Trap Into - JavaCro 2026'
 footer: '![](../../shared/assets/logo.webp) Philip Riecks · [PragmaTech GmbH](https://pragmatech.digital/) · [@rieckpil](https://x.com/rieckpil)'
 ---
 
 <!--
-Menti: https://www.menti.com/albx4ndyi8ni
+Menti QR: shared/assets/mentimeter-javacro-2026-second-talk.png
 -->
 
 <!-- _paginate: false -->
 <!-- _header: '' -->
 <!-- _footer: '' -->
-
-<!--
-Notes:
-- Opener: Bozen, the town of this talk. Warm welcome before the title slide.
--->
-
-![bg](../../shared/assets/bolzano-town.jpg)
-
----
 
 <!-- _class: light title -->
 <!-- _paginate: false -->
@@ -35,35 +26,32 @@ Notes:
 
 ## Your tests are green. But do you feel confident deploying?
 
-Tech Talks South Tyrol #14 · September 8, 2026
+JavaCro 2026 · October 13, 2026
 
 ---
 
 <!-- footer: '![](../../shared/assets/logo.webp)' -->
 
-![bg h:500 right:33%](../../shared/assets/philip-in-erlangen-map.jpg)
+![bg right:33% fit](../../shared/assets/the-need-for-speed/germany-map.png)
 
 ### About Philip
 
-- Software Engineer from Erlangen (Bolzano's partner town since 2018), Germany (Bavaria) 🍻
+- Software Engineer from Herzogenaurach (HQ of adidas & Puma), Germany 🍻
 - Blogging & content creation with a focus on testing Java and specifically Spring Boot applications 🍃
 - Founder of [PragmaTech GmbH](https://pragmatech.digital/) - **Enabling Developers to Frequently Deliver** Software with **More Confidence**
-- Worked together with Alex & Martin from AboutBits last year
 
 ---
 
 
-## Participate During the Talk
+## Getting to Know You Better
 
-Go to [menti.com](https://www.menti.com/) and use the code **2636 4022** to **anonymously** submit answers:
+![center h:400](../../shared/assets/mentimeter-javacro-2026-second-talk-padded.png)
 
-![center h:250](../../shared/assets/mentimeter-bozen.png)
-
-Please answer the **first three questions**:
-
-- Who wrote your tests last week?
-- How would you rate your Spring Boot testing knowledge?
-- How confident are you deploying on a Friday afternoon (0 to 10)?
+<!--
+Notes:
+- Menti: please answer the first three questions.
+- Who wrote your tests last week? How would you rate your Spring Boot testing knowledge? How confident are you deploying on a Friday afternoon (0 to 10)?
+-->
 
 ---
 
@@ -83,10 +71,28 @@ Please answer the **first three questions**:
 
 ---
 
-![center h:500](../../shared/assets/ai-frog-meme.jpg)
+<!-- _class: light reveal -->
+
+<style scoped>
+section > p, section > ul, section > ul > li, section > ul > li > p { margin: 0 !important; padding: 0 !important; text-align: center; }
+section img { display: block; margin: 0 auto; }
+</style>
+
+![w:420](../../shared/assets/ai-frog-meme-01.jpg)
+
+* ![w:420](../../shared/assets/ai-frog-meme-02.jpg)
+* ![w:420](../../shared/assets/ai-frog-meme-03.jpg)
+* ![w:420](../../shared/assets/ai-frog-meme-04.jpg)
+
+<!--
+Notes:
+- Three clicks: Frog's plan, Toad's objection, "That is true," said Frog.
+- Image is cut into four strips (shared/assets/ai-frog-meme-0N.jpg), PDF shows all at once.
+-->
 
 ---
 
+<!-- _class: light reveal -->
 <!-- _paginate: false -->
 
 
@@ -94,11 +100,9 @@ Please answer the **first three questions**:
 
 ### My Overall Northstar for Engineering Excellence
 
-Imagine seeing this pull request on a Friday afternoon:
-
-![](../../shared/assets/northstar-pr.png)
-
-How confident are you to merge this major Spring Boot upgrade and deploy it to production once the pipeline turns green?
+* Imagine seeing this pull request on a Friday afternoon:
+* ![](../../shared/assets/northstar-pr.png)
+* How confident are you to merge this major Spring Boot upgrade and deploy it to production once the pipeline turns green?
 
 ---
 
@@ -155,6 +159,18 @@ Notes:
 
 ---
 
+## A Decision Tree for Your Spring Test
+
+![center h:500](../../shared/assets/test-choice.png)
+
+<!--
+Notes:
+- Two questions: does the test need a Spring ApplicationContext at all? Do we start all of it?
+- No context: plain JUnit and Mockito, milliseconds. With a context: seconds. Sliced context for the layer under test, full context for the entire application.
+-->
+
+---
+
 ## Decision Paralysis: When to Include a Context
 
 A simplified decision table:
@@ -198,6 +214,67 @@ Notes:
 Results from one of our clients:
 
 ![center](../../shared/assets/context-cache-improvements.png)
+
+---
+
+<!-- _class: light -->
+
+<style scoped>
+.row { display: grid; grid-template-columns: 1.25fr 0.32fr 0.85fr; gap: 12px; align-items: start; margin-top: 0; }
+.row p { margin: 0; text-align: center; }
+.row pre { margin: 0; }
+.row + .row { margin-top: 44px; }
+.row img { margin-top: -26px; }
+.row .arrow {
+  position: relative; align-self: center; justify-self: stretch; margin: 0.5em 14px 0 8px;
+  height: 0; border-top: 5px solid var(--pt-link); font-size: 0; color: transparent; transform: none;
+}
+.row .arrow::after {
+  content: ''; position: absolute; right: -4px; top: -12px;
+  border-left: 18px solid var(--pt-link); border-top: 9.5px solid transparent; border-bottom: 9.5px solid transparent;
+}
+</style>
+
+## Each Test Requires a Different Context
+
+<div class="row">
+
+```java
+@WebMvcTest(BookController.class)
+class BookControllerIT {
+  @MockitoBean BookService bookService;
+  // ...
+}
+```
+
+<div class="arrow">→</div>
+
+![h:205](../../shared/assets/the-need-for-speed/context-sliced.png)
+
+</div>
+
+<div class="row">
+
+```java
+@SpringBootTest(webEnvironment = RANDOM_PORT)
+class BookApiIT {
+  @Autowired TestRestTemplate template;
+  // ...
+}
+```
+
+<div class="arrow">→</div>
+
+![h:205](../../shared/assets/the-need-for-speed/context-full.png)
+
+</div>
+
+<!--
+Notes:
+- Both tests need an ApplicationContext, but not the same one.
+- The slice starts only the web layer. @SpringBootTest starts the whole application.
+- Different configuration, different cache key, two context starts.
+-->
 
 ---
 
@@ -485,6 +562,25 @@ Notes:
 
 ---
 
+<!-- _class: light -->
+<!-- _paginate: false -->
+<!-- _header: '' -->
+<!-- _footer: '' -->
+
+<style scoped>
+section { padding: 0; }
+section img { display: block; margin: -36px auto 0; height: 720px; }
+</style>
+
+![h:720](../../shared/assets/sessionize-feedback-javacro-2026-top-5-talk.png)
+
+<!--
+Notes:
+- Feedback via Sessionize QR. Full screen, leave it up for a moment before the last slide.
+-->
+
+---
+
 <!-- _class: light closing -->
 <!-- _paginate: false -->
 <!-- _header: '' -->
@@ -493,10 +589,7 @@ Notes:
 
 # Joyful Testing!
 
-Get the slides here:
+Join my **Spring Boot Testing Newsletter** for best practices, recipes and quick wins in your inbox: **rieckpil.de/newsletter**
 
-![h:260 center](../../shared/assets/slides-pdf-bozen.png)
+![h:260 center](../../shared/assets/newsletter-signup-qr.png)
 
-Reach out any time
-- [LinkedIn](https://www.linkedin.com/in/rieckpil) (Philip Riecks)
-- [Mail](mailto:philip@pragmatech.digital) (philip@pragmatech.digital)

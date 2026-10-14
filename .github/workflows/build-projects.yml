@@ -17,6 +17,8 @@ jobs:
             java: 21
           - talks: prompt-it-right
             java: 25
+          - talks: the-need-for-speed
+            java: 25
     runs-on: ubuntu-latest
     name: Build the Maven project ${{ matrix.talks }}
     steps:
