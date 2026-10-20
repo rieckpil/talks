@@ -1,15 +1,16 @@
 ---
 marp: true
+title: Testing Spring Boot Applications Demystified - Java Guild@Elia
 theme: pragmatech
 class: light
 paginate: true
 transition: pt-fade
-header: 'Testing Spring Boot Applications Demystified @ JUG Nürnberg 10.09.2026'
+header: 'Testing Spring Boot Applications Demystified - Java Guild@Elia 20.10.2026'
 footer: '![](../../shared/assets/logo.webp) Philip Riecks · [PragmaTech GmbH](https://pragmatech.digital/) · [@rieckpil](https://x.com/rieckpil)'
 ---
 
 <!--
-Menti: https://www.menti.com/ - code 3982 6427
+Menti: https://www.menti.com/ - code 7854 5371
 -->
 
 <!-- _paginate: false -->
@@ -17,7 +18,7 @@ Menti: https://www.menti.com/ - code 3982 6427
 <!-- _footer: '' -->
 
 <!-- ![bg](../../shared/assets/tsbad-beginning.png) -->
-![bg](../../shared/assets/jug-nuremberg.jpg)
+![bg](../../shared/assets/tsbad-beginning.png)
 
 ---
 
@@ -36,13 +37,13 @@ Notes:
 
 ## The Hero's Journey Through the Spring Boot Testing Labyrinth
 
-Java User Group Nürnberg · September 10, 2026
+Java Guild@Elia · October 20, 2026
 
 ---
 
 <!-- footer: '![](../../shared/assets/logo.webp)' -->
 
-![bg right:33% h:750](../../shared/assets/hza.jpg)
+![bg right:33% fit](../../shared/assets/the-need-for-speed/germany-map.png)
 
 ### About Philip
 
@@ -54,19 +55,16 @@ Java User Group Nürnberg · September 10, 2026
 
 ## Participate During the Talk
 
-Go to [menti.com](https://www.menti.com/) and use the code **3982 6427** to **anonymously** submit answers for the quizzes and add your questions during the talk.
+Go to [menti.com](https://www.menti.com/) and use the code **7854 5371** to **anonymously** submit answers for the quizzes and add your questions during the talk.
 
-![h:200 center](../../shared/assets/mentimeter-jug-nuremberg.png)
+![h:200 center](../../shared/assets/mentimeter-elia-group-2026.png)
 
 
-Please answer the **first three questions**:
-- Who wrote your tests this week?
-- How would you rate your Spring Boot testing knowledge?
-- How confident are you deploying on a Friday afternoon?
+Please answer the questions, we'll wait a bit to continue.
 
 ---
 
-<!-- header: 'Testing Spring Boot Applications Demystified  @ JUG Nürnberg 10.09.2026 - Questions @ menti.com Code: <strong>3982 6427</strong>' -->
+<!-- header: 'Testing Spring Boot Applications Demystified - Java Guild@Elia 20.10.2026' -->
 <!-- _paginate: false -->
 
 ![bg right:33%](../../shared/assets/why-test-software.jpg)
@@ -82,7 +80,16 @@ Please answer the **first three questions**:
 
 ---
 
-![center h:500](../../shared/assets/ai-frog-meme.jpg)
+<!-- _class: light reveal -->
+
+![bg right:33%](../../shared/assets/ai-image.jpg)
+
+## Agentic Development Today
+
+* AI makes software faster to create and harder to trust.
+* AI made writing code cheap. Verifying it is the new bottleneck.
+* AI adoption correlates with increased throughput and decreased stability.
+* AI generates the logic, but you inherit the **liability**. It can write the function; it won't join the post-mortem.
 
 ---
 
@@ -1474,12 +1481,6 @@ public Long registerUser(int age, String username) {
 
 ---
 
-## Upcoming Online Course
-
-![center h:500 ](../../shared/assets/agentic-testing-course.png)
-
----
-
 ## Optimizing AI-written Tests with Skills
 
 
@@ -1498,18 +1499,27 @@ Get a **skillset** for fast & comprehensive tests, including a **test strategy**
 
 Each skill includes rules, references, best-practices and antipatterns described as code and text.
 
+---
+
+## What Is a Skill? Example: `unit-testing`
+
+```text
+.claude/skills/unit-testing/
+├── SKILL.md                 name, description and the core workflow
+├── testing-standards.md     naming, AssertJ, Arrange-Act-Assert
+├── mocking-guidelines.md    when to mock and when not to
+├── antipatterns.md          bad vs. good test examples
+└── examples/
+    └── OrderServiceTest.java
+```
+
+- `SKILL.md` has a short **description**, so the agent knows **when** to load the skill
+- The other files are read **on demand**, so the context window stays small
+- It is just **Markdown and code** in your repository - versioned, reviewed and shared like any other file
+
 
 ---
 
-
-## Let's Finalize the Menti Survey
-
-Go to [menti.com](https://www.menti.com/) and use the code **3982 6427** to finalize the poll and add your questions for the Q&A.
-
-![h:250 center](../../shared/assets/mentimeter-jug-nuremberg.png)
-
-
----
 
 [//]: # (![]&#40;../../shared/assets/pragmatech-main-offering.png&#41;)
 
@@ -1563,7 +1573,3 @@ Go to [menti.com](https://www.menti.com/) and use the code **3982 6427** to fina
 Get your Spring Boot Testing eBook (120+ pages):
 
 ![h:260 center](../../shared/assets/newsletter-signup-qr.png)
-
-Reach out any time
-- [LinkedIn](https://www.linkedin.com/in/rieckpil) (Philip Riecks)
-- [Mail](mailto:philip@pragmatech.digital) (philip@pragmatech.digital)
