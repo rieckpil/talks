@@ -80,14 +80,16 @@ Please answer the questions, we'll wait a bit to continue.
 
 ---
 
+<!-- _class: light reveal -->
+
 ![bg right:33%](../../shared/assets/ai-image.jpg)
 
 ## Agentic Development Today
 
-- AI makes software faster to create and harder to trust.
-- AI made writing code cheap. Verifying it is the new bottleneck.
-- AI adoption correlates with increased throughput and decreased stability.
-- AI generates the logic, but you inherit the **liability**. It can write the function; it won't join the post-mortem.
+* AI makes software faster to create and harder to trust.
+* AI made writing code cheap. Verifying it is the new bottleneck.
+* AI adoption correlates with increased throughput and decreased stability.
+* AI generates the logic, but you inherit the **liability**. It can write the function; it won't join the post-mortem.
 
 ---
 
