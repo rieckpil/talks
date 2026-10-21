@@ -30,6 +30,38 @@ Create a new development environment via [GitHub Codespaces](https://codespaces.
 
 Don't forget to [shut down the codespace](https://github.com/codespaces) afterward to avoid costs (check your usage [here](https://github.com/settings/billing/summary)).
 
+## Prompt It Right: Spring Boot Testing in the AI Era
+
+**Talk description**: Workshop-style talk (180 min including a 30 min break). Part 1 is a crash course on Spring Boot testing. Part 2 explains why a fast, complete test suite is the key for agentic development. Part 3 shows how to structure testing skills, use MCP servers and keep the pipeline fast.
+
+- [Source Code](prompt-it-right/)
+- Slides: [Devoxx Belgium 2026](prompt-it-right/slides/slides-devoxx-be-2026-10-05.pdf)
+- Recordings: none
+
+## Ship Fast, Sleep Well: Fearless Spring Boot Deployments in the AI Era
+
+**Talk description**: Push to production on Friday 16:00 and still sleep well. This talk covers a first-class test suite, feature flags, runbooks, monitoring and alerts for Spring Boot applications.
+
+- [Source Code](ship-fast-sleep-well/)
+- Slides: [DATEV Coding Festival 2026](ship-fast-sleep-well/slides/DATEV-Coding-Festival-2026.pdf)
+- Recordings: none
+
+## The Need for Speed: Cut Your Spring Boot Build Times by 70%
+
+**Talk description**: Your Spring Boot test suite is a time thief. Every context reload, every unnecessary restart and every `@DirtiesContext` annotation steals minutes from your development flow. This session shows how Spring's TestContext caching works, which silent performance killers slow down your test suite, and which strategies bring the biggest speed improvements - no new frameworks, no rewrites, just smarter testing.
+
+- [Source Code](the-need-for-speed/)
+- Slides: [JavaCro 2026](the-need-for-speed/slides/need-for-speed-javacro-2026.pdf)
+- Recordings: none
+
+## Top 5 Spring Boot Testing Mistakes Developers Trap Into
+
+**Talk description**: Your Spring Boot tests are passing, but can you trust them? This session reveals five critical mistakes that silently undermine your test suite's reliability: the golden hammer `@SpringBootTest`, the context tax, the production parity trap, the phantom commit and the green lie. Each pitfall comes with practical solutions and alternatives.
+
+- [Source Code](top-5-spring-boot-testing-mistakes-developers-trap-into/)
+- Slides: [JavaCro 2026](top-5-spring-boot-testing-mistakes-developers-trap-into/slides/slides-javacro-2026-10-13.pdf), [Bozen 2026](top-5-spring-boot-testing-mistakes-developers-trap-into/slides/slides-bozen-2026-09-08.pdf)
+- Recordings: none
+
 ## Testing Spring Boot Applications Demystified
 
 <p align="center">
