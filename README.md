@@ -60,7 +60,7 @@ Through hands-on examples, you'll discover why `@MockBean` might be your worst e
 Stop accepting slow tests as "just the way it is." Leave with a concrete action plan to accelerate your test suite today - no new frameworks, no rewrites, just smarter testing.
 
 - [Source Code](the-need-for-speed/)
-- Slides: [JavaCro 2026](the-need-for-speed/slides/need-for-speed-javacro-2026.pdf)
+- Slides: [TestCon Europe 2026](the-need-for-speed/slides/need-for-speed-testcon-europe-2026.pdf), [JavaCro 2026](the-need-for-speed/slides/need-for-speed-javacro-2026.pdf)
 - Recordings: none
 
 ## Top 5 Spring Boot Testing Mistakes Developers Trap Into

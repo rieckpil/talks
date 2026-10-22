@@ -1,20 +1,20 @@
 ---
 marp: true
 theme: pragmatech
-title: 'The Need for Speed: Cut Your Spring Boot Build Times by 70%'
+title: 'The Need for Speed: Cut Your Spring Boot Test Suite Duration by 70%'
 class: light
 paginate: true
 transition: pt-fade
-header: 'The Need for Speed: Cut Your Spring Boot Build Times by 70% - JavaCro 2026'
+header: 'The Need for Speed: Cut Your Spring Boot Test Suite Duration by 70% - TestCon Europe 2026'
 footer: '![](../../shared/assets/logo.webp) Philip Riecks · [@rieckpil](https://x.com/rieckpil) · [PragmaTech GmbH](https://pragmatech.digital/)'
 ---
 
-<!-- Menti: https://www.menti.com/alduhjtw1r39 -->
+<!-- Menti code: 4758 4332 -->
 <!-- _paginate: false -->
 <!-- _header: '' -->
 <!-- _footer: '' -->
 
-![bg](../../shared/assets/the-need-for-speed/banner.jpg)
+![bg](../../shared/assets/vilnius.jpg)
 
 ---
 
@@ -24,11 +24,11 @@ footer: '![](../../shared/assets/logo.webp) Philip Riecks · [@rieckpil](https:/
 
 ![bg left:33%](../../shared/assets/the-need-for-speed/speedometer.jpg)
 
-# The Need for **Speed**: Cut Your Spring Boot Build Times by 70%
+# The Need for **Speed**: Cut Your Spring Boot Test Suite Duration by 70%
 
 ## The hidden gem of Spring Test to unlock blazing fast feedback
 
-JavaCro 2026 · October 13, 2026
+TestCon Europe 2026 · October 22, 2026
 
 <!--
 Notes:
@@ -39,11 +39,22 @@ Notes:
 
 ## Let's See Who Has the Fastest Build
 
-![center h:520](../../shared/assets/mentimeter-javacro-2026-first-talk-padded.png)
+![center h:400](../../shared/assets/mentimeter-test-con-2026-speed-padded.png)
+
+<style scoped>
+.menti { display: flex; justify-content: center; align-items: center; gap: 28px; margin-top: 20px; font-size: 1.3em; }
+.menti .step { color: var(--pt-muted); }
+.menti .code { font-weight: 700; letter-spacing: 0.12em; padding: 0.1em 0.6em; border-radius: 12px; background: var(--pt-surface); color: var(--pt-link); border: 2px solid var(--pt-link); }
+</style>
+
+<div class="menti">
+  <span class="step">📱 Scan the QR code or go to <strong>menti.com</strong> and enter</span>
+  <span class="code">4758 4332</span>
+</div>
 
 <!--
 Notes:
-- QR leads to https://www.menti.com/alduhjtw1r39 (shared/assets/mentimeter-javacro-2026-first-talk.png).
+- QR leads to Menti.com, code 4758 4332 (shared/assets/mentimeter-test-con-2026-speed.png).
 - The room is long: keep the QR big and centered, give people a moment before moving on.
 - Menti questions: Who writes Spring Boot apps? How long does your build take? Do you know Spring's context caching?
 -->
@@ -81,7 +92,14 @@ Notes:
 
 ---
 
+<!-- _class: light reveal -->
 <!-- _paginate: false -->
+
+<style scoped>
+section.reveal > ul { list-style: disc; padding-left: 1.2em; }
+section.reveal > ul > li { margin: 0 0 0.4em; }
+section.reveal > ul > li::marker { content: initial; }
+</style>
 
 ![bg right:33%](../../shared/assets/northstar.jpg)
 
@@ -89,9 +107,9 @@ Notes:
 
 **No coverage goal**, but **engineering excellence**:
 
-- **Confidence** in every commit
-- Being able to **deploy fast** anytime
-- **Fast** feedback & **fast** flow
+* **Confidence** in every commit
+* Being able to **deploy fast** anytime
+* **Fast** feedback & **fast** flow
 
 <!--
 Notes:
@@ -227,6 +245,10 @@ Notes:
 ---
 
 ## The Culprit: Every Test Starts a Context
+
+<style scoped>
+pre .highlighted-line > * { background-color: rgba(255, 221, 0, 0.35); }
+</style>
 
 ```text {17}
   .   ____          _            __ _ _
@@ -534,25 +556,18 @@ An [open-source Spring Test utility](https://github.com/PragmaTech-GmbH/spring-t
 <dependency>
   <groupId>digital.pragmatech.testing</groupId>
   <artifactId>spring-test-profiler</artifactId>
-  <version>0.3.1</version>
+  <version>0.4.0</version>
   <scope>test</scope>
 </dependency>
 ```
 
 ---
 
-## Activate It
+## Nothing to Activate
 
-`src/test/resources/META-INF/spring.factories`:
+**No setup needed**: just drop the dependency and run your build.
 
-```properties
-org.springframework.test.context.TestExecutionListener=\
-digital.pragmatech.testing.SpringTestProfilerListener
-org.springframework.context.ApplicationContextInitializer=\
-digital.pragmatech.testing.diagnostic.ContextDiagnosticApplicationInitializer
-```
-
-Run the tests, open the report:
+Then open the report:
 
 ```bash
 ./mvnw verify
@@ -648,7 +663,7 @@ Point the skill to your `AbstractIntegrationTest` and name the antipatterns.
 ```json {7}
 {
   "schemaVersion": 1,
-  "profilerVersion": "0.3.1",
+  "profilerVersion": "0.4.0",
   "generatedAt": "2026-10-12T12:57:46Z",
   "buildTool": "MAVEN",
   ...
@@ -678,6 +693,34 @@ if [ "$actualContexts" -gt "$expectedContexts" ]; then
   exit 1
 fi
 ```
+
+---
+
+## Upcoming: Guard the Context Count with a Test
+
+The profiler exposes the numbers to your own code (upcoming feature):
+
+```java {5-6}
+public class ContextBudgetListener implements LauncherSessionListener {
+
+  @Override
+  public void launcherSessionClosed(LauncherSession session) {
+    var statistics = SpringTestProfilerListener.getContextCacheStatistics();
+
+    if (statistics.distinctContextsCreated() > 5) {
+      throw new AssertionError("Too many Spring contexts: "
+          + statistics.describeContexts());
+    }
+  }
+}
+```
+
+<!--
+Notes:
+- Upcoming feature, not released yet. API: SpringTestProfilerListener.getContextCacheStatistics() returns ContextCacheStatistics (distinctContextsCreated, contextsCreated, cacheHits, cacheMisses, totalContextCreationTimeMs, contexts, describeContexts).
+- Values are final only after the last test, so use a JUnit LauncherSessionListener, registered in META-INF/services/org.junit.platform.launcher.LauncherSessionListener. An exception fails the build.
+- Source: ~/Development/git/spring-test-profiler, branch feat/context-budget-check, README section "Fail the Build from Inside the Test Run".
+-->
 
 ---
 
@@ -719,26 +762,6 @@ Notes:
 
 ---
 
-<!-- _class: light -->
-<!-- _paginate: false -->
-<!-- _header: '' -->
-<!-- _footer: '' -->
-
-<style scoped>
-section { padding: 0; }
-section img { display: block; margin: -36px auto 0; height: 720px; }
-</style>
-
-![h:720](../../shared/assets/sessionize-feedback-javacro-2026-speed-talk.png)
-
-<!--
-Notes:
-- Feedback via Sessionize: https://sfeedback.com/Xd59D2
-- Full screen, leave it up for a moment before the last slide.
--->
-
----
-
 <!-- _class: light closing -->
 <!-- _paginate: false -->
 <!-- _header: '' -->
@@ -746,7 +769,7 @@ Notes:
 
 ![bg right:33%](../../shared/assets/end.jpg)
 
-# Joyful Testing!
+# Ačiū and Joyful Testing!
 
 Join my **Spring Boot Testing Newsletter** for best practices, recipes and quick wins in your inbox: **rieckpil.de/newsletter**
 
