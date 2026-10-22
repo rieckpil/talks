@@ -5,11 +5,11 @@ title: 'The Need for Speed: Cut Your Spring Boot Test Suite Duration by 70%'
 class: light
 paginate: true
 transition: pt-fade
-header: 'The Need for Speed: Cut Your Spring Boot Test Suite Duration by 70% - TestCon Europe 2026'
+header: 'The Need for Speed: Cut Your Spring Boot Test Suite Duration by 70% - JUG Vilnius 2026'
 footer: '![](../../shared/assets/logo.webp) Philip Riecks · [@rieckpil](https://x.com/rieckpil) · [PragmaTech GmbH](https://pragmatech.digital/)'
 ---
 
-<!-- Menti code: 4758 4332 -->
+<!-- Menti code: 1717 6052 -->
 <!-- _paginate: false -->
 <!-- _header: '' -->
 <!-- _footer: '' -->
@@ -28,7 +28,7 @@ footer: '![](../../shared/assets/logo.webp) Philip Riecks · [@rieckpil](https:/
 
 ## The hidden gem of Spring Test to unlock blazing fast feedback
 
-TestCon Europe 2026 · October 22, 2026
+JUG Vilnius 2026 · October 22, 2026
 
 <!--
 Notes:
@@ -47,13 +47,13 @@ Notes:
 
 <div class="menti-hint">📱 Scan the QR code or go to <strong>menti.com</strong> and enter</div>
 
-<div class="menti-code"><span>4758 4332</span></div>
+<div class="menti-code"><span>1717 6052</span></div>
 
-![center h:360](../../shared/assets/mentimeter-test-con-2026-speed-padded.png)
+![center h:360](../../shared/assets/mentimeter-jug-vilnius-2026-padded.png)
 
 <!--
 Notes:
-- QR leads to Menti.com, code 4758 4332 (shared/assets/mentimeter-test-con-2026-speed.png).
+- QR leads to Menti.com, code 1717 6052 (shared/assets/mentimeter-jug-vilnius-2026.png).
 - The room is long: keep the QR big and centered, give people a moment before moving on.
 - Menti questions: Who writes Spring Boot apps? How long does your build take? Do you know Spring's context caching?
 -->
