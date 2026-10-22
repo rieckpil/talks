@@ -39,18 +39,17 @@ Notes:
 
 ## Let's See Who Has the Fastest Build
 
-![center h:400](../../shared/assets/mentimeter-test-con-2026-speed-padded.png)
-
 <style scoped>
-.menti { display: flex; justify-content: center; align-items: center; gap: 28px; margin-top: 20px; font-size: 1.3em; }
-.menti .step { color: var(--pt-muted); }
-.menti .code { font-weight: 700; letter-spacing: 0.12em; padding: 0.1em 0.6em; border-radius: 12px; background: var(--pt-surface); color: var(--pt-link); border: 2px solid var(--pt-link); }
+.menti-hint { text-align: center; color: var(--pt-muted); font-size: 1.3em; margin: 0 0 8px; }
+.menti-code { text-align: center; margin: 0 0 4px; font-size: 1.3em; }
+.menti-code span { display: inline-block; font-weight: 700; letter-spacing: 0.12em; padding: 0.1em 0.6em; border-radius: 12px; background: var(--pt-surface); color: var(--pt-link); border: 2px solid var(--pt-link); }
 </style>
 
-<div class="menti">
-  <span class="step">📱 Scan the QR code or go to <strong>menti.com</strong> and enter</span>
-  <span class="code">4758 4332</span>
-</div>
+<div class="menti-hint">📱 Scan the QR code or go to <strong>menti.com</strong> and enter</div>
+
+<div class="menti-code"><span>4758 4332</span></div>
+
+![center h:360](../../shared/assets/mentimeter-test-con-2026-speed-padded.png)
 
 <!--
 Notes:
@@ -247,7 +246,7 @@ Notes:
 ## The Culprit: Every Test Starts a Context
 
 <style scoped>
-pre .highlighted-line > * { background-color: rgba(255, 221, 0, 0.35); }
+pre .highlighted-line > * { background-color: rgba(255, 214, 0, 0.75); }
 </style>
 
 ```text {17}
