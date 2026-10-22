@@ -9,19 +9,6 @@ Links:
 - [Twitter](https://twitter.com/rieckpil)
 - Speaker Image Reference: [400x400](/resources/rieckpil-400x400.jpg) or [200x257](/resources/rieckpil-200x257.jpg)
 
-## Slide tooling
-
-All Marp decks share one setup in [`shared/`](shared/): theme (`shared/theme/pragmatech.css`), engine, all images (`shared/assets/`), build scripts and a Remotion project for complex animations. A deck folder only holds its `slides/content.md`, visual sources and PDFs.
-
-```bash
-shared/scripts/new-deck.sh my-talk "My **Talk**" "Event 2027" "March 3, 2027" [banner.jpg]   # new deck
-shared/scripts/build.sh my-talk watch                                                         # live preview
-shared/scripts/sharable-pdf.sh my-talk slides-event-2027-03-03.pdf                            # small PDF
-shared/scripts/compare-pdfs.sh before.pdf after.pdf                                           # pixel diff after theme changes
-```
-
-Rules, layouts, diagrams and animations are documented in the `pragmatech-slides` skill (`.claude/skills/pragmatech-slides/SKILL.md`).
-
 ## Hands-On
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/rieckpil/talks)
@@ -32,7 +19,15 @@ Don't forget to [shut down the codespace](https://github.com/codespaces) afterwa
 
 ## Prompt It Right: Spring Boot Testing in the AI Era
 
-**Talk description**: Workshop-style talk (180 min including a 30 min break). Part 1 is a crash course on Spring Boot testing. Part 2 explains why a fast, complete test suite is the key for agentic development. Part 3 shows how to structure testing skills, use MCP servers and keep the pipeline fast.
+**Talk description**: AI now writes most of your test code, and that changes the skill you need. The bottleneck is no longer typing tests by hand; it's knowing what good tests look like, where each kind belongs, and how to prompt AI to produce them. Without that understanding, you get tests that pass but verify nothing.
+
+This session gives you the full picture of testing Spring Boot applications, so you can direct AI with confidence instead of trusting it blindly.
+
+We'll cover the complete testing pyramid: fast unit tests, sliced tests that load only the part of the context you need, and integration tests that exercise the real thing with Testcontainers. For each level, you'll see when to reach for it, what it actually proves, and how to prompt AI to write it well.
+
+Along the way you'll collect practical patterns and recipes you can apply directly to your own codebase, plus the common pitfalls that produce slow, flaky, or misleading tests. We'll close with quick wins that improve almost any Spring Boot test suite.
+
+Whether you're newer to Spring Boot testing or want to sharpen how you collaborate with AI tools, you'll leave knowing not just how to write tests, but how to judge whether the ones AI hands you are worth keeping.
 
 - [Source Code](prompt-it-right/)
 - Slides: [Devoxx Belgium 2026](prompt-it-right/slides/slides-devoxx-be-2026-10-05.pdf)
@@ -40,7 +35,15 @@ Don't forget to [shut down the codespace](https://github.com/codespaces) afterwa
 
 ## Ship Fast, Sleep Well: Fearless Spring Boot Deployments in the AI Era
 
-**Talk description**: Push to production on Friday 16:00 and still sleep well. This talk covers a first-class test suite, feature flags, runbooks, monitoring and alerts for Spring Boot applications.
+**Talk description**: "Never deploy on Friday" is one of the most popular rules in software development. But if a deployment is too risky for Friday, it's too risky for Tuesday, too.
+
+Fear of deploying is a symptom, not a law of nature. It shows up when changes are large, feedback is slow, and nobody really trusts the test suite. AI-assisted coding makes this worse: we now produce more code faster than ever, while our confidence in it often stays the same. Crossing your fingers doesn't scale.
+
+In this talk, we'll look at what it takes to make deployments boring at any time of day. We'll start with why deploying more often actually reduces risk, then focus on the foundation that makes it possible: a fast, reliable, and comprehensive test suite.
+
+You'll see how to structure tests so they catch real bugs in minutes, how to eliminate flaky tests, and how to measure whether your tests deserve your trust. We'll finish with the safety nets every production deployment needs: feature flags, backward-compatible database migrations, progressive rollouts, and automated rollbacks.
+
+Examples use Java and Spring Boot, but the principles apply to any technology stack. You'll leave with a concrete checklist to bring your team one step closer to a stress-free Friday deploy.
 
 - [Source Code](ship-fast-sleep-well/)
 - Slides: [DATEV Coding Festival 2026](ship-fast-sleep-well/slides/DATEV-Coding-Festival-2026.pdf)
@@ -48,7 +51,13 @@ Don't forget to [shut down the codespace](https://github.com/codespaces) afterwa
 
 ## The Need for Speed: Cut Your Spring Boot Build Times by 70%
 
-**Talk description**: Your Spring Boot test suite is a time thief. Every context reload, every unnecessary restart and every `@DirtiesContext` annotation steals minutes from your development flow. This session shows how Spring's TestContext caching works, which silent performance killers slow down your test suite, and which strategies bring the biggest speed improvements - no new frameworks, no rewrites, just smarter testing.
+**Talk description**: Your Spring Boot test suite is a time thief. Every context reload, every unnecessary restart, every `@DirtiesContext` annotation is stealing precious minutes from your development flow. But what if those 20-minute test runs could shrink to just 6 minutes?
+
+This session reveals the game-changing power of Spring's TestContext caching - a feature hiding in plain sight. We'll dissect how Spring decides to reuse or rebuild application contexts, expose the silent performance killers in your test suite, and demonstrate proven strategies that deliver dramatic speed improvements.
+
+Through hands-on examples, you'll discover why `@MockBean` might be your worst enemy, how test execution order affects performance, and which configuration patterns maximize context reuse. We'll benchmark real applications, showing exactly where those 70% gains come from.
+
+Stop accepting slow tests as "just the way it is." Leave with a concrete action plan to accelerate your test suite today - no new frameworks, no rewrites, just smarter testing.
 
 - [Source Code](the-need-for-speed/)
 - Slides: [JavaCro 2026](the-need-for-speed/slides/need-for-speed-javacro-2026.pdf)
@@ -56,7 +65,15 @@ Don't forget to [shut down the codespace](https://github.com/codespaces) afterwa
 
 ## Top 5 Spring Boot Testing Mistakes Developers Trap Into
 
-**Talk description**: Your Spring Boot tests are passing, but can you trust them? This session reveals five critical mistakes that silently undermine your test suite's reliability: the golden hammer `@SpringBootTest`, the context tax, the production parity trap, the phantom commit and the green lie. Each pitfall comes with practical solutions and alternatives.
+**Talk description**: Your Spring Boot tests are passing, but can you trust them? In recent years, most of your tests aren't written by you - an AI wrote them while you reviewed the diff. That makes testing more important than ever, yet for many teams it remains a neglected afterthought.
+
+This session reveals five mistakes that silently undermine your test suite's reliability and your confidence in deployments. We'll tackle the tough questions: How can 100% coverage still miss critical bugs? Why is your test suite so slow? Why does everything pass on H2 and fail in production?
+
+You'll see real tests that look correct but hide serious flaws: `@SpringBootTest` as the golden hammer, the hidden context tax of careless `@MockBean` usage, in-memory databases that fake production parity, `@Transactional` rollbacks that make commits vanish, and green tests that can never fail. Each pitfall comes with practical fixes: picking the right test slice, reusing the application context, testing against real infrastructure with Testcontainers, and challenging your coverage with mutation testing.
+
+You'll learn to judge tests, whether written by a human or an AI, and ship with certainty instead of hope. Perfect for developers burned by production issues despite "comprehensive" test suites.
+
+Joyful testing awaits!
 
 - [Source Code](top-5-spring-boot-testing-mistakes-developers-trap-into/)
 - Slides: [JavaCro 2026](top-5-spring-boot-testing-mistakes-developers-trap-into/slides/slides-javacro-2026-10-13.pdf), [Bozen 2026](top-5-spring-boot-testing-mistakes-developers-trap-into/slides/slides-bozen-2026-09-08.pdf)
