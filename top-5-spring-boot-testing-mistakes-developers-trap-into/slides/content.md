@@ -4,17 +4,17 @@ theme: pragmatech
 class: light
 paginate: true
 transition: pt-fade
-header: 'Top 5 Spring Boot Testing Mistakes Developers Trap Into - JavaCro 2026'
+header: 'Top 5 Spring Boot Testing Mistakes Developers Trap Into - TestCon Europe 2026'
 footer: '![](../../shared/assets/logo.webp) Philip Riecks · [PragmaTech GmbH](https://pragmatech.digital/) · [@rieckpil](https://x.com/rieckpil)'
 ---
-
-<!--
-Menti QR: shared/assets/mentimeter-javacro-2026-second-talk.png
--->
 
 <!-- _paginate: false -->
 <!-- _header: '' -->
 <!-- _footer: '' -->
+
+![bg](../../shared/assets/vilnius.jpg)
+
+---
 
 <!-- _class: light title -->
 <!-- _paginate: false -->
@@ -26,7 +26,7 @@ Menti QR: shared/assets/mentimeter-javacro-2026-second-talk.png
 
 ## Your tests are green. But do you feel confident deploying?
 
-JavaCro 2026 · October 13, 2026
+TestCon Europe 2026 · October 23, 2026
 
 ---
 
@@ -42,18 +42,6 @@ JavaCro 2026 · October 13, 2026
 
 ---
 
-
-## Getting to Know You Better
-
-![center h:400](../../shared/assets/mentimeter-javacro-2026-second-talk-padded.png)
-
-<!--
-Notes:
-- Menti: please answer the first three questions.
-- Who wrote your tests last week? How would you rate your Spring Boot testing knowledge? How confident are you deploying on a Friday afternoon (0 to 10)?
--->
-
----
 
 <!-- _paginate: false -->
 
@@ -205,15 +193,25 @@ Notes:
 - The tax is invisible, recurring, and everybody hates it.
 -->
 
+<!-- _class: light reveal -->
+
+<style scoped>
+section.reveal > ul { list-style: disc; padding-left: 1.2em; }
+section.reveal > ul > li { margin: 0 0 0.4em; }
+section.reveal > ul > li::marker { content: initial; }
+section.reveal > ul:last-of-type { list-style: none; padding: 0; margin-top: 0.6em; }
+section.reveal > ul:last-of-type > li::marker { content: ''; }
+</style>
+
 ## The No. #1 Spring Test Hidden Gem
 
 - Starting the `ApplicationContext` comes with a cost: test execution time
 - Every context launch (sliced or full) takes multiple seconds
 - Spring Test fixes this with: **TestContext Context Caching**
 
-Results from one of our clients:
+* Results from one of our clients:
 
-![center](../../shared/assets/context-cache-improvements.png)
+  ![center](../../shared/assets/context-cache-improvements.png)
 
 ---
 
@@ -327,17 +325,25 @@ Notes:
 - Second flavor: webEnvironment MOCK looks like HTTP but never touches the servlet container.
 -->
 
+<!-- _class: light reveal -->
+
+<style scoped>
+section.reveal > ul { list-style: disc; padding-left: 1.2em; }
+section.reveal > ul > li { margin: 0 0 0.5em; }
+section.reveal > ul > li::marker { content: initial; }
+</style>
+
 ## Where Tests Drift Away From Production
 
 Every test environment takes shortcuts.
 
 Each one is a small drift - and drifts compound:
 
-- **Database**: in-memory H2 instead of the production engine and version
-- **Servlet container**: `@SpringBootTest` defaults to a **mocked** servlet environment - `webEnvironment = RANDOM_PORT` starts the real one (Tomcat, etc.)
-- **External services**: mocked mail, object storage, message queues, IDPs
-- **Schema**: Hibernate `ddl-auto` in tests, Flyway/Liquibase migrations in production
-- **Environment**: clock, timezone, locale, JVM flags, OS of the CI runner
+* **Database**: in-memory H2 instead of the production engine and version
+* **Servlet container**: `@SpringBootTest` defaults to a **mocked** servlet environment - `webEnvironment = RANDOM_PORT` starts the real one (Tomcat, etc.)
+* **External services**: mocked mail, object storage, message queues, IDPs
+* **Schema**: Hibernate `ddl-auto` in tests, Flyway/Liquibase migrations in production
+* **Environment**: clock, timezone, locale, JVM flags, OS of the CI runner
 
 ---
 
@@ -360,13 +366,20 @@ class OrderRepositoryTest {
 
 ---
 
+<!-- _class: light reveal -->
+
+<style scoped>
+section.reveal > ul { list-style: disc; padding-left: 1.2em; }
+section.reveal > ul > li { margin: 0 0 0.5em; }
+section.reveal > ul > li::marker { content: initial; }
+</style>
+
 ## Disarm It: Close the Gap Step by Step
 
-- **Understand your shortcuts**: know where your test environment drifts from production - and decide which drifts you can live with
-- **Use Testcontainers**: run the real database, pinned to the production version (`postgres:17.2`) - `@ServiceConnection` wires it up; LocalStack, Kafka, Keycloak, and friends run as containers too
-- **Test the app inside Docker**: start the container image you actually ship and run tests against it (JVM flags, base image, OS-level surprises)
-- **Canary-test production continuously**: catch what no test environment can - expired SSL certs, rate limits, lost connectivity to cloud resources
-
+* **Understand your shortcuts**: know where your test environment drifts from production - and decide which drifts you can live with
+* **Use Testcontainers**: run the real database, pinned to the production version (`postgres:17.2`) - `@ServiceConnection` wires it up; LocalStack, Kafka, Keycloak, and friends run as containers too
+* **Test the app inside Docker**: start the container image you actually ship and run tests against it (JVM flags, base image, OS-level surprises)
+* **Canary-test production continuously**: catch what no test environment can - expired SSL certs, rate limits, lost connectivity to cloud resources
 
 ---
 
@@ -431,12 +444,20 @@ void greenButMeaningless() {
 
 ---
 
+<!-- _class: light reveal -->
+
+<style scoped>
+section.reveal > ul { list-style: disc; padding-left: 1.2em; }
+section.reveal > ul > li { margin: 0 0 0.5em; }
+section.reveal > ul > li::marker { content: initial; }
+</style>
+
 ## Be Careful on the Transaction Boundary
 
-- `@Transactional` in a test **rolls back** the transaction : no commit-time constraint checks, no visible change
-- `@TransactionalEventListener(phase = AFTER_COMMIT)` **may not fire** in the test
-- Lazy loading works inside the test transaction and throws `LazyInitializationException` in production
-- The gold standard: `@SpringBootTest(webEnvironment = RANDOM_PORT)` + a real HTTP call - the request runs in its **own transaction**, flushes, commits, and reads real rows
+* `@Transactional` in a test **rolls back** the transaction : no commit-time constraint checks, no visible change
+* `@TransactionalEventListener(phase = AFTER_COMMIT)` **may not fire** in the test
+* Lazy loading works inside the test transaction and throws `LazyInitializationException` in production
+* The gold standard: `@SpringBootTest(webEnvironment = RANDOM_PORT)` + a real HTTP call - the request runs in its **own transaction**, flushes, commits, and reads real rows
 
 ---
 
@@ -562,32 +583,13 @@ Notes:
 
 ---
 
-<!-- _class: light -->
-<!-- _paginate: false -->
-<!-- _header: '' -->
-<!-- _footer: '' -->
-
-<style scoped>
-section { padding: 0; }
-section img { display: block; margin: -36px auto 0; height: 720px; }
-</style>
-
-![h:720](../../shared/assets/sessionize-feedback-javacro-2026-top-5-talk.png)
-
-<!--
-Notes:
-- Feedback via Sessionize QR. Full screen, leave it up for a moment before the last slide.
--->
-
----
-
 <!-- _class: light closing -->
 <!-- _paginate: false -->
 <!-- _header: '' -->
 
 ![bg right:33%](../../shared/assets/end.jpg)
 
-# Joyful Testing!
+# Ačiū and Joyful Testing!
 
 Join my **Spring Boot Testing Newsletter** for best practices, recipes and quick wins in your inbox: **rieckpil.de/newsletter**
 

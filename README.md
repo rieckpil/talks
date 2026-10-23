@@ -60,7 +60,7 @@ Through hands-on examples, you'll discover why `@MockBean` might be your worst e
 Stop accepting slow tests as "just the way it is." Leave with a concrete action plan to accelerate your test suite today - no new frameworks, no rewrites, just smarter testing.
 
 - [Source Code](the-need-for-speed/)
-- Slides: [JavaCro 2026](the-need-for-speed/slides/need-for-speed-javacro-2026.pdf)
+- Slides: [JUG Vilnius 2026](the-need-for-speed/slides/need-for-speed-jug-vilnius-2026.pdf), [TestCon Europe 2026](the-need-for-speed/slides/need-for-speed-testcon-europe-2026.pdf), [JavaCro 2026](the-need-for-speed/slides/need-for-speed-javacro-2026.pdf)
 - Recordings: none
 
 ## Top 5 Spring Boot Testing Mistakes Developers Trap Into
@@ -76,7 +76,7 @@ You'll learn to judge tests, whether written by a human or an AI, and ship with 
 Joyful testing awaits!
 
 - [Source Code](top-5-spring-boot-testing-mistakes-developers-trap-into/)
-- Slides: [JavaCro 2026](top-5-spring-boot-testing-mistakes-developers-trap-into/slides/slides-javacro-2026-10-13.pdf), [Bozen 2026](top-5-spring-boot-testing-mistakes-developers-trap-into/slides/slides-bozen-2026-09-08.pdf)
+- Slides: [TestCon Europe 2026](top-5-spring-boot-testing-mistakes-developers-trap-into/slides/slides-testcon-europe-2026-10-23.pdf), [JavaCro 2026](top-5-spring-boot-testing-mistakes-developers-trap-into/slides/slides-javacro-2026-10-13.pdf), [Bozen 2026](top-5-spring-boot-testing-mistakes-developers-trap-into/slides/slides-bozen-2026-09-08.pdf)
 - Recordings: none
 
 ## Testing Spring Boot Applications Demystified

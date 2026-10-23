@@ -12,7 +12,7 @@ Slides: [slides/content.md](slides/content.md), see [slides/README.md](slides/RE
 
 ## Demo project
 
-Spring Boot 4.1.1, Java 25, Spring Web MVC, Spring Data JPA with H2 and the [Spring Test Profiler](https://github.com/PragmaTech-GmbH/spring-test-profiler) 0.3.1. Bootstrapped with the Spring Boot CLI (`spring init`). It is a small CRUD API for books (`/api/books`).
+Spring Boot 4.1.1, Java 25, Spring Web MVC, Spring Data JPA with H2 and the [Spring Test Profiler](https://github.com/PragmaTech-GmbH/spring-test-profiler) 0.4.0. Bootstrapped with the Spring Boot CLI (`spring init`). It is a small CRUD API for books (`/api/books`).
 
 The test suite is **unoptimized on purpose**. All classes end with `IT` and run through the Maven Failsafe plugin (`./mvnw verify`): five test classes create five different application contexts (`RANDOM_PORT` with `TestRestTemplate`, `@MockitoBean`, `@MockitoSpyBean`, `@DirtiesContext`, an extra property). Use it as the baseline and optimize it step by step during the talk.
 
