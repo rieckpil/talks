@@ -76,7 +76,7 @@ You'll learn to judge tests, whether written by a human or an AI, and ship with 
 Joyful testing awaits!
 
 - [Source Code](top-5-spring-boot-testing-mistakes-developers-trap-into/)
-- Slides: [JavaCro 2026](top-5-spring-boot-testing-mistakes-developers-trap-into/slides/slides-javacro-2026-10-13.pdf), [Bozen 2026](top-5-spring-boot-testing-mistakes-developers-trap-into/slides/slides-bozen-2026-09-08.pdf)
+- Slides: [TestCon Europe 2026](top-5-spring-boot-testing-mistakes-developers-trap-into/slides/slides-testcon-europe-2026-10-23.pdf), [JavaCro 2026](top-5-spring-boot-testing-mistakes-developers-trap-into/slides/slides-javacro-2026-10-13.pdf), [Bozen 2026](top-5-spring-boot-testing-mistakes-developers-trap-into/slides/slides-bozen-2026-09-08.pdf)
 - Recordings: none
 
 ## Testing Spring Boot Applications Demystified
