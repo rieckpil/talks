@@ -852,14 +852,14 @@ Notes:
 
 <div class="course">
   <img src="../../shared/assets/agentic-testing-course-thumbnail.png" style="width: 640px; height: auto; max-width: none">
-  <div class="qr"><img src="../../shared/assets/agentic-testing-course-qr.png" style="width: 220px; height: auto; max-width: none"><br>Get notified at launch</div>
+  <div class="qr"><img src="../../shared/assets/agentic-testing-course-qr.png" style="width: 220px; height: auto; max-width: none"></div>
 </div>
 
-My **skill library**, packed into a course: make Claude, Codex and Copilot write tests **you would have written yourself**. Need help with your build? Reach out: **philip@pragmatech.digital**
+**Onboard your team** to the skill library: make Claude, Codex and Copilot write tests **you would have written yourself**. Interested? Reach out via **LinkedIn** (Philip Riecks).
 
 <!--
 Notes:
-- Say it out loud: scan the QR to get notified, or reach out on LinkedIn or by mail, philip@pragmatech.digital.
+- Say it out loud: scan the QR, or reach out on LinkedIn (Philip Riecks) to onboard your team to the skill library.
 - Consulting for build optimization stays available (pragmatech-main-offering.png).
 -->
 
