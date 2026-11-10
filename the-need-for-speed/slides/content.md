@@ -1,20 +1,20 @@
 ---
 marp: true
 theme: pragmatech
-title: 'The Need for Speed: Cut Your Spring Boot Test Suite Duration by 70%'
+title: 'The Spring Test Profiler: Cut Down Your Test Execution Time by 70%'
 class: light
 paginate: true
 transition: pt-fade
-header: 'The Need for Speed: Cut Your Spring Boot Test Suite Duration by 70% - JUG Vilnius 2026'
+header: 'The Spring Test Profiler: Cut Down Your Test Execution Time by 70% - J-Fall 2026'
 footer: '![](../../shared/assets/logo.webp) Philip Riecks · [@rieckpil](https://x.com/rieckpil) · [PragmaTech GmbH](https://pragmatech.digital/)'
 ---
 
-<!-- Menti code: 1717 6052 -->
+<!-- Menti code: 8999 9930 -->
 <!-- _paginate: false -->
 <!-- _header: '' -->
 <!-- _footer: '' -->
 
-![bg](../../shared/assets/vilnius.jpg)
+![bg](../../shared/assets/jfall-2026.jpg)
 
 ---
 
@@ -24,11 +24,11 @@ footer: '![](../../shared/assets/logo.webp) Philip Riecks · [@rieckpil](https:/
 
 ![bg left:33%](../../shared/assets/the-need-for-speed/speedometer.jpg)
 
-# The Need for **Speed**: Cut Your Spring Boot Test Suite Duration by 70%
+# The Spring Test **Profiler**: Cut Down Your Test Execution Time by 70%
 
 ## The hidden gem of Spring Test to unlock blazing fast feedback
 
-JUG Vilnius 2026 · October 22, 2026
+J-Fall 2026 · November 12, 2026
 
 <!--
 Notes:
@@ -47,13 +47,13 @@ Notes:
 
 <div class="menti-hint">📱 Scan the QR code or go to <strong>menti.com</strong> and enter</div>
 
-<div class="menti-code"><span>1717 6052</span></div>
+<div class="menti-code"><span>8999 9930</span></div>
 
-![center h:360](../../shared/assets/mentimeter-jug-vilnius-2026-padded.png)
+![center h:360](../../shared/assets/mentimeter-jfall-2026-padded.png)
 
 <!--
 Notes:
-- QR leads to Menti.com, code 1717 6052 (shared/assets/mentimeter-jug-vilnius-2026.png).
+- QR leads to Menti.com, code 8999 9930 (shared/assets/mentimeter-jfall-2026.png).
 - The room is long: keep the QR big and centered, give people a moment before moving on.
 - Menti questions: Who writes Spring Boot apps? How long does your build take? Do you know Spring's context caching?
 -->
@@ -95,20 +95,20 @@ Notes:
 <!-- _paginate: false -->
 
 <style scoped>
-section.reveal > ul { list-style: disc; padding-left: 1.2em; }
-section.reveal > ul > li { margin: 0 0 0.4em; }
-section.reveal > ul > li::marker { content: initial; }
+section.reveal > ul > li > ul { list-style: disc; padding-left: 1.2em; margin: 0.3em 0 0; }
+section.reveal > ul > li > ul > li { margin: 0 0 0.4em; }
+section.reveal > ul > li > ul > li::marker { content: initial; }
 </style>
 
 ![bg right:33%](../../shared/assets/northstar.jpg)
 
 ## How Much Testing Do We Need?
 
-**No coverage goal**, but **engineering excellence**:
+Imagine seeing this pull request on a Friday afternoon:
 
-* **Confidence** in every commit
-* Being able to **deploy fast** anytime
-* **Fast** feedback & **fast** flow
+* ![w:640](../../shared/assets/northstar-pr.png)
+* **No coverage goal**, but **engineering excellence**:
+  <ul><li><b>Confidence</b> in every commit</li><li>Being able to <b>deploy fast</b> anytime</li><li><b>Fast</b> feedback &amp; <b>fast</b> flow</li></ul>
 
 <!--
 Notes:
@@ -428,15 +428,56 @@ The cache key is a `MergedContextConfiguration`: **the store of all context cust
 
 ---
 
+<!-- _class: light reveal -->
+
+<style scoped>
+section.reveal > ul { position: relative; height: 0; margin: 0; padding: 0; }
+section.reveal > ul > li { position: absolute; top: -488px; left: 0; right: 0; margin: 0; }
+section.reveal > ul > li > p { margin: 0; text-align: center; }
+</style>
+
 <!--
 Notes:
-- Animated GIF: loops on its own. Let it run one full loop.
-- In the exported PDF this shows the first frame only.
+- Click-driven build: one click per step. Base = three tests waiting, then OrderIT (miss, builds context), PaymentIT (hit, reuse), CheckoutIT (different key, miss), summary.
+- Each step is a still of the Remotion scene (shared/remotion/src/the-need-for-speed/ContextCache.tsx, composition ContextCacheSpeed).
+- Cache key = MergedContextConfiguration, value = ApplicationContext (the real types in Spring's DefaultContextCache).
+- In the exported PDF all steps overlap, so the last still (summary) is what you see.
 -->
 
 ## Context Caching in Action
 
-![center h:470](../../shared/assets/context-caching.gif)
+![center h:470](../../shared/assets/the-need-for-speed/context-click-17.png)
+
+* ![center h:470](../../shared/assets/the-need-for-speed/context-click-95.png)
+* ![center h:470](../../shared/assets/the-need-for-speed/context-click-155.png)
+* ![center h:470](../../shared/assets/the-need-for-speed/context-click-231.png)
+* ![center h:470](../../shared/assets/the-need-for-speed/context-click-284.png)
+
+---
+
+<style scoped>
+li { margin: 0 0 0.35em; }
+code { white-space: nowrap; }
+</style>
+
+## Context Killers
+
+Anything that changes the **cache key** forces a **new context start**:
+
+- `@MockitoBean` / `@MockitoSpyBean` on single test classes
+- `@TestPropertySource`, `properties = ...` or `@DynamicPropertySource` per class
+- Different `@ActiveProfiles`
+- Different `@Import`, `@TestConfiguration` or `@ContextConfiguration`
+- Mixing `@SpringBootTest` with slices like `@WebMvcTest` or `@DataJpaTest`
+- Different `webEnvironment` (`MOCK` vs. `RANDOM_PORT`)
+- `@DirtiesContext` - the final boss: **removes** the context from the cache
+
+<!--
+Notes:
+- Same idea as the cache key slide: every item here changes the MergedContextConfiguration, so the next test misses the cache.
+- A few of these are fine on purpose. The problem is the accidental variety nobody reviews.
+- Next slides: how to detect them (logs, profiler), then how to fix them.
+-->
 
 ---
 
@@ -750,13 +791,76 @@ ul > li .step { font-size: 1.3em; font-weight: 700; color: var(--pt-link); }
 
 ---
 
-## Need Help Further Optimizing Your Build?
+<style scoped>
+.pitch { max-width: 1060px; margin-left: auto; margin-right: auto; display: flex; align-items: stretch; justify-content: center; gap: 14px; margin-top: 0.8em; }
+.pitch .card { flex: 1; display: flex; flex-direction: column; align-items: center; text-align: center; }
+.pitch .box { width: 100%; flex: 1; background: #1c1b19; border: 2px solid #3a3835; border-radius: 14px; padding: 0.8em 0.7em; color: #f5f2ec; font-family: 'JetBrains Mono', monospace; font-size: 0.62em; line-height: 1.5; text-align: left; }
+.pitch .box.bad { border-color: #dc2626; }
+.pitch .box.skills { border-color: #c98a00; }
+.pitch .box.good { border-color: #00a34a; text-align: center; font-family: 'Space Grotesk', sans-serif; font-size: 0.8em; display: flex; flex-direction: column; justify-content: center; }
+.pitch .box .cmd { color: #f4c95d; }
+.pitch .box .ok { color: #4ade80; }
+.pitch .chip { display: inline-block; margin: 0.25em 0.3em 0 0; padding: 0.05em 0.6em; border-radius: 999px; background: #3b1d1d; border: 1px solid #dc2626; color: #fca5a5; }
+.pitch .skill { display: block; margin: 0 0 0.3em; padding: 0.25em 0.5em; border-radius: 6px; background: #fff3c4; color: #5b3a00; font-weight: 700; }
+.pitch .tick { font-size: 2.6em; line-height: 1; color: #4ade80; }
+.pitch .label { margin-top: 0.6em; font-size: 0.55em; font-weight: 700; letter-spacing: 0.1em; color: var(--pt-muted); }
+.pitch .name { margin-top: 0.4em; font-weight: 700; font-size: 0.8em; color: var(--pt-heading); }
+.pitch .arrow { align-self: center; font-size: 1.6em; color: var(--pt-muted); }
+</style>
 
-![center w:1120](../../shared/assets/pragmatech-main-offering.png)
+## From Years of Testing Knowledge to a Skill Library
+
+<div class="pitch">
+  <div class="card">
+    <div class="box bad"><span class="cmd">$ claude</span><br>"write meaningful tests, make no mistakes"</div>
+    <div class="label">THE NAIVE PROMPT</div>
+  </div>
+  <div class="arrow">→</div>
+  <div class="card">
+    <div class="box bad"><span class="ok">✔ 40 tests passed</span><br><span class="chip">🐌 slow</span><span class="chip">🧱 brittle</span><span class="chip">🫥 prove nothing</span></div>
+    <div class="label">THE SLOP</div>
+  </div>
+  <div class="arrow">→</div>
+  <div class="card">
+    <div class="box skills"><span class="skill">parallelizable integration tests</span><span class="skill">reusable container setup</span><span class="skill">meaningful slice tests</span><span class="skill">comprehensive unit tests</span><span class="skill">cache-friendly context setup</span></div>
+    <div class="name">Spring Boot Testing Skill Library</div>
+    <div class="label">THE SOLUTION</div>
+  </div>
+  <div class="arrow">→</div>
+  <div class="card">
+    <div class="box good"><div class="tick">✔</div><b>Confidence in every commit</b><span style="color:#4ade80">⚡ Fast feedback</span></div>
+    <div class="label">THE RESULT</div>
+  </div>
+</div>
 
 <!--
 Notes:
-- Say it out loud: reach out on LinkedIn or by mail, philip@pragmatech.digital.
+- Bridge from "Educate Your AI Agents Too": hints in a markdown file are the start, a skill library is the full version.
+- Naive prompt gives slow, brittle tests that prove nothing. My years of testing knowledge (this talk's context cache rules included) go into skills the agent loads on demand.
+- Works with Claude Code, Codex and Copilot.
+-->
+
+---
+
+<style scoped>
+.course { display: flex; align-items: center; justify-content: center; gap: 40px; margin-top: 0.4em; }
+.course .qr { text-align: center; font-size: 0.7em; color: var(--pt-muted); white-space: nowrap; }
+.course img { display: block; margin: 0 auto; }
+</style>
+
+## Agentic Testing for Spring Boot
+
+<div class="course">
+  <img src="../../shared/assets/agentic-testing-course-thumbnail.png" style="width: 640px; height: auto; max-width: none">
+  <div class="qr"><img src="../../shared/assets/agentic-testing-course-qr.png" style="width: 220px; height: auto; max-width: none"><br>Get notified at launch</div>
+</div>
+
+My **skill library**, packed into a course: make Claude, Codex and Copilot write tests **you would have written yourself**. Need help with your build? Reach out: **philip@pragmatech.digital**
+
+<!--
+Notes:
+- Say it out loud: scan the QR to get notified, or reach out on LinkedIn or by mail, philip@pragmatech.digital.
+- Consulting for build optimization stays available (pragmatech-main-offering.png).
 -->
 
 ---
@@ -768,7 +872,7 @@ Notes:
 
 ![bg right:33%](../../shared/assets/end.jpg)
 
-# Ačiū and Joyful Testing!
+# Bedankt and Joyful Testing!
 
 Join my **Spring Boot Testing Newsletter** for best practices, recipes and quick wins in your inbox: **rieckpil.de/newsletter**
 
