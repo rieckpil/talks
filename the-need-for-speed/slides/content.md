@@ -104,10 +104,11 @@ section.reveal > ul > li > ul > li::marker { content: initial; }
 
 ## How Much Testing Do We Need?
 
-Imagine seeing this pull request on a Friday afternoon:
+Imagine the following pull request:
 
 * ![w:640](../../shared/assets/northstar-pr.png)
-* **No coverage goal**, but **engineering excellence**:
+* **How confident are you** to deploy this to production on a Friday afternoon?
+* This requires **engineering excellence**:
   <ul><li><b>Confidence</b> in every commit</li><li>Being able to <b>deploy fast</b> anytime</li><li><b>Fast</b> feedback &amp; <b>fast</b> flow</li></ul>
 
 <!--
@@ -791,47 +792,33 @@ ul > li .step { font-size: 1.3em; font-weight: 700; color: var(--pt-link); }
 
 ---
 
+<!-- _class: light reveal -->
+
 <style scoped>
-.pitch { max-width: 1060px; margin-left: auto; margin-right: auto; display: flex; align-items: stretch; justify-content: center; gap: 14px; margin-top: 0.8em; }
-.pitch .card { flex: 1; display: flex; flex-direction: column; align-items: center; text-align: center; }
-.pitch .box { width: 100%; flex: 1; background: #1c1b19; border: 2px solid #3a3835; border-radius: 14px; padding: 0.8em 0.7em; color: #f5f2ec; font-family: 'JetBrains Mono', monospace; font-size: 0.62em; line-height: 1.5; text-align: left; }
-.pitch .box.bad { border-color: #dc2626; }
-.pitch .box.skills { border-color: #c98a00; }
-.pitch .box.good { border-color: #00a34a; text-align: center; font-family: 'Space Grotesk', sans-serif; font-size: 0.8em; display: flex; flex-direction: column; justify-content: center; }
-.pitch .box .cmd { color: #f4c95d; }
-.pitch .box .ok { color: #4ade80; }
-.pitch .chip { display: inline-block; margin: 0.25em 0.3em 0 0; padding: 0.05em 0.6em; border-radius: 999px; background: #3b1d1d; border: 1px solid #dc2626; color: #fca5a5; }
-.pitch .skill { display: block; margin: 0 0 0.3em; padding: 0.25em 0.5em; border-radius: 6px; background: #fff3c4; color: #5b3a00; font-weight: 700; }
-.pitch .tick { font-size: 2.6em; line-height: 1; color: #4ade80; }
-.pitch .label { margin-top: 0.6em; font-size: 0.55em; font-weight: 700; letter-spacing: 0.1em; color: var(--pt-muted); }
-.pitch .name { margin-top: 0.4em; font-weight: 700; font-size: 0.8em; color: var(--pt-heading); }
-.pitch .arrow { align-self: center; font-size: 1.6em; color: var(--pt-muted); }
+section.reveal > ul { display: flex; align-items: stretch; justify-content: center; gap: 34px; max-width: 1120px; margin: 0.9em auto 0; padding: 0; list-style: none; }
+section.reveal > ul > li { flex: 1; margin: 0; padding: 0; position: relative; }
+section.reveal > ul > li + li::before { content: '→'; position: absolute; left: -30px; top: 140px; font-size: 1.6em; line-height: 1; color: var(--pt-muted); }
+.card { display: flex; flex-direction: column; align-items: center; height: 100%; }
+.box { width: 100%; height: 330px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; background: #1c1b19; border: 2.5px solid #3a3835; border-radius: 14px; padding: 0.7em 0.8em; color: #f5f2ec; font-family: 'JetBrains Mono', monospace; font-size: 0.66em; line-height: 1.55; text-align: left; }
+.box.bad { border-color: #dc2626; }
+.box.skills { border-color: #c98a00; font-size: 0.56em; padding: 0.5em 0.6em; }
+.box.skills .title { font-family: 'Space Grotesk', sans-serif; font-size: 1.35em; font-weight: 700; color: #f4c95d; text-align: center; margin-bottom: 0.5em; }
+.box.good { border-color: #00a34a; text-align: center; align-items: center; font-family: 'Space Grotesk', sans-serif; font-size: 0.85em; gap: 0.3em; }
+.cmd { color: #f4c95d; }
+.ok { color: #4ade80; }
+.chip { display: block; margin: 0.35em 0 0; padding: 0.1em 0.7em; width: fit-content; border-radius: 999px; background: #3b1d1d; border: 1px solid #dc2626; color: #fca5a5; }
+.skill { display: block; margin: 0 0 0.3em; padding: 0.2em 0.5em; border-radius: 6px; background: #fff3c4; color: #5b3a00; font-weight: 700; }
+.tick { font-size: 2.8em; line-height: 1; color: #4ade80; }
+.label { margin-top: 0.7em; font-size: 0.6em; font-weight: 700; letter-spacing: 0.1em; color: var(--pt-muted); }
+.name { margin-top: 0.5em; font-weight: 700; font-size: 0.75em; color: var(--pt-heading); }
 </style>
 
 ## From Years of Testing Knowledge to a Skill Library
 
-<div class="pitch">
-  <div class="card">
-    <div class="box bad"><span class="cmd">$ claude</span><br>"write meaningful tests, make no mistakes"</div>
-    <div class="label">THE NAIVE PROMPT</div>
-  </div>
-  <div class="arrow">→</div>
-  <div class="card">
-    <div class="box bad"><span class="ok">✔ 40 tests passed</span><br><span class="chip">🐌 slow</span><span class="chip">🧱 brittle</span><span class="chip">🫥 prove nothing</span></div>
-    <div class="label">THE SLOP</div>
-  </div>
-  <div class="arrow">→</div>
-  <div class="card">
-    <div class="box skills"><span class="skill">parallelizable integration tests</span><span class="skill">reusable container setup</span><span class="skill">meaningful slice tests</span><span class="skill">comprehensive unit tests</span><span class="skill">cache-friendly context setup</span></div>
-    <div class="name">Spring Boot Testing Skill Library</div>
-    <div class="label">THE SOLUTION</div>
-  </div>
-  <div class="arrow">→</div>
-  <div class="card">
-    <div class="box good"><div class="tick">✔</div><b>Confidence in every commit</b><span style="color:#4ade80">⚡ Fast feedback</span></div>
-    <div class="label">THE RESULT</div>
-  </div>
-</div>
+* <div class="card"><div class="box bad"><span class="cmd">$ claude</span><span>"write meaningful tests, make no mistakes"</span></div><div class="label">THE NAIVE PROMPT</div></div>
+* <div class="card"><div class="box bad"><span class="ok">✔ 40 tests passed</span><span class="chip">🐌 slow</span><span class="chip">🧱 brittle</span><span class="chip">🫥 prove nothing</span></div><div class="label">THE SLOP</div></div>
+* <div class="card"><div class="box skills"><span class="title">Spring Boot Testing Skill Library</span><span class="skill">parallelizable integration tests</span><span class="skill">reusable container setup</span><span class="skill">meaningful slice tests</span><span class="skill">comprehensive unit tests</span><span class="skill">cache-friendly context setup</span></div><div class="label">THE SOLUTION</div></div>
+* <div class="card"><div class="box good"><div class="tick">✔</div><b>Confidence in every commit</b><span class="ok">⚡ Fast feedback</span></div><div class="label">THE RESULT</div></div>
 
 <!--
 Notes:
@@ -843,23 +830,21 @@ Notes:
 ---
 
 <style scoped>
-.course { display: flex; align-items: center; justify-content: center; gap: 40px; margin-top: 0.4em; }
-.course .qr { text-align: center; font-size: 0.7em; color: var(--pt-muted); white-space: nowrap; }
-.course img { display: block; margin: 0 auto; }
+.course { text-align: center; margin: 0.2em 0 0.6em; }
+.course img { display: block; margin: 0 auto; width: 600px; height: auto; max-width: none; }
 </style>
 
 ## Agentic Testing for Spring Boot
 
-<div class="course">
-  <img src="../../shared/assets/agentic-testing-course-thumbnail.png" style="width: 640px; height: auto; max-width: none">
-  <div class="qr"><img src="../../shared/assets/agentic-testing-course-qr.png" style="width: 220px; height: auto; max-width: none"></div>
-</div>
+**Onboard your team** to the skill library: make Claude, Codex and Copilot write tests **a lead Spring Boot dev would have written**.
 
-**Onboard your team** to the skill library: make Claude, Codex and Copilot write tests **you would have written yourself**. Interested? Reach out via **LinkedIn** (Philip Riecks).
+<div class="course"><img src="../../shared/assets/agentic-testing-course-thumbnail.png"></div>
+
+**DM me on LinkedIn** (Philip Riecks) to get the details.
 
 <!--
 Notes:
-- Say it out loud: scan the QR, or reach out on LinkedIn (Philip Riecks) to onboard your team to the skill library.
+- Say it out loud: DM me on LinkedIn (Philip Riecks) to get the details and onboard your team to the skill library.
 - Consulting for build optimization stays available (pragmatech-main-offering.png).
 -->
 
