@@ -101,7 +101,7 @@ const TestCard: React.FC<TestCardProps> = ({ name, hash, hashColor, top, active,
           {name}
         </div>
         <div style={{ fontSize: 14, color: MUTED, marginTop: 6, letterSpacing: '0.02em' }}>
-          hashCode()
+          hashCode() of the Context Configuration
         </div>
         <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 19, color: hashColor, marginTop: 1 }}>
           {hash}

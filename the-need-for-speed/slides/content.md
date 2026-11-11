@@ -597,7 +597,7 @@ An [open-source Spring Test utility](https://github.com/PragmaTech-GmbH/spring-t
 <dependency>
   <groupId>digital.pragmatech.testing</groupId>
   <artifactId>spring-test-profiler</artifactId>
-  <version>0.4.0</version>
+  <version>0.5.0</version>
   <scope>test</scope>
 </dependency>
 ```
@@ -704,7 +704,7 @@ Point the skill to your `AbstractIntegrationTest` and name the antipatterns.
 ```json {7}
 {
   "schemaVersion": 1,
-  "profilerVersion": "0.4.0",
+  "profilerVersion": "0.5.0",
   "generatedAt": "2026-10-12T12:57:46Z",
   "buildTool": "MAVEN",
   ...
@@ -855,10 +855,19 @@ Notes:
 <!-- _header: '' -->
 <!-- _footer: '' -->
 
+<style scoped>
+.newsletter-row { display: flex; align-items: center; justify-content: center; gap: 36px; margin-top: 0.3em; }
+.newsletter-row img { display: block; margin: 0; max-width: none; height: 280px; width: auto; }
+.newsletter-url { text-align: center; font-size: 0.85em; font-weight: 700; margin-top: 0.4em; }
+.newsletter-url a { text-decoration: none; border-bottom: none; }
+</style>
+
 ![bg right:33%](../../shared/assets/end.jpg)
 
 # Bedankt and Joyful Testing!
 
-Join my **Spring Boot Testing Newsletter** for best practices, recipes and quick wins in your inbox: **rieckpil.de/newsletter**
+Join my **Spring Boot Testing Newsletter** for tips and get **Testing Spring Boot Applications Demystified** for free:
 
-![center h:260](../../shared/assets/newsletter-signup-qr.png)
+<div class="newsletter-row"><img src="../../shared/assets/the-need-for-speed/testing-spring-boot-demystified-cover.png"><img src="../../shared/assets/newsletter-signup-qr.png"></div>
+
+<div class="newsletter-url"><a href="https://rieckpil.de/free-spring-boot-testing-book/">rieckpil.de/free-spring-boot-testing-book</a></div>
