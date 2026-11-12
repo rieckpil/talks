@@ -683,17 +683,17 @@ The setup above will **disable** the context caching feature and slow down the b
 
 ## Educate Your AI Agents Too
 
-Agents write most of the tests now. They need the same rules:
+Agents write most of the tests now. Without your rules, **every new test can start a new context**.
 
-```text
-.claude/skills/
-├── unit-testing            fast tests without context bloat
-├── slice-testing           right-sized Spring context slices
-├── integration-testing     extend AbstractIntegrationTest, no new context
-└── test-setup-reviewer     flags context cache killers
+- Put the rules into **skills** or your **CLAUDE.md** / **AGENTS.md**
+- Point to your `AbstractIntegrationTest` and name the antipatterns
+- Otherwise agents add `@MockitoBean`, `@DirtiesContext` or new properties **over and over**
+
+```markdown
+## Testing rules (CLAUDE.md)
+- Integration tests extend AbstractIntegrationTest
+- No @MockitoBean, @DirtiesContext or @TestPropertySource on test classes
 ```
-
-Point the skill to your `AbstractIntegrationTest` and name the antipatterns.
 
 ---
 
@@ -792,38 +792,45 @@ ul > li .step { font-size: 1.3em; font-weight: 700; color: var(--pt-link); }
 
 ---
 
-<!-- _class: light reveal -->
+<!-- _class: light split split-60 -->
 
 <style scoped>
-section.reveal > ul { display: flex; align-items: stretch; justify-content: center; gap: 34px; max-width: 1120px; margin: 0.9em auto 0; padding: 0; list-style: none; }
-section.reveal > ul > li { flex: 1; margin: 0; padding: 0; position: relative; }
-section.reveal > ul > li + li::before { content: '→'; position: absolute; left: -30px; top: 140px; font-size: 1.6em; line-height: 1; color: var(--pt-muted); }
-.card { display: flex; flex-direction: column; align-items: center; height: 100%; }
-.box { width: 100%; height: 330px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; background: #1c1b19; border: 2.5px solid #3a3835; border-radius: 14px; padding: 0.7em 0.8em; color: #f5f2ec; font-family: 'JetBrains Mono', monospace; font-size: 0.66em; line-height: 1.55; text-align: left; }
-.box.bad { border-color: #dc2626; }
-.box.skills { border-color: #c98a00; font-size: 0.56em; padding: 0.5em 0.6em; }
-.box.skills .title { font-family: 'Space Grotesk', sans-serif; font-size: 1.35em; font-weight: 700; color: #f4c95d; text-align: center; margin-bottom: 0.5em; }
-.box.good { border-color: #00a34a; text-align: center; align-items: center; font-family: 'Space Grotesk', sans-serif; font-size: 0.85em; gap: 0.3em; }
-.cmd { color: #f4c95d; }
-.ok { color: #4ade80; }
-.chip { display: block; margin: 0.35em 0 0; padding: 0.1em 0.7em; width: fit-content; border-radius: 999px; background: #3b1d1d; border: 1px solid #dc2626; color: #fca5a5; }
-.skill { display: block; margin: 0 0 0.3em; padding: 0.2em 0.5em; border-radius: 6px; background: #fff3c4; color: #5b3a00; font-weight: 700; }
-.tick { font-size: 2.8em; line-height: 1; color: #4ade80; }
-.label { margin-top: 0.7em; font-size: 0.6em; font-weight: 700; letter-spacing: 0.1em; color: var(--pt-muted); }
-.name { margin-top: 0.5em; font-weight: 700; font-size: 0.75em; color: var(--pt-heading); }
+li:first-child { list-style: none; margin-left: -1.2em; font-size: 1.1em; color: var(--pt-link); }
 </style>
 
 ## From Years of Testing Knowledge to a Skill Library
 
-* <div class="card"><div class="box bad"><span class="cmd">$ claude</span><span>"write meaningful tests, make no mistakes"</span></div><div class="label">THE NAIVE PROMPT</div></div>
-* <div class="card"><div class="box bad"><span class="ok">✔ 40 tests passed</span><span class="chip">🐌 slow</span><span class="chip">🧱 brittle</span><span class="chip">🫥 prove nothing</span></div><div class="label">THE SLOP</div></div>
-* <div class="card"><div class="box skills"><span class="title">Spring Boot Testing Skill Library</span><span class="skill">parallelizable integration tests</span><span class="skill">reusable container setup</span><span class="skill">meaningful slice tests</span><span class="skill">comprehensive unit tests</span><span class="skill">cache-friendly context setup</span></div><div class="label">THE SOLUTION</div></div>
-* <div class="card"><div class="box good"><div class="tick">✔</div><b>Confidence in every commit</b><span class="ok">⚡ Fast feedback</span></div><div class="label">THE RESULT</div></div>
+```text
+.claude/skills/spring-boot-testing/
+├── test-judgment           which test type for which change
+├── unit-testing            fast tests without context bloat
+├── slice-testing           right-sized Spring context slices
+├── integration-testing     parallelizable, cache-friendly
+├── testcontainers-setup    one container per image, reused
+├── test-setup-review       flags context cache killers
+└── ...
+
+unit-testing/
+├── SKILL.md                when to use it, rules, workflow
+└── references/
+    ├── testing-standards.md
+    ├── mockito-patterns.md
+    └── ...
+```
+
+- **The goal:**
+- **Test judgment**: the agent picks the right test type
+- **Unified test strategy** across the team
+- **Parallelizable** integration tests
+- **Correct use of Testcontainers**
+- No new contexts, **fast feedback**
+- **Confidence in every commit**
 
 <!--
 Notes:
 - Bridge from "Educate Your AI Agents Too": hints in a markdown file are the start, a skill library is the full version.
-- Naive prompt gives slow, brittle tests that prove nothing. My years of testing knowledge (this talk's context cache rules included) go into skills the agent loads on demand.
+- Years of testing knowledge (this talk's context cache rules included) go into skills the agent loads on demand.
+- Left: the skill folder. Right: what the agent should get right without being told every time.
 - Works with Claude Code, Codex and Copilot.
 -->
 
@@ -834,7 +841,7 @@ Notes:
 .course img { display: block; margin: 0 auto; width: 600px; height: auto; max-width: none; }
 </style>
 
-## Agentic Testing for Spring Boot
+## Agentic Testing for Spring Boot Course
 
 **Onboard your team** to the skill library: make Claude, Codex and Copilot write tests **a lead Spring Boot dev would have written**.
 
