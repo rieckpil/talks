@@ -8,12 +8,12 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import org.springframework.test.context.bean.override.mockito.MockitoSpyBean;
 
 @Disabled("Showcasing only")
 @ActiveProfiles("integration-test")
@@ -22,10 +22,10 @@ import org.springframework.test.context.ContextConfiguration;
 @SpringBootTest(properties = { "features.login-enabled=true", "custom.message=duke42" })
 class ShowcaseIT {
 
-  @MockBean
+  @MockitoBean
   private OrderService orderService;
 
-  @SpyBean
+  @MockitoSpyBean
   private CustomerService customerService;
 
   @Test

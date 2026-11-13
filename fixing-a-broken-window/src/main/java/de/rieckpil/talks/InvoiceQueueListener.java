@@ -1,6 +1,6 @@
 package de.rieckpil.talks;
 
-import io.awspring.cloud.messaging.listener.annotation.SqsListener;
+import io.awspring.cloud.sqs.annotation.SqsListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
