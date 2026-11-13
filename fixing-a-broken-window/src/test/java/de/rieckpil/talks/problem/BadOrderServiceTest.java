@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
 @SpringBootTest
 @Disabled("Showcasing purposes only - don't do this at home")
@@ -18,7 +18,7 @@ class BadOrderServiceTest {
   @Autowired
   private OrderService orderService;
 
-  @MockBean
+  @MockitoBean
   public CustomerService customerService;
 
   @Test
